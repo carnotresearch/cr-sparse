@@ -13,9 +13,7 @@ Subpackages
     cr.vision.filters
     cr.vision.geom_transform
     cr.vision.io
-    cr.vision.misc
     cr.vision.motion
-    cr.vision.noise
     cr.vision.object_detection
     cr.vision.object_tracker
     cr.vision.saliency

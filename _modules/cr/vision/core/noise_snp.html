@@ -1,0 +1,258 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>cr.vision.core.noise_snp &mdash; CR.Vision  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/js/custom.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> CR.Vision
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../nb_basic_image_operations.html">Basic Image Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../image_processing/index.html">Image Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/modules.html">cr</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">CR.Vision</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>cr.vision.core.noise_snp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for cr.vision.core.noise_snp</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Adds Salt and Pepper noise to an image</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">cr.vision</span> <span class="kn">import</span> <span class="n">core</span>
+
+<div class="viewcode-block" id="SaltAndPepperNoiseSpec"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.noise_snp.SaltAndPepperNoiseSpec">[docs]</a><span class="k">class</span> <span class="nc">SaltAndPepperNoiseSpec</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Specification for addition of Salt and Pepper noise to an image</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">copy</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="sd">&#39;&#39;&#39;By default destination image will be a copy of source image and source image will be left untouched&#39;&#39;&#39;</span>
+
+    <span class="n">black_threshold</span> <span class="o">=</span> <span class="o">.</span><span class="mi">02</span>
+    <span class="sd">&#39;&#39;&#39;Values less than 2% of peak value will be considered as locations for pepper noise&#39;&#39;&#39;</span>
+
+    <span class="n">white_threshold</span> <span class="o">=</span> <span class="o">.</span><span class="mi">98</span>
+    <span class="sd">&#39;&#39;&#39;Values greater than 98% of peak value will be considered as locations for salt noise&#39;&#39;&#39;</span></div>
+
+
+<div class="viewcode-block" id="add_salt_and_pepper_noise"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.noise_snp.add_salt_and_pepper_noise">[docs]</a><span class="k">def</span> <span class="nf">add_salt_and_pepper_noise</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">spec</span><span class="o">=</span><span class="n">SaltAndPepperNoiseSpec</span><span class="p">()):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Adds salt and pepper noise to a given image</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span>
+    <span class="c1"># Let&#39;s get the maximum value for the image data type</span>
+    <span class="n">peak_value</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">peak_value</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span>
+        <span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">peak_value</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">pepper_pattern</span> <span class="o">=</span> <span class="n">pattern</span> <span class="o">&lt;</span> <span class="n">peak_value</span> <span class="o">*</span> <span class="n">spec</span><span class="o">.</span><span class="n">black_threshold</span>
+    <span class="n">salt_pattern</span> <span class="o">=</span> <span class="n">pattern</span> <span class="o">&gt;</span> <span class="n">peak_value</span> <span class="o">*</span> <span class="n">spec</span><span class="o">.</span><span class="n">white_threshold</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">out</span><span class="p">[</span><span class="n">pepper_pattern</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">out</span><span class="p">[</span><span class="n">salt_pattern</span><span class="p">]</span> <span class="o">=</span> <span class="n">peak_value</span>
+    <span class="k">return</span> <span class="n">out</span></div>
+
+<span class="c1"># def noisy(noise_typ,image)</span>
+    
+<span class="c1">#     elif noise_typ == &quot;s&amp;p&quot;:</span>
+<span class="c1">#     elif noise_typ == &quot;poisson&quot;:</span>
+<span class="c1">#         vals = len(np.unique(image))</span>
+<span class="c1">#         vals = 2 ** np.ceil(np.log2(vals))</span>
+<span class="c1">#         noisy = np.random.poisson(image * vals) / float(vals)</span>
+<span class="c1">#         return noisy</span>
+<span class="c1">#     elif noise_typ ==&quot;speckle&quot;:</span>
+<span class="c1">#         row,col,ch = image.shape</span>
+<span class="c1">#         gauss = np.random.randn(row,col,ch)</span>
+<span class="c1">#         gauss = gauss.reshape(row,col,ch)        </span>
+<span class="c1">#         noisy = image + image * gauss</span>
+<span class="c1">#         return noisy</span>
+<span class="c1"># share</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Carnot Research Pvt. Ltd.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

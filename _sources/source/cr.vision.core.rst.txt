@@ -7,7 +7,7 @@ Submodules
 cr.vision.colors module
 ----------------------------------
 
-.. automodule:: cr.vision.colors
+.. automodule:: cr.vision.core.colors
     :members:
     :undoc-members:
     :show-inheritance:
@@ -15,7 +15,7 @@ cr.vision.colors module
 cr.vision.contour module
 -----------------------------------
 
-.. automodule:: cr.vision.contour
+.. automodule:: cr.vision.core.contour
     :members:
     :undoc-members:
     :show-inheritance:
@@ -23,7 +23,7 @@ cr.vision.contour module
 cr.vision.cvt\_color module
 --------------------------------------
 
-.. automodule:: cr.vision.cvt_color
+.. automodule:: cr.vision.core.cvt_color
     :members:
     :undoc-members:
     :show-inheritance:
@@ -31,7 +31,7 @@ cr.vision.cvt\_color module
 cr.vision.effects module
 -----------------------------------
 
-.. automodule:: cr.vision.effects
+.. automodule:: cr.vision.core.effects
     :members:
     :undoc-members:
     :show-inheritance:
@@ -39,7 +39,7 @@ cr.vision.effects module
 cr.vision.histogram module
 -------------------------------------
 
-.. automodule:: cr.vision.histogram
+.. automodule:: cr.vision.core.histogram
     :members:
     :undoc-members:
     :show-inheritance:
@@ -47,7 +47,7 @@ cr.vision.histogram module
 cr.vision.misc module
 --------------------------------
 
-.. automodule:: cr.vision.misc
+.. automodule:: cr.vision.core.misc
     :members:
     :undoc-members:
     :show-inheritance:
@@ -55,7 +55,7 @@ cr.vision.misc module
 cr.vision.operations module
 --------------------------------------
 
-.. automodule:: cr.vision.operations
+.. automodule:: cr.vision.core.operations
     :members:
     :undoc-members:
     :show-inheritance:
@@ -63,7 +63,7 @@ cr.vision.operations module
 cr.vision.plot module
 --------------------------------
 
-.. automodule:: cr.vision.plot
+.. automodule:: cr.vision.core.plot
     :members:
     :undoc-members:
     :show-inheritance:
@@ -71,7 +71,7 @@ cr.vision.plot module
 cr.vision.template module
 ------------------------------------
 
-.. automodule:: cr.vision.template
+.. automodule:: cr.vision.core.template
     :members:
     :undoc-members:
     :show-inheritance:
@@ -79,7 +79,7 @@ cr.vision.template module
 cr.vision.threshold module
 -------------------------------------
 
-.. automodule:: cr.vision.threshold
+.. automodule:: cr.vision.core.threshold
     :members:
     :undoc-members:
     :show-inheritance:
@@ -87,16 +87,21 @@ cr.vision.threshold module
 cr.vision.types module
 ---------------------------------
 
-.. automodule:: cr.vision.types
+.. automodule:: cr.vision.core.types
     :members:
     :undoc-members:
     :show-inheritance:
 
 
-Module contents
----------------
+Noise
+----------------
 
-.. automodule:: cr.vision.core
+.. automodule:: cr.vision.core.noise_gaussian
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: cr.vision.core.noise_snp
     :members:
     :undoc-members:
     :show-inheritance:
