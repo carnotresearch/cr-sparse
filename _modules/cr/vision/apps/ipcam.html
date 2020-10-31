@@ -1,0 +1,292 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>cr.vision.apps.ipcam &mdash; CR.Vision  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> CR.Vision
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../nb_basic_image_operations.html">Basic Image Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../image_processing/index.html">Image Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/modules.html">cr</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">CR.Vision</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>cr.vision.apps.ipcam</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for cr.vision.apps.ipcam</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+
+
+<div class="viewcode-block" id="IPCamera"><a class="viewcode-back" href="../../../../source/cr.vision.apps.html#cr.vision.apps.ipcam.IPCamera">[docs]</a><span class="k">class</span> <span class="nc">IPCamera</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Wrapper class for capturing frames from IP cameras&#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Constructor&#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">url</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.mjpg&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<div class="viewcode-block" id="IPCamera.get_frame"><a class="viewcode-back" href="../../../../source/cr.vision.apps.html#cr.vision.apps.ipcam.IPCamera.get_frame">[docs]</a>    <span class="k">def</span> <span class="nf">get_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Reads a frame from the URL&#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cap</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cap</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">frame</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># We use requests library to fetch frames</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">)</span>
+            <span class="n">img_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="nb">bytearray</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imdecode</span><span class="p">(</span><span class="n">img_array</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">frame</span></div>
+
+<div class="viewcode-block" id="IPCamera.release"><a class="viewcode-back" href="../../../../source/cr.vision.apps.html#cr.vision.apps.ipcam.IPCamera.release">[docs]</a>    <span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Releases the video capture object if created&#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cap</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cap</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+        <span class="k">return</span></div></div>
+
+
+
+<div class="viewcode-block" id="ipcam_capture"><a class="viewcode-back" href="../../../../source/cr.vision.apps.html#cr.vision.apps.ipcam.ipcam_capture">[docs]</a><span class="k">def</span> <span class="nf">ipcam_capture</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;IP Cam&#39;</span><span class="p">,</span> <span class="n">frame_rate</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">processor</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Captures and displays frames from an IP camera.&#39;&#39;&#39;</span>
+    <span class="n">camera</span> <span class="o">=</span> <span class="n">IPCamera</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">frame_period</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1000</span> <span class="o">/</span> <span class="n">frame_rate</span><span class="p">)</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">camera</span><span class="o">.</span><span class="n">get_frame</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">frame</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">processor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">frame</span> <span class="o">=</span> <span class="n">processor</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="n">frame_period</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">27</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
+    <span class="n">camera</span><span class="o">.</span><span class="n">release</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="test_ipcamera"><a class="viewcode-back" href="../../../../source/cr.vision.apps.html#cr.vision.apps.ipcam.test_ipcamera">[docs]</a><span class="k">def</span> <span class="nf">test_ipcamera</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; test function for IPCamera class&#39;&#39;&#39;</span>
+    <span class="n">camera</span> <span class="o">=</span> <span class="n">IPCamera</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="n">camera</span><span class="o">.</span><span class="n">get_frame</span><span class="p">()</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;frame&#39;</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">()</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="IPCameraDetails"><a class="viewcode-back" href="../../../../source/cr.vision.apps.html#cr.vision.apps.ipcam.IPCameraDetails">[docs]</a><span class="k">class</span> <span class="nc">IPCameraDetails</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;Details of an IP camera. IGNORE this class for now&#39;&#39;&#39;</span>
+    <span class="n">place</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">ip_address</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">country</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">protocol</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">place</span><span class="p">,</span> <span class="n">ip_address</span><span class="p">,</span> <span class="n">country</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">place</span> <span class="o">=</span> <span class="n">place</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ip_address</span> <span class="o">=</span> <span class="n">ip_address</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="n">country</span>
+
+<div class="viewcode-block" id="IPCameraDetails.get_url"><a class="viewcode-back" href="../../../../source/cr.vision.apps.html#cr.vision.apps.ipcam.IPCameraDetails.get_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Returns the URL for the camera feed &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1">#camera_url = &#39;http://83.211.71.120:8084/record/current.jpg&#39;</span>
+    <span class="n">camera_url</span> <span class="o">=</span> <span class="s1">&#39;http://webcam01.bigskyresort.com/mjpg/video.mjpg&#39;</span>
+    <span class="c1">#test_ipcamera(camera_url)</span>
+    <span class="n">ipcam_capture</span><span class="p">(</span><span class="n">camera_url</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Carnot Research Pvt. Ltd.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

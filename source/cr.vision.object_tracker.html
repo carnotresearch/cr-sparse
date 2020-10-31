@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>cr.vision.object_tracker package &mdash; InDigits.Vision  documentation</title>
+  <title>cr.vision.object_tracker package &mdash; CR.Vision  documentation</title>
   
 
   
@@ -52,7 +52,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> InDigits.Vision
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> CR.Vision
           
 
           
@@ -107,8 +107,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cr.vision.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#cr-vision-errors-module">cr.vision.errors module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#module-contents">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#module-cr.vision.errors">cr.vision.errors module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#module-cr.vision">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -128,7 +128,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">InDigits.Vision</a>
+          <a href="../index.html">CR.Vision</a>
         
       </nav>
 
@@ -211,11 +211,48 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="cr-vision-object-tracker-object-tracker-module">
-<h2>cr.vision.object_tracker.object_tracker module<a class="headerlink" href="#cr-vision-object-tracker-object-tracker-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-cr.vision.object_tracker.object_tracker">
+<span id="cr-vision-object-tracker-object-tracker-module"></span><h2>cr.vision.object_tracker.object_tracker module<a class="headerlink" href="#module-cr.vision.object_tracker.object_tracker" title="Permalink to this headline">¶</a></h2>
+<p>Base class for object trackers</p>
+<dl class="class">
+<dt id="cr.vision.object_tracker.object_tracker.ObjectTracker">
+<em class="property">class </em><code class="sig-prename descclassname">cr.vision.object_tracker.object_tracker.</code><code class="sig-name descname">ObjectTracker</code><span class="sig-paren">(</span><em class="sig-param">tracker</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/object_tracker/object_tracker.html#ObjectTracker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.object_tracker.object_tracker.ObjectTracker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Base class for object trackers</p>
+<dl class="attribute">
+<dt id="cr.vision.object_tracker.object_tracker.ObjectTracker.bounding_box">
+<code class="sig-name descname">bounding_box</code><em class="property"> = None</em><a class="headerlink" href="#cr.vision.object_tracker.object_tracker.ObjectTracker.bounding_box" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="cr.vision.object_tracker.object_tracker.ObjectTracker.initialize">
+<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">bounding_box</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/object_tracker/object_tracker.html#ObjectTracker.initialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.object_tracker.object_tracker.ObjectTracker.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes the tracker</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cr.vision.object_tracker.object_tracker.ObjectTracker.tracker">
+<code class="sig-name descname">tracker</code><em class="property"> = None</em><a class="headerlink" href="#cr.vision.object_tracker.object_tracker.ObjectTracker.tracker" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="cr.vision.object_tracker.object_tracker.ObjectTracker.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/object_tracker/object_tracker.html#ObjectTracker.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.object_tracker.object_tracker.ObjectTracker.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the bounding box for next frame</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="cr.vision.object_tracker.object_tracker.create_object_tracker">
+<code class="sig-prename descclassname">cr.vision.object_tracker.object_tracker.</code><code class="sig-name descname">create_object_tracker</code><span class="sig-paren">(</span><em class="sig-param">tracker_type</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/object_tracker/object_tracker.html#create_object_tracker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.object_tracker.object_tracker.create_object_tracker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a tracker object</p>
+</dd></dl>
+
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-cr.vision.object_tracker">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cr.vision.object_tracker" title="Permalink to this headline">¶</a></h2>
+<p>Object trackers</p>
 </div>
 </div>
 
@@ -240,7 +277,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2018, Shailesh Kumar
+        &copy; Copyright 2020, Carnot Research Pvt. Ltd.
 
     </p>
   </div>

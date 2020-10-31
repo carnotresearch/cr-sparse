@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>cr.vision.concurrent package &mdash; InDigits.Vision  documentation</title>
+  <title>cr.vision.concurrent package &mdash; CR.Vision  documentation</title>
   
 
   
@@ -52,7 +52,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> InDigits.Vision
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> CR.Vision
           
 
           
@@ -107,8 +107,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cr.vision.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#cr-vision-errors-module">cr.vision.errors module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#module-contents">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#module-cr.vision.errors">cr.vision.errors module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#module-cr.vision">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -128,7 +128,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">InDigits.Vision</a>
+          <a href="../index.html">CR.Vision</a>
         
       </nav>
 
@@ -211,26 +211,136 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="cr-vision-concurrent-base-module">
-<h2>cr.vision.concurrent.base module<a class="headerlink" href="#cr-vision-concurrent-base-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-cr.vision.concurrent.base">
+<span id="cr-vision-concurrent-base-module"></span><h2>cr.vision.concurrent.base module<a class="headerlink" href="#module-cr.vision.concurrent.base" title="Permalink to this headline">¶</a></h2>
+<p>Base class for thread based active nodes</p>
+<dl class="class">
+<dt id="cr.vision.concurrent.base.ActiveMap">
+<em class="property">class </em><code class="sig-prename descclassname">cr.vision.concurrent.base.</code><code class="sig-name descname">ActiveMap</code><span class="sig-paren">(</span><em class="sig-param">input_queue</em>, <em class="sig-param">output_queue</em>, <em class="sig-param">map_function</em>, <em class="sig-param">name='Map'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/concurrent/base.html#ActiveMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.concurrent.base.ActiveMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cr.vision.concurrent.base.ActiveNode" title="cr.vision.concurrent.base.ActiveNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.concurrent.base.ActiveNode</span></code></a></p>
+<p>Maps data from input queue to output queue</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="cr.vision.concurrent.base.ActiveNode">
+<em class="property">class </em><code class="sig-prename descclassname">cr.vision.concurrent.base.</code><code class="sig-name descname">ActiveNode</code><span class="sig-paren">(</span><em class="sig-param">name='Node'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/concurrent/base.html#ActiveNode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.concurrent.base.ActiveNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Executes some operations in a thread</p>
+<dl class="attribute">
+<dt id="cr.vision.concurrent.base.ActiveNode.name">
+<code class="sig-name descname">name</code><em class="property"> = ''</em><a class="headerlink" href="#cr.vision.concurrent.base.ActiveNode.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="cr.vision.concurrent.base.ActiveNode.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/concurrent/base.html#ActiveNode.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.concurrent.base.ActiveNode.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the thread</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cr.vision.concurrent.base.ActiveNode.stop">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/concurrent/base.html#ActiveNode.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.concurrent.base.ActiveNode.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates that the thread should stop</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="cr-vision-concurrent-graph-module">
-<h2>cr.vision.concurrent.graph module<a class="headerlink" href="#cr-vision-concurrent-graph-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-cr.vision.concurrent.graph">
+<span id="cr-vision-concurrent-graph-module"></span><h2>cr.vision.concurrent.graph module<a class="headerlink" href="#module-cr.vision.concurrent.graph" title="Permalink to this headline">¶</a></h2>
+<p>Graph of operations</p>
+<dl class="class">
+<dt id="cr.vision.concurrent.graph.ActiveGraph">
+<em class="property">class </em><code class="sig-prename descclassname">cr.vision.concurrent.graph.</code><code class="sig-name descname">ActiveGraph</code><span class="sig-paren">(</span><em class="sig-param">nodes=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/concurrent/graph.html#ActiveGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.concurrent.graph.ActiveGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A graph of nodes each of which is working in an independent thread</p>
+<dl class="method">
+<dt id="cr.vision.concurrent.graph.ActiveGraph.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/concurrent/graph.html#ActiveGraph.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.concurrent.graph.ActiveGraph.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts all nodes for producing/consuming data</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cr.vision.concurrent.graph.ActiveGraph.stop">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/concurrent/graph.html#ActiveGraph.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.concurrent.graph.ActiveGraph.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops all nodes</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="cr-vision-concurrent-motion-detection-module">
-<h2>cr.vision.concurrent.motion_detection module<a class="headerlink" href="#cr-vision-concurrent-motion-detection-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-cr.vision.concurrent.motion_detection">
+<span id="cr-vision-concurrent-motion-detection-module"></span><h2>cr.vision.concurrent.motion_detection module<a class="headerlink" href="#module-cr.vision.concurrent.motion_detection" title="Permalink to this headline">¶</a></h2>
+<p>Detects motion in video</p>
+<dl class="class">
+<dt id="cr.vision.concurrent.motion_detection.SimpleMotionDetectionNode">
+<em class="property">class </em><code class="sig-prename descclassname">cr.vision.concurrent.motion_detection.</code><code class="sig-name descname">SimpleMotionDetectionNode</code><span class="sig-paren">(</span><em class="sig-param">input_queue</em>, <em class="sig-param">output_queue</em>, <em class="sig-param">name='SimpleMotionDetectionAgent'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/concurrent/motion_detection.html#SimpleMotionDetectionNode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.concurrent.motion_detection.SimpleMotionDetectionNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cr.vision.concurrent.base.ActiveNode" title="cr.vision.concurrent.base.ActiveNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.concurrent.base.ActiveNode</span></code></a></p>
+<p>Detects motion using a simple algorithm</p>
+<dl class="attribute">
+<dt id="cr.vision.concurrent.motion_detection.SimpleMotionDetectionNode.first_frame">
+<code class="sig-name descname">first_frame</code><em class="property"> = None</em><a class="headerlink" href="#cr.vision.concurrent.motion_detection.SimpleMotionDetectionNode.first_frame" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="cr-vision-concurrent-on-screen-display-module">
-<h2>cr.vision.concurrent.on_screen_display module<a class="headerlink" href="#cr-vision-concurrent-on-screen-display-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-cr.vision.concurrent.on_screen_display">
+<span id="cr-vision-concurrent-on-screen-display-module"></span><h2>cr.vision.concurrent.on_screen_display module<a class="headerlink" href="#module-cr.vision.concurrent.on_screen_display" title="Permalink to this headline">¶</a></h2>
+<p>Displays images on screen</p>
+<dl class="class">
+<dt id="cr.vision.concurrent.on_screen_display.OnScreenDisplay">
+<em class="property">class </em><code class="sig-prename descclassname">cr.vision.concurrent.on_screen_display.</code><code class="sig-name descname">OnScreenDisplay</code><span class="sig-paren">(</span><em class="sig-param">input_queue</em>, <em class="sig-param">name='Screen'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/concurrent/on_screen_display.html#OnScreenDisplay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.concurrent.on_screen_display.OnScreenDisplay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cr.vision.concurrent.base.ActiveNode" title="cr.vision.concurrent.base.ActiveNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.concurrent.base.ActiveNode</span></code></a></p>
+</dd></dl>
+
 </div>
-<div class="section" id="cr-vision-concurrent-video-stream-module">
-<h2>cr.vision.concurrent.video_stream module<a class="headerlink" href="#cr-vision-concurrent-video-stream-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-cr.vision.concurrent.video_stream">
+<span id="cr-vision-concurrent-video-stream-module"></span><h2>cr.vision.concurrent.video_stream module<a class="headerlink" href="#module-cr.vision.concurrent.video_stream" title="Permalink to this headline">¶</a></h2>
+<p>Base class for video streams</p>
+<dl class="class">
+<dt id="cr.vision.concurrent.video_stream.VideoReadStream">
+<em class="property">class </em><code class="sig-prename descclassname">cr.vision.concurrent.video_stream.</code><code class="sig-name descname">VideoReadStream</code><span class="sig-paren">(</span><em class="sig-param">output_queue</em>, <em class="sig-param">name='VideoStream'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/concurrent/video_stream.html#VideoReadStream"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.concurrent.video_stream.VideoReadStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cr.vision.concurrent.base.ActiveNode" title="cr.vision.concurrent.base.ActiveNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.concurrent.base.ActiveNode</span></code></a></p>
+<p>A stream of video frames being read from a source</p>
+<dl class="attribute">
+<dt id="cr.vision.concurrent.video_stream.VideoReadStream.current_frame">
+<code class="sig-name descname">current_frame</code><em class="property"> = None</em><a class="headerlink" href="#cr.vision.concurrent.video_stream.VideoReadStream.current_frame" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="cr.vision.concurrent.video_stream.VideoReadStream.dropped_frame_count">
+<code class="sig-name descname">dropped_frame_count</code><em class="property"> = 0</em><a class="headerlink" href="#cr.vision.concurrent.video_stream.VideoReadStream.dropped_frame_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="cr.vision.concurrent.video_stream.VideoReadStream.frame_count">
+<code class="sig-name descname">frame_count</code><em class="property"> = 0</em><a class="headerlink" href="#cr.vision.concurrent.video_stream.VideoReadStream.frame_count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="cr.vision.concurrent.video_stream.VideoReadStream.get_current_frame">
+<code class="sig-name descname">get_current_frame</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/concurrent/video_stream.html#VideoReadStream.get_current_frame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.concurrent.video_stream.VideoReadStream.get_current_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns current frame</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="cr-vision-concurrent-webcam-stream-module">
-<h2>cr.vision.concurrent.webcam_stream module<a class="headerlink" href="#cr-vision-concurrent-webcam-stream-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-cr.vision.concurrent.webcam_stream">
+<span id="cr-vision-concurrent-webcam-stream-module"></span><h2>cr.vision.concurrent.webcam_stream module<a class="headerlink" href="#module-cr.vision.concurrent.webcam_stream" title="Permalink to this headline">¶</a></h2>
+<p>A video stream for reading frames from webcam</p>
+<dl class="class">
+<dt id="cr.vision.concurrent.webcam_stream.WebcamReadStream">
+<em class="property">class </em><code class="sig-prename descclassname">cr.vision.concurrent.webcam_stream.</code><code class="sig-name descname">WebcamReadStream</code><span class="sig-paren">(</span><em class="sig-param">output_queue</em>, <em class="sig-param">name='WebcamStream'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/concurrent/webcam_stream.html#WebcamReadStream"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.concurrent.webcam_stream.WebcamReadStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cr.vision.concurrent.video_stream.VideoReadStream" title="cr.vision.concurrent.video_stream.VideoReadStream"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.concurrent.video_stream.VideoReadStream</span></code></a></p>
+<p>Webcam stream</p>
+</dd></dl>
+
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-cr.vision.concurrent">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cr.vision.concurrent" title="Permalink to this headline">¶</a></h2>
+<p>Video streams</p>
 </div>
 </div>
 
@@ -255,7 +365,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2018, Shailesh Kumar
+        &copy; Copyright 2020, Carnot Research Pvt. Ltd.
 
     </p>
   </div>

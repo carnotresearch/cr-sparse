@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>cr.vision.apps package &mdash; InDigits.Vision  documentation</title>
+  <title>cr.vision.apps package &mdash; CR.Vision  documentation</title>
   
 
   
@@ -52,7 +52,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> InDigits.Vision
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> CR.Vision
           
 
           
@@ -107,8 +107,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cr.vision.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#cr-vision-errors-module">cr.vision.errors module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#module-contents">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#module-cr.vision.errors">cr.vision.errors module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#module-cr.vision">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -128,7 +128,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">InDigits.Vision</a>
+          <a href="../index.html">CR.Vision</a>
         
       </nav>
 
@@ -211,14 +211,91 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="cr-vision-apps-capture-module">
-<h2>cr.vision.apps.capture module<a class="headerlink" href="#cr-vision-apps-capture-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-cr.vision.apps.capture">
+<span id="cr-vision-apps-capture-module"></span><h2>cr.vision.apps.capture module<a class="headerlink" href="#module-cr.vision.apps.capture" title="Permalink to this headline">¶</a></h2>
+<p>A driver routine to capture data from video camera.</p>
+<dl class="function">
+<dt id="cr.vision.apps.capture.webcam_capture">
+<code class="sig-prename descclassname">cr.vision.apps.capture.</code><code class="sig-name descname">webcam_capture</code><span class="sig-paren">(</span><em class="sig-param">title='Camera'</em>, <em class="sig-param">processor=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/apps/capture.html#webcam_capture"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.apps.capture.webcam_capture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Captures and displays frames from video camera.</p>
+</dd></dl>
+
 </div>
-<div class="section" id="cr-vision-apps-ipcam-module">
-<h2>cr.vision.apps.ipcam module<a class="headerlink" href="#cr-vision-apps-ipcam-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-cr.vision.apps.ipcam">
+<span id="cr-vision-apps-ipcam-module"></span><h2>cr.vision.apps.ipcam module<a class="headerlink" href="#module-cr.vision.apps.ipcam" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="cr.vision.apps.ipcam.IPCamera">
+<em class="property">class </em><code class="sig-prename descclassname">cr.vision.apps.ipcam.</code><code class="sig-name descname">IPCamera</code><span class="sig-paren">(</span><em class="sig-param">url</em>, <em class="sig-param">user=None</em>, <em class="sig-param">password=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/apps/ipcam.html#IPCamera"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.apps.ipcam.IPCamera" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Wrapper class for capturing frames from IP cameras</p>
+<dl class="method">
+<dt id="cr.vision.apps.ipcam.IPCamera.get_frame">
+<code class="sig-name descname">get_frame</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/apps/ipcam.html#IPCamera.get_frame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.apps.ipcam.IPCamera.get_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a frame from the URL</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cr.vision.apps.ipcam.IPCamera.release">
+<code class="sig-name descname">release</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/apps/ipcam.html#IPCamera.release"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.apps.ipcam.IPCamera.release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Releases the video capture object if created</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cr.vision.apps.ipcam.IPCameraDetails">
+<em class="property">class </em><code class="sig-prename descclassname">cr.vision.apps.ipcam.</code><code class="sig-name descname">IPCameraDetails</code><span class="sig-paren">(</span><em class="sig-param">place</em>, <em class="sig-param">ip_address</em>, <em class="sig-param">country=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/apps/ipcam.html#IPCameraDetails"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.apps.ipcam.IPCameraDetails" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Details of an IP camera. IGNORE this class for now</p>
+<dl class="attribute">
+<dt id="cr.vision.apps.ipcam.IPCameraDetails.country">
+<code class="sig-name descname">country</code><em class="property"> = ''</em><a class="headerlink" href="#cr.vision.apps.ipcam.IPCameraDetails.country" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="cr.vision.apps.ipcam.IPCameraDetails.get_url">
+<code class="sig-name descname">get_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/apps/ipcam.html#IPCameraDetails.get_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.apps.ipcam.IPCameraDetails.get_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the URL for the camera feed</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cr.vision.apps.ipcam.IPCameraDetails.ip_address">
+<code class="sig-name descname">ip_address</code><em class="property"> = ''</em><a class="headerlink" href="#cr.vision.apps.ipcam.IPCameraDetails.ip_address" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="cr.vision.apps.ipcam.IPCameraDetails.path">
+<code class="sig-name descname">path</code><em class="property"> = ''</em><a class="headerlink" href="#cr.vision.apps.ipcam.IPCameraDetails.path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="cr.vision.apps.ipcam.IPCameraDetails.place">
+<code class="sig-name descname">place</code><em class="property"> = ''</em><a class="headerlink" href="#cr.vision.apps.ipcam.IPCameraDetails.place" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="cr.vision.apps.ipcam.IPCameraDetails.protocol">
+<code class="sig-name descname">protocol</code><em class="property"> = ''</em><a class="headerlink" href="#cr.vision.apps.ipcam.IPCameraDetails.protocol" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="cr.vision.apps.ipcam.ipcam_capture">
+<code class="sig-prename descclassname">cr.vision.apps.ipcam.</code><code class="sig-name descname">ipcam_capture</code><span class="sig-paren">(</span><em class="sig-param">url</em>, <em class="sig-param">title='IP Cam'</em>, <em class="sig-param">frame_rate=1</em>, <em class="sig-param">processor=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/apps/ipcam.html#ipcam_capture"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.apps.ipcam.ipcam_capture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Captures and displays frames from an IP camera.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cr.vision.apps.ipcam.test_ipcamera">
+<code class="sig-prename descclassname">cr.vision.apps.ipcam.</code><code class="sig-name descname">test_ipcamera</code><span class="sig-paren">(</span><em class="sig-param">url</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/apps/ipcam.html#test_ipcamera"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.apps.ipcam.test_ipcamera" title="Permalink to this definition">¶</a></dt>
+<dd><p>test function for IPCamera class</p>
+</dd></dl>
+
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-cr.vision.apps">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cr.vision.apps" title="Permalink to this headline">¶</a></h2>
+<p>Applications of computer vision</p>
 </div>
 </div>
 
@@ -243,7 +320,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2018, Shailesh Kumar
+        &copy; Copyright 2020, Carnot Research Pvt. Ltd.
 
     </p>
   </div>

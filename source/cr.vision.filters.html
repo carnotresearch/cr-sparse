@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>cr.vision.filters package &mdash; InDigits.Vision  documentation</title>
+  <title>cr.vision.filters package &mdash; CR.Vision  documentation</title>
   
 
   
@@ -52,7 +52,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> InDigits.Vision
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> CR.Vision
           
 
           
@@ -107,8 +107,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cr.vision.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#cr-vision-errors-module">cr.vision.errors module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#module-contents">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#module-cr.vision.errors">cr.vision.errors module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#module-cr.vision">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -128,7 +128,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">InDigits.Vision</a>
+          <a href="../index.html">CR.Vision</a>
         
       </nav>
 
@@ -211,14 +211,62 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="cr-vision-filters-filter-module">
-<h2>cr.vision.filters.filter module<a class="headerlink" href="#cr-vision-filters-filter-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-cr.vision.filters.filter">
+<span id="cr-vision-filters-filter-module"></span><h2>cr.vision.filters.filter module<a class="headerlink" href="#module-cr.vision.filters.filter" title="Permalink to this headline">¶</a></h2>
+<p>Methods for filtering</p>
+<p>We cover implementations for common use cases. One can fall back to the
+low level OpenCV API for more flexibility if needed.</p>
+<dl class="function">
+<dt id="cr.vision.filters.filter.filter_2d">
+<code class="sig-prename descclassname">cr.vision.filters.filter.</code><code class="sig-name descname">filter_2d</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">kernel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/filters/filter.html#filter_2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.filters.filter.filter_2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters an image retaining its depth</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cr.vision.filters.filter.gaussian_blur">
+<code class="sig-prename descclassname">cr.vision.filters.filter.</code><code class="sig-name descname">gaussian_blur</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">kernel_size=5</em>, <em class="sig-param">sigma=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/filters/filter.html#gaussian_blur"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.filters.filter.gaussian_blur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters an image using Gaussian filter of a given kernel size where we
+assume that the filter is symmetric.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cr.vision.filters.filter.laplacian">
+<code class="sig-prename descclassname">cr.vision.filters.filter.</code><code class="sig-name descname">laplacian</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">ddepth=5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/filters/filter.html#laplacian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.filters.filter.laplacian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes Laplacian of gray scale images</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cr.vision.filters.filter.sobel_energy_l1">
+<code class="sig-prename descclassname">cr.vision.filters.filter.</code><code class="sig-name descname">sobel_energy_l1</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/filters/filter.html#sobel_energy_l1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.filters.filter.sobel_energy_l1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the energy matrix for the image using sobel gradients by taking their absolute sums</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cr.vision.filters.filter.sobel_energy_l2">
+<code class="sig-prename descclassname">cr.vision.filters.filter.</code><code class="sig-name descname">sobel_energy_l2</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/filters/filter.html#sobel_energy_l2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.filters.filter.sobel_energy_l2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the energy matrix for the image using sobel gradients by computing the gradient magnitude</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cr.vision.filters.filter.sobel_x">
+<code class="sig-prename descclassname">cr.vision.filters.filter.</code><code class="sig-name descname">sobel_x</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">ddepth=5</em>, <em class="sig-param">ksize=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/filters/filter.html#sobel_x"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.filters.filter.sobel_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes sobel derivative in x direction</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cr.vision.filters.filter.sobel_y">
+<code class="sig-prename descclassname">cr.vision.filters.filter.</code><code class="sig-name descname">sobel_y</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">ddepth=5</em>, <em class="sig-param">ksize=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/filters/filter.html#sobel_y"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.filters.filter.sobel_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes sobel derivative in y direction</p>
+</dd></dl>
+
 </div>
-<div class="section" id="cr-vision-filters-kernels-module">
-<h2>cr.vision.filters.kernels module<a class="headerlink" href="#cr-vision-filters-kernels-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-cr.vision.filters.kernels">
+<span id="cr-vision-filters-kernels-module"></span><h2>cr.vision.filters.kernels module<a class="headerlink" href="#module-cr.vision.filters.kernels" title="Permalink to this headline">¶</a></h2>
+<p>Standard Kernels</p>
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-cr.vision.filters">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cr.vision.filters" title="Permalink to this headline">¶</a></h2>
+<p>Filters for image processing</p>
 </div>
 </div>
 
@@ -243,7 +291,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2018, Shailesh Kumar
+        &copy; Copyright 2020, Carnot Research Pvt. Ltd.
 
     </p>
   </div>
