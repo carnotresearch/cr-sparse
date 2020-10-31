@@ -1,7 +1,7 @@
-indigits
+cr
 ========
 
 .. toctree::
    :maxdepth: 4
 
-   indigits.vision
+   cr.vision

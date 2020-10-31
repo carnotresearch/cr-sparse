@@ -1,0 +1,1033 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Visual Effects on Images &mdash; InDigits.Vision  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> InDigits.Vision
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../nb_basic_image_operations.html">Basic Image Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Image Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/modules.html">cr</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">InDigits.Vision</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Visual Effects on Images</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/image_processing/nb_effects.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Visual-Effects-on-Images">
+<h1>Visual Effects on Images<a class="headerlink" href="#Visual-Effects-on-Images" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Setup-&amp;-Test-Examples">
+<h2>Setup &amp; Test Examples<a class="headerlink" href="#Setup-&-Test-Examples" title="Permalink to this headline">¶</a></h2>
+<p>Let us import the relevant libraries and read a few images to play with.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">from</span> <span class="nn">indigits</span> <span class="kn">import</span> <span class="n">vision</span> <span class="k">as</span> <span class="n">iv</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">watch</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../../data/images/pocket_watch.jpg&#39;</span><span class="p">)</span>
+<span class="n">mountain</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../../data/images/mountain.png&#39;</span><span class="p">)</span>
+<span class="n">roses</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../../data/images/roses.jpg&#39;</span><span class="p">)</span>
+<span class="n">fighter_jet</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../../data/images/fighter_jet.jpg&#39;</span><span class="p">)</span>
+<span class="n">barbara</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../../data/images/barbara.png&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">puppy</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../../data/images/puppy.jpg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">mountain</span><span class="p">,</span> <span class="n">roses</span><span class="p">,</span> <span class="n">fighter_jet</span><span class="p">,</span> <span class="n">barbara</span><span class="p">,</span> <span class="n">puppy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_3_0.png" src="../_images/image_processing_nb_effects_3_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Mirroring-Left-to-Right">
+<h2>Mirroring Left to Right<a class="headerlink" href="#Mirroring-Left-to-Right" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">mirror_lr</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_5_0.png" src="../_images/image_processing_nb_effects_5_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Mirroring-Up-to-Down">
+<h2>Mirroring Up to Down<a class="headerlink" href="#Mirroring-Up-to-Down" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">mirror_ud</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_7_0.png" src="../_images/image_processing_nb_effects_7_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Mirroring-Diagonally">
+<h2>Mirroring Diagonally<a class="headerlink" href="#Mirroring-Diagonally" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">mirror_x</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_9_0.png" src="../_images/image_processing_nb_effects_9_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Selecting-Red-Channel">
+<h2>Selecting Red Channel<a class="headerlink" href="#Selecting-Red-Channel" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_red</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_11_0.png" src="../_images/image_processing_nb_effects_11_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_red</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_12_0.png" src="../_images/image_processing_nb_effects_12_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Selecting-Green-Channel">
+<h2>Selecting Green Channel<a class="headerlink" href="#Selecting-Green-Channel" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_green</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_14_0.png" src="../_images/image_processing_nb_effects_14_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_green</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_15_0.png" src="../_images/image_processing_nb_effects_15_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Selecting-Blue-Channel">
+<h2>Selecting Blue Channel<a class="headerlink" href="#Selecting-Blue-Channel" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_blue</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_17_0.png" src="../_images/image_processing_nb_effects_17_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_blue</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_18_0.png" src="../_images/image_processing_nb_effects_18_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Monochrome-Image">
+<h2>Monochrome Image<a class="headerlink" href="#Monochrome-Image" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">monochrome</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_20_0.png" src="../_images/image_processing_nb_effects_20_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Embossing">
+<h2>Embossing<a class="headerlink" href="#Embossing" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">emboss</span><span class="p">(</span><span class="n">fighter_jet</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">fighter_jet</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_22_0.png" src="../_images/image_processing_nb_effects_22_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">emboss</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SW&#39;</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_23_0.png" src="../_images/image_processing_nb_effects_23_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">emboss</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;NE&#39;</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_24_0.png" src="../_images/image_processing_nb_effects_24_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">emboss</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;NW&#39;</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_25_0.png" src="../_images/image_processing_nb_effects_25_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+254
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Motion-Blur">
+<h2>Motion Blur<a class="headerlink" href="#Motion-Blur" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">motion_blur</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_28_0.png" src="../_images/image_processing_nb_effects_28_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">motion_blur</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">horz</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_29_0.png" src="../_images/image_processing_nb_effects_29_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Sharpening">
+<h2>Sharpening<a class="headerlink" href="#Sharpening" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">sharpen</span><span class="p">(</span><span class="n">roses</span><span class="p">)</span>
+<span class="n">differerence</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">abs_uint8</span><span class="p">(</span><span class="n">iv</span><span class="o">.</span><span class="n">signed_subtract</span><span class="p">(</span><span class="n">roses</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">))</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">roses</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">,</span> <span class="n">differerence</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_31_0.png" src="../_images/image_processing_nb_effects_31_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Vignette">
+<h2>Vignette<a class="headerlink" href="#Vignette" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">vignette</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_33_0.png" src="../_images/image_processing_nb_effects_33_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">vignette</span><span class="p">(</span><span class="n">barbara</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">barbara</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_34_0.png" src="../_images/image_processing_nb_effects_34_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">vignette</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_35_0.png" src="../_images/image_processing_nb_effects_35_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">enhance_contrast</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_36_0.png" src="../_images/image_processing_nb_effects_36_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Cartoon">
+<h2>Cartoon<a class="headerlink" href="#Cartoon" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">cartoonize</span><span class="p">(</span><span class="n">puppy</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_38_0.png" src="../_images/image_processing_nb_effects_38_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Pixelization">
+<h2>Pixelization<a class="headerlink" href="#Pixelization" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">pixelize</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_40_0.png" src="../_images/image_processing_nb_effects_40_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Sepia">
+<h2>Sepia<a class="headerlink" href="#Sepia" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">sepia</span><span class="p">(</span><span class="n">puppy</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_42_0.png" src="../_images/image_processing_nb_effects_42_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Contour">
+<h2>Contour<a class="headerlink" href="#Contour" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">puppy</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_44_0.png" src="../_images/image_processing_nb_effects_44_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="3d-embossing">
+<h2>3d embossing<a class="headerlink" href="#3d-embossing" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">emboss3d</span><span class="p">(</span><span class="n">roses</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">roses</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_46_0.png" src="../_images/image_processing_nb_effects_46_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2018, Shailesh Kumar
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

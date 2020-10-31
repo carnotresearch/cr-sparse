@@ -30,13 +30,14 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Image Processing" href="image_processing/index.html" /> 
+    <link rel="next" title="Basic Image Operations" href="nb_basic_image_operations.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -83,8 +84,9 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="nb_basic_image_operations.html">Basic Image Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="image_processing/index.html">Image Processing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source/modules.html">indigits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/modules.html">cr</a></li>
 </ul>
 
             
@@ -150,17 +152,42 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="indigits-vision">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="indigits-vision">
 <h1>InDigits.Vision<a class="headerlink" href="#indigits-vision" title="Permalink to this headline">¶</a></h1>
 <p>Computer Vision Tools and Applications</p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="nb_basic_image_operations.html">Basic Image Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="image_processing/index.html">Image Processing</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="source/modules.html">indigits</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/indigits.vision.html">indigits.vision package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/modules.html">cr</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="source/cr.vision.html">cr.vision package</a></li>
 </ul>
 </li>
 </ul>
@@ -183,7 +210,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="image_processing/index.html" class="btn btn-neutral float-right" title="Image Processing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="nb_basic_image_operations.html" class="btn btn-neutral float-right" title="Basic Image Operations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>
