@@ -1,0 +1,366 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>indigits.vision package &mdash; InDigits.Vision  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="indigits.vision.apps package" href="indigits.vision.apps.html" />
+    <link rel="prev" title="indigits" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> InDigits.Vision
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../image_processing/index.html">Image Processing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">indigits</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">indigits.vision package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="indigits.vision.apps.html">indigits.vision.apps package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="indigits.vision.concurrent.html">indigits.vision.concurrent package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="indigits.vision.core.html">indigits.vision.core package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="indigits.vision.edits.html">indigits.vision.edits package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="indigits.vision.filters.html">indigits.vision.filters package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="indigits.vision.geom_transform.html">indigits.vision.geom_transform package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="indigits.vision.io.html">indigits.vision.io package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="indigits.vision.misc.html">indigits.vision.misc package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="indigits.vision.motion.html">indigits.vision.motion package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="indigits.vision.noise.html">indigits.vision.noise package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="indigits.vision.object_detection.html">indigits.vision.object_detection package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="indigits.vision.object_tracker.html">indigits.vision.object_tracker package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="indigits.vision.saliency.html">indigits.vision.saliency package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="indigits.vision.video.html">indigits.vision.video package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#indigits-vision-errors-module">indigits.vision.errors module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">InDigits.Vision</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="modules.html">indigits</a> &raquo;</li>
+        
+      <li>indigits.vision package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/indigits.vision.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="indigits-vision-package">
+<h1>indigits.vision package<a class="headerlink" href="#indigits-vision-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="indigits.vision.apps.html">indigits.vision.apps package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.apps.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.apps.html#indigits-vision-apps-capture-module">indigits.vision.apps.capture module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.apps.html#indigits-vision-apps-ipcam-module">indigits.vision.apps.ipcam module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.apps.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="indigits.vision.concurrent.html">indigits.vision.concurrent package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.concurrent.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.concurrent.html#indigits-vision-concurrent-base-module">indigits.vision.concurrent.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.concurrent.html#indigits-vision-concurrent-graph-module">indigits.vision.concurrent.graph module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.concurrent.html#indigits-vision-concurrent-motion-detection-module">indigits.vision.concurrent.motion_detection module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.concurrent.html#indigits-vision-concurrent-on-screen-display-module">indigits.vision.concurrent.on_screen_display module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.concurrent.html#indigits-vision-concurrent-video-stream-module">indigits.vision.concurrent.video_stream module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.concurrent.html#indigits-vision-concurrent-webcam-stream-module">indigits.vision.concurrent.webcam_stream module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.concurrent.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="indigits.vision.core.html">indigits.vision.core package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.core.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.core.html#indigits-vision-core-colors-module">indigits.vision.core.colors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.core.html#indigits-vision-core-contour-module">indigits.vision.core.contour module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.core.html#indigits-vision-core-cvt-color-module">indigits.vision.core.cvt_color module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.core.html#indigits-vision-core-effects-module">indigits.vision.core.effects module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.core.html#indigits-vision-core-histogram-module">indigits.vision.core.histogram module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.core.html#indigits-vision-core-misc-module">indigits.vision.core.misc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.core.html#indigits-vision-core-operations-module">indigits.vision.core.operations module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.core.html#indigits-vision-core-plot-module">indigits.vision.core.plot module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.core.html#indigits-vision-core-template-module">indigits.vision.core.template module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.core.html#indigits-vision-core-threshold-module">indigits.vision.core.threshold module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.core.html#indigits-vision-core-types-module">indigits.vision.core.types module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.core.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="indigits.vision.edits.html">indigits.vision.edits package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.edits.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.edits.html#indigits-vision-edits-border-module">indigits.vision.edits.border module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.edits.html#indigits-vision-edits-logo-module">indigits.vision.edits.logo module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.edits.html#indigits-vision-edits-placement-module">indigits.vision.edits.placement module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.edits.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="indigits.vision.filters.html">indigits.vision.filters package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.filters.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.filters.html#indigits-vision-filters-filter-module">indigits.vision.filters.filter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.filters.html#indigits-vision-filters-kernels-module">indigits.vision.filters.kernels module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.filters.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="indigits.vision.geom_transform.html">indigits.vision.geom_transform package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.geom_transform.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.geom_transform.html#indigits-vision-geom-transform-projective2d-actions-module">indigits.vision.geom_transform.projective2d_actions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.geom_transform.html#indigits-vision-geom-transform-projective2d-matrices-module">indigits.vision.geom_transform.projective2d_matrices module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.geom_transform.html#indigits-vision-geom-transform-scaling-module">indigits.vision.geom_transform.scaling module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.geom_transform.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="indigits.vision.io.html">indigits.vision.io package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.io.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.io.html#indigits-vision-io-display-module">indigits.vision.io.display module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.io.html#indigits-vision-io-interfaces-module">indigits.vision.io.interfaces module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.io.html#indigits-vision-io-videocapture-module">indigits.vision.io.videocapture module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.io.html#indigits-vision-io-videowriter-module">indigits.vision.io.videowriter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.io.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="indigits.vision.misc.html">indigits.vision.misc package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.misc.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.misc.html#indigits-vision-misc-opencv-module">indigits.vision.misc.opencv module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.misc.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="indigits.vision.motion.html">indigits.vision.motion package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.motion.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.motion.html#indigits-vision-motion-simple-motion-detector-module">indigits.vision.motion.simple_motion_detector module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.motion.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="indigits.vision.noise.html">indigits.vision.noise package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.noise.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.noise.html#indigits-vision-noise-gaussian-module">indigits.vision.noise.gaussian module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.noise.html#indigits-vision-noise-snp-module">indigits.vision.noise.snp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.noise.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="indigits.vision.object_detection.html">indigits.vision.object_detection package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.object_detection.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.object_detection.html#indigits-vision-object-detection-nms-module">indigits.vision.object_detection.nms module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.object_detection.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="indigits.vision.object_tracker.html">indigits.vision.object_tracker package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.object_tracker.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.object_tracker.html#indigits-vision-object-tracker-object-tracker-module">indigits.vision.object_tracker.object_tracker module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.object_tracker.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="indigits.vision.saliency.html">indigits.vision.saliency package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.saliency.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.saliency.html#indigits-vision-saliency-saliency-module">indigits.vision.saliency.saliency module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.saliency.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="indigits.vision.video.html">indigits.vision.video package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.video.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.video.html#indigits-vision-video-frame-module">indigits.vision.video.frame module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indigits.vision.video.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="indigits-vision-errors-module">
+<h2>indigits.vision.errors module<a class="headerlink" href="#indigits-vision-errors-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="indigits.vision.apps.html" class="btn btn-neutral float-right" title="indigits.vision.apps package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="modules.html" class="btn btn-neutral float-left" title="indigits" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2018, Shailesh Kumar
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
