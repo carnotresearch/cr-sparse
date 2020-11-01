@@ -40,7 +40,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Image Processing" href="image_processing/index.html" />
-    <link rel="prev" title="Overview" href="overview.html" /> 
+    <link rel="prev" title="Getting Started" href="start.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,7 +88,13 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Basic Image Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#Creating-Simple-Images">Creating Simple Images</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#A-gray-scale-blank-image">A gray scale blank image</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#Image-Cleanup-via-Adaptive-Thresholding">Image Cleanup via Adaptive Thresholding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="image_processing/index.html">Image Processing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/modules.html">cr</a></li>
 </ul>
@@ -429,32 +435,48 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Basic-Image-Operations">
 <h1>Basic Image Operations<a class="headerlink" href="#Basic-Image-Operations" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Useful libraries</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># Carnot Research Vision Library</span>
+<span class="kn">from</span> <span class="nn">cr</span> <span class="kn">import</span> <span class="n">vision</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Images supplied with this library</span>
+<span class="n">MODULE_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="n">PACKAGE_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">MODULE_DIR</span><span class="p">)</span>
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PACKAGE_DIR</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">IMAGES_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s1">&#39;images&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Creating-Simple-Images">
+<h1>Creating Simple Images<a class="headerlink" href="#Creating-Simple-Images" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="A-gray-scale-blank-image">
+<h2>A gray scale blank image<a class="headerlink" href="#A-gray-scale-blank-image" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">cv2</span>
-<span class="kn">from</span> <span class="nn">indigits</span> <span class="kn">import</span> <span class="n">vision</span> <span class="k">as</span> <span class="n">iv</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">black</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">blank_image</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span></span><span class="n">black</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">blank_image</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">iv</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">black</span><span class="p">)</span>
+<span></span><span class="n">vision</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">black</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -462,7 +484,59 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/nb_basic_image_operations_3_0.png" src="_images/nb_basic_image_operations_3_0.png" />
+<img alt="_images/nb_basic_image_operations_5_0.png" src="_images/nb_basic_image_operations_5_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Image-Cleanup-via-Adaptive-Thresholding">
+<h1>Image Cleanup via Adaptive Thresholding<a class="headerlink" href="#Image-Cleanup-via-Adaptive-Thresholding" title="Permalink to this headline">¶</a></h1>
+<p>Let’s load an image of a page of text scanned in low light conditions.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">IMAGES_DIR</span><span class="p">,</span> <span class="s1">&#39;bookpage_dark_scan.jpg&#39;</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/nb_basic_image_operations_8_0.png" src="_images/nb_basic_image_operations_8_0.png" />
+</div>
+</div>
+<p>Let’s convert the image to gray scale (note that OpenCV loads images in BGR format)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">gray_image</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">bgr_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s apply an adaptive thresholding algorithm to cleanup the image</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">thresholded_image</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">adaptive_threshold_gaussian</span><span class="p">(</span>
+    <span class="n">gray_image</span><span class="p">,</span> <span class="n">block_size</span><span class="o">=</span><span class="mi">115</span><span class="p">,</span> <span class="n">constant</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">thresholded_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/nb_basic_image_operations_12_0.png" src="_images/nb_basic_image_operations_12_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -487,7 +561,7 @@ div.rendered_html tbody tr:hover {
         <a href="image_processing/index.html" class="btn btn-neutral float-right" title="Image Processing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="start.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

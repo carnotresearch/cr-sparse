@@ -14,6 +14,7 @@ GITHUB: https://github.com/carnotresearch/cr-vision
    :caption: Contents:
 
    overview
+   start
    nb_basic_image_operations
    image_processing/index
    source/modules

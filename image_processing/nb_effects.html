@@ -88,7 +88,10 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../nb_basic_image_operations.html">Basic Image Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nb_basic_image_operations.html#Creating-Simple-Images">Creating Simple Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nb_basic_image_operations.html#Image-Cleanup-via-Adaptive-Thresholding">Image Cleanup via Adaptive Thresholding</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Image Processing</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Visual Effects on Images</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#Setup-&amp;-Test-Examples">Setup &amp; Test Examples</a></li>
@@ -456,13 +459,13 @@ div.rendered_html tbody tr:hover {
 <h2>Setup &amp; Test Examples<a class="headerlink" href="#Setup-&-Test-Examples" title="Permalink to this headline">¶</a></h2>
 <p>Let us import the relevant libraries and read a few images to play with.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
-<span class="kn">from</span> <span class="nn">indigits</span> <span class="kn">import</span> <span class="n">vision</span> <span class="k">as</span> <span class="n">iv</span>
+<span class="kn">from</span> <span class="nn">cr</span> <span class="kn">import</span> <span class="n">vision</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="n">watch</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../../data/images/pocket_watch.jpg&#39;</span><span class="p">)</span>
@@ -479,7 +482,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">mountain</span><span class="p">,</span> <span class="n">roses</span><span class="p">,</span> <span class="n">fighter_jet</span><span class="p">,</span> <span class="n">barbara</span><span class="p">,</span> <span class="n">puppy</span><span class="p">)</span>
+<span></span><span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">mountain</span><span class="p">,</span> <span class="n">roses</span><span class="p">,</span> <span class="n">fighter_jet</span><span class="p">,</span> <span class="n">barbara</span><span class="p">,</span> <span class="n">puppy</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -494,12 +497,12 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Mirroring-Left-to-Right">
 <h2>Mirroring Left to Right<a class="headerlink" href="#Mirroring-Left-to-Right" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">mirror_lr</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">mirror_lr</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -514,12 +517,12 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Mirroring-Up-to-Down">
 <h2>Mirroring Up to Down<a class="headerlink" href="#Mirroring-Up-to-Down" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">mirror_ud</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">mirror_ud</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -534,12 +537,12 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Mirroring-Diagonally">
 <h2>Mirroring Diagonally<a class="headerlink" href="#Mirroring-Diagonally" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">mirror_x</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">mirror_x</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -554,12 +557,12 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Selecting-Red-Channel">
 <h2>Selecting Red Channel<a class="headerlink" href="#Selecting-Red-Channel" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_red</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_red</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -571,12 +574,12 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_red</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_red</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -591,12 +594,12 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Selecting-Green-Channel">
 <h2>Selecting Green Channel<a class="headerlink" href="#Selecting-Green-Channel" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_green</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_green</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -608,12 +611,12 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_green</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_green</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -628,12 +631,12 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Selecting-Blue-Channel">
 <h2>Selecting Blue Channel<a class="headerlink" href="#Selecting-Blue-Channel" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_blue</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_blue</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -645,12 +648,12 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_blue</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">select_blue</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -665,12 +668,12 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Monochrome-Image">
 <h2>Monochrome Image<a class="headerlink" href="#Monochrome-Image" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">monochrome</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">monochrome</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -685,12 +688,12 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Embossing">
 <h2>Embossing<a class="headerlink" href="#Embossing" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">emboss</span><span class="p">(</span><span class="n">fighter_jet</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">fighter_jet</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">emboss</span><span class="p">(</span><span class="n">fighter_jet</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">fighter_jet</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -702,12 +705,12 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">emboss</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SW&#39;</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">emboss</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SW&#39;</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -719,12 +722,12 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">emboss</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;NE&#39;</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">emboss</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;NE&#39;</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -736,12 +739,12 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">emboss</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;NW&#39;</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">emboss</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;NW&#39;</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -752,34 +755,33 @@ div.rendered_html tbody tr:hover {
 <img alt="../_images/image_processing_nb_effects_25_0.png" src="../_images/image_processing_nb_effects_25_0.png" />
 </div>
 </div>
+</div>
+<div class="section" id="Motion-Blur">
+<h2>Motion Blur<a class="headerlink" href="#Motion-Blur" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">motion_blur</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
-</pre></div>
+<div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<div class="highlight"><pre>
-254
-</pre></div></div>
+<img alt="../_images/image_processing_nb_effects_27_0.png" src="../_images/image_processing_nb_effects_27_0.png" />
 </div>
 </div>
-<div class="section" id="Motion-Blur">
-<h2>Motion Blur<a class="headerlink" href="#Motion-Blur" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">motion_blur</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">mountain</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">motion_blur</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">horz</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -790,34 +792,17 @@ div.rendered_html tbody tr:hover {
 <img alt="../_images/image_processing_nb_effects_28_0.png" src="../_images/image_processing_nb_effects_28_0.png" />
 </div>
 </div>
+</div>
+<div class="section" id="Sharpening">
+<h2>Sharpening<a class="headerlink" href="#Sharpening" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">motion_blur</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">horz</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/image_processing_nb_effects_29_0.png" src="../_images/image_processing_nb_effects_29_0.png" />
-</div>
-</div>
-</div>
-<div class="section" id="Sharpening">
-<h2>Sharpening<a class="headerlink" href="#Sharpening" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">sharpen</span><span class="p">(</span><span class="n">roses</span><span class="p">)</span>
-<span class="n">differerence</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">abs_uint8</span><span class="p">(</span><span class="n">iv</span><span class="o">.</span><span class="n">signed_subtract</span><span class="p">(</span><span class="n">roses</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">))</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">roses</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">,</span> <span class="n">differerence</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">sharpen</span><span class="p">(</span><span class="n">roses</span><span class="p">)</span>
+<span class="n">differerence</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">abs_uint8</span><span class="p">(</span><span class="n">vision</span><span class="o">.</span><span class="n">signed_subtract</span><span class="p">(</span><span class="n">roses</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">))</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">roses</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">,</span> <span class="n">differerence</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -826,19 +811,36 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/image_processing_nb_effects_31_0.png" src="../_images/image_processing_nb_effects_31_0.png" />
+<img alt="../_images/image_processing_nb_effects_30_0.png" src="../_images/image_processing_nb_effects_30_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="Vignette">
 <h2>Vignette<a class="headerlink" href="#Vignette" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">vignette</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/image_processing_nb_effects_32_0.png" src="../_images/image_processing_nb_effects_32_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">vignette</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">vignette</span><span class="p">(</span><span class="n">barbara</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">barbara</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -854,8 +856,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">vignette</span><span class="p">(</span><span class="n">barbara</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">barbara</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">vignette</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -871,8 +873,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">vignette</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">enhance_contrast</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -883,33 +885,16 @@ div.rendered_html tbody tr:hover {
 <img alt="../_images/image_processing_nb_effects_35_0.png" src="../_images/image_processing_nb_effects_35_0.png" />
 </div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">enhance_contrast</span><span class="p">(</span><span class="n">watch</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">watch</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/image_processing_nb_effects_36_0.png" src="../_images/image_processing_nb_effects_36_0.png" />
-</div>
-</div>
 </div>
 <div class="section" id="Cartoon">
 <h2>Cartoon<a class="headerlink" href="#Cartoon" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">cartoonize</span><span class="p">(</span><span class="n">puppy</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">cartoonize</span><span class="p">(</span><span class="n">puppy</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -917,19 +902,19 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/image_processing_nb_effects_38_0.png" src="../_images/image_processing_nb_effects_38_0.png" />
+<img alt="../_images/image_processing_nb_effects_37_0.png" src="../_images/image_processing_nb_effects_37_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="Pixelization">
 <h2>Pixelization<a class="headerlink" href="#Pixelization" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">pixelize</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">pixelize</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -937,19 +922,19 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/image_processing_nb_effects_40_0.png" src="../_images/image_processing_nb_effects_40_0.png" />
+<img alt="../_images/image_processing_nb_effects_39_0.png" src="../_images/image_processing_nb_effects_39_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="Sepia">
 <h2>Sepia<a class="headerlink" href="#Sepia" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">sepia</span><span class="p">(</span><span class="n">puppy</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">sepia</span><span class="p">(</span><span class="n">puppy</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -957,19 +942,19 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/image_processing_nb_effects_42_0.png" src="../_images/image_processing_nb_effects_42_0.png" />
+<img alt="../_images/image_processing_nb_effects_41_0.png" src="../_images/image_processing_nb_effects_41_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="Contour">
 <h2>Contour<a class="headerlink" href="#Contour" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">puppy</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">puppy</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">puppy</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -977,19 +962,19 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/image_processing_nb_effects_44_0.png" src="../_images/image_processing_nb_effects_44_0.png" />
+<img alt="../_images/image_processing_nb_effects_43_0.png" src="../_images/image_processing_nb_effects_43_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="3d-embossing">
 <h2>3d embossing<a class="headerlink" href="#3d-embossing" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">emboss3d</span><span class="p">(</span><span class="n">roses</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">iv</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">roses</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
+<span></span><span class="n">image_modified</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">emboss3d</span><span class="p">(</span><span class="n">roses</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">imshow_multiple_in_row</span><span class="p">(</span><span class="n">roses</span><span class="p">,</span> <span class="n">image_modified</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -997,16 +982,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/image_processing_nb_effects_46_0.png" src="../_images/image_processing_nb_effects_46_0.png" />
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
-</pre></div>
+<img alt="../_images/image_processing_nb_effects_45_0.png" src="../_images/image_processing_nb_effects_45_0.png" />
 </div>
 </div>
 </div>
