@@ -88,10 +88,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../start.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../nb_basic_image_operations.html">Basic Image Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../nb_basic_image_operations.html#Creating-Simple-Images">Creating Simple Images</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../nb_basic_image_operations.html#Image-Cleanup-via-Adaptive-Thresholding">Image Cleanup via Adaptive Thresholding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../image_processing/index.html">Image Processing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../source/modules.html">cr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/cr.vision.html">cr.vision package</a></li>
 </ul>
 
             
@@ -156,7 +154,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for cr.vision.core.effects</h1><div class="highlight"><pre>
-<span></span><span class="sd">&#39;&#39;&#39;</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Visual effects on images</span>
 
 
@@ -170,68 +168,70 @@
 <span class="sd">* https://www.linuxtopia.org/online_books/graphics_tools/gimp_advanced_guide/gimp_guide_node74.html</span>
 <span class="sd">* https://stackoverflow.com/questions/2034037/image-embossing-in-python-with-pil-adding-depth-azimuth-etc</span>
 
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
-<span class="kn">from</span> <span class="nn">cr</span> <span class="kn">import</span> <span class="n">vision</span> <span class="k">as</span> <span class="n">iv</span>
+<span class="kn">from</span> <span class="nn">cr</span> <span class="kn">import</span> <span class="n">vision</span>
 
 <span class="c1"># pylint: disable=C0103</span>
 
 
 <div class="viewcode-block" id="mirror_lr"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.mirror_lr">[docs]</a><span class="k">def</span> <span class="nf">mirror_lr</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Mirrors an image between left to right</span>
+    <span class="sd">&quot;&quot;&quot;Mirrors an image between left and right</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        image (array): Input image</span>
+<span class="sd">    :param image: An input image to convert</span>
+<span class="sd">    :type image: array_like</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        Mirrored image</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+
+<span class="sd">    :return: Mirrored image. Same dimensions as input.</span>
+<span class="sd">    :rtype: ndarray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">fliplr</span><span class="p">(</span><span class="n">image</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="mirror_ud"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.mirror_ud">[docs]</a><span class="k">def</span> <span class="nf">mirror_ud</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Mirrors an image between up and down</span>
+    <span class="sd">&quot;&quot;&quot;Mirrors an image between up and down</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        image (array): Input image</span>
+<span class="sd">    :param image: An input image to convert</span>
+<span class="sd">    :type image: array_like</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        Mirrored image</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+
+<span class="sd">    :return: Mirrored image. Same dimensions as input.</span>
+<span class="sd">    :rtype: ndarray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">image</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="mirror_x"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.mirror_x">[docs]</a><span class="k">def</span> <span class="nf">mirror_x</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Mirrors the image diagonally.</span>
-<span class="sd">        Top left corner goes to bottom rigth and vice versa. </span>
-<span class="sd">        Top right corner goes to bottom left and vice versa.</span>
+    <span class="sd">&quot;&quot;&quot;Mirrors the image diagonally.</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        image (array): Input image</span>
+<span class="sd">    * Top left corner goes to bottom rigth and vice versa.</span>
+<span class="sd">    * Top right corner goes to bottom left and vice versa.</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        Mirrored image</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    :param image: An input image to convert</span>
+<span class="sd">    :type image: array_like</span>
+
+
+<span class="sd">    :return: Mirrored image. Same dimensions as input.</span>
+<span class="sd">    :rtype: ndarray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fliplr</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">image</span></div>
 
 
 <div class="viewcode-block" id="select_red"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.select_red">[docs]</a><span class="k">def</span> <span class="nf">select_red</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">others</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Selects only the red channel of the image</span>
+    <span class="sd">&quot;&quot;&quot;Selects only the red channel of the image</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        image (array): Input image</span>
-<span class="sd">        others (int): Value to be set in other channels (default 0)</span>
+<span class="sd">    :param image: An input image in RGB format</span>
+<span class="sd">    :type image: array_like</span>
+<span class="sd">    :param others: Pixel value for other channels </span>
+<span class="sd">        , defaults to 0</span>
+<span class="sd">    :type others: int, optional</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        Reddish image</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    :return: Converted image which looks reddish</span>
+<span class="sd">    :rtype: ndarray, RGB</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">others</span>
     <span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">others</span>
@@ -239,16 +239,17 @@
 
 
 <div class="viewcode-block" id="select_green"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.select_green">[docs]</a><span class="k">def</span> <span class="nf">select_green</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">others</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Selects only the green channel of the image</span>
+    <span class="sd">&quot;&quot;&quot;Selects only the green channel of the image</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        image (array): Input image</span>
-<span class="sd">        others (int): Value to be set in other channels (default 0)</span>
+<span class="sd">    :param image: An input image in RGB format</span>
+<span class="sd">    :type image: array_like</span>
+<span class="sd">    :param others: Pixel value for other channels </span>
+<span class="sd">        , defaults to 0</span>
+<span class="sd">    :type others: int, optional</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        Greenish image</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    :return: Converted image which looks greenish</span>
+<span class="sd">    :rtype: ndarray, RGB</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">others</span>
     <span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">others</span>
@@ -256,107 +257,117 @@
 
 
 <div class="viewcode-block" id="select_blue"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.select_blue">[docs]</a><span class="k">def</span> <span class="nf">select_blue</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">others</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Selects only the blue channel of the image</span>
+    <span class="sd">&quot;&quot;&quot;Selects only the blue channel of the image</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        image (array): Input image</span>
-<span class="sd">        others (int): Value to be set in other channels (default 0)</span>
+<span class="sd">    :param image: An input image in RGB format</span>
+<span class="sd">    :type image: array_like</span>
+<span class="sd">    :param others: Pixel value for other channels </span>
+<span class="sd">        , defaults to 0</span>
+<span class="sd">    :type others: int, optional</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        Bluish image</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    :return: Converted image which looks bluish</span>
+<span class="sd">    :rtype: ndarray, RGB</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">others</span>
     <span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">others</span>
     <span class="k">return</span> <span class="n">image</span></div>
 
 
-<div class="viewcode-block" id="monochrome"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.monochrome">[docs]</a><span class="k">def</span> <span class="nf">monochrome</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Converts image to gray level</span>
+<div class="viewcode-block" id="monochrome"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.monochrome">[docs]</a><span class="k">def</span> <span class="nf">monochrome</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;bgr&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts image to gray scale</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        image (array): Input image</span>
+<span class="sd">    * If a monochrome image is provided as input, it will be</span>
+<span class="sd">      returned as it is.</span>
+<span class="sd">    * If a 2D array is provided as input, it will be returned</span>
+<span class="sd">      as it is.</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        Monochrome image</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">return</span> <span class="n">iv</span><span class="o">.</span><span class="n">bgr_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span></div>
+<span class="sd">    :param image: An input image</span>
+<span class="sd">    :type image: array_like</span>
+<span class="sd">    :param format: Format of input image,</span>
+<span class="sd">        defaults to &#39;bgr&#39;. </span>
+<span class="sd">        Supported formats: &#39;rgb&#39;, &#39;bgr&#39;</span>
+<span class="sd">    :type format: str, optional</span>
+
+<span class="sd">    :return: Converted monochrome image</span>
+<span class="sd">    :rtype: ndarray, 2D</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;rgb&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">vision</span><span class="o">.</span><span class="n">rgb_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;bgr&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">vision</span><span class="o">.</span><span class="n">bgr_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">image</span></div>
 
 
 <span class="n">EMBOSS_FILTERS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-                            <span class="p">]),</span>
-        <span class="s1">&#39;gray&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
-        <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;kernel&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span>
+        <span class="s2">&quot;gray&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+        <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="s1">&#39;sharp_color&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                            <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-                            <span class="p">]),</span>
-        <span class="s1">&#39;gray&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.2</span>
+    <span class="s2">&quot;sharp_color&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;kernel&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]),</span>
+        <span class="s2">&quot;gray&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="s1">&#39;SW&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                            <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                            <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span>
-        <span class="s1">&#39;gray&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
-        <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="s2">&quot;SW&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;kernel&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span>
+        <span class="s2">&quot;gray&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+        <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="s1">&#39;NE&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                            <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-                            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]),</span>
-        <span class="s1">&#39;gray&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
-        <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="s2">&quot;NE&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;kernel&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]),</span>
+        <span class="s2">&quot;gray&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+        <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="s1">&#39;NW&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
-                           <span class="p">),</span>
-        <span class="s1">&#39;gray&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
-        <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mi">1</span>
-    <span class="p">}</span>
+    <span class="s2">&quot;NW&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;kernel&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]),</span>
+        <span class="s2">&quot;gray&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+        <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">}</span>
 
 
-<div class="viewcode-block" id="emboss"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.emboss">[docs]</a><span class="k">def</span> <span class="nf">emboss</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Creates an embossed version of an image using a given method</span>
+<div class="viewcode-block" id="emboss"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.emboss">[docs]</a><span class="k">def</span> <span class="nf">emboss</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;bgr&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates an embossed version of an image using a given method</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        image (array): Input image</span>
+<span class="sd">    :param image: Input image</span>
+<span class="sd">    :type image: array_like</span>
+<span class="sd">    :param method: Embossing method.</span>
+<span class="sd">        Available methods: &#39;default&#39;, &#39;sharp_color&#39;, &#39;SW&#39;, &#39;NE&#39;, &#39;NW&#39;;</span>
+<span class="sd">        defaults to &#39;default&#39; </span>
+<span class="sd">    :type method: str, optional</span>
+<span class="sd">    :param format: Format of input image,</span>
+<span class="sd">        defaults to &#39;bgr&#39;. Applicable only when embossing</span>
+<span class="sd">        method works on monochrome images and we need to convert</span>
+<span class="sd">        the image to monochrome first</span>
+<span class="sd">        Supported formats: &#39;rgb&#39;, &#39;bgr&#39;</span>
+<span class="sd">    :type format: str, optional</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        Embossed image</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    :return: Embossed image</span>
+<span class="sd">    :rtype: ndarray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">method</span> <span class="o">=</span> <span class="n">EMBOSS_FILTERS</span><span class="p">[</span><span class="n">method</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">method</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">]:</span>
-        <span class="n">image</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">bgr_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">method</span><span class="p">[</span><span class="s2">&quot;gray&quot;</span><span class="p">]:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">monochrome</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="nb">format</span><span class="p">)</span>
     <span class="c1"># capture the original data type of image</span>
     <span class="n">image_type</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">dtype</span>
     <span class="c1"># perform filtering</span>
-    <span class="n">embossing</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">filter2D</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CV_64F</span><span class="p">,</span> <span class="n">method</span><span class="p">[</span><span class="s1">&#39;kernel&#39;</span><span class="p">])</span>
-    <span class="n">embossing</span> <span class="o">=</span> <span class="n">embossing</span> <span class="o">*</span> <span class="n">method</span><span class="p">[</span><span class="s1">&#39;scale&#39;</span><span class="p">]</span>
-    <span class="n">alpha</span> <span class="o">=</span> <span class="n">method</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span>
-    <span class="n">offset</span> <span class="o">=</span> <span class="n">method</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span>
+    <span class="n">embossing</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">filter2D</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CV_64F</span><span class="p">,</span> <span class="n">method</span><span class="p">[</span><span class="s2">&quot;kernel&quot;</span><span class="p">])</span>
+    <span class="n">embossing</span> <span class="o">=</span> <span class="n">embossing</span> <span class="o">*</span> <span class="n">method</span><span class="p">[</span><span class="s2">&quot;scale&quot;</span><span class="p">]</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">method</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">]</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="n">method</span><span class="p">[</span><span class="s2">&quot;offset&quot;</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">alpha</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="c1"># compute absolute values</span>
         <span class="c1"># embossing = np.absolute(embossing)</span>
@@ -364,24 +375,29 @@
         <span class="n">embossing</span> <span class="o">=</span> <span class="n">embossing</span> <span class="o">+</span> <span class="n">offset</span>
         <span class="k">return</span> <span class="n">embossing</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">image_type</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span>
-            <span class="n">embossing</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">embossing</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">offset</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span>
+            <span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">embossing</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">embossing</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">offset</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">image_type</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="motion_blur"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.motion_blur">[docs]</a><span class="k">def</span> <span class="nf">motion_blur</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">horz</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Introduces a motion blur effect</span>
+    <span class="sd">&quot;&quot;&quot;Introduces a motion blur effect</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        image (array): Input image</span>
+<span class="sd">    :param image: Input image</span>
+<span class="sd">    :type image: array_like</span>
+<span class="sd">    :param kernel_size: Size of motion blur filter kernel, defaults to 3</span>
+<span class="sd">    :type kernel_size: int, optional</span>
+<span class="sd">    :param horz: Indicates if motion blur is to be applied in horizontal direction,</span>
+<span class="sd">        defaults to True</span>
+<span class="sd">    :type horz: bool, optional</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        Motion blurred image</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    :return: Motion blurred image</span>
+<span class="sd">    :rtype: ndarray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">kernel_size</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">))</span>
     <span class="c1"># make middle row all ones</span>
-    <span class="n">mid_row</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">kernel_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">mid_row</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">kernel_size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
     <span class="n">kernel</span><span class="p">[</span><span class="n">mid_row</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">kernel_size</span><span class="p">)</span> <span class="o">/</span> <span class="n">kernel_size</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">horz</span><span class="p">:</span>
         <span class="c1"># for vertical blurring, we need to get the transpose</span>
@@ -391,33 +407,41 @@
 
 
 <div class="viewcode-block" id="sharpen"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.sharpen">[docs]</a><span class="k">def</span> <span class="nf">sharpen</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Sharpens an image using edge enhancement</span>
+    <span class="sd">&quot;&quot;&quot;Sharpens an image using edge enhancement</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        image (array): Input image</span>
+<span class="sd">    :param image: Input image</span>
+<span class="sd">    :type image: array_like</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        Sharpened image</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                       <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                       <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                       <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                       <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span> <span class="o">/</span> <span class="mf">8.0</span>
+<span class="sd">    :return: Sharpened image</span>
+<span class="sd">    :rtype: ndarray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="o">/</span> <span class="mf">8.0</span>
+    <span class="p">)</span>
     <span class="n">sharpened_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">filter2D</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">kernel</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">sharpened_image</span></div>
 
 
 <div class="viewcode-block" id="vignette"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.vignette">[docs]</a><span class="k">def</span> <span class="nf">vignette</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">vignette_size</span><span class="o">=</span><span class="mi">150</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Applies vignette effect on an image</span>
+    <span class="sd">&quot;&quot;&quot;Applies vignette effect on an image</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        image (array): Input image</span>
+<span class="sd">    :param image: Input image</span>
+<span class="sd">    :type image: array_like</span>
+<span class="sd">    :param vignette_size: Size of Gaussian kernel for vignette effect, defaults to 150</span>
+<span class="sd">    :type vignette_size: int, optional</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        Vignetted image</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    :return: Vignetted image</span>
+<span class="sd">    :rtype: ndarray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># height and width of the image</span>
     <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
     <span class="c1"># We will construct the vignette mask using Gaussian kernels</span>
@@ -426,50 +450,49 @@
     <span class="c1"># Construct a Gaussian kernel for y-direction</span>
     <span class="n">kernel_y</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">getGaussianKernel</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">vignette_size</span><span class="p">)</span>
     <span class="c1"># Multiply them together to form a combined Gaussian kernel</span>
-    <span class="n">kernel</span> <span class="o">=</span> <span class="n">kernel_y</span><span class="o">*</span><span class="n">kernel_x</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">kernel_y</span> <span class="o">*</span> <span class="n">kernel_x</span><span class="o">.</span><span class="n">T</span>
     <span class="c1"># prepare the mask</span>
     <span class="n">mask</span> <span class="o">=</span> <span class="n">kernel</span> <span class="o">/</span> <span class="n">kernel</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
         <span class="c1"># it&#39;s a black and white images</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">image</span><span class="o">*</span><span class="n">mask</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">image</span> <span class="o">*</span> <span class="n">mask</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">channels</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">channels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1"># it&#39;s a black and white image</span>
-            <span class="n">output</span> <span class="o">=</span> <span class="n">image</span><span class="o">*</span><span class="n">mask</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">image</span> <span class="o">*</span> <span class="n">mask</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># it&#39;s a BGR image</span>
             <span class="n">b</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-            <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="n">mask</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="o">*</span><span class="n">mask</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">mask</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">*</span> <span class="n">mask</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">g</span> <span class="o">*</span> <span class="n">mask</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">mask</span>
             <span class="n">output</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">merge</span><span class="p">([</span><span class="n">b</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">r</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">output</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="enhance_contrast"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.enhance_contrast">[docs]</a><span class="k">def</span> <span class="nf">enhance_contrast</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Applies vignette effect on an image</span>
+    <span class="sd">&quot;&quot;&quot;Enhances contrast of an image</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        image (array): Input image</span>
+<span class="sd">    :param image: Input image in BGR or monochrome format</span>
+<span class="sd">    :type image: array_like</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        Image with enhanced contrast</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">if</span> <span class="n">iv</span><span class="o">.</span><span class="n">is_gray_scale</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+<span class="sd">    :return: Image with enhanced contrast</span>
+<span class="sd">    :rtype: ndarray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">vision</span><span class="o">.</span><span class="n">is_gray_scale</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
         <span class="c1"># the image itself is gray scale</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">image</span>
-    <span class="k">elif</span> <span class="n">iv</span><span class="o">.</span><span class="n">is_3channel</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="k">elif</span> <span class="n">vision</span><span class="o">.</span><span class="n">is_3channel</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
         <span class="c1"># Convert from BGR to YUV format</span>
         <span class="n">image_yuv</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2YUV</span><span class="p">)</span>
         <span class="c1"># Extract Y channel</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">image_yuv</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">iv</span><span class="o">.</span><span class="n">IVError</span><span class="p">(</span><span class="s2">&quot;Invalid image format&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">vision</span><span class="o">.</span><span class="n">IVError</span><span class="p">(</span><span class="s2">&quot;Invalid image format&quot;</span><span class="p">)</span>
     <span class="c1"># perform histogram equalization on the grayscale y channel</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">equalizeHist</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">iv</span><span class="o">.</span><span class="n">is_gray_scale</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">vision</span><span class="o">.</span><span class="n">is_gray_scale</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
         <span class="c1"># The result is y itself</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">y</span>
     <span class="k">else</span><span class="p">:</span>
@@ -481,25 +504,26 @@
 
 
 <div class="viewcode-block" id="cartoonize"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.cartoonize">[docs]</a><span class="k">def</span> <span class="nf">cartoonize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Constructs a black and white cartoon version of image</span>
+    <span class="sd">&quot;&quot;&quot;Constructs a black and white cartoon version of image</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        image (array): Input image</span>
+<span class="sd">    :param image: Input image in BGR or monochrome format</span>
+<span class="sd">    :type image: array_like</span>
+<span class="sd">    :param kernel_size: Size of Laplacian filter kernel, defaults to 3</span>
+<span class="sd">    :type kernel_size: int, optional</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        Cartoonized image</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    :return: Cartoonized image</span>
+<span class="sd">    :rtype: ndarray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#  Convert to gray scale</span>
-    <span class="k">if</span> <span class="n">iv</span><span class="o">.</span><span class="n">is_3channel</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-        <span class="n">image</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">bgr_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">vision</span><span class="o">.</span><span class="n">is_3channel</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">bgr_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
     <span class="c1"># Apply median filtering</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">medianBlur</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
     <span class="c1"># Detect edges in the image</span>
     <span class="n">edges</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Laplacian</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CV_8U</span><span class="p">,</span> <span class="n">ksize</span><span class="o">=</span><span class="n">kernel_size</span><span class="p">)</span>
     <span class="c1"># Edges are where the Laplacian is small</span>
     <span class="c1"># We prepare an edge mask for small values</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">threshold_below</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">threshold_below</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
     <span class="c1"># We need to do some erosion to merge black edge points</span>
     <span class="c1"># prepare the structuring element</span>
     <span class="n">se</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
@@ -512,81 +536,82 @@
 
 
 <div class="viewcode-block" id="pixelize"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.pixelize">[docs]</a><span class="k">def</span> <span class="nf">pixelize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">pixel_size</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Pixelizes an image to given pixel size</span>
+    <span class="sd">&quot;&quot;&quot;Pixelizes an image to given pixel size</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        image (array): Input image</span>
+<span class="sd">    :param image: Input image</span>
+<span class="sd">    :type image: array_like</span>
+<span class="sd">    :param pixel_size: Pixelization factor, defaults to 8 (one pixel for 8x8 block)</span>
+<span class="sd">    :type pixel_size: int, optional</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        Pixelized image</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    :return: Pixelized image</span>
+<span class="sd">    :rtype: ndarray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">factor</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">pixel_size</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">fx</span><span class="o">=</span><span class="n">factor</span><span class="p">,</span> <span class="n">fy</span><span class="o">=</span><span class="n">factor</span><span class="p">,</span>
-                       <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_NEAREST</span><span class="p">)</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">fx</span><span class="o">=</span><span class="n">pixel_size</span><span class="p">,</span> <span class="n">fy</span><span class="o">=</span><span class="n">pixel_size</span><span class="p">,</span>
-                       <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_NEAREST</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span>
+        <span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">fx</span><span class="o">=</span><span class="n">factor</span><span class="p">,</span> <span class="n">fy</span><span class="o">=</span><span class="n">factor</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_NEAREST</span>
+    <span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span>
+        <span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">fx</span><span class="o">=</span><span class="n">pixel_size</span><span class="p">,</span> <span class="n">fy</span><span class="o">=</span><span class="n">pixel_size</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_NEAREST</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="n">image</span></div>
 
 
 <div class="viewcode-block" id="sepia"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.sepia">[docs]</a><span class="k">def</span> <span class="nf">sepia</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Adds sepia effect to a color image</span>
+    <span class="sd">&quot;&quot;&quot;Adds sepia effect to a color image</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        image (array): Input image</span>
+<span class="sd">    :param image: Input image in BGR format</span>
+<span class="sd">    :type image: array_like</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Image with sepia effect</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">B</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-    <span class="n">tr</span> <span class="o">=</span> <span class="mf">0.393</span><span class="o">*</span><span class="n">R</span> <span class="o">+</span> <span class="mf">0.769</span><span class="o">*</span><span class="n">G</span> <span class="o">+</span> <span class="mf">0.189</span><span class="o">*</span><span class="n">B</span>
-    <span class="n">tg</span> <span class="o">=</span> <span class="mf">0.349</span><span class="o">*</span><span class="n">R</span> <span class="o">+</span> <span class="mf">0.686</span><span class="o">*</span><span class="n">G</span> <span class="o">+</span> <span class="mf">0.168</span><span class="o">*</span><span class="n">B</span>
-    <span class="n">tb</span> <span class="o">=</span> <span class="mf">0.272</span><span class="o">*</span><span class="n">R</span> <span class="o">+</span> <span class="mf">0.534</span><span class="o">*</span><span class="n">G</span> <span class="o">+</span> <span class="mf">0.131</span><span class="o">*</span><span class="n">B</span>
+    <span class="n">tr</span> <span class="o">=</span> <span class="mf">0.393</span> <span class="o">*</span> <span class="n">R</span> <span class="o">+</span> <span class="mf">0.769</span> <span class="o">*</span> <span class="n">G</span> <span class="o">+</span> <span class="mf">0.189</span> <span class="o">*</span> <span class="n">B</span>
+    <span class="n">tg</span> <span class="o">=</span> <span class="mf">0.349</span> <span class="o">*</span> <span class="n">R</span> <span class="o">+</span> <span class="mf">0.686</span> <span class="o">*</span> <span class="n">G</span> <span class="o">+</span> <span class="mf">0.168</span> <span class="o">*</span> <span class="n">B</span>
+    <span class="n">tb</span> <span class="o">=</span> <span class="mf">0.272</span> <span class="o">*</span> <span class="n">R</span> <span class="o">+</span> <span class="mf">0.534</span> <span class="o">*</span> <span class="n">G</span> <span class="o">+</span> <span class="mf">0.131</span> <span class="o">*</span> <span class="n">B</span>
     <span class="c1"># saturate</span>
     <span class="n">tr</span><span class="p">[</span><span class="n">tr</span> <span class="o">&gt;</span> <span class="mi">255</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
     <span class="n">tg</span><span class="p">[</span><span class="n">tg</span> <span class="o">&gt;</span> <span class="mi">255</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
     <span class="n">tb</span><span class="p">[</span><span class="n">tb</span> <span class="o">&gt;</span> <span class="mi">255</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
     <span class="c1"># convert back to 8-bit</span>
-    <span class="n">tr</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
-    <span class="n">tg</span> <span class="o">=</span> <span class="n">tg</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
-    <span class="n">tb</span> <span class="o">=</span> <span class="n">tb</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+    <span class="n">tr</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span>
+    <span class="n">tg</span> <span class="o">=</span> <span class="n">tg</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span>
+    <span class="n">tb</span> <span class="o">=</span> <span class="n">tb</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span>
     <span class="c1"># Combine the 3 channel</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">merge</span><span class="p">([</span><span class="n">tb</span><span class="p">,</span> <span class="n">tg</span><span class="p">,</span> <span class="n">tr</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">result</span></div>
 
 
 <span class="n">_SPECIAL_FILTERS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;contour&#39;</span> <span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-            <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-            <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-            <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="p">]),</span>
-        <span class="s1">&#39;gray&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="mi">255</span><span class="p">,</span>
+    <span class="s2">&quot;contour&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;kernel&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]),</span>
+        <span class="s2">&quot;gray&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">255</span><span class="p">,</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
+
 <span class="k">def</span> <span class="nf">_apply_filter</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">filter_name</span><span class="p">):</span>
     <span class="nb">filter</span> <span class="o">=</span> <span class="n">_SPECIAL_FILTERS</span><span class="p">[</span><span class="n">filter_name</span><span class="p">]</span>
-    <span class="k">if</span> <span class="nb">filter</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">]:</span>
-        <span class="n">image</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">bgr_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-    <span class="n">kernel</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">[</span><span class="s1">&#39;kernel&#39;</span><span class="p">]</span>
-    <span class="n">scale</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">[</span><span class="s1">&#39;scale&#39;</span><span class="p">]</span>
-    <span class="n">offset</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">filter</span><span class="p">[</span><span class="s2">&quot;gray&quot;</span><span class="p">]:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">bgr_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">[</span><span class="s2">&quot;kernel&quot;</span><span class="p">]</span>
+    <span class="n">scale</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">[</span><span class="s2">&quot;scale&quot;</span><span class="p">]</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">[</span><span class="s2">&quot;offset&quot;</span><span class="p">]</span>
     <span class="n">kernel</span> <span class="o">=</span> <span class="n">kernel</span> <span class="o">/</span> <span class="n">scale</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">filter2D</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span>
 
 
 <div class="viewcode-block" id="contour"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.contour">[docs]</a><span class="k">def</span> <span class="nf">contour</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Creates a contour on the image&#39;&#39;&#39;</span>
-    <span class="k">return</span> <span class="n">_apply_filter</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="s1">&#39;contour&#39;</span><span class="p">)</span></div>
+    <span class="sd">&quot;&quot;&quot;Creates a contour on the image&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_apply_filter</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="s2">&quot;contour&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="emboss3d"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.emboss3d">[docs]</a><span class="k">def</span> <span class="nf">emboss3d</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">azimuth</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">elevation</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">bgr_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="emboss3d"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.effects.emboss3d">[docs]</a><span class="k">def</span> <span class="nf">emboss3d</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">azimuth</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">elevation</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">bgr_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">)</span>
     <span class="n">gradients</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
     <span class="n">grad_x</span><span class="p">,</span> <span class="n">grad_y</span> <span class="o">=</span> <span class="n">gradients</span>
     <span class="c1"># projection of unit vector to light source on to ground</span>
@@ -600,18 +625,17 @@
     <span class="n">grad_x</span> <span class="o">=</span> <span class="n">grad_x</span> <span class="o">*</span> <span class="n">depth</span> <span class="o">/</span> <span class="mi">100</span>
     <span class="n">grad_y</span> <span class="o">=</span> <span class="n">grad_y</span> <span class="o">*</span> <span class="n">depth</span> <span class="o">/</span> <span class="mi">100</span>
     <span class="c1"># gradient magnitudes [add a little extra to ensure magnitude is non-zero]</span>
-    <span class="n">mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">grad_x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">grad_y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">unit_x</span> <span class="o">=</span> <span class="n">grad_x</span> <span class="o">/</span><span class="n">mag</span>
+    <span class="n">mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">grad_x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">grad_y</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">unit_x</span> <span class="o">=</span> <span class="n">grad_x</span> <span class="o">/</span> <span class="n">mag</span>
     <span class="n">unit_y</span> <span class="o">=</span> <span class="n">grad_y</span> <span class="o">/</span> <span class="n">mag</span>
-    <span class="n">unit_z</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">mag</span>
+    <span class="n">unit_z</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">mag</span>
     <span class="c1"># compute the projection of gradient to the direction of light source</span>
-    <span class="n">projection</span> <span class="o">=</span> <span class="p">(</span><span class="n">ground_x</span><span class="o">*</span><span class="n">unit_x</span> <span class="o">+</span> <span class="n">ground_y</span><span class="o">*</span><span class="n">unit_y</span> <span class="o">+</span> <span class="n">up_z</span><span class="o">*</span><span class="n">unit_z</span><span class="p">)</span>
+    <span class="n">projection</span> <span class="o">=</span> <span class="n">ground_x</span> <span class="o">*</span> <span class="n">unit_x</span> <span class="o">+</span> <span class="n">ground_y</span> <span class="o">*</span> <span class="n">unit_y</span> <span class="o">+</span> <span class="n">up_z</span> <span class="o">*</span> <span class="n">unit_z</span>
     <span class="c1"># map to 0-255 range</span>
-    <span class="n">projection</span> <span class="o">=</span> <span class="mi">255</span><span class="o">*</span><span class="n">projection</span>
+    <span class="n">projection</span> <span class="o">=</span> <span class="mi">255</span> <span class="o">*</span> <span class="n">projection</span>
     <span class="n">projection</span> <span class="o">=</span> <span class="n">projection</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
-    <span class="n">projection</span> <span class="o">=</span> <span class="n">projection</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+    <span class="n">projection</span> <span class="o">=</span> <span class="n">projection</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">projection</span></div>
-
 </pre></div>
 
            </div>

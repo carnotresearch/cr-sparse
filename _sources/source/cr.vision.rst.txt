@@ -1,9 +1,6 @@
 cr.vision package
 =======================
 
-Subpackages
------------
-
 .. toctree::
 
     cr.vision.core
@@ -19,22 +16,10 @@ Subpackages
     cr.vision.saliency
     cr.vision.video
 
-Submodules
-----------
-
 cr.vision.errors module
 -----------------------------
 
 .. automodule:: cr.vision.errors
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: cr.vision
     :members:
     :undoc-members:
     :show-inheritance:

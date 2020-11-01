@@ -88,10 +88,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../start.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../nb_basic_image_operations.html">Basic Image Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../nb_basic_image_operations.html#Creating-Simple-Images">Creating Simple Images</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../nb_basic_image_operations.html#Image-Cleanup-via-Adaptive-Thresholding">Image Cleanup via Adaptive Thresholding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../image_processing/index.html">Image Processing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../source/modules.html">cr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/cr.vision.html">cr.vision package</a></li>
 </ul>
 
             
@@ -162,7 +160,7 @@
 <span class="kn">import</span> <span class="nn">cv2</span>
 
 <div class="viewcode-block" id="bgr_to_gray"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.cvt_color.bgr_to_gray">[docs]</a><span class="k">def</span> <span class="nf">bgr_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Converts from BGR to RGB&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;Converts from BGR to Gray&#39;&#39;&#39;</span>
     <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
         <span class="c1"># it is already a gray scale image</span>
         <span class="k">return</span> <span class="n">image</span>
@@ -170,6 +168,16 @@
         <span class="c1"># it is already a gray scale image</span>
         <span class="k">return</span> <span class="n">image</span>
     <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="rgb_to_gray"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.cvt_color.rgb_to_gray">[docs]</a><span class="k">def</span> <span class="nf">rgb_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Converts from RGB to Gray&#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="c1"># it is already a gray scale image</span>
+        <span class="k">return</span> <span class="n">image</span>
+    <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># it is already a gray scale image</span>
+        <span class="k">return</span> <span class="n">image</span>
+    <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2GRAY</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="bgr_to_rgb"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.cvt_color.bgr_to_rgb">[docs]</a><span class="k">def</span> <span class="nf">bgr_to_rgb</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>

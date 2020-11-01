@@ -1,8 +1,15 @@
-cr.vision package 
+cr.vision.core package 
 ============================
 
-Submodules
-----------
+The ``core`` modules are available directly::
+
+    from cr import vision
+    # core modules can be accessed directly now
+    vision.colors
+    vision.contour
+
+
+
 
 cr.vision.colors module
 ----------------------------------

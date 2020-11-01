@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>cr.vision package &mdash; CR.Vision  documentation</title>
+  <title>cr.vision.core package &mdash; CR.Vision  documentation</title>
   
 
   
@@ -90,31 +90,35 @@
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../nb_basic_image_operations.html">Basic Image Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nb_basic_image_operations.html#Creating-Simple-Images">Creating Simple Images</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nb_basic_image_operations.html#Image-Cleanup-via-Adaptive-Thresholding">Image Cleanup via Adaptive Thresholding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../image_processing/index.html">Image Processing</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">cr</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="cr.vision.html">cr.vision package</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="cr.vision.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.vision package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.vision.apps.html">cr.vision.apps package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.vision.concurrent.html">cr.vision.concurrent package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.vision.edits.html">cr.vision.edits package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.vision.filters.html">cr.vision.filters package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.vision.geom_transform.html">cr.vision.geom_transform package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.vision.io.html">cr.vision.io package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.vision.motion.html">cr.vision.motion package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.vision.object_detection.html">cr.vision.object_detection package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.vision.object_tracker.html">cr.vision.object_tracker package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.vision.saliency.html">cr.vision.saliency package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.vision.video.html">cr.vision.video package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="cr.vision.html">cr.vision package</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cr.vision.core package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.core.colors">cr.vision.colors module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.core.contour">cr.vision.contour module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.core.cvt_color">cr.vision.cvt_color module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.core.effects">cr.vision.effects module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.core.histogram">cr.vision.histogram module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.core.misc">cr.vision.misc module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.core.operations">cr.vision.operations module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.core.plot">cr.vision.plot module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.core.template">cr.vision.template module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.core.threshold">cr.vision.threshold module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.core.types">cr.vision.types module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.core.noise_gaussian">Noise</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#module-cr.vision.errors">cr.vision.errors module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cr.vision.html#module-cr.vision">Module contents</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.apps.html">cr.vision.apps package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html">cr.vision.concurrent package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html">cr.vision.edits package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html">cr.vision.filters package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom_transform.html">cr.vision.geom_transform package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html">cr.vision.io package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.motion.html">cr.vision.motion package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.object_detection.html">cr.vision.object_detection package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.object_tracker.html">cr.vision.object_tracker package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.saliency.html">cr.vision.saliency package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html">cr.vision.video package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.html#module-cr.vision.errors">cr.vision.errors module</a></li>
 </ul>
 </li>
 </ul>
@@ -163,11 +167,9 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="modules.html">cr</a> &raquo;</li>
-        
           <li><a href="cr.vision.html">cr.vision package</a> &raquo;</li>
         
-      <li>cr.vision package</li>
+      <li>cr.vision.core package</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -210,10 +212,14 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="cr-vision-package">
-<h1>cr.vision package<a class="headerlink" href="#cr-vision-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cr-vision-core-package">
+<h1>cr.vision.core package<a class="headerlink" href="#cr-vision-core-package" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">core</span></code> modules are available directly:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cr</span> <span class="kn">import</span> <span class="n">vision</span>
+<span class="c1"># core modules can be accessed directly now</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">colors</span>
+<span class="n">vision</span><span class="o">.</span><span class="n">contour</span>
+</pre></div>
 </div>
 <div class="section" id="module-cr.vision.core.colors">
 <span id="cr-vision-colors-module"></span><h2>cr.vision.colors module<a class="headerlink" href="#module-cr.vision.core.colors" title="Permalink to this headline">¶</a></h2>
@@ -348,7 +354,7 @@ without considering the orientation of object</p>
 <dl class="function">
 <dt id="cr.vision.core.cvt_color.bgr_to_gray">
 <code class="sig-prename descclassname">cr.vision.core.cvt_color.</code><code class="sig-name descname">bgr_to_gray</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/cvt_color.html#bgr_to_gray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.cvt_color.bgr_to_gray" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts from BGR to RGB</p>
+<dd><p>Converts from BGR to Gray</p>
 </dd></dl>
 
 <dl class="function">
@@ -371,6 +377,12 @@ without considering the orientation of object</p>
 <dd><p>Converts from RGB to BGR</p>
 </dd></dl>
 
+<dl class="function">
+<dt id="cr.vision.core.cvt_color.rgb_to_gray">
+<code class="sig-prename descclassname">cr.vision.core.cvt_color.</code><code class="sig-name descname">rgb_to_gray</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/cvt_color.html#rgb_to_gray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.cvt_color.rgb_to_gray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from RGB to Gray</p>
+</dd></dl>
+
 </div>
 <div class="section" id="module-cr.vision.core.effects">
 <span id="cr-vision-effects-module"></span><h2>cr.vision.effects module<a class="headerlink" href="#module-cr.vision.core.effects" title="Permalink to this headline">¶</a></h2>
@@ -389,10 +401,18 @@ without considering the orientation of object</p>
 <dt id="cr.vision.core.effects.cartoonize">
 <code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">cartoonize</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">kernel_size=5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#cartoonize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.cartoonize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructs a black and white cartoon version of image</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>image (array): Input image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>array_like</em>) – Input image in BGR or monochrome format</p></li>
+<li><p><strong>kernel_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>optional</em>) – Size of Laplacian filter kernel, defaults to 3</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>Cartoonized image</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Cartoonized image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
 </dd></dl>
@@ -405,12 +425,27 @@ without considering the orientation of object</p>
 
 <dl class="function">
 <dt id="cr.vision.core.effects.emboss">
-<code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">emboss</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">method='default'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#emboss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.emboss" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">emboss</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">method='default'</em>, <em class="sig-param">format='bgr'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#emboss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.emboss" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates an embossed version of an image using a given method</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>image (array): Input image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>array_like</em>) – Input image</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – Embossing method.
+Available methods: ‘default’, ‘sharp_color’, ‘SW’, ‘NE’, ‘NW’;
+defaults to ‘default’</p></li>
+<li><p><strong>format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – Format of input image,
+defaults to ‘bgr’. Applicable only when embossing
+method works on monochrome images and we need to convert
+the image to monochrome first
+Supported formats: ‘rgb’, ‘bgr’</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>Embossed image</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Embossed image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
 </dd></dl>
@@ -423,11 +458,16 @@ without considering the orientation of object</p>
 <dl class="function">
 <dt id="cr.vision.core.effects.enhance_contrast">
 <code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">enhance_contrast</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#enhance_contrast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.enhance_contrast" title="Permalink to this definition">¶</a></dt>
-<dd><p>Applies vignette effect on an image</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>image (array): Input image</p>
+<dd><p>Enhances contrast of an image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>array_like</em>) – Input image in BGR or monochrome format</p>
 </dd>
-<dt>Returns:</dt><dd><p>Image with enhanced contrast</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Image with enhanced contrast</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
 </dd></dl>
@@ -435,11 +475,16 @@ without considering the orientation of object</p>
 <dl class="function">
 <dt id="cr.vision.core.effects.mirror_lr">
 <code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">mirror_lr</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#mirror_lr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.mirror_lr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mirrors an image between left to right</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>image (array): Input image</p>
+<dd><p>Mirrors an image between left and right</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>array_like</em>) – An input image to convert</p>
 </dd>
-<dt>Returns:</dt><dd><p>Mirrored image</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Mirrored image. Same dimensions as input.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
 </dd></dl>
@@ -448,10 +493,15 @@ without considering the orientation of object</p>
 <dt id="cr.vision.core.effects.mirror_ud">
 <code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">mirror_ud</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#mirror_ud"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.mirror_ud" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mirrors an image between up and down</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>image (array): Input image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>array_like</em>) – An input image to convert</p>
 </dd>
-<dt>Returns:</dt><dd><p>Mirrored image</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Mirrored image. Same dimensions as input.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
 </dd></dl>
@@ -459,25 +509,48 @@ without considering the orientation of object</p>
 <dl class="function">
 <dt id="cr.vision.core.effects.mirror_x">
 <code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">mirror_x</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#mirror_x"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.mirror_x" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>Mirrors the image diagonally.</dt><dd><p>Top left corner goes to bottom rigth and vice versa. 
-Top right corner goes to bottom left and vice versa.</p>
+<dd><p>Mirrors the image diagonally.</p>
+<ul class="simple">
+<li><p>Top left corner goes to bottom rigth and vice versa.</p></li>
+<li><p>Top right corner goes to bottom left and vice versa.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>array_like</em>) – An input image to convert</p>
 </dd>
-<dt>Args:</dt><dd><p>image (array): Input image</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Mirrored image. Same dimensions as input.</p>
 </dd>
-<dt>Returns:</dt><dd><p>Mirrored image</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="cr.vision.core.effects.monochrome">
-<code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">monochrome</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#monochrome"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.monochrome" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts image to gray level</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>image (array): Input image</p>
+<code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">monochrome</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">format='bgr'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#monochrome"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.monochrome" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts image to gray scale</p>
+<ul class="simple">
+<li><p>If a monochrome image is provided as input, it will be
+returned as it is.</p></li>
+<li><p>If a 2D array is provided as input, it will be returned
+as it is.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>array_like</em>) – An input image</p></li>
+<li><p><strong>format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – Format of input image,
+defaults to ‘bgr’. 
+Supported formats: ‘rgb’, ‘bgr’</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>Monochrome image</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Converted monochrome image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray, 2D</p>
 </dd>
 </dl>
 </dd></dl>
@@ -486,10 +559,20 @@ Top right corner goes to bottom left and vice versa.</p>
 <dt id="cr.vision.core.effects.motion_blur">
 <code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">motion_blur</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">kernel_size=3</em>, <em class="sig-param">horz=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#motion_blur"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.motion_blur" title="Permalink to this definition">¶</a></dt>
 <dd><p>Introduces a motion blur effect</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>image (array): Input image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>array_like</em>) – Input image</p></li>
+<li><p><strong>kernel_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>optional</em>) – Size of motion blur filter kernel, defaults to 3</p></li>
+<li><p><strong>horz</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>, </em><em>optional</em>) – Indicates if motion blur is to be applied in horizontal direction,
+defaults to True</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>Motion blurred image</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Motion blurred image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
 </dd></dl>
@@ -498,10 +581,18 @@ Top right corner goes to bottom left and vice versa.</p>
 <dt id="cr.vision.core.effects.pixelize">
 <code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">pixelize</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">pixel_size=8</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#pixelize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.pixelize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pixelizes an image to given pixel size</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>image (array): Input image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>array_like</em>) – Input image</p></li>
+<li><p><strong>pixel_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>optional</em>) – Pixelization factor, defaults to 8 (one pixel for 8x8 block)</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>Pixelized image</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pixelized image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
 </dd></dl>
@@ -510,11 +601,19 @@ Top right corner goes to bottom left and vice versa.</p>
 <dt id="cr.vision.core.effects.select_blue">
 <code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">select_blue</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">others=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#select_blue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.select_blue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Selects only the blue channel of the image</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>image (array): Input image
-others (int): Value to be set in other channels (default 0)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>array_like</em>) – An input image in RGB format</p></li>
+<li><p><strong>others</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>optional</em>) – Pixel value for other channels 
+, defaults to 0</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>Bluish image</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Converted image which looks bluish</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray, RGB</p>
 </dd>
 </dl>
 </dd></dl>
@@ -523,11 +622,19 @@ others (int): Value to be set in other channels (default 0)</p>
 <dt id="cr.vision.core.effects.select_green">
 <code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">select_green</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">others=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#select_green"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.select_green" title="Permalink to this definition">¶</a></dt>
 <dd><p>Selects only the green channel of the image</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>image (array): Input image
-others (int): Value to be set in other channels (default 0)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>array_like</em>) – An input image in RGB format</p></li>
+<li><p><strong>others</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>optional</em>) – Pixel value for other channels 
+, defaults to 0</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>Greenish image</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Converted image which looks greenish</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray, RGB</p>
 </dd>
 </dl>
 </dd></dl>
@@ -536,11 +643,19 @@ others (int): Value to be set in other channels (default 0)</p>
 <dt id="cr.vision.core.effects.select_red">
 <code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">select_red</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">others=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#select_red"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.select_red" title="Permalink to this definition">¶</a></dt>
 <dd><p>Selects only the red channel of the image</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>image (array): Input image
-others (int): Value to be set in other channels (default 0)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>array_like</em>) – An input image in RGB format</p></li>
+<li><p><strong>others</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>optional</em>) – Pixel value for other channels 
+, defaults to 0</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>Reddish image</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Converted image which looks reddish</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray, RGB</p>
 </dd>
 </dl>
 </dd></dl>
@@ -549,9 +664,12 @@ others (int): Value to be set in other channels (default 0)</p>
 <dt id="cr.vision.core.effects.sepia">
 <code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">sepia</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#sepia"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.sepia" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds sepia effect to a color image</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>image (array): Input image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>array_like</em>) – Input image in BGR format</p>
 </dd>
+</dl>
+<dl class="simple">
 <dt>Returns:</dt><dd><p>Image with sepia effect</p>
 </dd>
 </dl>
@@ -561,10 +679,15 @@ others (int): Value to be set in other channels (default 0)</p>
 <dt id="cr.vision.core.effects.sharpen">
 <code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">sharpen</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#sharpen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.sharpen" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sharpens an image using edge enhancement</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>image (array): Input image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>array_like</em>) – Input image</p>
 </dd>
-<dt>Returns:</dt><dd><p>Sharpened image</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Sharpened image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
 </dd></dl>
@@ -573,10 +696,18 @@ others (int): Value to be set in other channels (default 0)</p>
 <dt id="cr.vision.core.effects.vignette">
 <code class="sig-prename descclassname">cr.vision.core.effects.</code><code class="sig-name descname">vignette</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">vignette_size=150</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/core/effects.html#vignette"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.core.effects.vignette" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies vignette effect on an image</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>image (array): Input image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>array_like</em>) – Input image</p></li>
+<li><p><strong>vignette_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>optional</em>) – Size of Gaussian kernel for vignette effect, defaults to 150</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><p>Vignetted image</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Vignetted image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
 </dd></dl>

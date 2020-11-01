@@ -34,14 +34,14 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Creating Simple Images"
+    "## Creating Simple Images"
    ]
   },
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## A gray scale blank image "
+    "A gray scale blank image "
    ]
   },
   {
@@ -77,7 +77,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Image Cleanup via Adaptive Thresholding"
+    "## Image Cleanup via Adaptive Thresholding"
    ]
   },
   {
