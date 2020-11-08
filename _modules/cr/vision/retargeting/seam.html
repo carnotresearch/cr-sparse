@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>cr.vision.retargeting.seam &mdash; CR.Vision  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/js/custom.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> CR.Vision
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../nb_basic_image_operations.html">Basic Image Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../image_processing/index.html">Image Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/cr.vision.html">cr.vision package</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">CR.Vision</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>cr.vision.retargeting.seam</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for cr.vision.retargeting.seam</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Implementation of seam carving method</span>
+
+<span class="sd">References:</span>
+
+<span class="sd">    * `Seam Carving Python Module by Vivian Hylee &lt;https://github.com/vivianhylee/seam-carving/blob/master/seam_carving.py&gt;`_</span>
+<span class="sd">    * `Source Code for OpenCV 3.x with Python By Example, Chapter 6 &lt;https://github.com/PacktPublishing/OpenCV-3-x-with-Python-By-Example/tree/master/Chapter06&gt;`_</span>
+<span class="sd">    * `2017, Adrian Roserbrock, Seam carving with OpenCV, Python, and scikit-image  &lt;https://www.pyimagesearch.com/2017/01/23/seam-carving-with-opencv-python-and-scikit-image/&gt;`_</span>
+<span class="sd">    * `scikit-image transform module &lt;http://scikit-image.org/docs/dev/api/skimage.transform.html#skimage.transform.seam_carve&gt;`_</span>
+<span class="sd">    * `scikit-image Seam Carving &lt;http://scikit-image.org/docs/dev/auto_examples/transform/plot_seam_carving.html&gt;`_</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">transform</span><span class="p">,</span> <span class="n">img_as_float</span>
+<span class="kn">from</span> <span class="nn">cr</span> <span class="kn">import</span> <span class="n">vision</span>
+
+
+<div class="viewcode-block" id="seam_carve"><a class="viewcode-back" href="../../../../source/cr.vision.retargeting.html#cr.vision.retargeting.seam.seam_carve">[docs]</a><span class="k">def</span> <span class="nf">seam_carve</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">target_width</span><span class="p">,</span> <span class="n">target_height</span><span class="p">,</span> <span class="n">energy_map</span><span class="o">=</span><span class="n">vision</span><span class="o">.</span><span class="n">sobel_energy_l1</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Converts an image into target width and height by using seam carving</span>
+
+<span class="sd">    :param image: Input image to be reduced to target width and height</span>
+<span class="sd">    :type image: array_like</span>
+<span class="sd">    :param target_width: target width of image</span>
+<span class="sd">    :type target_width: int</span>
+<span class="sd">    :param target_height: target height of image</span>
+<span class="sd">    :type target_height: int</span>
+<span class="sd">    :param energy_map: A function used to construct the energy matrix for the image</span>
+<span class="sd">    :type energy_map: function</span>
+
+<span class="sd">    :return: Seam carved image in which vertical and horizontal seams</span>
+<span class="sd">        have been identified and removed to meet the target image size.</span>
+<span class="sd">    :rtype: ndarray</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">src_height</span><span class="p">,</span> <span class="n">src_width</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">t_height</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">src_height</span><span class="p">)</span> <span class="o">*</span> <span class="n">target_width</span> <span class="o">/</span> <span class="n">src_width</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">t_height</span> <span class="o">&gt;</span> <span class="n">target_height</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Reducing image size to </span><span class="si">%d</span><span class="s1"> x </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">target_width</span><span class="p">,</span> <span class="n">t_height</span><span class="p">)</span>
+        <span class="c1"># Let&#39;s do a first level resizing</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">resize_by_width</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">target_width</span><span class="p">)</span>
+        <span class="n">src_height</span><span class="p">,</span> <span class="n">src_width</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">t_width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">src_width</span><span class="p">)</span> <span class="o">*</span> <span class="n">target_height</span> <span class="o">/</span> <span class="n">src_height</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">t_width</span> <span class="o">&gt;</span> <span class="n">target_width</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Reducing image size to </span><span class="si">%d</span><span class="s1"> x </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">t_width</span><span class="p">,</span> <span class="n">target_height</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">resize_by_height</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">target_height</span><span class="p">)</span>
+        <span class="n">src_height</span><span class="p">,</span> <span class="n">src_width</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">target_width</span> <span class="o">&lt;</span> <span class="n">src_width</span><span class="p">:</span>
+        <span class="c1"># compute the energy matrix for the image</span>
+        <span class="n">energy_matrix</span> <span class="o">=</span> <span class="n">energy_map</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="c1"># We need to remove some vertical seams</span>
+        <span class="n">num_seams_to_remove</span> <span class="o">=</span> <span class="n">src_width</span> <span class="o">-</span> <span class="n">target_width</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Removing </span><span class="si">%d</span><span class="s1"> vertical seams&#39;</span><span class="p">,</span> <span class="n">num_seams_to_remove</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">seam_carve</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">energy_matrix</span><span class="p">,</span>
+                                     <span class="s1">&#39;vertical&#39;</span><span class="p">,</span> <span class="n">num_seams_to_remove</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="p">(</span><span class="n">image</span><span class="o">*</span><span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">target_height</span> <span class="o">&lt;</span> <span class="n">src_height</span><span class="p">:</span>
+        <span class="c1"># compute the energy matrix for the image</span>
+        <span class="n">energy_matrix</span> <span class="o">=</span> <span class="n">energy_map</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="c1"># We need to remove some horizontal seams</span>
+        <span class="n">num_seams_to_remove</span> <span class="o">=</span> <span class="n">src_height</span> <span class="o">-</span> <span class="n">target_height</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Removing </span><span class="si">%d</span><span class="s1"> horizontal seams&#39;</span><span class="p">,</span> <span class="n">num_seams_to_remove</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">seam_carve</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">energy_matrix</span><span class="p">,</span>
+                                     <span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">num_seams_to_remove</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="p">(</span><span class="n">image</span><span class="o">*</span><span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">image</span></div>
+
+
+<div class="viewcode-block" id="find_vertical_seam"><a class="viewcode-back" href="../../../../source/cr.vision.retargeting.html#cr.vision.retargeting.seam.find_vertical_seam">[docs]</a><span class="k">def</span> <span class="nf">find_vertical_seam</span><span class="p">(</span><span class="n">vseam_matrix</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Finds the indices of the vertical seam with minimum energy</span>
+
+<span class="sd">    :param vseam_matrix: matrix of vertical seams</span>
+<span class="sd">    :type vseam_matrix: array-2d</span>
+
+<span class="sd">    :return: Indices of the vertical seam with minimum energy</span>
+<span class="sd">    :rtype: uint32 array</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># the number of rows and columns in the cumulative energy matrix</span>
+    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">vseam_matrix</span><span class="o">.</span><span class="n">shape</span>
+    <span class="c1"># The vector of indices of seam of minimum energy</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint32</span><span class="p">)</span>
+    <span class="c1"># Find the pixel with minimum energy in last row</span>
+    <span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">vseam_matrix</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="c1"># iterate over remaining rows</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># we will find the minimum energy of the neighboring three pixels</span>
+        <span class="c1"># in previous row</span>
+        <span class="c1"># we also need to take care of the boundary conditions</span>
+        <span class="c1"># get the value of pixel index for previous row</span>
+        <span class="n">previous_index</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="n">row</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># check if we are at the left boundary</span>
+        <span class="k">if</span> <span class="n">previous_index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># we just need to consider columns 0 and 1</span>
+            <span class="n">output</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">vseam_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># let&#39;s consider if the previous index is on the right boundary</span>
+            <span class="n">last_index</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">previous_index</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>
+            <span class="c1"># pick the neighbors in the 2 or 3 positions</span>
+            <span class="n">neighbors</span> <span class="o">=</span> <span class="n">vseam_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="p">(</span><span class="n">previous_index</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span><span class="n">last_index</span><span class="p">]</span>
+            <span class="n">output</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">neighbors</span><span class="p">)</span> <span class="o">+</span> <span class="n">previous_index</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">output</span></div>
+
+
+<div class="viewcode-block" id="delete_vertical_seam"><a class="viewcode-back" href="../../../../source/cr.vision.retargeting.html#cr.vision.retargeting.seam.delete_vertical_seam">[docs]</a><span class="k">def</span> <span class="nf">delete_vertical_seam</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">seam</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Deletes a vertical seam from the image</span>
+
+<span class="sd">    :param image: Input image</span>
+<span class="sd">    :type image: array_like</span>
+
+<span class="sd">    :param seam: Indices of the vertical seam to be deleted</span>
+<span class="sd">    :type seam: uint32 array-1d</span>
+
+<span class="sd">    :return: Image with the vertical seam deleted</span>
+<span class="sd">    :rtype: ndarray</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">out_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">out_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+        <span class="c1"># identify the column of pixel to be deleted in this row</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="n">seam</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+        <span class="c1"># copy the remaining pixels</span>
+        <span class="n">out_image</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="p">:],</span> <span class="p">(</span><span class="n">col</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out_image</span></div>
+
+
+<div class="viewcode-block" id="compute_vertical_seams"><a class="viewcode-back" href="../../../../source/cr.vision.retargeting.html#cr.vision.retargeting.seam.compute_vertical_seams">[docs]</a><span class="k">def</span> <span class="nf">compute_vertical_seams</span><span class="p">(</span><span class="n">energy_matrix</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Computes the vertical seams by dynamic programming</span>
+
+<span class="sd">    .. todo::</span>
+
+<span class="sd">        * Optimize inner loop </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span> <span class="o">=</span> <span class="n">energy_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">vertical_seams</span> <span class="o">=</span> <span class="n">energy_matrix</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_rows</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_cols</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">col</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">vertical_seams</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">vertical_seams</span><span class="p">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">col</span> <span class="o">==</span> <span class="n">n_cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">vertical_seams</span><span class="p">[</span><span class="n">row</span><span class="p">,</span>
+                               <span class="n">col</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">vertical_seams</span><span class="p">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="n">n_cols</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">vertical_seams</span><span class="p">[</span><span class="n">row</span><span class="p">,</span>
+                               <span class="n">col</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">vertical_seams</span><span class="p">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">col</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">vertical_seams</span></div>
+
+
+<div class="viewcode-block" id="compute_horizontal_seams"><a class="viewcode-back" href="../../../../source/cr.vision.retargeting.html#cr.vision.retargeting.seam.compute_horizontal_seams">[docs]</a><span class="k">def</span> <span class="nf">compute_horizontal_seams</span><span class="p">(</span><span class="n">energy_matrix</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Computes the vertical seams by dynamic programming&#39;&#39;&#39;</span>
+    <span class="c1"># We reuse the existing implementation of computation of vertical seams</span>
+    <span class="n">seams</span> <span class="o">=</span> <span class="n">compute_vertical_seams</span><span class="p">(</span><span class="n">energy_matrix</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="c1"># We transpose the result to make them horizontal seams</span>
+    <span class="k">return</span> <span class="n">seams</span><span class="o">.</span><span class="n">T</span></div>
+
+
+<div class="viewcode-block" id="find_horizontal_seam"><a class="viewcode-back" href="../../../../source/cr.vision.retargeting.html#cr.vision.retargeting.seam.find_horizontal_seam">[docs]</a><span class="k">def</span> <span class="nf">find_horizontal_seam</span><span class="p">(</span><span class="n">hseam_matrix</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Finds the indices of the horizontal seam with minimum energy</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Reuse implementation</span>
+    <span class="k">return</span> <span class="n">find_vertical_seam</span><span class="p">(</span><span class="n">hseam_matrix</span><span class="o">.</span><span class="n">T</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="delete_horizontal_seam"><a class="viewcode-back" href="../../../../source/cr.vision.retargeting.html#cr.vision.retargeting.seam.delete_horizontal_seam">[docs]</a><span class="k">def</span> <span class="nf">delete_horizontal_seam</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">seam</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Deletes a horizonal seam from the image</span>
+
+<span class="sd">    :param image: Input image</span>
+<span class="sd">    :type image: array_like</span>
+
+<span class="sd">    :param seam: Indices of the horizontal seam to be deleted</span>
+<span class="sd">    :type seam: uint32 array-1d</span>
+
+<span class="sd">    :return: Image with the horizontal seam deleted</span>
+<span class="sd">    :rtype: ndarray</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">out_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_rows</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">out_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">n_rows</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">n_col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_cols</span><span class="p">):</span>
+        <span class="c1"># identify the row number of pixel to be deleted in this column</span>
+        <span class="n">n_row</span> <span class="o">=</span> <span class="n">seam</span><span class="p">[</span><span class="n">n_col</span><span class="p">]</span>
+        <span class="c1"># copy the remaining pixels</span>
+        <span class="n">out_image</span><span class="p">[:,</span> <span class="n">n_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">image</span><span class="p">[:,</span> <span class="n">n_col</span><span class="p">],</span> <span class="p">(</span><span class="n">n_row</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">out_image</span></div>
+
+
+<div class="viewcode-block" id="reduce_width_by_seam_carving"><a class="viewcode-back" href="../../../../source/cr.vision.retargeting.html#cr.vision.retargeting.seam.reduce_width_by_seam_carving">[docs]</a><span class="k">def</span> <span class="nf">reduce_width_by_seam_carving</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">target_width</span><span class="p">,</span> <span class="n">energy_map</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Reduces the width of an image via seam carving&#39;&#39;&#39;</span>
+    <span class="n">src_width</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">src_width</span> <span class="o">-</span> <span class="n">target_width</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+        <span class="n">energy_matrix</span> <span class="o">=</span> <span class="n">energy_map</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">vertical_seams</span> <span class="o">=</span> <span class="n">compute_vertical_seams</span><span class="p">(</span><span class="n">energy_matrix</span><span class="p">)</span>
+        <span class="n">seam</span> <span class="o">=</span> <span class="n">find_vertical_seam</span><span class="p">(</span><span class="n">vertical_seams</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">delete_vertical_seam</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">seam</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">image</span></div>
+
+
+<div class="viewcode-block" id="reduce_height_by_seam_carving"><a class="viewcode-back" href="../../../../source/cr.vision.retargeting.html#cr.vision.retargeting.seam.reduce_height_by_seam_carving">[docs]</a><span class="k">def</span> <span class="nf">reduce_height_by_seam_carving</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">target_height</span><span class="p">,</span> <span class="n">energy_map</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Reduce the height of an image via seam carving&#39;&#39;&#39;</span>
+    <span class="n">src_height</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">src_height</span> <span class="o">-</span> <span class="n">target_height</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+        <span class="n">energy_matrix</span> <span class="o">=</span> <span class="n">energy_map</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">horizontal_seams</span> <span class="o">=</span> <span class="n">compute_horizontal_seams</span><span class="p">(</span><span class="n">energy_matrix</span><span class="p">)</span>
+        <span class="n">seam</span> <span class="o">=</span> <span class="n">find_horizontal_seam</span><span class="p">(</span><span class="n">horizontal_seams</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">delete_horizontal_seam</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">seam</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">image</span></div>
+
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Carnot Research Pvt. Ltd.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -110,6 +110,8 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.object_tracker.html">cr.vision.object_tracker package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.saliency.html">cr.vision.saliency package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html">cr.vision.video package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.measure.html">cr.vision.measure package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.retargeting.html">cr.vision.retargeting package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.html#module-cr.vision.errors">cr.vision.errors module</a></li>
 </ul>
 </li>
@@ -218,13 +220,45 @@ low level OpenCV API for more flexibility if needed.</p>
 <dt id="cr.vision.filters.filter.filter_2d">
 <code class="sig-prename descclassname">cr.vision.filters.filter.</code><code class="sig-name descname">filter_2d</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">kernel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/filters/filter.html#filter_2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.filters.filter.filter_2d" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filters an image retaining its depth</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>array_like</em>) – Input image</p></li>
+<li><p><strong>kernel</strong> (<em>array_like</em>) – 2D convolutional Kernel to apply on image</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Filtered image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="cr.vision.filters.filter.gaussian_blur">
 <code class="sig-prename descclassname">cr.vision.filters.filter.</code><code class="sig-name descname">gaussian_blur</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">kernel_size=5</em>, <em class="sig-param">sigma=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/filters/filter.html#gaussian_blur"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.filters.filter.gaussian_blur" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filters an image using Gaussian filter of a given kernel size where we
-assume that the filter is symmetric.</p>
+<dd><p>Filters an image using Gaussian filter of a given kernel size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>array_like</em>) – Input image</p></li>
+<li><p><strong>kernel_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>optional</em>) – Size of Gaussian kernel, defaults to 5</p></li>
+<li><p><strong>sigma</strong> (<em>double</em><em>, </em><em>optional</em>) – Kernel standard deviation</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Gaussian blurred image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+<p>Remarks</p>
+<ul class="simple">
+<li><p>We assume that the filter is symmetric.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="function">

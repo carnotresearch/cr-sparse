@@ -159,6 +159,25 @@
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
 
+
+<div class="viewcode-block" id="to_gray"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.cvt_color.to_gray">[docs]</a><span class="k">def</span> <span class="nf">to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;bgr&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts image from a color format to gray scale</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="c1"># it is already a gray scale image</span>
+        <span class="k">return</span> <span class="n">image</span>
+    <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># it is already a gray scale image</span>
+        <span class="k">return</span> <span class="n">image</span>
+    <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;bgr&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;rgb&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2GRAY</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s1">&#39;gray&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">image</span>
+    <span class="c1"># raise unsupported format error</span>
+    <span class="n">vision</span><span class="o">.</span><span class="n">error_unsupported_image_format</span><span class="p">(</span><span class="nb">format</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="bgr_to_gray"><a class="viewcode-back" href="../../../../source/cr.vision.core.html#cr.vision.core.cvt_color.bgr_to_gray">[docs]</a><span class="k">def</span> <span class="nf">bgr_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Converts from BGR to Gray&#39;&#39;&#39;</span>
     <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>

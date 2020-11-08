@@ -104,6 +104,8 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.object_tracker.html">cr.vision.object_tracker package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.saliency.html">cr.vision.saliency package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html">cr.vision.video package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.measure.html">cr.vision.measure package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.retargeting.html">cr.vision.retargeting package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-cr.vision.errors">cr.vision.errors module</a></li>
 </ul>
 </li>
@@ -295,14 +297,23 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html#module-cr.vision.video">Module contents</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="cr.vision.measure.html">cr.vision.measure package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.measure.html#module-cr.vision.measure.focus">cr.vision.measure.focus module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cr.vision.retargeting.html">cr.vision.retargeting package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.retargeting.html#module-cr.vision.retargeting">cr.vision.retargeting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.retargeting.html#module-cr.vision.retargeting.seam">cr.vision.retargeting.seam module</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="section" id="module-cr.vision.errors">
 <span id="cr-vision-errors-module"></span><h2>cr.vision.errors module<a class="headerlink" href="#module-cr.vision.errors" title="Permalink to this headline">¶</a></h2>
-<p>Exception classes for indigits.vision library</p>
+<p>Exception classes for cr-vision library</p>
 <dl class="exception">
-<dt id="cr.vision.errors.IVError">
-<em class="property">exception </em><code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">IVError</code><a class="reference internal" href="../_modules/cr/vision/errors.html#IVError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.IVError" title="Permalink to this definition">¶</a></dt>
+<dt id="cr.vision.errors.CRVError">
+<em class="property">exception </em><code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">CRVError</code><a class="reference internal" href="../_modules/cr/vision/errors.html#CRVError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.CRVError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
 <p>Base exception class</p>
 </dd></dl>
@@ -310,29 +321,36 @@
 <dl class="exception">
 <dt id="cr.vision.errors.InvalidNumChannelsError">
 <em class="property">exception </em><code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">InvalidNumChannelsError</code><span class="sig-paren">(</span><em class="sig-param">expected_channels</em>, <em class="sig-param">actual_channels</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/errors.html#InvalidNumChannelsError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.InvalidNumChannelsError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cr.vision.errors.IVError" title="cr.vision.errors.IVError"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.errors.IVError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#cr.vision.errors.CRVError" title="cr.vision.errors.CRVError"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.errors.CRVError</span></code></a></p>
 <p>Invalid number of channels error</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="cr.vision.errors.InvalidNumDimensionsError">
 <em class="property">exception </em><code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">InvalidNumDimensionsError</code><a class="reference internal" href="../_modules/cr/vision/errors.html#InvalidNumDimensionsError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.InvalidNumDimensionsError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cr.vision.errors.IVError" title="cr.vision.errors.IVError"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.errors.IVError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#cr.vision.errors.CRVError" title="cr.vision.errors.CRVError"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.errors.CRVError</span></code></a></p>
 <p>Invalid number of dimensions error</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="cr.vision.errors.NotU8C1Error">
 <em class="property">exception </em><code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">NotU8C1Error</code><a class="reference internal" href="../_modules/cr/vision/errors.html#NotU8C1Error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.NotU8C1Error" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cr.vision.errors.IVError" title="cr.vision.errors.IVError"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.errors.IVError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#cr.vision.errors.CRVError" title="cr.vision.errors.CRVError"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.errors.CRVError</span></code></a></p>
 <p>Image is not grayscale 8 bit unsigned</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="cr.vision.errors.NotU8C3Error">
 <em class="property">exception </em><code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">NotU8C3Error</code><a class="reference internal" href="../_modules/cr/vision/errors.html#NotU8C3Error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.NotU8C3Error" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cr.vision.errors.IVError" title="cr.vision.errors.IVError"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.errors.IVError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#cr.vision.errors.CRVError" title="cr.vision.errors.CRVError"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.errors.CRVError</span></code></a></p>
 <p>Image is not 8 bit unsigned 3 channel color image</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="cr.vision.errors.UnsupportedImageFormatError">
+<em class="property">exception </em><code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">UnsupportedImageFormatError</code><a class="reference internal" href="../_modules/cr/vision/errors.html#UnsupportedImageFormatError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.UnsupportedImageFormatError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cr.vision.errors.CRVError" title="cr.vision.errors.CRVError"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.errors.CRVError</span></code></a></p>
+<p>Unsupported image format</p>
 </dd></dl>
 
 <dl class="function">
@@ -357,6 +375,12 @@
 <dt id="cr.vision.errors.check_u8c3">
 <code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">check_u8c3</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/errors.html#check_u8c3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.check_u8c3" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chcecks that the image is an unsigned 8 bit image with 3 channels</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="cr.vision.errors.error_unsupported_image_format">
+<code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">error_unsupported_image_format</code><span class="sig-paren">(</span><em class="sig-param">format=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/errors.html#error_unsupported_image_format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.error_unsupported_image_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raises UnsupportedImageFormatError exception</p>
 </dd></dl>
 
 </div>

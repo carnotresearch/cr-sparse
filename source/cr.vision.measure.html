@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>cr.vision.video package &mdash; CR.Vision  documentation</title>
+  <title>cr.vision.measure package &mdash; CR.Vision  documentation</title>
   
 
   
@@ -39,8 +39,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cr.vision.measure package" href="cr.vision.measure.html" />
-    <link rel="prev" title="cr.vision.saliency package" href="cr.vision.saliency.html" /> 
+    <link rel="next" title="cr.vision.retargeting package" href="cr.vision.retargeting.html" />
+    <link rel="prev" title="cr.vision.video package" href="cr.vision.video.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -103,13 +103,11 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.object_detection.html">cr.vision.object_detection package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.object_tracker.html">cr.vision.object_tracker package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.saliency.html">cr.vision.saliency package</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">cr.vision.video package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.video.frame">cr.vision.video.frame module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.video">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html">cr.vision.video package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cr.vision.measure package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.measure.focus">cr.vision.measure.focus module</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.measure.html">cr.vision.measure package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.retargeting.html">cr.vision.retargeting package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.html#module-cr.vision.errors">cr.vision.errors module</a></li>
 </ul>
@@ -162,13 +160,13 @@
         
           <li><a href="cr.vision.html">cr.vision package</a> &raquo;</li>
         
-      <li>cr.vision.video package</li>
+      <li>cr.vision.measure package</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/source/cr.vision.video.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/source/cr.vision.measure.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -205,49 +203,42 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="cr-vision-video-package">
-<h1>cr.vision.video package<a class="headerlink" href="#cr-vision-video-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-cr.vision.video.frame">
-<span id="cr-vision-video-frame-module"></span><h2>cr.vision.video.frame module<a class="headerlink" href="#module-cr.vision.video.frame" title="Permalink to this headline">¶</a></h2>
-<p>Frames in a video sequence</p>
-<dl class="class">
-<dt id="cr.vision.video.frame.Frame">
-<em class="property">class </em><code class="sig-prename descclassname">cr.vision.video.frame.</code><code class="sig-name descname">Frame</code><span class="sig-paren">(</span><em class="sig-param">frame</em>, <em class="sig-param">frame_number</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/video/frame.html#Frame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.video.frame.Frame" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>A frame object</p>
-<dl class="attribute">
-<dt id="cr.vision.video.frame.Frame.frame">
-<code class="sig-name descname">frame</code><em class="property"> = None</em><a class="headerlink" href="#cr.vision.video.frame.Frame.frame" title="Permalink to this definition">¶</a></dt>
-<dd><p>Current frame</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cr.vision.video.frame.Frame.frame_number">
-<em class="property">property </em><code class="sig-name descname">frame_number</code><a class="headerlink" href="#cr.vision.video.frame.Frame.frame_number" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns underlying frame number</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cr.vision.video.frame.Frame.tick">
-<em class="property">property </em><code class="sig-name descname">tick</code><a class="headerlink" href="#cr.vision.video.frame.Frame.tick" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the clock tick when the frame was created</p>
-</dd></dl>
-
+<div class="section" id="cr-vision-measure-package">
+<h1>cr.vision.measure package<a class="headerlink" href="#cr-vision-measure-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-cr.vision.measure.focus">
+<span id="cr-vision-measure-focus-module"></span><h2>cr.vision.measure.focus module<a class="headerlink" href="#module-cr.vision.measure.focus" title="Permalink to this headline">¶</a></h2>
+<p>Algorithms for measuring focus in an image</p>
+<dl class="function">
+<dt id="cr.vision.measure.focus.focus">
+<code class="sig-prename descclassname">cr.vision.measure.focus.</code><code class="sig-name descname">focus</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">format='bgr'</em>, <em class="sig-param">method='laplacian_variance'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/measure/focus.html#focus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.measure.focus.focus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Measures the level of focus in an image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>array_like</em>) – Input image</p></li>
+<li><p><strong>format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – Format of input image,
+defaults to ‘bgr’.</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – Method to compute focus</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Amount of focus in image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>double</p>
+</dd>
+</dl>
+<p>Available methods:</p>
+<ul class="simple">
+<li><p>Variance of Laplacian</p></li>
+</ul>
 </dd></dl>
 
 <dl class="function">
-<dt id="cr.vision.video.frame.frame_sequence_map">
-<code class="sig-prename descclassname">cr.vision.video.frame.</code><code class="sig-name descname">frame_sequence_map</code><span class="sig-paren">(</span><em class="sig-param">input_sequence</em>, <em class="sig-param">mapping</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/video/frame.html#frame_sequence_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.video.frame.frame_sequence_map" title="Permalink to this definition">¶</a></dt>
-<dd><p>Maps a sequence of frames to another sequence after applying a mapping</p>
-</dd></dl>
+<dt id="cr.vision.measure.focus.laplacian_variance">
+<code class="sig-prename descclassname">cr.vision.measure.focus.</code><code class="sig-name descname">laplacian_variance</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">format='bgr'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/measure/focus.html#laplacian_variance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.measure.focus.laplacian_variance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
-</div>
-<div class="section" id="module-cr.vision.video">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cr.vision.video" title="Permalink to this headline">¶</a></h2>
-<p>Classes and functions related to video processing</p>
 </div>
 </div>
 
@@ -259,10 +250,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="cr.vision.measure.html" class="btn btn-neutral float-right" title="cr.vision.measure package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="cr.vision.retargeting.html" class="btn btn-neutral float-right" title="cr.vision.retargeting package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="cr.vision.saliency.html" class="btn btn-neutral float-left" title="cr.vision.saliency package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="cr.vision.video.html" class="btn btn-neutral float-left" title="cr.vision.video package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

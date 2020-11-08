@@ -15,6 +15,9 @@ cr.vision package
     cr.vision.object_tracker
     cr.vision.saliency
     cr.vision.video
+    cr.vision.measure
+    cr.vision.retargeting
+    
 
 cr.vision.errors module
 -----------------------------

@@ -489,7 +489,7 @@
         <span class="c1"># Extract Y channel</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">image_yuv</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">vision</span><span class="o">.</span><span class="n">IVError</span><span class="p">(</span><span class="s2">&quot;Invalid image format&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">vision</span><span class="o">.</span><span class="n">CRVError</span><span class="p">(</span><span class="s2">&quot;Invalid image format&quot;</span><span class="p">)</span>
     <span class="c1"># perform histogram equalization on the grayscale y channel</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">equalizeHist</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">vision</span><span class="o">.</span><span class="n">is_gray_scale</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>

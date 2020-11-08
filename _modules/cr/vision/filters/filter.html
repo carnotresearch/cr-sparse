@@ -164,12 +164,19 @@
 <span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">img_as_float</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
 
-<span class="kn">from</span> <span class="nn">cr</span> <span class="kn">import</span> <span class="n">vision</span> <span class="k">as</span> <span class="n">iv</span>
+<span class="kn">from</span> <span class="nn">cr</span> <span class="kn">import</span> <span class="n">vision</span>
 <span class="kn">from</span> <span class="nn">cr.vision.errors</span> <span class="kn">import</span> <span class="n">check_ndim</span><span class="p">,</span> <span class="n">check_nchannels</span>
 
 <div class="viewcode-block" id="filter_2d"><a class="viewcode-back" href="../../../../source/cr.vision.filters.html#cr.vision.filters.filter.filter_2d">[docs]</a><span class="k">def</span> <span class="nf">filter_2d</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">kernel</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Filters an image retaining its depth</span>
+    <span class="sd">&#39;&#39;&#39;Filters an image retaining its depth</span>
+
+<span class="sd">    :param image: Input image</span>
+<span class="sd">    :type image: array_like</span>
+<span class="sd">    :param kernel: 2D convolutional Kernel to apply on image</span>
+<span class="sd">    :type kernel: array_like</span>
+<span class="sd">    </span>
+<span class="sd">    :return: Filtered image</span>
+<span class="sd">    :rtype: ndarray</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="c1"># we set ddepth=-1 in the folllowing call</span>
     <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">filter2D</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">kernel</span><span class="p">)</span></div>
@@ -177,8 +184,21 @@
 
 <div class="viewcode-block" id="gaussian_blur"><a class="viewcode-back" href="../../../../source/cr.vision.filters.html#cr.vision.filters.filter.gaussian_blur">[docs]</a><span class="k">def</span> <span class="nf">gaussian_blur</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Filters an image using Gaussian filter of a given kernel size where we</span>
-<span class="sd">    assume that the filter is symmetric.</span>
+<span class="sd">    Filters an image using Gaussian filter of a given kernel size</span>
+
+<span class="sd">    :param image: Input image</span>
+<span class="sd">    :type image: array_like</span>
+<span class="sd">    :param kernel_size: Size of Gaussian kernel, defaults to 5</span>
+<span class="sd">    :type kernel_size: int, optional</span>
+<span class="sd">    :param sigma: Kernel standard deviation</span>
+<span class="sd">    :type sigma: double, optional</span>
+
+<span class="sd">    :return: Gaussian blurred image</span>
+<span class="sd">    :rtype: ndarray</span>
+
+<span class="sd">    Remarks</span>
+
+<span class="sd">    * We assume that the filter is symmetric.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">kernel_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">kernel_size</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span></div>
@@ -204,7 +224,7 @@
 
 <div class="viewcode-block" id="sobel_energy_l1"><a class="viewcode-back" href="../../../../source/cr.vision.filters.html#cr.vision.filters.filter.sobel_energy_l1">[docs]</a><span class="k">def</span> <span class="nf">sobel_energy_l1</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Computes the energy matrix for the image using sobel gradients by taking their absolute sums&#39;&#39;&#39;</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">bgr_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">bgr_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
     <span class="c1"># bring image to 0,1 range</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">img_as_float</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
     <span class="n">x_g</span> <span class="o">=</span> <span class="n">sobel_x</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">ddepth</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">CV_64F</span><span class="p">)</span>
@@ -214,7 +234,7 @@
 
 <div class="viewcode-block" id="sobel_energy_l2"><a class="viewcode-back" href="../../../../source/cr.vision.filters.html#cr.vision.filters.filter.sobel_energy_l2">[docs]</a><span class="k">def</span> <span class="nf">sobel_energy_l2</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Computes the energy matrix for the image using sobel gradients by computing the gradient magnitude&#39;&#39;&#39;</span>
-    <span class="n">image</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">bgr_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">bgr_to_gray</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
     <span class="c1"># bring image to 0,1 range</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">img_as_float</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
     <span class="n">x_g</span> <span class="o">=</span> <span class="n">sobel_x</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
