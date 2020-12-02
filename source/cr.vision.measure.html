@@ -97,7 +97,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html">cr.vision.concurrent package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html">cr.vision.edits package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html">cr.vision.filters package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom_transform.html">cr.vision.geom_transform package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom.html">cr.vision.geom package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html">cr.vision.io package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.motion.html">cr.vision.motion package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.object_detection.html">cr.vision.object_detection package</a></li>
@@ -105,11 +105,11 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.saliency.html">cr.vision.saliency package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html">cr.vision.video package</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">cr.vision.measure package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.measure.focus">cr.vision.measure.focus module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cr-vision-measure-focus-module">cr.vision.measure.focus module</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.retargeting.html">cr.vision.retargeting package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.html#module-cr.vision.errors">cr.vision.errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.html#cr-vision-errors-module">cr.vision.errors module</a></li>
 </ul>
 </li>
 </ul>
@@ -205,40 +205,8 @@
 </style>
 <div class="section" id="cr-vision-measure-package">
 <h1>cr.vision.measure package<a class="headerlink" href="#cr-vision-measure-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-cr.vision.measure.focus">
-<span id="cr-vision-measure-focus-module"></span><h2>cr.vision.measure.focus module<a class="headerlink" href="#module-cr.vision.measure.focus" title="Permalink to this headline">¶</a></h2>
-<p>Algorithms for measuring focus in an image</p>
-<dl class="function">
-<dt id="cr.vision.measure.focus.focus">
-<code class="sig-prename descclassname">cr.vision.measure.focus.</code><code class="sig-name descname">focus</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">format='bgr'</em>, <em class="sig-param">method='laplacian_variance'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/measure/focus.html#focus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.measure.focus.focus" title="Permalink to this definition">¶</a></dt>
-<dd><p>Measures the level of focus in an image</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>image</strong> (<em>array_like</em>) – Input image</p></li>
-<li><p><strong>format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – Format of input image,
-defaults to ‘bgr’.</p></li>
-<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>optional</em>) – Method to compute focus</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Amount of focus in image</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>double</p>
-</dd>
-</dl>
-<p>Available methods:</p>
-<ul class="simple">
-<li><p>Variance of Laplacian</p></li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.measure.focus.laplacian_variance">
-<code class="sig-prename descclassname">cr.vision.measure.focus.</code><code class="sig-name descname">laplacian_variance</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">format='bgr'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/measure/focus.html#laplacian_variance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.measure.focus.laplacian_variance" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<div class="section" id="cr-vision-measure-focus-module">
+<h2>cr.vision.measure.focus module<a class="headerlink" href="#cr-vision-measure-focus-module" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

@@ -5,7 +5,7 @@
 
 CR.Vision
 ===========================================
-Computer Vision Tools and Applications by Carnot Research
+Amazing Computer Vision Pipelines by Carnot Research
 
 
 GITHUB Repo: `cr-vision <https://github.com/carnotresearch/cr-vision>`_

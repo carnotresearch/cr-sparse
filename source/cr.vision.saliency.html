@@ -97,21 +97,21 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html">cr.vision.concurrent package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html">cr.vision.edits package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html">cr.vision.filters package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom_transform.html">cr.vision.geom_transform package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom.html">cr.vision.geom package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html">cr.vision.io package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.motion.html">cr.vision.motion package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.object_detection.html">cr.vision.object_detection package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.object_tracker.html">cr.vision.object_tracker package</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">cr.vision.saliency package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.saliency.saliency">cr.vision.saliency.saliency module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.saliency">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cr-vision-saliency-saliency-module">cr.vision.saliency.saliency module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html">cr.vision.video package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.measure.html">cr.vision.measure package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.retargeting.html">cr.vision.retargeting package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.html#module-cr.vision.errors">cr.vision.errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.html#cr-vision-errors-module">cr.vision.errors module</a></li>
 </ul>
 </li>
 </ul>
@@ -210,50 +210,11 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-cr.vision.saliency.saliency">
-<span id="cr-vision-saliency-saliency-module"></span><h2>cr.vision.saliency.saliency module<a class="headerlink" href="#module-cr.vision.saliency.saliency" title="Permalink to this headline">¶</a></h2>
-<p>Wrapper class and methods for OpenCV saliency module</p>
-<dl class="class">
-<dt id="cr.vision.saliency.saliency.Saliency">
-<em class="property">class </em><code class="sig-prename descclassname">cr.vision.saliency.saliency.</code><code class="sig-name descname">Saliency</code><span class="sig-paren">(</span><em class="sig-param">saliency</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/saliency/saliency.html#Saliency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.saliency.saliency.Saliency" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Wrapper class for saliency models</p>
-<dl class="method">
-<dt id="cr.vision.saliency.saliency.Saliency.compute_saliency">
-<code class="sig-name descname">compute_saliency</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/saliency/saliency.html#Saliency.compute_saliency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.saliency.saliency.Saliency.compute_saliency" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the saliency map</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cr.vision.saliency.saliency.Saliency.compute_saliency_mask">
-<code class="sig-name descname">compute_saliency_mask</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/saliency/saliency.html#Saliency.compute_saliency_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.saliency.saliency.Saliency.compute_saliency_mask" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the saliency mask using Otsu binarization</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cr.vision.saliency.saliency.Saliency.compute_saliency_uint8">
-<code class="sig-name descname">compute_saliency_uint8</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/saliency/saliency.html#Saliency.compute_saliency_uint8"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.saliency.saliency.Saliency.compute_saliency_uint8" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the saliency map and returns as 8-bit integers</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.saliency.saliency.create_static_saliency_fine_grained">
-<code class="sig-prename descclassname">cr.vision.saliency.saliency.</code><code class="sig-name descname">create_static_saliency_fine_grained</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/saliency/saliency.html#create_static_saliency_fine_grained"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.saliency.saliency.create_static_saliency_fine_grained" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a static saliency estimator based on fine grained method</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.saliency.saliency.create_static_saliency_spectral_residual">
-<code class="sig-prename descclassname">cr.vision.saliency.saliency.</code><code class="sig-name descname">create_static_saliency_spectral_residual</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/saliency/saliency.html#create_static_saliency_spectral_residual"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.saliency.saliency.create_static_saliency_spectral_residual" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a static saliency estimator based on spectral residual method</p>
-</dd></dl>
-
+<div class="section" id="cr-vision-saliency-saliency-module">
+<h2>cr.vision.saliency.saliency module<a class="headerlink" href="#cr-vision-saliency-saliency-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-cr.vision.saliency">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cr.vision.saliency" title="Permalink to this headline">¶</a></h2>
-<p>Saliency estimation related classes and functions</p>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

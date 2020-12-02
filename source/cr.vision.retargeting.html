@@ -96,7 +96,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html">cr.vision.concurrent package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html">cr.vision.edits package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html">cr.vision.filters package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom_transform.html">cr.vision.geom_transform package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom.html">cr.vision.geom package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html">cr.vision.io package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.motion.html">cr.vision.motion package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.object_detection.html">cr.vision.object_detection package</a></li>
@@ -105,11 +105,11 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html">cr.vision.video package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.measure.html">cr.vision.measure package</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">cr.vision.retargeting package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.retargeting">cr.vision.retargeting module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.retargeting.seam">cr.vision.retargeting.seam module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cr-vision-retargeting-module">cr.vision.retargeting module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cr-vision-retargeting-seam-module">cr.vision.retargeting.seam module</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.html#module-cr.vision.errors">cr.vision.errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.html#cr-vision-errors-module">cr.vision.errors module</a></li>
 </ul>
 </li>
 </ul>
@@ -205,139 +205,11 @@
 </style>
 <div class="section" id="cr-vision-retargeting-package">
 <h1>cr.vision.retargeting package<a class="headerlink" href="#cr-vision-retargeting-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-cr.vision.retargeting">
-<span id="cr-vision-retargeting-module"></span><h2>cr.vision.retargeting module<a class="headerlink" href="#module-cr.vision.retargeting" title="Permalink to this headline">¶</a></h2>
-<p>Retargeting images and videos for different device sizes</p>
+<div class="section" id="cr-vision-retargeting-module">
+<h2>cr.vision.retargeting module<a class="headerlink" href="#cr-vision-retargeting-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-cr.vision.retargeting.seam">
-<span id="cr-vision-retargeting-seam-module"></span><h2>cr.vision.retargeting.seam module<a class="headerlink" href="#module-cr.vision.retargeting.seam" title="Permalink to this headline">¶</a></h2>
-<p>Implementation of seam carving method</p>
-<p>References:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><a class="reference external" href="https://github.com/vivianhylee/seam-carving/blob/master/seam_carving.py">Seam Carving Python Module by Vivian Hylee</a></p></li>
-<li><p><a class="reference external" href="https://github.com/PacktPublishing/OpenCV-3-x-with-Python-By-Example/tree/master/Chapter06">Source Code for OpenCV 3.x with Python By Example, Chapter 6</a></p></li>
-<li><p><a class="reference external" href="https://www.pyimagesearch.com/2017/01/23/seam-carving-with-opencv-python-and-scikit-image/">2017, Adrian Roserbrock, Seam carving with OpenCV, Python, and scikit-image</a></p></li>
-<li><p><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.transform.html#skimage.transform.seam_carve">scikit-image transform module</a></p></li>
-<li><p><a class="reference external" href="http://scikit-image.org/docs/dev/auto_examples/transform/plot_seam_carving.html">scikit-image Seam Carving</a></p></li>
-</ul>
-</div></blockquote>
-<dl class="function">
-<dt id="cr.vision.retargeting.seam.compute_horizontal_seams">
-<code class="sig-prename descclassname">cr.vision.retargeting.seam.</code><code class="sig-name descname">compute_horizontal_seams</code><span class="sig-paren">(</span><em class="sig-param">energy_matrix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/retargeting/seam.html#compute_horizontal_seams"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.retargeting.seam.compute_horizontal_seams" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the vertical seams by dynamic programming</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.retargeting.seam.compute_vertical_seams">
-<code class="sig-prename descclassname">cr.vision.retargeting.seam.</code><code class="sig-name descname">compute_vertical_seams</code><span class="sig-paren">(</span><em class="sig-param">energy_matrix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/retargeting/seam.html#compute_vertical_seams"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.retargeting.seam.compute_vertical_seams" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the vertical seams by dynamic programming</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<ul class="simple">
-<li><p>Optimize inner loop</p></li>
-</ul>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.retargeting.seam.delete_horizontal_seam">
-<code class="sig-prename descclassname">cr.vision.retargeting.seam.</code><code class="sig-name descname">delete_horizontal_seam</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">seam</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/retargeting/seam.html#delete_horizontal_seam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.retargeting.seam.delete_horizontal_seam" title="Permalink to this definition">¶</a></dt>
-<dd><p>Deletes a horizonal seam from the image</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>image</strong> (<em>array_like</em>) – Input image</p></li>
-<li><p><strong>seam</strong> (<em>uint32 array-1d</em>) – Indices of the horizontal seam to be deleted</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Image with the horizontal seam deleted</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ndarray</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.retargeting.seam.delete_vertical_seam">
-<code class="sig-prename descclassname">cr.vision.retargeting.seam.</code><code class="sig-name descname">delete_vertical_seam</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">seam</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/retargeting/seam.html#delete_vertical_seam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.retargeting.seam.delete_vertical_seam" title="Permalink to this definition">¶</a></dt>
-<dd><p>Deletes a vertical seam from the image</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>image</strong> (<em>array_like</em>) – Input image</p></li>
-<li><p><strong>seam</strong> (<em>uint32 array-1d</em>) – Indices of the vertical seam to be deleted</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Image with the vertical seam deleted</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ndarray</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.retargeting.seam.find_horizontal_seam">
-<code class="sig-prename descclassname">cr.vision.retargeting.seam.</code><code class="sig-name descname">find_horizontal_seam</code><span class="sig-paren">(</span><em class="sig-param">hseam_matrix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/retargeting/seam.html#find_horizontal_seam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.retargeting.seam.find_horizontal_seam" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds the indices of the horizontal seam with minimum energy</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.retargeting.seam.find_vertical_seam">
-<code class="sig-prename descclassname">cr.vision.retargeting.seam.</code><code class="sig-name descname">find_vertical_seam</code><span class="sig-paren">(</span><em class="sig-param">vseam_matrix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/retargeting/seam.html#find_vertical_seam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.retargeting.seam.find_vertical_seam" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds the indices of the vertical seam with minimum energy</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>vseam_matrix</strong> (<em>array-2d</em>) – matrix of vertical seams</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Indices of the vertical seam with minimum energy</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>uint32 array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.retargeting.seam.reduce_height_by_seam_carving">
-<code class="sig-prename descclassname">cr.vision.retargeting.seam.</code><code class="sig-name descname">reduce_height_by_seam_carving</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">target_height</em>, <em class="sig-param">energy_map</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/retargeting/seam.html#reduce_height_by_seam_carving"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.retargeting.seam.reduce_height_by_seam_carving" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reduce the height of an image via seam carving</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.retargeting.seam.reduce_width_by_seam_carving">
-<code class="sig-prename descclassname">cr.vision.retargeting.seam.</code><code class="sig-name descname">reduce_width_by_seam_carving</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">target_width</em>, <em class="sig-param">energy_map</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/retargeting/seam.html#reduce_width_by_seam_carving"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.retargeting.seam.reduce_width_by_seam_carving" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reduces the width of an image via seam carving</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.retargeting.seam.seam_carve">
-<code class="sig-prename descclassname">cr.vision.retargeting.seam.</code><code class="sig-name descname">seam_carve</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">target_width</em>, <em class="sig-param">target_height</em>, <em class="sig-param">energy_map=&lt;function sobel_energy_l1&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/retargeting/seam.html#seam_carve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.retargeting.seam.seam_carve" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts an image into target width and height by using seam carving</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>image</strong> (<em>array_like</em>) – Input image to be reduced to target width and height</p></li>
-<li><p><strong>target_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – target width of image</p></li>
-<li><p><strong>target_height</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – target height of image</p></li>
-<li><p><strong>energy_map</strong> (<em>function</em>) – A function used to construct the energy matrix for the image</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Seam carved image in which vertical and horizontal seams
-have been identified and removed to meet the target image size.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ndarray</p>
-</dd>
-</dl>
-</dd></dl>
-
+<div class="section" id="cr-vision-retargeting-seam-module">
+<h2>cr.vision.retargeting.seam module<a class="headerlink" href="#cr-vision-retargeting-seam-module" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

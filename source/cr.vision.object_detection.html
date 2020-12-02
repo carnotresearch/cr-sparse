@@ -97,13 +97,13 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html">cr.vision.concurrent package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html">cr.vision.edits package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html">cr.vision.filters package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom_transform.html">cr.vision.geom_transform package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom.html">cr.vision.geom package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html">cr.vision.io package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.motion.html">cr.vision.motion package</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">cr.vision.object_detection package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.object_detection.nms">cr.vision.object_detection.nms module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.object_detection">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cr-vision-object-detection-nms-module">cr.vision.object_detection.nms module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.object_tracker.html">cr.vision.object_tracker package</a></li>
@@ -111,7 +111,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html">cr.vision.video package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.measure.html">cr.vision.measure package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.retargeting.html">cr.vision.retargeting package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.html#module-cr.vision.errors">cr.vision.errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.html#cr-vision-errors-module">cr.vision.errors module</a></li>
 </ul>
 </li>
 </ul>
@@ -210,58 +210,11 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-cr.vision.object_detection.nms">
-<span id="cr-vision-object-detection-nms-module"></span><h2>cr.vision.object_detection.nms module<a class="headerlink" href="#module-cr.vision.object_detection.nms" title="Permalink to this headline">¶</a></h2>
-<p>Methods for non-maximum suppression of rectangles</p>
-<dl class="function">
-<dt id="cr.vision.object_detection.nms.bb_areas">
-<code class="sig-prename descclassname">cr.vision.object_detection.nms.</code><code class="sig-name descname">bb_areas</code><span class="sig-paren">(</span><em class="sig-param">bounding_boxes</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/object_detection/nms.html#bb_areas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.object_detection.nms.bb_areas" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the areas of bounding boxes</p>
-<dl class="simple">
-<dt>Args:</dt><dd><dl class="simple">
-<dt>bounding_boxes (array): An Nx4 array containing a list of bounding boxes.</dt><dd><p>Each box is described by its top left and bottom right coordinates.</p>
-</dd>
-</dl>
-</dd>
-<dt>Returns:</dt><dd><p>An array of floats containing areas of bounding boxes.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.object_detection.nms.non_maximum_suppression">
-<code class="sig-prename descclassname">cr.vision.object_detection.nms.</code><code class="sig-name descname">non_maximum_suppression</code><span class="sig-paren">(</span><em class="sig-param">bounding_boxes</em>, <em class="sig-param">scores=None</em>, <em class="sig-param">overlap_threshold=0.3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/object_detection/nms.html#non_maximum_suppression"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.object_detection.nms.non_maximum_suppression" title="Permalink to this definition">¶</a></dt>
-<dd><p>Suppresses smaller boxes in the surroundings.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><dl class="simple">
-<dt>bounding_boxes (array): An Nx4 array containing a list of bounding boxes.</dt><dd><p>Each box is described by its top left and bottom right coordinates.</p>
-</dd>
-</dl>
-</dd>
-<dt>Kwargs:</dt><dd><dl class="simple">
-<dt>scores (array): Confidence scores of each bounding box.</dt><dd><p>If scores are not provided, then bounding boxes are selected on the basis of their areas.
-If scores are provided then bounding boxes are selected on the basis of their scores.</p>
-</dd>
-<dt>overlap_threshold (float): Overlap threshold for suppression. </dt><dd><p>For a selected box b_i, all the boxes b_j that are covered by more than the
-overlap threshold are suppressed.</p>
-</dd>
-</dl>
-</dd>
-<dt>Returns:</dt><dd><p>Selected bounding boxes which were not suppressed.</p>
-</dd>
-</dl>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<ul class="simple">
-<li><p>Need to consider only those rectangles which are nearby.</p></li>
-</ul>
+<div class="section" id="cr-vision-object-detection-nms-module">
+<h2>cr.vision.object_detection.nms module<a class="headerlink" href="#cr-vision-object-detection-nms-module" title="Permalink to this headline">¶</a></h2>
 </div>
-</dd></dl>
-
-</div>
-<div class="section" id="module-cr.vision.object_detection">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cr.vision.object_detection" title="Permalink to this headline">¶</a></h2>
-<p>Object detection module</p>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

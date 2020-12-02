@@ -97,14 +97,14 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html">cr.vision.concurrent package</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">cr.vision.edits package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.edits.border">cr.vision.edits.border module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.edits.logo">cr.vision.edits.logo module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.edits.placement">cr.vision.edits.placement module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.edits">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cr-vision-edits-border-module">cr.vision.edits.border module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cr-vision-edits-logo-module">cr.vision.edits.logo module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cr-vision-edits-placement-module">cr.vision.edits.placement module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html">cr.vision.filters package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom_transform.html">cr.vision.geom_transform package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom.html">cr.vision.geom package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html">cr.vision.io package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.motion.html">cr.vision.motion package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.object_detection.html">cr.vision.object_detection package</a></li>
@@ -113,7 +113,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html">cr.vision.video package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.measure.html">cr.vision.measure package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.retargeting.html">cr.vision.retargeting package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.html#module-cr.vision.errors">cr.vision.errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.html#cr-vision-errors-module">cr.vision.errors module</a></li>
 </ul>
 </li>
 </ul>
@@ -212,70 +212,17 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-cr.vision.edits.border">
-<span id="cr-vision-edits-border-module"></span><h2>cr.vision.edits.border module<a class="headerlink" href="#module-cr.vision.edits.border" title="Permalink to this headline">¶</a></h2>
-<p>Functions for adding borders to an image</p>
-<dl class="function">
-<dt id="cr.vision.edits.border.add_border">
-<code class="sig-prename descclassname">cr.vision.edits.border.</code><code class="sig-name descname">add_border</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">width</em>, <em class="sig-param">blue=0</em>, <em class="sig-param">green=0</em>, <em class="sig-param">red=0</em>, <em class="sig-param">color=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/edits/border.html#add_border"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.edits.border.add_border" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds a border of a specified color</p>
-<p>One can specify color in BGR format or specify each component: B, G, R separately.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.edits.border.add_letter_box_pattern">
-<code class="sig-prename descclassname">cr.vision.edits.border.</code><code class="sig-name descname">add_letter_box_pattern</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">width</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/edits/border.html#add_letter_box_pattern"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.edits.border.add_letter_box_pattern" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds a letter box pattern to an image</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.edits.border.add_multiple_borders">
-<code class="sig-prename descclassname">cr.vision.edits.border.</code><code class="sig-name descname">add_multiple_borders</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">widths</em>, <em class="sig-param">colors</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/edits/border.html#add_multiple_borders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.edits.border.add_multiple_borders" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds multiple borders with specified colors and widths</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.edits.border.add_pillar_box_pattern">
-<code class="sig-prename descclassname">cr.vision.edits.border.</code><code class="sig-name descname">add_pillar_box_pattern</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">width</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/edits/border.html#add_pillar_box_pattern"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.edits.border.add_pillar_box_pattern" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds a pillar box pattern to an image</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.edits.border.add_window_box_pattern">
-<code class="sig-prename descclassname">cr.vision.edits.border.</code><code class="sig-name descname">add_window_box_pattern</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">top_width</em>, <em class="sig-param">left_width</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/edits/border.html#add_window_box_pattern"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.edits.border.add_window_box_pattern" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds a window box pattern to an image</p>
-</dd></dl>
-
+<div class="section" id="cr-vision-edits-border-module">
+<h2>cr.vision.edits.border module<a class="headerlink" href="#cr-vision-edits-border-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-cr.vision.edits.logo">
-<span id="cr-vision-edits-logo-module"></span><h2>cr.vision.edits.logo module<a class="headerlink" href="#module-cr.vision.edits.logo" title="Permalink to this headline">¶</a></h2>
-<p>Functions to add a logo to an image</p>
-<dl class="function">
-<dt id="cr.vision.edits.logo.add_logo">
-<code class="sig-prename descclassname">cr.vision.edits.logo.</code><code class="sig-name descname">add_logo</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">logo_image</em>, <em class="sig-param">x_pos=0</em>, <em class="sig-param">y_pos=0</em>, <em class="sig-param">mask_threshold=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/edits/logo.html#add_logo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.edits.logo.add_logo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds a logo to an image at the specified position.</p>
-<p>Assumes that the background in logo image is black.</p>
-</dd></dl>
-
+<div class="section" id="cr-vision-edits-logo-module">
+<h2>cr.vision.edits.logo module<a class="headerlink" href="#cr-vision-edits-logo-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-cr.vision.edits.placement">
-<span id="cr-vision-edits-placement-module"></span><h2>cr.vision.edits.placement module<a class="headerlink" href="#module-cr.vision.edits.placement" title="Permalink to this headline">¶</a></h2>
-<p>Functions for placing one image inside another</p>
-<dl class="function">
-<dt id="cr.vision.edits.placement.place_image_at">
-<code class="sig-prename descclassname">cr.vision.edits.placement.</code><code class="sig-name descname">place_image_at</code><span class="sig-paren">(</span><em class="sig-param">target_image</em>, <em class="sig-param">src_image</em>, <em class="sig-param">roi_mask</em>, <em class="sig-param">x_pos</em>, <em class="sig-param">y_pos</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/edits/placement.html#place_image_at"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.edits.placement.place_image_at" title="Permalink to this definition">¶</a></dt>
-<dd><p>Patches <cite>src_image</cite> into the <cite>target_image</cite> at the location specified 
-by <cite>x_pos</cite> and <cite>y_pos</cite> on the pixels identified by the <cite>roi_mask</cite></p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This function overwrites the roi in target image.</p>
+<div class="section" id="cr-vision-edits-placement-module">
+<h2>cr.vision.edits.placement module<a class="headerlink" href="#cr-vision-edits-placement-module" title="Permalink to this headline">¶</a></h2>
 </div>
-</dd></dl>
-
-</div>
-<div class="section" id="module-cr.vision.edits">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cr.vision.edits" title="Permalink to this headline">¶</a></h2>
-<p>Basic editing functions</p>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

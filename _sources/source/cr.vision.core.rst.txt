@@ -83,6 +83,15 @@ cr.vision.template module
     :undoc-members:
     :show-inheritance:
 
+cr.vision.geom.scaling module
+----------------------------------------------
+
+.. automodule:: cr.vision.core.scaling
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
 cr.vision.threshold module
 -------------------------------------
 

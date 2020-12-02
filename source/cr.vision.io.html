@@ -40,7 +40,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="cr.vision.motion package" href="cr.vision.motion.html" />
-    <link rel="prev" title="cr.vision.geom_transform package" href="cr.vision.geom_transform.html" /> 
+    <link rel="prev" title="cr.vision.geom package" href="cr.vision.geom.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -97,14 +97,14 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html">cr.vision.concurrent package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html">cr.vision.edits package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html">cr.vision.filters package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom_transform.html">cr.vision.geom_transform package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom.html">cr.vision.geom package</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">cr.vision.io package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.io.display">cr.vision.io.display module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.io.interfaces">cr.vision.io.interfaces module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.io.videocapture">cr.vision.io.videocapture module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.io.videowriter">cr.vision.io.videowriter module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cr.vision.io">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cr-vision-io-display-module">cr.vision.io.display module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cr-vision-io-interfaces-module">cr.vision.io.interfaces module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cr-vision-io-videocapture-module">cr.vision.io.videocapture module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cr-vision-io-videowriter-module">cr.vision.io.videowriter module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.motion.html">cr.vision.motion package</a></li>
@@ -114,7 +114,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html">cr.vision.video package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.measure.html">cr.vision.measure package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.retargeting.html">cr.vision.retargeting package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.html#module-cr.vision.errors">cr.vision.errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.html#cr-vision-errors-module">cr.vision.errors module</a></li>
 </ul>
 </li>
 </ul>
@@ -213,152 +213,20 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-cr.vision.io.display">
-<span id="cr-vision-io-display-module"></span><h2>cr.vision.io.display module<a class="headerlink" href="#module-cr.vision.io.display" title="Permalink to this headline">¶</a></h2>
-<p>Display of frames on screen</p>
-<dl class="class">
-<dt id="cr.vision.io.display.DisplayManager">
-<em class="property">class </em><code class="sig-prename descclassname">cr.vision.io.display.</code><code class="sig-name descname">DisplayManager</code><span class="sig-paren">(</span><em class="sig-param">window_names</em>, <em class="sig-param">gap_x=100</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/io/display.html#DisplayManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.display.DisplayManager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Manages the display of one or more OpenCV 
-windows</p>
-<dl class="method">
-<dt id="cr.vision.io.display.DisplayManager.select_roi">
-<code class="sig-name descname">select_roi</code><span class="sig-paren">(</span><em class="sig-param">frame</em>, <em class="sig-param">window_num=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/io/display.html#DisplayManager.select_roi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.display.DisplayManager.select_roi" title="Permalink to this definition">¶</a></dt>
-<dd><p>Selects a region of interest in a given frame</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cr.vision.io.display.DisplayManager.show">
-<code class="sig-name descname">show</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">window_num=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/io/display.html#DisplayManager.show"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.display.DisplayManager.show" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shows a frame on a specified window</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cr.vision.io.display.DisplayManager.show_all">
-<code class="sig-name descname">show_all</code><span class="sig-paren">(</span><em class="sig-param">*images</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/io/display.html#DisplayManager.show_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.display.DisplayManager.show_all" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shows multiple images</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cr.vision.io.display.DisplayManager.stop">
-<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/io/display.html#DisplayManager.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.display.DisplayManager.stop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stops the display of all windows</p>
-</dd></dl>
-
-</dd></dl>
-
+<div class="section" id="cr-vision-io-display-module">
+<h2>cr.vision.io.display module<a class="headerlink" href="#cr-vision-io-display-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-cr.vision.io.interfaces">
-<span id="cr-vision-io-interfaces-module"></span><h2>cr.vision.io.interfaces module<a class="headerlink" href="#module-cr.vision.io.interfaces" title="Permalink to this headline">¶</a></h2>
-<p>Interfaces for IO</p>
-<dl class="class">
-<dt id="cr.vision.io.interfaces.FrameSequence">
-<em class="property">class </em><code class="sig-prename descclassname">cr.vision.io.interfaces.</code><code class="sig-name descname">FrameSequence</code><a class="reference internal" href="../_modules/cr/vision/io/interfaces.html#FrameSequence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.interfaces.FrameSequence" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Frame sequence interface</p>
-<dl class="method">
-<dt id="cr.vision.io.interfaces.FrameSequence.is_done">
-<code class="sig-name descname">is_done</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/io/interfaces.html#FrameSequence.is_done"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.interfaces.FrameSequence.is_done" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns if the sequence is over</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cr.vision.io.interfaces.FrameSequence.is_open">
-<code class="sig-name descname">is_open</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/io/interfaces.html#FrameSequence.is_open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.interfaces.FrameSequence.is_open" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns if the sequence is open for reading more frames</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cr.vision.io.interfaces.FrameSequence.stop">
-<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/io/interfaces.html#FrameSequence.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.interfaces.FrameSequence.stop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stop serving more frames</p>
-</dd></dl>
-
-</dd></dl>
-
+<div class="section" id="cr-vision-io-interfaces-module">
+<h2>cr.vision.io.interfaces module<a class="headerlink" href="#cr-vision-io-interfaces-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-cr.vision.io.videocapture">
-<span id="cr-vision-io-videocapture-module"></span><h2>cr.vision.io.videocapture module<a class="headerlink" href="#module-cr.vision.io.videocapture" title="Permalink to this headline">¶</a></h2>
-<p>Webcam frame sequence</p>
-<dl class="class">
-<dt id="cr.vision.io.videocapture.VideoCaptureSequence">
-<em class="property">class </em><code class="sig-prename descclassname">cr.vision.io.videocapture.</code><code class="sig-name descname">VideoCaptureSequence</code><a class="reference internal" href="../_modules/cr/vision/io/videocapture.html#VideoCaptureSequence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.videocapture.VideoCaptureSequence" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cr.vision.io.interfaces.FrameSequence" title="cr.vision.io.interfaces.FrameSequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.io.interfaces.FrameSequence</span></code></a></p>
-<p>Wrapper for cv2.VideoCapture</p>
-<dl class="method">
-<dt id="cr.vision.io.videocapture.VideoCaptureSequence.is_done">
-<code class="sig-name descname">is_done</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/io/videocapture.html#VideoCaptureSequence.is_done"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.videocapture.VideoCaptureSequence.is_done" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns if the sequence is over</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cr.vision.io.videocapture.VideoCaptureSequence.is_open">
-<code class="sig-name descname">is_open</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/io/videocapture.html#VideoCaptureSequence.is_open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.videocapture.VideoCaptureSequence.is_open" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns if the sequence is open for reading more frames</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cr.vision.io.videocapture.VideoCaptureSequence.stop">
-<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/io/videocapture.html#VideoCaptureSequence.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.videocapture.VideoCaptureSequence.stop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stop serving more frames</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="cr.vision.io.videocapture.VideoCaptureSequence.stream">
-<code class="sig-name descname">stream</code><em class="property"> = None</em><a class="headerlink" href="#cr.vision.io.videocapture.VideoCaptureSequence.stream" title="Permalink to this definition">¶</a></dt>
-<dd><p>OpenCV Video Capture Stream</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cr.vision.io.videocapture.VideoFileSequence">
-<em class="property">class </em><code class="sig-prename descclassname">cr.vision.io.videocapture.</code><code class="sig-name descname">VideoFileSequence</code><span class="sig-paren">(</span><em class="sig-param">filepath</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/io/videocapture.html#VideoFileSequence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.videocapture.VideoFileSequence" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cr.vision.io.videocapture.VideoCaptureSequence" title="cr.vision.io.videocapture.VideoCaptureSequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.io.videocapture.VideoCaptureSequence</span></code></a></p>
-<p>Frame sequence from a video file</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="cr.vision.io.videocapture.WebcamSequence">
-<em class="property">class </em><code class="sig-prename descclassname">cr.vision.io.videocapture.</code><code class="sig-name descname">WebcamSequence</code><a class="reference internal" href="../_modules/cr/vision/io/videocapture.html#WebcamSequence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.videocapture.WebcamSequence" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cr.vision.io.videocapture.VideoCaptureSequence" title="cr.vision.io.videocapture.VideoCaptureSequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.io.videocapture.VideoCaptureSequence</span></code></a></p>
-<p>A frame sequence from webcamp</p>
-</dd></dl>
-
+<div class="section" id="cr-vision-io-videocapture-module">
+<h2>cr.vision.io.videocapture module<a class="headerlink" href="#cr-vision-io-videocapture-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-cr.vision.io.videowriter">
-<span id="cr-vision-io-videowriter-module"></span><h2>cr.vision.io.videowriter module<a class="headerlink" href="#module-cr.vision.io.videowriter" title="Permalink to this headline">¶</a></h2>
-<p>Wrapper for OpenCV video writer</p>
-<dl class="class">
-<dt id="cr.vision.io.videowriter.VideoWriter">
-<em class="property">class </em><code class="sig-prename descclassname">cr.vision.io.videowriter.</code><code class="sig-name descname">VideoWriter</code><span class="sig-paren">(</span><em class="sig-param">filepath</em>, <em class="sig-param">fourcc='XVID'</em>, <em class="sig-param">fps=15</em>, <em class="sig-param">frame_size=(640</em>, <em class="sig-param">480)</em>, <em class="sig-param">is_color=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/io/videowriter.html#VideoWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.videowriter.VideoWriter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Wrapper class for OpenCV video writer</p>
-<dl class="method">
-<dt id="cr.vision.io.videowriter.VideoWriter.is_open">
-<code class="sig-name descname">is_open</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/io/videowriter.html#VideoWriter.is_open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.videowriter.VideoWriter.is_open" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns if the stream is open for writing</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cr.vision.io.videowriter.VideoWriter.stop">
-<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/io/videowriter.html#VideoWriter.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.videowriter.VideoWriter.stop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stop serving more frames</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="cr.vision.io.videowriter.VideoWriter.write">
-<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">frame</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/io/videowriter.html#VideoWriter.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.io.videowriter.VideoWriter.write" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes a frame to output file</p>
-</dd></dl>
-
-</dd></dl>
-
+<div class="section" id="cr-vision-io-videowriter-module">
+<h2>cr.vision.io.videowriter module<a class="headerlink" href="#cr-vision-io-videowriter-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-cr.vision.io">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cr.vision.io" title="Permalink to this headline">¶</a></h2>
-<p>IO package</p>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -373,7 +241,7 @@ windows</p>
         <a href="cr.vision.motion.html" class="btn btn-neutral float-right" title="cr.vision.motion package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="cr.vision.geom_transform.html" class="btn btn-neutral float-left" title="cr.vision.geom_transform package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="cr.vision.geom.html" class="btn btn-neutral float-left" title="cr.vision.geom package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

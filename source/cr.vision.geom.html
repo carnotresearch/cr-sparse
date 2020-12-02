@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>cr.vision.object_tracker package &mdash; CR.Vision  documentation</title>
+  <title>cr.vision.geom package &mdash; CR.Vision  documentation</title>
   
 
   
@@ -39,8 +39,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cr.vision.saliency package" href="cr.vision.saliency.html" />
-    <link rel="prev" title="cr.vision.object_detection package" href="cr.vision.object_detection.html" /> 
+    <link rel="next" title="cr.vision.io package" href="cr.vision.io.html" />
+    <link rel="prev" title="cr.vision.filters package" href="cr.vision.filters.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -97,16 +97,17 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html">cr.vision.concurrent package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html">cr.vision.edits package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html">cr.vision.filters package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom.html">cr.vision.geom package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html">cr.vision.io package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.motion.html">cr.vision.motion package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.object_detection.html">cr.vision.object_detection package</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">cr.vision.object_tracker package</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cr.vision.geom package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cr-vision-object-tracker-object-tracker-module">cr.vision.object_tracker.object_tracker module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cr-vision-geom-projective2d-actions-module">cr.vision.geom.projective2d_actions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cr-vision-geom-projective2d-matrices-module">cr.vision.geom.projective2d_matrices module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html">cr.vision.io package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.motion.html">cr.vision.motion package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.object_detection.html">cr.vision.object_detection package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.object_tracker.html">cr.vision.object_tracker package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.saliency.html">cr.vision.saliency package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html">cr.vision.video package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.measure.html">cr.vision.measure package</a></li>
@@ -162,13 +163,13 @@
         
           <li><a href="cr.vision.html">cr.vision package</a> &raquo;</li>
         
-      <li>cr.vision.object_tracker package</li>
+      <li>cr.vision.geom package</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/source/cr.vision.object_tracker.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/source/cr.vision.geom.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -205,13 +206,16 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="cr-vision-object-tracker-package">
-<h1>cr.vision.object_tracker package<a class="headerlink" href="#cr-vision-object-tracker-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cr-vision-geom-package">
+<h1>cr.vision.geom package<a class="headerlink" href="#cr-vision-geom-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="cr-vision-object-tracker-object-tracker-module">
-<h2>cr.vision.object_tracker.object_tracker module<a class="headerlink" href="#cr-vision-object-tracker-object-tracker-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cr-vision-geom-projective2d-actions-module">
+<h2>cr.vision.geom.projective2d_actions module<a class="headerlink" href="#cr-vision-geom-projective2d-actions-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="cr-vision-geom-projective2d-matrices-module">
+<h2>cr.vision.geom.projective2d_matrices module<a class="headerlink" href="#cr-vision-geom-projective2d-matrices-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-contents">
 <h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
@@ -226,10 +230,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="cr.vision.saliency.html" class="btn btn-neutral float-right" title="cr.vision.saliency package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="cr.vision.io.html" class="btn btn-neutral float-right" title="cr.vision.io package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="cr.vision.object_detection.html" class="btn btn-neutral float-left" title="cr.vision.object_detection package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="cr.vision.filters.html" class="btn btn-neutral float-left" title="cr.vision.filters package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

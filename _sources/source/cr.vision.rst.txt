@@ -8,7 +8,7 @@ cr.vision package
     cr.vision.concurrent
     cr.vision.edits
     cr.vision.filters
-    cr.vision.geom_transform
+    cr.vision.geom
     cr.vision.io
     cr.vision.motion
     cr.vision.object_detection

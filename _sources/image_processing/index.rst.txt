@@ -5,5 +5,6 @@ Image Processing
    :maxdepth: 2
    :caption: Contents:
 
+   cheat_sheet
    nb_effects
    

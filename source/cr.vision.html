@@ -97,7 +97,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html">cr.vision.concurrent package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html">cr.vision.edits package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html">cr.vision.filters package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom_transform.html">cr.vision.geom_transform package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom.html">cr.vision.geom package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html">cr.vision.io package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.motion.html">cr.vision.motion package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.object_detection.html">cr.vision.object_detection package</a></li>
@@ -106,7 +106,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html">cr.vision.video package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.measure.html">cr.vision.measure package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.retargeting.html">cr.vision.retargeting package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-cr.vision.errors">cr.vision.errors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cr-vision-errors-module">cr.vision.errors module</a></li>
 </ul>
 </li>
 </ul>
@@ -203,186 +203,113 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cr.vision.core.html">cr.vision.core package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#module-cr.vision.core.colors">cr.vision.colors module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#module-cr.vision.core.contour">cr.vision.contour module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#module-cr.vision.core.cvt_color">cr.vision.cvt_color module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#module-cr.vision.core.effects">cr.vision.effects module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#module-cr.vision.core.histogram">cr.vision.histogram module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#module-cr.vision.core.misc">cr.vision.misc module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#module-cr.vision.core.operations">cr.vision.operations module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#module-cr.vision.core.plot">cr.vision.plot module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#module-cr.vision.core.template">cr.vision.template module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#module-cr.vision.core.threshold">cr.vision.threshold module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#module-cr.vision.core.types">cr.vision.types module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#module-cr.vision.core.noise_gaussian">Noise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#cr-vision-colors-module">cr.vision.colors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#cr-vision-contour-module">cr.vision.contour module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#cr-vision-cvt-color-module">cr.vision.cvt_color module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#cr-vision-effects-module">cr.vision.effects module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#cr-vision-histogram-module">cr.vision.histogram module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#cr-vision-misc-module">cr.vision.misc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#cr-vision-operations-module">cr.vision.operations module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#cr-vision-plot-module">cr.vision.plot module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#cr-vision-template-module">cr.vision.template module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#cr-vision-geom-scaling-module">cr.vision.geom.scaling module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#cr-vision-threshold-module">cr.vision.threshold module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#cr-vision-types-module">cr.vision.types module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html#noise">Noise</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cr.vision.apps.html">cr.vision.apps package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.apps.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.apps.html#module-cr.vision.apps.capture">cr.vision.apps.capture module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.apps.html#module-cr.vision.apps.ipcam">cr.vision.apps.ipcam module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.apps.html#module-cr.vision.apps">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.apps.html#cr-vision-apps-capture-module">cr.vision.apps.capture module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.apps.html#cr-vision-apps-ipcam-module">cr.vision.apps.ipcam module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.apps.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cr.vision.concurrent.html">cr.vision.concurrent package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html#module-cr.vision.concurrent.base">cr.vision.concurrent.base module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html#module-cr.vision.concurrent.graph">cr.vision.concurrent.graph module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html#module-cr.vision.concurrent.motion_detection">cr.vision.concurrent.motion_detection module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html#module-cr.vision.concurrent.on_screen_display">cr.vision.concurrent.on_screen_display module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html#module-cr.vision.concurrent.video_stream">cr.vision.concurrent.video_stream module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html#module-cr.vision.concurrent.webcam_stream">cr.vision.concurrent.webcam_stream module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html#module-cr.vision.concurrent">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html#cr-vision-concurrent-base-module">cr.vision.concurrent.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html#cr-vision-concurrent-graph-module">cr.vision.concurrent.graph module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html#cr-vision-concurrent-motion-detection-module">cr.vision.concurrent.motion_detection module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html#cr-vision-concurrent-on-screen-display-module">cr.vision.concurrent.on_screen_display module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html#cr-vision-concurrent-video-stream-module">cr.vision.concurrent.video_stream module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html#cr-vision-concurrent-webcam-stream-module">cr.vision.concurrent.webcam_stream module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cr.vision.edits.html">cr.vision.edits package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html#module-cr.vision.edits.border">cr.vision.edits.border module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html#module-cr.vision.edits.logo">cr.vision.edits.logo module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html#module-cr.vision.edits.placement">cr.vision.edits.placement module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html#module-cr.vision.edits">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html#cr-vision-edits-border-module">cr.vision.edits.border module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html#cr-vision-edits-logo-module">cr.vision.edits.logo module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html#cr-vision-edits-placement-module">cr.vision.edits.placement module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cr.vision.filters.html">cr.vision.filters package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html#module-cr.vision.filters.filter">cr.vision.filters.filter module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html#module-cr.vision.filters.kernels">cr.vision.filters.kernels module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html#module-cr.vision.filters">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html#cr-vision-filters-filter-module">cr.vision.filters.filter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html#cr-vision-filters-kernels-module">cr.vision.filters.kernels module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html#module-contents">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="cr.vision.geom_transform.html">cr.vision.geom_transform package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom_transform.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom_transform.html#module-cr.vision.geom_transform.projective2d_actions">cr.vision.geom_transform.projective2d_actions module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom_transform.html#module-cr.vision.geom_transform.projective2d_matrices">cr.vision.geom_transform.projective2d_matrices module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom_transform.html#module-cr.vision.geom_transform.scaling">cr.vision.geom_transform.scaling module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom_transform.html#module-cr.vision.geom_transform">Module contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cr.vision.geom.html">cr.vision.geom package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom.html#cr-vision-geom-projective2d-actions-module">cr.vision.geom.projective2d_actions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom.html#cr-vision-geom-projective2d-matrices-module">cr.vision.geom.projective2d_matrices module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cr.vision.io.html">cr.vision.io package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html#module-cr.vision.io.display">cr.vision.io.display module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html#module-cr.vision.io.interfaces">cr.vision.io.interfaces module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html#module-cr.vision.io.videocapture">cr.vision.io.videocapture module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html#module-cr.vision.io.videowriter">cr.vision.io.videowriter module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html#module-cr.vision.io">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html#cr-vision-io-display-module">cr.vision.io.display module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html#cr-vision-io-interfaces-module">cr.vision.io.interfaces module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html#cr-vision-io-videocapture-module">cr.vision.io.videocapture module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html#cr-vision-io-videowriter-module">cr.vision.io.videowriter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cr.vision.motion.html">cr.vision.motion package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.motion.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.motion.html#module-cr.vision.motion.simple_motion_detector">cr.vision.motion.simple_motion_detector module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.motion.html#module-cr.vision.motion">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.motion.html#cr-vision-motion-simple-motion-detector-module">cr.vision.motion.simple_motion_detector module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.motion.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cr.vision.object_detection.html">cr.vision.object_detection package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.object_detection.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.object_detection.html#module-cr.vision.object_detection.nms">cr.vision.object_detection.nms module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.object_detection.html#module-cr.vision.object_detection">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.object_detection.html#cr-vision-object-detection-nms-module">cr.vision.object_detection.nms module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.object_detection.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cr.vision.object_tracker.html">cr.vision.object_tracker package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.object_tracker.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.object_tracker.html#module-cr.vision.object_tracker.object_tracker">cr.vision.object_tracker.object_tracker module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.object_tracker.html#module-cr.vision.object_tracker">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.object_tracker.html#cr-vision-object-tracker-object-tracker-module">cr.vision.object_tracker.object_tracker module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.object_tracker.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cr.vision.saliency.html">cr.vision.saliency package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.saliency.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.saliency.html#module-cr.vision.saliency.saliency">cr.vision.saliency.saliency module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.saliency.html#module-cr.vision.saliency">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.saliency.html#cr-vision-saliency-saliency-module">cr.vision.saliency.saliency module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.saliency.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cr.vision.video.html">cr.vision.video package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html#module-cr.vision.video.frame">cr.vision.video.frame module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html#module-cr.vision.video">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html#cr-vision-video-frame-module">cr.vision.video.frame module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html#module-contents">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cr.vision.measure.html">cr.vision.measure package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.measure.html#module-cr.vision.measure.focus">cr.vision.measure.focus module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.measure.html#cr-vision-measure-focus-module">cr.vision.measure.focus module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cr.vision.retargeting.html">cr.vision.retargeting package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.retargeting.html#module-cr.vision.retargeting">cr.vision.retargeting module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.retargeting.html#module-cr.vision.retargeting.seam">cr.vision.retargeting.seam module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.retargeting.html#cr-vision-retargeting-module">cr.vision.retargeting module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cr.vision.retargeting.html#cr-vision-retargeting-seam-module">cr.vision.retargeting.seam module</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<div class="section" id="module-cr.vision.errors">
-<span id="cr-vision-errors-module"></span><h2>cr.vision.errors module<a class="headerlink" href="#module-cr.vision.errors" title="Permalink to this headline">¶</a></h2>
-<p>Exception classes for cr-vision library</p>
-<dl class="exception">
-<dt id="cr.vision.errors.CRVError">
-<em class="property">exception </em><code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">CRVError</code><a class="reference internal" href="../_modules/cr/vision/errors.html#CRVError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.CRVError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
-<p>Base exception class</p>
-</dd></dl>
-
-<dl class="exception">
-<dt id="cr.vision.errors.InvalidNumChannelsError">
-<em class="property">exception </em><code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">InvalidNumChannelsError</code><span class="sig-paren">(</span><em class="sig-param">expected_channels</em>, <em class="sig-param">actual_channels</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/errors.html#InvalidNumChannelsError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.InvalidNumChannelsError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cr.vision.errors.CRVError" title="cr.vision.errors.CRVError"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.errors.CRVError</span></code></a></p>
-<p>Invalid number of channels error</p>
-</dd></dl>
-
-<dl class="exception">
-<dt id="cr.vision.errors.InvalidNumDimensionsError">
-<em class="property">exception </em><code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">InvalidNumDimensionsError</code><a class="reference internal" href="../_modules/cr/vision/errors.html#InvalidNumDimensionsError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.InvalidNumDimensionsError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cr.vision.errors.CRVError" title="cr.vision.errors.CRVError"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.errors.CRVError</span></code></a></p>
-<p>Invalid number of dimensions error</p>
-</dd></dl>
-
-<dl class="exception">
-<dt id="cr.vision.errors.NotU8C1Error">
-<em class="property">exception </em><code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">NotU8C1Error</code><a class="reference internal" href="../_modules/cr/vision/errors.html#NotU8C1Error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.NotU8C1Error" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cr.vision.errors.CRVError" title="cr.vision.errors.CRVError"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.errors.CRVError</span></code></a></p>
-<p>Image is not grayscale 8 bit unsigned</p>
-</dd></dl>
-
-<dl class="exception">
-<dt id="cr.vision.errors.NotU8C3Error">
-<em class="property">exception </em><code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">NotU8C3Error</code><a class="reference internal" href="../_modules/cr/vision/errors.html#NotU8C3Error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.NotU8C3Error" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cr.vision.errors.CRVError" title="cr.vision.errors.CRVError"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.errors.CRVError</span></code></a></p>
-<p>Image is not 8 bit unsigned 3 channel color image</p>
-</dd></dl>
-
-<dl class="exception">
-<dt id="cr.vision.errors.UnsupportedImageFormatError">
-<em class="property">exception </em><code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">UnsupportedImageFormatError</code><a class="reference internal" href="../_modules/cr/vision/errors.html#UnsupportedImageFormatError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.UnsupportedImageFormatError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cr.vision.errors.CRVError" title="cr.vision.errors.CRVError"><code class="xref py py-class docutils literal notranslate"><span class="pre">cr.vision.errors.CRVError</span></code></a></p>
-<p>Unsupported image format</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.errors.check_nchannels">
-<code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">check_nchannels</code><span class="sig-paren">(</span><em class="sig-param">expected_channels</em>, <em class="sig-param">actual_channels</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/errors.html#check_nchannels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.check_nchannels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if number of channels is correct</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.errors.check_ndim">
-<code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">check_ndim</code><span class="sig-paren">(</span><em class="sig-param">actual_ndim</em>, <em class="sig-param">expected_min_ndim=None</em>, <em class="sig-param">expected_max_ndim=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/errors.html#check_ndim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.check_ndim" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks if the number of dimensions is correct</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.errors.check_u8c1">
-<code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">check_u8c1</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/errors.html#check_u8c1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.check_u8c1" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks that the image is an unsigned 8 bit image with one channel</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.errors.check_u8c3">
-<code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">check_u8c3</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/errors.html#check_u8c3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.check_u8c3" title="Permalink to this definition">¶</a></dt>
-<dd><p>Chcecks that the image is an unsigned 8 bit image with 3 channels</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="cr.vision.errors.error_unsupported_image_format">
-<code class="sig-prename descclassname">cr.vision.errors.</code><code class="sig-name descname">error_unsupported_image_format</code><span class="sig-paren">(</span><em class="sig-param">format=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cr/vision/errors.html#error_unsupported_image_format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cr.vision.errors.error_unsupported_image_format" title="Permalink to this definition">¶</a></dt>
-<dd><p>Raises UnsupportedImageFormatError exception</p>
-</dd></dl>
-
+<div class="section" id="cr-vision-errors-module">
+<h2>cr.vision.errors module<a class="headerlink" href="#cr-vision-errors-module" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
