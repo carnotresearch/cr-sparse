@@ -65,7 +65,7 @@ Resize an image if its width exceeds a given maximum width::
 
 Resize to a specific width and height (aspect ratio is not preserved)::
 
-    image = vision.resize_by_height(image, target_width, target_height)
+    image = vision.resize(image, target_width, target_height)
 
 
 
