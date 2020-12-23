@@ -96,12 +96,10 @@ setup(
     download_url="https://github.com/carnotresearch/cr-sparse/archive/v0.1.tar.gz",
     install_requires=[ "numpy", 
         "scipy", 
+        "tensorflow",
         "matplotlib", 
-        "scikit-image", 
-        "opencv-contrib-python",
         "imageio", 
         "click", 
-        "rx"
     ],
 
     # List additional groups of dependencies here (e.g. development
@@ -110,7 +108,7 @@ setup(
     # $ pip install -e .[dev,test]
     extras_require={
         'dev': [ ],
-        'test': [ "tox"],
+        'test': [ "pytest"],
     },
     include_package_data=True,
     zip_safe=False,
