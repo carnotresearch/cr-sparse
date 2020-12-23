@@ -1,5 +1,5 @@
 import tensorflow as tf
-
+import numpy as np
 from .defs import SingleRecoverySolution
 
 class MatchingPursuit:
@@ -17,7 +17,8 @@ class MatchingPursuit:
         # initialize residual
         r = x
         # initialize solution vector
-        z = tf.Variable(tf.zeros(self.num_atoms))
+        # z = tf.Variable(tf.zeros(self.num_atoms))
+        z = np.zeros(self.num_atoms)
         # iteration count
         t = 0
         dict = self.dict
@@ -39,7 +40,8 @@ class MatchingPursuit:
             # pick corresponding correlation value
             coeff = h[index]
             # update the representation
-            z[index].assign(z[index] + coeff)
+            # z[index].assign(z[index] + coeff)
+            z[index] += coeff
             # update the residual
             atom = dict[index]
             r = r - coeff * atom

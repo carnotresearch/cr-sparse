@@ -15,6 +15,8 @@ S = 1
 
 gen = SparseRepGenerator(D, K, S)
 
+tf.random.set_seed(1234)
+
 # Dictionary
 dict = simple.gaussian_mtx(N, D)
 
@@ -24,10 +26,11 @@ mp = MatchingPursuit(dict)
 
 start_time = time.time()
 for i in range(20):
+    tf.random.set_seed(i)
     # Sparse Representation
     representation = gen.gaussian()
     # Signal
     signal = tf.squeeze(representation @ dict)
     # solve it
     solution = mp(signal)
-    print("--- %s seconds ---" % (time.time() - start_time))
+    print("[%d] [%d] iters  res_norm: %s, --- time: %s seconds ---" % (i+1, solution.iterations, solution.residual_norm.numpy(), time.time() - start_time))
