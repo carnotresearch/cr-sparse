@@ -5,6 +5,6 @@ Convolutional Neural Networks
    :maxdepth: 2
    :caption: Contents:
 
-   resent_from_scratch
+   resnet_from_scratch
 
    

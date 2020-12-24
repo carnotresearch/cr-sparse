@@ -1,0 +1,1932 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building Resnet 50 from scratch with Keras &mdash; CR.Vision  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/js/custom.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="cr.vision package" href="../../source/cr.vision.html" />
+    <link rel="prev" title="Convolutional Neural Networks" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> CR.Vision
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nb_basic_image_operations.html">Basic Image Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../image_processing/index.html">Image Processing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Convolutional Neural Networks</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Building Resnet 50 from scratch with Keras</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#The-Residual-Blocks">The Residual Blocks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Building-a-model">Building a model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#The-identity-path">The identity path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#The-conv1-stage">The conv1 stage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#The-stack-of-all-residual-blocks-of-conv2-stage">The stack of all residual blocks of conv2 stage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Size-reduction-from-one-stage-to-next-stage">Size reduction from one stage to next stage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#The-complete-ResNet-50-CNN">The complete ResNet 50 CNN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#The-classification-layer.">The classification layer.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Where-to-go-from-here">Where to go from here</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/cr.vision.html">cr.vision package</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CR.Vision</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Tutorials</a> &raquo;</li>
+        
+          <li><a href="index.html">Convolutional Neural Networks</a> &raquo;</li>
+        
+      <li>Building Resnet 50 from scratch with Keras</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/tutorials/cnn/resnet_from_scratch.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Building-Resnet-50-from-scratch-with-Keras">
+<h1>Building Resnet 50 from scratch with Keras<a class="headerlink" href="#Building-Resnet-50-from-scratch-with-Keras" title="Permalink to this headline">¶</a></h1>
+<p>Resnets are one of the most popular convolutional networks available in deep learning literature. All major libraries (e.g. Keras) have fully baked implementations of Resnets available for engineers to use on daily basis. There are a number of online tutorials available which illuminate the basic principles behind the resnets. Here are a couple of them:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cv-tricks.com/keras/understand-implement-resnets/">Detailed Guide to Understand and Implement ResNets</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/hitchhikers-guide-to-residual-networks-resnet-in-keras-385ec01ec8ff">Hitchhiker’s Guide to Residual Networks in Keras</a></p></li>
+</ul>
+<p>There is also one useful tutorial about building the key modules in popular networks like VGG, Inception and ResNet.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://machinelearningmastery.com/how-to-implement-major-architecture-innovations-for-convolutional-neural-networks/">How to Develop VGG, Inception and ResNet Modules from Scratch in Keras</a></p></li>
+</ul>
+<p>However, there is a lack of articles walking through the nitty gritties of a complete ResNet implementation. There are several details which need to be properly addressed in building a complete ResNet. In this article, we will focus on building ResNet 50 from scratch. Our presentation in this tutorial is a simplified version of the code available in the <a class="reference external" href="https://github.com/keras-team/keras-applications">Keras Applications</a> GITHUB repository.</p>
+<p>One key goal of this tutorial is to give you hands on experience of building large complex CNNs with the help of <a class="reference external" href="https://keras.io/guides/functional_api/">Keras Functional API</a>.</p>
+<p>For basic introduction to Resnets, we suggest looking at the articles mentioned above or the original paper</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.cv-foundation.org/openaccess/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html">2016, Deep Residual Learning for Image Recognition</a></p></li>
+</ul>
+<p>Following is table-1 from the paper which describes various ResNet architectures. <img alt="Resnet Architectures" src="https://drive.google.com/uc?id=1CH2tuV2hMFZ7BAyeURm8tLhQUvqvinfm" /></p>
+<p>Please spend some time looking at the column for the architecture of 50 layer ResNet.</p>
+<p>Without further ado, let’s get into implementing a Resnet 50 network with Keras.</p>
+<p>We start by importing relevant modules from Keras.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>from tensorflow.keras import layers, backend, models, utils
+
+</pre></div>
+</div>
+</div>
+<p>In the sequel, we will need to create various batch normalization layers. All of them will have same epsilon value which is a small float added to the variance to avoid dividing by zero.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span># epsilon for Batch Normalization layers
+BN_EPS= 1.001e-5
+
+</pre></div>
+</div>
+</div>
+<p>There are five stages of the ResNet which have been labeled as conv1, conv2, conv3, conv4 and conv5 in the paper (first column of the table above). These are followed by a global average pool and a simple fully connected 1000 way classification layer.</p>
+<p>Input to the ResNet 50 network is typically a batch of images with size ( 224, 224, 3).</p>
+<ul class="simple">
+<li><p>Stage conv1 output is (56, 56, 64). i.e. the size has reduced 4 times to (56, 56) and the number of channels has increased to 64.</p></li>
+<li><p>Stage conv2 output is (56, 56, 256).</p></li>
+<li><p>Stage conv3 output is (28, 28, 512).</p></li>
+<li><p>Stage conv4 output is (14, 14, 1024)</p></li>
+<li><p>Stage conv5 output is (7, 7, 2048)</p></li>
+<li><p>conv2 has 3 residual blocks, conv3 has 4 residual blocks, conv4 has 6 and conv5 has 3.</p></li>
+</ul>
+<div class="section" id="The-Residual-Blocks">
+<h2>The Residual Blocks<a class="headerlink" href="#The-Residual-Blocks" title="Permalink to this headline">¶</a></h2>
+<p>Let’s start by defining functions for building the residual blocks in the ResNet50 network. We will slowly increase the complexity of residual blocks to cover all the needs of ResNet 50.</p>
+<p>Every residual block essentially consists of three convolutional layers along the residual path and an identity connection from input to output. There are some details which will come up later. Let’s look at the residual blocks in conv2 stage.</p>
+<p>Output of the conv1 stage is a tensor of size (None, 56, 56, 64). Its implementation will be discussed later.</p>
+<p>The first convolutional layer in this residual block is a 1x1 layer with 64 filters. Second one is a 3x3 layer with 64 filters. The last is again a 1x1 layer with 4 times number of filters at 256 filters.</p>
+<p>For now, let’s just build the convolutional layers for the residual path.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>def conv_131(input, filters):
+    # number of channels in output tensor
+    num_output_channels = 4 * filters
+    # The 1x1 first convolution layer
+    net = layers.Conv2D(filters, 1)(input)
+    net = layers.BatchNormalization(epsilon=BN_EPS,)(net)
+    net = layers.Activation(&#39;relu&#39;)(net)
+    # The 3x3 second convolution layer
+    net = layers.Conv2D(filters, 3, padding=&#39;same&#39;)(net)
+    net = layers.BatchNormalization(epsilon=BN_EPS)(net)
+    net = layers.Activation(&#39;relu&#39;)(net)
+    # The 1x1 third convolution layer
+    net = layers.Conv2D(num_output_channels, 1)(net)
+    net = layers.BatchNormalization(epsilon=BN_EPS)(net)
+    net = layers.Activation(&#39;relu&#39;)(net)
+    return net
+
+</pre></div>
+</div>
+</div>
+<p>The 1x1 layers don’t require a padding parameter as 1x1 convolution is nothing but an inner product over the channels in the input tensor and it doesn’t lead to any changes in the image size (unless a different stride is specified). It can definitely change the number of channels from input to output.</p>
+<p>Each conv layer is followed by batch normalization and then a relu activation.</p>
+</div>
+<div class="section" id="Building-a-model">
+<h2>Building a model<a class="headerlink" href="#Building-a-model" title="Permalink to this headline">¶</a></h2>
+<p>We will write a simple function which can build a Keras model from a network building function. A network building function, like <code class="docutils literal notranslate"><span class="pre">conv_131</span></code> above, takes a layer as input, adds some more layers on top of it.</p>
+<p>The model building function considers the shape of the input tensor to the network and uses it to create an input layer. It then feeds the input layer to the network building function and builds the whole network. Finally, the input and output are combined to form a Keras model.</p>
+<p>This function will be quite handy in displaying the architecture of any network in rest of the tutorial.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>def build_model(input_shape, net_fn):
+    img_input =  layers.Input(shape=input_shape)
+    net = net_fn(img_input)
+    inputs = img_input
+    outputs = net
+    model = models.Model(inputs, outputs)
+    return model
+</pre></div>
+</div>
+</div>
+<p>Let’s use this function to build a small model consisting of a single block of the three convolutional layers in conv2 stage of ResNet 50. As discussed earlier, the input shape is (56, 56, 64). We then print the model architecture summary.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>model = build_model((56, 56, 64), lambda input: conv_131(input, 64))
+model.summary()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Model: &#34;functional_1&#34;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+input_1 (InputLayer)         [(None, 56, 56, 64)]      0
+_________________________________________________________________
+conv2d (Conv2D)              (None, 56, 56, 64)        4160
+_________________________________________________________________
+batch_normalization (BatchNo (None, 56, 56, 64)        256
+_________________________________________________________________
+activation (Activation)      (None, 56, 56, 64)        0
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 56, 56, 64)        36928
+_________________________________________________________________
+batch_normalization_1 (Batch (None, 56, 56, 64)        256
+_________________________________________________________________
+activation_1 (Activation)    (None, 56, 56, 64)        0
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 56, 56, 256)       16640
+_________________________________________________________________
+batch_normalization_2 (Batch (None, 56, 56, 256)       1024
+_________________________________________________________________
+activation_2 (Activation)    (None, 56, 56, 256)       0
+=================================================================
+Total params: 59,264
+Trainable params: 58,496
+Non-trainable params: 768
+_________________________________________________________________
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="The-identity-path">
+<h2>The identity path<a class="headerlink" href="#The-identity-path" title="Permalink to this headline">¶</a></h2>
+<p>It’s time to add the identity path in our 3 CNN layer block. However, there is a catch. The input to first residual block is (56, 56, 64). But the output of the third layer in this block is (56, 56, 256). The number of channels changes from 64 to 256. Hence, the input cannot be added to the output of the residual path directly. A solution is to add a 1x1 conv layer in the identity path (whenever the number of input channels is not equal to the number of output channels).</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">residual_131_v1</span></code> below incorporates this. Note the following in this:</p>
+<ul class="simple">
+<li><p>We check if the number of input and output channels is different.</p></li>
+<li><p>If yes, then a 1x1 conv layer is added with batch normalization but no relu activation.</p></li>
+<li><p>The output of the last (1x1) conv layer is bacth normalized.</p></li>
+<li><p>Then it is added to the output of the shortcut identity path.</p></li>
+<li><p>Finally, the sum undergoes a common relu activation.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>def residual_131_v1(input, filters):
+    # shape of input tensor
+    input_shape = input.shape
+    # number of channels in input tensor
+    num_input_channels = input_shape[3]
+    # number of channels in output tensor
+    num_output_channels = 4 * filters
+    # if input and output channels are same then we can feed
+    # the input directly as identity shortcut
+    # otherwise, we need to add a convolutional layer in identity path
+    conv_in_identity_path = num_output_channels != num_input_channels
+    if conv_in_identity_path is True:
+        # add a conv layer to increase the number of channels
+        shortcut = layers.Conv2D(num_output_channels, 1)(input)
+        # batch normalize (activation will come later)
+        shortcut = layers.BatchNormalization(epsilon=BN_EPS)(shortcut)
+    else:
+        shortcut = input
+    # The 1x1 first convolution layer
+    net = layers.Conv2D(filters, 1)(input)
+    net = layers.BatchNormalization(epsilon=BN_EPS,)(net)
+    net = layers.Activation(&#39;relu&#39;)(net)
+    # The 3x3 second convolution layer
+    net = layers.Conv2D(filters, 3, padding=&#39;same&#39;)(net)
+    net = layers.BatchNormalization(epsilon=BN_EPS)(net)
+    net = layers.Activation(&#39;relu&#39;)(net)
+    # The 1x1 third convolution layer
+    net = layers.Conv2D(num_output_channels, 1)(net)
+    net = layers.BatchNormalization(epsilon=BN_EPS)(net)
+    # Add identity shortcut to residual output before activation
+    net = layers.Add()([shortcut, net])
+    net = layers.Activation(&#39;relu&#39;)(net)
+    return net
+
+</pre></div>
+</div>
+</div>
+<p>Let’s build a model with a residual block and print its summary.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>model = build_model((56, 56, 64), lambda input: residual_131_v1(input, 64))
+model.summary()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Model: &#34;functional_3&#34;
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to
+==================================================================================================
+input_2 (InputLayer)            [(None, 56, 56, 64)] 0
+__________________________________________________________________________________________________
+conv2d_4 (Conv2D)               (None, 56, 56, 64)   4160        input_2[0][0]
+__________________________________________________________________________________________________
+batch_normalization_4 (BatchNor (None, 56, 56, 64)   256         conv2d_4[0][0]
+__________________________________________________________________________________________________
+activation_3 (Activation)       (None, 56, 56, 64)   0           batch_normalization_4[0][0]
+__________________________________________________________________________________________________
+conv2d_5 (Conv2D)               (None, 56, 56, 64)   36928       activation_3[0][0]
+__________________________________________________________________________________________________
+batch_normalization_5 (BatchNor (None, 56, 56, 64)   256         conv2d_5[0][0]
+__________________________________________________________________________________________________
+activation_4 (Activation)       (None, 56, 56, 64)   0           batch_normalization_5[0][0]
+__________________________________________________________________________________________________
+conv2d_3 (Conv2D)               (None, 56, 56, 256)  16640       input_2[0][0]
+__________________________________________________________________________________________________
+conv2d_6 (Conv2D)               (None, 56, 56, 256)  16640       activation_4[0][0]
+__________________________________________________________________________________________________
+batch_normalization_3 (BatchNor (None, 56, 56, 256)  1024        conv2d_3[0][0]
+__________________________________________________________________________________________________
+batch_normalization_6 (BatchNor (None, 56, 56, 256)  1024        conv2d_6[0][0]
+__________________________________________________________________________________________________
+add (Add)                       (None, 56, 56, 256)  0           batch_normalization_3[0][0]
+                                                                 batch_normalization_6[0][0]
+__________________________________________________________________________________________________
+activation_5 (Activation)       (None, 56, 56, 256)  0           add[0][0]
+==================================================================================================
+Total params: 76,928
+Trainable params: 75,648
+Non-trainable params: 1,280
+__________________________________________________________________________________________________
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="The-conv1-stage">
+<h2>The conv1 stage<a class="headerlink" href="#The-conv1-stage" title="Permalink to this headline">¶</a></h2>
+<p>There are still one problem with the residual block. But before that, let’s complete the implementation of the conv1 stage. See the function below.</p>
+<ul class="simple">
+<li><p>Input is a (224, 224, 3) image.</p></li>
+<li><p>The first layer is a large 7x7 convolutional layer that downsamples the resolution to (112, 112) and increases the number of channels to 64.</p></li>
+<li><p>We achieve this in two steps as follows.</p></li>
+<li><p>Add a padding of 3 pixels on all sides increasing resolution to (230, 230)</p></li>
+<li><p>Perform a 7x7 valid convolution with stride 2 with 64 filters and achieve an output of (112, 112, 64).</p></li>
+<li><p>Next, the output goes through batch normalization and relu activation.</p></li>
+<li><p>Finally, we add a padding of 1 pixels and then do a max pooling of 3x3 to achieve an output tensor of size (56,56,64).</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>def conv1(img_input):
+    # pad in advance for valid convolution (output is 230x230)
+    net = layers.ZeroPadding2D(padding=(3, 3))(img_input)
+    # perform the big 7x7 convolution with 2x2 stride to (112x112x64)
+    net = layers.Conv2D(64, (7, 7),
+                      strides=(2, 2),
+                      padding=&#39;valid&#39;,
+                      kernel_initializer=&#39;he_normal&#39;)(net)
+    # batch normalization before activation (output is 112x112x64)
+    net = layers.BatchNormalization(epsilon=BN_EPS)(net)
+    # relu activation (output is 112x112x64)
+    net = layers.Activation(&#39;relu&#39;)(net)
+    # pad again for max pooling (output is 114x114x64)
+    net = layers.ZeroPadding2D(padding=(1, 1))(net)
+    # 3x3 max pooling with 2x2 stride (output is 56x56x64)
+    net = layers.MaxPooling2D((3, 3), strides=(2, 2))(net)
+    return net
+
+</pre></div>
+</div>
+</div>
+<p>Let’s combine the conv1 stage with our first residual block to see if everything is working; build a partial residual network and print it.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>def partial_resnet_v1(img_input):
+  net = conv1(img_input)
+  net = residual_131_v1(net, 64)
+  return net
+
+model =  build_model((224, 224, 3), partial_resnet_v1)
+model.summary()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Model: &#34;functional_5&#34;
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to
+==================================================================================================
+input_3 (InputLayer)            [(None, 224, 224, 3) 0
+__________________________________________________________________________________________________
+zero_padding2d (ZeroPadding2D)  (None, 230, 230, 3)  0           input_3[0][0]
+__________________________________________________________________________________________________
+conv2d_7 (Conv2D)               (None, 112, 112, 64) 9472        zero_padding2d[0][0]
+__________________________________________________________________________________________________
+batch_normalization_7 (BatchNor (None, 112, 112, 64) 256         conv2d_7[0][0]
+__________________________________________________________________________________________________
+activation_6 (Activation)       (None, 112, 112, 64) 0           batch_normalization_7[0][0]
+__________________________________________________________________________________________________
+zero_padding2d_1 (ZeroPadding2D (None, 114, 114, 64) 0           activation_6[0][0]
+__________________________________________________________________________________________________
+max_pooling2d (MaxPooling2D)    (None, 56, 56, 64)   0           zero_padding2d_1[0][0]
+__________________________________________________________________________________________________
+conv2d_9 (Conv2D)               (None, 56, 56, 64)   4160        max_pooling2d[0][0]
+__________________________________________________________________________________________________
+batch_normalization_9 (BatchNor (None, 56, 56, 64)   256         conv2d_9[0][0]
+__________________________________________________________________________________________________
+activation_7 (Activation)       (None, 56, 56, 64)   0           batch_normalization_9[0][0]
+__________________________________________________________________________________________________
+conv2d_10 (Conv2D)              (None, 56, 56, 64)   36928       activation_7[0][0]
+__________________________________________________________________________________________________
+batch_normalization_10 (BatchNo (None, 56, 56, 64)   256         conv2d_10[0][0]
+__________________________________________________________________________________________________
+activation_8 (Activation)       (None, 56, 56, 64)   0           batch_normalization_10[0][0]
+__________________________________________________________________________________________________
+conv2d_8 (Conv2D)               (None, 56, 56, 256)  16640       max_pooling2d[0][0]
+__________________________________________________________________________________________________
+conv2d_11 (Conv2D)              (None, 56, 56, 256)  16640       activation_8[0][0]
+__________________________________________________________________________________________________
+batch_normalization_8 (BatchNor (None, 56, 56, 256)  1024        conv2d_8[0][0]
+__________________________________________________________________________________________________
+batch_normalization_11 (BatchNo (None, 56, 56, 256)  1024        conv2d_11[0][0]
+__________________________________________________________________________________________________
+add_1 (Add)                     (None, 56, 56, 256)  0           batch_normalization_8[0][0]
+                                                                 batch_normalization_11[0][0]
+__________________________________________________________________________________________________
+activation_9 (Activation)       (None, 56, 56, 256)  0           add_1[0][0]
+==================================================================================================
+Total params: 86,656
+Trainable params: 85,248
+Non-trainable params: 1,408
+__________________________________________________________________________________________________
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="The-stack-of-all-residual-blocks-of-conv2-stage">
+<h2>The stack of all residual blocks of conv2 stage<a class="headerlink" href="#The-stack-of-all-residual-blocks-of-conv2-stage" title="Permalink to this headline">¶</a></h2>
+<p>Everything is going good so far. Recall from the network table that the conv2 stage for ResNet 50 has 3 residual blocks. Let’s write a simple function to build all of them and combine them.</p>
+<p>This is also known as the stack of residual blocks.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>def residual_stack_v1(input, filters, blocks):
+    net = input
+    for i in range(blocks):
+        net = residual_131_v1(net, filters)
+    return net
+
+</pre></div>
+</div>
+</div>
+<p>If you have been paying attention, you may notice something interesting.</p>
+<ul class="simple">
+<li><p>Output of first residual block is (56, 56, 256).</p></li>
+<li><p>Output of second residual block is also (56, 56, 256).</p></li>
+<li><p>Thus, for the second (and also the third) residual block, the number of channels in both input and output are same.</p></li>
+<li><p>Hence, the identity connection doesn’t require any 1x1 convolutional layer.</p></li>
+<li><p>In fact, the first 1x1 conv layer in the second residual block actually reduces the number of channels from 256 back to 64 and the third layer increases it again to 256.</p></li>
+</ul>
+<p>Let’s now build a partial resnet with both conv1 and conv2 stages complete.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>def partial_resnet_v2(img_input):
+  net = conv1(img_input)
+  net = residual_stack_v1(net, 64, 3)
+  return net
+
+model =  build_model((224, 224, 3), partial_resnet_v2)
+model.summary()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Model: &#34;functional_7&#34;
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to
+==================================================================================================
+input_4 (InputLayer)            [(None, 224, 224, 3) 0
+__________________________________________________________________________________________________
+zero_padding2d_2 (ZeroPadding2D (None, 230, 230, 3)  0           input_4[0][0]
+__________________________________________________________________________________________________
+conv2d_12 (Conv2D)              (None, 112, 112, 64) 9472        zero_padding2d_2[0][0]
+__________________________________________________________________________________________________
+batch_normalization_12 (BatchNo (None, 112, 112, 64) 256         conv2d_12[0][0]
+__________________________________________________________________________________________________
+activation_10 (Activation)      (None, 112, 112, 64) 0           batch_normalization_12[0][0]
+__________________________________________________________________________________________________
+zero_padding2d_3 (ZeroPadding2D (None, 114, 114, 64) 0           activation_10[0][0]
+__________________________________________________________________________________________________
+max_pooling2d_1 (MaxPooling2D)  (None, 56, 56, 64)   0           zero_padding2d_3[0][0]
+__________________________________________________________________________________________________
+conv2d_14 (Conv2D)              (None, 56, 56, 64)   4160        max_pooling2d_1[0][0]
+__________________________________________________________________________________________________
+batch_normalization_14 (BatchNo (None, 56, 56, 64)   256         conv2d_14[0][0]
+__________________________________________________________________________________________________
+activation_11 (Activation)      (None, 56, 56, 64)   0           batch_normalization_14[0][0]
+__________________________________________________________________________________________________
+conv2d_15 (Conv2D)              (None, 56, 56, 64)   36928       activation_11[0][0]
+__________________________________________________________________________________________________
+batch_normalization_15 (BatchNo (None, 56, 56, 64)   256         conv2d_15[0][0]
+__________________________________________________________________________________________________
+activation_12 (Activation)      (None, 56, 56, 64)   0           batch_normalization_15[0][0]
+__________________________________________________________________________________________________
+conv2d_13 (Conv2D)              (None, 56, 56, 256)  16640       max_pooling2d_1[0][0]
+__________________________________________________________________________________________________
+conv2d_16 (Conv2D)              (None, 56, 56, 256)  16640       activation_12[0][0]
+__________________________________________________________________________________________________
+batch_normalization_13 (BatchNo (None, 56, 56, 256)  1024        conv2d_13[0][0]
+__________________________________________________________________________________________________
+batch_normalization_16 (BatchNo (None, 56, 56, 256)  1024        conv2d_16[0][0]
+__________________________________________________________________________________________________
+add_2 (Add)                     (None, 56, 56, 256)  0           batch_normalization_13[0][0]
+                                                                 batch_normalization_16[0][0]
+__________________________________________________________________________________________________
+activation_13 (Activation)      (None, 56, 56, 256)  0           add_2[0][0]
+__________________________________________________________________________________________________
+conv2d_17 (Conv2D)              (None, 56, 56, 64)   16448       activation_13[0][0]
+__________________________________________________________________________________________________
+batch_normalization_17 (BatchNo (None, 56, 56, 64)   256         conv2d_17[0][0]
+__________________________________________________________________________________________________
+activation_14 (Activation)      (None, 56, 56, 64)   0           batch_normalization_17[0][0]
+__________________________________________________________________________________________________
+conv2d_18 (Conv2D)              (None, 56, 56, 64)   36928       activation_14[0][0]
+__________________________________________________________________________________________________
+batch_normalization_18 (BatchNo (None, 56, 56, 64)   256         conv2d_18[0][0]
+__________________________________________________________________________________________________
+activation_15 (Activation)      (None, 56, 56, 64)   0           batch_normalization_18[0][0]
+__________________________________________________________________________________________________
+conv2d_19 (Conv2D)              (None, 56, 56, 256)  16640       activation_15[0][0]
+__________________________________________________________________________________________________
+batch_normalization_19 (BatchNo (None, 56, 56, 256)  1024        conv2d_19[0][0]
+__________________________________________________________________________________________________
+add_3 (Add)                     (None, 56, 56, 256)  0           activation_13[0][0]
+                                                                 batch_normalization_19[0][0]
+__________________________________________________________________________________________________
+activation_16 (Activation)      (None, 56, 56, 256)  0           add_3[0][0]
+__________________________________________________________________________________________________
+conv2d_20 (Conv2D)              (None, 56, 56, 64)   16448       activation_16[0][0]
+__________________________________________________________________________________________________
+batch_normalization_20 (BatchNo (None, 56, 56, 64)   256         conv2d_20[0][0]
+__________________________________________________________________________________________________
+activation_17 (Activation)      (None, 56, 56, 64)   0           batch_normalization_20[0][0]
+__________________________________________________________________________________________________
+conv2d_21 (Conv2D)              (None, 56, 56, 64)   36928       activation_17[0][0]
+__________________________________________________________________________________________________
+batch_normalization_21 (BatchNo (None, 56, 56, 64)   256         conv2d_21[0][0]
+__________________________________________________________________________________________________
+activation_18 (Activation)      (None, 56, 56, 64)   0           batch_normalization_21[0][0]
+__________________________________________________________________________________________________
+conv2d_22 (Conv2D)              (None, 56, 56, 256)  16640       activation_18[0][0]
+__________________________________________________________________________________________________
+batch_normalization_22 (BatchNo (None, 56, 56, 256)  1024        conv2d_22[0][0]
+__________________________________________________________________________________________________
+add_4 (Add)                     (None, 56, 56, 256)  0           activation_16[0][0]
+                                                                 batch_normalization_22[0][0]
+__________________________________________________________________________________________________
+activation_19 (Activation)      (None, 56, 56, 256)  0           add_4[0][0]
+==================================================================================================
+Total params: 229,760
+Trainable params: 226,816
+Non-trainable params: 2,944
+__________________________________________________________________________________________________
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Size-reduction-from-one-stage-to-next-stage">
+<h2>Size reduction from one stage to next stage<a class="headerlink" href="#Size-reduction-from-one-stage-to-next-stage" title="Permalink to this headline">¶</a></h2>
+<p>Look back at the architecture table. conv2 stage has output size of (56, 56) but the conv3 stage works on a size of (28, 28). We need to perform a downsampling here. This is the job of the first convolution layer in the first residual block of a particular stage of the network (conv3, conv4, conv5).</p>
+<p>A little modification in the residual 131 block generation function achieves this. See the code below:</p>
+<ul class="simple">
+<li><p>A new parameter stride1 has been introduced. This only applies to the first 1x1 convolution layer.</p></li>
+<li><p>If stride1=2, then the first 1x1 conv layer reduces the input size by a factor of 4 (2 in width, 2 in height).</p></li>
+<li><p>The other two conv layers remain as it is.</p></li>
+<li><p>This change also applies to the identity path. As the output size is halved, the 1x1 conv layer in the identity path also needs a stride of 2.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>def residual_131_v2(input, filters, stride1=1):
+    # shape of input tensor
+    input_shape = input.shape
+    # number of channels in input tensor
+    num_input_channels = input_shape[3]
+    # number of channels in output tensor
+    num_output_channels = 4 * filters
+    # if input and output channels are same then we can feed
+    # the input directly as identity shortcut
+    # otherwise, we need to add a convolutional layer in identity path
+    conv_in_identity_path = num_output_channels != num_input_channels
+    if conv_in_identity_path is True:
+        # add a conv layer to increase the number of channels
+        shortcut = layers.Conv2D(num_output_channels, 1, strides=stride1)(input)
+        # batch normalize (activation will come later)
+        shortcut = layers.BatchNormalization(epsilon=BN_EPS)(shortcut)
+    else:
+        shortcut = input
+    # The 1x1 first convolution layer
+    net = layers.Conv2D(filters, 1, strides=stride1)(input)
+    net = layers.BatchNormalization(epsilon=BN_EPS,)(net)
+    net = layers.Activation(&#39;relu&#39;)(net)
+    # The 3x3 second convolution layer
+    net = layers.Conv2D(filters, 3, padding=&#39;same&#39;)(net)
+    net = layers.BatchNormalization(epsilon=BN_EPS)(net)
+    net = layers.Activation(&#39;relu&#39;)(net)
+    # The 1x1 third convolution layer
+    net = layers.Conv2D(num_output_channels, 1)(net)
+    net = layers.BatchNormalization(epsilon=BN_EPS)(net)
+    # Add identity shortcut to residual output before activation
+    net = layers.Add()([shortcut, net])
+    net = layers.Activation(&#39;relu&#39;)(net)
+    return net
+
+</pre></div>
+</div>
+</div>
+<p>we need to modify our stack building function. The first block in the stack will have a stride of 2 (for conv3, conv4, conv5) layers and stride of 1 in conv2 layer. All other blocks in the stack will have a stride of 1.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>def residual_stack_v2(input, filters, blocks, stride1=2):
+    net = input
+    net = residual_131_v2(net, filters, stride1=stride1)
+    for i in range(blocks-1):
+        net = residual_131_v1(net, filters)
+    return net
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="The-complete-ResNet-50-CNN">
+<h2>The complete ResNet 50 CNN<a class="headerlink" href="#The-complete-ResNet-50-CNN" title="Permalink to this headline">¶</a></h2>
+<p>We are now ready to build all the 5 stages of the ResNet 50 CNN. See the code below. The only thing missing is the classification layer on top of the CNN.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>def cnn_resnet50(img_input):
+  net = conv1(img_input)
+  net = residual_stack_v2(net, 64, 3, stride1=1)
+  net = residual_stack_v2(net, 128, 4)
+  net = residual_stack_v2(net, 256, 6)
+  net = residual_stack_v2(net, 512, 3)
+  return net
+
+model =  build_model((224, 224, 3), cnn_resnet50)
+model.summary()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Model: &#34;functional_9&#34;
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to
+==================================================================================================
+input_5 (InputLayer)            [(None, 224, 224, 3) 0
+__________________________________________________________________________________________________
+zero_padding2d_4 (ZeroPadding2D (None, 230, 230, 3)  0           input_5[0][0]
+__________________________________________________________________________________________________
+conv2d_23 (Conv2D)              (None, 112, 112, 64) 9472        zero_padding2d_4[0][0]
+__________________________________________________________________________________________________
+batch_normalization_23 (BatchNo (None, 112, 112, 64) 256         conv2d_23[0][0]
+__________________________________________________________________________________________________
+activation_20 (Activation)      (None, 112, 112, 64) 0           batch_normalization_23[0][0]
+__________________________________________________________________________________________________
+zero_padding2d_5 (ZeroPadding2D (None, 114, 114, 64) 0           activation_20[0][0]
+__________________________________________________________________________________________________
+max_pooling2d_2 (MaxPooling2D)  (None, 56, 56, 64)   0           zero_padding2d_5[0][0]
+__________________________________________________________________________________________________
+conv2d_25 (Conv2D)              (None, 56, 56, 64)   4160        max_pooling2d_2[0][0]
+__________________________________________________________________________________________________
+batch_normalization_25 (BatchNo (None, 56, 56, 64)   256         conv2d_25[0][0]
+__________________________________________________________________________________________________
+activation_21 (Activation)      (None, 56, 56, 64)   0           batch_normalization_25[0][0]
+__________________________________________________________________________________________________
+conv2d_26 (Conv2D)              (None, 56, 56, 64)   36928       activation_21[0][0]
+__________________________________________________________________________________________________
+batch_normalization_26 (BatchNo (None, 56, 56, 64)   256         conv2d_26[0][0]
+__________________________________________________________________________________________________
+activation_22 (Activation)      (None, 56, 56, 64)   0           batch_normalization_26[0][0]
+__________________________________________________________________________________________________
+conv2d_24 (Conv2D)              (None, 56, 56, 256)  16640       max_pooling2d_2[0][0]
+__________________________________________________________________________________________________
+conv2d_27 (Conv2D)              (None, 56, 56, 256)  16640       activation_22[0][0]
+__________________________________________________________________________________________________
+batch_normalization_24 (BatchNo (None, 56, 56, 256)  1024        conv2d_24[0][0]
+__________________________________________________________________________________________________
+batch_normalization_27 (BatchNo (None, 56, 56, 256)  1024        conv2d_27[0][0]
+__________________________________________________________________________________________________
+add_5 (Add)                     (None, 56, 56, 256)  0           batch_normalization_24[0][0]
+                                                                 batch_normalization_27[0][0]
+__________________________________________________________________________________________________
+activation_23 (Activation)      (None, 56, 56, 256)  0           add_5[0][0]
+__________________________________________________________________________________________________
+conv2d_28 (Conv2D)              (None, 56, 56, 64)   16448       activation_23[0][0]
+__________________________________________________________________________________________________
+batch_normalization_28 (BatchNo (None, 56, 56, 64)   256         conv2d_28[0][0]
+__________________________________________________________________________________________________
+activation_24 (Activation)      (None, 56, 56, 64)   0           batch_normalization_28[0][0]
+__________________________________________________________________________________________________
+conv2d_29 (Conv2D)              (None, 56, 56, 64)   36928       activation_24[0][0]
+__________________________________________________________________________________________________
+batch_normalization_29 (BatchNo (None, 56, 56, 64)   256         conv2d_29[0][0]
+__________________________________________________________________________________________________
+activation_25 (Activation)      (None, 56, 56, 64)   0           batch_normalization_29[0][0]
+__________________________________________________________________________________________________
+conv2d_30 (Conv2D)              (None, 56, 56, 256)  16640       activation_25[0][0]
+__________________________________________________________________________________________________
+batch_normalization_30 (BatchNo (None, 56, 56, 256)  1024        conv2d_30[0][0]
+__________________________________________________________________________________________________
+add_6 (Add)                     (None, 56, 56, 256)  0           activation_23[0][0]
+                                                                 batch_normalization_30[0][0]
+__________________________________________________________________________________________________
+activation_26 (Activation)      (None, 56, 56, 256)  0           add_6[0][0]
+__________________________________________________________________________________________________
+conv2d_31 (Conv2D)              (None, 56, 56, 64)   16448       activation_26[0][0]
+__________________________________________________________________________________________________
+batch_normalization_31 (BatchNo (None, 56, 56, 64)   256         conv2d_31[0][0]
+__________________________________________________________________________________________________
+activation_27 (Activation)      (None, 56, 56, 64)   0           batch_normalization_31[0][0]
+__________________________________________________________________________________________________
+conv2d_32 (Conv2D)              (None, 56, 56, 64)   36928       activation_27[0][0]
+__________________________________________________________________________________________________
+batch_normalization_32 (BatchNo (None, 56, 56, 64)   256         conv2d_32[0][0]
+__________________________________________________________________________________________________
+activation_28 (Activation)      (None, 56, 56, 64)   0           batch_normalization_32[0][0]
+__________________________________________________________________________________________________
+conv2d_33 (Conv2D)              (None, 56, 56, 256)  16640       activation_28[0][0]
+__________________________________________________________________________________________________
+batch_normalization_33 (BatchNo (None, 56, 56, 256)  1024        conv2d_33[0][0]
+__________________________________________________________________________________________________
+add_7 (Add)                     (None, 56, 56, 256)  0           activation_26[0][0]
+                                                                 batch_normalization_33[0][0]
+__________________________________________________________________________________________________
+activation_29 (Activation)      (None, 56, 56, 256)  0           add_7[0][0]
+__________________________________________________________________________________________________
+conv2d_35 (Conv2D)              (None, 28, 28, 128)  32896       activation_29[0][0]
+__________________________________________________________________________________________________
+batch_normalization_35 (BatchNo (None, 28, 28, 128)  512         conv2d_35[0][0]
+__________________________________________________________________________________________________
+activation_30 (Activation)      (None, 28, 28, 128)  0           batch_normalization_35[0][0]
+__________________________________________________________________________________________________
+conv2d_36 (Conv2D)              (None, 28, 28, 128)  147584      activation_30[0][0]
+__________________________________________________________________________________________________
+batch_normalization_36 (BatchNo (None, 28, 28, 128)  512         conv2d_36[0][0]
+__________________________________________________________________________________________________
+activation_31 (Activation)      (None, 28, 28, 128)  0           batch_normalization_36[0][0]
+__________________________________________________________________________________________________
+conv2d_34 (Conv2D)              (None, 28, 28, 512)  131584      activation_29[0][0]
+__________________________________________________________________________________________________
+conv2d_37 (Conv2D)              (None, 28, 28, 512)  66048       activation_31[0][0]
+__________________________________________________________________________________________________
+batch_normalization_34 (BatchNo (None, 28, 28, 512)  2048        conv2d_34[0][0]
+__________________________________________________________________________________________________
+batch_normalization_37 (BatchNo (None, 28, 28, 512)  2048        conv2d_37[0][0]
+__________________________________________________________________________________________________
+add_8 (Add)                     (None, 28, 28, 512)  0           batch_normalization_34[0][0]
+                                                                 batch_normalization_37[0][0]
+__________________________________________________________________________________________________
+activation_32 (Activation)      (None, 28, 28, 512)  0           add_8[0][0]
+__________________________________________________________________________________________________
+conv2d_38 (Conv2D)              (None, 28, 28, 128)  65664       activation_32[0][0]
+__________________________________________________________________________________________________
+batch_normalization_38 (BatchNo (None, 28, 28, 128)  512         conv2d_38[0][0]
+__________________________________________________________________________________________________
+activation_33 (Activation)      (None, 28, 28, 128)  0           batch_normalization_38[0][0]
+__________________________________________________________________________________________________
+conv2d_39 (Conv2D)              (None, 28, 28, 128)  147584      activation_33[0][0]
+__________________________________________________________________________________________________
+batch_normalization_39 (BatchNo (None, 28, 28, 128)  512         conv2d_39[0][0]
+__________________________________________________________________________________________________
+activation_34 (Activation)      (None, 28, 28, 128)  0           batch_normalization_39[0][0]
+__________________________________________________________________________________________________
+conv2d_40 (Conv2D)              (None, 28, 28, 512)  66048       activation_34[0][0]
+__________________________________________________________________________________________________
+batch_normalization_40 (BatchNo (None, 28, 28, 512)  2048        conv2d_40[0][0]
+__________________________________________________________________________________________________
+add_9 (Add)                     (None, 28, 28, 512)  0           activation_32[0][0]
+                                                                 batch_normalization_40[0][0]
+__________________________________________________________________________________________________
+activation_35 (Activation)      (None, 28, 28, 512)  0           add_9[0][0]
+__________________________________________________________________________________________________
+conv2d_41 (Conv2D)              (None, 28, 28, 128)  65664       activation_35[0][0]
+__________________________________________________________________________________________________
+batch_normalization_41 (BatchNo (None, 28, 28, 128)  512         conv2d_41[0][0]
+__________________________________________________________________________________________________
+activation_36 (Activation)      (None, 28, 28, 128)  0           batch_normalization_41[0][0]
+__________________________________________________________________________________________________
+conv2d_42 (Conv2D)              (None, 28, 28, 128)  147584      activation_36[0][0]
+__________________________________________________________________________________________________
+batch_normalization_42 (BatchNo (None, 28, 28, 128)  512         conv2d_42[0][0]
+__________________________________________________________________________________________________
+activation_37 (Activation)      (None, 28, 28, 128)  0           batch_normalization_42[0][0]
+__________________________________________________________________________________________________
+conv2d_43 (Conv2D)              (None, 28, 28, 512)  66048       activation_37[0][0]
+__________________________________________________________________________________________________
+batch_normalization_43 (BatchNo (None, 28, 28, 512)  2048        conv2d_43[0][0]
+__________________________________________________________________________________________________
+add_10 (Add)                    (None, 28, 28, 512)  0           activation_35[0][0]
+                                                                 batch_normalization_43[0][0]
+__________________________________________________________________________________________________
+activation_38 (Activation)      (None, 28, 28, 512)  0           add_10[0][0]
+__________________________________________________________________________________________________
+conv2d_44 (Conv2D)              (None, 28, 28, 128)  65664       activation_38[0][0]
+__________________________________________________________________________________________________
+batch_normalization_44 (BatchNo (None, 28, 28, 128)  512         conv2d_44[0][0]
+__________________________________________________________________________________________________
+activation_39 (Activation)      (None, 28, 28, 128)  0           batch_normalization_44[0][0]
+__________________________________________________________________________________________________
+conv2d_45 (Conv2D)              (None, 28, 28, 128)  147584      activation_39[0][0]
+__________________________________________________________________________________________________
+batch_normalization_45 (BatchNo (None, 28, 28, 128)  512         conv2d_45[0][0]
+__________________________________________________________________________________________________
+activation_40 (Activation)      (None, 28, 28, 128)  0           batch_normalization_45[0][0]
+__________________________________________________________________________________________________
+conv2d_46 (Conv2D)              (None, 28, 28, 512)  66048       activation_40[0][0]
+__________________________________________________________________________________________________
+batch_normalization_46 (BatchNo (None, 28, 28, 512)  2048        conv2d_46[0][0]
+__________________________________________________________________________________________________
+add_11 (Add)                    (None, 28, 28, 512)  0           activation_38[0][0]
+                                                                 batch_normalization_46[0][0]
+__________________________________________________________________________________________________
+activation_41 (Activation)      (None, 28, 28, 512)  0           add_11[0][0]
+__________________________________________________________________________________________________
+conv2d_48 (Conv2D)              (None, 14, 14, 256)  131328      activation_41[0][0]
+__________________________________________________________________________________________________
+batch_normalization_48 (BatchNo (None, 14, 14, 256)  1024        conv2d_48[0][0]
+__________________________________________________________________________________________________
+activation_42 (Activation)      (None, 14, 14, 256)  0           batch_normalization_48[0][0]
+__________________________________________________________________________________________________
+conv2d_49 (Conv2D)              (None, 14, 14, 256)  590080      activation_42[0][0]
+__________________________________________________________________________________________________
+batch_normalization_49 (BatchNo (None, 14, 14, 256)  1024        conv2d_49[0][0]
+__________________________________________________________________________________________________
+activation_43 (Activation)      (None, 14, 14, 256)  0           batch_normalization_49[0][0]
+__________________________________________________________________________________________________
+conv2d_47 (Conv2D)              (None, 14, 14, 1024) 525312      activation_41[0][0]
+__________________________________________________________________________________________________
+conv2d_50 (Conv2D)              (None, 14, 14, 1024) 263168      activation_43[0][0]
+__________________________________________________________________________________________________
+batch_normalization_47 (BatchNo (None, 14, 14, 1024) 4096        conv2d_47[0][0]
+__________________________________________________________________________________________________
+batch_normalization_50 (BatchNo (None, 14, 14, 1024) 4096        conv2d_50[0][0]
+__________________________________________________________________________________________________
+add_12 (Add)                    (None, 14, 14, 1024) 0           batch_normalization_47[0][0]
+                                                                 batch_normalization_50[0][0]
+__________________________________________________________________________________________________
+activation_44 (Activation)      (None, 14, 14, 1024) 0           add_12[0][0]
+__________________________________________________________________________________________________
+conv2d_51 (Conv2D)              (None, 14, 14, 256)  262400      activation_44[0][0]
+__________________________________________________________________________________________________
+batch_normalization_51 (BatchNo (None, 14, 14, 256)  1024        conv2d_51[0][0]
+__________________________________________________________________________________________________
+activation_45 (Activation)      (None, 14, 14, 256)  0           batch_normalization_51[0][0]
+__________________________________________________________________________________________________
+conv2d_52 (Conv2D)              (None, 14, 14, 256)  590080      activation_45[0][0]
+__________________________________________________________________________________________________
+batch_normalization_52 (BatchNo (None, 14, 14, 256)  1024        conv2d_52[0][0]
+__________________________________________________________________________________________________
+activation_46 (Activation)      (None, 14, 14, 256)  0           batch_normalization_52[0][0]
+__________________________________________________________________________________________________
+conv2d_53 (Conv2D)              (None, 14, 14, 1024) 263168      activation_46[0][0]
+__________________________________________________________________________________________________
+batch_normalization_53 (BatchNo (None, 14, 14, 1024) 4096        conv2d_53[0][0]
+__________________________________________________________________________________________________
+add_13 (Add)                    (None, 14, 14, 1024) 0           activation_44[0][0]
+                                                                 batch_normalization_53[0][0]
+__________________________________________________________________________________________________
+activation_47 (Activation)      (None, 14, 14, 1024) 0           add_13[0][0]
+__________________________________________________________________________________________________
+conv2d_54 (Conv2D)              (None, 14, 14, 256)  262400      activation_47[0][0]
+__________________________________________________________________________________________________
+batch_normalization_54 (BatchNo (None, 14, 14, 256)  1024        conv2d_54[0][0]
+__________________________________________________________________________________________________
+activation_48 (Activation)      (None, 14, 14, 256)  0           batch_normalization_54[0][0]
+__________________________________________________________________________________________________
+conv2d_55 (Conv2D)              (None, 14, 14, 256)  590080      activation_48[0][0]
+__________________________________________________________________________________________________
+batch_normalization_55 (BatchNo (None, 14, 14, 256)  1024        conv2d_55[0][0]
+__________________________________________________________________________________________________
+activation_49 (Activation)      (None, 14, 14, 256)  0           batch_normalization_55[0][0]
+__________________________________________________________________________________________________
+conv2d_56 (Conv2D)              (None, 14, 14, 1024) 263168      activation_49[0][0]
+__________________________________________________________________________________________________
+batch_normalization_56 (BatchNo (None, 14, 14, 1024) 4096        conv2d_56[0][0]
+__________________________________________________________________________________________________
+add_14 (Add)                    (None, 14, 14, 1024) 0           activation_47[0][0]
+                                                                 batch_normalization_56[0][0]
+__________________________________________________________________________________________________
+activation_50 (Activation)      (None, 14, 14, 1024) 0           add_14[0][0]
+__________________________________________________________________________________________________
+conv2d_57 (Conv2D)              (None, 14, 14, 256)  262400      activation_50[0][0]
+__________________________________________________________________________________________________
+batch_normalization_57 (BatchNo (None, 14, 14, 256)  1024        conv2d_57[0][0]
+__________________________________________________________________________________________________
+activation_51 (Activation)      (None, 14, 14, 256)  0           batch_normalization_57[0][0]
+__________________________________________________________________________________________________
+conv2d_58 (Conv2D)              (None, 14, 14, 256)  590080      activation_51[0][0]
+__________________________________________________________________________________________________
+batch_normalization_58 (BatchNo (None, 14, 14, 256)  1024        conv2d_58[0][0]
+__________________________________________________________________________________________________
+activation_52 (Activation)      (None, 14, 14, 256)  0           batch_normalization_58[0][0]
+__________________________________________________________________________________________________
+conv2d_59 (Conv2D)              (None, 14, 14, 1024) 263168      activation_52[0][0]
+__________________________________________________________________________________________________
+batch_normalization_59 (BatchNo (None, 14, 14, 1024) 4096        conv2d_59[0][0]
+__________________________________________________________________________________________________
+add_15 (Add)                    (None, 14, 14, 1024) 0           activation_50[0][0]
+                                                                 batch_normalization_59[0][0]
+__________________________________________________________________________________________________
+activation_53 (Activation)      (None, 14, 14, 1024) 0           add_15[0][0]
+__________________________________________________________________________________________________
+conv2d_60 (Conv2D)              (None, 14, 14, 256)  262400      activation_53[0][0]
+__________________________________________________________________________________________________
+batch_normalization_60 (BatchNo (None, 14, 14, 256)  1024        conv2d_60[0][0]
+__________________________________________________________________________________________________
+activation_54 (Activation)      (None, 14, 14, 256)  0           batch_normalization_60[0][0]
+__________________________________________________________________________________________________
+conv2d_61 (Conv2D)              (None, 14, 14, 256)  590080      activation_54[0][0]
+__________________________________________________________________________________________________
+batch_normalization_61 (BatchNo (None, 14, 14, 256)  1024        conv2d_61[0][0]
+__________________________________________________________________________________________________
+activation_55 (Activation)      (None, 14, 14, 256)  0           batch_normalization_61[0][0]
+__________________________________________________________________________________________________
+conv2d_62 (Conv2D)              (None, 14, 14, 1024) 263168      activation_55[0][0]
+__________________________________________________________________________________________________
+batch_normalization_62 (BatchNo (None, 14, 14, 1024) 4096        conv2d_62[0][0]
+__________________________________________________________________________________________________
+add_16 (Add)                    (None, 14, 14, 1024) 0           activation_53[0][0]
+                                                                 batch_normalization_62[0][0]
+__________________________________________________________________________________________________
+activation_56 (Activation)      (None, 14, 14, 1024) 0           add_16[0][0]
+__________________________________________________________________________________________________
+conv2d_63 (Conv2D)              (None, 14, 14, 256)  262400      activation_56[0][0]
+__________________________________________________________________________________________________
+batch_normalization_63 (BatchNo (None, 14, 14, 256)  1024        conv2d_63[0][0]
+__________________________________________________________________________________________________
+activation_57 (Activation)      (None, 14, 14, 256)  0           batch_normalization_63[0][0]
+__________________________________________________________________________________________________
+conv2d_64 (Conv2D)              (None, 14, 14, 256)  590080      activation_57[0][0]
+__________________________________________________________________________________________________
+batch_normalization_64 (BatchNo (None, 14, 14, 256)  1024        conv2d_64[0][0]
+__________________________________________________________________________________________________
+activation_58 (Activation)      (None, 14, 14, 256)  0           batch_normalization_64[0][0]
+__________________________________________________________________________________________________
+conv2d_65 (Conv2D)              (None, 14, 14, 1024) 263168      activation_58[0][0]
+__________________________________________________________________________________________________
+batch_normalization_65 (BatchNo (None, 14, 14, 1024) 4096        conv2d_65[0][0]
+__________________________________________________________________________________________________
+add_17 (Add)                    (None, 14, 14, 1024) 0           activation_56[0][0]
+                                                                 batch_normalization_65[0][0]
+__________________________________________________________________________________________________
+activation_59 (Activation)      (None, 14, 14, 1024) 0           add_17[0][0]
+__________________________________________________________________________________________________
+conv2d_67 (Conv2D)              (None, 7, 7, 512)    524800      activation_59[0][0]
+__________________________________________________________________________________________________
+batch_normalization_67 (BatchNo (None, 7, 7, 512)    2048        conv2d_67[0][0]
+__________________________________________________________________________________________________
+activation_60 (Activation)      (None, 7, 7, 512)    0           batch_normalization_67[0][0]
+__________________________________________________________________________________________________
+conv2d_68 (Conv2D)              (None, 7, 7, 512)    2359808     activation_60[0][0]
+__________________________________________________________________________________________________
+batch_normalization_68 (BatchNo (None, 7, 7, 512)    2048        conv2d_68[0][0]
+__________________________________________________________________________________________________
+activation_61 (Activation)      (None, 7, 7, 512)    0           batch_normalization_68[0][0]
+__________________________________________________________________________________________________
+conv2d_66 (Conv2D)              (None, 7, 7, 2048)   2099200     activation_59[0][0]
+__________________________________________________________________________________________________
+conv2d_69 (Conv2D)              (None, 7, 7, 2048)   1050624     activation_61[0][0]
+__________________________________________________________________________________________________
+batch_normalization_66 (BatchNo (None, 7, 7, 2048)   8192        conv2d_66[0][0]
+__________________________________________________________________________________________________
+batch_normalization_69 (BatchNo (None, 7, 7, 2048)   8192        conv2d_69[0][0]
+__________________________________________________________________________________________________
+add_18 (Add)                    (None, 7, 7, 2048)   0           batch_normalization_66[0][0]
+                                                                 batch_normalization_69[0][0]
+__________________________________________________________________________________________________
+activation_62 (Activation)      (None, 7, 7, 2048)   0           add_18[0][0]
+__________________________________________________________________________________________________
+conv2d_70 (Conv2D)              (None, 7, 7, 512)    1049088     activation_62[0][0]
+__________________________________________________________________________________________________
+batch_normalization_70 (BatchNo (None, 7, 7, 512)    2048        conv2d_70[0][0]
+__________________________________________________________________________________________________
+activation_63 (Activation)      (None, 7, 7, 512)    0           batch_normalization_70[0][0]
+__________________________________________________________________________________________________
+conv2d_71 (Conv2D)              (None, 7, 7, 512)    2359808     activation_63[0][0]
+__________________________________________________________________________________________________
+batch_normalization_71 (BatchNo (None, 7, 7, 512)    2048        conv2d_71[0][0]
+__________________________________________________________________________________________________
+activation_64 (Activation)      (None, 7, 7, 512)    0           batch_normalization_71[0][0]
+__________________________________________________________________________________________________
+conv2d_72 (Conv2D)              (None, 7, 7, 2048)   1050624     activation_64[0][0]
+__________________________________________________________________________________________________
+batch_normalization_72 (BatchNo (None, 7, 7, 2048)   8192        conv2d_72[0][0]
+__________________________________________________________________________________________________
+add_19 (Add)                    (None, 7, 7, 2048)   0           activation_62[0][0]
+                                                                 batch_normalization_72[0][0]
+__________________________________________________________________________________________________
+activation_65 (Activation)      (None, 7, 7, 2048)   0           add_19[0][0]
+__________________________________________________________________________________________________
+conv2d_73 (Conv2D)              (None, 7, 7, 512)    1049088     activation_65[0][0]
+__________________________________________________________________________________________________
+batch_normalization_73 (BatchNo (None, 7, 7, 512)    2048        conv2d_73[0][0]
+__________________________________________________________________________________________________
+activation_66 (Activation)      (None, 7, 7, 512)    0           batch_normalization_73[0][0]
+__________________________________________________________________________________________________
+conv2d_74 (Conv2D)              (None, 7, 7, 512)    2359808     activation_66[0][0]
+__________________________________________________________________________________________________
+batch_normalization_74 (BatchNo (None, 7, 7, 512)    2048        conv2d_74[0][0]
+__________________________________________________________________________________________________
+activation_67 (Activation)      (None, 7, 7, 512)    0           batch_normalization_74[0][0]
+__________________________________________________________________________________________________
+conv2d_75 (Conv2D)              (None, 7, 7, 2048)   1050624     activation_67[0][0]
+__________________________________________________________________________________________________
+batch_normalization_75 (BatchNo (None, 7, 7, 2048)   8192        conv2d_75[0][0]
+__________________________________________________________________________________________________
+add_20 (Add)                    (None, 7, 7, 2048)   0           activation_65[0][0]
+                                                                 batch_normalization_75[0][0]
+__________________________________________________________________________________________________
+activation_68 (Activation)      (None, 7, 7, 2048)   0           add_20[0][0]
+==================================================================================================
+Total params: 23,587,712
+Trainable params: 23,534,592
+Non-trainable params: 53,120
+__________________________________________________________________________________________________
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="The-classification-layer.">
+<h2>The classification layer.<a class="headerlink" href="#The-classification-layer." title="Permalink to this headline">¶</a></h2>
+<p>It’s important to keep the classification layer separate (called the top in Keras docs). The CNN part can work on images of larger sizes too. A (224,224,3) input image size is necessary only if the network is being used for classification purposes. For transfer learning, people often load the CNN (without the top classification layer) with pre-trained weights and train a different classification layer on top of it.</p>
+<p>Following is the top classification layer for Res Nets. If the pretrained weights for ImageNet classification are to be loaded, then the number of classes will be 1000.</p>
+<ul class="simple">
+<li><p>The output of the CNN is of size (7,7,2048).</p></li>
+<li><p>There is a simple global average pooling reducing the size to a vector of 2048 length.</p></li>
+<li><p>This is followed by a dense layer with 1000 outputs. (2048 * 1000 + 1000 weights).</p></li>
+<li><p>The output of dense layer goes through a softmax activation to convert it to classification probablities.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>def top_resnet(net, classes=1000):
+    # add the top classification network
+    net = layers.GlobalAveragePooling2D()(net)
+    net = layers.Dense(classes, activation=&#39;softmax&#39;)(net)
+    return net
+</pre></div>
+</div>
+</div>
+<p>We now combine the CNN with the classifier to build the overall ResNet 50 classifier. Build a model around it.</p>
+<p>Voila! It’s done. We have a complete ResNet 50 architecture built for us.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>def resnet_classifier(img_input):
+  net = cnn_resnet50 (img_input)
+  net = top_resnet(net)
+  return net
+
+model =  build_model((224, 224, 3), resnet_classifier)
+model.summary()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Model: &#34;functional_11&#34;
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to
+==================================================================================================
+input_6 (InputLayer)            [(None, 224, 224, 3) 0
+__________________________________________________________________________________________________
+zero_padding2d_6 (ZeroPadding2D (None, 230, 230, 3)  0           input_6[0][0]
+__________________________________________________________________________________________________
+conv2d_76 (Conv2D)              (None, 112, 112, 64) 9472        zero_padding2d_6[0][0]
+__________________________________________________________________________________________________
+batch_normalization_76 (BatchNo (None, 112, 112, 64) 256         conv2d_76[0][0]
+__________________________________________________________________________________________________
+activation_69 (Activation)      (None, 112, 112, 64) 0           batch_normalization_76[0][0]
+__________________________________________________________________________________________________
+zero_padding2d_7 (ZeroPadding2D (None, 114, 114, 64) 0           activation_69[0][0]
+__________________________________________________________________________________________________
+max_pooling2d_3 (MaxPooling2D)  (None, 56, 56, 64)   0           zero_padding2d_7[0][0]
+__________________________________________________________________________________________________
+conv2d_78 (Conv2D)              (None, 56, 56, 64)   4160        max_pooling2d_3[0][0]
+__________________________________________________________________________________________________
+batch_normalization_78 (BatchNo (None, 56, 56, 64)   256         conv2d_78[0][0]
+__________________________________________________________________________________________________
+activation_70 (Activation)      (None, 56, 56, 64)   0           batch_normalization_78[0][0]
+__________________________________________________________________________________________________
+conv2d_79 (Conv2D)              (None, 56, 56, 64)   36928       activation_70[0][0]
+__________________________________________________________________________________________________
+batch_normalization_79 (BatchNo (None, 56, 56, 64)   256         conv2d_79[0][0]
+__________________________________________________________________________________________________
+activation_71 (Activation)      (None, 56, 56, 64)   0           batch_normalization_79[0][0]
+__________________________________________________________________________________________________
+conv2d_77 (Conv2D)              (None, 56, 56, 256)  16640       max_pooling2d_3[0][0]
+__________________________________________________________________________________________________
+conv2d_80 (Conv2D)              (None, 56, 56, 256)  16640       activation_71[0][0]
+__________________________________________________________________________________________________
+batch_normalization_77 (BatchNo (None, 56, 56, 256)  1024        conv2d_77[0][0]
+__________________________________________________________________________________________________
+batch_normalization_80 (BatchNo (None, 56, 56, 256)  1024        conv2d_80[0][0]
+__________________________________________________________________________________________________
+add_21 (Add)                    (None, 56, 56, 256)  0           batch_normalization_77[0][0]
+                                                                 batch_normalization_80[0][0]
+__________________________________________________________________________________________________
+activation_72 (Activation)      (None, 56, 56, 256)  0           add_21[0][0]
+__________________________________________________________________________________________________
+conv2d_81 (Conv2D)              (None, 56, 56, 64)   16448       activation_72[0][0]
+__________________________________________________________________________________________________
+batch_normalization_81 (BatchNo (None, 56, 56, 64)   256         conv2d_81[0][0]
+__________________________________________________________________________________________________
+activation_73 (Activation)      (None, 56, 56, 64)   0           batch_normalization_81[0][0]
+__________________________________________________________________________________________________
+conv2d_82 (Conv2D)              (None, 56, 56, 64)   36928       activation_73[0][0]
+__________________________________________________________________________________________________
+batch_normalization_82 (BatchNo (None, 56, 56, 64)   256         conv2d_82[0][0]
+__________________________________________________________________________________________________
+activation_74 (Activation)      (None, 56, 56, 64)   0           batch_normalization_82[0][0]
+__________________________________________________________________________________________________
+conv2d_83 (Conv2D)              (None, 56, 56, 256)  16640       activation_74[0][0]
+__________________________________________________________________________________________________
+batch_normalization_83 (BatchNo (None, 56, 56, 256)  1024        conv2d_83[0][0]
+__________________________________________________________________________________________________
+add_22 (Add)                    (None, 56, 56, 256)  0           activation_72[0][0]
+                                                                 batch_normalization_83[0][0]
+__________________________________________________________________________________________________
+activation_75 (Activation)      (None, 56, 56, 256)  0           add_22[0][0]
+__________________________________________________________________________________________________
+conv2d_84 (Conv2D)              (None, 56, 56, 64)   16448       activation_75[0][0]
+__________________________________________________________________________________________________
+batch_normalization_84 (BatchNo (None, 56, 56, 64)   256         conv2d_84[0][0]
+__________________________________________________________________________________________________
+activation_76 (Activation)      (None, 56, 56, 64)   0           batch_normalization_84[0][0]
+__________________________________________________________________________________________________
+conv2d_85 (Conv2D)              (None, 56, 56, 64)   36928       activation_76[0][0]
+__________________________________________________________________________________________________
+batch_normalization_85 (BatchNo (None, 56, 56, 64)   256         conv2d_85[0][0]
+__________________________________________________________________________________________________
+activation_77 (Activation)      (None, 56, 56, 64)   0           batch_normalization_85[0][0]
+__________________________________________________________________________________________________
+conv2d_86 (Conv2D)              (None, 56, 56, 256)  16640       activation_77[0][0]
+__________________________________________________________________________________________________
+batch_normalization_86 (BatchNo (None, 56, 56, 256)  1024        conv2d_86[0][0]
+__________________________________________________________________________________________________
+add_23 (Add)                    (None, 56, 56, 256)  0           activation_75[0][0]
+                                                                 batch_normalization_86[0][0]
+__________________________________________________________________________________________________
+activation_78 (Activation)      (None, 56, 56, 256)  0           add_23[0][0]
+__________________________________________________________________________________________________
+conv2d_88 (Conv2D)              (None, 28, 28, 128)  32896       activation_78[0][0]
+__________________________________________________________________________________________________
+batch_normalization_88 (BatchNo (None, 28, 28, 128)  512         conv2d_88[0][0]
+__________________________________________________________________________________________________
+activation_79 (Activation)      (None, 28, 28, 128)  0           batch_normalization_88[0][0]
+__________________________________________________________________________________________________
+conv2d_89 (Conv2D)              (None, 28, 28, 128)  147584      activation_79[0][0]
+__________________________________________________________________________________________________
+batch_normalization_89 (BatchNo (None, 28, 28, 128)  512         conv2d_89[0][0]
+__________________________________________________________________________________________________
+activation_80 (Activation)      (None, 28, 28, 128)  0           batch_normalization_89[0][0]
+__________________________________________________________________________________________________
+conv2d_87 (Conv2D)              (None, 28, 28, 512)  131584      activation_78[0][0]
+__________________________________________________________________________________________________
+conv2d_90 (Conv2D)              (None, 28, 28, 512)  66048       activation_80[0][0]
+__________________________________________________________________________________________________
+batch_normalization_87 (BatchNo (None, 28, 28, 512)  2048        conv2d_87[0][0]
+__________________________________________________________________________________________________
+batch_normalization_90 (BatchNo (None, 28, 28, 512)  2048        conv2d_90[0][0]
+__________________________________________________________________________________________________
+add_24 (Add)                    (None, 28, 28, 512)  0           batch_normalization_87[0][0]
+                                                                 batch_normalization_90[0][0]
+__________________________________________________________________________________________________
+activation_81 (Activation)      (None, 28, 28, 512)  0           add_24[0][0]
+__________________________________________________________________________________________________
+conv2d_91 (Conv2D)              (None, 28, 28, 128)  65664       activation_81[0][0]
+__________________________________________________________________________________________________
+batch_normalization_91 (BatchNo (None, 28, 28, 128)  512         conv2d_91[0][0]
+__________________________________________________________________________________________________
+activation_82 (Activation)      (None, 28, 28, 128)  0           batch_normalization_91[0][0]
+__________________________________________________________________________________________________
+conv2d_92 (Conv2D)              (None, 28, 28, 128)  147584      activation_82[0][0]
+__________________________________________________________________________________________________
+batch_normalization_92 (BatchNo (None, 28, 28, 128)  512         conv2d_92[0][0]
+__________________________________________________________________________________________________
+activation_83 (Activation)      (None, 28, 28, 128)  0           batch_normalization_92[0][0]
+__________________________________________________________________________________________________
+conv2d_93 (Conv2D)              (None, 28, 28, 512)  66048       activation_83[0][0]
+__________________________________________________________________________________________________
+batch_normalization_93 (BatchNo (None, 28, 28, 512)  2048        conv2d_93[0][0]
+__________________________________________________________________________________________________
+add_25 (Add)                    (None, 28, 28, 512)  0           activation_81[0][0]
+                                                                 batch_normalization_93[0][0]
+__________________________________________________________________________________________________
+activation_84 (Activation)      (None, 28, 28, 512)  0           add_25[0][0]
+__________________________________________________________________________________________________
+conv2d_94 (Conv2D)              (None, 28, 28, 128)  65664       activation_84[0][0]
+__________________________________________________________________________________________________
+batch_normalization_94 (BatchNo (None, 28, 28, 128)  512         conv2d_94[0][0]
+__________________________________________________________________________________________________
+activation_85 (Activation)      (None, 28, 28, 128)  0           batch_normalization_94[0][0]
+__________________________________________________________________________________________________
+conv2d_95 (Conv2D)              (None, 28, 28, 128)  147584      activation_85[0][0]
+__________________________________________________________________________________________________
+batch_normalization_95 (BatchNo (None, 28, 28, 128)  512         conv2d_95[0][0]
+__________________________________________________________________________________________________
+activation_86 (Activation)      (None, 28, 28, 128)  0           batch_normalization_95[0][0]
+__________________________________________________________________________________________________
+conv2d_96 (Conv2D)              (None, 28, 28, 512)  66048       activation_86[0][0]
+__________________________________________________________________________________________________
+batch_normalization_96 (BatchNo (None, 28, 28, 512)  2048        conv2d_96[0][0]
+__________________________________________________________________________________________________
+add_26 (Add)                    (None, 28, 28, 512)  0           activation_84[0][0]
+                                                                 batch_normalization_96[0][0]
+__________________________________________________________________________________________________
+activation_87 (Activation)      (None, 28, 28, 512)  0           add_26[0][0]
+__________________________________________________________________________________________________
+conv2d_97 (Conv2D)              (None, 28, 28, 128)  65664       activation_87[0][0]
+__________________________________________________________________________________________________
+batch_normalization_97 (BatchNo (None, 28, 28, 128)  512         conv2d_97[0][0]
+__________________________________________________________________________________________________
+activation_88 (Activation)      (None, 28, 28, 128)  0           batch_normalization_97[0][0]
+__________________________________________________________________________________________________
+conv2d_98 (Conv2D)              (None, 28, 28, 128)  147584      activation_88[0][0]
+__________________________________________________________________________________________________
+batch_normalization_98 (BatchNo (None, 28, 28, 128)  512         conv2d_98[0][0]
+__________________________________________________________________________________________________
+activation_89 (Activation)      (None, 28, 28, 128)  0           batch_normalization_98[0][0]
+__________________________________________________________________________________________________
+conv2d_99 (Conv2D)              (None, 28, 28, 512)  66048       activation_89[0][0]
+__________________________________________________________________________________________________
+batch_normalization_99 (BatchNo (None, 28, 28, 512)  2048        conv2d_99[0][0]
+__________________________________________________________________________________________________
+add_27 (Add)                    (None, 28, 28, 512)  0           activation_87[0][0]
+                                                                 batch_normalization_99[0][0]
+__________________________________________________________________________________________________
+activation_90 (Activation)      (None, 28, 28, 512)  0           add_27[0][0]
+__________________________________________________________________________________________________
+conv2d_101 (Conv2D)             (None, 14, 14, 256)  131328      activation_90[0][0]
+__________________________________________________________________________________________________
+batch_normalization_101 (BatchN (None, 14, 14, 256)  1024        conv2d_101[0][0]
+__________________________________________________________________________________________________
+activation_91 (Activation)      (None, 14, 14, 256)  0           batch_normalization_101[0][0]
+__________________________________________________________________________________________________
+conv2d_102 (Conv2D)             (None, 14, 14, 256)  590080      activation_91[0][0]
+__________________________________________________________________________________________________
+batch_normalization_102 (BatchN (None, 14, 14, 256)  1024        conv2d_102[0][0]
+__________________________________________________________________________________________________
+activation_92 (Activation)      (None, 14, 14, 256)  0           batch_normalization_102[0][0]
+__________________________________________________________________________________________________
+conv2d_100 (Conv2D)             (None, 14, 14, 1024) 525312      activation_90[0][0]
+__________________________________________________________________________________________________
+conv2d_103 (Conv2D)             (None, 14, 14, 1024) 263168      activation_92[0][0]
+__________________________________________________________________________________________________
+batch_normalization_100 (BatchN (None, 14, 14, 1024) 4096        conv2d_100[0][0]
+__________________________________________________________________________________________________
+batch_normalization_103 (BatchN (None, 14, 14, 1024) 4096        conv2d_103[0][0]
+__________________________________________________________________________________________________
+add_28 (Add)                    (None, 14, 14, 1024) 0           batch_normalization_100[0][0]
+                                                                 batch_normalization_103[0][0]
+__________________________________________________________________________________________________
+activation_93 (Activation)      (None, 14, 14, 1024) 0           add_28[0][0]
+__________________________________________________________________________________________________
+conv2d_104 (Conv2D)             (None, 14, 14, 256)  262400      activation_93[0][0]
+__________________________________________________________________________________________________
+batch_normalization_104 (BatchN (None, 14, 14, 256)  1024        conv2d_104[0][0]
+__________________________________________________________________________________________________
+activation_94 (Activation)      (None, 14, 14, 256)  0           batch_normalization_104[0][0]
+__________________________________________________________________________________________________
+conv2d_105 (Conv2D)             (None, 14, 14, 256)  590080      activation_94[0][0]
+__________________________________________________________________________________________________
+batch_normalization_105 (BatchN (None, 14, 14, 256)  1024        conv2d_105[0][0]
+__________________________________________________________________________________________________
+activation_95 (Activation)      (None, 14, 14, 256)  0           batch_normalization_105[0][0]
+__________________________________________________________________________________________________
+conv2d_106 (Conv2D)             (None, 14, 14, 1024) 263168      activation_95[0][0]
+__________________________________________________________________________________________________
+batch_normalization_106 (BatchN (None, 14, 14, 1024) 4096        conv2d_106[0][0]
+__________________________________________________________________________________________________
+add_29 (Add)                    (None, 14, 14, 1024) 0           activation_93[0][0]
+                                                                 batch_normalization_106[0][0]
+__________________________________________________________________________________________________
+activation_96 (Activation)      (None, 14, 14, 1024) 0           add_29[0][0]
+__________________________________________________________________________________________________
+conv2d_107 (Conv2D)             (None, 14, 14, 256)  262400      activation_96[0][0]
+__________________________________________________________________________________________________
+batch_normalization_107 (BatchN (None, 14, 14, 256)  1024        conv2d_107[0][0]
+__________________________________________________________________________________________________
+activation_97 (Activation)      (None, 14, 14, 256)  0           batch_normalization_107[0][0]
+__________________________________________________________________________________________________
+conv2d_108 (Conv2D)             (None, 14, 14, 256)  590080      activation_97[0][0]
+__________________________________________________________________________________________________
+batch_normalization_108 (BatchN (None, 14, 14, 256)  1024        conv2d_108[0][0]
+__________________________________________________________________________________________________
+activation_98 (Activation)      (None, 14, 14, 256)  0           batch_normalization_108[0][0]
+__________________________________________________________________________________________________
+conv2d_109 (Conv2D)             (None, 14, 14, 1024) 263168      activation_98[0][0]
+__________________________________________________________________________________________________
+batch_normalization_109 (BatchN (None, 14, 14, 1024) 4096        conv2d_109[0][0]
+__________________________________________________________________________________________________
+add_30 (Add)                    (None, 14, 14, 1024) 0           activation_96[0][0]
+                                                                 batch_normalization_109[0][0]
+__________________________________________________________________________________________________
+activation_99 (Activation)      (None, 14, 14, 1024) 0           add_30[0][0]
+__________________________________________________________________________________________________
+conv2d_110 (Conv2D)             (None, 14, 14, 256)  262400      activation_99[0][0]
+__________________________________________________________________________________________________
+batch_normalization_110 (BatchN (None, 14, 14, 256)  1024        conv2d_110[0][0]
+__________________________________________________________________________________________________
+activation_100 (Activation)     (None, 14, 14, 256)  0           batch_normalization_110[0][0]
+__________________________________________________________________________________________________
+conv2d_111 (Conv2D)             (None, 14, 14, 256)  590080      activation_100[0][0]
+__________________________________________________________________________________________________
+batch_normalization_111 (BatchN (None, 14, 14, 256)  1024        conv2d_111[0][0]
+__________________________________________________________________________________________________
+activation_101 (Activation)     (None, 14, 14, 256)  0           batch_normalization_111[0][0]
+__________________________________________________________________________________________________
+conv2d_112 (Conv2D)             (None, 14, 14, 1024) 263168      activation_101[0][0]
+__________________________________________________________________________________________________
+batch_normalization_112 (BatchN (None, 14, 14, 1024) 4096        conv2d_112[0][0]
+__________________________________________________________________________________________________
+add_31 (Add)                    (None, 14, 14, 1024) 0           activation_99[0][0]
+                                                                 batch_normalization_112[0][0]
+__________________________________________________________________________________________________
+activation_102 (Activation)     (None, 14, 14, 1024) 0           add_31[0][0]
+__________________________________________________________________________________________________
+conv2d_113 (Conv2D)             (None, 14, 14, 256)  262400      activation_102[0][0]
+__________________________________________________________________________________________________
+batch_normalization_113 (BatchN (None, 14, 14, 256)  1024        conv2d_113[0][0]
+__________________________________________________________________________________________________
+activation_103 (Activation)     (None, 14, 14, 256)  0           batch_normalization_113[0][0]
+__________________________________________________________________________________________________
+conv2d_114 (Conv2D)             (None, 14, 14, 256)  590080      activation_103[0][0]
+__________________________________________________________________________________________________
+batch_normalization_114 (BatchN (None, 14, 14, 256)  1024        conv2d_114[0][0]
+__________________________________________________________________________________________________
+activation_104 (Activation)     (None, 14, 14, 256)  0           batch_normalization_114[0][0]
+__________________________________________________________________________________________________
+conv2d_115 (Conv2D)             (None, 14, 14, 1024) 263168      activation_104[0][0]
+__________________________________________________________________________________________________
+batch_normalization_115 (BatchN (None, 14, 14, 1024) 4096        conv2d_115[0][0]
+__________________________________________________________________________________________________
+add_32 (Add)                    (None, 14, 14, 1024) 0           activation_102[0][0]
+                                                                 batch_normalization_115[0][0]
+__________________________________________________________________________________________________
+activation_105 (Activation)     (None, 14, 14, 1024) 0           add_32[0][0]
+__________________________________________________________________________________________________
+conv2d_116 (Conv2D)             (None, 14, 14, 256)  262400      activation_105[0][0]
+__________________________________________________________________________________________________
+batch_normalization_116 (BatchN (None, 14, 14, 256)  1024        conv2d_116[0][0]
+__________________________________________________________________________________________________
+activation_106 (Activation)     (None, 14, 14, 256)  0           batch_normalization_116[0][0]
+__________________________________________________________________________________________________
+conv2d_117 (Conv2D)             (None, 14, 14, 256)  590080      activation_106[0][0]
+__________________________________________________________________________________________________
+batch_normalization_117 (BatchN (None, 14, 14, 256)  1024        conv2d_117[0][0]
+__________________________________________________________________________________________________
+activation_107 (Activation)     (None, 14, 14, 256)  0           batch_normalization_117[0][0]
+__________________________________________________________________________________________________
+conv2d_118 (Conv2D)             (None, 14, 14, 1024) 263168      activation_107[0][0]
+__________________________________________________________________________________________________
+batch_normalization_118 (BatchN (None, 14, 14, 1024) 4096        conv2d_118[0][0]
+__________________________________________________________________________________________________
+add_33 (Add)                    (None, 14, 14, 1024) 0           activation_105[0][0]
+                                                                 batch_normalization_118[0][0]
+__________________________________________________________________________________________________
+activation_108 (Activation)     (None, 14, 14, 1024) 0           add_33[0][0]
+__________________________________________________________________________________________________
+conv2d_120 (Conv2D)             (None, 7, 7, 512)    524800      activation_108[0][0]
+__________________________________________________________________________________________________
+batch_normalization_120 (BatchN (None, 7, 7, 512)    2048        conv2d_120[0][0]
+__________________________________________________________________________________________________
+activation_109 (Activation)     (None, 7, 7, 512)    0           batch_normalization_120[0][0]
+__________________________________________________________________________________________________
+conv2d_121 (Conv2D)             (None, 7, 7, 512)    2359808     activation_109[0][0]
+__________________________________________________________________________________________________
+batch_normalization_121 (BatchN (None, 7, 7, 512)    2048        conv2d_121[0][0]
+__________________________________________________________________________________________________
+activation_110 (Activation)     (None, 7, 7, 512)    0           batch_normalization_121[0][0]
+__________________________________________________________________________________________________
+conv2d_119 (Conv2D)             (None, 7, 7, 2048)   2099200     activation_108[0][0]
+__________________________________________________________________________________________________
+conv2d_122 (Conv2D)             (None, 7, 7, 2048)   1050624     activation_110[0][0]
+__________________________________________________________________________________________________
+batch_normalization_119 (BatchN (None, 7, 7, 2048)   8192        conv2d_119[0][0]
+__________________________________________________________________________________________________
+batch_normalization_122 (BatchN (None, 7, 7, 2048)   8192        conv2d_122[0][0]
+__________________________________________________________________________________________________
+add_34 (Add)                    (None, 7, 7, 2048)   0           batch_normalization_119[0][0]
+                                                                 batch_normalization_122[0][0]
+__________________________________________________________________________________________________
+activation_111 (Activation)     (None, 7, 7, 2048)   0           add_34[0][0]
+__________________________________________________________________________________________________
+conv2d_123 (Conv2D)             (None, 7, 7, 512)    1049088     activation_111[0][0]
+__________________________________________________________________________________________________
+batch_normalization_123 (BatchN (None, 7, 7, 512)    2048        conv2d_123[0][0]
+__________________________________________________________________________________________________
+activation_112 (Activation)     (None, 7, 7, 512)    0           batch_normalization_123[0][0]
+__________________________________________________________________________________________________
+conv2d_124 (Conv2D)             (None, 7, 7, 512)    2359808     activation_112[0][0]
+__________________________________________________________________________________________________
+batch_normalization_124 (BatchN (None, 7, 7, 512)    2048        conv2d_124[0][0]
+__________________________________________________________________________________________________
+activation_113 (Activation)     (None, 7, 7, 512)    0           batch_normalization_124[0][0]
+__________________________________________________________________________________________________
+conv2d_125 (Conv2D)             (None, 7, 7, 2048)   1050624     activation_113[0][0]
+__________________________________________________________________________________________________
+batch_normalization_125 (BatchN (None, 7, 7, 2048)   8192        conv2d_125[0][0]
+__________________________________________________________________________________________________
+add_35 (Add)                    (None, 7, 7, 2048)   0           activation_111[0][0]
+                                                                 batch_normalization_125[0][0]
+__________________________________________________________________________________________________
+activation_114 (Activation)     (None, 7, 7, 2048)   0           add_35[0][0]
+__________________________________________________________________________________________________
+conv2d_126 (Conv2D)             (None, 7, 7, 512)    1049088     activation_114[0][0]
+__________________________________________________________________________________________________
+batch_normalization_126 (BatchN (None, 7, 7, 512)    2048        conv2d_126[0][0]
+__________________________________________________________________________________________________
+activation_115 (Activation)     (None, 7, 7, 512)    0           batch_normalization_126[0][0]
+__________________________________________________________________________________________________
+conv2d_127 (Conv2D)             (None, 7, 7, 512)    2359808     activation_115[0][0]
+__________________________________________________________________________________________________
+batch_normalization_127 (BatchN (None, 7, 7, 512)    2048        conv2d_127[0][0]
+__________________________________________________________________________________________________
+activation_116 (Activation)     (None, 7, 7, 512)    0           batch_normalization_127[0][0]
+__________________________________________________________________________________________________
+conv2d_128 (Conv2D)             (None, 7, 7, 2048)   1050624     activation_116[0][0]
+__________________________________________________________________________________________________
+batch_normalization_128 (BatchN (None, 7, 7, 2048)   8192        conv2d_128[0][0]
+__________________________________________________________________________________________________
+add_36 (Add)                    (None, 7, 7, 2048)   0           activation_114[0][0]
+                                                                 batch_normalization_128[0][0]
+__________________________________________________________________________________________________
+activation_117 (Activation)     (None, 7, 7, 2048)   0           add_36[0][0]
+__________________________________________________________________________________________________
+global_average_pooling2d (Globa (None, 2048)         0           activation_117[0][0]
+__________________________________________________________________________________________________
+dense (Dense)                   (None, 1000)         2049000     global_average_pooling2d[0][0]
+==================================================================================================
+Total params: 25,636,712
+Trainable params: 25,583,592
+Non-trainable params: 53,120
+__________________________________________________________________________________________________
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Where-to-go-from-here">
+<h2>Where to go from here<a class="headerlink" href="#Where-to-go-from-here" title="Permalink to this headline">¶</a></h2>
+<p>There are some additional details involved in a robust implementation which have been skipped in this tutorial.</p>
+<ul class="simple">
+<li><p>Every layer should be named appropriately.</p></li>
+<li><p>Some image processing systmes may follow channels first approach where the image dimensions are (3,224,224).</p></li>
+<li><p>Every image needs to go through a basic preprocessing. This involves, convering the image to BGR format (from RGB) if necessary, then zero center each color channel with respect to the ImageNet dataset.</p></li>
+<li><p>Loading the pretrained weights using the model.load_weights function.</p></li>
+<li><p>Add a global pooling if the top classification network is ignored.</p></li>
+</ul>
+<p>For a more complete implementation addressing these aspects, please look at the source code in Keras Applications repository mentioned above.</p>
+<p>We hope that we have been able to give you a first hand experience of building large and complex convolutional networks easily with the help of Keras.</p>
+<p>Enjoy!</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../source/cr.vision.html" class="btn btn-neutral float-right" title="cr.vision package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Convolutional Neural Networks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Carnot Research Pvt. Ltd.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
