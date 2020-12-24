@@ -3,10 +3,10 @@ import tensorflow as tf
 
 @dataclass
 class SingleRecoverySolution:
-    signal: tf.Tensor = None
-    representation : tf.Tensor = None
-    residual : tf.Tensor =  None
-    residual_norm : tf.Tensor = None
+    signals: tf.Tensor = None
+    representations : tf.Tensor = None
+    residuals : tf.Tensor =  None
+    residual_norms : tf.Tensor = None
     iterations: int = None
     support : tf.Tensor = None
 

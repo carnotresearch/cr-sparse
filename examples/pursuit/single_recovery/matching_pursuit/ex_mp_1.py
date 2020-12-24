@@ -11,7 +11,7 @@ D = 2*N
 # Sparsity level
 K = N//32
 # Number of signals
-S = 1
+S = 160
 
 gen = SparseRepGenerator(D, K, S)
 
@@ -25,12 +25,13 @@ dict = simple.gaussian_mtx(N, D)
 mp = MatchingPursuit(dict)
 
 start_time = time.time()
-for i in range(20):
-    tf.random.set_seed(i)
-    # Sparse Representation
-    representation = gen.gaussian()
-    # Signal
-    signal = tf.squeeze(representation @ dict)
-    # solve it
-    solution = mp(signal)
-    print("[%d] [%d] iters  res_norm: %s, --- time: %s seconds ---" % (i+1, solution.iterations, solution.residual_norm.numpy(), time.time() - start_time))
+tf.random.set_seed(1234)
+# Sparse Representation
+representation = gen.gaussian()
+# Signal
+signal = tf.squeeze(representation @ dict)
+# solve it
+solution = mp(signal)
+print("\n[%d] iters, --- time: %s seconds ---" % ( 
+    solution.iterations, 
+    time.time() - start_time))
