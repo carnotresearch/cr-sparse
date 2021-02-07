@@ -19,7 +19,9 @@ GITHUB Repo: `cr-vision <https://github.com/carnotresearch/cr-vision>`_
    nb_basic_image_operations
    image_processing/index
    tutorials/index
+   srrcs/index
    source/cr.vision
+   zzzreferences
 
 
 

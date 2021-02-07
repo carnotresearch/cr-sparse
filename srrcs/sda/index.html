@@ -1,0 +1,607 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Fully Convolutional Stacked Denoising Autoencoders &mdash; CR.Vision  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/js/mathconf.js"></script>
+        <script src="../../_static/js/custom.js"></script>
+        <script src="../../_static/js/disqus.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="cr.vision package" href="../../source/cr.vision.html" />
+    <link rel="prev" title="Sparse Representations and Compressive Sensing" href="../index.html" />
+ 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+        // All bold letters
+        AA: '{\\mathbb{A}}',
+        BB: '{\\mathbb{B}}',
+        // Complex space symbol
+        CC: '{\\mathbb{C}}',
+        // A dictionary
+        DD: '{\\mathbb{D}}',
+        // Expectation operator
+        EE: '{\\mathbb{E}}',
+        // A field
+        FF: '{\\mathbb{F}}',
+        // A group
+        GG: '{\\mathbb{G}}',
+        // A Hilbert space
+        HH: '{\\mathbb{H}}',
+        // Irrational numbers
+        II: '{\\mathbb{I}}',
+        JJ: '{\\mathbb{J}}',
+        // Real or complex space symbol
+        KK: '{\\mathbb{K}}',
+        // Natural numbers
+        NN: '{\\mathbb{N}}',
+        Nat: '{\\mathbb{N}}',
+        // Probability set symbol
+        PP: '{\\mathbb{P}}',
+        // Rational numbers
+        QQ: '{\\mathbb{Q}}',
+        // Real line symbol
+        RR: '{\\mathbb{R}}',
+        RRMN: '{\\mathbb{R}^{M \\times N} }',
+        // A linear operator
+        TT: '{\\mathbb{T}}',
+        // Another linear operator
+        UU: '{\\mathbb{U}}',
+        // A vector space
+        VV: '{\\mathbb{V}}',
+        // A subspace
+        WW: '{\\mathbb{W}}',
+        // An inner product space
+        XX: '{\\mathbb{X}}',
+        // Integers
+        ZZ: '{\\mathbb{Z}}',
+
+        // All mathcal shortcuts
+        AAA: '{\\mathcal{A}}',
+        BBB: '{\\mathcal{B}}',
+        CCC: '{\\mathcal{C}}',
+        DDD: '{\\mathcal{D}}',
+        EEE: '{\\mathcal{E}}',
+        FFF: '{\\mathcal{F}}',
+        GGG: '{\\mathcal{G}}',
+        HHH: '{\\mathcal{H}}',
+        III: '{\\mathcal{I}}',
+        JJJ: '{\\mathcal{J}}',
+        KKK: '{\\mathcal{K}}',
+        LLL: '{\\mathcal{L}}',
+        MMM: '{\\mathcal{M}}',
+        NNN: '{\\mathcal{N}}',
+        OOO: '{\\mathcal{O}}',
+        PPP: '{\\mathcal{P}}',
+        QQQ: '{\\mathcal{Q}}',
+        RRR: '{\\mathcal{R}}',
+        SSS: '{\\mathcal{S}}',
+        TTT: '{\\mathcal{T}}',
+        UUU: '{\\mathcal{U}}',
+        VVV: '{\\mathcal{V}}',
+        WWW: '{\\mathcal{W}}',
+        XXX: '{\\mathcal{X}}',
+        YYY: '{\\mathcal{Y}}',
+        ZZZ: '{\\mathcal{Z}}',
+
+        Tau: '{\\mathcal{T}}',
+        Chi: '{\\mathcal{X}}',
+        Eta: '{\\mathcal{H}}',
+
+        // Real part of a complex number
+        Re: '\\operatorname{Re}',
+        Im: '\\operatorname{Im}',
+
+
+        // Null space
+        NullSpace: '{\\mathcal{N}}',
+        // Column space
+        ColSpace: '{\\mathcal{C}}',
+        // Row space
+        RowSpace: '{\\mathcal{R}}',
+        // Power set
+        Power: '{\\mathop{\\mathcal{P}}}',
+        LinTSpace:'{\\mathcal{L}}', 
+
+        // Range
+        Range: '{\\mathrm{R}}',
+        // image
+        Image: '{\\mathrm{im}}',
+        // Kernel
+        Kernel: '{\\mathrm{ker}}',
+        // Span
+        Span: '{\\mathrm{span}}',
+        // Nullity of an operator
+        Nullity: '{\\mathrm{nullity}}',
+        // Dimension of a vector space
+        Dim: '{\\mathrm{dim}}',
+        // Rank of a matrix
+        Rank: '{\\mathrm{rank}}',
+        // Trace of a matrix
+        Trace: '{\\mathrm{tr}}',
+        // Diagonal of a matrix
+        Diag: '{\\mathrm{diag}}',
+        // Signum function
+        sgn: '{\\mathrm{sgn}}',
+        // Support function
+        supp: '{\\mathrm{supp}}',
+        // Row support
+        rowsupp: '{\\mathop{\\mathrm{rowsupp}}}',
+        // Entry wise absolute value function
+        abs: '{\\mathop{\\mathrm{abs}}}',
+        // error function
+        erf: '{\\mathop{\\mathrm{erf}}}',
+        // complementary error function
+        erfc: '{\\mathop{\\mathrm{erfc}}}',
+        // Sub Gaussian function
+        Sub: '{\\mathop{\\mathrm{Sub}}}',
+        // Strictly sub Gaussian function
+        SSub: '{\\mathop{\\mathrm{SSub}}}',
+        // Variance function
+        Var: '{\\mathop{\\mathrm{Var}}}',
+        // Covariance matrix
+        Cov: '{\\mathop{\\mathrm{Cov}}}',
+        // Affine hull of a set
+        AffineHull: '{\\mathop{\\mathrm{aff}}}',
+        // Convex hull of a set
+        ConvexHull: '{\\mathop{\\mathrm{conv}}}',
+
+        // Set theory related stuff
+        argmin:'\\mathrm{arg}\\,\\mathrm{min}',
+        argmax:'\\mathrm{arg}\\,\\mathrm{max}',
+        EmptySet:'\\varnothing',
+        // Forall operator with some space
+        Forall: '\\; \\forall \\;',
+
+        // Probability distributions
+        Gaussian: '{\\mathcal{N}}',
+
+
+        // Sparse representations related stuff
+        // Spark of a matrix
+        spark: '{\\mathop{\\mathrm{spark}}}',
+        // Exact Recovery Criterion
+        ERC: '{\\mathop{\\mathrm{ERC}}}',
+        // Maximum correlation
+        Maxcor: '{\\mathop{\\mathrm{maxcor}}}',
+        BPhi: '\\mathbf{\\Phi}',
+        BPsi: '\\mathbf{\\Psi}',
+
+        // pseudo-inverse
+        dag: '\\dagger',
+        // bracket operator
+        Bracket: '\\left [ \\; \\right ]',
+        // OneVec
+        OneVec: '\\mathbb{1}',
+        ZeroVec: '0',
+        OneMat: '\\mathbf{1}',
+    }
+  }
+});
+console.log(6);
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> CR.Vision
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../nb_basic_image_operations.html">Basic Image Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../image_processing/index.html">Image Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Sparse Representations and Compressive Sensing</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Fully Convolutional Stacked Denoising Autoencoders</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#compressive-sensing-framework">Compressive Sensing Framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stacked-denoising-autoencoder">Stacked Denoising Autoencoder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sda-linear-measurements">SDA + Linear Measurements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#fully-convolutional-stacked-denoising-autoencoder">Fully Convolutional Stacked Denoising Autoencoder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#x1-convolutions">1x1 Convolutions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-autoencoder-architecture">The AutoEncoder architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/cr.vision.html">cr.vision package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../zzzreferences.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CR.Vision</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Sparse Representations and Compressive Sensing</a> &raquo;</li>
+        
+      <li>Fully Convolutional Stacked Denoising Autoencoders</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/srrcs/sda/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="fully-convolutional-stacked-denoising-autoencoders">
+<h1>Fully Convolutional Stacked Denoising Autoencoders<a class="headerlink" href="#fully-convolutional-stacked-denoising-autoencoders" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#compressive-sensing-framework" id="id345">Compressive Sensing Framework</a></p></li>
+<li><p><a class="reference internal" href="#stacked-denoising-autoencoder" id="id346">Stacked Denoising Autoencoder</a></p>
+<ul>
+<li><p><a class="reference internal" href="#sda-linear-measurements" id="id347">SDA + Linear Measurements</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#fully-convolutional-stacked-denoising-autoencoder" id="id348">Fully Convolutional Stacked Denoising Autoencoder</a></p>
+<ul>
+<li><p><a class="reference internal" href="#x1-convolutions" id="id349">1x1 Convolutions</a></p></li>
+<li><p><a class="reference internal" href="#the-autoencoder-architecture" id="id350">The AutoEncoder architecture</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#references" id="id351">References</a></p></li>
+</ul>
+</div>
+<p><span id="id1">[<a class="reference internal" href="../../zzzreferences.html#id236"><span>MPB15</span></a>]</span> presents a deep learning
+based framework for sensing and recovering structured
+signals. This article builds on the ideas developed
+in it and presents a fully convolutional auto-encoder
+architecture for the same.</p>
+<div class="section" id="compressive-sensing-framework">
+<h2><a class="toc-backref" href="#id345">Compressive Sensing Framework</a><a class="headerlink" href="#compressive-sensing-framework" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/cs.png" src="../../_images/cs.png" />
+<p>We consider a set of signals <span class="math notranslate nohighlight">\(x \in \RR^N\)</span> from
+a specific domain (e.g. images).</p>
+<p>In compressive sensing, a number of random
+measurements are taken over the signal mapping
+from the signal space <span class="math notranslate nohighlight">\(\RR^N\)</span> to a
+measurement space <span class="math notranslate nohighlight">\(\RR^M\)</span> via a mapping</p>
+<div class="math notranslate nohighlight">
+\[y = \mathbf{\Gamma}(x)\]</div>
+<p>In general, this mapping from signal space to measurement space
+can be either linear or non-linear. A linear mapping
+is typically represented via a sensing matrix <span class="math notranslate nohighlight">\(\BPhi\)</span>
+as</p>
+<div class="math notranslate nohighlight">
+\[y  = \BPhi x\]</div>
+<p>Compressive sensing is a field that focuses on solving
+the inverse problem of recovering the signal <span class="math notranslate nohighlight">\(x\)</span>
+from the linear measurements <span class="math notranslate nohighlight">\(y\)</span>.
+This is generally possible if <span class="math notranslate nohighlight">\(x\)</span> has a sparse
+representation in some basis <span class="math notranslate nohighlight">\(\BPsi\)</span>
+such that</p>
+<div class="math notranslate nohighlight">
+\[x = \BPsi \alpha\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> has only <span class="math notranslate nohighlight">\(K \ll N\)</span> non-zero entries.</p>
+<p>Under these conditions, a small number of linear measurements
+<span class="math notranslate nohighlight">\(M \ll N\)</span> is sufficient to recover the
+original signal <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>The basis <span class="math notranslate nohighlight">\(\BPsi\)</span> in which the signal has a sparse (or compressive)
+representation is domain specific. Some popular bases include:</p>
+<ul class="simple">
+<li><p>Wavelets</p></li>
+<li><p>Frames</p></li>
+<li><p>Dictionaries (like multiple orthonormal bases)</p></li>
+<li><p>Dictionaries learnt from data</p></li>
+</ul>
+<p>Sparse recovery is the process of recovering the
+sparse representation <span class="math notranslate nohighlight">\(\alpha\)</span> from the measurements
+<span class="math notranslate nohighlight">\(y\)</span> given that the sparsifying basis
+<span class="math notranslate nohighlight">\(\BPsi\)</span> and the sensing matrix <span class="math notranslate nohighlight">\(\BPhi\)</span> are
+known. This is represented by the step:</p>
+<div class="math notranslate nohighlight">
+\[\widehat{\alpha} = \Delta_r(\mathbf{\Phi} \mathbf{\Psi}, y )\]</div>
+<p>in the diagram above. Typical recovery algorithms include:</p>
+<ul class="simple">
+<li><p>Convex optimization based routines like basis pursuit</p></li>
+<li><p>Greedy algorithms like OMP, CoSaMP, IHT</p></li>
+</ul>
+</div>
+<div class="section" id="stacked-denoising-autoencoder">
+<h2><a class="toc-backref" href="#id346">Stacked Denoising Autoencoder</a><a class="headerlink" href="#stacked-denoising-autoencoder" title="Permalink to this headline">¶</a></h2>
+<p><span id="id2">[<a class="reference internal" href="../../zzzreferences.html#id236"><span>MPB15</span></a>]</span> considers how deep learning ideas can
+be used to develop a recovery algorithm from compressed measurements
+of  a signal.</p>
+<p>In particular, it is not necessary to choose a specific
+sparsifying basis for the recovery of signals. It is enough
+to know that the signals are compressible in some basis
+and a suitable recovery algorithm can be learnt directly
+from the data in the form of a neural network.</p>
+<img alt="../../_images/recovery_in_signal_space.png" src="../../_images/recovery_in_signal_space.png" />
+<p>The figure above represents the recovery directly from measurement
+space to the signal space.</p>
+<p>Deep learning architectures can be constructed for following
+scenarios:</p>
+<ul class="simple">
+<li><p>Recovery of the signal from fixed linear measurements
+(using random sensing matrices)</p></li>
+<li><p>Recovery of the signal from nonlinear adaptive compressive
+measurements</p></li>
+</ul>
+<p>While in the first scenario, the sensing matrix <span class="math notranslate nohighlight">\(\BPhi\)</span>
+is fixed and known apriori, in the second scenario, the
+sensing mapping <span class="math notranslate nohighlight">\(\mathbf{\Gamma}\)</span> is also learned during the
+training process.</p>
+<p>The neural network architecture ideally suited for solving
+this kind of recovery problem is a stacked denoising autoencoder (SDA).</p>
+<div class="section" id="sda-linear-measurements">
+<h3><a class="toc-backref" href="#id347">SDA + Linear Measurements</a><a class="headerlink" href="#sda-linear-measurements" title="Permalink to this headline">¶</a></h3>
+<img alt="../../_images/sda_from_linear_measurements.png" src="../../_images/sda_from_linear_measurements.png" />
+<p>The diagram above shows a four layer Stacked Denoising Autoencoder (SDA)
+for recovering signals from their linear measurements. The
+first layer is essentially a sensing matrix (no nonlinearity added).
+The following three layers form a neural network for which:</p>
+<ul class="simple">
+<li><p>The input is the linear measurements <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+<li><p>The output is the reconstruction of the  <span class="math notranslate nohighlight">\(\hat{x}\)</span> of the
+original signal.</p></li>
+</ul>
+<p>In other words:</p>
+<ul class="simple">
+<li><p>The first layer is the encoder</p></li>
+<li><p>The following three layers are the decoder</p></li>
+</ul>
+<p>Each layer in the decoder is a fully connected
+layer that implements an affine transformation
+followed by a nonlinearity.</p>
+<p>The functions of three layers in the decoder are
+described below.</p>
+<p class="rubric">Layer 1 (input <span class="math notranslate nohighlight">\(\RR^M\)</span>, output <span class="math notranslate nohighlight">\(\RR^N\)</span>)</p>
+<div class="math notranslate nohighlight">
+\[x_{h_1} = \mathcal{T}(\mathbf{W}_1 y + \mathbf{b}_1)\]</div>
+<p><span class="math notranslate nohighlight">\(\mathbf{W}_1 \in \RR^{N \times M}\)</span>
+and <span class="math notranslate nohighlight">\(\mathbf{b}_1 \in \RR^N\)</span> are the weight
+matrix and bias vector for the first decoding layer.</p>
+<p class="rubric">Layer 2 (input <span class="math notranslate nohighlight">\(\RR^N\)</span>, output <span class="math notranslate nohighlight">\(\RR^N\)</span>)</p>
+<div class="math notranslate nohighlight">
+\[x_{h_2} = \mathcal{T}(\mathbf{W}_2 x_{h_1} + \mathbf{b}_2)\]</div>
+<p><span class="math notranslate nohighlight">\(\mathbf{W}_2 \in \RR^{M \times N}\)</span>
+and <span class="math notranslate nohighlight">\(\mathbf{b}_2 \in \RR^M\)</span> are the weight
+matrix and bias vector for the second decoding layer.</p>
+<p class="rubric">Layer 3 (input <span class="math notranslate nohighlight">\(\RR^M\)</span>, output <span class="math notranslate nohighlight">\(\RR^N\)</span>)</p>
+<div class="math notranslate nohighlight">
+\[\widehat{x} = \mathcal{T}(\mathbf{W}_3 x_{h_2} + \mathbf{b}_3)\]</div>
+<p><span class="math notranslate nohighlight">\(\mathbf{W}_3 \in \RR^{N \times M}\)</span>
+and <span class="math notranslate nohighlight">\(\mathbf{b}_3 \in \RR^N\)</span> are the weight
+matrix and bias vector for the third and final decoding layer.</p>
+<p>The set of parameters to be trained in this network is given
+by:</p>
+<div class="math notranslate nohighlight">
+\[\Omega = \{\mathbf{W}_1, \mathbf{b}_1,
+\mathbf{W}_2, \mathbf{b}_2,
+\mathbf{W}_3, \mathbf{b}_3, \}\]</div>
+</div>
+</div>
+<div class="section" id="fully-convolutional-stacked-denoising-autoencoder">
+<h2><a class="toc-backref" href="#id348">Fully Convolutional Stacked Denoising Autoencoder</a><a class="headerlink" href="#fully-convolutional-stacked-denoising-autoencoder" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="x1-convolutions">
+<h3><a class="toc-backref" href="#id349">1x1 Convolutions</a><a class="headerlink" href="#x1-convolutions" title="Permalink to this headline">¶</a></h3>
+<img alt="../../_images/channel_reduction.png" src="../../_images/channel_reduction.png" />
+</div>
+<div class="section" id="the-autoencoder-architecture">
+<h3><a class="toc-backref" href="#id350">The AutoEncoder architecture</a><a class="headerlink" href="#the-autoencoder-architecture" title="Permalink to this headline">¶</a></h3>
+<img alt="../../_images/cs_sda_cnn.png" src="../../_images/cs_sda_cnn.png" />
+</div>
+</div>
+<div class="section" id="references">
+<h2><a class="toc-backref" href="#id351">References</a><a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="id3"><dl class="citation">
+<dt class="label" id="id238"><span class="brackets">MPB15</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
+<dd><p>Ali Mousavi, Ankit B Patel, and Richard G Baraniuk. A deep learning approach to structured signal recovery. In <em>2015 53rd annual allerton conference on communication, control, and computing (Allerton)</em>, 1336–1343. IEEE, 2015.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../../source/cr.vision.html" class="btn btn-neutral float-right" title="cr.vision package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="Sparse Representations and Compressive Sensing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-Present, Carnot Research Pvt. Ltd..
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

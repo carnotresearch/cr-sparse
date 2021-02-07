@@ -13,6 +13,7 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -34,8 +35,12 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script src="../_static/js/mathconf.js"></script>
         <script src="../_static/js/custom.js"></script>
+        <script src="../_static/js/disqus.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -43,7 +48,180 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Visual Effects on Images" href="nb_effects.html" />
-    <link rel="prev" title="Image Processing" href="index.html" /> 
+    <link rel="prev" title="Image Processing" href="index.html" />
+ 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+        // All bold letters
+        AA: '{\\mathbb{A}}',
+        BB: '{\\mathbb{B}}',
+        // Complex space symbol
+        CC: '{\\mathbb{C}}',
+        // A dictionary
+        DD: '{\\mathbb{D}}',
+        // Expectation operator
+        EE: '{\\mathbb{E}}',
+        // A field
+        FF: '{\\mathbb{F}}',
+        // A group
+        GG: '{\\mathbb{G}}',
+        // A Hilbert space
+        HH: '{\\mathbb{H}}',
+        // Irrational numbers
+        II: '{\\mathbb{I}}',
+        JJ: '{\\mathbb{J}}',
+        // Real or complex space symbol
+        KK: '{\\mathbb{K}}',
+        // Natural numbers
+        NN: '{\\mathbb{N}}',
+        Nat: '{\\mathbb{N}}',
+        // Probability set symbol
+        PP: '{\\mathbb{P}}',
+        // Rational numbers
+        QQ: '{\\mathbb{Q}}',
+        // Real line symbol
+        RR: '{\\mathbb{R}}',
+        RRMN: '{\\mathbb{R}^{M \\times N} }',
+        // A linear operator
+        TT: '{\\mathbb{T}}',
+        // Another linear operator
+        UU: '{\\mathbb{U}}',
+        // A vector space
+        VV: '{\\mathbb{V}}',
+        // A subspace
+        WW: '{\\mathbb{W}}',
+        // An inner product space
+        XX: '{\\mathbb{X}}',
+        // Integers
+        ZZ: '{\\mathbb{Z}}',
+
+        // All mathcal shortcuts
+        AAA: '{\\mathcal{A}}',
+        BBB: '{\\mathcal{B}}',
+        CCC: '{\\mathcal{C}}',
+        DDD: '{\\mathcal{D}}',
+        EEE: '{\\mathcal{E}}',
+        FFF: '{\\mathcal{F}}',
+        GGG: '{\\mathcal{G}}',
+        HHH: '{\\mathcal{H}}',
+        III: '{\\mathcal{I}}',
+        JJJ: '{\\mathcal{J}}',
+        KKK: '{\\mathcal{K}}',
+        LLL: '{\\mathcal{L}}',
+        MMM: '{\\mathcal{M}}',
+        NNN: '{\\mathcal{N}}',
+        OOO: '{\\mathcal{O}}',
+        PPP: '{\\mathcal{P}}',
+        QQQ: '{\\mathcal{Q}}',
+        RRR: '{\\mathcal{R}}',
+        SSS: '{\\mathcal{S}}',
+        TTT: '{\\mathcal{T}}',
+        UUU: '{\\mathcal{U}}',
+        VVV: '{\\mathcal{V}}',
+        WWW: '{\\mathcal{W}}',
+        XXX: '{\\mathcal{X}}',
+        YYY: '{\\mathcal{Y}}',
+        ZZZ: '{\\mathcal{Z}}',
+
+        Tau: '{\\mathcal{T}}',
+        Chi: '{\\mathcal{X}}',
+        Eta: '{\\mathcal{H}}',
+
+        // Real part of a complex number
+        Re: '\\operatorname{Re}',
+        Im: '\\operatorname{Im}',
+
+
+        // Null space
+        NullSpace: '{\\mathcal{N}}',
+        // Column space
+        ColSpace: '{\\mathcal{C}}',
+        // Row space
+        RowSpace: '{\\mathcal{R}}',
+        // Power set
+        Power: '{\\mathop{\\mathcal{P}}}',
+        LinTSpace:'{\\mathcal{L}}', 
+
+        // Range
+        Range: '{\\mathrm{R}}',
+        // image
+        Image: '{\\mathrm{im}}',
+        // Kernel
+        Kernel: '{\\mathrm{ker}}',
+        // Span
+        Span: '{\\mathrm{span}}',
+        // Nullity of an operator
+        Nullity: '{\\mathrm{nullity}}',
+        // Dimension of a vector space
+        Dim: '{\\mathrm{dim}}',
+        // Rank of a matrix
+        Rank: '{\\mathrm{rank}}',
+        // Trace of a matrix
+        Trace: '{\\mathrm{tr}}',
+        // Diagonal of a matrix
+        Diag: '{\\mathrm{diag}}',
+        // Signum function
+        sgn: '{\\mathrm{sgn}}',
+        // Support function
+        supp: '{\\mathrm{supp}}',
+        // Row support
+        rowsupp: '{\\mathop{\\mathrm{rowsupp}}}',
+        // Entry wise absolute value function
+        abs: '{\\mathop{\\mathrm{abs}}}',
+        // error function
+        erf: '{\\mathop{\\mathrm{erf}}}',
+        // complementary error function
+        erfc: '{\\mathop{\\mathrm{erfc}}}',
+        // Sub Gaussian function
+        Sub: '{\\mathop{\\mathrm{Sub}}}',
+        // Strictly sub Gaussian function
+        SSub: '{\\mathop{\\mathrm{SSub}}}',
+        // Variance function
+        Var: '{\\mathop{\\mathrm{Var}}}',
+        // Covariance matrix
+        Cov: '{\\mathop{\\mathrm{Cov}}}',
+        // Affine hull of a set
+        AffineHull: '{\\mathop{\\mathrm{aff}}}',
+        // Convex hull of a set
+        ConvexHull: '{\\mathop{\\mathrm{conv}}}',
+
+        // Set theory related stuff
+        argmin:'\\mathrm{arg}\\,\\mathrm{min}',
+        argmax:'\\mathrm{arg}\\,\\mathrm{max}',
+        EmptySet:'\\varnothing',
+        // Forall operator with some space
+        Forall: '\\; \\forall \\;',
+
+        // Probability distributions
+        Gaussian: '{\\mathcal{N}}',
+
+
+        // Sparse representations related stuff
+        // Spark of a matrix
+        spark: '{\\mathop{\\mathrm{spark}}}',
+        // Exact Recovery Criterion
+        ERC: '{\\mathop{\\mathrm{ERC}}}',
+        // Maximum correlation
+        Maxcor: '{\\mathop{\\mathrm{maxcor}}}',
+        BPhi: '\\mathbf{\\Phi}',
+        BPsi: '\\mathbf{\\Psi}',
+
+        // pseudo-inverse
+        dag: '\\dagger',
+        // bracket operator
+        Bracket: '\\left [ \\; \\right ]',
+        // OneVec
+        OneVec: '\\mathbb{1}',
+        ZeroVec: '0',
+        OneMat: '\\mathbf{1}',
+    }
+  }
+});
+console.log(6);
+</script>
+
 </head>
 
 <body class="wy-body-for-nav">
@@ -109,7 +287,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../srrcs/index.html">Sparse Representations and Compressive Sensing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../source/cr.vision.html">cr.vision package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zzzreferences.html">References</a></li>
 </ul>
 
             
@@ -324,7 +504,7 @@ by <code class="docutils literal notranslate"><span class="pre">cr-vision</span>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2020, Carnot Research Pvt. Ltd..
+        &#169; Copyright 2020-Present, Carnot Research Pvt. Ltd..
 
     </p>
   </div>

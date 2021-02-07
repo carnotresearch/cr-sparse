@@ -1,3 +1,46 @@
 .wy-nav-content {
     max-width: 1200px;
 }
+
+.theoremenv {
+    border: 1px solid #e1e4e5;
+    margin: 1px 0 24px 0;
+    padding-bottom: : 10px;
+}
+
+.theoremenv_caption  {
+    background-color: #e8e4e4;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.theoremenv_counter:before{
+    content:" "; 
+    display:inline-block; 
+    width:5px;
+}
+
+.theoremenv_title:before{
+    content:" "; 
+    display:inline-block; 
+    width:5px;
+}
+
+.theoremenv_body {
+    padding-left: 10px;
+}
+
+.think{
+    background: #e7f2fa;    
+}
+
+.think_body{
+    background: #e7f2fa;
+}
+
+span.small_caps {
+    font-variant: small-caps;
+}
+

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>cr.vision.saliency package &mdash; CR.Vision  documentation</title>
+  <title>Sparse Representations and Compressive Sensing &mdash; CR.Vision  documentation</title>
   
 
   
@@ -47,8 +47,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cr.vision.video package" href="cr.vision.video.html" />
-    <link rel="prev" title="cr.vision.object_tracker package" href="cr.vision.object_tracker.html" />
+    <link rel="next" title="Fully Convolutional Stacked Denoising Autoencoders" href="sda/index.html" />
+    <link rel="prev" title="Building Resnet 50 from scratch with Keras" href="../tutorials/cnn/resnet_from_scratch.html" />
  
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -273,30 +273,11 @@ console.log(6);
 <li class="toctree-l1"><a class="reference internal" href="../nb_basic_image_operations.html">Basic Image Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../image_processing/index.html">Image Processing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../srrcs/index.html">Sparse Representations and Compressive Sensing</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="cr.vision.html">cr.vision package</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.core.html">cr.vision.core package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.apps.html">cr.vision.apps package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.concurrent.html">cr.vision.concurrent package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.edits.html">cr.vision.edits package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.filters.html">cr.vision.filters package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.geom.html">cr.vision.geom package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.io.html">cr.vision.io package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.motion.html">cr.vision.motion package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.object_detection.html">cr.vision.object_detection package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.object_tracker.html">cr.vision.object_tracker package</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">cr.vision.saliency package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cr-vision-saliency-saliency-module">cr.vision.saliency.saliency module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sparse Representations and Compressive Sensing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sda/index.html">Fully Convolutional Stacked Denoising Autoencoders</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.video.html">cr.vision.video package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.measure.html">cr.vision.measure package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.retargeting.html">cr.vision.retargeting package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cr.vision.html#cr-vision-errors-module">cr.vision.errors module</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../source/cr.vision.html">cr.vision package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../zzzreferences.html">References</a></li>
 </ul>
 
@@ -346,15 +327,13 @@ console.log(6);
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="cr.vision.html">cr.vision package</a> &raquo;</li>
-        
-      <li>cr.vision.saliency package</li>
+      <li>Sparse Representations and Compressive Sensing</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/source/cr.vision.saliency.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/srrcs/index.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -391,16 +370,19 @@ console.log(6);
     text-align: unset;
 }
 </style>
-<div class="section" id="cr-vision-saliency-package">
-<h1>cr.vision.saliency package<a class="headerlink" href="#cr-vision-saliency-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="cr-vision-saliency-saliency-module">
-<h2>cr.vision.saliency.saliency module<a class="headerlink" href="#cr-vision-saliency-saliency-module" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sparse-representations-and-compressive-sensing">
+<h1>Sparse Representations and Compressive Sensing<a class="headerlink" href="#sparse-representations-and-compressive-sensing" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sda/index.html">Fully Convolutional Stacked Denoising Autoencoders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sda/index.html#compressive-sensing-framework">Compressive Sensing Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sda/index.html#stacked-denoising-autoencoder">Stacked Denoising Autoencoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sda/index.html#fully-convolutional-stacked-denoising-autoencoder">Fully Convolutional Stacked Denoising Autoencoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sda/index.html#references">References</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
@@ -410,8 +392,8 @@ console.log(6);
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="cr.vision.video.html" class="btn btn-neutral float-right" title="cr.vision.video package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="cr.vision.object_tracker.html" class="btn btn-neutral float-left" title="cr.vision.object_tracker package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sda/index.html" class="btn btn-neutral float-right" title="Fully Convolutional Stacked Denoising Autoencoders" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../tutorials/cnn/resnet_from_scratch.html" class="btn btn-neutral float-left" title="Building Resnet 50 from scratch with Keras" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
