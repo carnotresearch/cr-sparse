@@ -280,6 +280,7 @@ console.log(6);
 <li class="toctree-l4"><a class="reference internal" href="#sda-linear-measurements">SDA + Linear Measurements</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-images">Working with Images</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fully-convolutional-stacked-denoising-autoencoder">Fully Convolutional Stacked Denoising Autoencoder</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#x1-convolutions">1x1 Convolutions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#the-autoencoder-architecture">The AutoEncoder architecture</a></li>
@@ -389,28 +390,29 @@ console.log(6);
 <h1>Fully Convolutional Stacked Denoising Autoencoders<a class="headerlink" href="#fully-convolutional-stacked-denoising-autoencoders" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#compressive-sensing-framework" id="id345">Compressive Sensing Framework</a></p></li>
-<li><p><a class="reference internal" href="#stacked-denoising-autoencoder" id="id346">Stacked Denoising Autoencoder</a></p>
+<li><p><a class="reference internal" href="#compressive-sensing-framework" id="id347">Compressive Sensing Framework</a></p></li>
+<li><p><a class="reference internal" href="#stacked-denoising-autoencoder" id="id348">Stacked Denoising Autoencoder</a></p>
 <ul>
-<li><p><a class="reference internal" href="#sda-linear-measurements" id="id347">SDA + Linear Measurements</a></p></li>
+<li><p><a class="reference internal" href="#sda-linear-measurements" id="id349">SDA + Linear Measurements</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#fully-convolutional-stacked-denoising-autoencoder" id="id348">Fully Convolutional Stacked Denoising Autoencoder</a></p>
+<li><p><a class="reference internal" href="#working-with-images" id="id350">Working with Images</a></p></li>
+<li><p><a class="reference internal" href="#fully-convolutional-stacked-denoising-autoencoder" id="id351">Fully Convolutional Stacked Denoising Autoencoder</a></p>
 <ul>
-<li><p><a class="reference internal" href="#x1-convolutions" id="id349">1x1 Convolutions</a></p></li>
-<li><p><a class="reference internal" href="#the-autoencoder-architecture" id="id350">The AutoEncoder architecture</a></p></li>
+<li><p><a class="reference internal" href="#x1-convolutions" id="id352">1x1 Convolutions</a></p></li>
+<li><p><a class="reference internal" href="#the-autoencoder-architecture" id="id353">The AutoEncoder architecture</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#references" id="id351">References</a></p></li>
+<li><p><a class="reference internal" href="#references" id="id354">References</a></p></li>
 </ul>
 </div>
 <p><span id="id1">[<a class="reference internal" href="../../zzzreferences.html#id236"><span>MPB15</span></a>]</span> presents a deep learning
 based framework for sensing and recovering structured
-signals. This article builds on the ideas developed
+signals. This work builds on the ideas developed
 in it and presents a fully convolutional auto-encoder
 architecture for the same.</p>
 <div class="section" id="compressive-sensing-framework">
-<h2><a class="toc-backref" href="#id345">Compressive Sensing Framework</a><a class="headerlink" href="#compressive-sensing-framework" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id347">Compressive Sensing Framework</a><a class="headerlink" href="#compressive-sensing-framework" title="Permalink to this headline">¶</a></h2>
 <img alt="../../_images/cs.png" src="../../_images/cs.png" />
 <p>We consider a set of signals <span class="math notranslate nohighlight">\(x \in \RR^N\)</span> from
 a specific domain (e.g. images).</p>
@@ -460,7 +462,7 @@ known. This is represented by the step:</p>
 </ul>
 </div>
 <div class="section" id="stacked-denoising-autoencoder">
-<h2><a class="toc-backref" href="#id346">Stacked Denoising Autoencoder</a><a class="headerlink" href="#stacked-denoising-autoencoder" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id348">Stacked Denoising Autoencoder</a><a class="headerlink" href="#stacked-denoising-autoencoder" title="Permalink to this headline">¶</a></h2>
 <p><span id="id2">[<a class="reference internal" href="../../zzzreferences.html#id236"><span>MPB15</span></a>]</span> considers how deep learning ideas can
 be used to develop a recovery algorithm from compressed measurements
 of  a signal.</p>
@@ -487,7 +489,7 @@ training process.</p>
 <p>The neural network architecture ideally suited for solving
 this kind of recovery problem is a stacked denoising autoencoder (SDA).</p>
 <div class="section" id="sda-linear-measurements">
-<h3><a class="toc-backref" href="#id347">SDA + Linear Measurements</a><a class="headerlink" href="#sda-linear-measurements" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id349">SDA + Linear Measurements</a><a class="headerlink" href="#sda-linear-measurements" title="Permalink to this headline">¶</a></h3>
 <img alt="../../_images/sda_from_linear_measurements.png" src="../../_images/sda_from_linear_measurements.png" />
 <p>The diagram above shows a four layer Stacked Denoising Autoencoder (SDA)
 for recovering signals from their linear measurements. The
@@ -534,22 +536,86 @@ by:</p>
 \mathbf{W}_3, \mathbf{b}_3, \}\]</div>
 </div>
 </div>
+<div class="section" id="working-with-images">
+<h2><a class="toc-backref" href="#id350">Working with Images</a><a class="headerlink" href="#working-with-images" title="Permalink to this headline">¶</a></h2>
+<p>SDA layers are fully connected layers. Hence, the
+input layer has to be connected to all pixels in
+an image. This is computationally infeasible for
+large images.</p>
+<p>The standard practice is to divide image into
+small patches and vectorize each patch. Then,
+the network can process one patch at a time
+(for encoding and decoding).</p>
+<p><span id="id3">[<a class="reference internal" href="../../zzzreferences.html#id236"><span>MPB15</span></a>]</span> trained their SDA
+for <span class="math notranslate nohighlight">\(32 \times 32\)</span> patches of
+grayscale images. Working with patches leads
+to some blockiness artifact in the reconstruction.
+The authors suggest using overlapped patches
+during sensing and averaging the reconstructions
+to avoid blockiness.</p>
+<p>In the following, we discuss how SDA can be
+developed as a network consisting solely of
+convolutional layers.</p>
+</div>
 <div class="section" id="fully-convolutional-stacked-denoising-autoencoder">
-<h2><a class="toc-backref" href="#id348">Fully Convolutional Stacked Denoising Autoencoder</a><a class="headerlink" href="#fully-convolutional-stacked-denoising-autoencoder" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id351">Fully Convolutional Stacked Denoising Autoencoder</a><a class="headerlink" href="#fully-convolutional-stacked-denoising-autoencoder" title="Permalink to this headline">¶</a></h2>
+<p class="rubric">Input</p>
+<p>We use Caltech-UCSD Birds-200-2011 dataset <span id="id4">[<a class="reference internal" href="../../zzzreferences.html#id326"><span>WAS08</span></a>]</span> for our training.</p>
+<ul class="simple">
+<li><p>We work with color images.</p></li>
+<li><p>For training, we work with randomly selected subset of images.</p></li>
+<li><p>We pick the center crop of size <span class="math notranslate nohighlight">\(256 \times 256\)</span> from
+these images.</p></li>
+<li><p>If an image has a smaller size, it is resized first preserving
+the aspect ratio and then the center part of <span class="math notranslate nohighlight">\(256 \times 256\)</span>
+is cropped.</p></li>
+<li><p>Image pixels are mapped to the range <span class="math notranslate nohighlight">\([0, 255]\)</span>.</p></li>
+<li><p>During training, batches of 32 images are fed to the network.</p></li>
+</ul>
+<p class="rubric">Linear measurements</p>
+<p>It is possible to implement patch-wise compressive sampling
+<span class="math notranslate nohighlight">\(y = \BPhi x\)</span> using a convolutional layer.</p>
+<ul class="simple">
+<li><p>Consider patches of size <span class="math notranslate nohighlight">\(N = n \times n \times 3\)</span>.</p></li>
+<li><p>Use a convolutional kernel with kernel size <span class="math notranslate nohighlight">\(n \times n\)</span>.</p></li>
+<li><p>Use a stride of <span class="math notranslate nohighlight">\(n \times n\)</span>.</p></li>
+<li><p>Don’t use any bias.</p></li>
+<li><p>Don’t use any activation function (i.e. linear activation).</p></li>
+<li><p>Use <span class="math notranslate nohighlight">\(M\)</span> such kernels.</p></li>
+</ul>
+<p>What is happening?</p>
+<ul class="simple">
+<li><p>Each kernel is a row of the sensing matrix <span class="math notranslate nohighlight">\(\BPhi\)</span></p></li>
+<li><p>Each kernel is applied on a volume of size <span class="math notranslate nohighlight">\(N = n \times n \times 3\)</span> to generate a single value.</p></li>
+<li><p>In effect it is an inner product of one row of <span class="math notranslate nohighlight">\(\BPhi\)</span>, with
+one (linearized) patch of the input image.</p></li>
+<li><p>The stride of <span class="math notranslate nohighlight">\(n \times n\)</span> ensures that the kernel
+is applied on non-overlapping patches of the input image.</p></li>
+<li><p><span class="math notranslate nohighlight">\(M\)</span> separate kernels are <span class="math notranslate nohighlight">\(M\)</span> rows of the sensing
+matrix <span class="math notranslate nohighlight">\(\BPhi\)</span>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(b = 256 / n\)</span>.</p></li>
+<li><p>Then, the number of patches in the image is <span class="math notranslate nohighlight">\(b \times b\)</span>.</p></li>
+<li><p>Each input patch gets mapped to a single pixel on each output channel.</p></li>
+<li><p>Thus, each depth vector (across all channels) is a measurement vector
+for each input patch.</p></li>
+</ul>
 <div class="section" id="x1-convolutions">
-<h3><a class="toc-backref" href="#id349">1x1 Convolutions</a><a class="headerlink" href="#x1-convolutions" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id352">1x1 Convolutions</a><a class="headerlink" href="#x1-convolutions" title="Permalink to this headline">¶</a></h3>
 <img alt="../../_images/channel_reduction.png" src="../../_images/channel_reduction.png" />
 </div>
 <div class="section" id="the-autoencoder-architecture">
-<h3><a class="toc-backref" href="#id350">The AutoEncoder architecture</a><a class="headerlink" href="#the-autoencoder-architecture" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id353">The AutoEncoder architecture</a><a class="headerlink" href="#the-autoencoder-architecture" title="Permalink to this headline">¶</a></h3>
 <img alt="../../_images/cs_sda_cnn.png" src="../../_images/cs_sda_cnn.png" />
 </div>
 </div>
 <div class="section" id="references">
-<h2><a class="toc-backref" href="#id351">References</a><a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<p id="id3"><dl class="citation">
-<dt class="label" id="id238"><span class="brackets">MPB15</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
+<h2><a class="toc-backref" href="#id354">References</a><a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="id5"><dl class="citation">
+<dt class="label" id="id240"><span class="brackets">MPB15</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>)</span></dt>
 <dd><p>Ali Mousavi, Ankit B Patel, and Richard G Baraniuk. A deep learning approach to structured signal recovery. In <em>2015 53rd annual allerton conference on communication, control, and computing (Allerton)</em>, 1336–1343. IEEE, 2015.</p>
+</dd>
+<dt class="label" id="id330"><span class="brackets"><a class="fn-backref" href="#id4">WAS08</a></span></dt>
+<dd><p>Zhongmin Wang, Gonzalo R Arce, and Brian M Sadler. Subspace compressive detection for sparse signals. In <em>Acoustics, Speech and Signal Processing, 2008. ICASSP 2008. IEEE International Conference on</em>, 3873–3876. IEEE, 2008.</p>
 </dd>
 </dl>
 </p>

@@ -7,7 +7,7 @@ Fully Convolutional Stacked Denoising Autoencoders
 
 :cite:`mousavi2015deep` presents a deep learning
 based framework for sensing and recovering structured
-signals. This article builds on the ideas developed
+signals. This work builds on the ideas developed
 in it and presents a fully convolutional auto-encoder
 architecture for the same.
 
@@ -185,8 +185,78 @@ by:
     \mathbf{W}_3, \mathbf{b}_3, \}
 
 
+Working with Images
+--------------------------
+
+SDA layers are fully connected layers. Hence, the
+input layer has to be connected to all pixels in
+an image. This is computationally infeasible for
+large images.
+
+The standard practice is to divide image into 
+small patches and vectorize each patch. Then,
+the network can process one patch at a time
+(for encoding and decoding).
+
+:cite:`mousavi2015deep` trained their SDA
+for :math:`32 \times 32` patches of 
+grayscale images. Working with patches leads
+to some blockiness artifact in the reconstruction.
+The authors suggest using overlapped patches 
+during sensing and averaging the reconstructions
+to avoid blockiness.
+
+
+In the following, we discuss how SDA can be
+developed as a network consisting solely of
+convolutional layers.
+
 Fully Convolutional Stacked Denoising Autoencoder
 ----------------------------------------------------
+
+.. rubric:: Input
+
+We use Caltech-UCSD Birds-200-2011 dataset :cite:`wang2008subspace` for our training.
+
+* We work with color images. 
+* For training, we work with randomly selected subset of images.
+* We pick the center crop of size :math:`256 \times 256` from 
+  these images. 
+* If an image has a smaller size, it is resized first preserving
+  the aspect ratio and then the center part of :math:`256 \times 256`
+  is cropped.
+* Image pixels are mapped to the range :math:`[0, 255]`.
+* During training, batches of 32 images are fed to the network.
+
+
+.. rubric:: Linear measurements
+
+It is possible to implement patch-wise compressive sampling
+:math:`y = \BPhi x` using a convolutional layer. 
+
+* Consider patches of size :math:`N = n \times n \times 3`.
+* Use a convolutional kernel with kernel size :math:`n \times n`.
+* Use a stride of :math:`n \times n`.
+* Don't use any bias.
+* Don't use any activation function (i.e. linear activation).
+* Use :math:`M` such kernels.
+
+What is happening? 
+
+* Each kernel is a row of the sensing matrix :math:`\BPhi`
+* Each kernel is applied on a volume of size :math:`N = n \times n \times 3` to generate a single value.
+* In effect it is an inner product of one row of :math:`\BPhi`, with
+  one (linearized) patch of the input image.
+* The stride of :math:`n \times n` ensures that the kernel 
+  is applied on non-overlapping patches of the input image.
+* :math:`M` separate kernels are :math:`M` rows of the sensing
+  matrix :math:`\BPhi`.
+* Let :math:`b = 256 / n`.
+* Then, the number of patches in the image is :math:`b \times b`.
+* Each input patch gets mapped to a single pixel on each output channel.
+* Thus, each depth vector (across all channels) is a measurement vector
+  for each input patch.
+
 
 1x1 Convolutions
 '''''''''''''''''''''
