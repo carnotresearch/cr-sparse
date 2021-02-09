@@ -258,20 +258,46 @@ What is happening?
   for each input patch.
 
 
-1x1 Convolutions
-'''''''''''''''''''''
+.. rubric:: 1x1 Convolutions for decoder layer 1 and 2
+
+Since, each image patch is represented by a depth vector
+in the input tensor to the decoder, we need a way
+to map such a vector to another vector as per the FC
+layers in the SDA. This can be easily achieved by 1x1 convolutions.
 
 .. image:: ../../diagrams/cnn/1x1/channel_reduction.png
 
 
+.. rubric:: Transposed convolution for the final decoder layer
 
-The AutoEncoder architecture
-''''''''''''''''''''''''''''''''''''
+Final challenge is to take the depth vectors for individual 
+image patches and map them back into regular image patches 
+with 3 channels.
+
+A transposed convolution layer with identical kernel size
+and stride as the encoding layer can achieve this job.
+
+The Fully Convolutional SDA architecture
+'''''''''''''''''''''''''''''''''''''''''
+
+The figure below presents the architecture of the fully 
+convolutional stacked denoising autoencoder. 
+
 
 .. image:: ../../diagrams/cs/sda/cs_sda_cnn.png
 
 
+There are few differences from the approach taken in :cite:`mousavi2015deep`.
 
+* We use ReLU activations in decoder layers 1 and 2.
+* The final decoder layer uses sigmoid activation to ensure
+  that the output remains clipped between 0 and 1.
+* We have added batch normalization after layer 1 and 2 of the
+  decoder. 
+
+While this architecture doesn't address the blockiness issue,
+it can probably be addressed easily by adding one more convolutional
+layer after the decoder.
 
 References 
 ---------------
