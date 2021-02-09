@@ -282,10 +282,10 @@ console.log(6);
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#working-with-images">Working with Images</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fully-convolutional-stacked-denoising-autoencoder">Fully Convolutional Stacked Denoising Autoencoder</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#the-fully-convolutional-sda-architecture">The Fully Convolutional SDA architecture</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#fully-convolutional-stacked-denoising-autoencoder">Fully Convolutional Stacked Denoising Autoencoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#training">Training</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#evaluation">Evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implementation-details">Implementation Details</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
@@ -390,28 +390,27 @@ console.log(6);
 <h1>Fully Convolutional Stacked Denoising Autoencoders<a class="headerlink" href="#fully-convolutional-stacked-denoising-autoencoders" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#compressive-sensing-framework" id="id349">Compressive Sensing Framework</a></p></li>
-<li><p><a class="reference internal" href="#stacked-denoising-autoencoder" id="id350">Stacked Denoising Autoencoder</a></p>
+<li><p><a class="reference internal" href="#compressive-sensing-framework" id="id357">Compressive Sensing Framework</a></p></li>
+<li><p><a class="reference internal" href="#stacked-denoising-autoencoder" id="id358">Stacked Denoising Autoencoder</a></p>
 <ul>
-<li><p><a class="reference internal" href="#sda-linear-measurements" id="id351">SDA + Linear Measurements</a></p></li>
+<li><p><a class="reference internal" href="#sda-linear-measurements" id="id359">SDA + Linear Measurements</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#working-with-images" id="id352">Working with Images</a></p></li>
-<li><p><a class="reference internal" href="#fully-convolutional-stacked-denoising-autoencoder" id="id353">Fully Convolutional Stacked Denoising Autoencoder</a></p>
-<ul>
-<li><p><a class="reference internal" href="#the-fully-convolutional-sda-architecture" id="id354">The Fully Convolutional SDA architecture</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#references" id="id355">References</a></p></li>
+<li><p><a class="reference internal" href="#working-with-images" id="id360">Working with Images</a></p></li>
+<li><p><a class="reference internal" href="#fully-convolutional-stacked-denoising-autoencoder" id="id361">Fully Convolutional Stacked Denoising Autoencoder</a></p></li>
+<li><p><a class="reference internal" href="#training" id="id362">Training</a></p></li>
+<li><p><a class="reference internal" href="#evaluation" id="id363">Evaluation</a></p></li>
+<li><p><a class="reference internal" href="#implementation-details" id="id364">Implementation Details</a></p></li>
+<li><p><a class="reference internal" href="#references" id="id365">References</a></p></li>
 </ul>
 </div>
-<p><span id="id1">[<a class="reference internal" href="../../zzzreferences.html#id237"><span>MPB15</span></a>]</span> presents a deep learning
+<p><span id="id1">[<a class="reference internal" href="../../zzzreferences.html#id241"><span>MPB15</span></a>]</span> presents a deep learning
 based framework for sensing and recovering structured
 signals. This work builds on the ideas developed
 in it and presents a fully convolutional auto-encoder
 architecture for the same.</p>
 <div class="section" id="compressive-sensing-framework">
-<h2><a class="toc-backref" href="#id349">Compressive Sensing Framework</a><a class="headerlink" href="#compressive-sensing-framework" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id357">Compressive Sensing Framework</a><a class="headerlink" href="#compressive-sensing-framework" title="Permalink to this headline">¶</a></h2>
 <img alt="../../_images/cs.png" src="../../_images/cs.png" />
 <p>We consider a set of signals <span class="math notranslate nohighlight">\(x \in \RR^N\)</span> from
 a specific domain (e.g. images).</p>
@@ -461,8 +460,8 @@ known. This is represented by the step:</p>
 </ul>
 </div>
 <div class="section" id="stacked-denoising-autoencoder">
-<h2><a class="toc-backref" href="#id350">Stacked Denoising Autoencoder</a><a class="headerlink" href="#stacked-denoising-autoencoder" title="Permalink to this headline">¶</a></h2>
-<p><span id="id2">[<a class="reference internal" href="../../zzzreferences.html#id237"><span>MPB15</span></a>]</span> considers how deep learning ideas can
+<h2><a class="toc-backref" href="#id358">Stacked Denoising Autoencoder</a><a class="headerlink" href="#stacked-denoising-autoencoder" title="Permalink to this headline">¶</a></h2>
+<p><span id="id2">[<a class="reference internal" href="../../zzzreferences.html#id241"><span>MPB15</span></a>]</span> considers how deep learning ideas can
 be used to develop a recovery algorithm from compressed measurements
 of  a signal.</p>
 <p>In particular, it is not necessary to choose a specific
@@ -488,7 +487,7 @@ training process.</p>
 <p>The neural network architecture ideally suited for solving
 this kind of recovery problem is a stacked denoising autoencoder (SDA).</p>
 <div class="section" id="sda-linear-measurements">
-<h3><a class="toc-backref" href="#id351">SDA + Linear Measurements</a><a class="headerlink" href="#sda-linear-measurements" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id359">SDA + Linear Measurements</a><a class="headerlink" href="#sda-linear-measurements" title="Permalink to this headline">¶</a></h3>
 <img alt="../../_images/sda_from_linear_measurements.png" src="../../_images/sda_from_linear_measurements.png" />
 <p>The diagram above shows a four layer Stacked Denoising Autoencoder (SDA)
 for recovering signals from their linear measurements. The
@@ -536,7 +535,7 @@ by:</p>
 </div>
 </div>
 <div class="section" id="working-with-images">
-<h2><a class="toc-backref" href="#id352">Working with Images</a><a class="headerlink" href="#working-with-images" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id360">Working with Images</a><a class="headerlink" href="#working-with-images" title="Permalink to this headline">¶</a></h2>
 <p>SDA layers are fully connected layers. Hence, the
 input layer has to be connected to all pixels in
 an image. This is computationally infeasible for
@@ -545,7 +544,7 @@ large images.</p>
 small patches and vectorize each patch. Then,
 the network can process one patch at a time
 (for encoding and decoding).</p>
-<p><span id="id3">[<a class="reference internal" href="../../zzzreferences.html#id237"><span>MPB15</span></a>]</span> trained their SDA
+<p><span id="id3">[<a class="reference internal" href="../../zzzreferences.html#id241"><span>MPB15</span></a>]</span> trained their SDA
 for <span class="math notranslate nohighlight">\(32 \times 32\)</span> patches of
 grayscale images. Working with patches leads
 to some blockiness artifact in the reconstruction.
@@ -557,9 +556,12 @@ developed as a network consisting solely of
 convolutional layers.</p>
 </div>
 <div class="section" id="fully-convolutional-stacked-denoising-autoencoder">
-<h2><a class="toc-backref" href="#id353">Fully Convolutional Stacked Denoising Autoencoder</a><a class="headerlink" href="#fully-convolutional-stacked-denoising-autoencoder" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id361">Fully Convolutional Stacked Denoising Autoencoder</a><a class="headerlink" href="#fully-convolutional-stacked-denoising-autoencoder" title="Permalink to this headline">¶</a></h2>
+<p>The figure below presents the architecture of the fully
+convolutional stacked denoising autoencoder.</p>
+<img alt="../../_images/cs_sda_cnn.png" src="../../_images/cs_sda_cnn.png" />
 <p class="rubric">Input</p>
-<p>We use Caltech-UCSD Birds-200-2011 dataset <span id="id4">[<a class="reference internal" href="../../zzzreferences.html#id327"><span>WAS08</span></a>]</span> for our training.</p>
+<p>We use Caltech-UCSD Birds-200-2011 dataset <span id="id4">[<a class="reference internal" href="../../zzzreferences.html#id332"><span>WAS08</span></a>]</span> for our training.</p>
 <ul class="simple">
 <li><p>We work with color images.</p></li>
 <li><p>For training, we work with randomly selected subset of images.</p></li>
@@ -610,31 +612,140 @@ image patches and map them back into regular image patches
 with 3 channels.</p>
 <p>A transposed convolution layer with identical kernel size
 and stride as the encoding layer can achieve this job.</p>
-<div class="section" id="the-fully-convolutional-sda-architecture">
-<h3><a class="toc-backref" href="#id354">The Fully Convolutional SDA architecture</a><a class="headerlink" href="#the-fully-convolutional-sda-architecture" title="Permalink to this headline">¶</a></h3>
-<p>The figure below presents the architecture of the fully
-convolutional stacked denoising autoencoder.</p>
-<img alt="../../_images/cs_sda_cnn.png" src="../../_images/cs_sda_cnn.png" />
-<p>There are few differences from the approach taken in <span id="id5">[<a class="reference internal" href="../../zzzreferences.html#id237"><span>MPB15</span></a>]</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are few differences from the approach taken in <span id="id5">[<a class="reference internal" href="../../zzzreferences.html#id241"><span>MPB15</span></a>]</span>.</p>
 <ul class="simple">
+<li><p>We can work with color images directly. No need for grayscale conversion.</p></li>
 <li><p>We use ReLU activations in decoder layers 1 and 2.</p></li>
 <li><p>The final decoder layer uses sigmoid activation to ensure
 that the output remains clipped between 0 and 1.</p></li>
 <li><p>We have added batch normalization after layer 1 and 2 of the
 decoder.</p></li>
 </ul>
+</div>
 <p>While this architecture doesn’t address the blockiness issue,
 it can probably be addressed easily by adding one more convolutional
 layer after the decoder.</p>
 </div>
+<div class="section" id="training">
+<h2><a class="toc-backref" href="#id362">Training</a><a class="headerlink" href="#training" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>1000 images were randomly sampled from the Caltech-UCSD Birds-200-2011 dataset.</p></li>
+<li><p>Center crop of 256x256 was used.</p></li>
+<li><p>Images were divided by 255 to bring all the pixels to [0,1] range.</p></li>
+<li><p>The dataset was divided into 3 parts: 600 images in training set,
+200 images in validation set and 200 images in test set.</p></li>
+<li><p>Data augmentation was used to increase the number of training examples.</p>
+<ul>
+<li><p>Rotation up to 10 degrees.</p></li>
+<li><p>Shear upto 5 degrees</p></li>
+<li><p>Vertical shift upto 2 percent</p></li>
+<li><p>Horizontal flips</p></li>
+</ul>
+</li>
+<li><p>Batch size was 32 images</p></li>
+<li><p>25 batches per epoch</p></li>
+<li><p>80 epochs</p></li>
+</ul>
+</div>
+<div class="section" id="evaluation">
+<h2><a class="toc-backref" href="#id363">Evaluation</a><a class="headerlink" href="#evaluation" title="Permalink to this headline">¶</a></h2>
+<p>We selected a set of 12 representative images from the
+dataset for measuring the performance of the autoencoder.</p>
+<p>The figure below shows original images in row 1 and its
+reconstructions in row 2.</p>
+<img alt="../../_images/bird_reconstructions.png" src="../../_images/bird_reconstructions.png" />
+<p>The reconstruction error was measured using PSNR
+(implementation from Scikit-Image <span id="id6">[<a class="reference internal" href="../../zzzreferences.html#id319"><span>VdWSchonbergerNI+14</span></a>]</span>).</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Image</p></th>
+<th class="head"><p>PSNR (dB)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Black Footed Albatross</p></td>
+<td><p>31.66</p></td>
+</tr>
+<tr class="row-odd"><td><p>Black Throated Blue Warbler</p></td>
+<td><p>28.99</p></td>
+</tr>
+<tr class="row-even"><td><p>Downy Woodpecker</p></td>
+<td><p>27.87</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fish Crow</p></td>
+<td><p>25.18</p></td>
+</tr>
+<tr class="row-even"><td><p>Indigo Bunting</p></td>
+<td><p>25.54</p></td>
+</tr>
+<tr class="row-odd"><td><p>Loggerhead Shrike</p></td>
+<td><p>28.62</p></td>
+</tr>
+<tr class="row-even"><td><p>Red Faced Cormorant</p></td>
+<td><p>31.12</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rhinoceros Auklet</p></td>
+<td><p>24.41</p></td>
+</tr>
+<tr class="row-even"><td><p>Vesper Sparrow</p></td>
+<td><p>31.53</p></td>
+</tr>
+<tr class="row-odd"><td><p>White Breasted Kingfisher</p></td>
+<td><p>25.03</p></td>
+</tr>
+<tr class="row-even"><td><p>White Pelican</p></td>
+<td><p>25.89</p></td>
+</tr>
+<tr class="row-odd"><td><p>Yellow Billed Cuckoo</p></td>
+<td><p>25.42</p></td>
+</tr>
+</tbody>
+</table>
+<p>The reconstruction is excellent and PSNR for these
+sample images is quite high.</p>
+</div>
+<div class="section" id="implementation-details">
+<h2><a class="toc-backref" href="#id364">Implementation Details</a><a class="headerlink" href="#implementation-details" title="Permalink to this headline">¶</a></h2>
+<p>The autoencoder was implemented using Keras
+<span id="id7">[<a class="reference internal" href="../../zzzreferences.html#id78"><span>C+15</span></a>,<a class="reference internal" href="../../zzzreferences.html#id79"><span>Cho16</span></a>]</span>.
+and Tensorflow <span id="id8">[<a class="reference internal" href="../../zzzreferences.html#id2"><span>ABC+16</span></a>,<a class="reference internal" href="../../zzzreferences.html#id154"><span>Geron19</span></a>]</span>.</p>
+<p>The model implementation is available
+<a class="reference external" href="https://github.com/carnotresearch/cr-vision/blob/master/src/cr/vision/dl/nets/cs/sda.py">here</a> .</p>
+<p class="rubric">Notebooks</p>
+<p>Training and evaluation was done using Google Colab.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://nbviewer.jupyter.org/github/carnotresearch/cr-vision/blob/master/experiments/cs/sda/sda_training.ipynb">Notebook for training</a></p></li>
+<li><p><a class="reference external" href="https://nbviewer.jupyter.org/github/carnotresearch/cr-vision/blob/master/experiments/cs/sda/sda_predictions.ipynb">Notebook for evaluation</a></p></li>
+</ul>
 </div>
 <div class="section" id="references">
-<h2><a class="toc-backref" href="#id355">References</a><a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
-<p id="id6"><dl class="citation">
-<dt class="label" id="id242"><span class="brackets">MPB15</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>,<a href="#id5">4</a>)</span></dt>
+<h2><a class="toc-backref" href="#id365">References</a><a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="id9"><dl class="citation">
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id8">ABC+16</a></span></dt>
+<dd><p>Martín Abadi, Paul Barham, Jianmin Chen, Zhifeng Chen, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard, and others. Tensorflow: a system for large-scale machine learning. In <em>12th $\$USENIX$\$ Symposium on Operating Systems Design and Implementation ($\$OSDI$\$ 16)</em>, 265–283. 2016.</p>
+</dd>
+<dt class="label" id="id87"><span class="brackets"><a class="fn-backref" href="#id7">Cho16</a></span></dt>
+<dd><p>Francois Chollet. Building autoencoders in keras. <em>The Keras Blog</em>, 2016.</p>
+</dd>
+<dt class="label" id="id86"><span class="brackets"><a class="fn-backref" href="#id7">C+15</a></span></dt>
+<dd><p>Francois Chollet and others. Keras. 2015. URL: <a class="reference external" href="https://github.com/fchollet/keras">https://github.com/fchollet/keras</a>.</p>
+</dd>
+<dt class="label" id="id162"><span class="brackets"><a class="fn-backref" href="#id8">Geron19</a></span></dt>
+<dd><p>Aurélien Géron. <em>Hands-on machine learning with Scikit-Learn, Keras, and TensorFlow: Concepts, tools, and techniques to build intelligent systems</em>. O'Reilly Media, 2019.</p>
+</dd>
+<dt class="label" id="id249"><span class="brackets">MPB15</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>,<a href="#id5">4</a>)</span></dt>
 <dd><p>Ali Mousavi, Ankit B Patel, and Richard G Baraniuk. A deep learning approach to structured signal recovery. In <em>2015 53rd annual allerton conference on communication, control, and computing (Allerton)</em>, 1336–1343. IEEE, 2015.</p>
 </dd>
-<dt class="label" id="id332"><span class="brackets"><a class="fn-backref" href="#id4">WAS08</a></span></dt>
+<dt class="label" id="id327"><span class="brackets"><a class="fn-backref" href="#id6">VdWSchonbergerNI+14</a></span></dt>
+<dd><p>Stefan Van der Walt, Johannes L Schönberger, Juan Nunez-Iglesias, François Boulogne, Joshua D Warner, Neil Yager, Emmanuelle Gouillart, and Tony Yu. Scikit-image: image processing in python. <em>PeerJ</em>, 2:e453, 2014.</p>
+</dd>
+<dt class="label" id="id340"><span class="brackets"><a class="fn-backref" href="#id4">WAS08</a></span></dt>
 <dd><p>Zhongmin Wang, Gonzalo R Arce, and Brian M Sadler. Subspace compressive detection for sparse signals. In <em>Acoustics, Speech and Signal Processing, 2008. ICASSP 2008. IEEE International Conference on</em>, 3873–3876. IEEE, 2008.</p>
 </dd>
 </dl>

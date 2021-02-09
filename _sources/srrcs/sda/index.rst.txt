@@ -214,6 +214,13 @@ convolutional layers.
 Fully Convolutional Stacked Denoising Autoencoder
 ----------------------------------------------------
 
+The figure below presents the architecture of the fully 
+convolutional stacked denoising autoencoder. 
+
+
+.. image:: ../../diagrams/cs/sda/cs_sda_cnn.png
+
+
 .. rubric:: Input
 
 We use Caltech-UCSD Birds-200-2011 dataset :cite:`wang2008subspace` for our training.
@@ -277,27 +284,108 @@ with 3 channels.
 A transposed convolution layer with identical kernel size
 and stride as the encoding layer can achieve this job.
 
-The Fully Convolutional SDA architecture
-'''''''''''''''''''''''''''''''''''''''''
+.. note::
 
-The figure below presents the architecture of the fully 
-convolutional stacked denoising autoencoder. 
+  There are few differences from the approach taken in :cite:`mousavi2015deep`.
 
-
-.. image:: ../../diagrams/cs/sda/cs_sda_cnn.png
-
-
-There are few differences from the approach taken in :cite:`mousavi2015deep`.
-
-* We use ReLU activations in decoder layers 1 and 2.
-* The final decoder layer uses sigmoid activation to ensure
-  that the output remains clipped between 0 and 1.
-* We have added batch normalization after layer 1 and 2 of the
-  decoder. 
+  * We can work with color images directly. No need for grayscale conversion.
+  * We use ReLU activations in decoder layers 1 and 2.
+  * The final decoder layer uses sigmoid activation to ensure
+    that the output remains clipped between 0 and 1.
+  * We have added batch normalization after layer 1 and 2 of the
+    decoder. 
 
 While this architecture doesn't address the blockiness issue,
 it can probably be addressed easily by adding one more convolutional
 layer after the decoder.
+
+
+Training
+--------------------
+
+* 1000 images were randomly sampled from the Caltech-UCSD Birds-200-2011 dataset.
+* Center crop of 256x256 was used.
+* Images were divided by 255 to bring all the pixels to [0,1] range.
+* The dataset was divided into 3 parts: 600 images in training set,
+  200 images in validation set and 200 images in test set.
+* Data augmentation was used to increase the number of training examples.
+ 
+  * Rotation up to 10 degrees.
+  * Shear upto 5 degrees
+  * Vertical shift upto 2 percent
+  * Horizontal flips
+
+* Batch size was 32 images
+* 25 batches per epoch
+* 80 epochs
+
+
+Evaluation
+----------------
+
+We selected a set of 12 representative images from the
+dataset for measuring the performance of the autoencoder.
+
+The figure below shows original images in row 1 and its
+reconstructions in row 2. 
+
+.. image:: bird_reconstructions.png
+
+The reconstruction error was measured using PSNR 
+(implementation from Scikit-Image :cite:`van2014scikit`).
+
+.. list-table::
+  :header-rows: 1
+
+  * - Image
+    - PSNR (dB)
+  * - Black Footed Albatross
+    - 31.66
+  * - Black Throated Blue Warbler
+    - 28.99
+  * - Downy Woodpecker
+    - 27.87
+  * - Fish Crow
+    - 25.18
+  * - Indigo Bunting
+    - 25.54
+  * - Loggerhead Shrike
+    - 28.62
+  * - Red Faced Cormorant
+    - 31.12
+  * - Rhinoceros Auklet
+    - 24.41
+  * - Vesper Sparrow
+    - 31.53
+  * - White Breasted Kingfisher
+    - 25.03
+  * - White Pelican
+    - 25.89
+  * - Yellow Billed Cuckoo
+    - 25.42
+
+The reconstruction is excellent and PSNR for these
+sample images is quite high.
+
+
+Implementation Details
+-----------------------
+
+The autoencoder was implemented using Keras 
+:cite:`chollet2015keras, chollet2016building`.
+and Tensorflow :cite:`abadi2016tensorflow,geron2019hands`. 
+
+The model implementation is available
+`here <https://github.com/carnotresearch/cr-vision/blob/master/src/cr/vision/dl/nets/cs/sda.py>`_ .
+
+
+.. rubric:: Notebooks
+
+Training and evaluation was done using Google Colab.
+
+* `Notebook for training <https://nbviewer.jupyter.org/github/carnotresearch/cr-vision/blob/master/experiments/cs/sda/sda_training.ipynb>`_
+* `Notebook for evaluation <https://nbviewer.jupyter.org/github/carnotresearch/cr-vision/blob/master/experiments/cs/sda/sda_predictions.ipynb>`_
+
 
 References 
 ---------------
