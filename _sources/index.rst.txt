@@ -21,8 +21,9 @@ GITHUB Repo: `cr-vision <https://github.com/carnotresearch/cr-vision>`_
    tutorials/index
    cnn/index
    srrcs/index
-   source/cr.vision
+   notes/index
    zzzreferences
+   source/cr.vision
 
 
 
