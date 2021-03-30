@@ -265,6 +265,23 @@ What is happening?
   for each input patch.
 
 
+.. note::
+
+  The **Compression Ratio** can be defined as the
+  ratio :math:`\frac{N}{M}`. In the first design,
+  we will take compression ratio = 4. In the 
+  sequel, we will vary the compression ratio
+  to how the quality of reconstruction varies
+  with compression ratio.
+
+
+.. rubric:: The decoder
+
+The decoder consists of following layers
+
+* 2 1x1 convolutional layers with batch normalization
+* 1 final transposed convolutional layer
+
 .. rubric:: 1x1 Convolutions for decoder layer 1 and 2
 
 Since, each image patch is represented by a depth vector
