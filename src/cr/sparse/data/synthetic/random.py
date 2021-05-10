@@ -1,25 +1,33 @@
-import tensorflow as tf
 
-class SparseRepGenerator:
 
-    def __init__(self, dim_rep, sparsity, count, dtype=tf.float32):
-        self.dim_rep = dim_rep
-        self.sparsity = sparsity
-        self.count = count
-        #  generate the sequence 0..N-1
-        r = tf.range(dim_rep)
-        r = tf.random.shuffle(r)
-        # keep the first K
-        r = r[:sparsity]
-        self.omega = r
-        # output
-        shape = [count, dim_rep]
-        self.output = tf.Variable(tf.zeros(shape, dtype=dtype))
+import jax.numpy as jnp
+from jax import jit
+from jax import random 
+from jax.ops import index, index_update
 
-    def gaussian(self):
-        shape = [self.count, self.sparsity]
-        data = tf.random.normal(shape)
-        for (i, index) in enumerate(self.omega):
-            self.output[:, index].assign(data[:, i])
-        return self.output
+def sparse_normal_representations(key, D, K, S):
+    """
+    Generates a block of representation vectors where each vector is
+    K-sparse, the non-zero basis indexes are randomly selected
+    and shared among all vectors and non-zero values are normally
+    distributed. 
+
+    Args:
+        D (int): Dimension of the sparse representation space
+        K (int): Number of non-zero entries in the sparse signals
+        S (int): Number of sparse signals
+
+    Returns:
+        result (DeviceArray): Block of sparse representations
+        omega (DeviceArray): Locations of Non-Zero entries
+    """
+    r = jnp.arange(D)
+    r = random.permutation(key, r)
+    omega = r[:K]
+    omega = jnp.sort(omega)
+    shape = [S, K]
+    values = random.normal(key, shape)
+    result = jnp.zeros([S, D])
+    result = index_update(result, index[:, omega], values)
+    return result, omega
 

@@ -1,75 +1,115 @@
-import tensorflow as tf
-import numpy as np
+import jax.numpy as jnp
+from jax.ops import index, index_add
+from jax.numpy.linalg import norm
 from .defs import SingleRecoverySolution
 from cr.sparse.norm import *
 
-class MatchingPursuit:
+def solve_smv(dictionary, x, max_iters=None, max_res_norm=None):
+    # initialize residual
+    r = x
+    num_atoms = dictionary.shape[0]
+    z = jnp.zeros(num_atoms)
+    # iteration count
+    t = 0
+    # compute the norm of original signal
+    x_norm = norm(x)
+    # absolute limit on res norm
+    upper_res_norm = x_norm * 1e-6
+    # upper limit on number of iterations
+    upper_iters = 4 * num_atoms
+    if max_iters is not None:
+        upper_iters = max_iters
+    if max_res_norm is not None:
+        upper_res_norm = max_res_norm
+    while True:
+        # Compute the inner product of residual with atoms
+        correlations = r @ dictionary.T
+        # each correlation column is for one signal
+        # take absolute values
+        abs_corrs = jnp.abs(correlations)
+        # find the maximum in the column
+        best_match_index = jnp.argmax(abs_corrs)
+        # pick corresponding correlation value
+        coeff = correlations[best_match_index]
+        # update the representation
+        z  = index_add(z, index[best_match_index], coeff)
+        # find the best match atom
+        atom = dictionary[best_match_index]
+        # update the residual
+        r = r - coeff * atom
+        t += 1
+        # compute the updated residual norm
+        r_norm = norm(r)
+        # print("[{}] norm: {}".format(t, r_norm))
+        # print('.', end="", flush=True)
+        if t >= upper_iters:
+            break
+        if r_norm < upper_res_norm:
+            break
+        #print("[{}] res norm: {}".format(t, r_norm))
+    solution = SingleRecoverySolution(signals=x, 
+        representations=z, 
+        residuals=r, 
+        residual_norms=r_norm,
+        iterations=t)
+    return solution
 
-    def __init__(self, dict):
-        # reach row is an atom
-        # number of rows is number of atoms in dictionary
-        self.dict = dict
-        shape = dict.shape
-        self.num_atoms = shape[0]
-        self.dim_signal = shape[1]
 
-
-    def __call__(self, signals, max_iters=None, max_res_norm=None):
-        # initialize residual
-        residuals = tf.Variable(signals)
-        num_signals = signals.shape[0]
-        # initialize solution vector
-        # z = tf.Variable(tf.zeros(self.num_atoms))
-        sol_shape = (num_signals, self.num_atoms)
-        z = np.zeros(sol_shape)
-        # iteration count
-        t = 0
-        dict = self.dict
-        # compute the norm of original signal
-        x_norms = norms_l2_rw(signals)
-        # absolute limit on res norm
-        upper_res_norm = tf.reduce_max(x_norms) * 1e-6
-        # upper limit on number of iterations
-        upper_iters = 4 * self.num_atoms
-        while True:
-            # Compute the inner product of residual with atoms
-            correlations = tf.matmul(dict, residuals, transpose_b=True)
-            #print(correlations.shape)
-            # each correlation column is for one signal
-            # take absolute values
-            abs_corrs = tf.abs(correlations)
-            # find the maximum in the column
-            indices = tf.math.argmax(abs_corrs, axis=0)
-            for i in range(num_signals):
-                # best match atom index
-                best_match_index = indices[i]
-                # pick corresponding correlation value
-                coeff = correlations[best_match_index, i]
-                # update the representation
-                z[i, best_match_index] += coeff
-                # find the best match atom
-                atom = dict[best_match_index]
-                # update the residual
-                residuals[i, :].assign(residuals[i, :] - coeff * atom) 
-            t += 1
-            # compute the updated residual norm
-            r_norms = norms_l2_rw(residuals)
-            max_r_norm = tf.reduce_max(r_norms)
-            # print("[{}] norm: {}".format(t, r_norm))
-            print('.', end="", flush=True)
-            if max_iters is not None and t >= max_iters:
-                break
-            if max_res_norm is not None and max_r_norm < max_res_norm:
-                break
-            if max_r_norm < upper_res_norm:
-                break
-            if t >= upper_iters:
-                break
-            #print("[{}] res norm: {}".format(t, max_r_norm))
-        solution = SingleRecoverySolution(signals=signals, 
-            representations=z, 
-            residuals=residuals, 
-            residual_norms=r_norms,
-            iterations=t)
-        return solution
+def solve_mmv(dictionary, signals, max_iters=None, max_res_norm=None):
+    # initialize residual
+    residuals = signals
+    num_signals = signals.shape[0]
+    num_atoms = dictionary.shape[0]
+    sol_shape = (num_signals, num_atoms)
+    z = jnp.zeros(sol_shape)
+    # iteration count
+    t = 0
+    # compute the norm of original signal
+    x_norms = norms_l2_rw(signals)
+    # absolute limit on res norm
+    upper_res_norm = jnp.max(x_norms) * 1e-6
+    # upper limit on number of iterations
+    upper_iters = 4 * num_atoms
+    while True:
+        # Compute the inner product of residual with atoms
+        correlations = jnp.matmul(dictionary, residuals.T)
+        #print(correlations.shape)
+        # each correlation column is for one signal
+        # take absolute values
+        abs_corrs = jnp.abs(correlations)
+        # find the maximum in the column
+        indices = jnp.argmax(abs_corrs, axis=0)
+        for i in range(num_signals):
+            # best match atom index
+            best_match_index = indices[i]
+            # pick corresponding correlation value
+            coeff = correlations[best_match_index, i]
+            # update the representation
+            z  = index_add(z, index[i, best_match_index], coeff)
+            # find the best match atom
+            atom = dictionary[best_match_index]
+            # update the residual
+            update = coeff * atom
+            residuals = index_add(residuals, index[i, :], -update)
+        t += 1
+        # compute the updated residual norm
+        r_norms = norms_l2_rw(residuals)
+        max_r_norm = jnp.max(r_norms)
+        # print("[{}] norm: {}".format(t, r_norm))
+        print('.', end="", flush=True)
+        if max_iters is not None and t >= max_iters:
+            break
+        if max_res_norm is not None and max_r_norm < max_res_norm:
+            break
+        if max_r_norm < upper_res_norm:
+            break
+        if t >= upper_iters:
+            break
+        #print("[{}] res norm: {}".format(t, max_r_norm))
+    solution = SingleRecoverySolution(signals=signals, 
+        representations=z, 
+        residuals=residuals, 
+        residual_norms=r_norms,
+        iterations=t)
+    return solution
 

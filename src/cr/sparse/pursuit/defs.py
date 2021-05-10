@@ -1,12 +1,12 @@
 from dataclasses import dataclass
-import tensorflow as tf
+import jax.numpy as jnp
 
 @dataclass
 class SingleRecoverySolution:
-    signals: tf.Tensor = None
-    representations : tf.Tensor = None
-    residuals : tf.Tensor =  None
-    residual_norms : tf.Tensor = None
+    signals: jnp.DeviceArray = None
+    representations : jnp.DeviceArray = None
+    residuals : jnp.DeviceArray =  None
+    residual_norms : jnp.DeviceArray = None
     iterations: int = None
-    support : tf.Tensor = None
+    support : jnp.DeviceArray = None
 

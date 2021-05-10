@@ -94,9 +94,11 @@ setup(
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
     download_url="https://github.com/carnotresearch/cr-sparse/archive/v0.1.tar.gz",
-    install_requires=[ "numpy", 
+    install_requires=[ 
+        "numpy", 
         "scipy", 
-        "tensorflow",
+        "jax",
+        "jaxlib",
         "matplotlib", 
         "imageio", 
         "click", 
