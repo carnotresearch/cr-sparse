@@ -12,35 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from jax import lax
+import jax.numpy as jnp
 
-from cr.sparse._src.util import (
-    promote_arg_dtypes
-)
-
-from cr.sparse._src.matrix import (
-    transpose,
-    hermitian,
-    is_matrix,
-    is_square,
-    is_symmetric,
-    is_hermitian,
-    is_positive_definite,
-    has_orthogonal_columns,
-    has_orthogonal_rows,
-    has_unitary_columns,
-    has_unitary_rows,
-)
-
-from cr.sparse._src.norm import (
-    norms_l1_cw,
-    norms_l1_rw,
-    norms_l2_cw,
-    norms_l2_rw,
-    norms_linf_cw,
-    norms_linf_rw,
-
-    normalize_l1_cw,
-    normalize_l1_rw,
-    normalize_l2_cw,
-    normalize_l2_rw,
-)
+transpose = lambda x : jnp.swapaxes(x, -1, -2)
