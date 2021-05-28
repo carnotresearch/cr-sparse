@@ -11,3 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+from cr.sparse._src.pursuit.util import (
+    abs_max_idx,
+    gram_chol_update
+)

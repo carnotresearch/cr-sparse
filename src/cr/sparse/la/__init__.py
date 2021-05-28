@@ -12,4 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#from cr.sparse._src.la.util import ()
+from cr.sparse._src.la.triangular import (
+    solve_Lx_b,
+    solve_LTx_b,
+    solve_Ux_b,
+    solve_UTx_b,
+    solve_spd_chol_solve
+)
