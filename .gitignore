@@ -110,3 +110,6 @@ data/videos/*.mp4
 *.ogg
 *.mp4
 examples/junk/*
+workbook.ipynb
+test_*.ipynb
+demo_*.ipynb
