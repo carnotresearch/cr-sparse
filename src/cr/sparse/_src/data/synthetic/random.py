@@ -3,7 +3,6 @@
 import jax.numpy as jnp
 from jax import jit
 from jax import random 
-from jax.ops import index, index_update
 
 def sparse_normal_representations(key, D, K, S):
     """
@@ -25,9 +24,9 @@ def sparse_normal_representations(key, D, K, S):
     r = random.permutation(key, r)
     omega = r[:K]
     omega = jnp.sort(omega)
-    shape = [S, K]
+    shape = [K, S]
     values = random.normal(key, shape)
-    result = jnp.zeros([S, D])
-    result = index_update(result, index[:, omega], values)
+    result = jnp.zeros([D, S])
+    result = result.at[omega, :].set(values)
     return result, omega
 
