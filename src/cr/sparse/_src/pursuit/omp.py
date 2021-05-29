@@ -16,7 +16,7 @@
 import jax.numpy as jnp
 
 from .util import abs_max_idx, gram_chol_update
-from cr.sparse.la import solve_spd_chol_solve
+from cr.sparse.la import solve_spd_chol
 
 def solve(Phi, y, max_iters, max_res_norm=1e-6):
     # initialize residual
@@ -71,7 +71,7 @@ def solve(Phi, y, max_iters, max_res_norm=1e-6):
         # sub-vector of proxy corresponding to selected indices
         p_I = p[I]
         # sub-vector of representation coefficients estimated so far
-        x_I = solve_spd_chol_solve(L, p_I)
+        x_I = solve_spd_chol(L, p_I)
         # updated residual after first iteration
         r = y - Phi_I @ x_I
         # norm squared of new residual

@@ -40,7 +40,7 @@ def solve_UTx_b(U, b):
     return solve_triangular(U, b, trans='T')
 
 
-def solve_spd_chol_solve(L, b):
+def solve_spd_chol(L, b):
     """
     Solves a symmetric positive definite system A x = b
     where A = L L'

@@ -17,5 +17,5 @@ from cr.sparse._src.la.triangular import (
     solve_LTx_b,
     solve_Ux_b,
     solve_UTx_b,
-    solve_spd_chol_solve
+    solve_spd_chol
 )
