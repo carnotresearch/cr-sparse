@@ -1,2 +1,2 @@
-Algorithms for Sparse and Redundant Representations
-======================================================
+XLA Accelerated Algorithms for Sparse Representations and Compressive Sensing
+==================================================================================
