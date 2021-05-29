@@ -14,44 +14,41 @@
 
 
 import jax.numpy as jnp
-from jax.ops import index, index_add, index_update
-from jax.numpy.linalg import norm, lstsq
-from .defs import SingleRecoverySolution
 
 from .util import abs_max_idx, gram_chol_update
 from cr.sparse.la import solve_spd_chol_solve
 
-def solve(Phi, x, max_iters, max_res_norm=1e-6):
+def solve(Phi, y, max_iters, max_res_norm=1e-6):
     # initialize residual
-    r = x
+    r = y
     D = Phi.shape[0]
     N = Phi.shape[1]
     K = max_iters
     # Let's conduct first iteration of OMP
     # squared norm of the signal
-    norm_x_sqr = x.T @ x
+    norm_y_sqr = y.T @ y
     # initialize residual squared norm with the same
-    norm_r_sqr = norm_x_sqr
+    norm_r_sqr = norm_y_sqr
     # The proxy representation
-    p = Phi.T @ x
+    p = Phi.T @ y
     # First correlation of residual with signal
     h = p
     # Index of best match
-    index = abs_max_idx(h)
+    i = abs_max_idx(h)
     # Initialize the array of selected indices
-    indices = jnp.array([index])
+    I = jnp.array([i])
     # First matched atom
-    atom = Phi[:, index]
+    phi_i = Phi[:, i]
     # Initial subdictionary of selected atoms
-    subdict = jnp.expand_dims(atom, axis=1)
+    Phi_I = jnp.expand_dims(phi_i, axis=1)
     # Initial L for Cholesky factorization of Gram matrix
     L = jnp.ones((1,1))
     # sub-vector of proxy corresponding to selected indices
-    p_sub = p[indices]
+    p_I = p[I]
     # sub-vector of representation coefficients estimated so far
-    alpha_sub = p_sub
+    x_I = p_I
     # updated residual after first iteration
-    r = x - subdict @ alpha_sub
+    r = y - Phi_I @ x_I
     # norm squared of new residual
     norm_r_new_sqr = r.T @ r
     # conduct OMP iterations
@@ -60,23 +57,23 @@ def solve(Phi, x, max_iters, max_res_norm=1e-6):
         # compute the correlations
         h = Phi.T @ r
         # Index of best match
-        index = abs_max_idx(h)
+        i = abs_max_idx(h)
         # Update the set of indices
-        indices = jnp.append(indices, index)
+        I = jnp.append(I, i)
         # best matching atom
-        atom = Phi[:, index]
+        phi_i = Phi[:, i]
         # Correlate with previously selected atoms
-        b = subdict.T @ atom
+        v = Phi_I.T @ phi_i
         # Update the Cholesky factorization
-        L = gram_chol_update(L, b)
+        L = gram_chol_update(L, v)
         # Update the subdictionary
-        subdict = jnp.hstack((subdict, jnp.expand_dims(atom,1)))
+        Phi_I = jnp.hstack((Phi_I, jnp.expand_dims(phi_i,1)))
         # sub-vector of proxy corresponding to selected indices
-        p_sub = p[indices]
+        p_I = p[I]
         # sub-vector of representation coefficients estimated so far
-        alpha_sub = solve_spd_chol_solve(L, p_sub)
+        x_I = solve_spd_chol_solve(L, p_I)
         # updated residual after first iteration
-        r = x - subdict @ alpha_sub
+        r = y - Phi_I @ x_I
         # norm squared of new residual
         norm_r_new_sqr = r.T @ r
-    return alpha_sub, indices, r
+    return x_I, I, r

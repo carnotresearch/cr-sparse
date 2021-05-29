@@ -22,10 +22,10 @@ def abs_max_idx(h):
     """
     return jnp.argmax(jnp.abs(h))
 
-def gram_chol_update(L, b):
+def gram_chol_update(L, v):
     m, n = L.shape
     z = jnp.zeros((m, 1))
-    w = solve_Lx_b(L, b)
+    w = solve_Lx_b(L, v)
     s = jnp.sqrt(1  - w.T @ w)
     L0 = jnp.hstack((L, z))
     L1 = jnp.hstack((w.T, s))
