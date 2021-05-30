@@ -27,6 +27,15 @@ def read(*names, **kwargs):
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
+def _parse_requirements(filename):
+  with open(path.join(here, 'requirements', filename)) as f:
+    return [
+        line.rstrip()
+        for line in f
+        if not (line.isspace() or line.startswith('#'))
+    ]
+
+
 setup(
     name='cr-sparse',
 
@@ -94,23 +103,17 @@ setup(
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
     download_url="https://github.com/carnotresearch/cr-sparse/archive/v0.1.tar.gz",
-    install_requires=[ 
-        "numpy", 
-        "scipy", 
-        "jax",
-        "jaxlib",
-        "matplotlib", 
-        "imageio", 
-        "click", 
-    ],
-
+    install_requires=_parse_requirements('requirements.txt'),
+    tests_require=_parse_requirements('requirements-tests.txt'),
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
     # for example:
     # $ pip install -e .[dev,test]
     extras_require={
         'dev': [ ],
-        'test': [ "pytest"],
+        'docs': _parse_requirements('requirements-docs.txt'),
+        'test': _parse_requirements('requirements-tests.txt'),
+        'examples': _parse_requirements('requirements-examples.txt')
     },
     include_package_data=True,
     zip_safe=False,
