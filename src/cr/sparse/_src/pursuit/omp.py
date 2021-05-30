@@ -14,9 +14,11 @@
 
 
 import jax.numpy as jnp
+from jax import vmap
 
 from .util import abs_max_idx, gram_chol_update
 from cr.sparse.la import solve_spd_chol
+from .defs import RecoverySolution
 
 def solve(Phi, y, max_iters, max_res_norm=1e-6):
     # initialize residual
@@ -76,4 +78,7 @@ def solve(Phi, y, max_iters, max_res_norm=1e-6):
         r = y - Phi_I @ x_I
         # norm squared of new residual
         norm_r_new_sqr = r.T @ r
-    return x_I, I, r
+    return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=norm_r_new_sqr, iterations=k)
+
+
+solve_multi = vmap(solve, (None, 1, None), 0)
