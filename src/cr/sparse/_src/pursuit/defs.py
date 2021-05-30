@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+from typing import NamedTuple
 from dataclasses import dataclass
 import jax.numpy as jnp
+from jax.tree_util import register_pytree_node
 
 @dataclass
 class SingleRecoverySolution:
@@ -25,3 +26,14 @@ class SingleRecoverySolution:
     iterations: int = None
     support : jnp.DeviceArray = None
 
+class RecoverySolution(NamedTuple):
+    # The non-zero values
+    x_I: jnp.DeviceArray
+    # The support for non-zero values
+    I: jnp.DeviceArray
+    # The residual
+    r: jnp.DeviceArray
+    # The residual norm squared
+    r_norm_sqr: jnp.DeviceArray
+    # The number of iterations it took to complete
+    iterations: int
