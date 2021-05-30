@@ -78,7 +78,7 @@ def solve(Phi, y, max_iters, max_res_norm=1e-6):
         r = y - Phi_I @ x_I
         # norm squared of new residual
         norm_r_new_sqr = r.T @ r
-    return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=norm_r_new_sqr, iterations=k)
+    return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=norm_r_new_sqr, iterations=k+1)
 
 
 solve_multi = vmap(solve, (None, 1, None), 0)
