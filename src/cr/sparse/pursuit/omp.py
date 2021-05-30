@@ -13,5 +13,6 @@
 # limitations under the License.
 
 from cr.sparse._src.pursuit.omp import (
-    solve
+    solve,
+    solve_multi
 )

@@ -16,3 +16,7 @@ from cr.sparse._src.pursuit.util import (
     abs_max_idx,
     gram_chol_update
 )
+
+from cr.sparse._src.pursuit.defs import (
+    RecoverySolution
+)
