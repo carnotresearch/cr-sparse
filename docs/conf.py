@@ -14,7 +14,7 @@ import os
 import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
-sys.path.insert(0, os.path.abspath("../"))
+sys.path.insert(0, os.path.abspath(".."))
 sys.path.append(os.path.abspath('extensions'))
 
 
@@ -39,15 +39,31 @@ extensions = [
     "nbsphinx",
     'sphinx.ext.graphviz',
     "sphinx.ext.autodoc",
+    'sphinx.ext.autosummary',
     "sphinx.ext.doctest",
     'sphinx.ext.ifconfig',
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
     "sphinx.ext.mathjax",
     "sphinx.ext.viewcode",
+    'sphinx.ext.napoleon',
     "sphinx.ext.githubpages",
+    'matplotlib.sphinxext.plot_directive',
+    'sphinx_autodoc_typehints',
     #'sphinxcontrib.bibtex',
 ]
+
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3/', None),
+    'numpy': ('https://numpy.org/doc/stable/', None),
+    'scipy': ('https://docs.scipy.org/doc/scipy/reference/', None),
+}
+
+suppress_warnings = [
+    'ref.citation',  # Many duplicated citations in numpy/scipy docstrings.
+    'ref.footnote',  # Many unreferenced footnotes in numpy/scipy docstrings
+]
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -59,8 +75,16 @@ master_doc = "index"
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db'
-    , '.DS_Store', "**/.DS_Store", ".ipynb_checkpoints", "**/.ipynb_checkpoints"]
+exclude_patterns = ['_build', 
+    'Thumbs.db',
+    '.DS_Store', 
+    "**/.DS_Store", 
+    ".ipynb_checkpoints", 
+    "**/.ipynb_checkpoints"
+    ]
+
+autosummary_generate = True
+napolean_use_rtype = False
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -119,3 +143,6 @@ import matplotlib
 
 matplotlib.use("agg")
 
+# Tell sphinx-autodoc-typehints to generate stub parameter annotations including
+# types, even if the parameters aren't explicitly documented.
+always_document_param_types = True

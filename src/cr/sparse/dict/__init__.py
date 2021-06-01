@@ -12,7 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+"""
+Sparsifying dictionaries
+"""
 
 from cr.sparse._src.dict.simple import (
     gaussian_mtx,

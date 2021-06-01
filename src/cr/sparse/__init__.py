@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+CR.Sparse
+"""
+
 
 from cr.sparse._src.util import (
     promote_arg_dtypes

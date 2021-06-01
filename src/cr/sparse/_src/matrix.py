@@ -18,12 +18,18 @@ from .util import promote_arg_dtypes
 
 
 def transpose(a):
+    """Returns the transpose of an array
+    """
     return jnp.swapaxes(a, -1, -2)
 
 def hermitian(a):
+    """Returns the conjugate transpose of an array
+    """
     return jnp.conjugate(jnp.swapaxes(a, -1, -2))
 
 def is_matrix(A):
+    """Checks if an array is a matrix
+    """
     return A.ndim == 2
 
 def is_square(A):

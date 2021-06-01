@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Linear algebra utility functions
+"""
+
 from cr.sparse._src.la.triangular import (
     solve_Lx_b,
     solve_LTx_b,
