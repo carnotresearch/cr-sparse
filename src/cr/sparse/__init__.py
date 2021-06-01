@@ -88,4 +88,9 @@ from cr.sparse._src.signal import (
     randomize_cols,
     find_first_signal_with_energy_le_rw,
     find_first_signal_with_energy_le_cw,
+    largest_indices,
+    largest_indices_rw,
+    largest_indices_cw,
+    take_along_rows,
+    take_along_cols
 )
