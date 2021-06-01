@@ -30,3 +30,9 @@ def promote_arg_dtypes(*args):
         return args[0]
     else:
         return args
+
+
+def canonicalize_dtype(dtype):
+    if dtype is None:
+        return dtype
+    return dtypes.canonicalize_dtype(dtype)
