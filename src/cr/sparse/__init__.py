@@ -44,3 +44,38 @@ from cr.sparse._src.norm import (
     normalize_l2_cw,
     normalize_l2_rw,
 )
+
+from cr.sparse._src.distance import (
+    pairwise_sqr_l2_distances_rw,
+    pairwise_sqr_l2_distances_cw,
+    pairwise_l2_distances_rw,
+    pairwise_l2_distances_cw,
+    pdist_sqr_l2_rw,
+    pdist_sqr_l2_cw,
+    pdist_l2_rw,
+    pdist_l2_cw,
+    # Manhattan distances
+    pairwise_l1_distances_rw,
+    pairwise_l1_distances_cw,
+    pdist_l1_rw,
+    pdist_l1_cw,
+
+    # Chebychev distance
+    pairwise_linf_distances_rw,
+    pairwise_linf_distances_cw,
+    pdist_linf_rw,
+    pdist_linf_cw
+)
+
+from cr.sparse._src.discrete.number import (
+    is_integer,
+    is_positive_integer,
+    is_negative_integer,
+    is_odd,
+    is_even,
+    is_odd_natural,
+    is_even_natural,
+    is_power_of_2,
+    is_perfect_square,
+    integer_factors_close_to_sqr_root
+)
