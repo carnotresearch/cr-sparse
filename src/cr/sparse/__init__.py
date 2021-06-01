@@ -97,3 +97,7 @@ from cr.sparse._src.signal import (
     sparse_approximation_cw,
     sparse_approximation_rw
 )
+
+from cr.sparse._src.signalcomparison import (
+    SignalsComparison
+)
