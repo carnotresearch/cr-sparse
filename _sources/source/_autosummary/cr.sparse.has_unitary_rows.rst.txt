@@ -1,0 +1,6 @@
+﻿cr.sparse.has\_unitary\_rows
+============================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: has_unitary_rows

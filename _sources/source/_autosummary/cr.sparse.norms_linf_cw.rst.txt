@@ -1,0 +1,6 @@
+﻿cr.sparse.norms\_linf\_cw
+=========================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: norms_linf_cw

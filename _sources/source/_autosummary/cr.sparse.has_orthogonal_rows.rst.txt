@@ -1,0 +1,6 @@
+﻿cr.sparse.has\_orthogonal\_rows
+===============================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: has_orthogonal_rows

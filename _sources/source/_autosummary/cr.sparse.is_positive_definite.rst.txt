@@ -1,0 +1,6 @@
+﻿cr.sparse.is\_positive\_definite
+================================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: is_positive_definite

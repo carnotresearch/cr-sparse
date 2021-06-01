@@ -1,0 +1,6 @@
+﻿cr.sparse.is\_hermitian
+=======================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: is_hermitian
