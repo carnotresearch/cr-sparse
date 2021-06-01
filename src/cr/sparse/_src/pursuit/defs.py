@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import NamedTuple
+from typing import NamedTuple, List, Dict
 from dataclasses import dataclass
 import jax.numpy as jnp
 from jax.tree_util import register_pytree_node
@@ -37,3 +37,18 @@ class RecoverySolution(NamedTuple):
     r_norm_sqr: jnp.DeviceArray
     # The number of iterations it took to complete
     iterations: int
+
+
+class PTConfig(NamedTuple):
+    K: int
+    M: int
+    eta: int
+    rho: int
+    
+class PTConfigurations(NamedTuple):
+    N: int
+    configurations: List[PTConfig]
+    Ms: jnp.DeviceArray
+    etas: jnp.DeviceArray
+    rhos: jnp.DeviceArray
+    reverse_map: Dict
