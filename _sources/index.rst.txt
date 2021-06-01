@@ -1,29 +1,13 @@
-.. CR.Vision documentation master file, created by
-   sphinx-quickstart on Sat Aug  4 18:38:48 2018.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+CR.Sparse
+=====================================
 
-CR.Vision
-===========================================
-Amazing Computer Vision Pipelines by Carnot Research
-
-
-GITHUB Repo: `cr-vision <https://github.com/carnotresearch/cr-vision>`_
+GITHUB Repo: `cr-sparse <https://github.com/carnotresearch/cr-sparse>`_
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   overview
-   start
-   nb_basic_image_operations
-   image_processing/index
-   tutorials/index
-   cnn/index
-   srrcs/index
-   notes/index
-   zzzreferences
-   source/cr.vision
+   source/index
 
 
 
