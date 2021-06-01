@@ -114,3 +114,6 @@ workbook.ipynb
 test_*.ipynb
 demo_*.ipynb
 workbook_*.ipynb
+
+_autosummary
+docs/source/_autosummary/*
