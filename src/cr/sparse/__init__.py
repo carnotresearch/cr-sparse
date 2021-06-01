@@ -99,5 +99,7 @@ from cr.sparse._src.signal import (
 )
 
 from cr.sparse._src.signalcomparison import (
-    SignalsComparison
+    SignalsComparison,
+    snrs_cw,
+    snrs_rw
 )

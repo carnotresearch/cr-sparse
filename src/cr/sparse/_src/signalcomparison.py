@@ -16,7 +16,7 @@
 import jax
 import jax.numpy as jnp
 
-from .norm import sqr_norms_l2_cw, norms_l2_cw
+from .norm import sqr_norms_l2_cw, sqr_norms_l2_rw, norms_l2_cw
 
 norm = jnp.linalg.norm
 
@@ -100,3 +100,16 @@ class SignalsComparison:
         print(f'Combined difference norm: {self.cum_difference_norm:.3f}')
         print(f'Combined SNR: {self.cum_signal_to_noise_ratio:.2f} dB')
 
+
+
+def snrs_cw(A, B):
+    ref_energies = sqr_norms_l2_cw(A)
+    diff_energies = sqr_norms_l2_cw(A-B)
+    ratios = ref_energies / diff_energies
+    return 10*jnp.log10(ratios)
+
+def snrs_rw(A, B):
+    ref_energies = sqr_norms_l2_rw(A)
+    diff_energies = sqr_norms_l2_rw(A-B)
+    ratios = ref_energies / diff_energies
+    return 10*jnp.log10(ratios)
