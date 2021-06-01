@@ -24,6 +24,10 @@ norm = jnp.linalg.norm
 class SignalsComparison:
 
     def __init__(self, references, estimates):
+        if references.ndim == 1:
+            references = jnp.expand_dims(references, 1)
+        if estimates.ndim == 1:
+            estimates = jnp.expand_dims(estimates, 1)
         self.references = references
         self.estimates  = estimates
         self.differences = references - estimates
@@ -92,6 +96,10 @@ class SignalsComparison:
         return 20 * jnp.log10(ratio)
 
     def summarize(self):
+        # if self.references.ndim == 2:
+        #     
+        # else:
+        #     n, s = self.references.shape, 1
         n, s = self.references.shape
         print(f'Dimensions: {n}')
         print(f'Signals: {s}')
