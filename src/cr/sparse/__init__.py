@@ -38,6 +38,9 @@ from cr.sparse._src.norm import (
     norms_l2_rw,
     norms_linf_cw,
     norms_linf_rw,
+    sqr_norms_l2_cw,
+    sqr_norms_l2_rw,
+
 
     normalize_l1_cw,
     normalize_l1_rw,
@@ -78,4 +81,11 @@ from cr.sparse._src.discrete.number import (
     is_power_of_2,
     is_perfect_square,
     integer_factors_close_to_sqr_root
+)
+
+from cr.sparse._src.signal import (
+    randomize_rows,
+    randomize_cols,
+    find_first_signal_with_energy_le_rw,
+    find_first_signal_with_energy_le_cw,
 )

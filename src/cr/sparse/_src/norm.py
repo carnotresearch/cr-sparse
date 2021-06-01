@@ -65,6 +65,18 @@ def norms_linf_rw(X):
     return norm(X, ord=jnp.inf, axis=1)
 
 
+def sqr_norms_l2_cw(X):
+    """
+    Computes the squared l_2 norm of each column of a matrix
+    """
+    return jnp.sum(X * X, axis=0)
+
+def sqr_norms_l2_rw(X):
+    """
+    Computes the l_2 norm of each row of a matrix
+    """
+    return jnp.sum(X * X, axis=1)
+
 
 ######################################
 # Normalization of rows and columns
