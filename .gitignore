@@ -113,3 +113,4 @@ examples/junk/*
 workbook.ipynb
 test_*.ipynb
 demo_*.ipynb
+workbook_*.ipynb
