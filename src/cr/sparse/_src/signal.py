@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+import jax
 import jax.numpy as jnp
 from jax import random
 
@@ -57,3 +57,29 @@ def take_along_rows(X, indices):
 
 def take_along_cols(X, indices):
     return jnp.take_along_axis(X, indices, axis=0)
+
+def sparse_approximation(x, K):
+    if K == 0:
+        return x.at[:].set(0)
+    indices = jnp.argsort(jnp.abs(x))
+    #print(x, K, indices)
+    return x.at[indices[:-K]].set(0)
+    
+def sparse_approximation_cw(X, K):
+    #return jax.vmap(sparse_approximation, in_axes=(1, None), out_axes=1)(X, K)
+    if K == 0:
+        return X.at[:].set(0)
+    indices = jnp.argsort(jnp.abs(X), axis=0)
+    for c in range(X.shape[1]):
+        ind = indices[:-K, c]
+        X = X.at[ind, c].set(0)
+    return X
+
+def sparse_approximation_rw(X, K):
+    if K == 0:
+        return X.at[:].set(0)
+    indices = jnp.argsort(jnp.abs(X), axis=1)
+    for r in range(X.shape[0]):
+        ind = indices[r, :-K]
+        X = X.at[r, ind].set(0)
+    return X

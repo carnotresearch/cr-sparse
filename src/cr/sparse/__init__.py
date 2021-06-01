@@ -92,5 +92,8 @@ from cr.sparse._src.signal import (
     largest_indices_rw,
     largest_indices_cw,
     take_along_rows,
-    take_along_cols
+    take_along_cols,
+    sparse_approximation,
+    sparse_approximation_cw,
+    sparse_approximation_rw
 )
