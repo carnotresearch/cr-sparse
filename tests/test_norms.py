@@ -1,6 +1,6 @@
 from math import sqrt
 
-from cr.sparse.norm import *
+from cr.sparse import *
 import jax.numpy as jnp
 
 import pytest
