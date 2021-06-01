@@ -95,7 +95,10 @@ from cr.sparse._src.signal import (
     take_along_cols,
     sparse_approximation,
     sparse_approximation_cw,
-    sparse_approximation_rw
+    sparse_approximation_rw,
+    build_signal_from_indices_and_values,
+    nonzero_values,
+    nonzero_indices
 )
 
 from cr.sparse._src.signalcomparison import (

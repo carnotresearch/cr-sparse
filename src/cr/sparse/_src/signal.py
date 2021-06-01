@@ -83,3 +83,17 @@ def sparse_approximation_rw(X, K):
         ind = indices[r, :-K]
         X = X.at[r, ind].set(0)
     return X
+
+
+def build_signal_from_indices_and_values(length, indices, values):
+    x = jnp.zeros(length)
+    indices = jnp.asarray(indices)
+    values = jnp.asarray(values)
+    return x.at[indices].set(values)
+
+
+def nonzero_values(x):
+    return x[x != 0]
+
+def nonzero_indices(x):
+    return jnp.nonzero(x)[0]
