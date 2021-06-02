@@ -178,12 +178,16 @@
 <span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">hermitian</span>
 
 <div class="viewcode-block" id="gram"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.gram.html#cr.sparse.dict.gram">[docs]</a><span class="k">def</span> <span class="nf">gram</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes the Gram matrix :math:`G = A^T A`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">jnp</span><span class="o">.</span><span class="n">isrealobj</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">A</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">hermitian</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">@</span> <span class="n">A</span>
     <span class="k">return</span> <span class="n">G</span><span class="o">.</span><span class="n">real</span></div>
 
 <span class="k">def</span> <span class="nf">frame</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes the frame matrix :math:`G = A A^T`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">jnp</span><span class="o">.</span><span class="n">isrealobj</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">A</span> <span class="o">@</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span>
     <span class="n">F</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">hermitian</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -201,37 +205,47 @@
      <span class="k">return</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">index</span></div>
 
 <div class="viewcode-block" id="coherence"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.coherence.html#cr.sparse.dict.coherence">[docs]</a><span class="k">def</span> <span class="nf">coherence</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes the coherence of a dictionary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">max_val</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">coherence_with_index</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">max_val</span></div>
 
 
 <div class="viewcode-block" id="frame_bounds"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.frame_bounds.html#cr.sparse.dict.frame_bounds">[docs]</a><span class="k">def</span> <span class="nf">frame_bounds</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes the frame bounds (largest and smallest singular valuee)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="upper_frame_bound"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.upper_frame_bound.html#cr.sparse.dict.upper_frame_bound">[docs]</a><span class="k">def</span> <span class="nf">upper_frame_bound</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes the upper frame bound for a dictionary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="lower_frame_bound"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.lower_frame_bound.html#cr.sparse.dict.lower_frame_bound">[docs]</a><span class="k">def</span> <span class="nf">lower_frame_bound</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes the lower frame bound for a dictionary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="babel"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.babel.html#cr.sparse.dict.babel">[docs]</a><span class="k">def</span> <span class="nf">babel</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes the babel function for a dictionary (generalized coherence)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># compute gram matrix</span>
-     <span class="n">G</span> <span class="o">=</span> <span class="n">gram</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-     <span class="c1"># compute absolute values</span>
-     <span class="n">G</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-     <span class="c1"># sort on each row</span>
-     <span class="n">G</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-     <span class="c1"># reverse each row and drop last entry [self similarity is 1]</span>
-     <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">2</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-     <span class="c1"># compute cumulative sums over rows</span>
-     <span class="n">sums</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-     <span class="c1"># find maximum over each column</span>
-     <span class="n">result</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">sums</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-     <span class="k">return</span> <span class="n">result</span></div>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">gram</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="c1"># compute absolute values</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="c1"># sort on each row</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="c1"># reverse each row and drop last entry [self similarity is 1]</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">2</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># compute cumulative sums over rows</span>
+    <span class="n">sums</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># find maximum over each column</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">sums</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
 </pre></div>
 
            </div>

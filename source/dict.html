@@ -39,6 +39,8 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
         <script src="../_static/js/custom.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -105,7 +107,7 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dict.dirac_hadamard_basis.html">cr.sparse.dict.dirac_hadamard_basis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dict.dct_basis.html">cr.sparse.dict.dct_basis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dict.dirac_dct_basis.html">cr.sparse.dict.dirac_dct_basis</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dict.dirac_hadamard_dict_basis.html">cr.sparse.dict.dirac_hadamard_dict_basis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dict.dirac_hadamard_dct_basis.html">cr.sparse.dict.dirac_hadamard_dct_basis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dict.fourier_basis.html">cr.sparse.dict.fourier_basis</a></li>
 </ul>
 </li>
@@ -235,34 +237,34 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.gaussian_mtx.html#cr.sparse.dict.gaussian_mtx" title="cr.sparse.dict.gaussian_mtx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_mtx</span></code></a>(key, N, D[, normalize_atoms])</p></td>
-<td><p></p></td>
+<td><p>A dictionary/sensing matrix where entries are drawn independently from normal distribution.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.rademacher_mtx.html#cr.sparse.dict.rademacher_mtx" title="cr.sparse.dict.rademacher_mtx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rademacher_mtx</span></code></a>(key, M, N)</p></td>
-<td><p></p></td>
+<td><p>A dictionary/sensing matrix where entries are drawn independently from Rademacher distribution.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.random_onb.html#cr.sparse.dict.random_onb" title="cr.sparse.dict.random_onb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_onb</span></code></a>(key, N)</p></td>
 <td><p>Generates a random orthonormal basis</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.hadamard.html#cr.sparse.dict.hadamard" title="cr.sparse.dict.hadamard"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hadamard</span></code></a>(n[, dtype])</p></td>
-<td><p></p></td>
+<td><p>Hadamard matrices of size <span class="math notranslate nohighlight">\(n      imes n\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.hadamard_basis.html#cr.sparse.dict.hadamard_basis" title="cr.sparse.dict.hadamard_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hadamard_basis</span></code></a>(n)</p></td>
-<td><p></p></td>
+<td><p>A Hadamard basis</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.dirac_hadamard_basis.html#cr.sparse.dict.dirac_hadamard_basis" title="cr.sparse.dict.dirac_hadamard_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dirac_hadamard_basis</span></code></a>(n)</p></td>
-<td><p></p></td>
+<td><p>A dictionary consisting of identity basis and hadamard bases</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.dct_basis.html#cr.sparse.dict.dct_basis" title="cr.sparse.dict.dct_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dct_basis</span></code></a>(N)</p></td>
-<td><p></p></td>
+<td><p>DCT Basis</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.dirac_dct_basis.html#cr.sparse.dict.dirac_dct_basis" title="cr.sparse.dict.dirac_dct_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dirac_dct_basis</span></code></a>(n)</p></td>
-<td><p></p></td>
+<td><p>A dictionary consisting of identity and DCT bases</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.dirac_hadamard_dict_basis.html#cr.sparse.dict.dirac_hadamard_dict_basis" title="cr.sparse.dict.dirac_hadamard_dict_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dirac_hadamard_dict_basis</span></code></a>(n)</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.dirac_hadamard_dct_basis.html#cr.sparse.dict.dirac_hadamard_dct_basis" title="cr.sparse.dict.dirac_hadamard_dct_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dirac_hadamard_dct_basis</span></code></a>(n)</p></td>
+<td><p>A dictionary consisting of identity, Hadamard and DCT bases</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.fourier_basis.html#cr.sparse.dict.fourier_basis" title="cr.sparse.dict.fourier_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fourier_basis</span></code></a>(n)</p></td>
-<td><p></p></td>
+<td><p>Fourier basis</p></td>
 </tr>
 </tbody>
 </table>
@@ -276,25 +278,25 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.gram.html#cr.sparse.dict.gram" title="cr.sparse.dict.gram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gram</span></code></a>(A)</p></td>
-<td><p></p></td>
+<td><p>Computes the Gram matrix <span class="math notranslate nohighlight">\(G = A^T A\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.coherence_with_index.html#cr.sparse.dict.coherence_with_index" title="cr.sparse.dict.coherence_with_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coherence_with_index</span></code></a>(A)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.coherence.html#cr.sparse.dict.coherence" title="cr.sparse.dict.coherence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coherence</span></code></a>(A)</p></td>
-<td><p></p></td>
+<td><p>Computes the coherence of a dictionary</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.frame_bounds.html#cr.sparse.dict.frame_bounds" title="cr.sparse.dict.frame_bounds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">frame_bounds</span></code></a>(A)</p></td>
-<td><p></p></td>
+<td><p>Computes the frame bounds (largest and smallest singular valuee)</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.upper_frame_bound.html#cr.sparse.dict.upper_frame_bound" title="cr.sparse.dict.upper_frame_bound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">upper_frame_bound</span></code></a>(A)</p></td>
-<td><p></p></td>
+<td><p>Computes the upper frame bound for a dictionary</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.lower_frame_bound.html#cr.sparse.dict.lower_frame_bound" title="cr.sparse.dict.lower_frame_bound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lower_frame_bound</span></code></a>(A)</p></td>
-<td><p></p></td>
+<td><p>Computes the lower frame bound for a dictionary</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.babel.html#cr.sparse.dict.babel" title="cr.sparse.dict.babel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">babel</span></code></a>(A)</p></td>
-<td><p></p></td>
+<td><p>Computes the babel function for a dictionary (generalized coherence)</p></td>
 </tr>
 </tbody>
 </table>
@@ -310,7 +312,7 @@ during the dictionary learning process.</p>
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.matching_atoms_ratio.html#cr.sparse.dict.matching_atoms_ratio" title="cr.sparse.dict.matching_atoms_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matching_atoms_ratio</span></code></a>(A, B[, distance_threshold])</p></td>
-<td><p></p></td>
+<td><p>Identifies how many atoms are very close between dictionaries A and B</p></td>
 </tr>
 </tbody>
 </table>
