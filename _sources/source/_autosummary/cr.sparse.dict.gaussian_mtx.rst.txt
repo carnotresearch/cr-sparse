@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.gaussian\_mtx
+============================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: gaussian_mtx

@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.upper\_frame\_bound
+==================================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: upper_frame_bound

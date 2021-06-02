@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.babel
+====================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: babel

@@ -1,0 +1,6 @@
+﻿cr.sparse.pursuit.abs\_max\_idx
+===============================
+
+.. currentmodule:: cr.sparse.pursuit
+
+.. autofunction:: abs_max_idx

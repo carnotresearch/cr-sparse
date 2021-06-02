@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>cr.sparse._src.pursuit.defs &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../../../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/index.html">CR.Sparse API Documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>cr.sparse._src.pursuit.defs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for cr.sparse._src.pursuit.defs</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2021 CR.Sparse Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">jax.tree_util</span> <span class="kn">import</span> <span class="n">register_pytree_node</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">SingleRecoverySolution</span><span class="p">:</span>
+    <span class="n">signals</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">representations</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">residuals</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span> <span class="o">=</span>  <span class="kc">None</span>
+    <span class="n">residual_norms</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">support</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="RecoverySolution"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.RecoverySolution.html#cr.sparse.pursuit.RecoverySolution">[docs]</a><span class="k">class</span> <span class="nc">RecoverySolution</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents the solution of a sparse recovery problem</span>
+
+<span class="sd">    Consider a sparse recovery problem :math:`y=\Phi x + e`.</span>
+<span class="sd">    Assume that :math:`x` is supported on an index set :math:`I`</span>
+<span class="sd">    i.e. the non-zero values of :math:`x` are in the sub-vector</span>
+<span class="sd">    :math:`x_I`, then the equation can be rewritten as </span>
+<span class="sd">    :math:`y = \Phi_I x_I + e`.</span>
+
+<span class="sd">    Solving the sparse recovery problem given :math:`\Phi`</span>
+<span class="sd">    and :math:`x` involves identifying :math:`I` and estimating :math:`x_I`.</span>
+<span class="sd">    Then, the residual is :math:`r = y - \Phi_I x_I`. An important</span>
+<span class="sd">    quantity during the sparse recovery is the (squared) norm of the</span>
+<span class="sd">    residual :math:`\| r \|_2^2` which is an estimate of the energy</span>
+<span class="sd">    of error :math:`e`.</span>
+
+<span class="sd">    This type combines all of this information together.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">        x_I : :estimate(s) of :math:`x_I`</span>
+<span class="sd">        I : identified index set(s) :math:`I`</span>
+<span class="sd">        r : residual(s) :math:`r = y - \Phi_I x_I `</span>
+<span class="sd">        r_norm_sqr: squared norm of residual :math:`\| r \|_2^2`</span>
+<span class="sd">        iterations: Number of iterations required for the algorithm to converge</span>
+
+<span class="sd">    Note:</span>
+
+<span class="sd">        The tuple can be used to solve multiple measurement vector</span>
+<span class="sd">        problems also. In this case, each column (of individual parameters)</span>
+<span class="sd">        represents the solution of corresponding single vector problems.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># The non-zero values</span>
+    <span class="n">x_I</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Non-zero values&quot;&quot;&quot;</span>
+
+    <span class="n">I</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;The support for non-zero values&quot;&quot;&quot;</span>
+
+    <span class="n">r</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;The residuals&quot;&quot;&quot;</span>
+    <span class="n">r_norm_sqr</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;The residual norm squared&quot;&quot;&quot;</span>
+
+    <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span></div>
+
+
+<span class="k">class</span> <span class="nc">PTConfig</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="n">K</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">M</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">eta</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">rho</span><span class="p">:</span> <span class="nb">int</span>
+    
+<span class="k">class</span> <span class="nc">PTConfigurations</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="n">N</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">configurations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">PTConfig</span><span class="p">]</span>
+    <span class="n">Ms</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span>
+    <span class="n">etas</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span>
+    <span class="n">rhos</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span>
+    <span class="n">reverse_map</span><span class="p">:</span> <span class="n">Dict</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

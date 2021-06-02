@@ -1,0 +1,6 @@
+﻿cr.sparse.pursuit.gram\_chol\_update
+====================================
+
+.. currentmodule:: cr.sparse.pursuit
+
+.. autofunction:: gram_chol_update

@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.fourier\_basis
+=============================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: fourier_basis

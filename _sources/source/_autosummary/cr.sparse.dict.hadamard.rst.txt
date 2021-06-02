@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.hadamard
+=======================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: hadamard

@@ -1,0 +1,6 @@
+﻿cr.sparse.pursuit.omp.solve\_multi
+==================================
+
+.. currentmodule:: cr.sparse.pursuit.omp
+
+.. autofunction:: solve_multi

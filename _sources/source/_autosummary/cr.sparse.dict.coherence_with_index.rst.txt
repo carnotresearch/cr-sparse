@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.coherence\_with\_index
+=====================================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: coherence_with_index

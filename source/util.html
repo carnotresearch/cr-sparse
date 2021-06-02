@@ -1,0 +1,360 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Utilities in cr.sparse module &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cr.sparse.transpose" href="_autosummary/cr.sparse.transpose.html" />
+    <link rel="prev" title="Sample Data Generation Utilities" href="data.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CR.Sparse API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pursuit.html">Sparse Recovery Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Utilities in cr.sparse module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.transpose.html">cr.sparse.transpose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.hermitian.html">cr.sparse.hermitian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.is_matrix.html">cr.sparse.is_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.is_square.html">cr.sparse.is_square</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.is_symmetric.html">cr.sparse.is_symmetric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.is_hermitian.html">cr.sparse.is_hermitian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.is_positive_definite.html">cr.sparse.is_positive_definite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.has_orthogonal_columns.html">cr.sparse.has_orthogonal_columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.has_orthogonal_rows.html">cr.sparse.has_orthogonal_rows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.has_unitary_columns.html">cr.sparse.has_unitary_columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.has_unitary_rows.html">cr.sparse.has_unitary_rows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.norms_l1_cw.html">cr.sparse.norms_l1_cw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.norms_l1_rw.html">cr.sparse.norms_l1_rw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.norms_l2_cw.html">cr.sparse.norms_l2_cw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.norms_l2_rw.html">cr.sparse.norms_l2_rw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.norms_linf_cw.html">cr.sparse.norms_linf_cw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.norms_linf_rw.html">cr.sparse.norms_linf_rw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.sqr_norms_l2_cw.html">cr.sparse.sqr_norms_l2_cw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.sqr_norms_l2_rw.html">cr.sparse.sqr_norms_l2_rw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.normalize_l1_cw.html">cr.sparse.normalize_l1_cw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.normalize_l1_rw.html">cr.sparse.normalize_l1_rw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.normalize_l2_cw.html">cr.sparse.normalize_l2_cw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.normalize_l2_rw.html">cr.sparse.normalize_l2_rw</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="la.html">Linear Algebra Subroutines</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">CR.Sparse API Documentation</a> &raquo;</li>
+        
+      <li>Utilities in cr.sparse module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/source/util.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="utilities-in-cr-sparse-module">
+<h1>Utilities in cr.sparse module<a class="headerlink" href="#utilities-in-cr-sparse-module" title="Permalink to this headline">¶</a></h1>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.transpose.html#cr.sparse.transpose" title="cr.sparse.transpose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transpose</span></code></a>(A)</p></td>
+<td><p>Returns the transpose of an array</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.hermitian.html#cr.sparse.hermitian" title="cr.sparse.hermitian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hermitian</span></code></a>(a)</p></td>
+<td><p>Returns the conjugate transpose of an array</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.is_matrix.html#cr.sparse.is_matrix" title="cr.sparse.is_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_matrix</span></code></a>(A)</p></td>
+<td><p>Checks if an array is a matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.is_square.html#cr.sparse.is_square" title="cr.sparse.is_square"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_square</span></code></a>(A)</p></td>
+<td><p>Checks if an array is a square matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.is_symmetric.html#cr.sparse.is_symmetric" title="cr.sparse.is_symmetric"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_symmetric</span></code></a>(A)</p></td>
+<td><p>Checks if an array is a symmetric matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.is_hermitian.html#cr.sparse.is_hermitian" title="cr.sparse.is_hermitian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_hermitian</span></code></a>(A)</p></td>
+<td><p>Checks if an array is a Hermitian matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.is_positive_definite.html#cr.sparse.is_positive_definite" title="cr.sparse.is_positive_definite"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_positive_definite</span></code></a>(A)</p></td>
+<td><p>Checks if an array is a symmetric positive definite matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.has_orthogonal_columns.html#cr.sparse.has_orthogonal_columns" title="cr.sparse.has_orthogonal_columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_orthogonal_columns</span></code></a>(A)</p></td>
+<td><p>Checks if a matrix has orthogonal columns</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.has_orthogonal_rows.html#cr.sparse.has_orthogonal_rows" title="cr.sparse.has_orthogonal_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_orthogonal_rows</span></code></a>(A)</p></td>
+<td><p>Checks if a matrix has orthogonal rows</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.has_unitary_columns.html#cr.sparse.has_unitary_columns" title="cr.sparse.has_unitary_columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_unitary_columns</span></code></a>(A)</p></td>
+<td><p>Checks if a matrix has unitary columns</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.has_unitary_rows.html#cr.sparse.has_unitary_rows" title="cr.sparse.has_unitary_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_unitary_rows</span></code></a>(A)</p></td>
+<td><p>Checks if a matrix has unitary rows</p></td>
+</tr>
+</tbody>
+</table>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.norms_l1_cw.html#cr.sparse.norms_l1_cw" title="cr.sparse.norms_l1_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">norms_l1_cw</span></code></a>(X)</p></td>
+<td><p>Computes the l_1 norm of each column of a matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.norms_l1_rw.html#cr.sparse.norms_l1_rw" title="cr.sparse.norms_l1_rw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">norms_l1_rw</span></code></a>(X)</p></td>
+<td><p>Computes the l_1 norm of each row of a matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.norms_l2_cw.html#cr.sparse.norms_l2_cw" title="cr.sparse.norms_l2_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">norms_l2_cw</span></code></a>(X)</p></td>
+<td><p>Computes the l_2 norm of each column of a matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.norms_l2_rw.html#cr.sparse.norms_l2_rw" title="cr.sparse.norms_l2_rw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">norms_l2_rw</span></code></a>(X)</p></td>
+<td><p>Computes the l_2 norm of each row of a matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.norms_linf_cw.html#cr.sparse.norms_linf_cw" title="cr.sparse.norms_linf_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">norms_linf_cw</span></code></a>(X)</p></td>
+<td><p>Computes the l_inf norm of each column of a matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.norms_linf_rw.html#cr.sparse.norms_linf_rw" title="cr.sparse.norms_linf_rw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">norms_linf_rw</span></code></a>(X)</p></td>
+<td><p>Computes the l_inf norm of each row of a matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sqr_norms_l2_cw.html#cr.sparse.sqr_norms_l2_cw" title="cr.sparse.sqr_norms_l2_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sqr_norms_l2_cw</span></code></a>(X)</p></td>
+<td><p>Computes the squared l_2 norm of each column of a matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sqr_norms_l2_rw.html#cr.sparse.sqr_norms_l2_rw" title="cr.sparse.sqr_norms_l2_rw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sqr_norms_l2_rw</span></code></a>(X)</p></td>
+<td><p>Computes the l_2 norm of each row of a matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.normalize_l1_cw.html#cr.sparse.normalize_l1_cw" title="cr.sparse.normalize_l1_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize_l1_cw</span></code></a>(X)</p></td>
+<td><p>Normalize each column of X per l_1-norm</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.normalize_l1_rw.html#cr.sparse.normalize_l1_rw" title="cr.sparse.normalize_l1_rw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize_l1_rw</span></code></a>(X)</p></td>
+<td><p>Normalize each row of X per l_1-norm</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.normalize_l2_cw.html#cr.sparse.normalize_l2_cw" title="cr.sparse.normalize_l2_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize_l2_cw</span></code></a>(X)</p></td>
+<td><p>Normalize each column of X per l_2-norm</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.normalize_l2_rw.html#cr.sparse.normalize_l2_rw" title="cr.sparse.normalize_l2_rw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize_l2_rw</span></code></a>(X)</p></td>
+<td><p>Normalize each row of X per l_2-norm</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="_autosummary/cr.sparse.transpose.html" class="btn btn-neutral float-right" title="cr.sparse.transpose" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="data.html" class="btn btn-neutral float-left" title="Sample Data Generation Utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

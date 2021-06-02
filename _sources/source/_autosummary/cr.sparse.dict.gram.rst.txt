@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.gram
+===================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: gram

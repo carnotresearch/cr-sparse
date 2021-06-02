@@ -1,0 +1,21 @@
+﻿cr.sparse.pursuit.RecoverySolution
+==================================
+
+.. currentmodule:: cr.sparse.pursuit
+
+.. autoclass:: RecoverySolution
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~RecoverySolution.I
+      ~RecoverySolution.iterations
+      ~RecoverySolution.r
+      ~RecoverySolution.r_norm_sqr
+      ~RecoverySolution.x_I
+   
+   

@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.frame\_bounds
+============================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: frame_bounds

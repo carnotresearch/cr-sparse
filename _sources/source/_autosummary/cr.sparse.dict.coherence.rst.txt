@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.coherence
+========================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: coherence

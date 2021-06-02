@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.matching\_atoms\_ratio
+=====================================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: matching_atoms_ratio

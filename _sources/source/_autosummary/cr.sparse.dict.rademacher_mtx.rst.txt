@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.rademacher\_mtx
+==============================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: rademacher_mtx

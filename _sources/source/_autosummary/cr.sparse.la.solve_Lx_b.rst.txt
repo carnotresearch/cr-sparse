@@ -1,0 +1,6 @@
+﻿cr.sparse.la.solve\_Lx\_b
+=========================
+
+.. currentmodule:: cr.sparse.la
+
+.. autofunction:: solve_Lx_b
