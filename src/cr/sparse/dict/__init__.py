@@ -25,7 +25,7 @@ from cr.sparse._src.dict.simple import (
     dirac_hadamard_basis,
     dct_basis,
     dirac_dct_basis,
-    dirac_hadamard_dict_basis,
+    dirac_hadamard_dct_basis,
     fourier_basis
 )
 

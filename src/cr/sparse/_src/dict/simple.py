@@ -27,6 +27,8 @@ from cr.sparse import normalize_l2_cw, promote_arg_dtypes, hermitian
 
 
 def gaussian_mtx(key, N, D, normalize_atoms=True):
+    """A dictionary/sensing matrix where entries are drawn independently from normal distribution.
+    """
     shape = (N, D)
     dict = random.normal(key, shape)
     if normalize_atoms:
@@ -37,6 +39,8 @@ def gaussian_mtx(key, N, D, normalize_atoms=True):
     return dict
 
 def rademacher_mtx(key, M, N):
+    """A dictionary/sensing matrix where entries are drawn independently from Rademacher distribution.
+    """
     shape = (M, N)
     dict = random.bernoulli(key, shape=shape)
     dict = 2*promote_arg_dtypes(dict) - 1
@@ -54,6 +58,8 @@ def random_onb(key, N):
 
 
 def hadamard(n, dtype=int):
+    """Hadamard matrices of size :math:`n \times n`
+    """
     lg2 = int(math.log(n, 2))
     assert 2**lg2 == n, "n must be positive integer and a power of 2"
     H = jnp.array([[1]], dtype=dtype)
@@ -62,28 +68,38 @@ def hadamard(n, dtype=int):
     return H
 
 def hadamard_basis(n):
+    """A Hadamard basis
+    """
     H = hadamard(n, dtype=jnp.float32)
     return H / math.sqrt(n)
 
 
 def dirac_hadamard_basis(n):
+    """A dictionary consisting of identity basis and hadamard bases
+    """
     I = jnp.eye(n)
     H = hadamard_basis(n)
     return jnp.hstack((I, H))
 
 
 def dct_basis(N):
+    """DCT Basis
+    """
     n, k = jnp.ogrid[1:2*N+1:2, :N]
     D = 2 * jnp.cos(jnp.pi/(2*N) * n * k)
     D = normalize_l2_cw(D)
     return D.T
 
 def dirac_dct_basis(n):
+    """A dictionary consisting of identity and DCT bases
+    """
     I = jnp.eye(n)
     H = dct_basis(n)
     return jnp.hstack((I, H))
 
-def dirac_hadamard_dict_basis(n):
+def dirac_hadamard_dct_basis(n):
+    """A dictionary consisting of identity, Hadamard and DCT bases
+    """
     I = jnp.eye(n)
     H = hadamard_basis(n)
     D = dct_basis(n)
@@ -91,6 +107,8 @@ def dirac_hadamard_dict_basis(n):
 
 
 def fourier_basis(n):
+    """Fourier basis
+    """
     F = scipy.linalg.dft(n) / math.sqrt(n)
     # From numpy to jax
     F = jnp.array(F)

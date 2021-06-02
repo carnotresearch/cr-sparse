@@ -16,6 +16,8 @@ import jax.numpy as jnp
 
 
 def matching_atoms_ratio(A, B, distance_threshold=0.01):
+    """Identifies how many atoms are very close between dictionaries A and B
+    """
     # number of atoms
     n_atoms = A.shape[1]
     # inner products betweeen atoms of A and B
