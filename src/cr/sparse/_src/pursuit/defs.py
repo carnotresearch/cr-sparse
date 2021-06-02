@@ -27,16 +27,52 @@ class SingleRecoverySolution:
     support : jnp.DeviceArray = None
 
 class RecoverySolution(NamedTuple):
+    """Represents the solution of a sparse recovery problem
+
+    Consider a sparse recovery problem :math:`y=\Phi x + e`.
+    Assume that :math:`x` is supported on an index set :math:`I`
+    i.e. the non-zero values of :math:`x` are in the sub-vector
+    :math:`x_I`, then the equation can be rewritten as 
+    :math:`y = \Phi_I x_I + e`.
+
+    Solving the sparse recovery problem given :math:`\Phi`
+    and :math:`x` involves identifying :math:`I` and estimating :math:`x_I`.
+    Then, the residual is :math:`r = y - \Phi_I x_I`. An important
+    quantity during the sparse recovery is the (squared) norm of the
+    residual :math:`\| r \|_2^2` which is an estimate of the energy
+    of error :math:`e`.
+
+    This type combines all of this information together.
+
+    Parameters:
+
+        x_I : :estimate(s) of :math:`x_I`
+        I : identified index set(s) :math:`I`
+        r : residual(s) :math:`r = y - \Phi_I x_I `
+        r_norm_sqr: squared norm of residual :math:`\| r \|_2^2`
+        iterations: Number of iterations required for the algorithm to converge
+
+    Note:
+
+        The tuple can be used to solve multiple measurement vector
+        problems also. In this case, each column (of individual parameters)
+        represents the solution of corresponding single vector problems.
+
+    """
     # The non-zero values
-    x_I: jnp.DeviceArray
-    # The support for non-zero values
-    I: jnp.DeviceArray
-    # The residual
-    r: jnp.DeviceArray
-    # The residual norm squared
-    r_norm_sqr: jnp.DeviceArray
-    # The number of iterations it took to complete
+    x_I: jnp.ndarray
+    """Non-zero values"""
+
+    I: jnp.ndarray
+    """The support for non-zero values"""
+
+    r: jnp.ndarray
+    """The residuals"""
+    r_norm_sqr: jnp.ndarray
+    """The residual norm squared"""
+
     iterations: int
+    """The number of iterations it took to complete"""
 
 
 class PTConfig(NamedTuple):

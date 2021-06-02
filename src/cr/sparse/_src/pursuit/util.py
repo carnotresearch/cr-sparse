@@ -23,6 +23,8 @@ def abs_max_idx(h):
     return jnp.argmax(jnp.abs(h))
 
 def gram_chol_update(L, v):
+    """Incrementally updates the Cholesky factorization :math:`G = L L^T` where :math:`G = \Phi^T \Phi`
+    """
     m, n = L.shape
     z = jnp.zeros((m, 1))
     w = solve_Lx_b(L, v)

@@ -21,6 +21,8 @@ from cr.sparse.la import solve_spd_chol
 from .defs import RecoverySolution
 
 def solve(Phi, y, max_iters, max_res_norm=1e-6):
+    """Solves the recovery/approximation problem :math:`y = \Phi x + e` using Orthogonal Matching Pursuit
+    """
     # initialize residual
     r = y
     D = Phi.shape[0]
