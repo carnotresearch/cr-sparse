@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Overview: module code &mdash; CR.Sparse  documentation</title>
+  <title>Orthogonal Matching Pursuit &mdash; CR.Sparse  documentation</title>
   
 
   
@@ -45,7 +45,8 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Benchmarks" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -91,11 +92,14 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../start.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../source/index.html">CR.Sparse API Documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Benchmarks</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Orthogonal Matching Pursuit</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -144,10 +148,16 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Overview: module code</li>
+          <li><a href="index.html">Benchmarks</a> &raquo;</li>
+        
+      <li>Orthogonal Matching Pursuit</li>
     
     
       <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/benchmarks/omp.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
     
@@ -159,22 +169,109 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>All modules for which code is available</h1>
-<ul><li><a href="cr/sparse/_src/dict/comparison.html">cr.sparse._src.dict.comparison</a></li>
-<li><a href="cr/sparse/_src/dict/props.html">cr.sparse._src.dict.props</a></li>
-<li><a href="cr/sparse/_src/dict/simple.html">cr.sparse._src.dict.simple</a></li>
-<li><a href="cr/sparse/_src/la/triangular.html">cr.sparse._src.la.triangular</a></li>
-<li><a href="cr/sparse/_src/matrix.html">cr.sparse._src.matrix</a></li>
-<li><a href="cr/sparse/_src/norm.html">cr.sparse._src.norm</a></li>
-<li><a href="cr/sparse/_src/pursuit/defs.html">cr.sparse._src.pursuit.defs</a></li>
-<li><a href="cr/sparse/_src/pursuit/omp.html">cr.sparse._src.pursuit.omp</a></li>
-<li><a href="cr/sparse/_src/pursuit/util.html">cr.sparse._src.pursuit.util</a></li>
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="orthogonal-matching-pursuit">
+<h1>Orthogonal Matching Pursuit<a class="headerlink" href="#orthogonal-matching-pursuit" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Speed benchmarks for JAX implementation</p>
+<p>Each row of the following table describes:</p>
+<ul class="simple">
+<li><p>problem type and configuration (M x N is dictionary size, K is sparsity level)</p></li>
+<li><p>Average time taken in CPU/GPU configurations</p></li>
+<li><p>Speed improvement ratios</p></li>
 </ul>
+<p class="rubric">System used</p>
+<ul class="simple">
+<li><p>All benchmarks have been generated on Google Colab</p></li>
+<li><p>CPU and GPU configurations Google Colab have been used</p></li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>M</p></th>
+<th class="head"><p>N</p></th>
+<th class="head"><p>K</p></th>
+<th class="head"><p>CPU</p></th>
+<th class="head"><p>CPU + JIT</p></th>
+<th class="head"><p>CPU / CPU + JIT</p></th>
+<th class="head"><p>GPU</p></th>
+<th class="head"><p>GPU + JIT</p></th>
+<th class="head"><p>GPU / GPU + JIT</p></th>
+<th class="head"><p>CPU + JIT / GPU + JIT</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>256</p></td>
+<td><p>1024</p></td>
+<td><p>16</p></td>
+<td><p>148 ms</p></td>
+<td><p>8.27 ms</p></td>
+<td><p>17.9x</p></td>
+<td><p>139 ms</p></td>
+<td><p>1.28 ms</p></td>
+<td><p>108x</p></td>
+<td><p>6.46x</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Observations</p>
+<ul class="simple">
+<li><p>JIT (Just In Time) compilation seems to give significant performance improvements
+in both CPU and GPU architectures</p></li>
+<li><p>Current implementation seems to be slower on GPU vs CPU with JIT.</p></li>
+<li><p>GPU speed gain over CPU (with JIT on) is relatively meager.
+On Tensorflow, people regularly report 30x improvements betweeen CPU to GPU
+for neural networks implemented using Keras.</p></li>
+</ul>
+<p class="rubric">Possible deficiencies</p>
+<ul class="simple">
+<li><p>There is opportunity to improve parallelization in the OMP implementation.</p></li>
+<li><p>Cholesky update based implements depends heavily on solving triangular systems.</p></li>
+<li><p>GPUs may not be great at solving triangular systems.</p></li>
+</ul>
+</div>
+
 
            </div>
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="index.html" class="btn btn-neutral float-left" title="Benchmarks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 
