@@ -8,6 +8,7 @@ GITHUB Repo: `cr-sparse <https://github.com/carnotresearch/cr-sparse>`_
    :caption: Contents:
 
    start
+   tutorials/index
    source/index
 
 
