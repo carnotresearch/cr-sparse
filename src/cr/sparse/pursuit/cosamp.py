@@ -12,16 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
-Sparse recovery algorithms
-"""
-
-from cr.sparse._src.pursuit.util import (
-    abs_max_idx,
-    gram_chol_update,
-    largest_indices
-)
-
-from cr.sparse._src.pursuit.defs import (
-    RecoverySolution
+from cr.sparse._src.pursuit.cosamp import (
+    solve
 )

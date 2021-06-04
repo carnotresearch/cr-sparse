@@ -22,6 +22,11 @@ def abs_max_idx(h):
     """
     return jnp.argmax(jnp.abs(h))
 
+def largest_indices(h, K):
+    indices = jnp.argsort(jnp.abs(h))
+    return indices[:-K-1:-1]
+
+
 def gram_chol_update(L, v):
     """Incrementally updates the Cholesky factorization :math:`G = L L^T` where :math:`G = \Phi^T \Phi`
     """
