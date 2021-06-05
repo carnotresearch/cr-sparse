@@ -37,3 +37,11 @@ Greedy pursuit based Algorithms
     solve
     solve_multi
 
+.. rubric:: Compressive Sampling Matching Pursuit
+
+.. currentmodule:: cr.sparse.pursuit.cosamp
+
+.. autosummary::
+  :toctree: _autosummary
+
+    solve
