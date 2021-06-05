@@ -107,6 +107,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#greedy-pursuit-based-algorithms">Greedy pursuit based Algorithms</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.pursuit.omp.solve.html">cr.sparse.pursuit.omp.solve</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.pursuit.omp.solve_multi.html">cr.sparse.pursuit.omp.solve_multi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.pursuit.cosamp.solve.html">cr.sparse.pursuit.cosamp.solve</a></li>
 </ul>
 </li>
 </ul>
@@ -253,6 +254,18 @@
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.omp.solve_multi.html#cr.sparse.pursuit.omp.solve_multi" title="cr.sparse.pursuit.omp.solve_multi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_multi</span></code></a>(Phi, y, max_iters[, max_res_norm])</p></td>
 <td><p>Vectorized version of solve.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Compressive Sampling Matching Pursuit</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.cosamp.solve.html#cr.sparse.pursuit.cosamp.solve" title="cr.sparse.pursuit.cosamp.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve</span></code></a>(Phi, y, K[, max_iters, res_norm_rtol])</p></td>
+<td><p>Solves the sparse recovery problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Compressive Sampling Matching Pursuit</p></td>
 </tr>
 </tbody>
 </table>
