@@ -22,3 +22,8 @@ The library also provides
 * Sample data generation utilities
 * Framework for evaluation of sparse recovery algorithms
 
+| `Documentation <https://carnotresearch.github.io/cr-sparse>`_ | 
+`Code <https://github.com/carnotresearch/cr-sparse>`_ | 
+`Issues <https://github.com/carnotresearch/cr-sparse/issues>`_ | 
+`Discussions <https://github.com/carnotresearch/cr-sparse/discussions>`_ |
+`Sparse-Plex <https://sparse-plex.readthedocs.io>`_ |

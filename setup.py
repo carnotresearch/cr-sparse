@@ -45,7 +45,7 @@ setup(
     long_description=long_description,
 
     # The project's main homepage.
-    url='',
+    url='https://carnotresearch.github.io/cr-sparse',
 
     # Author details
     author='CR.Sparse Development Team',
