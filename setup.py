@@ -39,16 +39,16 @@ def _parse_requirements(filename):
 setup(
     name='cr-sparse',
 
-    version='0.1.0',
+    version='0.1.1',
 
-    description='Algorithms for Sparse and Redundant Representations',
+    description='Accelerated sparse representations and compressive sensing',
     long_description=long_description,
 
     # The project's main homepage.
     url='',
 
     # Author details
-    author='Carnot Research Pvt. Ltd.',
+    author='CR.Sparse Development Team',
     author_email='contact@carnotresearch.com',
 
     # Choose your license
@@ -73,10 +73,10 @@ setup(
         # OS Support
         'Operating System :: Unix',
         'Operating System :: POSIX',
-        'Operating System :: Microsoft :: Windows',
+        # 'Operating System :: Microsoft :: Windows',
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
-        'Programming Language :: Python :: 3.6',
+        # 'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
