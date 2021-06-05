@@ -1,5 +1,6 @@
-Accelerated Algorithms for Sparse Representations and Compressive Sensing
-==================================================================================
+Accelerated sparse representations and compressive sensing
+====================================================================
+
 
 This library aims to provide XLA/JAX based Python implementations for
 various algorithms related to:
@@ -20,3 +21,4 @@ The library also provides
 * Various simple dictionaries and sensing matrices
 * Sample data generation utilities
 * Framework for evaluation of sparse recovery algorithms
+
