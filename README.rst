@@ -1,6 +1,7 @@
 Accelerated sparse representations and compressive sensing
 ====================================================================
 
+|docs|
 
 This library aims to provide XLA/JAX based Python implementations for
 various algorithms related to:
@@ -27,3 +28,9 @@ The library also provides
 `Issues <https://github.com/carnotresearch/cr-sparse/issues>`_ | 
 `Discussions <https://github.com/carnotresearch/cr-sparse/discussions>`_ |
 `Sparse-Plex <https://sparse-plex.readthedocs.io>`_
+
+
+.. |docs| image:: https://github.com/carnotresearch/cr-sparse/actions/workflows/sphinx.yaml/badge.svg
+    :alt: Documentation Status
+    :scale: 100%
+    :target: https://github.com/carnotresearch/cr-sparse/actions/workflows/sphinx.yaml
