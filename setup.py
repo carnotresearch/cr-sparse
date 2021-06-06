@@ -46,7 +46,7 @@ setup(
 
     # The project's main homepage.
     url='https://carnotresearch.github.io/cr-sparse',
-    download_url=f"https://github.com/carnotresearch/cr-sparse/archive/{__version__}.tar.gz",
+    download_url=f"https://github.com/carnotresearch/cr-sparse/archive/v{__version__}.tar.gz",
 
     # Author details
     author='CR.Sparse Development Team',
