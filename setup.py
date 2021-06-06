@@ -14,6 +14,7 @@ from setuptools import setup, find_namespace_packages
 from codecs import open
 from os import path
 
+exec(open('src/cr/sparse/version.py').read())
 here = path.abspath(path.dirname(__file__))
 
 def read(*names, **kwargs):
@@ -35,17 +36,17 @@ def _parse_requirements(filename):
         if not (line.isspace() or line.startswith('#'))
     ]
 
-
 setup(
     name='cr-sparse',
 
-    version='0.1.2',
+    version=__version__,
 
     description='Accelerated sparse representations and compressive sensing',
     long_description=long_description,
 
     # The project's main homepage.
     url='https://carnotresearch.github.io/cr-sparse',
+    download_url=f"https://github.com/carnotresearch/cr-sparse/archive/{__version__}.tar.gz",
 
     # Author details
     author='CR.Sparse Development Team',
@@ -102,7 +103,6 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    download_url="https://github.com/carnotresearch/cr-sparse/archive/v0.1.tar.gz",
     install_requires=_parse_requirements('requirements.txt'),
     tests_require=_parse_requirements('requirements-tests.txt'),
     # List additional groups of dependencies here (e.g. development

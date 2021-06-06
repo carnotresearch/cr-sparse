@@ -16,6 +16,7 @@
 CR.Sparse
 """
 
+from .version import __version__
 
 from cr.sparse._src.util import (
     promote_arg_dtypes
