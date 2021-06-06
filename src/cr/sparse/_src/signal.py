@@ -130,7 +130,9 @@ def nonzero_indices(x):
 
 
 def hard_threshold(x, K):
-    """Keeps only largest K non-zero entries in a vector x
+    """Returns the indices and values of largest K non-zero entries in a vector x
     """
     indices = jnp.argsort(jnp.abs(x))
-    return x.at[indices[:-K]].set(0)
+    I = indices[:-K-1:-1]
+    x_I = x[I]
+    return I, x_I
