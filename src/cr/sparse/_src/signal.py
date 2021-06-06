@@ -19,46 +19,66 @@ from jax import random
 from .norm import sqr_norms_l2_cw, sqr_norms_l2_rw
 
 def find_first_signal_with_energy_le_rw(X, energy):
+    """Returns the index of the first row which has energy less than the specified threshold
+    """
     energies = sqr_norms_l2_rw(X)
     index = jnp.argmax(energies <= energy)
     return index if energies[index] <= energy else jnp.array(-1)
 
 def find_first_signal_with_energy_le_cw(X, energy):
+    """Returns the index of the first column which has energy less than the specified threshold
+    """
     energies = sqr_norms_l2_cw(X)
     index = jnp.argmax(energies <= energy)
     return index if energies[index] <= energy else jnp.array(-1)
 
 
 def randomize_rows(key, X):
+    """Randomizes the rows in X
+    """
     m, n = X.shape
     r = random.permutation(key, m)
     return X[r, :]
 
 def randomize_cols(key, X):
+    """Randomizes the columns in X
+    """
     m, n = X.shape
     r = random.permutation(key, n)
     return X[:, r]
 
 
 def largest_indices(x, K):
+    """Returns the indices of K largest entries in x by magnitude
+    """
     indices = jnp.argsort(jnp.abs(x))
     return indices[:-K-1:-1]
 
 def largest_indices_rw(X, K):
+    """Returns the indices of K largest entries by magnitude in each row of X
+    """
     indices = jnp.argsort(jnp.abs(X), axis=1)
     return indices[:, :-K-1:-1]
 
 def largest_indices_cw(X, K):
+    """Returns the indices of K largest entries by magnitude in each column of X
+    """
     indices = jnp.argsort(jnp.abs(X), axis=0)
     return indices[:-K-1:-1, :]
 
 def take_along_rows(X, indices):
+    """Picks K entries from each row of X specified by indices matrix
+    """
     return jnp.take_along_axis(X, indices, axis=1)
 
 def take_along_cols(X, indices):
+    """Picks K entries from each column of X specified by indices matrix
+    """
     return jnp.take_along_axis(X, indices, axis=0)
 
 def sparse_approximation(x, K):
+    """Keeps only largest K non-zero entries by magnitude in a vector x
+    """
     if K == 0:
         return x.at[:].set(0)
     indices = jnp.argsort(jnp.abs(x))
@@ -67,6 +87,8 @@ def sparse_approximation(x, K):
     
 def sparse_approximation_cw(X, K):
     #return jax.vmap(sparse_approximation, in_axes=(1, None), out_axes=1)(X, K)
+    """Keeps only largest K non-zero entries by magnitude in each column of X
+    """
     if K == 0:
         return X.at[:].set(0)
     indices = jnp.argsort(jnp.abs(X), axis=0)
@@ -76,6 +98,8 @@ def sparse_approximation_cw(X, K):
     return X
 
 def sparse_approximation_rw(X, K):
+    """Keeps only largest K non-zero entries by magnitude in each row of X
+    """
     if K == 0:
         return X.at[:].set(0)
     indices = jnp.argsort(jnp.abs(X), axis=1)
@@ -86,6 +110,8 @@ def sparse_approximation_rw(X, K):
 
 
 def build_signal_from_indices_and_values(length, indices, values):
+    """Builds a sparse signal from its non-zero entries (specified by their indices and values)
+    """
     x = jnp.zeros(length)
     indices = jnp.asarray(indices)
     values = jnp.asarray(values)
@@ -93,7 +119,18 @@ def build_signal_from_indices_and_values(length, indices, values):
 
 
 def nonzero_values(x):
+    """Returns the values of non-zero entries in x
+    """
     return x[x != 0]
 
 def nonzero_indices(x):
+    """Returns the indices of non-zero entries in x
+    """
     return jnp.nonzero(x)[0]
+
+
+def hard_threshold(x, K):
+    """Keeps only largest K non-zero entries in a vector x
+    """
+    indices = jnp.argsort(jnp.abs(x))
+    return x.at[indices[:-K]].set(0)
