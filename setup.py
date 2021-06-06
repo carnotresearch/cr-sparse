@@ -39,7 +39,7 @@ def _parse_requirements(filename):
 setup(
     name='cr-sparse',
 
-    version='0.1.1',
+    version='0.1.2',
 
     description='Accelerated sparse representations and compressive sensing',
     long_description=long_description,
