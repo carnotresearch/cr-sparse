@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>cr.sparse._src.pursuit.sp &mdash; CR.Sparse  documentation</title>
+  <title>cr.sparse._src.pursuit.htp &mdash; CR.Sparse  documentation</title>
   
 
   
@@ -147,7 +147,7 @@
         
           <li><a href="../../../../index.html">Module code</a> &raquo;</li>
         
-      <li>cr.sparse._src.pursuit.sp</li>
+      <li>cr.sparse._src.pursuit.htp</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -162,7 +162,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for cr.sparse._src.pursuit.sp</h1><div class="highlight"><pre>
+  <h1>Source code for cr.sparse._src.pursuit.htp</h1><div class="highlight"><pre>
 <span></span><span class="c1"># Copyright 2021 CR.Sparse Development Team</span>
 <span class="c1">#</span>
 <span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
@@ -177,63 +177,57 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 
-
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">vmap</span><span class="p">,</span> <span class="n">jit</span><span class="p">,</span> <span class="n">lax</span>
 
 
 <span class="kn">from</span> <span class="nn">.defs</span> <span class="kn">import</span> <span class="n">RecoverySolution</span>
 
-<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">largest_indices</span>
+<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">hard_threshold</span><span class="p">,</span> <span class="n">build_signal_from_indices_and_values</span>
+<span class="kn">from</span> <span class="nn">cr.sparse.dict</span> <span class="kn">import</span> <span class="n">upper_frame_bound</span>
 
-
-
-<div class="viewcode-block" id="solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.sp.solve.html#cr.sparse.pursuit.sp.solve">[docs]</a><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">res_norm_rtol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem :math:`y = \Phi x + e` using Compressive Sampling Matching Pursuit</span>
+<div class="viewcode-block" id="solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.htp.solve.html#cr.sparse.pursuit.htp.solve">[docs]</a><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">res_norm_rtol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem :math:`y = \Phi x + e` using Hard Thresholding Pursuit</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">## Initialize some constants for the algorithm</span>
     <span class="n">M</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">shape</span>
+
     <span class="c1"># squared norm of the signal</span>
     <span class="n">y_norm_sqr</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span>
 
-    <span class="n">max_r_norm_sqr</span> <span class="o">=</span> <span class="n">y_norm_sqr</span> <span class="o">*</span> <span class="p">(</span><span class="n">res_norm_rtol</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> 
+    <span class="n">max_r_norm_sqr</span> <span class="o">=</span> <span class="n">y_norm_sqr</span> <span class="o">*</span> <span class="p">(</span><span class="n">res_norm_rtol</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">step_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">step_size</span> <span class="o">=</span> <span class="mf">0.98</span> <span class="o">/</span> <span class="n">upper_frame_bound</span><span class="p">(</span><span class="n">Phi</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">max_iters</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">max_iters</span> <span class="o">=</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span> 
 
     <span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
+        <span class="c1"># Assume previous estimate to be zero and conduct first iteration</span>
         <span class="c1"># compute the correlations of atoms with signal y</span>
         <span class="n">h</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span>
-        <span class="c1"># Pick largest K indices [this is first iteration]</span>
-        <span class="n">I</span> <span class="o">=</span> <span class="n">largest_indices</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-        <span class="c1"># Pick corresponding atoms to form the K wide subdictionary</span>
+        <span class="c1"># update</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">step_size</span> <span class="o">*</span> <span class="n">h</span>
+        <span class="c1"># threshold</span>
+        <span class="n">I</span><span class="p">,</span> <span class="n">x_I</span> <span class="o">=</span> <span class="n">hard_threshold</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+        <span class="c1"># Form the subdictionary of corresponding atoms</span>
         <span class="n">Phi_I</span> <span class="o">=</span> <span class="n">Phi</span><span class="p">[:,</span> <span class="n">I</span><span class="p">]</span>
-        <span class="c1"># Solve least squares over the selected indices</span>
-        <span class="n">x_I</span><span class="p">,</span> <span class="n">r_I_norms</span><span class="p">,</span> <span class="n">rank_I</span><span class="p">,</span> <span class="n">s_I</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">Phi_I</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="c1"># Compute new residual</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">Phi_I</span> <span class="o">@</span> <span class="n">x_I</span>
         <span class="c1"># Compute residual norm squared</span>
         <span class="n">r_norm_sqr</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">r</span>
-        <span class="c1"># Assemble the algorithm state at the end of first iteration</span>
         <span class="k">return</span> <span class="n">RecoverySolution</span><span class="p">(</span><span class="n">x_I</span><span class="o">=</span><span class="n">x_I</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">r_norm_sqr</span><span class="o">=</span><span class="n">r_norm_sqr</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">iteration</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
         <span class="c1"># compute the correlations of dictionary atoms with the residual</span>
         <span class="n">h</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">state</span><span class="o">.</span><span class="n">r</span>
-        <span class="c1"># Ignore the previously selected atoms</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">state</span><span class="o">.</span><span class="n">I</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="c1"># Pick largest K indices</span>
-        <span class="n">I_new</span> <span class="o">=</span> <span class="n">largest_indices</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-        <span class="c1"># Combine with previous K indices to form a set of 2K indices</span>
-        <span class="n">I_2k</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">state</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="n">I_new</span><span class="p">))</span>
-        <span class="c1"># Pick corresponding atoms to form the 2K wide subdictionary</span>
-        <span class="n">Phi_2I</span> <span class="o">=</span> <span class="n">Phi</span><span class="p">[:,</span> <span class="n">I_2k</span><span class="p">]</span>
-        <span class="c1"># Solve least squares over the selected 2K indices</span>
-        <span class="n">x_p</span><span class="p">,</span> <span class="n">r_p_norms</span><span class="p">,</span> <span class="n">rank_p</span><span class="p">,</span> <span class="n">s_p</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">Phi_2I</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-        <span class="c1"># pick the K largest indices</span>
-        <span class="n">Ia</span> <span class="o">=</span> <span class="n">largest_indices</span><span class="p">(</span><span class="n">x_p</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-        <span class="c1"># Identify indices for corresponding atoms</span>
-        <span class="n">I</span> <span class="o">=</span> <span class="n">I_2k</span><span class="p">[</span><span class="n">Ia</span><span class="p">]</span>
-        <span class="c1"># TODO consider how we can exploit the guess for x_I</span>
-        <span class="c1"># # Corresponding non-zero entries in the sparse approximation</span>
-        <span class="c1"># x_I = x_p[Ia]</span>
+        <span class="c1"># current approximation</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">build_signal_from_indices_and_values</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">x_I</span><span class="p">)</span>
+        <span class="c1"># update</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">step_size</span> <span class="o">*</span> <span class="n">h</span>
+        <span class="c1"># threshold</span>
+        <span class="n">I</span><span class="p">,</span> <span class="n">x_I</span> <span class="o">=</span> <span class="n">hard_threshold</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
         <span class="c1"># Form the subdictionary of corresponding atoms</span>
         <span class="n">Phi_I</span> <span class="o">=</span> <span class="n">Phi</span><span class="p">[:,</span> <span class="n">I</span><span class="p">]</span>
         <span class="c1"># Solve least squares over the selected K indices</span>

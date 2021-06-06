@@ -108,6 +108,7 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.pursuit.cosamp.solve.html">cr.sparse.pursuit.cosamp.solve</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.pursuit.sp.solve.html">cr.sparse.pursuit.sp.solve</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.pursuit.iht.solve.html">cr.sparse.pursuit.iht.solve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.pursuit.htp.solve.html">cr.sparse.pursuit.htp.solve</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#data-types">Data Types</a><ul>
@@ -224,54 +225,48 @@
 <h1>Sparse Recovery Algorithms<a class="headerlink" href="#sparse-recovery-algorithms" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="greedy-pursuit-based-algorithms">
 <h2>Greedy pursuit based Algorithms<a class="headerlink" href="#greedy-pursuit-based-algorithms" title="Permalink to this headline">¶</a></h2>
-<p class="rubric">Orthogonal Matching Pursuit</p>
+<p class="rubric">Matching Pursuit Based Algorithms</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.omp.solve.html#cr.sparse.pursuit.omp.solve" title="cr.sparse.pursuit.omp.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve</span></code></a>(Phi, y, max_iters[, max_res_norm])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.omp.solve.html#cr.sparse.pursuit.omp.solve" title="cr.sparse.pursuit.omp.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omp.solve</span></code></a>(Phi, y, max_iters[, max_res_norm])</p></td>
 <td><p>Solves the recovery/approximation problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Orthogonal Matching Pursuit</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.omp.solve_multi.html#cr.sparse.pursuit.omp.solve_multi" title="cr.sparse.pursuit.omp.solve_multi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_multi</span></code></a>(Phi, y, max_iters[, max_res_norm])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.omp.solve_multi.html#cr.sparse.pursuit.omp.solve_multi" title="cr.sparse.pursuit.omp.solve_multi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omp.solve_multi</span></code></a>(Phi, y, max_iters[, …])</p></td>
 <td><p>Vectorized version of solve.</p></td>
 </tr>
 </tbody>
 </table>
-<p class="rubric">Compressive Sampling Matching Pursuit</p>
+<p class="rubric">Compressive Sensing Matching Pursuit (CSMP) Algorithms</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.cosamp.solve.html#cr.sparse.pursuit.cosamp.solve" title="cr.sparse.pursuit.cosamp.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve</span></code></a>(Phi, y, K[, max_iters, res_norm_rtol])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.cosamp.solve.html#cr.sparse.pursuit.cosamp.solve" title="cr.sparse.pursuit.cosamp.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cosamp.solve</span></code></a>(Phi, y, K[, max_iters, …])</p></td>
+<td><p>Solves the sparse recovery problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Compressive Sampling Matching Pursuit</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.sp.solve.html#cr.sparse.pursuit.sp.solve" title="cr.sparse.pursuit.sp.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sp.solve</span></code></a>(Phi, y, K[, max_iters, res_norm_rtol])</p></td>
 <td><p>Solves the sparse recovery problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Compressive Sampling Matching Pursuit</p></td>
 </tr>
 </tbody>
 </table>
-<p class="rubric">Subspace Pursuit</p>
+<p class="rubric">Hard Thresholding Based Algorithms</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.sp.solve.html#cr.sparse.pursuit.sp.solve" title="cr.sparse.pursuit.sp.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve</span></code></a>(Phi, y, K[, max_iters, res_norm_rtol])</p></td>
-<td><p>Solves the sparse recovery problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Compressive Sampling Matching Pursuit</p></td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Iterative Hard Thresholding</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.iht.solve.html#cr.sparse.pursuit.iht.solve" title="cr.sparse.pursuit.iht.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve</span></code></a>(Phi, y, K[, step_size, max_iters, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.iht.solve.html#cr.sparse.pursuit.iht.solve" title="cr.sparse.pursuit.iht.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iht.solve</span></code></a>(Phi, y, K[, step_size, max_iters, …])</p></td>
 <td><p>Solves the sparse recovery problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Iterative Hard Thresholding</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.htp.solve.html#cr.sparse.pursuit.htp.solve" title="cr.sparse.pursuit.htp.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">htp.solve</span></code></a>(Phi, y, K[, step_size, max_iters, …])</p></td>
+<td><p>Solves the sparse recovery problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Hard Thresholding Pursuit</p></td>
 </tr>
 </tbody>
 </table>
