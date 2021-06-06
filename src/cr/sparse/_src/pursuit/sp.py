@@ -60,16 +60,19 @@ def solve(Phi, y, K, max_iters=6, res_norm_rtol=1e-3):
         I_2k = jnp.hstack((state.I, I_new))
         # Pick corresponding atoms to form the 2K wide subdictionary
         Phi_2I = Phi[:, I_2k]
-        # Solve least squares over the selected indices
+        # Solve least squares over the selected 2K indices
         x_p, r_p_norms, rank_p, s_p = jnp.linalg.lstsq(Phi_2I, y)
         # pick the K largest indices
         Ia = largest_indices(x_p, K)
         # Identify indices for corresponding atoms
         I = I_2k[Ia]
-        # Corresponding non-zero entries in the sparse approximation
-        x_I = x_p[Ia]
+        # TODO consider how we can exploit the guess for x_I
+        # # Corresponding non-zero entries in the sparse approximation
+        # x_I = x_p[Ia]
         # Form the subdictionary of corresponding atoms
         Phi_I = Phi[:, I]
+        # Solve least squares over the selected K indices
+        x_I, r_I_norms, rank_I, s_I = jnp.linalg.lstsq(Phi_I, y)
         # Compute new residual
         r = y - Phi_I @ x_I
         # Compute residual norm squared
