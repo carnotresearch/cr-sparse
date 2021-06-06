@@ -1,7 +1,7 @@
 Accelerated sparse representations and compressive sensing
 ====================================================================
 
-|docs|
+|docs| |unttests|
 
 This library aims to provide XLA/JAX based Python implementations for
 various algorithms related to:
@@ -34,3 +34,8 @@ The library also provides
     :alt: Documentation Status
     :scale: 100%
     :target: https://github.com/carnotresearch/cr-sparse/actions/workflows/sphinx.yaml
+
+.. |unttests| image:: https://github.com/carnotresearch/cr-sparse/actions/workflows/ci.yml/badge.svg
+    :alt: Unit Tests
+    :scale: 100%
+    :target: https://github.com/carnotresearch/cr-sparse/actions/workflows/ci.yml
