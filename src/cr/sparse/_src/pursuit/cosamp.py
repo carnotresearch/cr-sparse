@@ -31,7 +31,6 @@ def solve(Phi, y, K, max_iters=6, res_norm_rtol=1e-3):
     M, N = Phi.shape
     K2 = EXTRA_FACTOR * K
     K3 = K + K2
-    # Let's conduct first iteration of OMP
     # squared norm of the signal
     y_norm_sqr = y.T @ y
 
