@@ -2,26 +2,6 @@ Sparse Recovery Algorithms
 =================================
 
 
-.. currentmodule:: cr.sparse.pursuit
-
-
-.. rubric:: Data Types
-
-.. autosummary::
-  :nosignatures:
-  :toctree: _autosummary
-  :template: namedtuple.rst
-
-    RecoverySolution
-
-.. rubric:: Utilities
-
-.. autosummary::
-  :toctree: _autosummary
-
-    abs_max_idx
-    gram_chol_update
-
 
 Greedy pursuit based Algorithms
 -------------------------------
@@ -47,6 +27,15 @@ Greedy pursuit based Algorithms
     solve
 
 
+.. rubric:: Subspace Pursuit
+
+.. currentmodule:: cr.sparse.pursuit.sp
+
+.. autosummary::
+  :toctree: _autosummary
+
+    solve
+
 .. rubric:: Iterative Hard Thresholding
 
 .. currentmodule:: cr.sparse.pursuit.iht
@@ -55,3 +44,25 @@ Greedy pursuit based Algorithms
   :toctree: _autosummary
 
     solve
+
+
+Data Types
+-------------------------------
+
+.. currentmodule:: cr.sparse.pursuit
+
+.. autosummary::
+  :nosignatures:
+  :toctree: _autosummary
+  :template: namedtuple.rst
+
+    RecoverySolution
+
+Utilities
+-------------------------------
+
+.. autosummary::
+  :toctree: _autosummary
+
+    abs_max_idx
+    gram_chol_update
