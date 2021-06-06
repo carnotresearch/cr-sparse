@@ -6,44 +6,32 @@ Sparse Recovery Algorithms
 Greedy pursuit based Algorithms
 -------------------------------
 
+.. currentmodule:: cr.sparse.pursuit
 
-.. rubric:: Orthogonal Matching Pursuit
 
-.. currentmodule:: cr.sparse.pursuit.omp
-
-.. autosummary::
-  :toctree: _autosummary
-
-    solve
-    solve_multi
-
-.. rubric:: Compressive Sampling Matching Pursuit
-
-.. currentmodule:: cr.sparse.pursuit.cosamp
+.. rubric:: Matching Pursuit Based Algorithms
 
 .. autosummary::
   :toctree: _autosummary
 
-    solve
+    omp.solve
+    omp.solve_multi
 
-
-.. rubric:: Subspace Pursuit
-
-.. currentmodule:: cr.sparse.pursuit.sp
+.. rubric:: Compressive Sensing Matching Pursuit (CSMP) Algorithms
 
 .. autosummary::
   :toctree: _autosummary
 
-    solve
+    cosamp.solve
+    sp.solve
 
-.. rubric:: Iterative Hard Thresholding
-
-.. currentmodule:: cr.sparse.pursuit.iht
+.. rubric:: Hard Thresholding Based Algorithms
 
 .. autosummary::
   :toctree: _autosummary
 
-    solve
+    iht.solve
+    htp.solve
 
 
 Data Types
