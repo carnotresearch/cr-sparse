@@ -1,0 +1,6 @@
+﻿cr.sparse.take\_along\_rows
+===========================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: take_along_rows

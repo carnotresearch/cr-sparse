@@ -1,0 +1,6 @@
+﻿cr.sparse.nonzero\_indices
+==========================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: nonzero_indices

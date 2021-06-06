@@ -1,0 +1,6 @@
+﻿cr.sparse.build\_signal\_from\_indices\_and\_values
+===================================================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: build_signal_from_indices_and_values

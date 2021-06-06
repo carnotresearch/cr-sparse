@@ -45,3 +45,13 @@ Greedy pursuit based Algorithms
   :toctree: _autosummary
 
     solve
+
+
+.. rubric:: Iterative Hard Thresholding
+
+.. currentmodule:: cr.sparse.pursuit.iht
+
+.. autosummary::
+  :toctree: _autosummary
+
+    solve

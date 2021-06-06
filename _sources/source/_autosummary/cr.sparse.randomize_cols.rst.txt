@@ -1,0 +1,6 @@
+﻿cr.sparse.randomize\_cols
+=========================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: randomize_cols

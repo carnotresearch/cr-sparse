@@ -1,0 +1,6 @@
+﻿cr.sparse.sparse\_approximation\_rw
+===================================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: sparse_approximation_rw

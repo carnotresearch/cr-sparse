@@ -1,0 +1,6 @@
+﻿cr.sparse.largest\_indices\_rw
+==============================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: largest_indices_rw

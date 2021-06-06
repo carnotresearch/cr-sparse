@@ -101,29 +101,52 @@
 <li class="toctree-l2"><a class="reference internal" href="pursuit.html">Sparse Recovery Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Utilities in cr.sparse module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.transpose.html">cr.sparse.transpose</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.hermitian.html">cr.sparse.hermitian</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.is_matrix.html">cr.sparse.is_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.is_square.html">cr.sparse.is_square</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.is_symmetric.html">cr.sparse.is_symmetric</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.is_hermitian.html">cr.sparse.is_hermitian</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.is_positive_definite.html">cr.sparse.is_positive_definite</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.has_orthogonal_columns.html">cr.sparse.has_orthogonal_columns</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.has_orthogonal_rows.html">cr.sparse.has_orthogonal_rows</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.has_unitary_columns.html">cr.sparse.has_unitary_columns</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.has_unitary_rows.html">cr.sparse.has_unitary_rows</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.norms_l1_cw.html">cr.sparse.norms_l1_cw</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.norms_l1_rw.html">cr.sparse.norms_l1_rw</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.norms_l2_cw.html">cr.sparse.norms_l2_cw</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.norms_l2_rw.html">cr.sparse.norms_l2_rw</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.norms_linf_cw.html">cr.sparse.norms_linf_cw</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.norms_linf_rw.html">cr.sparse.norms_linf_rw</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.sqr_norms_l2_cw.html">cr.sparse.sqr_norms_l2_cw</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.sqr_norms_l2_rw.html">cr.sparse.sqr_norms_l2_rw</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.normalize_l1_cw.html">cr.sparse.normalize_l1_cw</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.normalize_l1_rw.html">cr.sparse.normalize_l1_rw</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.normalize_l2_cw.html">cr.sparse.normalize_l2_cw</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_autosummary/cr.sparse.normalize_l2_rw.html">cr.sparse.normalize_l2_rw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#some-checks-and-utilities-for-matrices-2d-arrays">Some checks and utilities for matrices (2D arrays)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.transpose.html">cr.sparse.transpose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.hermitian.html">cr.sparse.hermitian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.is_matrix.html">cr.sparse.is_matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.is_square.html">cr.sparse.is_square</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.is_symmetric.html">cr.sparse.is_symmetric</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.is_hermitian.html">cr.sparse.is_hermitian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.is_positive_definite.html">cr.sparse.is_positive_definite</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.has_orthogonal_columns.html">cr.sparse.has_orthogonal_columns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.has_orthogonal_rows.html">cr.sparse.has_orthogonal_rows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.has_unitary_columns.html">cr.sparse.has_unitary_columns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.has_unitary_rows.html">cr.sparse.has_unitary_rows</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#row-wise-and-column-wise-norms-for-signal-representation-matrices">Row wise and column wise norms for signal/representation matrices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.norms_l1_cw.html">cr.sparse.norms_l1_cw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.norms_l1_rw.html">cr.sparse.norms_l1_rw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.norms_l2_cw.html">cr.sparse.norms_l2_cw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.norms_l2_rw.html">cr.sparse.norms_l2_rw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.norms_linf_cw.html">cr.sparse.norms_linf_cw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.norms_linf_rw.html">cr.sparse.norms_linf_rw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.sqr_norms_l2_cw.html">cr.sparse.sqr_norms_l2_cw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.sqr_norms_l2_rw.html">cr.sparse.sqr_norms_l2_rw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.normalize_l1_cw.html">cr.sparse.normalize_l1_cw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.normalize_l1_rw.html">cr.sparse.normalize_l1_rw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.normalize_l2_cw.html">cr.sparse.normalize_l2_cw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.normalize_l2_rw.html">cr.sparse.normalize_l2_rw</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sparse-representations">Sparse representations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.nonzero_values.html">cr.sparse.nonzero_values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.nonzero_indices.html">cr.sparse.nonzero_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.randomize_rows.html">cr.sparse.randomize_rows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.randomize_cols.html">cr.sparse.randomize_cols</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.largest_indices.html">cr.sparse.largest_indices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.hard_threshold.html">cr.sparse.hard_threshold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.sparse_approximation.html">cr.sparse.sparse_approximation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.build_signal_from_indices_and_values.html">cr.sparse.build_signal_from_indices_and_values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.largest_indices_rw.html">cr.sparse.largest_indices_rw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.take_along_rows.html">cr.sparse.take_along_rows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.sparse_approximation_rw.html">cr.sparse.sparse_approximation_rw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.largest_indices_cw.html">cr.sparse.largest_indices_cw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.take_along_cols.html">cr.sparse.take_along_cols</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.sparse_approximation_cw.html">cr.sparse.sparse_approximation_cw</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="la.html">Linear Algebra Subroutines</a></li>
@@ -225,6 +248,8 @@
 </style>
 <div class="section" id="utilities-in-cr-sparse-module">
 <h1>Utilities in cr.sparse module<a class="headerlink" href="#utilities-in-cr-sparse-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="some-checks-and-utilities-for-matrices-2d-arrays">
+<h2>Some checks and utilities for matrices (2D arrays)<a class="headerlink" href="#some-checks-and-utilities-for-matrices-2d-arrays" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -266,6 +291,9 @@
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="row-wise-and-column-wise-norms-for-signal-representation-matrices">
+<h2>Row wise and column wise norms for signal/representation matrices<a class="headerlink" href="#row-wise-and-column-wise-norms-for-signal-representation-matrices" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -310,6 +338,79 @@
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="sparse-representations">
+<h2>Sparse representations<a class="headerlink" href="#sparse-representations" title="Permalink to this headline">¶</a></h2>
+<p>Following functions analyze or construct representation vectors which are known to be sparse.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.nonzero_values.html#cr.sparse.nonzero_values" title="cr.sparse.nonzero_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nonzero_values</span></code></a>(x)</p></td>
+<td><p>Returns the values of non-zero entries in x</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.nonzero_indices.html#cr.sparse.nonzero_indices" title="cr.sparse.nonzero_indices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nonzero_indices</span></code></a>(x)</p></td>
+<td><p>Returns the indices of non-zero entries in x</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.randomize_rows.html#cr.sparse.randomize_rows" title="cr.sparse.randomize_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">randomize_rows</span></code></a>(key, X)</p></td>
+<td><p>Randomizes the rows in X</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.randomize_cols.html#cr.sparse.randomize_cols" title="cr.sparse.randomize_cols"><code class="xref py py-obj docutils literal notranslate"><span class="pre">randomize_cols</span></code></a>(key, X)</p></td>
+<td><p>Randomizes the columns in X</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.largest_indices.html#cr.sparse.largest_indices" title="cr.sparse.largest_indices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">largest_indices</span></code></a>(x, K)</p></td>
+<td><p>Returns the indices of K largest entries in x by magnitude</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.hard_threshold.html#cr.sparse.hard_threshold" title="cr.sparse.hard_threshold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hard_threshold</span></code></a>(x, K)</p></td>
+<td><p>Returns the indices and values of largest K non-zero entries in a vector x</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sparse_approximation.html#cr.sparse.sparse_approximation" title="cr.sparse.sparse_approximation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_approximation</span></code></a>(x, K)</p></td>
+<td><p>Keeps only largest K non-zero entries by magnitude in a vector x</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.build_signal_from_indices_and_values.html#cr.sparse.build_signal_from_indices_and_values" title="cr.sparse.build_signal_from_indices_and_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_signal_from_indices_and_values</span></code></a>(length, …)</p></td>
+<td><p>Builds a sparse signal from its non-zero entries (specified by their indices and values)</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Sparse representation matrices (row-wise)</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.largest_indices_rw.html#cr.sparse.largest_indices_rw" title="cr.sparse.largest_indices_rw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">largest_indices_rw</span></code></a>(X, K)</p></td>
+<td><p>Returns the indices of K largest entries by magnitude in each row of X</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.take_along_rows.html#cr.sparse.take_along_rows" title="cr.sparse.take_along_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">take_along_rows</span></code></a>(X, indices)</p></td>
+<td><p>Picks K entries from each row of X specified by indices matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sparse_approximation_rw.html#cr.sparse.sparse_approximation_rw" title="cr.sparse.sparse_approximation_rw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_approximation_rw</span></code></a>(X, K)</p></td>
+<td><p>Keeps only largest K non-zero entries by magnitude in each row of X</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Sparse representation matrices (column-wise)</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.largest_indices_cw.html#cr.sparse.largest_indices_cw" title="cr.sparse.largest_indices_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">largest_indices_cw</span></code></a>(X, K)</p></td>
+<td><p>Returns the indices of K largest entries by magnitude in each column of X</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.take_along_cols.html#cr.sparse.take_along_cols" title="cr.sparse.take_along_cols"><code class="xref py py-obj docutils literal notranslate"><span class="pre">take_along_cols</span></code></a>(X, indices)</p></td>
+<td><p>Picks K entries from each column of X specified by indices matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sparse_approximation_cw.html#cr.sparse.sparse_approximation_cw" title="cr.sparse.sparse_approximation_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_approximation_cw</span></code></a>(X, K)</p></td>
+<td><p>Keeps only largest K non-zero entries by magnitude in each column of X</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 
 
