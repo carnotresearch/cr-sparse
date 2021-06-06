@@ -1,0 +1,6 @@
+﻿cr.sparse.pursuit.sp.solve
+==========================
+
+.. currentmodule:: cr.sparse.pursuit.sp
+
+.. autofunction:: solve
