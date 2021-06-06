@@ -115,5 +115,6 @@ test_*.ipynb
 demo_*.ipynb
 workbook_*.ipynb
 
+demo_*.py
 _autosummary
 docs/source/_autosummary/*
