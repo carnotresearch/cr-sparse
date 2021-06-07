@@ -84,3 +84,7 @@ def solve(Phi, y, max_iters, max_res_norm=1e-6):
 
 
 solve_multi = vmap(solve, (None, 1, None), 0)
+"""Solves the recovery/approximation problem :math:`Y = \Phi X + E` using Orthogonal Matching Pursuit
+
+Extends :py:func:`cr.sparse.pursuit.omp.solve` using :py:func:`jax.vmap`.
+"""
