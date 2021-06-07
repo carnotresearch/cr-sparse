@@ -118,3 +118,6 @@ workbook_*.ipynb
 demo_*.py
 _autosummary
 docs/source/_autosummary/*
+
+# Data files
+record_*.csv
