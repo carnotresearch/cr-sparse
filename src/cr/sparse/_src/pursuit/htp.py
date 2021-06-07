@@ -79,3 +79,7 @@ def solve(Phi, y, K, step_size=None, max_iters=None, res_norm_rtol=1e-3):
 
     state = lax.while_loop(cond, iteration, init())
     return state
+
+
+solve_jit  = jit(solve, static_argnums=(2), 
+    static_argnames=("step_size", "max_iters", "res_norm_rtol"))

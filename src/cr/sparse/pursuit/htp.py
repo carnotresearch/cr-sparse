@@ -13,5 +13,6 @@
 # limitations under the License.
 
 from cr.sparse._src.pursuit.htp import (
-    solve
+    solve,
+    solve_jit
 )

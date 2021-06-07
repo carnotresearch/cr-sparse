@@ -13,5 +13,6 @@
 # limitations under the License.
 
 from cr.sparse._src.pursuit.sp import (
-    solve
+    solve,
+    solve_jit
 )
