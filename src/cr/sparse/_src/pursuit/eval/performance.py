@@ -26,8 +26,44 @@ class RecoveryPerformance:
     * Synthesis :math:`y = \Phi x + e`
     * Recovery: :math:`y = \Phi \hat{x} + r`
     * Representation error: :math:`h = x - \hat{x}`
-    * Residual: :math:`y - \Phi \hat{x} `
+    * Residual: :math:`y - \Phi \hat{x}`
     """
+
+    M : int = 0
+    """Signal/Measurement space dimension, number of rows in :math:`\Phi`"""
+    N : int = 0
+    """Representation space dimension, number of atoms/columns in :math:`\Phi`"""
+    K: int = 0
+    """Number of non-zero entries in :math:`x`"""
+    T0 = []
+    """The index set of K non-zero coefficients in :math:`x`"""
+    x_norm: float = 0
+    """norm of representation :math:`x`"""
+    y_norm: float = 0
+    """norm of measurement/signal :math:`y`"""
+    x_hat_norm: float = 0
+    """norm of the reconstruction :math:`\hat{x}`"""
+    h = []
+    """Recovery/reconstruction error :math:`h = x - \hat{x}`"""
+    h_norm: float = 0
+    """Norm of reconstruction error :math:`h`"""
+    recovery_snr: float = 0
+    """Reconstruction/recovery SNR (dB) in representation space :math:`20 \log (\| x \|_2 / \| h \|_2)`"""
+    R0 = []
+    """Index set of K largest (magnitude) entries in the reconstruction :math:`\hat{x}`"""
+    overlap = []
+    """Indices overlapping between T0 and R0  :math:`T_0 \cap R_0`"""
+    num_correct_atoms : int = 0
+    """Number of entries in the overlap, i.e. number of indices of the support correctly recovered"""
+    r = []
+    """The residual :math:`r = y - \Phi \hat{x}`"""
+    r_norm : float = 0
+    """Norm of the residual"""
+    measurement_snr: float = 0
+    """Measurement SNR (dB) in measurement/signal space :math:`20 \log (\| y \|_2 / \| r \|_2)`"""
+    success: bool = False
+    """Indicates if recovery was successful or not"""
+
     def __init__(self, Phi, y, x, x_hat=None, sol=None):
         """Computes all parameters related to the quality of reconstruction
         """
@@ -35,7 +71,6 @@ class RecoveryPerformance:
         M, N = Phi.shape
         if sol is not None:
             x_hat = build_signal_from_indices_and_values(N, sol.I, sol.x_I) 
-        # The K non-zero coefficients in x (set of indices)
         self.T0 = nonzero_indices(x)
         K = self.T0.size
         self.M = M
@@ -79,7 +114,7 @@ class RecoveryPerformance:
         self.support_recovery_ratio = self.num_correct_atoms / K
         # measurement/signal residual vector [M] length vector
         r = y - Phi @ x_hat
-        self.residual = r
+        self.r = r
         # Norm of measurement error.  This must be less than epsilon
         self.r_norm = jnp.linalg.norm(r)
         # Measurement SNR
@@ -92,6 +127,7 @@ class RecoveryPerformance:
         self.success = self.num_correct_atoms >= K
 
     def print(self):
+        """Prints metrics related to reconstruction quality"""
         print(f'M: {self.M}, N: {self.N}, K: {self.K}')
         print(f'x_norm: {self.x_norm:.3f}, y_norm: {self.y_norm:.3f}')
         print(f'x_hat_norm: {self.x_hat_norm:.3f}, h_norm: {self.h_norm:.2e}, r_norm: {self.r_norm:.2e}')
