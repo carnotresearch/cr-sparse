@@ -36,7 +36,7 @@ def solve(Phi, y, K, step_size=None, max_iters=None, res_norm_rtol=1e-3):
         step_size = 0.98 / upper_frame_bound(Phi)
 
     if max_iters is None:
-        max_iters = M**2 
+        max_iters = M 
 
     def init():
         # Assume previous estimate to be zero and conduct first iteration

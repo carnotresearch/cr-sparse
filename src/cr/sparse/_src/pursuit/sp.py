@@ -23,7 +23,7 @@ from cr.sparse import largest_indices
 
 
 
-def solve(Phi, y, K, max_iters=6, res_norm_rtol=1e-3):
+def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-3):
     """Solves the sparse recovery problem :math:`y = \Phi x + e` using Compressive Sampling Matching Pursuit
     """
     ## Initialize some constants for the algorithm
@@ -32,6 +32,9 @@ def solve(Phi, y, K, max_iters=6, res_norm_rtol=1e-3):
     y_norm_sqr = y.T @ y
 
     max_r_norm_sqr = y_norm_sqr * (res_norm_rtol ** 2) 
+
+    if max_iters is None:
+        max_iters = M 
 
     def init():
         # compute the correlations of atoms with signal y
