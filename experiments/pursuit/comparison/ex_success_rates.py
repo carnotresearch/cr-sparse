@@ -4,9 +4,9 @@ from cr.sparse.pursuit.eval import SuccessRates
 evaluation = SuccessRates(
     M = 200,
     N = 1000,
-    Ks = range(2, 120+1),
-    num_dict_trials = 100,
-    num_signal_trials = 5
+    Ks = range(2, 120+1, 2),
+    num_dict_trials = 20,
+    num_signal_trials = 25
 )
 
 # Add solvers

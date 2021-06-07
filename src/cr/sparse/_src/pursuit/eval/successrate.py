@@ -109,7 +109,8 @@ class SuccessRates:
             success_rate = successes / trials
             # summarized information
             row = Row(m=M, n=N, k=K, method=name, 
-                trials=trials, successes=successes, success_rate=success_rate)
+                trials=trials, successes=successes, 
+                failures=failures, success_rate=success_rate)
             print(row)
             df.loc[len(df)] = row
    
