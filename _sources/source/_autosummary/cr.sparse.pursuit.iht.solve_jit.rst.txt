@@ -1,0 +1,6 @@
+﻿cr.sparse.pursuit.iht.solve\_jit
+================================
+
+.. currentmodule:: cr.sparse.pursuit.iht
+
+.. autofunction:: solve_jit

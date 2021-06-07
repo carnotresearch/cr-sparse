@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>cr.sparse.randomize_cols &mdash; CR.Sparse  documentation</title>
+  <title>cr.sparse.pursuit.htp.solve_jit &mdash; CR.Sparse  documentation</title>
   
 
   
@@ -39,6 +39,8 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
         <script src="../../_static/js/custom.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
@@ -46,8 +48,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="cr.sparse.largest_indices" href="cr.sparse.largest_indices.html" />
-    <link rel="prev" title="cr.sparse.randomize_rows" href="cr.sparse.randomize_rows.html" /> 
+    <link rel="next" title="cr.sparse.pursuit.RecoverySolution" href="cr.sparse.pursuit.RecoverySolution.html" />
+    <link rel="prev" title="cr.sparse.pursuit.htp.solve" href="cr.sparse.pursuit.htp.solve.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -99,30 +101,28 @@
 <li class="toctree-l1"><a class="reference internal" href="../../start.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">CR.Sparse API Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pursuit.html">Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../pursuit.html">Sparse Recovery/Approximation Algorithms</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../pursuit.html#greedy-pursuit-based-algorithms">Greedy pursuit based Algorithms</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.omp.solve.html">cr.sparse.pursuit.omp.solve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.omp.solve_multi.html">cr.sparse.pursuit.omp.solve_multi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.cosamp.solve.html">cr.sparse.pursuit.cosamp.solve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.cosamp.solve_jit.html">cr.sparse.pursuit.cosamp.solve_jit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.sp.solve.html">cr.sparse.pursuit.sp.solve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.sp.solve_jit.html">cr.sparse.pursuit.sp.solve_jit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.iht.solve.html">cr.sparse.pursuit.iht.solve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.iht.solve_jit.html">cr.sparse.pursuit.iht.solve_jit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.htp.solve.html">cr.sparse.pursuit.htp.solve</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.pursuit.htp.solve_jit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../pursuit.html#data-types">Data Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pursuit.html#utilities">Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pursuit.html#evaluation-framework">Evaluation Framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pursuit.html#using-the-algorithms">Using the Algorithms</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../util.html#some-checks-and-utilities-for-matrices-2d-arrays">Some checks and utilities for matrices (2D arrays)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../util.html#row-wise-and-column-wise-norms-for-signal-representation-matrices">Row wise and column wise norms for signal/representation matrices</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../util.html#sparse-representations">Sparse representations</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.nonzero_values.html">cr.sparse.nonzero_values</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.nonzero_indices.html">cr.sparse.nonzero_indices</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.randomize_rows.html">cr.sparse.randomize_rows</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.randomize_cols</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.largest_indices.html">cr.sparse.largest_indices</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.hard_threshold.html">cr.sparse.hard_threshold</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.sparse_approximation.html">cr.sparse.sparse_approximation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.build_signal_from_indices_and_values.html">cr.sparse.build_signal_from_indices_and_values</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.largest_indices_rw.html">cr.sparse.largest_indices_rw</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.take_along_rows.html">cr.sparse.take_along_rows</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.sparse_approximation_rw.html">cr.sparse.sparse_approximation_rw</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.largest_indices_cw.html">cr.sparse.largest_indices_cw</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.take_along_cols.html">cr.sparse.take_along_cols</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.sparse_approximation_cw.html">cr.sparse.sparse_approximation_cw</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra Subroutines</a></li>
 </ul>
 </li>
@@ -177,15 +177,15 @@
         
           <li><a href="../index.html">CR.Sparse API Documentation</a> &raquo;</li>
         
-          <li><a href="../util.html">Utilities in cr.sparse module</a> &raquo;</li>
+          <li><a href="../pursuit.html">Sparse Recovery/Approximation Algorithms</a> &raquo;</li>
         
-      <li>cr.sparse.randomize_cols</li>
+      <li>cr.sparse.pursuit.htp.solve_jit</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/source/_autosummary/cr.sparse.randomize_cols.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/source/_autosummary/cr.sparse.pursuit.htp.solve_jit.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -222,12 +222,12 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="cr-sparse-randomize-cols">
-<h1>cr.sparse.randomize_cols<a class="headerlink" href="#cr-sparse-randomize-cols" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cr-sparse-pursuit-htp-solve-jit">
+<h1>cr.sparse.pursuit.htp.solve_jit<a class="headerlink" href="#cr-sparse-pursuit-htp-solve-jit" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="cr.sparse.randomize_cols">
-<span class="sig-prename descclassname"><span class="pre">cr.sparse.</span></span><span class="sig-name descname"><span class="pre">randomize_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/signal.html#randomize_cols"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.randomize_cols" title="Permalink to this definition">¶</a></dt>
-<dd><p>Randomizes the columns in X</p>
+<dt class="sig sig-object py" id="cr.sparse.pursuit.htp.solve_jit">
+<span class="sig-prename descclassname"><span class="pre">cr.sparse.pursuit.htp.</span></span><span class="sig-name descname"><span class="pre">solve_jit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_norm_rtol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cr.sparse.pursuit.htp.solve_jit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves the sparse recovery problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Hard Thresholding Pursuit</p>
 </dd></dl>
 
 </div>
@@ -238,8 +238,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="cr.sparse.largest_indices.html" class="btn btn-neutral float-right" title="cr.sparse.largest_indices" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="cr.sparse.randomize_rows.html" class="btn btn-neutral float-left" title="cr.sparse.randomize_rows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cr.sparse.pursuit.RecoverySolution.html" class="btn btn-neutral float-right" title="cr.sparse.pursuit.RecoverySolution" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cr.sparse.pursuit.htp.solve.html" class="btn btn-neutral float-left" title="cr.sparse.pursuit.htp.solve" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

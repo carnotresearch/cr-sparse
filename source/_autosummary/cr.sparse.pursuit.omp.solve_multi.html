@@ -101,18 +101,24 @@
 <li class="toctree-l1"><a class="reference internal" href="../../start.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">CR.Sparse API Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../pursuit.html">Sparse Recovery Algorithms</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../pursuit.html">Sparse Recovery/Approximation Algorithms</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../pursuit.html#greedy-pursuit-based-algorithms">Greedy pursuit based Algorithms</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.omp.solve.html">cr.sparse.pursuit.omp.solve</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.pursuit.omp.solve_multi</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.cosamp.solve.html">cr.sparse.pursuit.cosamp.solve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.cosamp.solve_jit.html">cr.sparse.pursuit.cosamp.solve_jit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.sp.solve.html">cr.sparse.pursuit.sp.solve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.sp.solve_jit.html">cr.sparse.pursuit.sp.solve_jit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.iht.solve.html">cr.sparse.pursuit.iht.solve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.iht.solve_jit.html">cr.sparse.pursuit.iht.solve_jit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.htp.solve.html">cr.sparse.pursuit.htp.solve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.htp.solve_jit.html">cr.sparse.pursuit.htp.solve_jit</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../pursuit.html#data-types">Data Types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../pursuit.html#utilities">Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pursuit.html#evaluation-framework">Evaluation Framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pursuit.html#using-the-algorithms">Using the Algorithms</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
@@ -171,7 +177,7 @@
         
           <li><a href="../index.html">CR.Sparse API Documentation</a> &raquo;</li>
         
-          <li><a href="../pursuit.html">Sparse Recovery Algorithms</a> &raquo;</li>
+          <li><a href="../pursuit.html">Sparse Recovery/Approximation Algorithms</a> &raquo;</li>
         
       <li>cr.sparse.pursuit.omp.solve_multi</li>
     
@@ -221,9 +227,8 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="cr.sparse.pursuit.omp.solve_multi">
 <span class="sig-prename descclassname"><span class="pre">cr.sparse.pursuit.omp.</span></span><span class="sig-name descname"><span class="pre">solve_multi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_res_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cr.sparse.pursuit.omp.solve_multi" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vectorized version of solve. Takes similar arguments as solve but with additional array axes over which solve is mapped.</p>
-<p>Original documentation:</p>
-<p>Solves the recovery/approximation problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Orthogonal Matching Pursuit</p>
+<dd><p>Solves the recovery/approximation problem <span class="math notranslate nohighlight">\(Y = \Phi X + E\)</span> using Orthogonal Matching Pursuit</p>
+<p>Extends <a class="reference internal" href="cr.sparse.pursuit.omp.solve.html#cr.sparse.pursuit.omp.solve" title="cr.sparse.pursuit.omp.solve"><code class="xref py py-func docutils literal notranslate"><span class="pre">cr.sparse.pursuit.omp.solve()</span></code></a> using <a class="reference external" href="https://jax.readthedocs.io/en/latest/jax.html#jax.vmap" title="(in JAX)"><code class="xref py py-func docutils literal notranslate"><span class="pre">jax.vmap()</span></code></a>.</p>
 </dd></dl>
 
 </div>

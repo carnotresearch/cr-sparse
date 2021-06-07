@@ -1,0 +1,6 @@
+﻿cr.sparse.pursuit.htp.solve\_jit
+================================
+
+.. currentmodule:: cr.sparse.pursuit.htp
+
+.. autofunction:: solve_jit

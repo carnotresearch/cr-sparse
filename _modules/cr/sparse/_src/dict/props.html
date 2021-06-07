@@ -219,7 +219,8 @@
     <span class="sd">&quot;&quot;&quot;Computes the frame bounds (largest and smallest singular valuee)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="upper_frame_bound"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.upper_frame_bound.html#cr.sparse.dict.upper_frame_bound">[docs]</a><span class="k">def</span> <span class="nf">upper_frame_bound</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Computes the upper frame bound for a dictionary</span>

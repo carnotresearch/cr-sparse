@@ -249,6 +249,10 @@
 
 
 <span class="n">solve_multi</span> <span class="o">=</span> <span class="n">vmap</span><span class="p">(</span><span class="n">solve</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;Solves the recovery/approximation problem :math:`Y = \Phi X + E` using Orthogonal Matching Pursuit</span>
+
+<span class="sd">Extends :py:func:`cr.sparse.pursuit.omp.solve` using :py:func:`jax.vmap`.</span>
+<span class="sd">&quot;&quot;&quot;</span>
 </pre></div>
 
            </div>

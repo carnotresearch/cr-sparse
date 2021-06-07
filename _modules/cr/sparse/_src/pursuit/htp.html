@@ -201,7 +201,7 @@
         <span class="n">step_size</span> <span class="o">=</span> <span class="mf">0.98</span> <span class="o">/</span> <span class="n">upper_frame_bound</span><span class="p">(</span><span class="n">Phi</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">max_iters</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">max_iters</span> <span class="o">=</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span> 
+        <span class="n">max_iters</span> <span class="o">=</span> <span class="n">M</span> 
 
     <span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
         <span class="c1"># Assume previous estimate to be zero and conduct first iteration</span>
@@ -244,6 +244,10 @@
 
     <span class="n">state</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">iteration</span><span class="p">,</span> <span class="n">init</span><span class="p">())</span>
     <span class="k">return</span> <span class="n">state</span></div>
+
+
+<span class="n">solve_jit</span>  <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">solve</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> 
+    <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;step_size&quot;</span><span class="p">,</span> <span class="s2">&quot;max_iters&quot;</span><span class="p">,</span> <span class="s2">&quot;res_norm_rtol&quot;</span><span class="p">))</span>
 </pre></div>
 
            </div>
