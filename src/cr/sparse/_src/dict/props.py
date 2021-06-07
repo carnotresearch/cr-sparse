@@ -54,7 +54,8 @@ def frame_bounds(A):
     """Computes the frame bounds (largest and smallest singular valuee)
     """
     s = jnp.linalg.svd(A, False, False)
-    return s[0], s[-1]
+    indices = jnp.array([0, -1])
+    return s[indices]
 
 def upper_frame_bound(A):
     """Computes the upper frame bound for a dictionary
