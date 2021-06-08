@@ -36,7 +36,9 @@ from cr.sparse._src.dict.props import (
     frame_bounds,
     upper_frame_bound,
     lower_frame_bound,
-    babel
+    babel,
+    mutual_coherence_with_index,
+    mutual_coherence,
 )
 
 from cr.sparse._src.dict.comparison import (

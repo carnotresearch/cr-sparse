@@ -34,21 +34,22 @@ def frame(A):
 
 
 def coherence_with_index(A):
-     G = gram(A)
-     G = jnp.abs(G)
-     n = G.shape[0]
-     # set diagonals to 0
-     G = G.at[jnp.diag_indices(n)].set(0)
-     index = jnp.unravel_index(jnp.argmax(G, axis=None), G.shape)
-     max_val = G[index]
-     return max_val, index
+    """Returns the coherence of a dictionary A along with indices of most correlated atoms
+    """
+    G = gram(A)
+    G = jnp.abs(G)
+    n = G.shape[0]
+    # set diagonals to 0
+    G = G.at[jnp.diag_indices(n)].set(0)
+    index = jnp.unravel_index(jnp.argmax(G, axis=None), G.shape)
+    max_val = G[index]
+    return max_val, index
 
 def coherence(A):
     """Computes the coherence of a dictionary
     """
     max_val, index = coherence_with_index(A)
     return max_val
-
 
 def frame_bounds(A):
     """Computes the frame bounds (largest and smallest singular valuee)
@@ -86,3 +87,23 @@ def babel(A):
     # find maximum over each column
     result = jnp.max(sums, axis=0)
     return result
+
+
+def mutual_coherence_with_index(A, B):
+    """Mutual coherence between two dictionaries A and B  along with indices of most correlated atoms
+    """
+    # compute inner products of atoms of A with atoms of B
+    G = hermitian(A) @ B
+    # Take absolute values
+    G = jnp.abs(G)
+    # Find the maximum value and identify its index
+    index = jnp.unravel_index(jnp.argmax(G, axis=None), G.shape)
+    # Maxium value
+    max_val = G[index]
+    return max_val, index
+
+def mutual_coherence(A, B):
+    """"Mutual coherence between two dictionaries A and B 
+    """
+    max_val, index = mutual_coherence_with_index(A, B)
+    return max_val

@@ -51,4 +51,6 @@ during the dictionary learning process.
 .. autosummary::
   :toctree: _autosummary
 
+    mutual_coherence_with_index
+    mutual_coherence
     matching_atoms_ratio
