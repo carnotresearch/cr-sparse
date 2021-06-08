@@ -3,6 +3,8 @@ Accelerated sparse representations and compressive sensing
 
 |docs| |unttests|
 
+An `overview <https://carnotresearch.github.io/cr-sparse/intro.html>`_ of the library.
+
 This library aims to provide XLA/JAX based Python implementations for
 various algorithms related to:
 
@@ -10,24 +12,19 @@ various algorithms related to:
 * Compressive sensing
 * Dictionary learning
 
-
-Included sparse recovery algorithms:
-
-* Orthogonal matching pursuit
-* Compressive sampling matching pursuit
-
-
 The library also provides
 
 * Various simple dictionaries and sensing matrices
 * Sample data generation utilities
 * Framework for evaluation of sparse recovery algorithms
 
+
 `Documentation <https://carnotresearch.github.io/cr-sparse>`_ | 
 `Code <https://github.com/carnotresearch/cr-sparse>`_ | 
 `Issues <https://github.com/carnotresearch/cr-sparse/issues>`_ | 
 `Discussions <https://github.com/carnotresearch/cr-sparse/discussions>`_ |
-`Notebooks <https://github.com/carnotresearch/cr-sparse/blob/master/examples/notebooks/README.rst>`_ |
+`Examples <https://github.com/carnotresearch/cr-sparse/blob/master/examples/notebooks/README.rst>`_ |
+`Experiments <https://github.com/carnotresearch/cr-sparse/blob/master/experiments/README.rst>`_ |
 `Sparse-Plex <https://sparse-plex.readthedocs.io>`_
 
 
