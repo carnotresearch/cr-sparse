@@ -125,6 +125,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#dictionary-comparison">Dictionary comparison</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dict.mutual_coherence_with_index.html">cr.sparse.dict.mutual_coherence_with_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dict.mutual_coherence.html">cr.sparse.dict.mutual_coherence</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dict.matching_atoms_ratio.html">cr.sparse.dict.matching_atoms_ratio</a></li>
 </ul>
 </li>
@@ -285,7 +287,7 @@
 <td><p>Computes the Gram matrix <span class="math notranslate nohighlight">\(G = A^T A\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.coherence_with_index.html#cr.sparse.dict.coherence_with_index" title="cr.sparse.dict.coherence_with_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coherence_with_index</span></code></a>(A)</p></td>
-<td><p></p></td>
+<td><p>Returns the coherence of a dictionary A along with indices of most correlated atoms</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.coherence.html#cr.sparse.dict.coherence" title="cr.sparse.dict.coherence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coherence</span></code></a>(A)</p></td>
 <td><p>Computes the coherence of a dictionary</p></td>
@@ -315,6 +317,12 @@ during the dictionary learning process.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.mutual_coherence_with_index.html#cr.sparse.dict.mutual_coherence_with_index" title="cr.sparse.dict.mutual_coherence_with_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutual_coherence_with_index</span></code></a>(A, B)</p></td>
+<td><p>Mutual coherence between two dictionaries A and B  along with indices of most correlated atoms</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.mutual_coherence.html#cr.sparse.dict.mutual_coherence" title="cr.sparse.dict.mutual_coherence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutual_coherence</span></code></a>(A, B)</p></td>
+<td><p>“Mutual coherence between two dictionaries A and B</p></td>
+</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.matching_atoms_ratio.html#cr.sparse.dict.matching_atoms_ratio" title="cr.sparse.dict.matching_atoms_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matching_atoms_ratio</span></code></a>(A, B[, distance_threshold])</p></td>
 <td><p>Identifies how many atoms are very close between dictionaries A and B</p></td>
 </tr>

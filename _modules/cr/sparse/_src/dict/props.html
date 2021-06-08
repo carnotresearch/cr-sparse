@@ -199,21 +199,22 @@
 
 
 <div class="viewcode-block" id="coherence_with_index"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.coherence_with_index.html#cr.sparse.dict.coherence_with_index">[docs]</a><span class="k">def</span> <span class="nf">coherence_with_index</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-     <span class="n">G</span> <span class="o">=</span> <span class="n">gram</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-     <span class="n">G</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-     <span class="n">n</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-     <span class="c1"># set diagonals to 0</span>
-     <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">jnp</span><span class="o">.</span><span class="n">diag_indices</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-     <span class="n">index</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="n">G</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-     <span class="n">max_val</span> <span class="o">=</span> <span class="n">G</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-     <span class="k">return</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">index</span></div>
+    <span class="sd">&quot;&quot;&quot;Returns the coherence of a dictionary A along with indices of most correlated atoms</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">gram</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># set diagonals to 0</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">jnp</span><span class="o">.</span><span class="n">diag_indices</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="n">G</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">max_val</span> <span class="o">=</span> <span class="n">G</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">index</span></div>
 
 <div class="viewcode-block" id="coherence"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.coherence.html#cr.sparse.dict.coherence">[docs]</a><span class="k">def</span> <span class="nf">coherence</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Computes the coherence of a dictionary</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">max_val</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">coherence_with_index</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">max_val</span></div>
-
 
 <div class="viewcode-block" id="frame_bounds"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.frame_bounds.html#cr.sparse.dict.frame_bounds">[docs]</a><span class="k">def</span> <span class="nf">frame_bounds</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Computes the frame bounds (largest and smallest singular valuee)</span>
@@ -251,6 +252,26 @@
     <span class="c1"># find maximum over each column</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">sums</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="mutual_coherence_with_index"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.mutual_coherence_with_index.html#cr.sparse.dict.mutual_coherence_with_index">[docs]</a><span class="k">def</span> <span class="nf">mutual_coherence_with_index</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mutual coherence between two dictionaries A and B  along with indices of most correlated atoms</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># compute inner products of atoms of A with atoms of B</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">hermitian</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">@</span> <span class="n">B</span>
+    <span class="c1"># Take absolute values</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="c1"># Find the maximum value and identify its index</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="n">G</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="c1"># Maxium value</span>
+    <span class="n">max_val</span> <span class="o">=</span> <span class="n">G</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">index</span></div>
+
+<div class="viewcode-block" id="mutual_coherence"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.mutual_coherence.html#cr.sparse.dict.mutual_coherence">[docs]</a><span class="k">def</span> <span class="nf">mutual_coherence</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;&quot;Mutual coherence between two dictionaries A and B </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">max_val</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">mutual_coherence_with_index</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">max_val</span></div>
 </pre></div>
 
            </div>
