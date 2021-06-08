@@ -27,6 +27,7 @@ The library also provides
 `Code <https://github.com/carnotresearch/cr-sparse>`_ | 
 `Issues <https://github.com/carnotresearch/cr-sparse/issues>`_ | 
 `Discussions <https://github.com/carnotresearch/cr-sparse/discussions>`_ |
+`Notebooks <https://github.com/carnotresearch/cr-sparse/blob/master/examples/notebooks/README.rst>`_ |
 `Sparse-Plex <https://sparse-plex.readthedocs.io>`_
 
 
