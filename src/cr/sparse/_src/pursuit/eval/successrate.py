@@ -42,6 +42,7 @@ class Row(NamedTuple):
     max_iters: int = 0
     mean_iters: int = 0
     runtime: float = 0.0
+    mean_runtime: float = 0.0
 
 class SuccessRates:
 
@@ -109,6 +110,10 @@ class SuccessRates:
                     sol = solver(Phi, y, K)
                     # Measure recovery performance
                     rp = RecoveryPerformance(Phi, y, x, sol=sol)
+                    if trials == 0:
+                        # first trial is for JIT compilation.
+                        # We start time measurement after that.
+                        start_time = time.perf_counter()
                     trials += 1
                     success = bool(rp.success)
                     successes +=  rp.success
@@ -121,12 +126,14 @@ class SuccessRates:
             # success rate
             success_rate = successes / trials
             iters = np.array(iters)
+            runtime=end_time-start_time # in seconds
+            mean_runtime=runtime * 1000 / (trials - 1) # in milli seconds
             # summarized information
             row = Row(m=M, n=N, k=K, method=name, 
                 trials=trials, successes=successes, 
                 failures=failures, success_rate=success_rate,
                 min_iters=iters.min(), max_iters=iters.max(), mean_iters=iters.mean(),
-                runtime=end_time-start_time)
+                runtime=end_time-start_time, mean_runtime=mean_runtime)
             print(row)
             df.loc[len(df)] = row
             self.save()
