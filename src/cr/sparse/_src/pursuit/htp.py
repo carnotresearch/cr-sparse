@@ -27,7 +27,7 @@ from cr.sparse.dict import upper_frame_bound
 
 
 
-def solve(Phi, y, K, normalized=False, step_size=None, max_iters=None, res_norm_rtol=1e-3):
+def solve(Phi, y, K, normalized=False, step_size=None, max_iters=None, res_norm_rtol=1e-4):
     """Solves the sparse recovery problem :math:`y = \Phi x + e` using Hard Thresholding Pursuit
     """
     ## Initialize some constants for the algorithm
@@ -42,7 +42,9 @@ def solve(Phi, y, K, normalized=False, step_size=None, max_iters=None, res_norm_
         step_size = 0.98 / upper_frame_bound(Phi)
 
     if max_iters is None:
-        max_iters = M 
+        max_iters = M
+
+    min_iters = min(3*K, 20) 
 
     def compute_step_size(h, I):
         h_I = h[I]
@@ -107,10 +109,18 @@ def solve(Phi, y, K, normalized=False, step_size=None, max_iters=None, res_norm_
             )
 
     def cond(state):
-        # limit on residual norm and number of iterations
-        return jnp.logical_and(state.r_norm_sqr > max_r_norm_sqr,
-            jnp.logical_and(jnp.any(jnp.not_equal(state.I, state.I_prev)), 
-            state.iterations < max_iters))
+        # limit on residual norm 
+        a = state.r_norm_sqr > max_r_norm_sqr
+        # limit on number of iterations
+        b = state.iterations < max_iters
+        c = jnp.logical_and(a, b)
+        # checking if support is still changing
+        d = jnp.any(jnp.not_equal(state.I, state.I_prev))
+        # consider support change only after some iterations
+        d = jnp.logical_or(state.iterations < min_iters, d)
+        c = jnp.logical_and(c,d)
+        # overall condition
+        return c
 
     state = lax.while_loop(cond, iteration, init())
     return RecoverySolution(x_I=state.x_I, I=state.I, r=state.r, r_norm_sqr=state.r_norm_sqr,
