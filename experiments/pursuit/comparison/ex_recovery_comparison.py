@@ -6,11 +6,12 @@ from functools import partial
 
 from cr.sparse.pursuit.eval import RecoveryTrialsAtFixed_M_N
 
+Ks = jnp.array(list(range(1, 4)) + list(range(4, 60, 2)) + list(range(60, 101, 4)))
 
 evaluation = RecoveryTrialsAtFixed_M_N(
     M = 200,
     N = 1000,
-    Ks = range(2, 90+1, 2),
+    Ks = Ks,
     num_dict_trials = 25,
     num_signal_trials = 20
 )
