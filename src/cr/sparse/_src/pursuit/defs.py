@@ -108,3 +108,5 @@ class HTPState(NamedTuple):
     r_norm_sqr_prev: jnp.ndarray
 
 IHTState = HTPState
+
+CoSaMPState = HTPState

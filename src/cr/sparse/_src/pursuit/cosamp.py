@@ -17,7 +17,7 @@ import jax.numpy as jnp
 from jax import vmap, jit, lax
 
 
-from .defs import RecoverySolution
+from .defs import RecoverySolution, CoSaMPState
 
 from .util import largest_indices
 
@@ -40,6 +40,10 @@ def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-3):
         max_iters = M 
 
     def init():
+        # Data for the previous approximation [r = y, x = 0]
+        I_prev = jnp.arange(0, K)
+        x_I_prev = jnp.zeros(K)
+        r_norm_sqr_prev = y_norm_sqr
         # compute the correlations of atoms with signal y
         h = Phi.T @ y
         # Pick largest 3K indices [this is first iteration]
@@ -61,13 +65,16 @@ def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-3):
         # Compute residual norm squared
         r_norm_sqr = r.T @ r
         # Assemble the algorithm state at the end of first iteration
-        return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, iterations=1)
+        return CoSaMPState(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, 
+            iterations=1,
+            I_prev=I_prev, x_I_prev=x_I_prev, r_norm_sqr_prev=r_norm_sqr_prev)
 
     def iteration(state):
+        I_prev = state.I
+        x_I_prev = state.x_I
+        r_norm_sqr_prev = state.r_norm_sqr
         # Index set of atoms for current solution
         I = state.I
-        # Current iteration number
-        iterations = state.iterations
         # compute the correlations of dictionary atoms with the residual
         h = Phi.T @ state.r
         # Ignore the previously selected atoms
@@ -92,14 +99,20 @@ def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-3):
         r = y - Phi_I @ x_I
         # Compute residual norm squared
         r_norm_sqr = r.T @ r
-        return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, iterations=iterations+1)
+        return CoSaMPState(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, 
+            iterations=state.iterations+1,
+            I_prev=I_prev, x_I_prev=x_I_prev, r_norm_sqr_prev=r_norm_sqr_prev
+            )
 
     def cond(state):
         # limit on residual norm and number of iterations
-        return jnp.logical_and(state.r_norm_sqr > max_r_norm_sqr, state.iterations < max_iters)
+        return jnp.logical_and(state.r_norm_sqr > max_r_norm_sqr,
+            jnp.logical_and(jnp.any(jnp.not_equal(state.I, state.I_prev)), 
+            state.iterations < max_iters))
 
     state = lax.while_loop(cond, iteration, init())
-    return state
+    return RecoverySolution(x_I=state.x_I, I=state.I, r=state.r, r_norm_sqr=state.r_norm_sqr,
+        iterations=state.iterations)
 
 
 solve_jit = jit(solve, static_argnums=(2), static_argnames=("max_iters", "res_norm_rtol"))
