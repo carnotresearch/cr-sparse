@@ -12,10 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import time
+from typing import NamedTuple
+
+import numpy as np
+import pandas as pd
+
 import jax
 import jax.numpy as jnp
-import pandas as pd
-from typing import NamedTuple
 
 import cr.sparse as crs
 from cr.sparse import pursuit
@@ -34,6 +38,10 @@ class Row(NamedTuple):
     successes : int = 0
     failures: int = 0
     success_rate: float = 0
+    min_iters: int = 0
+    max_iters: int = 0
+    mean_iters: int = 0
+    runtime: float = 0.0
 
 class SuccessRates:
 
@@ -52,15 +60,16 @@ class SuccessRates:
             "solver" : solver
         })
 
-    def __call__(self):
+    def __call__(self, destination='record_success_rates.csv'):
         """
         Runs the smulation
         """
+        self.destination = destination
         for solver in self.solvers:
             self._process(solver['name'], solver['solver'])
 
-    def save(self, destination='record_success_rates.csv'):
-        self.df.to_csv(destination, index=False)
+    def save(self):
+        self.df.to_csv(self.destination, index=False)
 
     def _process(self, name, solver):
         # Copy configuration
@@ -74,12 +83,14 @@ class SuccessRates:
         key = jax.random.PRNGKey(0)
         for K in Ks:
             print(f'\nK={K}')
+            start_time = time.perf_counter()
             # Keys for tests
             key, subkey = jax.random.split(key)
             dict_keys = jax.random.split(key, num_dict_trials)
             trials = 0
             successes = 0
             success_rate = 0
+            iters = []
             # Iterate over number of trials (dictionaries * signals)
             for ndt in range(num_dict_trials):
                 dict_key = dict_keys[ndt]
@@ -101,16 +112,23 @@ class SuccessRates:
                     trials += 1
                     success = bool(rp.success)
                     successes +=  rp.success
+                    iters.append(sol.iterations)
                     print('+' if success else '-', end='', flush=True)
                 print('')
+            end_time = time.perf_counter()
             # number of failures
             failures = trials - successes
             # success rate
             success_rate = successes / trials
+            iters = np.array(iters)
             # summarized information
             row = Row(m=M, n=N, k=K, method=name, 
                 trials=trials, successes=successes, 
-                failures=failures, success_rate=success_rate)
+                failures=failures, success_rate=success_rate,
+                min_iters=iters.min(), max_iters=iters.max(), mean_iters=iters.mean(),
+                runtime=end_time-start_time)
             print(row)
             df.loc[len(df)] = row
+            self.save()
+        self.save()
    
