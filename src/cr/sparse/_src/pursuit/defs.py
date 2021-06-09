@@ -88,3 +88,23 @@ class PTConfigurations(NamedTuple):
     etas: jnp.DeviceArray
     rhos: jnp.DeviceArray
     reverse_map: Dict
+
+
+class HTPState(NamedTuple):
+    # The non-zero values
+    x_I: jnp.ndarray
+    """Non-zero values"""
+    I: jnp.ndarray
+    """The support for non-zero values"""
+    r: jnp.ndarray
+    """The residuals"""
+    r_norm_sqr: jnp.ndarray
+    """The residual norm squared"""
+    iterations: int
+    """The number of iterations it took to complete"""
+    # Information from previous iteration
+    I_prev: jnp.ndarray
+    x_I_prev: jnp.ndarray
+    r_norm_sqr_prev: jnp.ndarray
+
+IHTState = HTPState

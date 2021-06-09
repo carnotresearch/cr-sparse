@@ -18,7 +18,7 @@ import jax.numpy as jnp
 from jax import vmap, jit, lax
 
 
-from .defs import RecoverySolution
+from .defs import RecoverySolution, HTPState
 
 from cr.sparse import (hard_threshold, 
     hard_threshold_sorted,
@@ -26,22 +26,6 @@ from cr.sparse import (hard_threshold,
 from cr.sparse.dict import upper_frame_bound
 
 
-class HTPState(NamedTuple):
-    # The non-zero values
-    x_I: jnp.ndarray
-    """Non-zero values"""
-    I: jnp.ndarray
-    """The support for non-zero values"""
-    r: jnp.ndarray
-    """The residuals"""
-    r_norm_sqr: jnp.ndarray
-    """The residual norm squared"""
-    iterations: int
-    """The number of iterations it took to complete"""
-    # Information from previous iteration
-    I_prev: jnp.ndarray
-    x_I_prev: jnp.ndarray
-    r_norm_sqr_prev: jnp.ndarray
 
 def solve(Phi, y, K, normalized=False, step_size=None, max_iters=None, res_norm_rtol=1e-3):
     """Solves the sparse recovery problem :math:`y = \Phi x + e` using Hard Thresholding Pursuit
@@ -70,7 +54,6 @@ def solve(Phi, y, K, normalized=False, step_size=None, max_iters=None, res_norm_
 
     def get_step_size(h, I):
         return compute_step_size(h, I) if normalized else step_size
-        #return jnp.where(normalized, compute_step_size(h, I), step_size)
 
     def init():
         # Data for the previous approximation [r = y, x = 0]
