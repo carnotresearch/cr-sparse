@@ -43,7 +43,7 @@ class HTPState(NamedTuple):
     x_I_prev: jnp.ndarray
     r_norm_sqr_prev: jnp.ndarray
 
-def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-3):
+def solve(Phi, y, K, normalized=False, step_size=None, max_iters=None, res_norm_rtol=1e-3):
     """Solves the sparse recovery problem :math:`y = \Phi x + e` using Hard Thresholding Pursuit
     """
     ## Initialize some constants for the algorithm
@@ -53,6 +53,9 @@ def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-3):
     y_norm_sqr = y.T @ y
 
     max_r_norm_sqr = y_norm_sqr * (res_norm_rtol ** 2)
+
+    if not normalized and step_size is None:
+        step_size = 0.98 / upper_frame_bound(Phi)
 
     if max_iters is None:
         max_iters = M 
@@ -65,6 +68,10 @@ def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-3):
         mu = h_I.T @ h_I / (Ah.T @ Ah)
         return mu
 
+    def get_step_size(h, I):
+        return compute_step_size(h, I) if normalized else step_size
+        #return jnp.where(normalized, compute_step_size(h, I), step_size)
+
     def init():
         # Data for the previous approximation [r = y, x = 0]
         I_prev = jnp.arange(0, K)
@@ -73,7 +80,7 @@ def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-3):
         # Assume previous estimate to be zero and conduct first iteration
         # compute the correlations of atoms with signal y
         h = Phi.T @ y
-        mu = compute_step_size(h, I_prev)
+        mu = get_step_size(h, I_prev)
         # update
         x = mu * h
         # threshold
@@ -97,7 +104,7 @@ def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-3):
         # current approximation
         x = build_signal_from_indices_and_values(N, state.I, state.x_I)
         # Step size calculation
-        mu = compute_step_size(h, I_prev)
+        mu = get_step_size(h, I_prev)
         # update
         x = x + mu * h
         # threshold
@@ -128,4 +135,4 @@ def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-3):
 
 
 solve_jit  = jit(solve, static_argnums=(2), 
-    static_argnames=("max_iters", "res_norm_rtol"))
+    static_argnames=("normalized", "step_size", "max_iters", "res_norm_rtol"))
