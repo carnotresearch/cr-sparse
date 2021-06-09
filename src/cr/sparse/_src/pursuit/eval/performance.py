@@ -17,7 +17,9 @@ import jax.numpy as jnp
 
 from cr.sparse import (nonzero_indices, 
     largest_indices, 
-    build_signal_from_indices_and_values
+    build_signal_from_indices_and_values,
+    dynamic_range,
+    nonzero_dynamic_range
 )
 
 class RecoveryPerformance:
@@ -43,6 +45,12 @@ class RecoveryPerformance:
     """norm of measurement/signal :math:`y`"""
     x_hat_norm: float = 0
     """norm of the reconstruction :math:`\hat{x}`"""
+    x_dr: float = 0
+    """ Dynamic range of x """
+    y_dr: float = 0
+    """ Dynamic range of y """
+    x_hat_dr: float = 0
+    """ Dynamic range of x_hat """
     h = []
     """Recovery/reconstruction error :math:`h = x - \hat{x}`"""
     h_norm: float = 0
@@ -61,8 +69,6 @@ class RecoveryPerformance:
     """Norm of the residual"""
     measurement_snr: float = 0
     """Measurement SNR (dB) in measurement/signal space :math:`20 \log (\| y \|_2 / \| r \|_2)`"""
-    success: bool = False
-    """Indicates if recovery was successful or not"""
 
     def __init__(self, Phi, y, x, x_hat=None, sol=None):
         """Computes all parameters related to the quality of reconstruction
@@ -82,6 +88,9 @@ class RecoveryPerformance:
         self.y_norm = jnp.linalg.norm(y)
         # Norm of the reconstructed representation
         self.x_hat_norm = jnp.linalg.norm(x_hat)
+        self.x_dr = nonzero_dynamic_range(x)
+        self.y_dr = dynamic_range(y)
+        self.x_hat_dr = nonzero_dynamic_range(x_hat)
         # recovery error vector. N length vector
         h = x - x_hat
         self.h = h
@@ -110,8 +119,6 @@ class RecoveryPerformance:
         # Support Overlap
         self.overlap = jnp.intersect1d(self.T0, self.R0)
         self.num_correct_atoms = self.overlap.size
-        # Support recovery ratio
-        self.support_recovery_ratio = self.num_correct_atoms / K
         # measurement/signal residual vector [M] length vector
         r = y - Phi @ x_hat
         self.r = r
@@ -121,10 +128,6 @@ class RecoveryPerformance:
         self.measurement_snr = 20 * jnp.log10(self.y_norm / self.r_norm)
         # Ratio between the norm of recovery error and measurement error
         self.h_by_r_norms = self.h_norm / self.r_norm
-        # Whether we consider the process to be success or not.
-        # We consider success only if the support has been recovered
-        # completely.
-        self.success = self.num_correct_atoms >= K
 
     def print(self):
         """Prints metrics related to reconstruction quality"""
@@ -132,7 +135,25 @@ class RecoveryPerformance:
         print(f'x_norm: {self.x_norm:.3f}, y_norm: {self.y_norm:.3f}')
         print(f'x_hat_norm: {self.x_hat_norm:.3f}, h_norm: {self.h_norm:.2e}, r_norm: {self.r_norm:.2e}')
         print(f'recovery_snr: {self.recovery_snr:.2f} dB, measurement_snr: {self.measurement_snr:.2f} dB')
+        print(f'x_dr: {self.x_dr:.2f} dB, y_dr: {self.y_dr:.2f} dB, x_hat_dr: {self.x_hat_dr:.3f} dB')
         print(f'T0: {self.T0}')
         print(f'R0: {self.R0}')
-        print(f'Overlap: {self.overlap}, Correct: {self.num_correct_atoms}')
+        print(f'Overlap: {self.overlap}')
+        print(f'Correct atoms: {self.num_correct_atoms}. Ratio: {self.support_recovery_ratio}, perfect_support_recovery: {self.perfect_support_recovery}')
         print(f'success: {self.success}')
+
+    @property
+    def support_recovery_ratio(self):
+        """Returns the ratio of correctly recovered atoms"""
+        return self.num_correct_atoms / self.K
+
+    @property
+    def perfect_support_recovery(self):
+        """Returns if the support has been recovered perfectly"""
+        return self.num_correct_atoms >= self.K
+
+    @property
+    def success(self):
+        """Returns True if more than 75% indices are correctly identified and recovery SNR is high"""
+        return self.support_recovery_ratio > 0.75 and self.recovery_snr > 30
+
