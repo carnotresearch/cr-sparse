@@ -2,10 +2,10 @@
 from jax.config import config
 config.update("jax_enable_x64", True)
 
-from cr.sparse.pursuit.eval import SuccessRates
+from cr.sparse.pursuit.eval import RecoveryTrialsAtFixed_M_N
 
 
-evaluation = SuccessRates(
+evaluation = RecoveryTrialsAtFixed_M_N(
     M = 200,
     N = 1000,
     Ks = range(2, 90+1, 2),
@@ -40,4 +40,4 @@ evaluation.add_solver('SP', sp.solve_jit)
 evaluation.add_solver('CoSaMP', cosamp.solve_jit)
 
 # Run evaluation
-evaluation()
+evaluation('record_recovery_comparison.csv')

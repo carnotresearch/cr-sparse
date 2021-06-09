@@ -17,5 +17,5 @@ from cr.sparse._src.pursuit.eval.performance import (
 )
 
 from cr.sparse._src.pursuit.eval.successrate import (
-    SuccessRates
+    RecoveryTrialsAtFixed_M_N
 )

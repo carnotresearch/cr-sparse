@@ -44,7 +44,7 @@ class Row(NamedTuple):
     runtime: float = 0.0
     mean_runtime: float = 0.0
 
-class SuccessRates:
+class RecoveryTrialsAtFixed_M_N:
 
     def __init__(self, M, N, Ks, num_dict_trials=10, num_signal_trials=5):
         self.M  = M
@@ -61,7 +61,7 @@ class SuccessRates:
             "solver" : solver
         })
 
-    def __call__(self, destination='record_success_rates.csv'):
+    def __call__(self, destination):
         """
         Runs the smulation
         """
