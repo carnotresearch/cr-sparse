@@ -188,7 +188,7 @@
 
 
 
-<div class="viewcode-block" id="solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.sp.solve.html#cr.sparse.pursuit.sp.solve">[docs]</a><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">res_norm_rtol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">):</span>
+<div class="viewcode-block" id="solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.sp.solve.html#cr.sparse.pursuit.sp.solve">[docs]</a><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">res_norm_rtol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem :math:`y = \Phi x + e` using Compressive Sampling Matching Pursuit</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">## Initialize some constants for the algorithm</span>
@@ -248,8 +248,12 @@
         <span class="k">return</span> <span class="n">RecoverySolution</span><span class="p">(</span><span class="n">x_I</span><span class="o">=</span><span class="n">x_I</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">r_norm_sqr</span><span class="o">=</span><span class="n">r_norm_sqr</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">cond</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
-        <span class="c1"># limit on residual norm and number of iterations</span>
-        <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">r_norm_sqr</span> <span class="o">&gt;</span> <span class="n">max_r_norm_sqr</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">max_iters</span><span class="p">)</span>
+        <span class="c1"># limit on residual norm </span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">r_norm_sqr</span> <span class="o">&gt;</span> <span class="n">max_r_norm_sqr</span>
+        <span class="c1"># limit on number of iterations</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">max_iters</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">c</span>
 
     <span class="n">state</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">iteration</span><span class="p">,</span> <span class="n">init</span><span class="p">())</span>
     <span class="k">return</span> <span class="n">state</span></div>

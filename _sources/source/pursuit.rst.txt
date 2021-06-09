@@ -88,7 +88,7 @@ It is a set of tools to evaluate the performance of sparse recovery algorithms:
   :toctree: _autosummary
 
     RecoveryPerformance
-    SuccessRates
+    RecoveryTrialsAtFixed_M_N
 
 
 Using the Algorithms

@@ -295,12 +295,39 @@
 
 
 <div class="viewcode-block" id="hard_threshold"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.hard_threshold.html#cr.sparse.hard_threshold">[docs]</a><span class="k">def</span> <span class="nf">hard_threshold</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the indices and values of largest K non-zero entries in a vector x</span>
+    <span class="sd">&quot;&quot;&quot;Returns the indices and corresponding values of largest K non-zero entries in a vector x</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">indices</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
     <span class="n">I</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[:</span><span class="o">-</span><span class="n">K</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">x_I</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">I</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">I</span><span class="p">,</span> <span class="n">x_I</span></div>
+
+<span class="k">def</span> <span class="nf">hard_threshold_sorted</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the sorted indices and corresponding values of largest K non-zero entries in a vector x</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Sort entries in x by their magnitude</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="c1"># Pick the indices of K-largest (magnitude) entries in x (from behind)</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[:</span><span class="o">-</span><span class="n">K</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># Make sure that indices are sorted in ascending order</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+    <span class="c1"># Pick corresponding values</span>
+    <span class="n">x_I</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">I</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">I</span><span class="p">,</span> <span class="n">x_I</span>
+
+
+<span class="k">def</span> <span class="nf">dynamic_range</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the ratio of largest and smallest values (by magnitude) in x (dB)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">return</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">nonzero_dynamic_range</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the ratio of largest and smallest non-zero values (by magnitude) in x (dB)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">nonzero_values</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dynamic_range</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 
            </div>

@@ -253,6 +253,28 @@
     <span class="n">etas</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span>
     <span class="n">rhos</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span>
     <span class="n">reverse_map</span><span class="p">:</span> <span class="n">Dict</span>
+
+
+<span class="k">class</span> <span class="nc">HTPState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="c1"># The non-zero values</span>
+    <span class="n">x_I</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Non-zero values&quot;&quot;&quot;</span>
+    <span class="n">I</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;The support for non-zero values&quot;&quot;&quot;</span>
+    <span class="n">r</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;The residuals&quot;&quot;&quot;</span>
+    <span class="n">r_norm_sqr</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;The residual norm squared&quot;&quot;&quot;</span>
+    <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span>
+    <span class="c1"># Information from previous iteration</span>
+    <span class="n">I_prev</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">x_I_prev</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">r_norm_sqr_prev</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+
+<span class="n">IHTState</span> <span class="o">=</span> <span class="n">HTPState</span>
+
+<span class="n">CoSaMPState</span> <span class="o">=</span> <span class="n">HTPState</span>
 </pre></div>
 
            </div>
