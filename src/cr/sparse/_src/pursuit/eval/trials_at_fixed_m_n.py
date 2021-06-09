@@ -45,6 +45,8 @@ class Row(NamedTuple):
     mean_runtime: float = 0.0
 
 class RecoveryTrialsAtFixed_M_N:
+    """Experiment of sparse recovery trials for multiple solvers at fixed dictionary size
+    """
 
     def __init__(self, M, N, Ks, num_dict_trials=10, num_signal_trials=5):
         self.M  = M

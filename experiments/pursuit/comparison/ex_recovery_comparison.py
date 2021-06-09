@@ -2,6 +2,8 @@
 from jax.config import config
 config.update("jax_enable_x64", True)
 
+from functools import partial
+
 from cr.sparse.pursuit.eval import RecoveryTrialsAtFixed_M_N
 
 
