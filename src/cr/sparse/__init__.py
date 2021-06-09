@@ -95,8 +95,11 @@ from cr.sparse._src.signal import (
     randomize_cols,
     largest_indices,
     hard_threshold,
+    hard_threshold_sorted,
     sparse_approximation,
     build_signal_from_indices_and_values,
+    dynamic_range,
+    nonzero_dynamic_range,
 
     # row wise
     largest_indices_rw,
@@ -107,6 +110,7 @@ from cr.sparse._src.signal import (
     largest_indices_cw,
     take_along_cols,
     sparse_approximation_cw,
+
 )
 
 from cr.sparse._src.signal import (

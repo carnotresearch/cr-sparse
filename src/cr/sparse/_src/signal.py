@@ -130,9 +130,36 @@ def nonzero_indices(x):
 
 
 def hard_threshold(x, K):
-    """Returns the indices and values of largest K non-zero entries in a vector x
+    """Returns the indices and corresponding values of largest K non-zero entries in a vector x
     """
     indices = jnp.argsort(jnp.abs(x))
     I = indices[:-K-1:-1]
     x_I = x[I]
     return I, x_I
+
+def hard_threshold_sorted(x, K):
+    """Returns the sorted indices and corresponding values of largest K non-zero entries in a vector x
+    """
+    # Sort entries in x by their magnitude
+    indices = jnp.argsort(jnp.abs(x))
+    # Pick the indices of K-largest (magnitude) entries in x (from behind)
+    I = indices[:-K-1:-1]
+    # Make sure that indices are sorted in ascending order
+    I = jnp.sort(I)
+    # Pick corresponding values
+    x_I = x[I]
+    return I, x_I
+
+
+def dynamic_range(x):
+    """Returns the ratio of largest and smallest values (by magnitude) in x (dB)
+    """
+    x = jnp.sort(jnp.abs(x))
+    return 20 * jnp.log10(x[-1] / x[0])
+
+
+def nonzero_dynamic_range(x):
+    """Returns the ratio of largest and smallest non-zero values (by magnitude) in x (dB)
+    """
+    x = nonzero_values(x)
+    return dynamic_range(x)
