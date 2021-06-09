@@ -139,7 +139,7 @@ class RecoveryPerformance:
         print(f'T0: {self.T0}')
         print(f'R0: {self.R0}')
         print(f'Overlap: {self.overlap}')
-        print(f'Correct atoms: {self.num_correct_atoms}. Ratio: {self.support_recovery_ratio}, perfect_support_recovery: {self.perfect_support_recovery}')
+        print(f'Correct atoms: {self.num_correct_atoms}. Ratio: {self.support_recovery_ratio:.2f}, perfect_support_recovery: {self.perfect_support_recovery}')
         print(f'success: {self.success}')
 
     @property
