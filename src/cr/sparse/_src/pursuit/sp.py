@@ -23,7 +23,7 @@ from cr.sparse import largest_indices
 
 
 
-def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-3):
+def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
     """Solves the sparse recovery problem :math:`y = \Phi x + e` using Compressive Sampling Matching Pursuit
     """
     ## Initialize some constants for the algorithm
@@ -83,8 +83,12 @@ def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-3):
         return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, iterations=state.iterations+1)
 
     def cond(state):
-        # limit on residual norm and number of iterations
-        return jnp.logical_and(state.r_norm_sqr > max_r_norm_sqr, state.iterations < max_iters)
+        # limit on residual norm 
+        a = state.r_norm_sqr > max_r_norm_sqr
+        # limit on number of iterations
+        b = state.iterations < max_iters
+        c = jnp.logical_and(a, b)
+        return c
 
     state = lax.while_loop(cond, iteration, init())
     return state

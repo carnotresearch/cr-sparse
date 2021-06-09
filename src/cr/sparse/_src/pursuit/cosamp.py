@@ -24,7 +24,7 @@ from .util import largest_indices
 EXTRA_FACTOR = 2
 
 
-def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-3):
+def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
     """Solves the sparse recovery problem :math:`y = \Phi x + e` using Compressive Sampling Matching Pursuit
     """
     ## Initialize some constants for the algorithm
@@ -38,6 +38,8 @@ def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-3):
 
     if max_iters is None:
         max_iters = M 
+
+    min_iters = min(3*K, 20) 
 
     def init():
         # Data for the previous approximation [r = y, x = 0]
@@ -55,7 +57,7 @@ def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-3):
         # pick the K largest indices
         Ia = largest_indices(x_3I, K)
         # Identify indices for corresponding atoms
-        I = I_3k[Ia]
+        I = jnp.sort(I_3k[Ia])
         # Corresponding non-zero entries in the sparse approximation
         x_I = x_3I[Ia]
         # Form the subdictionary of corresponding atoms
@@ -105,10 +107,12 @@ def solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-3):
             )
 
     def cond(state):
-        # limit on residual norm and number of iterations
-        return jnp.logical_and(state.r_norm_sqr > max_r_norm_sqr,
-            jnp.logical_and(jnp.any(jnp.not_equal(state.I, state.I_prev)), 
-            state.iterations < max_iters))
+        # limit on residual norm 
+        a = state.r_norm_sqr > max_r_norm_sqr
+        # limit on number of iterations
+        b = state.iterations < max_iters
+        c = jnp.logical_and(a, b)
+        return c
 
     state = lax.while_loop(cond, iteration, init())
     return RecoverySolution(x_I=state.x_I, I=state.I, r=state.r, r_norm_sqr=state.r_norm_sqr,
