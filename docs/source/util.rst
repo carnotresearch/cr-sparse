@@ -58,8 +58,11 @@ Following functions analyze or construct representation vectors which are known 
     randomize_cols
     largest_indices
     hard_threshold
+    hard_threshold_sorted
     sparse_approximation
     build_signal_from_indices_and_values
+    dynamic_range
+    nonzero_dynamic_range
 
 
 .. rubric:: Sparse representation matrices (row-wise)
