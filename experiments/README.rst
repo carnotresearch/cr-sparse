@@ -8,6 +8,6 @@ Experiments
 Sparse Recovery
 -------------------------
 
-* `Recovery Performance of Various Sparse Recovery Algorithms <https://nbviewer.jupyter.org/github/carnotresearch/cr-sparse/blob/master/experiments/pursuit/comparison/nb_recovery_performance.ipynb>`_
+* `Recovery Performance Comparison of Various Sparse Recovery Algorithms <https://nbviewer.jupyter.org/github/carnotresearch/cr-sparse/blob/master/experiments/pursuit/comparison/nb_recovery_comparison_multiple_methods.ipynb>`_
 
 
