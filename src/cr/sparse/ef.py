@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from cr.sparse._src.pursuit.eval.performance import (
+from cr.sparse._src.ef.performance import (
     RecoveryPerformance
 )
 
-from cr.sparse._src.pursuit.eval.trials_at_fixed_m_n import (
+from cr.sparse._src.ef.trials_at_fixed_m_n import (
     RecoveryTrialsAtFixed_M_N
 )

@@ -6,7 +6,7 @@ import jax.numpy as jnp
 
 from functools import partial
 
-from cr.sparse.pursuit.eval import RecoveryTrialsAtFixed_M_N
+from cr.sparse.ef import RecoveryTrialsAtFixed_M_N
 
 Ks = jnp.array(list(range(1, 4)) + list(range(4, 60, 2)) + list(range(60, 101, 4)))
 

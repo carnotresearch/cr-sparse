@@ -9,6 +9,7 @@ CR.Sparse API Documentation
    pursuit
    data
    util
+   ef
    la
 
 
