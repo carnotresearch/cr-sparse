@@ -14,7 +14,7 @@
 
 
 import jax.numpy as jnp
-from jax import vmap
+from jax import vmap, jit, lax
 
 from .util import abs_max_idx, gram_chol_update
 from cr.sparse.la import solve_spd_chol
@@ -88,3 +88,5 @@ solve_multi = vmap(solve, (None, 1, None), 0)
 
 Extends :py:func:`cr.sparse.pursuit.omp.solve` using :py:func:`jax.vmap`.
 """
+
+solve_jit = jit(solve, static_argnums=(2,), static_argnames=("max_res_norm",))
