@@ -154,6 +154,6 @@ class RecoveryPerformance:
 
     @property
     def success(self):
-        """Returns True if more than 75% indices are correctly identified and recovery SNR is high"""
+        """Returns True if more than 75% indices are correctly identified and recovery SNR is high (> 30 dB)"""
         return bool(self.support_recovery_ratio > 0.75) and bool(self.recovery_snr > 30)
 

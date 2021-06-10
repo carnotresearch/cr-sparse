@@ -57,7 +57,6 @@ class RecoverySolution(NamedTuple):
         The tuple can be used to solve multiple measurement vector
         problems also. In this case, each column (of individual parameters)
         represents the solution of corresponding single vector problems.
-
     """
     # The non-zero values
     x_I: jnp.ndarray

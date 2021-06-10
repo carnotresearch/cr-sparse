@@ -46,9 +46,51 @@ class Row(NamedTuple):
 
 class RecoveryTrialsAtFixed_M_N:
     """Experiment of sparse recovery trials for multiple solvers at fixed dictionary size
+
+    Procedure
+
+    * Setup the experiment parameters
+    * Add the solvers to be evaluated under the experiment
+    * Run the experiment (specify the CSV file in which the results will be saved)
+
+    The results are saved automatically during the experiment.
+
+    Sample usage::
+
+        from functools import partial
+        import jax.numpy as jnp
+        from cr.sparse.pursuit.eval import RecoveryTrialsAtFixed_M_N
+        from cr.sparse.pursuit import htp
+
+        Ks = jnp.array(list(range(1, 4)) + list(range(4, 60, 8)))
+        evaluation = RecoveryTrialsAtFixed_M_N(
+            M = 200,
+            N = 1000,
+            Ks = Ks,
+            num_dict_trials = 1,
+            num_signal_trials = 20
+        )
+        # Add multiple solvers
+        htp_solve_jit = partial(htp.solve_jit, normalized=False)
+        nhtp_solve_jit = partial(htp.solve_jit, normalized=True)
+        evaluation.add_solver('HTP', htp_solve_jit)
+        evaluation.add_solver('NHTP', nhtp_solve_jit)
+        # Run evaluation
+        evaluation('record_combined_performance.csv')
     """
 
-    def __init__(self, M, N, Ks, num_dict_trials=10, num_signal_trials=5):
+    def __init__(self, M, N, Ks, num_dict_trials, num_signal_trials):
+        """Initializes the experiment parameters.
+
+        Parameters:
+
+            M: (fixed) signal/measurement space dimension
+            N: (fixed) number of atoms / representation space dimension
+            Ks: Different values of sparsity levels for which experiments will be run
+            num_dict_trials: Number of dictionaries sampled for each value of K
+            num_signal_trials: Number of sparse vectors sampled for each sampled dictionary for each K
+
+        """
         self.M  = M
         self.N  = N
         self.Ks = Ks
@@ -72,6 +114,7 @@ class RecoveryTrialsAtFixed_M_N:
             self._process(solver['name'], solver['solver'])
 
     def save(self):
+        """Saves the experiment results in the CSV file"""
         self.df.to_csv(self.destination, index=False)
 
     def _process(self, name, solver):
