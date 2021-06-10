@@ -138,8 +138,11 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.randomize_cols.html">cr.sparse.randomize_cols</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.largest_indices.html">cr.sparse.largest_indices</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.hard_threshold.html">cr.sparse.hard_threshold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.hard_threshold_sorted.html">cr.sparse.hard_threshold_sorted</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.sparse_approximation.html">cr.sparse.sparse_approximation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.build_signal_from_indices_and_values.html">cr.sparse.build_signal_from_indices_and_values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dynamic_range.html">cr.sparse.dynamic_range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.nonzero_dynamic_range.html">cr.sparse.nonzero_dynamic_range</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.largest_indices_rw.html">cr.sparse.largest_indices_rw</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.take_along_rows.html">cr.sparse.take_along_rows</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.sparse_approximation_rw.html">cr.sparse.sparse_approximation_rw</a></li>
@@ -367,11 +370,20 @@
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.hard_threshold.html#cr.sparse.hard_threshold" title="cr.sparse.hard_threshold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hard_threshold</span></code></a>(x, K)</p></td>
 <td><p>Returns the indices and corresponding values of largest K non-zero entries in a vector x</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sparse_approximation.html#cr.sparse.sparse_approximation" title="cr.sparse.sparse_approximation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_approximation</span></code></a>(x, K)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.hard_threshold_sorted.html#cr.sparse.hard_threshold_sorted" title="cr.sparse.hard_threshold_sorted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hard_threshold_sorted</span></code></a>(x, K)</p></td>
+<td><p>Returns the sorted indices and corresponding values of largest K non-zero entries in a vector x</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sparse_approximation.html#cr.sparse.sparse_approximation" title="cr.sparse.sparse_approximation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_approximation</span></code></a>(x, K)</p></td>
 <td><p>Keeps only largest K non-zero entries by magnitude in a vector x</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.build_signal_from_indices_and_values.html#cr.sparse.build_signal_from_indices_and_values" title="cr.sparse.build_signal_from_indices_and_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_signal_from_indices_and_values</span></code></a>(length, …)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.build_signal_from_indices_and_values.html#cr.sparse.build_signal_from_indices_and_values" title="cr.sparse.build_signal_from_indices_and_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_signal_from_indices_and_values</span></code></a>(length, …)</p></td>
 <td><p>Builds a sparse signal from its non-zero entries (specified by their indices and values)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dynamic_range.html#cr.sparse.dynamic_range" title="cr.sparse.dynamic_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dynamic_range</span></code></a>(x)</p></td>
+<td><p>Returns the ratio of largest and smallest values (by magnitude) in x (dB)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.nonzero_dynamic_range.html#cr.sparse.nonzero_dynamic_range" title="cr.sparse.nonzero_dynamic_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nonzero_dynamic_range</span></code></a>(x)</p></td>
+<td><p>Returns the ratio of largest and smallest non-zero values (by magnitude) in x (dB)</p></td>
 </tr>
 </tbody>
 </table>

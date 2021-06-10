@@ -1,0 +1,6 @@
+﻿cr.sparse.nonzero\_dynamic\_range
+=================================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: nonzero_dynamic_range

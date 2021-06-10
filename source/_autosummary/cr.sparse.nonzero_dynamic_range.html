@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>cr.sparse.largest_indices_cw &mdash; CR.Sparse  documentation</title>
+  <title>cr.sparse.nonzero_dynamic_range &mdash; CR.Sparse  documentation</title>
   
 
   
@@ -46,8 +46,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="cr.sparse.take_along_cols" href="cr.sparse.take_along_cols.html" />
-    <link rel="prev" title="cr.sparse.sparse_approximation_rw" href="cr.sparse.sparse_approximation_rw.html" /> 
+    <link rel="next" title="cr.sparse.largest_indices_rw" href="cr.sparse.largest_indices_rw.html" />
+    <link rel="prev" title="cr.sparse.dynamic_range" href="cr.sparse.dynamic_range.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -115,11 +115,11 @@
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.sparse_approximation.html">cr.sparse.sparse_approximation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.build_signal_from_indices_and_values.html">cr.sparse.build_signal_from_indices_and_values</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.dynamic_range.html">cr.sparse.dynamic_range</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.nonzero_dynamic_range.html">cr.sparse.nonzero_dynamic_range</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.nonzero_dynamic_range</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.largest_indices_rw.html">cr.sparse.largest_indices_rw</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.take_along_rows.html">cr.sparse.take_along_rows</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.sparse_approximation_rw.html">cr.sparse.sparse_approximation_rw</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.largest_indices_cw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.largest_indices_cw.html">cr.sparse.largest_indices_cw</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.take_along_cols.html">cr.sparse.take_along_cols</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.sparse_approximation_cw.html">cr.sparse.sparse_approximation_cw</a></li>
 </ul>
@@ -182,13 +182,13 @@
         
           <li><a href="../util.html">Utilities in cr.sparse module</a> &raquo;</li>
         
-      <li>cr.sparse.largest_indices_cw</li>
+      <li>cr.sparse.nonzero_dynamic_range</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/source/_autosummary/cr.sparse.largest_indices_cw.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/source/_autosummary/cr.sparse.nonzero_dynamic_range.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -225,12 +225,12 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="cr-sparse-largest-indices-cw">
-<h1>cr.sparse.largest_indices_cw<a class="headerlink" href="#cr-sparse-largest-indices-cw" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cr-sparse-nonzero-dynamic-range">
+<h1>cr.sparse.nonzero_dynamic_range<a class="headerlink" href="#cr-sparse-nonzero-dynamic-range" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="cr.sparse.largest_indices_cw">
-<span class="sig-prename descclassname"><span class="pre">cr.sparse.</span></span><span class="sig-name descname"><span class="pre">largest_indices_cw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/signal.html#largest_indices_cw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.largest_indices_cw" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the indices of K largest entries by magnitude in each column of X</p>
+<dt class="sig sig-object py" id="cr.sparse.nonzero_dynamic_range">
+<span class="sig-prename descclassname"><span class="pre">cr.sparse.</span></span><span class="sig-name descname"><span class="pre">nonzero_dynamic_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/signal.html#nonzero_dynamic_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.nonzero_dynamic_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the ratio of largest and smallest non-zero values (by magnitude) in x (dB)</p>
 </dd></dl>
 
 </div>
@@ -241,8 +241,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="cr.sparse.take_along_cols.html" class="btn btn-neutral float-right" title="cr.sparse.take_along_cols" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="cr.sparse.sparse_approximation_rw.html" class="btn btn-neutral float-left" title="cr.sparse.sparse_approximation_rw" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cr.sparse.largest_indices_rw.html" class="btn btn-neutral float-right" title="cr.sparse.largest_indices_rw" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cr.sparse.dynamic_range.html" class="btn btn-neutral float-left" title="cr.sparse.dynamic_range" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
