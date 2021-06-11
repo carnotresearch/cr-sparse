@@ -1,7 +1,7 @@
 Accelerated sparse representations and compressive sensing
 ====================================================================
 
-|docs| |unttests|
+|docs| |unttests| |coverage|
 
 An `overview <https://carnotresearch.github.io/cr-sparse/intro.html>`_ of the library.
 
@@ -37,3 +37,11 @@ The library also provides
     :alt: Unit Tests
     :scale: 100%
     :target: https://github.com/carnotresearch/cr-sparse/actions/workflows/ci.yml
+
+
+
+.. |coverage| image:: https://codecov.io/gh/carnotresearch/cr-sparse/branch/master/graph/badge.svg?token=JZQW6QU3S4
+    :alt: Coverage
+    :scale: 100%
+    :target: https://codecov.io/gh/carnotresearch/cr-sparse
+    
