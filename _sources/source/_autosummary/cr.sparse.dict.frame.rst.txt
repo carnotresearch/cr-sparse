@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.frame
+====================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: frame

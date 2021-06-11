@@ -34,6 +34,7 @@ Dictionary properties
   :toctree: _autosummary
 
     gram
+    frame
     coherence_with_index
     coherence
     frame_bounds
