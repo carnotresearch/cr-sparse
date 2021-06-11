@@ -31,6 +31,7 @@ from cr.sparse._src.dict.simple import (
 
 from cr.sparse._src.dict.props import (
     gram,
+    frame,
     coherence_with_index,
     coherence,
     frame_bounds,
