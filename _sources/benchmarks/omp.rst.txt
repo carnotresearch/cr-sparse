@@ -46,7 +46,7 @@ Each row of the following table describes:
   in both CPU and GPU architectures
 * Current implementation seems to be slower on GPU vs CPU with JIT. 
 * GPU speed gain over CPU (with JIT on) is relatively meager. 
-  On Tensorflow, people regularly report 30x improvements betweeen CPU to GPU 
+  On TensorFlow, people regularly report 30x improvements between CPU to GPU 
   for neural networks implemented using Keras. 
 
 
