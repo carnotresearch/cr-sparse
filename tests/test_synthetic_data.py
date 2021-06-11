@@ -20,4 +20,15 @@ def test_sparse_vector():
     assert len(support) == K
 
 
+def test_sparse_vectors():
+    key = random.PRNGKey(0)
+    D = 10
+    K = 2
+    S = 2
+    x, omega = crdata.sparse_normal_representations(key, D, K, S)
+    assert len(omega) == K
+    assert x.shape == (D, S)
+    support = crs.nonzero_indices(x)
+    assert len(support) == K*S
+
 
