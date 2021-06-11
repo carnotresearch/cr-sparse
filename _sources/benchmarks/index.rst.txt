@@ -5,4 +5,5 @@ Benchmarks
    :maxdepth: 2
    :caption: Contents:
 
+   comparison
    omp

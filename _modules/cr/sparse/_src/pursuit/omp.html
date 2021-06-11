@@ -179,7 +179,7 @@
 
 
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">vmap</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">vmap</span><span class="p">,</span> <span class="n">jit</span><span class="p">,</span> <span class="n">lax</span>
 
 <span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">abs_max_idx</span><span class="p">,</span> <span class="n">gram_chol_update</span>
 <span class="kn">from</span> <span class="nn">cr.sparse.la</span> <span class="kn">import</span> <span class="n">solve_spd_chol</span>
@@ -253,6 +253,8 @@
 
 <span class="sd">Extends :py:func:`cr.sparse.pursuit.omp.solve` using :py:func:`jax.vmap`.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">solve_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">solve</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;max_res_norm&quot;</span><span class="p">,))</span>
 </pre></div>
 
            </div>

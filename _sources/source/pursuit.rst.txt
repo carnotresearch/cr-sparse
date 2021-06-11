@@ -74,22 +74,6 @@ Utilities
     gram_chol_update
 
 
-Evaluation Framework
--------------------------------
-
-It is a set of tools to evaluate the performance of sparse recovery algorithms:
-
-* Reconstruction quality of invidual sparse recovery problems
-* Success rates across multiple sparsity levels
-
-.. currentmodule:: cr.sparse.pursuit
-
-.. autosummary::
-  :toctree: _autosummary
-
-    eval.RecoveryPerformance
-    eval.RecoveryTrialsAtFixed_M_N
-
 
 Using the Algorithms
 -------------------------------
@@ -152,7 +136,7 @@ sparse representation as follows::
 
 Finally, you can use the utility to evaluate the quality of reconstruction::
 
-  from cr.sparse.pursuit.eval import RecoveryPerformance
+  from cr.sparse.ef import RecoveryPerformance
   rp = RecoveryPerformance(Phi, y, x, x_hat)
   rp.print()
 

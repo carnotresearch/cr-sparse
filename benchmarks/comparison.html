@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Computation Time Comparison of Sparse Recovery Methods &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Orthogonal Matching Pursuit" href="omp.html" />
+    <link rel="prev" title="Benchmarks" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Benchmarks</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Computation Time Comparison of Sparse Recovery Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#performance-on-cpu">Performance on CPU</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="omp.html">Orthogonal Matching Pursuit</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Benchmarks</a> &raquo;</li>
+        
+      <li>Computation Time Comparison of Sparse Recovery Methods</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/benchmarks/comparison.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="computation-time-comparison-of-sparse-recovery-methods">
+<h1>Computation Time Comparison of Sparse Recovery Methods<a class="headerlink" href="#computation-time-comparison-of-sparse-recovery-methods" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="performance-on-cpu">
+<h2>Performance on CPU<a class="headerlink" href="#performance-on-cpu" title="Permalink to this headline">¶</a></h2>
+<p>System configuration</p>
+<ul class="simple">
+<li><p>MacBook Pro 2019 Model</p></li>
+<li><p>Processor: 1.4 GHz Quad Core Intel Core i5</p></li>
+<li><p>Memory: 8 GB 2133 MHz LPDDR3</p></li>
+</ul>
+<p>Problem Specification</p>
+<ul class="simple">
+<li><p>Gaussian sensing matrices (normalized to unit norm columns)</p></li>
+<li><p>Sparse vectors with non-zero entries drawn from Gaussian distributions</p></li>
+<li><p>M, N, K have been chosen so that all algorithms under comparison are known to converge to successful
+recovery.</p></li>
+</ul>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Average time (msec) and speedups due to JIT compilation</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>method</p></th>
+<th class="head"><p>M</p></th>
+<th class="head"><p>N</p></th>
+<th class="head"><p>K</p></th>
+<th class="head"><p>iterations</p></th>
+<th class="head"><p>jit_off</p></th>
+<th class="head"><p>jit_on</p></th>
+<th class="head"><p>speedup</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OMP</p></td>
+<td><p>200</p></td>
+<td><p>1000</p></td>
+<td><p>20</p></td>
+<td><p>20</p></td>
+<td><p>105.78</p></td>
+<td><p>2.14</p></td>
+<td><p>49.48</p></td>
+</tr>
+<tr class="row-odd"><td><p>SP</p></td>
+<td><p>200</p></td>
+<td><p>1000</p></td>
+<td><p>20</p></td>
+<td><p>3</p></td>
+<td><p>1645.32</p></td>
+<td><p>2.73</p></td>
+<td><p>602.34</p></td>
+</tr>
+<tr class="row-even"><td><p>CoSaMP</p></td>
+<td><p>200</p></td>
+<td><p>1000</p></td>
+<td><p>20</p></td>
+<td><p>4</p></td>
+<td><p>309.01</p></td>
+<td><p>6.20</p></td>
+<td><p>49.84</p></td>
+</tr>
+<tr class="row-odd"><td><p>IHT</p></td>
+<td><p>200</p></td>
+<td><p>1000</p></td>
+<td><p>20</p></td>
+<td><p>65</p></td>
+<td><p>232.99</p></td>
+<td><p>36.27</p></td>
+<td><p>6.42</p></td>
+</tr>
+<tr class="row-even"><td><p>NIHT</p></td>
+<td><p>200</p></td>
+<td><p>1000</p></td>
+<td><p>20</p></td>
+<td><p>16</p></td>
+<td><p>240.96</p></td>
+<td><p>5.64</p></td>
+<td><p>42.72</p></td>
+</tr>
+<tr class="row-odd"><td><p>HTP</p></td>
+<td><p>200</p></td>
+<td><p>1000</p></td>
+<td><p>20</p></td>
+<td><p>5</p></td>
+<td><p>1491.00</p></td>
+<td><p>13.71</p></td>
+<td><p>108.76</p></td>
+</tr>
+<tr class="row-even"><td><p>NHTP</p></td>
+<td><p>200</p></td>
+<td><p>1000</p></td>
+<td><p>20</p></td>
+<td><p>4</p></td>
+<td><p>1467.35</p></td>
+<td><p>1.98</p></td>
+<td><p>741.88</p></td>
+</tr>
+</tbody>
+</table>
+<p>Some comments on the results are in order.</p>
+<p class="rubric">Without JIT vs With JIT</p>
+<ul class="simple">
+<li><p>It is clear that all algorithms exhibit significant speedups with the introduction of
+JIT compilation.</p></li>
+<li><p>The speedup is as low as 6x for IHT and as high as 740x in NHTP.</p></li>
+<li><p>After JIT compilation, IHT is the slowest algorithm while NIHT is the fastest.</p></li>
+<li><p>It appears that steps like dynamic step size computation and least squares tend to get
+aggressively optimized and lead to massive speed gains.</p></li>
+</ul>
+<p class="rubric">OMP</p>
+<ul class="simple">
+<li><p>With JIT on, OMP is actually one of the fastest algorithms in the mix.</p></li>
+<li><p>In the current implementations, OMP is the only one in which the least squares step has
+been optimized using Cholesky updates.</p></li>
+<li><p>This is possible as OMP structure allows for adding atoms one at a time to the mix.</p></li>
+<li><p>Other algorithms change several atoms [add / remove] in each iteration. Hence, such
+optimizations are not possible.</p></li>
+<li><p>The least squares steps in other algorithms can be accelerated using small number of conjugate gradients
+iterations. However, this hasn’t been implemented yet.</p></li>
+</ul>
+<p class="rubric">SP vs CoSaMP</p>
+<ul class="simple">
+<li><p>CoSaMP has one least squares step (on 3K indices) in each iteration.</p></li>
+<li><p>SP (Subspace Pursuit) has two least squares steps in each iteration.</p></li>
+<li><p>Without JIT, CoSaMP is 5x faster.</p></li>
+<li><p>With JIT, SP becomes 2.5x faster than CoSaMP.</p></li>
+<li><p>Thus, SP seems to provide more aggressive optimization opportunities.</p></li>
+</ul>
+<p class="rubric">IHT vs NIHT</p>
+<ul class="simple">
+<li><p>IHT and NIHT are both simple algorithms. They don’t involve a least squares step in their iterations.</p></li>
+<li><p>The main difference is that the step-size fixed for IHT and it is computed on every iteration in NIHT.</p></li>
+<li><p>The dynamic step size leads to reduction in the number of iterations for NIHT. From 65 to 16, 4x reduction.</p></li>
+<li><p>Without JIT, there is no significant difference between IHT and NIHT.
+Thus, step-size computation seems to contribute a lot to computation time without compilation.</p></li>
+<li><p>With JIT, step-size computation seems to be aggressively optimized.
+NIHT after JIT is 6x faster than IHT even though the number of iterations reduces by only 4 times
+and there is extra overhead of computing the step size.</p></li>
+</ul>
+<p class="rubric">IHT vs HTP</p>
+<ul class="simple">
+<li><p>The major difference in the two algorithms is that HTP performs a least squares estimate
+on the current guess of signal support</p></li>
+<li><p>Although the number of iterations reduces 13 times, the computation speed up is not so
+high (due to extra overhead of least squares computation)</p></li>
+<li><p>Without JIT, HTP becomes much slower than IHT. Thus, overhead of a least squares step is quite high.</p></li>
+<li><p>HTP is about 3x faster than IHT with JIT. This makes sense. The number of iterations reduced by 13
+times and the overhead of least squares was added.</p></li>
+</ul>
+<p class="rubric">HTP vs NHTP</p>
+<ul class="simple">
+<li><p>Just like NIHT, NHTP also introduces computing the step size dynamically in every iteration.</p></li>
+<li><p>It helps in reducing the number of iterations from 5 to 4.</p></li>
+<li><p>In this case, the benefit of dynamic step size is not visible much in terms of iterations.</p></li>
+<li><p>Without JIT, there is not much benefit either.</p></li>
+<li><p>However, with JIT, NHTP is 6x faster than HTP. This speedup is unusual as there is just
+20% reduction in number of iterations and there is the overhead of step size computation.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="omp.html" class="btn btn-neutral float-right" title="Orthogonal Matching Pursuit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Benchmarks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
