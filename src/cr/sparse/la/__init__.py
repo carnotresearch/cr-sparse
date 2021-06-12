@@ -16,10 +16,25 @@
 Linear algebra utility functions
 """
 
+from cr.sparse._src.la.linear import (
+    point2d,
+    vec2d,
+    rotate2d_cw,
+    rotate2d_ccw,
+    reflect2d,
+    householder_vec,
+    householder_reflect,
+)
+
 from cr.sparse._src.la.triangular import (
     solve_Lx_b,
     solve_LTx_b,
     solve_Ux_b,
     solve_UTx_b,
     solve_spd_chol
+)
+
+# These functions are not JIT ready
+from cr.sparse._src.la.linear import (
+    householder_vec_
 )
