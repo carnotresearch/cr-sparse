@@ -17,6 +17,7 @@ Utility functions for working with Affine spaces
 """
 
 from cr.sparse._src.la.affine import (
+    homogenize,
     homogenize_vec,
     homogenize_cols,    
 )

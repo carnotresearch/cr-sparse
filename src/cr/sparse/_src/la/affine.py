@@ -24,3 +24,8 @@ def homogenize_cols(X, value=1):
     o = value * jnp.ones(n)
     return jnp.vstack((X, o))
 
+
+def homogenize(X, value=1):
+    if X.ndim == 1:
+        return homogenize_vec(X, value)
+    return homogenize_cols(X, value)
