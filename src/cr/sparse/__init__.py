@@ -88,6 +88,13 @@ from cr.sparse._src.discrete.number import (
     integer_factors_close_to_sqr_root
 )
 
+from cr.sparse._src.vector import (
+    is_line_vec,
+    is_row_vec,
+    is_col_vec,
+    to_row_vec,
+    to_col_vec,
+)
 from cr.sparse._src.signal import (
     nonzero_values,
     nonzero_indices,
