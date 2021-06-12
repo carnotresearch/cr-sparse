@@ -125,3 +125,8 @@ from cr.sparse._src.signalcomparison import (
     snrs_cw,
     snrs_rw
 )
+
+from cr.sparse._src.special import (
+    pascal,
+    pascal_jit
+)
