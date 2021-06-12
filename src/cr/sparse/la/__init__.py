@@ -22,8 +22,6 @@ from cr.sparse._src.la.linear import (
     rotate2d_cw,
     rotate2d_ccw,
     reflect2d,
-    householder_vec,
-    householder_reflect,
 )
 
 from cr.sparse._src.la.triangular import (
@@ -34,7 +32,14 @@ from cr.sparse._src.la.triangular import (
     solve_spd_chol
 )
 
+from cr.sparse._src.la.householder import (
+    householder_vec,
+    householder_matrix,
+    householder_premultiply,
+    householder_postmultiply,
+)
+
 # These functions are not JIT ready
-from cr.sparse._src.la.linear import (
+from cr.sparse._src.la.householder import (
     householder_vec_
 )
