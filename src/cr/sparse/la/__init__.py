@@ -46,6 +46,11 @@ from cr.sparse._src.la.householder import (
     householder_qr,
 )
 
+from cr.sparse._src.la.chol import (
+    cholesky_update_on_add_column,
+    cholesky_build_factor
+)
+
 # These functions are not JIT ready
 from cr.sparse._src.la.householder import (
     householder_vec_
