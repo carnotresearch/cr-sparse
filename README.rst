@@ -18,6 +18,44 @@ The library also provides
 * Sample data generation utilities
 * Framework for evaluation of sparse recovery algorithms
 
+Quick Examples
+----------------
+
+.. rubric:: A greedy pursuit based sparse recovery with synthetic data
+
+Build a Gaussian dictionary/sensing matrix::
+
+  from jax import random
+  import cr.sparse.dict as crdict
+  M = 128
+  N = 256
+  key = random.PRNGKey(0)
+  Phi = crdict.gaussian_mtx(key, M,N)
+
+Build a K-sparse signal with Gaussian non-zero entries::
+
+  import cr.sparse.data as crdata
+  import jax.numpy as jnp
+  K = 16
+  key, subkey = random.split(key)
+  x, omega = crdata.sparse_normal_representations(key, N, K, 1)
+  x = jnp.squeeze(x)
+
+Build the measurement vector::
+
+  y = Phi @ x
+
+
+Import the Compressive Sampling Matching Pursuit sparse recovery solver::
+
+  from cr.sparse.pursuit import cosamp
+
+Solve the recovery problem::
+
+  solution =  cosamp.solve(Phi, y, K)
+
+For the complete set of available solvers, see the documentation.
+
 
 Citing CR.Sparse
 ------------------------
