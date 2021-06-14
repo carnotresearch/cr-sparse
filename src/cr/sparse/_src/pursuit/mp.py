@@ -17,7 +17,7 @@ import jax.numpy as jnp
 from jax.ops import index, index_add
 from jax.numpy.linalg import norm
 from .defs import SingleRecoverySolution
-from cr.sparse.norm import *
+from cr.sparse import *
 
 def solve_smv(dictionary, x, max_iters=None, max_res_norm=None):
     # initialize residual
