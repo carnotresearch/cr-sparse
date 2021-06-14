@@ -19,7 +19,9 @@ The library also provides
 * Framework for evaluation of sparse recovery algorithms
 
 
-## Citing CR.Sparse
+Citing CR.Sparse
+------------------------
+
 
 To cite this repository:
 
