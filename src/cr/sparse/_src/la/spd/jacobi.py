@@ -26,8 +26,6 @@ import jax.numpy as jnp
 class State(NamedTuple):
     x: jnp.ndarray
     """The solution"""
-    r: jnp.ndarray
-    """The residual"""
     r_norm_sqr: jnp.ndarray
     """The residual norm squared"""
     iterations: int
@@ -57,10 +55,9 @@ def solve(A, b, max_iters=None, res_norm_rtol=1e-4):
         max_iters = 500
 
     def init():
-        x = jnp.zeros(m)
-        r = b
-        r_norm_sqr = b_norm_sqr
-        return State(x=x, r=r,
+        x = z
+        r_norm_sqr = x.T @ x
+        return State(x=x,
             r_norm_sqr=r_norm_sqr,
             iterations=1)
 
@@ -68,10 +65,10 @@ def solve(A, b, max_iters=None, res_norm_rtol=1e-4):
         # update the solution x
         x = B @ state.x + z
         # update the residual r
-        r = b - A @ x
+        r = x - state.x
         r_norm_sqr = r.T @ r
         # update state
-        return State(x=x, r=r,
+        return State(x=x,
             r_norm_sqr=r_norm_sqr,
             iterations=state.iterations+1)
 
