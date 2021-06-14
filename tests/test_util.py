@@ -13,4 +13,5 @@ def test_promote_arg_dtypes():
     promote_arg_dtypes(jnp.array(1), jnp.array(2.))
 
 def test_canonicalize_dtype():
+    canonicalize_dtype(None)
     canonicalize_dtype(jnp.int32)
