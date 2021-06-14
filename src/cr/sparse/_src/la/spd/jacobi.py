@@ -26,8 +26,8 @@ import jax.numpy as jnp
 class State(NamedTuple):
     x: jnp.ndarray
     """The solution"""
-    r_norm_sqr: jnp.ndarray
-    """The residual norm squared"""
+    e_norm_sqr: jnp.ndarray
+    """The norm squared of the error between successive x approximations"""
     iterations: int
     """The number of iterations it took to complete"""
 
@@ -50,15 +50,15 @@ def solve(A, b, max_iters=None, res_norm_rtol=1e-4):
 
     b_norm_sqr = b.T @ b
 
-    max_r_norm_sqr = b_norm_sqr * (res_norm_rtol ** 2)
+    max_e_norm_sqr = b_norm_sqr * (res_norm_rtol ** 2)
     if max_iters is None:
         max_iters = 500
 
     def init():
         x = z
-        r_norm_sqr = x.T @ x
+        e_norm_sqr = x.T @ x
         return State(x=x,
-            r_norm_sqr=r_norm_sqr,
+            e_norm_sqr=e_norm_sqr,
             iterations=1)
 
     def iteration(state):
@@ -66,15 +66,15 @@ def solve(A, b, max_iters=None, res_norm_rtol=1e-4):
         x = B @ state.x + z
         # update the residual r
         r = x - state.x
-        r_norm_sqr = r.T @ r
+        e_norm_sqr = r.T @ r
         # update state
         return State(x=x,
-            r_norm_sqr=r_norm_sqr,
+            e_norm_sqr=e_norm_sqr,
             iterations=state.iterations+1)
 
     def cond(state):
         # limit on residual norm 
-        a = state.r_norm_sqr > max_r_norm_sqr
+        a = state.e_norm_sqr > max_e_norm_sqr
         # limit on number of iterations
         b = state.iterations < max_iters
         c = jnp.logical_and(a, b)
