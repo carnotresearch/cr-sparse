@@ -24,16 +24,14 @@ class CGState(NamedTuple):
     r: jnp.ndarray
     """The residual"""
     p: jnp.ndarray
-    """The direction"""
+    """The conjugate direction"""
     r_norm_sqr: jnp.ndarray
-    """The residual norm squared"""
-    prev_r_norm_sqr: jnp.ndarray
     """The residual norm squared"""
     iterations: int
     """The number of iterations it took to complete"""
 
-def solve(A, b, max_iters=None, res_norm_rtol=1e-4):
-    """Solves the problem Ax  = b via conjugate gradients iterations
+def solve_from(A, b, x_0, max_iters=None, res_norm_rtol=1e-4):
+    """Solves the problem :math:`Ax  = b` for a symmetric positive definite :math:`A` via conjugate gradients iterations
     """
     # Boyd Conjugate Gradients slide 22
     m, n = A.shape
@@ -46,36 +44,36 @@ def solve(A, b, max_iters=None, res_norm_rtol=1e-4):
 
     def init():
         # Complete one iteration
-        # Steps of first iteration have been simplified.
-        # r = b
-        # r_norm_sqr = b_norm_sqr
-        # p = r
-        p = b
-        w = A @ p
-        alpha = b_norm_sqr / (p.T @ w)
-        x = alpha * p
-        r = b - alpha * w
+        r = b - A @ x_0
+        # residual energy
         r_norm_sqr = r.T @ r
-        return CGState(x=x, r=r, p=p, 
-            r_norm_sqr=r_norm_sqr, prev_r_norm_sqr=b_norm_sqr,
-            iterations=1)
+        # first conjugate direction
+        p = r
+        return CGState(x=x_0, r=r, p=p, 
+            r_norm_sqr=r_norm_sqr,
+            iterations=0)
 
     def iteration(state):
         # individual iteration
-        rho_1 = state.r_norm_sqr
-        rho_2 = state.prev_r_norm_sqr
-        # compute p from previous r and p values
-        p = state.r + (rho_1 / rho_2) * state.p
-        w = A @ p
-        alpha = rho_1 / (p.T @ w)
+        p = state.p
+        # common term in the computation of p.T @ A @ p and residual update
+        Ap = A @ p
+        # x step size along the conjugate direction
+        alpha = state.r_norm_sqr / (p.T @ Ap)
         # update the solution x
         x = state.x + alpha * p
         # update the residual r
-        r = b - alpha * w
-        r_norm_sqr = r.T @ r
+        r = state.r - alpha * Ap
+        # update residual energy
+        rho_1 = r.T @ r
+        rho_2 = state.r_norm_sqr
+        # direction update step size
+        beta = rho_1 / rho_2
+        # compute next conjugate direction
+        p = r + beta * p
         # update state
         return CGState(x=x, r=r, p=p, 
-            r_norm_sqr=r_norm_sqr, prev_r_norm_sqr=rho_1,
+            r_norm_sqr=rho_1,
             iterations=state.iterations+1)
 
     def cond(state):
@@ -88,6 +86,15 @@ def solve(A, b, max_iters=None, res_norm_rtol=1e-4):
 
     state = lax.while_loop(cond, iteration, init())
     return state
+
+solve_from_jit  = jit(solve_from,
+    static_argnames=("max_iters", "res_norm_rtol"))
+
+
+def solve(A, b, max_iters=None, res_norm_rtol=1e-4):
+    x_0 = jnp.zeros(A.shape[0])
+    return solve_from_jit(A, b, x_0, max_iters=max_iters, res_norm_rtol=res_norm_rtol)
+
 
 solve_jit  = jit(solve,
     static_argnames=("max_iters", "res_norm_rtol"))
