@@ -27,7 +27,7 @@ To cite this repository:
 
     @software{crsparse2021github,
     author = {Shailesh Kumar},
-    title = {{CR.Sparse}: XLA accelerated algorithms for inverse problems in sparse representations and compressive sensing},
+    title = {{CR.Sparse}: XLA accelerated functional algorithms for inverse problems},
     url = {https://github.com/carnotresearch/cr-sparse},
     version = {0.1.3},
     year = {2021},
