@@ -38,6 +38,5 @@ def pascal(n, symmetric=False):
         return _pascal_sym(n)
     else:
         return _pascal_lower(n)
-    return A
 
 pascal_jit = jax.jit(pascal, static_argnums=(0, 1))
