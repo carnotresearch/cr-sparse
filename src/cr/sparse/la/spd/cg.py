@@ -16,7 +16,9 @@
 Functions for solving linear problems using Conjugate gradient method
 """
 
-from cr.sparse._src.la.cg import (
+from cr.sparse._src.la.spd.cg import (
+    solve_from,
+    solve_from_jit,
     solve,
     solve_jit
 )
