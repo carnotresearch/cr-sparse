@@ -18,7 +18,7 @@ The library also provides
 * Sample data generation utilities
 * Framework for evaluation of sparse recovery algorithms
 
-Quick Examples
+Example usage
 ----------------
 
 .. rubric:: A greedy pursuit based sparse recovery with synthetic data
