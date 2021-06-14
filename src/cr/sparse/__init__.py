@@ -19,7 +19,8 @@ CR.Sparse
 from .version import __version__
 
 from cr.sparse._src.util import (
-    promote_arg_dtypes
+    promote_arg_dtypes,
+    canonicalize_dtype
 )
 
 from cr.sparse._src.matrix import (
