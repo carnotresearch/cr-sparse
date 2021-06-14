@@ -2,7 +2,7 @@ import pytest
 from functools import partial
 
 import jax
-from jax import random
+from jax import random, jit
 import jax.numpy as jnp
 
 import cr.sparse as crs
@@ -13,6 +13,9 @@ from cr.sparse.ef import RecoveryPerformance
 
 from cr.sparse._src.pursuit.mp import solve_smv, solve_mmv
 
+
+solve_smv_jit = jit(solve_smv, static_argnames=("max_iters", "max_res_norm",))
+solve_mmv_jit = jit(solve_mmv, static_argnames=("max_iters", "max_res_norm",))
 
 # Signal dimension
 N = 10
@@ -35,4 +38,7 @@ representations = x.T
 signals = representations @ dictionary
 
 def test_mp_smv():
-    sol = solve_smv(dictionary, signals[0])
+    sol = solve_smv(dictionary, signals[0], max_iters=1, max_res_norm=1)
+
+def test_mp_mmv():
+    sol = solve_mmv(dictionary, signals, max_iters=1, max_res_norm=1)
