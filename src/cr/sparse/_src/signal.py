@@ -17,10 +17,12 @@ import jax.numpy as jnp
 from jax import random
 
 from .norm import sqr_norms_l2_cw, sqr_norms_l2_rw
+from .matrix import is_matrix
 
 def find_first_signal_with_energy_le_rw(X, energy):
     """Returns the index of the first row which has energy less than the specified threshold
     """
+    assert is_matrix(X)
     energies = sqr_norms_l2_rw(X)
     index = jnp.argmax(energies <= energy)
     return index if energies[index] <= energy else jnp.array(-1)
@@ -28,6 +30,7 @@ def find_first_signal_with_energy_le_rw(X, energy):
 def find_first_signal_with_energy_le_cw(X, energy):
     """Returns the index of the first column which has energy less than the specified threshold
     """
+    assert is_matrix(X)
     energies = sqr_norms_l2_cw(X)
     index = jnp.argmax(energies <= energy)
     return index if energies[index] <= energy else jnp.array(-1)
@@ -36,6 +39,7 @@ def find_first_signal_with_energy_le_cw(X, energy):
 def randomize_rows(key, X):
     """Randomizes the rows in X
     """
+    assert is_matrix(X)
     m, n = X.shape
     r = random.permutation(key, m)
     return X[r, :]
@@ -43,6 +47,7 @@ def randomize_rows(key, X):
 def randomize_cols(key, X):
     """Randomizes the columns in X
     """
+    assert is_matrix(X)
     m, n = X.shape
     r = random.permutation(key, n)
     return X[:, r]

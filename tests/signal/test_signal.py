@@ -1,0 +1,145 @@
+import pytest
+
+
+from cr.sparse import *
+import jax.numpy as jnp
+from jax import random
+
+def test_find_first_signal_with_energy_le_rw():
+    X = jnp.eye(10)
+    X = X.at[5,5].set(.5)
+    index = find_first_signal_with_energy_le_rw(X, 0.3)
+    assert index == 5
+    index = find_first_signal_with_energy_le_rw(X, 0.2)
+    assert index == -1
+
+def test_find_first_signal_with_energy_le_cw():
+    X = jnp.eye(10)
+    X = X.at[5,5].set(.5)
+    index = find_first_signal_with_energy_le_cw(X, 0.3)
+    assert index == 5
+    index = find_first_signal_with_energy_le_cw(X, 0.2)
+    assert index == -1
+
+def test_randomize_rows():
+    key = random.PRNGKey(0)
+    X = jnp.ones((4, 4))
+    Y = randomize_rows(key, X)
+    assert jnp.allclose(X, Y)
+
+def test_randomize_cols():
+    key = random.PRNGKey(0)
+    X = jnp.ones((4, 4))
+    Y = randomize_cols(key, X)
+    assert jnp.allclose(X, Y)
+
+
+def test_largest_indices():
+    x = jnp.array([5, 1, 3, 4, 2])
+    indices = largest_indices(x, 2)
+    assert jnp.array_equal(indices, jnp.array([0, 3]))
+
+def test_largest_indices_rw():
+    x = jnp.array([[5, 1, 3, 4, 2]])
+    indices = largest_indices_rw(x, 2)
+    assert jnp.array_equal(indices, jnp.array([[0, 3]]))
+
+def test_largest_indices_cw():
+    x = jnp.array([[5, 1, 3, 4, 2]])
+    indices = largest_indices_cw(x.T, 2)
+    expected = jnp.array([[0, 3]]).T
+    assert jnp.array_equal(indices, expected)
+
+def test_take_along_rows():
+    x = jnp.array([[5, 1, 3, 4, 2]])
+    indices = largest_indices_rw(x, 2)
+    y = take_along_rows(x, indices)
+    assert jnp.array_equal(y, jnp.array([[5, 4]]))
+
+def test_take_along_cols():
+    x = jnp.array([[5, 1, 3, 4, 2]]).T
+    indices = largest_indices_cw(x, 2)
+    y = take_along_cols(x, indices)
+    expected = jnp.array([[5, 4]]).T
+    assert jnp.array_equal(y, expected)
+
+
+def test_sparse_approximation():
+    x = jnp.array([5, 1, 3, 4, 2])
+    y = sparse_approximation(x, 2)
+    expected = jnp.array([5, 0, 0, 4, 0])
+    assert jnp.array_equal(y, expected)
+
+def test_sparse_approximation_0():
+    x = jnp.array([5, 1, 3, 4, 2])
+    y = sparse_approximation(x, 0)
+    expected = jnp.array([0, 0, 0, 0, 0])
+    assert jnp.array_equal(y, expected)
+
+def test_sparse_approximation_cw():
+    x = jnp.array([[5, 1, 3, 4, 2]]).T
+    y = sparse_approximation_cw(x, 2)
+    expected = jnp.array([[5, 0, 0, 4, 0]]).T
+    assert jnp.array_equal(y, expected)
+    y = sparse_approximation_cw(x, 0)
+    expected = jnp.array([[0, 0, 0, 0, 0]]).T
+    assert jnp.array_equal(y, expected)
+
+
+def test_sparse_approximation_rw():
+    x = jnp.array([[5, 1, 3, 4, 2]])
+    y = sparse_approximation_rw(x, 2)
+    expected = jnp.array([[5, 0, 0, 4, 0]])
+    assert jnp.array_equal(y, expected)
+    y = sparse_approximation_rw(x, 0)
+    expected = jnp.array([[0, 0, 0, 0, 0]])
+    assert jnp.array_equal(y, expected)
+
+def test_build_signal_from_indices_and_values():
+    n = 4
+    indices = jnp.array([1, 3])
+    values = jnp.array([9, 15])
+    x = build_signal_from_indices_and_values(n, indices, values)
+    expected = jnp.array([0, 9, 0, 15])
+    assert jnp.array_equal(x, expected)
+
+def test_nonzero_values():
+    x = jnp.array([0, 9, 0, 15])
+    y = nonzero_values(x)
+    expected = jnp.array([9, 15])
+    assert jnp.array_equal(y, expected)
+
+def test_nonzero_indices():
+    x = jnp.array([0, 9, 0, 15])
+    y = nonzero_indices(x)
+    expected = jnp.array([1, 3])
+    assert jnp.array_equal(y, expected)
+
+def test_hard_threshold():
+    x = jnp.array([5, 1, 3, 6, 2])
+    I, x_I = hard_threshold(x, 2)
+    assert I.size == 2
+    assert x_I.size == 2
+    assert jnp.array_equal(I, jnp.array([3, 0]))
+    assert jnp.array_equal(x_I, jnp.array([6, 5]))
+
+def test_hard_threshold_sorted():
+    x = jnp.array([5, 1, 3, 6, 2])
+    I, x_I = hard_threshold_sorted(x, 2)
+    assert I.size == 2
+    assert x_I.size == 2
+    assert jnp.array_equal(I, jnp.array([0, 3]))
+    assert jnp.array_equal(x_I, jnp.array([5, 6]))
+
+def test_dynamic_range():
+    x = jnp.array([4, -2, 3, 3, 8])
+    dr = dynamic_range(x)
+    assert dr >= 12 and dr <= 12.1
+
+def test_nonzero_dynamic_range():
+    x = jnp.array([4, -2, 3, 3, 8])
+    dr = nonzero_dynamic_range(x)
+    assert dr >= 12 and dr <= 12.1
+    x = jnp.array([4, -2, 0, 0, 8])
+    dr = nonzero_dynamic_range(x)
+    assert dr >= 12 and dr <= 12.1
