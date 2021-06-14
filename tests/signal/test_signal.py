@@ -143,3 +143,28 @@ def test_nonzero_dynamic_range():
     x = jnp.array([4, -2, 0, 0, 8])
     dr = nonzero_dynamic_range(x)
     assert dr >= 12 and dr <= 12.1
+
+
+def test_SignalsComparison():
+    n = 80
+    s = 10
+    X = jnp.ones((n,s))
+    Y = 1.1 * jnp.ones((n, s))
+    cmp = SignalsComparison(X, Y)
+    assert len(cmp.reference_norms) == s
+    assert len(cmp.estimate_norms) == s
+    assert len(cmp.difference_norms) == s
+    assert len(cmp.reference_energies) == s
+    assert len(cmp.estimate_energies) == s
+    assert len(cmp.difference_energies) == s
+    assert len(cmp.error_to_signal_norms) == s
+    assert len(cmp.signal_to_noise_ratios) == s
+    assert cmp.cum_reference_norm
+    assert cmp.cum_estimate_norm
+    assert cmp.cum_difference_norm
+    assert cmp.cum_error_to_signal_norm
+    assert cmp.cum_signal_to_noise_ratio
+    cmp.summarize()
+    assert(len(snrs_cw(X, Y)) == s)
+    assert(len(snrs_rw(X, Y)) == n)
+    cmp = SignalsComparison(X[:,0], Y[:,0])
