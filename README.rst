@@ -19,6 +19,21 @@ The library also provides
 * Framework for evaluation of sparse recovery algorithms
 
 
+## Citing CR.Sparse
+
+To cite this repository:
+
+.. code-block:: none
+
+    @software{crsparse2021github,
+    author = {Shailesh Kumar},
+    title = {{CR.Sparse}: XLA accelerated algorithms for inverse problems in sparse representations and compressive sensing},
+    url = {https://github.com/carnotresearch/cr-sparse},
+    version = {0.1.3},
+    year = {2021},
+    }
+
+
 `Documentation <https://carnotresearch.github.io/cr-sparse>`_ | 
 `Code <https://github.com/carnotresearch/cr-sparse>`_ | 
 `Issues <https://github.com/carnotresearch/cr-sparse/issues>`_ | 
