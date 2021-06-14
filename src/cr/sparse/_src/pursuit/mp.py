@@ -112,13 +112,7 @@ def solve_mmv(dictionary, signals, max_iters=None, max_res_norm=None):
         max_r_norm = jnp.max(r_norms)
         # print("[{}] norm: {}".format(t, r_norm))
         print('.', end="", flush=True)
-        if max_iters is not None and t >= max_iters:
-            break
-        if max_res_norm is not None and max_r_norm < max_res_norm:
-            break
-        if max_r_norm < upper_res_norm:
-            break
-        if t >= upper_iters:
+        if ((max_iters is not None and t >= max_iters) or (max_res_norm is not None and max_r_norm < max_res_norm) or (max_r_norm < upper_res_norm) or (t >= upper_iters)):
             break
         #print("[{}] res norm: {}".format(t, max_r_norm))
     solution = SingleRecoverySolution(signals=signals, 

@@ -40,5 +40,14 @@ signals = representations @ dictionary
 def test_mp_smv():
     sol = solve_smv(dictionary, signals[0], max_iters=1, max_res_norm=1)
 
+def test_mp_smv2():
+    sol = solve_smv(dictionary, signals[0], max_iters=2, max_res_norm=0)
+
 def test_mp_mmv():
     sol = solve_mmv(dictionary, signals, max_iters=1, max_res_norm=1)
+
+def test_mp_mmv2():
+    sol = solve_mmv(dictionary, signals, max_iters=4, max_res_norm=0)
+
+def test_mp_mmv3():
+    sol = solve_mmv(dictionary, signals, max_iters=0, max_res_norm=100)
