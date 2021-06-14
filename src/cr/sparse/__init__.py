@@ -89,6 +89,8 @@ from cr.sparse._src.discrete.number import (
 )
 
 from cr.sparse._src.vector import (
+    is_scalar,
+    is_vec,
     is_line_vec,
     is_row_vec,
     is_col_vec,

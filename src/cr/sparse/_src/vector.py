@@ -17,6 +17,12 @@ import jax.numpy as jnp
 
 from .util import promote_arg_dtypes
 
+def is_scalar(x):
+    return x.ndim == 0
+
+def is_vec(x):
+    return x.ndim == 1 or (x.ndim == 2 and 
+        (x.shape[0] == 1 or x.shape[1] == 1))
 
 def is_line_vec(x):
     return x.ndim == 1
