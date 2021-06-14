@@ -19,11 +19,11 @@ import jax.numpy as jnp
 from scipy.spatial.distance import pdist
 
 
-def pdist_rw(X, metric):
-    return pdist(X, metric)
+# def pdist_rw(X, metric):
+#     return pdist(X, metric)
 
-def pdist_cw(X, metric):
-    return pdist(X.T, metric)
+# def pdist_cw(X, metric):
+#     return pdist(X.T, metric)
 
 
 def pairwise_sqr_l2_distances_rw(A, B):
