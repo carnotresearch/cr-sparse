@@ -23,4 +23,7 @@ def test_numbers():
     a,b  = integer_factors_close_to_sqr_root(90)
     assert a == 9
     assert b == 10
+    a,b  = integer_factors_close_to_sqr_root(77)
+    assert a == 7
+    assert b == 11
 
