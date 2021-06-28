@@ -221,6 +221,13 @@
     <span class="k">return</span> <span class="n">Q</span></div>
 
 
+<span class="k">def</span> <span class="nf">random_orthonormal_rows</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a random sensing matrix with orthonormal rows</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">])</span>
+    <span class="n">Q</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Q</span><span class="o">.</span><span class="n">T</span>
 
 <div class="viewcode-block" id="hadamard"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.hadamard.html#cr.sparse.dict.hadamard">[docs]</a><span class="k">def</span> <span class="nf">hadamard</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Hadamard matrices of size :math:`n \times n`</span>
