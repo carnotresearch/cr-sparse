@@ -56,6 +56,13 @@ def random_onb(key, N):
     return Q
 
 
+def random_orthonormal_rows(key, M, N):
+    """
+    Generates a random sensing matrix with orthonormal rows
+    """
+    A = random.normal(key, [N, M])
+    Q,R = jnp.linalg.qr(A)
+    return Q.T
 
 def hadamard(n, dtype=int):
     """Hadamard matrices of size :math:`n \times n`

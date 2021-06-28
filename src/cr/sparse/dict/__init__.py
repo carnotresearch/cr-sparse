@@ -26,7 +26,8 @@ from cr.sparse._src.dict.simple import (
     dct_basis,
     dirac_dct_basis,
     dirac_hadamard_dct_basis,
-    fourier_basis
+    fourier_basis,
+    random_orthonormal_rows
 )
 
 from cr.sparse._src.dict.props import (
