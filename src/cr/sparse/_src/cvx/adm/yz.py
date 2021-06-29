@@ -94,7 +94,7 @@ def solve_bp(Phi, y, beta=0., gamma=1., max_iters=100, tolerance=1e-2):
     # squared norm of the signal
     y_norm_sqr = y.T @ y
     max_r_norm_sqr = y_norm_sqr * (tolerance ** 2)
-    y_max  = norm(y, 'inf')
+    y_max  = norm(y, ord=jnp.inf)
     if y_max < tolerance:
         # TODO handle special case
         pass
@@ -165,8 +165,8 @@ def solve_bp(Phi, y, beta=0., gamma=1., max_iters=100, tolerance=1e-2):
         return c
 
     state = lax.while_loop(cond, iteration, init())
-    return RecoveryFullSolution(x=state.x, r=state.r_primal, 
-        r_norm_sqr=state.r_norm_sqr, iterations=state.iterations)
+    return RecoveryFullSolution(x=y_max*state.x, r=y_max*state.r_primal, 
+        r_norm_sqr=y_max*y_max*state.r_norm_sqr, iterations=state.iterations)
 
 
 
