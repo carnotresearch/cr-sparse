@@ -27,6 +27,30 @@ EPS = jnp.finfo(jnp.float32).eps
 
 norm = jnp.linalg.norm
 
+def norm_l1(x):
+    """
+    Computes the l_1 norm of a vector
+    """
+    return jnp.sum(jnp.abs(x))
+
+def sqr_norm_l2(x):
+    """
+    Computes the squared l_2 norm of a vector
+    """
+    return x.T @ x
+
+def norm_l2(x):
+    """
+    Computes the l_2 norm of a vector
+    """
+    return jnp.sqrt(x.T @ x)
+
+def norm_linf(x):
+    """
+    Computes the l_inf norm of a vector
+    """
+    return jnp.max(jnp.abs(x))
+
 def norms_l1_cw(X):
     """
     Computes the l_1 norm of each column of a matrix

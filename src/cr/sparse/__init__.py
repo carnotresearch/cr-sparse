@@ -38,6 +38,11 @@ from cr.sparse._src.matrix import (
 )
 
 from cr.sparse._src.norm import (
+    norm_l1,
+    sqr_norm_l2,
+    norm_l2,
+    norm_linf,
+
     norms_l1_cw,
     norms_l1_rw,
     norms_l2_cw,
