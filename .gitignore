@@ -121,3 +121,5 @@ docs/source/_autosummary/*
 
 # Data files
 record_*.csv
+
+*.mat
