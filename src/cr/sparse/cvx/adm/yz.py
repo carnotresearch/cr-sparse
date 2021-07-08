@@ -13,5 +13,8 @@
 # limitations under the License.
 
 from cr.sparse._src.cvx.adm.yz import (
-    solve_bp
+    solve,
+    solve_bp,
+    solve_l1_l2,
+    solve_l1_l2_jit
 )
