@@ -18,14 +18,18 @@ norm = jnp.linalg.norm
 
 from cr.sparse import norms_l2_cw
 
-def project_to_l2_ball(x, radius=1.0):
+def project_to_ball(x, radius=1.0):
     x_norm = norm(x)
     factor = radius / x_norm
     return jnp.where(x_norm > radius, factor * x, x)
 
 
-def project_to_linf_ball(x, radius=1.0):
+def project_to_box(x, radius=1.0):
     abs_x = jnp.abs(x)
     factors = jnp.maximum(abs_x, radius)
     factors = radius / factors
     return x * factors
+
+
+def project_to_real_upper_limit(x, limit=1.0):
+    return jnp.minimum(jnp.real(x), limit)

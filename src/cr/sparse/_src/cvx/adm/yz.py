@@ -23,8 +23,8 @@ import jax.numpy as jnp
 from jax import jit, lax, vmap
 norm = jnp.linalg.norm
 
-from cr.sparse.opt import (project_to_l2_ball, 
-    project_to_linf_ball,
+from cr.sparse.opt import (project_to_ball, 
+    project_to_box,
     shrink)
 
 
@@ -118,7 +118,7 @@ def solve_bp(A, b, x0, z0, gamma, tolerance, max_iters):
         Aty = A.T @ y
         # update z
         z = Aty + x_by_mu
-        z = project_to_linf_ball(z)
+        z = project_to_box(z)
         forward_count = state.forward_count + 1
         adjoint_count = state.adjoint_count + 1
 
@@ -249,7 +249,7 @@ def solve_l1_l2(A, b, x0, z0, rho, gamma, tolerance, max_iters):
         #print(y[0:5])
         # update z
         z = Aty + x_by_mu
-        z = project_to_linf_ball(z)
+        z = project_to_box(z)
         forward_count = state.forward_count + 1
         adjoint_count = state.adjoint_count + 1
 
@@ -370,7 +370,7 @@ def solve_l1_l2con(A, b, x0, z0, delta, gamma, tolerance, max_iters):
         Aty = A.T @ y
         # update z
         z = Aty + x_by_mu
-        z = project_to_linf_ball(z)
+        z = project_to_box(z)
         forward_count = state.forward_count + 1
         adjoint_count = state.adjoint_count + 1
 

@@ -14,8 +14,9 @@
 
 
 from cr.sparse._src.opt.projections import (
-    project_to_l2_ball,
-    project_to_linf_ball
+    project_to_ball,
+    project_to_box,
+    project_to_real_upper_limit
 )
 
 from cr.sparse._src.opt.shrinkage import (
