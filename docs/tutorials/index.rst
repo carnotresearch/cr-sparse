@@ -6,3 +6,4 @@ Tutorials
    :caption: Contents:
 
    dirac_dct_dictionaries
+   admm_l1
