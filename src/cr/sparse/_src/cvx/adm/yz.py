@@ -86,103 +86,124 @@ class BPState(NamedTuple):
 
 
 
-def solve_bp(A, b, beta=0., gamma=1., max_iters=100, tolerance=1e-2):
+def solve_bp(A, b, x0, z0, gamma, tolerance, max_iters):
     """
     Solves the problem $\min \| x \|_1 \text{s.t.} \A x = b$
 
-    Args:
-        A (jax.numpy.ndarray): Sensing matrix/dictionary
-        b (jax.numpy.ndarray): Signal being approximated
-        beta (float): weight for the quadratic penalty term
-        gamma (float): for primal variable update
-        max_iters (int): maximum number of ADMM iterations
-
-    Returns:
-        RecoveryFullSolution: Solution vector $x$ and residual $r$
-
     This function implements eq 2.29 of the paper.
     """
-    m, n = A.shape
-    x_norm = 0.
-    rp_norm = 0.
-    rd_norm = 0.
-    # squared norm of the signal
-    y_norm_sqr = b.T @ b
-    max_r_norm_sqr = y_norm_sqr * (tolerance ** 2)
-    b_max  = norm(b, ord=jnp.inf)
-    if b_max < tolerance:
-        # TODO handle special case
-        pass
-    # scale the problem
-    b = b / b_max
-
-    if beta == 0:
-        # initialize beta
-        beta = jnp.mean(jnp.abs(b))
+    mu = jnp.mean(jnp.abs(b))
+    mu_orig = mu
+    b_by_mu = b  / mu
+    rp_norm_threshold = tolerance * norm(b)
 
     def init():
-        # initial estimate of the solution
-        x  = A.T @ b
-        u = jnp.zeros(n)
         # primal residual
-        rp = b - A @ x
+        rp = b - A @ x0
         # dual residual
-        rd = jnp.zeros(n)
-        r_norm_sqr = rp.T @ rp
-        primal_objective = jnp.sum(jnp.abs(x))
+        rd = - A.T @ b
+        primal_objective = jnp.sum(jnp.abs(x0))
         # update dual objective
         dual_objective = 0.
-
         # initial state
-        return BPState(x=x, u=u,
-            rp=rp, rd=rd, r_norm_sqr=r_norm_sqr, 
+        return BPState(x=x0, x_prev=jnp.zeros(x0.shape), z=z0,
+            rp=rp, rd=rd, 
             primal_objective=primal_objective, dual_objective=dual_objective,
-            iterations=0)
+            iterations=0, forward_count=1, adjoint_count=1)
 
     def iteration(state):
+        # update y
+        x_by_mu = state.x / mu
+        y = A @ (state.z - x_by_mu) + b_by_mu
+        Aty = A.T @ y
         # update z
-        z = state.u + ( state.x/ beta)
+        z = Aty + x_by_mu
         z = project_to_linf_ball(z)
-        #  update yy
-        Az = A @ z
-        yy = Az + (state.rp / beta)
-        # update dual residual
-        u = A.T @ yy
-        rd = z - u
+        forward_count = state.forward_count + 1
+        adjoint_count = state.adjoint_count + 1
+
+        # dual residual
+        rd  = z - Aty
+        
         # update x
-        x = state.x - (gamma * beta) * rd
-        # update primal residual
+        x = state.x - (gamma*mu) * rd
+        
+        # primal residual
         rp = b - A @ x
-        # update primal objective
-        primal_objective = jnp.sum(jnp.abs(x))
-        # update dual objective
-        dual_objective = b.T @ yy
-        r_norm_sqr = rp.T @ rp
+        forward_count += 1
+        
+        # primary objective
+        primal_objective = jnp.sum(jnp.abs(x))        
+        # dual objective
+        dual_objective = b.T @ y
+
+        # print(f'x[{state.iterations+1}]', end='')
+        # print(x[0:6])
+        # print(f'y[{state.iterations+1}]', end='')
+        # print(y[0:6])
+        # print(f'z[{state.iterations+1}]', end='')
+        # print(z[0:6])
+        
         # updatd state
-        return BPState(x=x, u=u, 
-            rp=rp, rd=rd, r_norm_sqr=r_norm_sqr,
+        return BPState(x=x, x_prev=state.x, z=z,
+            rp=rp, rd=rd,
             primal_objective=primal_objective, dual_objective=dual_objective,
-            iterations=state.iterations+1)
+            iterations=state.iterations+1, forward_count=forward_count, adjoint_count=adjoint_count)
+
+    def double_iteration(state):
+        state = iteration(state)
+        return iteration(state)
 
     def cond(state):
-        # limit on residual norm 
-        # a = state.r_norm_sqr > max_r_norm_sqr
+        """
+        Stopping condition:
+        - Either relative change in x should be within tolerance.
+        - Or both relative duality gap and relative dual norm should be within tolerance.
+        """
         # limit on number of iterations
-        a = state.iterations < max_iters
-        # gap in objectives
-        gap = abs(state.primal_objective  - state.dual_objective)
-        # relative gap in objective
-        relative_gap = gap / jnp.abs(state.primal_objective)
-        b = relative_gap > tolerance
-        # combine conditions
-        c = jnp.logical_and(a, b)
-        # e = jnp.logical_and(c, d)
-        return c
+        more_iters = state.iterations < max_iters
 
-    state = lax.while_loop(cond, iteration, init())
-    return RecoveryFullSolution(x=b_max*state.x, r=b_max*state.rp, 
-        r_norm_sqr=b_max*b_max*state.r_norm_sqr, iterations=state.iterations)
+        # x norm
+        x_norm = norm(state.x)
+        # relative change in x norm
+        x_relative_change = norm(state.x - state.x_prev) / x_norm
+        # condition on relative change in x norm
+        x_unstable = x_relative_change > tolerance
 
+        # condition on dual residual norm
+        rel_rd = norm(state.rd) / norm(state.z)
+        d_infeasible = rel_rd > tolerance
+
+        # duality gap
+        duality_gap = jnp.abs(state.dual_objective - state.primal_objective)
+        # relative duality gap
+        relative_gap = duality_gap / state.primal_objective
+        gap_infeasible = relative_gap > tolerance
+
+        # primal residual norm
+        rp_norm = norm(state.rp)
+        # check feasibility of primal residual norm
+        p_infeasible = rp_norm >= rp_norm_threshold
+
+        # if either duality gap or dual res norm are beyond tolerance, we continue 
+        condition = jnp.logical_or(gap_infeasible, d_infeasible)
+        condition = jnp.logical_or(condition, p_infeasible)
+        condition = jnp.logical_and(condition, more_iters)
+        condition = jnp.logical_and(condition, x_unstable)
+
+        # print(f'[{state.iterations:02d}] x_norm: {x_norm:.3f}, rel:{x_relative_change:.2e} ' + 
+        #    f'rel_rd {rel_rd:.2e} rp_norm: {rp_norm:.2e} p_infeasible: {p_infeasible}' +
+        #    f' p_obj: {state.primal_objective:.1e}, d_obj: {state.dual_objective:.1e} relative_gap {relative_gap:.1e}')
+ 
+        return condition
+
+    # state = init()
+    # while cond(state):
+    #     state = double_iteration(state)
+    state = lax.while_loop(cond, double_iteration, init())
+    return state
+
+solve_bp_jit = jit(solve_bp, static_argnums=(4,5,6))
 
 
 def solve_l1_l2(A, b, x0, z0, rho, gamma, tolerance, max_iters):
@@ -494,7 +515,8 @@ def solve(A, b, x0=None, z0=None, rho=0., delta=0., gamma=1.0, tolerance=5e-3, m
             # It's an l1-l2 constrained problem BPIC
             state = solve_l1_l2con_jit(A, b, x0, z0, delta, gamma, tolerance, max_iters)
         else:
-            raise NotImplemented
+            # It's a basis pursuit problem
+            state = solve_bp_jit(A, b, x0, z0, gamma, tolerance, max_iters)
     else:
         if rho > 0:
             # It's an l1-l2 problem BPDN
@@ -503,7 +525,8 @@ def solve(A, b, x0=None, z0=None, rho=0., delta=0., gamma=1.0, tolerance=5e-3, m
             # It's an l1-l2 constrained problem BPIC
             state = solve_l1_l2con(A, b, x0, z0, delta, gamma, tolerance, max_iters)
         else:
-            raise NotImplemented
+            # It's a basis pursuit problem
+            state = solve_bp(A, b, x0, z0, gamma, tolerance, max_iters)
     r_norm_sqr = state.rp.T @ state.rp
     return RecoveryFullSolution(x=b_max*state.x, r=b_max*state.rp, 
         r_norm_sqr=b_max*b_max*r_norm_sqr, iterations=state.iterations,
