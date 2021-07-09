@@ -23,11 +23,13 @@ import jax.numpy as jnp
 from jax import jit, lax, vmap
 norm = jnp.linalg.norm
 
-from cr.sparse.opt import (project_to_ball, 
-    project_to_box,
-    project_to_real_upper_limit,
-    shrink)
+def project_to_box(z, w):
+    ww = jnp.maximum(w, jnp.abs(z))
+    factors = w / ww
+    return z * factors
 
+def project_to_real_upper_limit(z, w):
+    return jnp.minimum(w, jnp.real(z))
 
 class RecoveryFullSolution(NamedTuple):
     """Represents the solution of a sparse recovery problem
@@ -53,14 +55,12 @@ class RecoveryFullSolution(NamedTuple):
     x: jnp.ndarray
     """Solution vector"""
     r: jnp.ndarray
-    """The residuals"""
-    r_norm_sqr: jnp.ndarray
-    """The residual norm squared"""
+    """The primal residual vector"""
     iterations: int
     """The number of iterations it took to complete"""
-    forward_count: int = 0
+    n_times: int = 0
     """Number of times A x computed """
-    adjoint_count : int = 0
+    n_trans : int = 0
     """Number of times A.T b computed """
 
 class BPState(NamedTuple):
@@ -80,14 +80,14 @@ class BPState(NamedTuple):
     "Dual objective function value"
     iterations: int
     """Number of iterations"""
-    forward_count: int = 0
+    n_times: int = 0
     """Number of times A x computed """
-    adjoint_count : int = 0
+    n_trans : int = 0
     """Number of times A.T b computed """
 
 
 
-def solve_bp(A, b, x0, z0, nonneg, gamma, tolerance, max_iters):
+def solve_bp(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters):
     """
     Solves the problem $\min \| x \|_1 \text{s.t.} \A x = b$
 
@@ -103,14 +103,14 @@ def solve_bp(A, b, x0, z0, nonneg, gamma, tolerance, max_iters):
         rp = b - A @ x0
         # dual residual
         rd = - A.T @ b
-        primal_objective = jnp.sum(jnp.abs(x0))
+        primal_objective = jnp.sum(jnp.abs(w*x0))
         # update dual objective
         dual_objective = 0.
         # initial state
         return BPState(x=x0, x_prev=jnp.zeros(x0.shape), z=z0,
             rp=rp, rd=rd, 
             primal_objective=primal_objective, dual_objective=dual_objective,
-            iterations=0, forward_count=1, adjoint_count=1)
+            iterations=0, n_times=1, n_trans=1)
 
     def iteration(state):
         # update y
@@ -119,9 +119,9 @@ def solve_bp(A, b, x0, z0, nonneg, gamma, tolerance, max_iters):
         Aty = A.T @ y
         # update z
         z = Aty + x_by_mu
-        z = jnp.where(nonneg, project_to_real_upper_limit(z), project_to_box(z))
-        forward_count = state.forward_count + 1
-        adjoint_count = state.adjoint_count + 1
+        z = jnp.where(nonneg, project_to_real_upper_limit(z, w), project_to_box(z, w))
+        n_times = state.n_times + 1
+        n_trans = state.n_trans + 1
 
         # dual residual
         rd  = z - Aty
@@ -131,10 +131,10 @@ def solve_bp(A, b, x0, z0, nonneg, gamma, tolerance, max_iters):
         
         # primal residual
         rp = b - A @ x
-        forward_count += 1
+        n_times += 1
         
         # primary objective
-        primal_objective = jnp.sum(jnp.abs(x))        
+        primal_objective = jnp.sum(jnp.abs(w*x))        
         # dual objective
         dual_objective = b.T @ y
 
@@ -149,7 +149,7 @@ def solve_bp(A, b, x0, z0, nonneg, gamma, tolerance, max_iters):
         return BPState(x=x, x_prev=state.x, z=z,
             rp=rp, rd=rd,
             primal_objective=primal_objective, dual_objective=dual_objective,
-            iterations=state.iterations+1, forward_count=forward_count, adjoint_count=adjoint_count)
+            iterations=state.iterations+1, n_times=n_times, n_trans=n_trans)
 
     def double_iteration(state):
         state = iteration(state)
@@ -205,10 +205,10 @@ def solve_bp(A, b, x0, z0, nonneg, gamma, tolerance, max_iters):
     state = lax.while_loop(cond, double_iteration, init())
     return state
 
-solve_bp_jit = jit(solve_bp, static_argnums=(4,5,6, 7))
+solve_bp_jit = jit(solve_bp, static_argnums=(5,6, 7, 8))
 
 
-def solve_l1_l2(A, b, x0, z0, nonneg, rho, gamma, tolerance, max_iters):
+def solve_l1_l2(A, b, x0, z0, w, nonneg, rho, gamma, tolerance, max_iters):
     """
     Solves the problem :math:`\min \| x \|_1  + \frac{1}{2 \rho} \| A x - b \|_2^2`
 
@@ -230,7 +230,7 @@ def solve_l1_l2(A, b, x0, z0, nonneg, rho, gamma, tolerance, max_iters):
         # dual residual
         rd = - A.T @ b
         rp_norm_sqr = rp.T @ rp
-        primal_objective = jnp.sum(jnp.abs(x)) + (0.5 / rho) * rp_norm_sqr
+        primal_objective = jnp.sum(jnp.abs(w*x)) + (0.5 / rho) * rp_norm_sqr
         # update dual objective
         dual_objective = 0.
 
@@ -238,7 +238,7 @@ def solve_l1_l2(A, b, x0, z0, nonneg, rho, gamma, tolerance, max_iters):
         return BPState(x=x, x_prev=jnp.zeros(x.shape), z=z,
             rp=rp, rd=rd, 
             primal_objective=primal_objective, dual_objective=dual_objective,
-            iterations=0, forward_count=1, adjoint_count=1)
+            iterations=0, n_times=1, n_trans=1)
 
     def iteration(state):
         # update y
@@ -251,9 +251,9 @@ def solve_l1_l2(A, b, x0, z0, nonneg, rho, gamma, tolerance, max_iters):
         #print(y[0:5])
         # update z
         z = Aty + x_by_mu
-        z = jnp.where(nonneg, project_to_real_upper_limit(z), project_to_box(z))
-        forward_count = state.forward_count + 1
-        adjoint_count = state.adjoint_count + 1
+        z = jnp.where(nonneg, project_to_real_upper_limit(z, w), project_to_box(z, w))
+        n_times = state.n_times + 1
+        n_trans = state.n_trans + 1
 
         # dual residual
         rd  = z - Aty
@@ -263,7 +263,7 @@ def solve_l1_l2(A, b, x0, z0, nonneg, rho, gamma, tolerance, max_iters):
         
         # primal residual
         rp = b - A @ x
-        forward_count += 1
+        n_times += 1
         
         # primal resdiual norm squared
         rp_norm_sqr = rp.T @ rp
@@ -271,7 +271,7 @@ def solve_l1_l2(A, b, x0, z0, nonneg, rho, gamma, tolerance, max_iters):
         y_norm_sqr = y.T @ y
 
         # primary objective
-        primal_objective = jnp.sum(jnp.abs(x)) + (0.5 / rho) * rp_norm_sqr
+        primal_objective = jnp.sum(jnp.abs(w*x)) + (0.5 / rho) * rp_norm_sqr
         
         # dual objective
         dual_objective = b.T @ y - (0.5 * rho) * y_norm_sqr
@@ -280,7 +280,7 @@ def solve_l1_l2(A, b, x0, z0, nonneg, rho, gamma, tolerance, max_iters):
         return BPState(x=x, x_prev=state.x, z=z,
             rp=rp, rd=rd,
             primal_objective=primal_objective, dual_objective=dual_objective,
-            iterations=state.iterations+1, forward_count=forward_count, adjoint_count=adjoint_count)
+            iterations=state.iterations+1, n_times=n_times, n_trans=n_trans)
 
     def double_iteration(state):
         state = iteration(state)
@@ -328,11 +328,11 @@ def solve_l1_l2(A, b, x0, z0, nonneg, rho, gamma, tolerance, max_iters):
     return state
 
 
-solve_l1_l2_jit = jit(solve_l1_l2, static_argnums=(4,5,6,7,8))
+solve_l1_l2_jit = jit(solve_l1_l2, static_argnums=(5,6,7,8,9))
 
 
 
-def solve_l1_l2con(A, b, x0, z0, nonneg, delta, gamma, tolerance, max_iters):
+def solve_l1_l2con(A, b, x0, z0, w, nonneg, delta, gamma, tolerance, max_iters):
     """
     Solves the problem :math:`\min \| x \|_1  \text{s.t.} \| A x - b \|_2 \leq \delta`
 
@@ -353,14 +353,14 @@ def solve_l1_l2con(A, b, x0, z0, nonneg, delta, gamma, tolerance, max_iters):
         rp = b - A @ x0
         # dual residual
         rd = - A.T @ b
-        primal_objective = jnp.sum(jnp.abs(x0))
+        primal_objective = jnp.sum(jnp.abs(w*x0))
         # update dual objective
         dual_objective = 0.
         # initial state
         return BPState(x=x0, x_prev=jnp.zeros(x0.shape), z=z0,
             rp=rp, rd=rd, 
             primal_objective=primal_objective, dual_objective=dual_objective,
-            iterations=0, forward_count=1, adjoint_count=1)
+            iterations=0, n_times=1, n_trans=1)
 
     def iteration(state):
         # update y
@@ -372,9 +372,9 @@ def solve_l1_l2con(A, b, x0, z0, nonneg, delta, gamma, tolerance, max_iters):
         Aty = A.T @ y
         # update z
         z = Aty + x_by_mu
-        z = jnp.where(nonneg, project_to_real_upper_limit(z), project_to_box(z))
-        forward_count = state.forward_count + 1
-        adjoint_count = state.adjoint_count + 1
+        z = jnp.where(nonneg, project_to_real_upper_limit(z, w), project_to_box(z, w))
+        n_times = state.n_times + 1
+        n_trans = state.n_trans + 1
 
         # dual residual
         rd  = z - Aty
@@ -384,10 +384,10 @@ def solve_l1_l2con(A, b, x0, z0, nonneg, delta, gamma, tolerance, max_iters):
         
         # primal residual
         rp = b - A @ x
-        forward_count += 1
+        n_times += 1
         
         # primary objective
-        primal_objective = jnp.sum(jnp.abs(x))        
+        primal_objective = jnp.sum(jnp.abs(w*x))        
         # dual objective
         dual_objective = b.T @ y - delta * norm(y)
 
@@ -402,7 +402,7 @@ def solve_l1_l2con(A, b, x0, z0, nonneg, delta, gamma, tolerance, max_iters):
         return BPState(x=x, x_prev=state.x, z=z,
             rp=rp, rd=rd,
             primal_objective=primal_objective, dual_objective=dual_objective,
-            iterations=state.iterations+1, forward_count=forward_count, adjoint_count=adjoint_count)
+            iterations=state.iterations+1, n_times=n_times, n_trans=n_trans)
 
     def double_iteration(state):
         state = iteration(state)
@@ -458,11 +458,11 @@ def solve_l1_l2con(A, b, x0, z0, nonneg, delta, gamma, tolerance, max_iters):
     return state
 
 
-solve_l1_l2con_jit = jit(solve_l1_l2con, static_argnums=(4,5,6,7,8))
+solve_l1_l2con_jit = jit(solve_l1_l2con, static_argnums=(5,6,7,8, 9))
 
 
 
-def solve(A, b, x0=None, z0=None, W=None, nonneg=False, rho=0., delta=0., gamma=1.0, tolerance=5e-3, max_iters=9999, jit=True):
+def solve(A, b, x0=None, z0=None, W=None, weights=None, nonneg=False, rho=0., delta=0., gamma=1.0, tolerance=5e-3, max_iters=9999, jit=True):
     """
     Solves a variety of l1 minimization problems
 
@@ -473,6 +473,7 @@ def solve(A, b, x0=None, z0=None, W=None, nonneg=False, rho=0., delta=0., gamma=
         z0 (jax.numpy.ndarray): Initial value of dual variable :math:`z`
         nonneg (bool): Flag to indicate if values in the solution are all non-negative
         W (jax.numpy.ndarray): The sparsifying orthonormal basis such that :math:`W x` is sparse
+        weights (jax.numpy.ndarray): The weights for individual entries in :math:`x`
         rho (float): weight for the quadratic penalty term
         delta (float): constraint on the residual norm
         gamma (float): ADMM update parameter for :math:`x`
@@ -485,8 +486,8 @@ def solve(A, b, x0=None, z0=None, W=None, nonneg=False, rho=0., delta=0., gamma=
     """
     m = b.shape[0]
     Atb = A.T @ b
-    forward_count = 0
-    adjoint_count = 1
+    n_times = 0
+    n_trans = 1
     n = Atb.shape[0]
     b_max  = float(norm(b, ord=jnp.inf))
     atb_max = float(norm(Atb, ord=jnp.inf))
@@ -497,9 +498,9 @@ def solve(A, b, x0=None, z0=None, W=None, nonneg=False, rho=0., delta=0., gamma=
         zero_solution = norm(b) <= delta
     if zero_solution:
         x = jnp.zeros(n)
-        return RecoveryFullSolution(x=x, r=b, r_norm_sqr=b.T @ b, 
+        return RecoveryFullSolution(x=x, r=b, 
             iterations=0, 
-            forward_count=forward_count, adjoint_count=adjoint_count)
+            n_times=n_times, n_trans=n_trans)
     if x0 is None:
         x0 = Atb / b_max
 
@@ -510,6 +511,11 @@ def solve(A, b, x0=None, z0=None, W=None, nonneg=False, rho=0., delta=0., gamma=
         # change A to solve for alpha = W x
         C = A
         A = C @ B.T
+    
+    w = jnp.ones(n)
+    if weights:
+        # make sure that the final weights are an array of size n
+        w = w * weights
 
     # scale data and model parameters
     b = b / b_max
@@ -519,29 +525,28 @@ def solve(A, b, x0=None, z0=None, W=None, nonneg=False, rho=0., delta=0., gamma=
     if jit:
         if rho > 0:
             # It's an l1-l2 problem
-            state = solve_l1_l2_jit(A, b, x0, z0, nonneg, rho, gamma, tolerance, max_iters)
+            state = solve_l1_l2_jit(A, b, x0, z0, w, nonneg, rho, gamma, tolerance, max_iters)
         elif delta > 0:
             # It's an l1-l2 constrained problem BPIC
-            state = solve_l1_l2con_jit(A, b, x0, z0, nonneg, delta, gamma, tolerance, max_iters)
+            state = solve_l1_l2con_jit(A, b, x0, z0, w, nonneg, delta, gamma, tolerance, max_iters)
         else:
             # It's a basis pursuit problem
-            state = solve_bp_jit(A, b, x0, z0, nonneg, gamma, tolerance, max_iters)
+            state = solve_bp_jit(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters)
     else:
         if rho > 0:
             # It's an l1-l2 problem BPDN
-            state = solve_l1_l2(A, b, x0, z0, nonneg, rho, gamma, tolerance, max_iters)
+            state = solve_l1_l2(A, b, x0, z0, w, nonneg, rho, gamma, tolerance, max_iters)
         elif delta > 0:
             # It's an l1-l2 constrained problem BPIC
-            state = solve_l1_l2con(A, b, x0, z0, nonneg, delta, gamma, tolerance, max_iters)
+            state = solve_l1_l2con(A, b, x0, z0, w, nonneg, delta, gamma, tolerance, max_iters)
         else:
             # It's a basis pursuit problem
-            state = solve_bp(A, b, x0, z0, nonneg, gamma, tolerance, max_iters)
-    r_norm_sqr = state.rp.T @ state.rp
+            state = solve_bp(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters)
     x = jnp.where(nonneg, jnp.maximum(0, state.x), state.x)
     if W:
         # alpha = W x has been found. x = W.T @ alpha
         x = W.T @ x
     return RecoveryFullSolution(x=b_max*x, r=b_max*state.rp, 
-        r_norm_sqr=b_max*b_max*r_norm_sqr, iterations=state.iterations,
-        forward_count=state.forward_count+forward_count, 
-        adjoint_count=state.adjoint_count+adjoint_count)
+        iterations=state.iterations,
+        n_times=state.n_times+n_times, 
+        n_trans=state.n_trans+n_trans)
