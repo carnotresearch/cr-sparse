@@ -25,6 +25,7 @@ norm = jnp.linalg.norm
 
 from cr.sparse.opt import (project_to_ball, 
     project_to_box,
+    project_to_real_upper_limit,
     shrink)
 
 
@@ -86,7 +87,7 @@ class BPState(NamedTuple):
 
 
 
-def solve_bp(A, b, x0, z0, gamma, tolerance, max_iters):
+def solve_bp(A, b, x0, z0, nonneg, gamma, tolerance, max_iters):
     """
     Solves the problem $\min \| x \|_1 \text{s.t.} \A x = b$
 
@@ -118,7 +119,7 @@ def solve_bp(A, b, x0, z0, gamma, tolerance, max_iters):
         Aty = A.T @ y
         # update z
         z = Aty + x_by_mu
-        z = project_to_box(z)
+        z = jnp.where(nonneg, project_to_real_upper_limit(z), project_to_box(z))
         forward_count = state.forward_count + 1
         adjoint_count = state.adjoint_count + 1
 
@@ -160,6 +161,7 @@ def solve_bp(A, b, x0, z0, gamma, tolerance, max_iters):
         - Either relative change in x should be within tolerance.
         - Or both relative duality gap and relative dual norm should be within tolerance.
         """
+        q = 0.1
         # limit on number of iterations
         more_iters = state.iterations < max_iters
 
@@ -168,7 +170,7 @@ def solve_bp(A, b, x0, z0, gamma, tolerance, max_iters):
         # relative change in x norm
         x_relative_change = norm(state.x - state.x_prev) / x_norm
         # condition on relative change in x norm
-        x_unstable = x_relative_change > tolerance
+        x_unstable = x_relative_change > tolerance * (1 - q)
 
         # condition on dual residual norm
         rel_rd = norm(state.rd) / norm(state.z)
@@ -203,10 +205,10 @@ def solve_bp(A, b, x0, z0, gamma, tolerance, max_iters):
     state = lax.while_loop(cond, double_iteration, init())
     return state
 
-solve_bp_jit = jit(solve_bp, static_argnums=(4,5,6))
+solve_bp_jit = jit(solve_bp, static_argnums=(4,5,6, 7))
 
 
-def solve_l1_l2(A, b, x0, z0, rho, gamma, tolerance, max_iters):
+def solve_l1_l2(A, b, x0, z0, nonneg, rho, gamma, tolerance, max_iters):
     """
     Solves the problem :math:`\min \| x \|_1  + \frac{1}{2 \rho} \| A x - b \|_2^2`
 
@@ -249,7 +251,7 @@ def solve_l1_l2(A, b, x0, z0, rho, gamma, tolerance, max_iters):
         #print(y[0:5])
         # update z
         z = Aty + x_by_mu
-        z = project_to_box(z)
+        z = jnp.where(nonneg, project_to_real_upper_limit(z), project_to_box(z))
         forward_count = state.forward_count + 1
         adjoint_count = state.adjoint_count + 1
 
@@ -326,11 +328,11 @@ def solve_l1_l2(A, b, x0, z0, rho, gamma, tolerance, max_iters):
     return state
 
 
-solve_l1_l2_jit = jit(solve_l1_l2, static_argnums=(4,5,6,7))
+solve_l1_l2_jit = jit(solve_l1_l2, static_argnums=(4,5,6,7,8))
 
 
 
-def solve_l1_l2con(A, b, x0, z0, delta, gamma, tolerance, max_iters):
+def solve_l1_l2con(A, b, x0, z0, nonneg, delta, gamma, tolerance, max_iters):
     """
     Solves the problem :math:`\min \| x \|_1  \text{s.t.} \| A x - b \|_2 \leq \delta`
 
@@ -370,7 +372,7 @@ def solve_l1_l2con(A, b, x0, z0, delta, gamma, tolerance, max_iters):
         Aty = A.T @ y
         # update z
         z = Aty + x_by_mu
-        z = project_to_box(z)
+        z = jnp.where(nonneg, project_to_real_upper_limit(z), project_to_box(z))
         forward_count = state.forward_count + 1
         adjoint_count = state.adjoint_count + 1
 
@@ -456,11 +458,11 @@ def solve_l1_l2con(A, b, x0, z0, delta, gamma, tolerance, max_iters):
     return state
 
 
-solve_l1_l2con_jit = jit(solve_l1_l2con, static_argnums=(4,5,6,7))
+solve_l1_l2con_jit = jit(solve_l1_l2con, static_argnums=(4,5,6,7,8))
 
 
 
-def solve(A, b, x0=None, z0=None, rho=0., delta=0., gamma=1.0, tolerance=5e-3, max_iters=9999, jit=True):
+def solve(A, b, x0=None, z0=None, nonneg=False, rho=0., delta=0., gamma=1.0, tolerance=5e-3, max_iters=9999, jit=True):
     """
     Solves a variety of l1 minimization problems
 
@@ -510,25 +512,27 @@ def solve(A, b, x0=None, z0=None, rho=0., delta=0., gamma=1.0, tolerance=5e-3, m
     if jit:
         if rho > 0:
             # It's an l1-l2 problem
-            state = solve_l1_l2_jit(A, b, x0, z0, rho, gamma, tolerance, max_iters)
+            state = solve_l1_l2_jit(A, b, x0, z0, nonneg, rho, gamma, tolerance, max_iters)
         elif delta > 0:
             # It's an l1-l2 constrained problem BPIC
-            state = solve_l1_l2con_jit(A, b, x0, z0, delta, gamma, tolerance, max_iters)
+            state = solve_l1_l2con_jit(A, b, x0, z0, nonneg, delta, gamma, tolerance, max_iters)
         else:
             # It's a basis pursuit problem
-            state = solve_bp_jit(A, b, x0, z0, gamma, tolerance, max_iters)
+            state = solve_bp_jit(A, b, x0, z0, nonneg, gamma, tolerance, max_iters)
     else:
         if rho > 0:
             # It's an l1-l2 problem BPDN
-            state = solve_l1_l2(A, b, x0, z0, rho, gamma, tolerance, max_iters)
+            state = solve_l1_l2(A, b, x0, z0, nonneg, rho, gamma, tolerance, max_iters)
         elif delta > 0:
             # It's an l1-l2 constrained problem BPIC
-            state = solve_l1_l2con(A, b, x0, z0, delta, gamma, tolerance, max_iters)
+            state = solve_l1_l2con(A, b, x0, z0, nonneg, delta, gamma, tolerance, max_iters)
         else:
             # It's a basis pursuit problem
-            state = solve_bp(A, b, x0, z0, gamma, tolerance, max_iters)
+            state = solve_bp(A, b, x0, z0, nonneg, gamma, tolerance, max_iters)
     r_norm_sqr = state.rp.T @ state.rp
-    return RecoveryFullSolution(x=b_max*state.x, r=b_max*state.rp, 
+    x = jnp.where(nonneg, jnp.maximum(0, state.x), state.x)
+    
+    return RecoveryFullSolution(x=b_max*x, r=b_max*state.rp, 
         r_norm_sqr=b_max*b_max*r_norm_sqr, iterations=state.iterations,
         forward_count=state.forward_count+forward_count, 
         adjoint_count=state.adjoint_count+adjoint_count)
