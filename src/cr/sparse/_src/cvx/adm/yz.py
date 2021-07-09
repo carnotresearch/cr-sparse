@@ -462,7 +462,7 @@ solve_l1_l2con_jit = jit(solve_l1_l2con, static_argnums=(4,5,6,7,8))
 
 
 
-def solve(A, b, x0=None, z0=None, nonneg=False, rho=0., delta=0., gamma=1.0, tolerance=5e-3, max_iters=9999, jit=True):
+def solve(A, b, x0=None, z0=None, W=None, nonneg=False, rho=0., delta=0., gamma=1.0, tolerance=5e-3, max_iters=9999, jit=True):
     """
     Solves a variety of l1 minimization problems
 
@@ -471,6 +471,8 @@ def solve(A, b, x0=None, z0=None, nonneg=False, rho=0., delta=0., gamma=1.0, tol
         b (jax.numpy.ndarray): Signal being approximated
         x0 (jax.numpy.ndarray): Initial value of solutiion (primary variable) :math:`x`
         z0 (jax.numpy.ndarray): Initial value of dual variable :math:`z`
+        nonneg (bool): Flag to indicate if values in the solution are all non-negative
+        W (jax.numpy.ndarray): The sparsifying orthonormal basis such that :math:`W x` is sparse
         rho (float): weight for the quadratic penalty term
         delta (float): constraint on the residual norm
         gamma (float): ADMM update parameter for :math:`x`
@@ -504,6 +506,11 @@ def solve(A, b, x0=None, z0=None, nonneg=False, rho=0., delta=0., gamma=1.0, tol
     if z0 is None:
         z0 = jnp.zeros(n)
 
+    if W:
+        # change A to solve for alpha = W x
+        C = A
+        A = C @ B.T
+
     # scale data and model parameters
     b = b / b_max
     if rho > 0: rho = rho / b_max
@@ -531,7 +538,9 @@ def solve(A, b, x0=None, z0=None, nonneg=False, rho=0., delta=0., gamma=1.0, tol
             state = solve_bp(A, b, x0, z0, nonneg, gamma, tolerance, max_iters)
     r_norm_sqr = state.rp.T @ state.rp
     x = jnp.where(nonneg, jnp.maximum(0, state.x), state.x)
-    
+    if W:
+        # alpha = W x has been found. x = W.T @ alpha
+        x = W.T @ x
     return RecoveryFullSolution(x=b_max*x, r=b_max*state.rp, 
         r_norm_sqr=b_max*b_max*r_norm_sqr, iterations=state.iterations,
         forward_count=state.forward_count+forward_count, 
