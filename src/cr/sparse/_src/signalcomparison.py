@@ -16,7 +16,7 @@
 import jax
 import jax.numpy as jnp
 
-from .norm import sqr_norms_l2_cw, sqr_norms_l2_rw, norms_l2_cw
+from .norm import sqr_norms_l2_cw, sqr_norms_l2_rw, norms_l2_cw, sqr_norm_l2
 
 norm = jnp.linalg.norm
 
@@ -121,3 +121,10 @@ def snrs_rw(A, B):
     diff_energies = sqr_norms_l2_rw(A-B)
     ratios = ref_energies / diff_energies
     return 10*jnp.log10(ratios)
+
+def snr(signal, noise):
+    s = sqr_norm_l2(signal)
+    n = sqr_norm_l2(noise)
+    ratio = s/n
+    return 10*jnp.log10(ratio)
+

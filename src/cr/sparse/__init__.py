@@ -138,7 +138,8 @@ from cr.sparse._src.signal import (
 from cr.sparse._src.signalcomparison import (
     SignalsComparison,
     snrs_cw,
-    snrs_rw
+    snrs_rw,
+    snr
 )
 
 from cr.sparse._src.special import (
