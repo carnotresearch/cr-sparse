@@ -16,5 +16,7 @@ from cr.sparse._src.cvx.adm.yz import (
     solve,
     solve_bp,
     solve_l1_l2,
-    solve_l1_l2_jit
+    solve_l1_l2_jit,
+    solve_l1_l2con,
+    solve_l1_l2con_jit
 )
