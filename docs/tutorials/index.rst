@@ -2,7 +2,7 @@ Tutorials
 =====================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
    dirac_dct_dictionaries

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from cr.sparse._src.cvx.adm.yz import (
+from cr.sparse._src.cvx.adm.yall1 import (
     solve,
     solve_bp,
     solve_bp_jit,
