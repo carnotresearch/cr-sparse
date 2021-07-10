@@ -123,3 +123,5 @@ docs/source/_autosummary/*
 record_*.csv
 
 *.mat
+
+tmp/*
