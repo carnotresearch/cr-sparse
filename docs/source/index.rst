@@ -6,6 +6,7 @@ CR.Sparse API Documentation
    :caption: Contents:
 
    dict
+   lop
    pursuit
    data
    util

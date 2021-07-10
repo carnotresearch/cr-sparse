@@ -22,11 +22,11 @@ def hermitian(a):
 
 class LinearOperator(NamedTuple):
     """
-    Represents a finite linear operator :math:`T : A -> B` where A and B are vector spaces.
+    Represents a finite linear operator :math:`T : A -> B` where :math:`A` and :math:`B` are finite vector spaces.
 
     Parameters:
-        times: A function implementing T(x)
-        trans: A function implementing T^H (x)
+        times: A function implementing :math:`T(x)`
+        trans: A function implementing :math:`T^H (x)`
         m: The dimension of the destination vector space :math:`B`
         n: The dimension of the source vector space :math:`A`
     """
@@ -52,7 +52,7 @@ class LinearOperator(NamedTuple):
         return compose(self, other)
 
     def __pow__(self, n):
-        """Returns a linear operator which works like applying T n times"""
+        """Returns a linear operator which works like applying :math:`T` n times"""
         return power(self, n)
 
 def jit(operator):
@@ -83,19 +83,19 @@ def diagonal(d):
     return LinearOperator(times=times, trans=trans, m=n, n=n)
 
 def neg(A):
-    """Returns the negative of a linear operator A"""
+    """Returns the negative of a linear operator :math:`T = -A`"""
     times = lambda x : -A.times(x)
     trans = lambda x : -A.trans(x)
     return LinearOperator(times=times, trans=trans, m=A.m, n=A.n)
 
 def scale(A, alpha):
-    """Returns the linear operator :math:`\alpha A` for the operator :math:`A`"""
+    """Returns the linear operator :math:`T = \\alpha A` for the operator :math:`A`"""
     times = lambda x : alpha * A.times(x)
     trans = lambda x : alpha * A.trans(x)
     return LinearOperator(times=times, trans=trans, m=A.m, n=A.n)
 
 def add(A, B):
-    """Returns the sum of two linear operators A and B"""
+    """Returns the sum of two linear operators :math:`T = A + B`"""
     ma, na = A.m, A.n
     mb, nb = B.m, B.n
     assert ma == mb
@@ -127,7 +127,7 @@ def compose(A, B):
 
 
 def hcat(A, B):
-    """Returns the linear operator :math:`T = [A B]`"""
+    """Returns the linear operator :math:`T = [A \\, B]`"""
     ma, na = A.m, A.n
     mb, nb = B.m, B.n
     assert ma == mb
@@ -150,7 +150,7 @@ def apply_n(func, n, x):
 apply_n =  jax.jit(apply_n, static_argnums=(0, 1))
 
 def power(A, p):
-    """Returns the linear operator :math:`T = A^n`"""
+    """Returns the linear operator :math:`T = A^p`"""
     assert A.m == A.n
     times = lambda x :apply_n(A.times, p, x)
     trans = lambda x : apply_n(A.trans, p, x)
