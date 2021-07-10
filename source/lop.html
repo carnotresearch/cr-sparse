@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Linear Operators &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
+        <script src="../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cr.sparse.lop.LinearOperator" href="_autosummary/cr.sparse.lop.LinearOperator.html" />
+    <link rel="prev" title="cr.sparse.dict.matching_atoms_ratio" href="_autosummary/cr.sparse.dict.matching_atoms_ratio.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CR.Sparse API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Linear Operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data-types">Data types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.LinearOperator.html">cr.sparse.lop.LinearOperator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#basic-operators">Basic operators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.identity.html">cr.sparse.lop.identity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.matrix.html">cr.sparse.lop.matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.diagonal.html">cr.sparse.lop.diagonal</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#operator-algebra">Operator algebra</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.neg.html">cr.sparse.lop.neg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.scale.html">cr.sparse.lop.scale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.add.html">cr.sparse.lop.add</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.subtract.html">cr.sparse.lop.subtract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.compose.html">cr.sparse.lop.compose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.hcat.html">cr.sparse.lop.hcat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.power.html">cr.sparse.lop.power</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#utilities">Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.to_matrix.html">cr.sparse.lop.to_matrix</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pursuit.html">Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">Utilities in cr.sparse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="la.html">Linear Algebra Subroutines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks/index.html">Benchmarks</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">CR.Sparse API Documentation</a> &raquo;</li>
+        
+      <li>Linear Operators</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/source/lop.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="linear-operators">
+<h1>Linear Operators<a class="headerlink" href="#linear-operators" title="Permalink to this headline">¶</a></h1>
+<p>We provide a collection of linear operators which are
+relevant in standard signal/image processing problems.
+We also provide a bunch of utilities to combine and convert
+linear operators.</p>
+<div class="section" id="data-types">
+<h2>Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.LinearOperator.html#cr.sparse.lop.LinearOperator" title="cr.sparse.lop.LinearOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearOperator</span></code></a>(times, …)</p></td>
+<td><p>Represents a finite linear operator <span class="math notranslate nohighlight">\(T : A -&gt; B\)</span> where <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are finite vector spaces.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="basic-operators">
+<h2>Basic operators<a class="headerlink" href="#basic-operators" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.identity.html#cr.sparse.lop.identity" title="cr.sparse.lop.identity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">identity</span></code></a>(m, n)</p></td>
+<td><p>Returns an identity linear operator from A to B</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.matrix.html#cr.sparse.lop.matrix" title="cr.sparse.lop.matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrix</span></code></a>(A)</p></td>
+<td><p>Converts a two-dimensional matrix to a linear operator</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.diagonal.html#cr.sparse.lop.diagonal" title="cr.sparse.lop.diagonal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diagonal</span></code></a>(d)</p></td>
+<td><p>Returns a linear operator which can be represented by a diagonal matrix</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="operator-algebra">
+<h2>Operator algebra<a class="headerlink" href="#operator-algebra" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.neg.html#cr.sparse.lop.neg" title="cr.sparse.lop.neg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">neg</span></code></a>(A)</p></td>
+<td><p>Returns the negative of a linear operator <span class="math notranslate nohighlight">\(T = -A\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.scale.html#cr.sparse.lop.scale" title="cr.sparse.lop.scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale</span></code></a>(A, alpha)</p></td>
+<td><p>Returns the linear operator <span class="math notranslate nohighlight">\(T = \alpha A\)</span> for the operator <span class="math notranslate nohighlight">\(A\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.add.html#cr.sparse.lop.add" title="cr.sparse.lop.add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add</span></code></a>(A, B)</p></td>
+<td><p>Returns the sum of two linear operators <span class="math notranslate nohighlight">\(T = A + B\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.subtract.html#cr.sparse.lop.subtract" title="cr.sparse.lop.subtract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subtract</span></code></a>(A, B)</p></td>
+<td><p>Returns a linear operator <span class="math notranslate nohighlight">\(T  = A - B\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.compose.html#cr.sparse.lop.compose" title="cr.sparse.lop.compose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose</span></code></a>(A, B)</p></td>
+<td><p>Returns the composite linear operator <span class="math notranslate nohighlight">\(T = AB\)</span> such that <span class="math notranslate nohighlight">\(T(x)= A(B(x))\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.hcat.html#cr.sparse.lop.hcat" title="cr.sparse.lop.hcat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hcat</span></code></a>(A, B)</p></td>
+<td><p>Returns the linear operator <span class="math notranslate nohighlight">\(T = [A \, B]\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.power.html#cr.sparse.lop.power" title="cr.sparse.lop.power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power</span></code></a>(A, p)</p></td>
+<td><p>Returns the linear operator <span class="math notranslate nohighlight">\(T = A^p\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.to_matrix.html#cr.sparse.lop.to_matrix" title="cr.sparse.lop.to_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_matrix</span></code></a>(A)</p></td>
+<td><p>Converts a linear operator to a matrix</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="_autosummary/cr.sparse.lop.LinearOperator.html" class="btn btn-neutral float-right" title="cr.sparse.lop.LinearOperator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="_autosummary/cr.sparse.dict.matching_atoms_ratio.html" class="btn btn-neutral float-left" title="cr.sparse.dict.matching_atoms_ratio" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

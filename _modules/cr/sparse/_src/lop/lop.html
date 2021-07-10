@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>cr.sparse._src.lop.lop &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../../../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../benchmarks/index.html">Benchmarks</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>cr.sparse._src.lop.lop</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for cr.sparse._src.lop.lop</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2021 CR.Sparse Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Callable</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+
+<span class="k">def</span> <span class="nf">hermitian</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="LinearOperator"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.LinearOperator.html#cr.sparse.lop.LinearOperator">[docs]</a><span class="k">class</span> <span class="nc">LinearOperator</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a finite linear operator :math:`T : A -&gt; B` where :math:`A` and :math:`B` are finite vector spaces.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        times: A function implementing :math:`T(x)`</span>
+<span class="sd">        trans: A function implementing :math:`T^H (x)`</span>
+<span class="sd">        m: The dimension of the destination vector space :math:`B`</span>
+<span class="sd">        n: The dimension of the source vector space :math:`A`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">times</span> <span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
+    <span class="sd">&quot;&quot;&quot;A linear function mapping from A to B &quot;&quot;&quot;</span>
+    <span class="n">trans</span> <span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
+    <span class="sd">&quot;&quot;&quot;Corresponding adjoint linear function mapping from B to A&quot;&quot;&quot;</span>
+    <span class="n">m</span> <span class="p">:</span> <span class="nb">int</span>
+    <span class="sd">&quot;&quot;&quot;Dimension of space B&quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="p">:</span> <span class="nb">int</span>
+    <span class="sd">&quot;&quot;&quot;Dimension of space A&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the nagative of this linear operator&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">neg</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the sum of this linear operator with another linear operator&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__matmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the composition of this linear operator with another linear operator&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a linear operator which works like applying :math:`T` n times&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span></div>
+
+<span class="k">def</span> <span class="nf">jit</span><span class="p">(</span><span class="n">operator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the same linear operator with compiled times and trans functions&quot;&quot;&quot;</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">times</span><span class="p">)</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">trans</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">LinearOperator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+
+<div class="viewcode-block" id="identity"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.identity.html#cr.sparse.lop.identity">[docs]</a><span class="k">def</span> <span class="nf">identity</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns an identity linear operator from A to B&quot;&quot;&quot;</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>  <span class="n">x</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">LinearOperator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="matrix"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.matrix.html#cr.sparse.lop.matrix">[docs]</a><span class="k">def</span> <span class="nf">matrix</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts a two-dimensional matrix to a linear operator&quot;&quot;&quot;</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">hermitian</span><span class="p">(</span><span class="n">hermitian</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">@</span> <span class="n">A</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">LinearOperator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="diagonal"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.diagonal.html#cr.sparse.lop.diagonal">[docs]</a><span class="k">def</span> <span class="nf">diagonal</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns a linear operator which can be represented by a diagonal matrix&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">d</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">d</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">hermitian</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">LinearOperator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="neg"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.neg.html#cr.sparse.lop.neg">[docs]</a><span class="k">def</span> <span class="nf">neg</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the negative of a linear operator :math:`T = -A`&quot;&quot;&quot;</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="o">-</span><span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="o">-</span><span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">LinearOperator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">n</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="scale"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.scale.html#cr.sparse.lop.scale">[docs]</a><span class="k">def</span> <span class="nf">scale</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the linear operator :math:`T = \\alpha A` for the operator :math:`A`&quot;&quot;&quot;</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">LinearOperator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">n</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="add"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.add.html#cr.sparse.lop.add">[docs]</a><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the sum of two linear operators :math:`T = A + B`&quot;&quot;&quot;</span>
+    <span class="n">ma</span><span class="p">,</span> <span class="n">na</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">n</span>
+    <span class="n">mb</span><span class="p">,</span> <span class="n">nb</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">n</span>
+    <span class="k">assert</span> <span class="n">ma</span> <span class="o">==</span> <span class="n">mb</span>
+    <span class="k">assert</span> <span class="n">na</span> <span class="o">==</span> <span class="n">nb</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">B</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">LinearOperator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">ma</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">na</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="subtract"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.subtract.html#cr.sparse.lop.subtract">[docs]</a><span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns a linear operator :math:`T  = A - B`&quot;&quot;&quot;</span>
+    <span class="n">ma</span><span class="p">,</span> <span class="n">na</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">n</span>
+    <span class="n">mb</span><span class="p">,</span> <span class="n">nb</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">n</span>
+    <span class="k">assert</span> <span class="n">ma</span> <span class="o">==</span> <span class="n">mb</span>
+    <span class="k">assert</span> <span class="n">na</span> <span class="o">==</span> <span class="n">nb</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">B</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">B</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">LinearOperator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">ma</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">na</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="compose"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.compose.html#cr.sparse.lop.compose">[docs]</a><span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the composite linear operator :math:`T = AB` such that :math:`T(x)= A(B(x))`&quot;&quot;&quot;</span>
+    <span class="n">ma</span><span class="p">,</span> <span class="n">na</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">n</span>
+    <span class="n">mb</span><span class="p">,</span> <span class="n">nb</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">n</span>
+    <span class="k">assert</span> <span class="n">na</span> <span class="o">==</span> <span class="n">mb</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">B</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">LinearOperator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">ma</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">nb</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="hcat"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.hcat.html#cr.sparse.lop.hcat">[docs]</a><span class="k">def</span> <span class="nf">hcat</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the linear operator :math:`T = [A \\, B]`&quot;&quot;&quot;</span>
+    <span class="n">ma</span><span class="p">,</span> <span class="n">na</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">n</span>
+    <span class="n">mb</span><span class="p">,</span> <span class="n">nb</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">n</span>
+    <span class="k">assert</span> <span class="n">ma</span> <span class="o">==</span> <span class="n">mb</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">ma</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">na</span> <span class="o">+</span> <span class="n">nb</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="n">na</span><span class="p">]),</span> <span class="n">B</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">na</span><span class="p">:])))</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">B</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">LinearOperator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span></div>
+
+<span class="k">def</span> <span class="nf">apply_n</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">init</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">c</span><span class="o">+</span><span class="mi">1</span>
+    <span class="k">def</span> <span class="nf">cond</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">n</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">init</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">apply_n</span> <span class="o">=</span>  <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">apply_n</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<div class="viewcode-block" id="power"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.power.html#cr.sparse.lop.power">[docs]</a><span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the linear operator :math:`T = A^p`&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">A</span><span class="o">.</span><span class="n">m</span> <span class="o">==</span> <span class="n">A</span><span class="o">.</span><span class="n">n</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span><span class="n">apply_n</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">apply_n</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">LinearOperator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">n</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="to_matrix"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.to_matrix.html#cr.sparse.lop.to_matrix">[docs]</a><span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts a linear operator to a matrix&quot;&quot;&quot;</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">I</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

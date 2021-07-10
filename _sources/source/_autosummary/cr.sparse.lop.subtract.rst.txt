@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.subtract
+======================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: subtract

@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.identity
+======================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: identity

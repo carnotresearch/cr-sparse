@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.hcat
+==================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: hcat
