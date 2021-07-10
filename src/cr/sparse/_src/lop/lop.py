@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import NamedTuple, List, Dict
+from typing import NamedTuple, Callable
 import jax
 import jax.numpy as jnp
 
 
 class LinearOperator(NamedTuple):
-    times : jnp.ndarray
-    trans : jnp.ndarray
+    times : Callable[[jnp.ndarray], jnp.ndarray]
+    trans : Callable[[jnp.ndarray], jnp.ndarray]
     m : int
     n : int
 
