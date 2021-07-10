@@ -118,11 +118,14 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.add.html">cr.sparse.lop.add</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.subtract.html">cr.sparse.lop.subtract</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.compose.html">cr.sparse.lop.compose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.transpose.html">cr.sparse.lop.transpose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.hermitian.html">cr.sparse.lop.hermitian</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.hcat.html">cr.sparse.lop.hcat</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.power.html">cr.sparse.lop.power</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#utilities">Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.hermitian.html">cr.sparse.lop.hermitian</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.to_matrix.html">cr.sparse.lop.to_matrix</a></li>
 </ul>
 </li>
@@ -231,10 +234,39 @@
 </style>
 <div class="section" id="linear-operators">
 <h1>Linear Operators<a class="headerlink" href="#linear-operators" title="Permalink to this headline">¶</a></h1>
-<p>We provide a collection of linear operators which are
+<p>We provide a collection of linear operators with efficient JAX based implementations
+that are
 relevant in standard signal/image processing problems.
 We also provide a bunch of utilities to combine and convert
 linear operators.</p>
+<p>This module is inspired by <code class="docutils literal notranslate"><span class="pre">pylops</span></code> although the implementation approach
+is different.</p>
+<p>A linear operator <span class="math notranslate nohighlight">\(T : X \to Y\)</span> connects a model space <span class="math notranslate nohighlight">\(X\)</span>
+to a data space <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>A linear operator satisfies following laws:</p>
+<div class="math notranslate nohighlight">
+\[T (x + y) = T (x) + T (y)\]</div>
+<div class="math notranslate nohighlight">
+\[T (\alpha x) = \alpha T(x)\]</div>
+<p>Thus, for a general linear combination:</p>
+<div class="math notranslate nohighlight">
+\[T (\alpha x + \beta y) = \alpha T (x) + \beta T (y)\]</div>
+<p>We are concerned with linear operators <span class="math notranslate nohighlight">\(T : \mathbb{F}^n \to \mathbb{F}^m\)</span>
+where <span class="math notranslate nohighlight">\(\mathbb{F}\)</span> is either the field of real numbers or
+complex numbers.
+<span class="math notranslate nohighlight">\(X = \mathbb{F}^n\)</span> is the model space and
+<span class="math notranslate nohighlight">\(Y = \mathbb{F}^m\)</span> is the data space.</p>
+<p>Such a linear operator can be represented by a two dimensional matrix <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>The forward operation is given by:</p>
+<div class="math notranslate nohighlight">
+\[y = A x.\]</div>
+<p>The corresponding adjoint operation is given by:</p>
+<div class="math notranslate nohighlight">
+\[\hat{x} = A^H y\]</div>
+<p>We represent a linear operator by a pair of functions <code class="docutils literal notranslate"><span class="pre">times</span></code> and <code class="docutils literal notranslate"><span class="pre">trans</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">times</span></code> function implements the forward operation while the <code class="docutils literal notranslate"><span class="pre">trans</span></code>
+function implements the adjoint operation.</p>
+<p>An inverse problem consists of computing <span class="math notranslate nohighlight">\(x\)</span> given <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <div class="section" id="data-types">
 <h2>Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
@@ -292,6 +324,12 @@ linear operators.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.compose.html#cr.sparse.lop.compose" title="cr.sparse.lop.compose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose</span></code></a>(A, B)</p></td>
 <td><p>Returns the composite linear operator <span class="math notranslate nohighlight">\(T = AB\)</span> such that <span class="math notranslate nohighlight">\(T(x)= A(B(x))\)</span></p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.transpose.html#cr.sparse.lop.transpose" title="cr.sparse.lop.transpose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transpose</span></code></a>(A)</p></td>
+<td><p>Returns the transpose of a given operator <span class="math notranslate nohighlight">\(T = A^T\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.hermitian.html#cr.sparse.lop.hermitian" title="cr.sparse.lop.hermitian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hermitian</span></code></a>(A)</p></td>
+<td><p>Returns the Hermitian transpose of a given operator <span class="math notranslate nohighlight">\(T = A^H\)</span></p></td>
+</tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.hcat.html#cr.sparse.lop.hcat" title="cr.sparse.lop.hcat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hcat</span></code></a>(A, B)</p></td>
 <td><p>Returns the linear operator <span class="math notranslate nohighlight">\(T = [A \, B]\)</span></p></td>
 </tr>
@@ -309,7 +347,10 @@ linear operators.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.to_matrix.html#cr.sparse.lop.to_matrix" title="cr.sparse.lop.to_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_matrix</span></code></a>(A)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.hermitian.html#cr.sparse.lop.hermitian" title="cr.sparse.lop.hermitian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hermitian</span></code></a>(A)</p></td>
+<td><p>Returns the Hermitian transpose of a given operator <span class="math notranslate nohighlight">\(T = A^H\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.to_matrix.html#cr.sparse.lop.to_matrix" title="cr.sparse.lop.to_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_matrix</span></code></a>(A)</p></td>
 <td><p>Converts a linear operator to a matrix</p></td>
 </tr>
 </tbody>

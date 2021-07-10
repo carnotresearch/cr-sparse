@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.transpose
+=======================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: transpose
