@@ -13,8 +13,22 @@
 # limitations under the License.
 
 from cr.sparse._src.lop.lop import (
+    # Data type
+    LinearOperator,
+    # basic operators
     identity,
     matrix,
-    hcat,
+    diagonal,
+    # jax support
     jit,
+    # operator algebra
+    neg,
+    scale,
+    add,
+    subtract,
+    compose,
+    hcat,
+    power,
+    # utilities
+    to_matrix
 )
