@@ -69,7 +69,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 2,
+   "execution_count": 1,
    "id": "31fba328",
    "metadata": {},
    "outputs": [],
@@ -86,7 +86,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": 2,
    "id": "8388b4ab",
    "metadata": {},
    "outputs": [],
@@ -94,12 +94,13 @@
     "import cr.sparse as crs\n",
     "import cr.sparse.dict as crdict\n",
     "import cr.sparse.data as crdata\n",
+    "import cr.sparse.lop as lop\n",
     "from cr.sparse.cvx.adm import yall1"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 4,
+   "execution_count": 3,
    "id": "db11fc41",
    "metadata": {},
    "outputs": [],
@@ -119,7 +120,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 5,
+   "execution_count": 4,
    "id": "01e91bef",
    "metadata": {},
    "outputs": [],
@@ -131,7 +132,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 6,
+   "execution_count": 5,
    "id": "cd6e376c",
    "metadata": {},
    "outputs": [
@@ -150,7 +151,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
+   "execution_count": 6,
    "id": "031fcbbd",
    "metadata": {},
    "outputs": [],
@@ -160,7 +161,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 8,
+   "execution_count": 7,
    "id": "1598f000",
    "metadata": {},
    "outputs": [
@@ -170,7 +171,7 @@
        "DeviceArray(True, dtype=bool)"
       ]
      },
-     "execution_count": 8,
+     "execution_count": 7,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -181,7 +182,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 9,
+   "execution_count": 8,
    "id": "6cf7860f",
    "metadata": {},
    "outputs": [
@@ -206,7 +207,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 10,
+   "execution_count": 9,
    "id": "b7e7bed5",
    "metadata": {},
    "outputs": [],
@@ -217,7 +218,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 11,
+   "execution_count": 10,
    "id": "7ffaa82a",
    "metadata": {},
    "outputs": [
@@ -235,6 +236,17 @@
    "source": [
     "fig=plt.figure(figsize=(8,6), dpi= 100, facecolor='w', edgecolor='k')\n",
     "plt.stem(x, markerfmt='.');"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "93eb898d",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Convert A into a linear operator\n",
+    "A = lop.matrix(A)"
    ]
   },
   {
@@ -260,7 +272,7 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "b0 = A @ x"
+    "b0 = A.times(x)"
    ]
   },
   {
@@ -374,7 +386,7 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "8.93 ms ± 101 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)\n"
+      "4.77 ms ± 47.5 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)\n"
      ]
     }
    ],
@@ -521,7 +533,7 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "8.48 ms ± 65.4 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)\n"
+      "4.47 ms ± 49 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)\n"
      ]
     }
    ],
@@ -648,7 +660,7 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "8.04 ms ± 47.5 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)\n"
+      "4.65 ms ± 23.1 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)\n"
      ]
     }
    ],
@@ -711,7 +723,7 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "b0p = A @ xp"
+    "b0p = A.times(xp)"
    ]
   },
   {
@@ -825,7 +837,7 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "10.3 ms ± 69.5 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)\n"
+      "5.27 ms ± 72.9 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)\n"
      ]
     }
    ],
@@ -961,7 +973,7 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "8.45 ms ± 35.1 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)\n"
+      "4.58 ms ± 85.4 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)\n"
      ]
     }
    ],
@@ -1066,13 +1078,21 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "7.65 ms ± 89.9 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)\n"
+      "4.35 ms ± 17 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)\n"
      ]
     }
    ],
    "source": [
     "%timeit yall1.solve(A, bp, delta=delta).x.block_until_ready()"
    ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "e8e57a8c",
+   "metadata": {},
+   "outputs": [],
+   "source": []
   }
  ],
  "metadata": {
