@@ -107,9 +107,9 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#Non-negative-counterparts">Non-negative counterparts</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1">Basis pursuit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id2">Basis pursuit denoising</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id3">Basis pursuit with inequality constraints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Non-negative-basis-pursuit">Non-negative basis pursuit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Non-negative-basis-pursuit-denoising">Non-negative basis pursuit denoising</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Non-negative-basis-pursuit-with-inequality-constraints">Non-negative basis pursuit with inequality constraints</a></li>
 </ul>
 </li>
 </ul>
@@ -649,12 +649,16 @@ DeviceArray(True, dtype=bool)
 <h2>Standard sparse recovery problems for compressive sensing<a class="headerlink" href="#Standard-sparse-recovery-problems-for-compressive-sensing" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="Basis-pursuit">
 <h3>Basis pursuit<a class="headerlink" href="#Basis-pursuit" title="Permalink to this headline">¶</a></h3>
+<p>The simple form of basis pursuit problem is:</p>
+<div class="math notranslate nohighlight">
+\[{\min}_{x} \| x\|_{1} \; \text{s.t.} \, A x = b\]</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">b0</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span></span><span class="c1"># Compute the measurements</span>
+<span class="n">b0</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -762,6 +766,9 @@ DeviceArray(0.01208655, dtype=float64)
 </div>
 <div class="section" id="Basis-pursuit-denoising">
 <h3>Basis pursuit denoising<a class="headerlink" href="#Basis-pursuit-denoising" title="Permalink to this headline">¶</a></h3>
+<p>The simple form of L1-L2 unconstrained minimization or basis pursuit denoising is:</p>
+<div class="math notranslate nohighlight">
+\[{\min}_{x} \| x\|_{1} + \frac{1}{2\rho}\| A x - b \|_2^2\]</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
@@ -886,6 +893,9 @@ DeviceArray(0.05690205, dtype=float64)
 </div>
 <div class="section" id="Basis-pursuit-with-inequality-constraints">
 <h3>Basis pursuit with inequality constraints<a class="headerlink" href="#Basis-pursuit-with-inequality-constraints" title="Permalink to this headline">¶</a></h3>
+<p>The simple form of L1 minimization with L2 constraints or basis pursuit with inequality constraints is:</p>
+<div class="math notranslate nohighlight">
+\[{\min}_{x} \| x\|_{1} \; \text{s.t.} \, \| A x - b \|_2 \leq \delta\]</div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
@@ -993,6 +1003,8 @@ DeviceArray(0.05584753, dtype=float64)
 </div>
 <div class="section" id="Non-negative-counterparts">
 <h2>Non-negative counterparts<a class="headerlink" href="#Non-negative-counterparts" title="Permalink to this headline">¶</a></h2>
+<p>In this case, the signal <span class="math notranslate nohighlight">\(x\)</span> with the sparse representation <span class="math notranslate nohighlight">\(\alpha = W x\)</span> has only non-negative entries. i.e. if an entry in <span class="math notranslate nohighlight">\(x\)</span> is non-zero, it is positive. This is typical for images.</p>
+<p>Let us construct a sparse representation with non-negative entries.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
@@ -1019,8 +1031,11 @@ DeviceArray(0.05584753, dtype=float64)
 <img alt="../_images/tutorials_admm_l1_41_0.png" src="../_images/tutorials_admm_l1_41_0.png" />
 </div>
 </div>
-<div class="section" id="id1">
-<h3>Basis pursuit<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Non-negative-basis-pursuit">
+<h3>Non-negative basis pursuit<a class="headerlink" href="#Non-negative-basis-pursuit" title="Permalink to this headline">¶</a></h3>
+<p>The simple form of basis pursuit for non-negative <span class="math notranslate nohighlight">\(x\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[{\min}_{x} \| x\|_{1} \; \text{s.t.} \, A x = b \, \, \text{and} \, x \succeq 0\]</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
@@ -1132,8 +1147,11 @@ DeviceArray(0.01095682, dtype=float64)
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="id2">
-<h3>Basis pursuit denoising<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Non-negative-basis-pursuit-denoising">
+<h3>Non-negative basis pursuit denoising<a class="headerlink" href="#Non-negative-basis-pursuit-denoising" title="Permalink to this headline">¶</a></h3>
+<p>The simple form of L1-L2 unconstrained minimization with non-negative <span class="math notranslate nohighlight">\(x\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[{\min}_{x} \| x\|_{1} + \frac{1}{2\rho}\| A x - b \|_2^2  \; \text{s.t.} \, x \succeq 0\]</div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
 </pre></div>
@@ -1246,8 +1264,10 @@ DeviceArray(0.04551954, dtype=float64)
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="id3">
-<h3>Basis pursuit with inequality constraints<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Non-negative-basis-pursuit-with-inequality-constraints">
+<h3>Non-negative basis pursuit with inequality constraints<a class="headerlink" href="#Non-negative-basis-pursuit-with-inequality-constraints" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[{\min}_{x} \| x\|_{1} \; \text{s.t.} \, \| A x - b \|_2 \leq \delta \, \, \text{and} \, x \succeq 0\]</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
 </pre></div>
