@@ -12,33 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from cr.sparse._src.lop.lop import (
-    # Data type
-    LinearOperator,
-    # jax support
-    jit,
-    # operator algebra
-    neg,
-    scale,
-    add,
-    subtract,
-    compose,
-    transpose,
-    hermitian,
-    hcat,
-    power,
-)
+import jax.numpy as jnp
 
-# basic operators
-from cr.sparse._src.lop.basic import (
-    identity,
-    matrix,
-    diagonal,
-    zero,
-    flipud,
-)
 
-# utilities
-from cr.sparse._src.lop.util import (
-    to_matrix
-)
+def to_matrix(A):
+    """Converts a linear operator to a matrix"""
+    I = jnp.eye(A.n)
+    return A.times(I)

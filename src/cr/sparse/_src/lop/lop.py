@@ -16,8 +16,7 @@ from typing import NamedTuple, Callable
 import jax
 import jax.numpy as jnp
 
-def hermitian(a):
-    return jnp.conjugate(a.T)
+from .impl import _hermitian
 
 
 class LinearOperator(NamedTuple):
@@ -61,27 +60,9 @@ def jit(operator):
     trans = jax.jit(operator.trans)
     return LinearOperator(times=times, trans=trans, m=operator.m, n=operator.n)
 
-def identity(m, n):
-    """Returns an identity linear operator from A to B"""
-    times = lambda x:  x
-    trans = lambda x : x
-    return LinearOperator(times=times, trans=trans, m=m, n=n)
-
-def matrix(A):
-    """Converts a two-dimensional matrix to a linear operator"""
-    m, n = A.shape
-    times = lambda x: A @ x
-    trans = lambda x : hermitian(hermitian(x) @ A )
-    return LinearOperator(times=times, trans=trans, m=m, n=n)
-
-def diagonal(d):
-    """Returns a linear operator which can be represented by a diagonal matrix"""
-    assert d.ndim == 1
-    n = d.shape[0]
-    times = lambda x: d * x
-    trans = lambda x: hermitian(d) * x
-    return LinearOperator(times=times, trans=trans, m=n, n=n)
-
+###########################################################################################
+#  Operator algebra
+###########################################################################################
 def neg(A):
     """Returns the negative of a linear operator :math:`T = -A`"""
     times = lambda x : -A.times(x)
@@ -126,6 +107,16 @@ def compose(A, B):
     return LinearOperator(times=times, trans=trans, m=ma, n=nb)
 
 
+def hermitian(A):
+    """Returns the Hermitian transpose of a given operator :math:`T = A^H`"""
+    return LinearOperator(times=A.trans, trans=A.times, m=A.n, n=A.m)
+
+def transpose(A):
+    """Returns the transpose of a given operator :math:`T = A^T`"""
+    times = lambda x: _hermitian(A.trans(_hermitian(x)))
+    trans = lambda x: _hermitian(A.times(_hermitian(x)))
+    return LinearOperator(times=times, trans=trans, m=A.n, n=A.m)
+
 def hcat(A, B):
     """Returns the linear operator :math:`T = [A \\, B]`"""
     ma, na = A.m, A.n
@@ -157,7 +148,3 @@ def power(A, p):
     return LinearOperator(times=times, trans=trans, m=A.m, n=A.n)
 
 
-def to_matrix(A):
-    """Converts a linear operator to a matrix"""
-    I = jnp.eye(A.n)
-    return A.times(I)
