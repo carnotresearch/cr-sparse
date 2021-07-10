@@ -23,6 +23,8 @@ import jax.numpy as jnp
 from jax import jit, lax, vmap
 norm = jnp.linalg.norm
 
+from cr.sparse import lop
+
 def project_to_box(z, w):
     ww = jnp.maximum(w, jnp.abs(z))
     factors = w / ww
@@ -93,6 +95,8 @@ def solve_bp(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters):
 
     This function implements eq 2.29 of the paper.
     """
+    times = A.times
+    trans = A.trans
     mu = jnp.mean(jnp.abs(b))
     mu_orig = mu
     b_by_mu = b  / mu
@@ -100,9 +104,9 @@ def solve_bp(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters):
 
     def init():
         # primal residual
-        rp = b - A @ x0
+        rp = b - times(x0)
         # dual residual
-        rd = - A.T @ b
+        rd = - trans(b)
         primal_objective = jnp.sum(jnp.abs(w*x0))
         # update dual objective
         dual_objective = 0.
@@ -115,8 +119,8 @@ def solve_bp(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters):
     def iteration(state):
         # update y
         x_by_mu = state.x / mu
-        y = A @ (state.z - x_by_mu) + b_by_mu
-        Aty = A.T @ y
+        y = times(state.z - x_by_mu) + b_by_mu
+        Aty = trans(y)
         # update z
         z = Aty + x_by_mu
         z = jnp.where(nonneg, project_to_real_upper_limit(z, w), project_to_box(z, w))
@@ -130,7 +134,7 @@ def solve_bp(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters):
         x = state.x - (gamma*mu) * rd
         
         # primal residual
-        rp = b - A @ x
+        rp = b - times(x)
         n_times += 1
         
         # primary objective
@@ -205,7 +209,7 @@ def solve_bp(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters):
     state = lax.while_loop(cond, double_iteration, init())
     return state
 
-solve_bp_jit = jit(solve_bp, static_argnums=(5,6, 7, 8))
+solve_bp_jit = jit(solve_bp, static_argnums=(0, 5,6, 7, 8))
 
 
 def solve_l1_l2(A, b, x0, z0, w, nonneg, rho, gamma, tolerance, max_iters):
@@ -214,6 +218,8 @@ def solve_l1_l2(A, b, x0, z0, w, nonneg, rho, gamma, tolerance, max_iters):
 
     This function implements eq 2.25 of the paper.
     """
+    times = A.times
+    trans = A.trans
     mu = jnp.mean(jnp.abs(b))
     mu_orig = mu
     rho_by_mu = rho / mu
@@ -226,9 +232,9 @@ def solve_l1_l2(A, b, x0, z0, w, nonneg, rho, gamma, tolerance, max_iters):
         x = x0
         z = z0 
         # primal residual
-        rp = b - A @ x
+        rp = b - times(x)
         # dual residual
-        rd = - A.T @ b
+        rd = - trans(b)
         rp_norm_sqr = rp.T @ rp
         primal_objective = jnp.sum(jnp.abs(w*x)) + (0.5 / rho) * rp_norm_sqr
         # update dual objective
@@ -243,9 +249,9 @@ def solve_l1_l2(A, b, x0, z0, w, nonneg, rho, gamma, tolerance, max_iters):
     def iteration(state):
         # update y
         x_by_mu = state.x / mu
-        y = A @ (state.z - x_by_mu) + b_by_mu
+        y = times(state.z - x_by_mu) + b_by_mu
         y = y / rho_by_mu_p1
-        Aty = A.T @ y
+        Aty = trans(y)
         #print(f'\n[{state.iterations+1}]', end='')
         #print(state.x[0:5])
         #print(y[0:5])
@@ -262,7 +268,7 @@ def solve_l1_l2(A, b, x0, z0, w, nonneg, rho, gamma, tolerance, max_iters):
         x = state.x - (gamma*mu) * rd
         
         # primal residual
-        rp = b - A @ x
+        rp = b - times(x)
         n_times += 1
         
         # primal resdiual norm squared
@@ -328,7 +334,7 @@ def solve_l1_l2(A, b, x0, z0, w, nonneg, rho, gamma, tolerance, max_iters):
     return state
 
 
-solve_l1_l2_jit = jit(solve_l1_l2, static_argnums=(5,6,7,8,9))
+solve_l1_l2_jit = jit(solve_l1_l2, static_argnums=(0, 5,6,7,8,9))
 
 
 
@@ -338,6 +344,8 @@ def solve_l1_l2con(A, b, x0, z0, w, nonneg, delta, gamma, tolerance, max_iters):
 
     This function implements eq 2.27 of the paper.
     """
+    times = A.times
+    trans = A.trans
     mu = jnp.mean(jnp.abs(b))
     mu_orig = mu
     b_by_mu = b  / mu
@@ -350,9 +358,9 @@ def solve_l1_l2con(A, b, x0, z0, w, nonneg, delta, gamma, tolerance, max_iters):
 
     def init():
         # primal residual
-        rp = b - A @ x0
+        rp = b - times(x0)
         # dual residual
-        rd = - A.T @ b
+        rd = - trans(b)
         primal_objective = jnp.sum(jnp.abs(w*x0))
         # update dual objective
         dual_objective = 0.
@@ -365,11 +373,11 @@ def solve_l1_l2con(A, b, x0, z0, w, nonneg, delta, gamma, tolerance, max_iters):
     def iteration(state):
         # update y
         x_by_mu = state.x / mu
-        y = A @ (state.z - x_by_mu) + b_by_mu
+        y = times (state.z - x_by_mu) + b_by_mu
         # subtract projection of y to l2 ball from y
         y_norm = norm(y)
         y = jnp.maximum(0, 1 - delta_by_mu / y_norm) * y
-        Aty = A.T @ y
+        Aty = trans(y)
         # update z
         z = Aty + x_by_mu
         z = jnp.where(nonneg, project_to_real_upper_limit(z, w), project_to_box(z, w))
@@ -383,7 +391,7 @@ def solve_l1_l2con(A, b, x0, z0, w, nonneg, delta, gamma, tolerance, max_iters):
         x = state.x - (gamma*mu) * rd
         
         # primal residual
-        rp = b - A @ x
+        rp = b - times(x)
         n_times += 1
         
         # primary objective
@@ -458,7 +466,7 @@ def solve_l1_l2con(A, b, x0, z0, w, nonneg, delta, gamma, tolerance, max_iters):
     return state
 
 
-solve_l1_l2con_jit = jit(solve_l1_l2con, static_argnums=(5,6,7,8, 9))
+solve_l1_l2con_jit = jit(solve_l1_l2con, static_argnums=(0, 5,6,7,8, 9))
 
 
 
@@ -485,7 +493,7 @@ def solve(A, b, x0=None, z0=None, W=None, weights=None, nonneg=False, rho=0., de
     This function implements eq 2.25 of the paper.
     """
     m = b.shape[0]
-    Atb = A.T @ b
+    Atb = A.trans(b)
     n_times = 0
     n_trans = 1
     n = Atb.shape[0]
