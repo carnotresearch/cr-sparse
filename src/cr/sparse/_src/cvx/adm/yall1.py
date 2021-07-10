@@ -42,7 +42,7 @@ class RecoveryFullSolution(NamedTuple):
 
     Parameters:
 
-        x : :estimate(s) of :math:`x`
+        x : estimate(s) of :math:`x`
         r : residual(s) :math:`r = b - A_I x_I `
         r_norm_sqr: squared norm of residual :math:`\| r \|_2^2`
         iterations: Number of iterations required for the algorithm to converge
