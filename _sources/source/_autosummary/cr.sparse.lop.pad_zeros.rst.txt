@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.pad\_zeros
+========================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: pad_zeros

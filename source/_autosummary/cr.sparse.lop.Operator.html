@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>cr.sparse.lop.LinearOperator &mdash; CR.Sparse  documentation</title>
+  <title>cr.sparse.lop.Operator &mdash; CR.Sparse  documentation</title>
   
 
   
@@ -103,10 +103,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../lop.html">Linear Operators</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../lop.html#data-types">Data types</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.lop.LinearOperator</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.lop.Operator</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#basic-operators">Basic operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lop.html#signal-processing-operators">Signal processing operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lop.html#random-compressive-sensing-operators">Random compressive sensing operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lop.html#convenience-operators">Convenience operators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#operator-algebra">Operator algebra</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#utilities">Utilities</a></li>
 </ul>
@@ -171,13 +174,13 @@
         
           <li><a href="../lop.html">Linear Operators</a> &raquo;</li>
         
-      <li>cr.sparse.lop.LinearOperator</li>
+      <li>cr.sparse.lop.Operator</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/source/_autosummary/cr.sparse.lop.LinearOperator.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/source/_autosummary/cr.sparse.lop.Operator.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -214,11 +217,11 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="cr-sparse-lop-linearoperator">
-<h1>cr.sparse.lop.LinearOperator<a class="headerlink" href="#cr-sparse-lop-linearoperator" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cr-sparse-lop-operator">
+<h1>cr.sparse.lop.Operator<a class="headerlink" href="#cr-sparse-lop-operator" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="cr.sparse.lop.LinearOperator">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cr.sparse.lop.</span></span><span class="sig-name descname"><span class="pre">LinearOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trans</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/lop/lop.html#LinearOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.lop.LinearOperator" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cr.sparse.lop.Operator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cr.sparse.lop.</span></span><span class="sig-name descname"><span class="pre">Operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trans</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">linear</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jit_safe</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_safe</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/lop/lop.html#Operator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.lop.Operator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a finite linear operator <span class="math notranslate nohighlight">\(T : A -&gt; B\)</span> where <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are finite vector spaces.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -227,33 +230,19 @@
 <li><p><strong>trans</strong> – A function implementing <span class="math notranslate nohighlight">\(T^H (x)\)</span></p></li>
 <li><p><strong>m</strong> – The dimension of the destination vector space <span class="math notranslate nohighlight">\(B\)</span></p></li>
 <li><p><strong>n</strong> – The dimension of the source vector space <span class="math notranslate nohighlight">\(A\)</span></p></li>
+<li><p><strong>linear</strong> – Indicates if the operator is linear or not</p></li>
+<li><p><strong>jit_safe</strong> – Indicates if the operator can be safely JIT compiled</p></li>
+<li><p><strong>matrix_safe</strong> – Indicates if the operator can accept a matrix of vectors</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="cr.sparse.lop.LinearOperator.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cr.sparse.lop.LinearOperator.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
-</dd></dl>
-
-<p class="rubric">Methods</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cr.sparse.lop.LinearOperator.__init__" title="cr.sparse.lop.LinearOperator.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>()</p></td>
-<td><p>Initialize self.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">count</span></code>(value, /)</p></td>
-<td><p>Return number of occurrences of value.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>(value[, start, stop])</p></td>
-<td><p>Return first index of value.</p></td>
-</tr>
-</tbody>
-</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While most of the operators in the library are linear operators,
+some are not. Prominent examples include operators
+like real part operator, imaginary part operator.</p>
+<p>These operators are provided for convenience.</p>
+</div>
 <p class="rubric">Attributes</p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -261,16 +250,25 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">jit_safe</span></code></p></td>
+<td><p>Indicates if the times and trans functions can be safely jit compiled</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">linear</span></code></p></td>
+<td><p>Indicates if the operator is linear or not</p></td>
+</tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">m</span></code></p></td>
 <td><p>Dimension of space B</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">n</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrix_safe</span></code></p></td>
+<td><p>Indicates if the operator can accept a matrix of vectors</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">n</span></code></p></td>
 <td><p>Dimension of space A</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">times</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">times</span></code></p></td>
 <td><p>A linear function mapping from A to B</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">trans</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">trans</span></code></p></td>
 <td><p>Corresponding adjoint linear function mapping from B to A</p></td>
 </tr>
 </tbody>

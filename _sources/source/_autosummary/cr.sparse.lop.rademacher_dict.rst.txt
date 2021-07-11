@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.rademacher\_dict
+==============================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: rademacher_dict

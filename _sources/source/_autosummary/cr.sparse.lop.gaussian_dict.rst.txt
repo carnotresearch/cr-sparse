@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.gaussian\_dict
+============================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: gaussian_dict

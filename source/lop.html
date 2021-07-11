@@ -48,7 +48,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cr.sparse.lop.LinearOperator" href="_autosummary/cr.sparse.lop.LinearOperator.html" />
+    <link rel="next" title="cr.sparse.lop.Operator" href="_autosummary/cr.sparse.lop.Operator.html" />
     <link rel="prev" title="cr.sparse.dict.matching_atoms_ratio" href="_autosummary/cr.sparse.dict.matching_atoms_ratio.html" /> 
 </head>
 
@@ -103,13 +103,33 @@
 <li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Linear Operators</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#data-types">Data types</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.LinearOperator.html">cr.sparse.lop.LinearOperator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.Operator.html">cr.sparse.lop.Operator</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#basic-operators">Basic operators</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.identity.html">cr.sparse.lop.identity</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.matrix.html">cr.sparse.lop.matrix</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.diagonal.html">cr.sparse.lop.diagonal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.zero.html">cr.sparse.lop.zero</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.flipud.html">cr.sparse.lop.flipud</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.sum.html">cr.sparse.lop.sum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.pad_zeros.html">cr.sparse.lop.pad_zeros</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.symmetrize.html">cr.sparse.lop.symmetrize</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#signal-processing-operators">Signal processing operators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.fourier_basis_1d.html">cr.sparse.lop.fourier_basis_1d</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#random-compressive-sensing-operators">Random compressive sensing operators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.gaussian_dict.html">cr.sparse.lop.gaussian_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.rademacher_dict.html">cr.sparse.lop.rademacher_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.random_onb_dict.html">cr.sparse.lop.random_onb_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.random_orthonormal_rows_dict.html">cr.sparse.lop.random_orthonormal_rows_dict</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#convenience-operators">Convenience operators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.real.html">cr.sparse.lop.real</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#operator-algebra">Operator algebra</a><ul>
@@ -125,8 +145,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#utilities">Utilities</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.hermitian.html">cr.sparse.lop.hermitian</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.to_matrix.html">cr.sparse.lop.to_matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.to_adjoint_matrix.html">cr.sparse.lop.to_adjoint_matrix</a></li>
 </ul>
 </li>
 </ul>
@@ -275,7 +295,7 @@ function implements the adjoint operation.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.LinearOperator.html#cr.sparse.lop.LinearOperator" title="cr.sparse.lop.LinearOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearOperator</span></code></a>(times, …)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.Operator.html#cr.sparse.lop.Operator" title="cr.sparse.lop.Operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Operator</span></code></a></p></td>
 <td><p>Represents a finite linear operator <span class="math notranslate nohighlight">\(T : A -&gt; B\)</span> where <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are finite vector spaces.</p></td>
 </tr>
 </tbody>
@@ -297,6 +317,73 @@ function implements the adjoint operation.</p>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.diagonal.html#cr.sparse.lop.diagonal" title="cr.sparse.lop.diagonal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diagonal</span></code></a>(d)</p></td>
 <td><p>Returns a linear operator which can be represented by a diagonal matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.zero.html#cr.sparse.lop.zero" title="cr.sparse.lop.zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero</span></code></a>(m[, n])</p></td>
+<td><p>Returns a linear operator which maps everything to 0 vector in data space</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.flipud.html#cr.sparse.lop.flipud" title="cr.sparse.lop.flipud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flipud</span></code></a>(n)</p></td>
+<td><p>Returns an operator which flips the order of entries in input upside down</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.sum.html#cr.sparse.lop.sum" title="cr.sparse.lop.sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sum</span></code></a>(n)</p></td>
+<td><p>Returns an operator which computes the sum of a vector</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.pad_zeros.html#cr.sparse.lop.pad_zeros" title="cr.sparse.lop.pad_zeros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pad_zeros</span></code></a>(n, before, after)</p></td>
+<td><p>Adds zeros before and after a vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.symmetrize.html#cr.sparse.lop.symmetrize" title="cr.sparse.lop.symmetrize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">symmetrize</span></code></a>(n)</p></td>
+<td><p>An operator which constructs a symmetric vector by pre-pending the input in reversed order</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="signal-processing-operators">
+<h2>Signal processing operators<a class="headerlink" href="#signal-processing-operators" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.fourier_basis_1d.html#cr.sparse.lop.fourier_basis_1d" title="cr.sparse.lop.fourier_basis_1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fourier_basis_1d</span></code></a>(n)</p></td>
+<td><p>Returns an operator which represents the DFT orthonormal basis</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="random-compressive-sensing-operators">
+<h2>Random compressive sensing operators<a class="headerlink" href="#random-compressive-sensing-operators" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.gaussian_dict.html#cr.sparse.lop.gaussian_dict" title="cr.sparse.lop.gaussian_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_dict</span></code></a>(key, m, n[, normalize_atoms])</p></td>
+<td><p>An operator which represents a Gaussian sensix matrix (with normalized columns)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.rademacher_dict.html#cr.sparse.lop.rademacher_dict" title="cr.sparse.lop.rademacher_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rademacher_dict</span></code></a>(key, m, n)</p></td>
+<td><p>An operator which represents a Rademacher sensing matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.random_onb_dict.html#cr.sparse.lop.random_onb_dict" title="cr.sparse.lop.random_onb_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_onb_dict</span></code></a>(key, n)</p></td>
+<td><p>An operator representing a random orthonormal basis</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.random_orthonormal_rows_dict.html#cr.sparse.lop.random_orthonormal_rows_dict" title="cr.sparse.lop.random_orthonormal_rows_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_orthonormal_rows_dict</span></code></a>(key, m, n)</p></td>
+<td><p>An operator whose rows are orthonormal (sampled from a random orthonormal basis)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="convenience-operators">
+<h2>Convenience operators<a class="headerlink" href="#convenience-operators" title="Permalink to this headline">¶</a></h2>
+<p>These operators are technically not linear on <span class="math notranslate nohighlight">\(\mathbb{F}^n \to \mathbb{F}^m\)</span></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.real.html#cr.sparse.lop.real" title="cr.sparse.lop.real"><code class="xref py py-obj docutils literal notranslate"><span class="pre">real</span></code></a>(n)</p></td>
+<td><p>Returns the real parts of a vector of complex numbers</p></td>
 </tr>
 </tbody>
 </table>
@@ -347,11 +434,11 @@ function implements the adjoint operation.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.hermitian.html#cr.sparse.lop.hermitian" title="cr.sparse.lop.hermitian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hermitian</span></code></a>(A)</p></td>
-<td><p>Returns the Hermitian transpose of a given operator <span class="math notranslate nohighlight">\(T = A^H\)</span></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.to_matrix.html#cr.sparse.lop.to_matrix" title="cr.sparse.lop.to_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_matrix</span></code></a>(A)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.to_matrix.html#cr.sparse.lop.to_matrix" title="cr.sparse.lop.to_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_matrix</span></code></a>(A)</p></td>
 <td><p>Converts a linear operator to a matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.to_adjoint_matrix.html#cr.sparse.lop.to_adjoint_matrix" title="cr.sparse.lop.to_adjoint_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_adjoint_matrix</span></code></a>(A)</p></td>
+<td><p>Converts the adjoint of a linear operator to a matrix</p></td>
 </tr>
 </tbody>
 </table>
@@ -364,7 +451,7 @@ function implements the adjoint operation.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="_autosummary/cr.sparse.lop.LinearOperator.html" class="btn btn-neutral float-right" title="cr.sparse.lop.LinearOperator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="_autosummary/cr.sparse.lop.Operator.html" class="btn btn-neutral float-right" title="cr.sparse.lop.Operator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="_autosummary/cr.sparse.dict.matching_atoms_ratio.html" class="btn btn-neutral float-left" title="cr.sparse.dict.matching_atoms_ratio" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

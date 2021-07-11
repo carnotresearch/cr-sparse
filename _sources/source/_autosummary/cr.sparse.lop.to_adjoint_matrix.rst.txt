@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.to\_adjoint\_matrix
+=================================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: to_adjoint_matrix

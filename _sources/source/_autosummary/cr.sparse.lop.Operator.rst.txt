@@ -1,0 +1,23 @@
+﻿cr.sparse.lop.Operator
+======================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autoclass:: Operator
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Operator.jit_safe
+      ~Operator.linear
+      ~Operator.m
+      ~Operator.matrix_safe
+      ~Operator.n
+      ~Operator.times
+      ~Operator.trans
+   
+   

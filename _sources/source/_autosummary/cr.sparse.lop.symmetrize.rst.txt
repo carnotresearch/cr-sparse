@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.symmetrize
+========================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: symmetrize

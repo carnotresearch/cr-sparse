@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.random\_onb\_dict
+===============================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: random_onb_dict

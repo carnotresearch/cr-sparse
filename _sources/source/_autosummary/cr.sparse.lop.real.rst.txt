@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.real
+==================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: real
