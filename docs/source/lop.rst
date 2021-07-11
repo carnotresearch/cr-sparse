@@ -88,6 +88,16 @@ Basic operators
     pad_zeros
     symmetrize
 
+
+Signal processing operators
+------------------------------------
+
+.. autosummary::
+    :toctree: _autosummary
+
+    fourier_basis_1d
+
+
 Convenience operators
 -----------------------
 

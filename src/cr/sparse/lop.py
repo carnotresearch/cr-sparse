@@ -53,3 +53,7 @@ from cr.sparse._src.lop.util import (
 from cr.sparse._src.lop.basic import (
     real,
 )
+
+from cr.sparse._src.lop.signal1d import (
+    fourier_basis_1d
+)
