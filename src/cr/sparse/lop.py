@@ -27,6 +27,9 @@ from cr.sparse._src.lop.lop import (
     hermitian,
     hcat,
     power,
+    # operator parts
+    column,
+    columns
 )
 
 # basic operators

@@ -18,6 +18,23 @@ import jax.numpy as jnp
 
 from .impl import _hermitian
 
+def column(T, i):
+    """Returns the i-th column of the operator T
+    """
+    e = jnp.zeros(T.n).at[i].set(1.)
+    return T.times(e)
+
+column = jax.jit(column, static_argnums=(0, 1))
+
+def columns(T, indices):
+    """Returns the i-th column of the operator T
+    """
+    k = len(indices)
+    e = jnp.zeros((T.n, k))
+    e = e.at[indices, jnp.arange(k)].set(1.)
+    return T.times(e)
+
+columns = jax.jit(columns, static_argnums=(0,))
 
 class Operator(NamedTuple):
     """
@@ -53,6 +70,10 @@ class Operator(NamedTuple):
     """Indicates if the times and trans functions can be safely jit compiled"""
     matrix_safe: bool = True
     """Indicates if the operator can accept a matrix of vectors"""
+    column = column
+    """Returns a specific column of the matrix representation of the operator"""
+    columns = columns
+    """Returns a subset of columns of the matrix representation of the operator"""
 
     def __neg__(self):
         """Returns the nagative of this linear operator"""
@@ -192,4 +213,6 @@ def hcat(A, B):
     times = lambda x: A.times(x[:na]) + B.times(x[na:])
     trans = lambda x: jnp.concatenate((A.trans(x), B.trans(x)))
     return Operator(times=times, trans=trans, m=m, n=n, jit_safe=jit_safe, matrix_safe=matrix_safe)
+
+
 
