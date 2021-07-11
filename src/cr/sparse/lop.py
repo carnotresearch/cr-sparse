@@ -38,6 +38,7 @@ from cr.sparse._src.lop.basic import (
     flipud,
     sum,
     pad_zeros,
+    symmetrize,
 )
 
 # utilities

@@ -89,3 +89,12 @@ def real(n):
     times = lambda x: jnp.real(x)
     trans = lambda x: jnp.real(x)
     return Operator(times=times, trans=trans, m=n, n=n, linear=False)
+
+
+def symmetrize(n):
+    """An operator which constructs a symmetric vector by pre-pending the input in reversed order
+    """
+    times = lambda x: jnp.concatenate((jnp.flipud(x), x))
+    trans = lambda x: x[n:] + x[n-1::-1]
+    return Operator(times=times, trans=trans, m=2*n, n=n)
+

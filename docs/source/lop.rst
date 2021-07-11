@@ -86,7 +86,17 @@ Basic operators
     flipud
     sum
     pad_zeros
+    symmetrize
 
+Convenience operators
+-----------------------
+
+These operators are technically not linear on :math:`\mathbb{F}^n \to \mathbb{F}^m`
+
+.. autosummary::
+    :toctree: _autosummary
+
+    real
 
 Operator algebra
 ------------------
