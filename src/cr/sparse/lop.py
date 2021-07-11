@@ -57,3 +57,10 @@ from cr.sparse._src.lop.basic import (
 from cr.sparse._src.lop.signal1d import (
     fourier_basis_1d
 )
+
+from cr.sparse._src.lop.random import (
+    gaussian_dict,
+    rademacher_dict,
+    random_onb_dict,
+    random_orthonormal_rows_dict,
+)

@@ -98,6 +98,18 @@ Signal processing operators
     fourier_basis_1d
 
 
+Random compressive sensing operators
+--------------------------------------
+
+.. autosummary::
+    :toctree: _autosummary
+
+    gaussian_dict
+    rademacher_dict
+    random_onb_dict
+    random_orthonormal_rows_dict
+
+
 Convenience operators
 -----------------------
 
