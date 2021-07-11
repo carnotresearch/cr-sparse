@@ -37,6 +37,10 @@ class LinearOperator(NamedTuple):
     """Dimension of space B"""
     n : int
     """Dimension of space A"""
+    jit_safe: bool = True
+    """Indicates if the times and trans functions can be safely jit compiled"""
+    matrix_safe: bool = True
+    """Indicates if the operator scan accept a matrix of vectors"""
 
     def __neg__(self):
         """Returns the nagative of this linear operator"""
@@ -54,79 +58,52 @@ class LinearOperator(NamedTuple):
         """Returns a linear operator which works like applying :math:`T` n times"""
         return power(self, n)
 
+    def times_2d(self, X):
+        return jax.vmap(self.times, (1), (1))(X)
+
+    def trans_2d(self, Y):
+        return jax.vmap(self.trans, (1), (1))(Y)
+
+
 def jit(operator):
     """Returns the same linear operator with compiled times and trans functions"""
+    if not operator.jit_safe:
+        raise Exception("This operator is not suitable for JIT compilation.")
     times = jax.jit(operator.times)
     trans = jax.jit(operator.trans)
-    return LinearOperator(times=times, trans=trans, m=operator.m, n=operator.n)
+    return LinearOperator(times=times, trans=trans, m=operator.m, n=operator.n, matrix_safe=operator.matrix_safe)
 
 ###########################################################################################
+#
 #  Operator algebra
+#
 ###########################################################################################
+
+###########################################################################################
+#  Unary operations on linear operators
+###########################################################################################
+
 def neg(A):
     """Returns the negative of a linear operator :math:`T = -A`"""
     times = lambda x : -A.times(x)
     trans = lambda x : -A.trans(x)
-    return LinearOperator(times=times, trans=trans, m=A.m, n=A.n)
+    return LinearOperator(times=times, trans=trans, m=A.m, n=A.n, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
 
 def scale(A, alpha):
     """Returns the linear operator :math:`T = \\alpha A` for the operator :math:`A`"""
     times = lambda x : alpha * A.times(x)
     trans = lambda x : alpha * A.trans(x)
-    return LinearOperator(times=times, trans=trans, m=A.m, n=A.n)
-
-def add(A, B):
-    """Returns the sum of two linear operators :math:`T = A + B`"""
-    ma, na = A.m, A.n
-    mb, nb = B.m, B.n
-    assert ma == mb
-    assert na == nb
-    times = lambda x: A.times(x) + B.times(x)
-    trans = lambda x: A.trans(x) + B.trans(x)
-    return LinearOperator(times=times, trans=trans, m=ma, n=na)
-
-
-def subtract(A, B):
-    """Returns a linear operator :math:`T  = A - B`"""
-    ma, na = A.m, A.n
-    mb, nb = B.m, B.n
-    assert ma == mb
-    assert na == nb
-    times = lambda x: A.times(x) - B.times(x)
-    trans = lambda x: A.trans(x) - B.trans(x)
-    return LinearOperator(times=times, trans=trans, m=ma, n=na)
-
-
-def compose(A, B):
-    """Returns the composite linear operator :math:`T = AB` such that :math:`T(x)= A(B(x))`"""
-    ma, na = A.m, A.n
-    mb, nb = B.m, B.n
-    assert na == mb
-    times = lambda x: A.times(B.times(x))
-    trans = lambda x: B.trans(A.trans(x))
-    return LinearOperator(times=times, trans=trans, m=ma, n=nb)
-
+    return LinearOperator(times=times, trans=trans, m=A.m, n=A.n, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
 
 def hermitian(A):
     """Returns the Hermitian transpose of a given operator :math:`T = A^H`"""
-    return LinearOperator(times=A.trans, trans=A.times, m=A.n, n=A.m)
+    return LinearOperator(times=A.trans, trans=A.times, m=A.n, n=A.m, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
 
 def transpose(A):
     """Returns the transpose of a given operator :math:`T = A^T`"""
     times = lambda x: _hermitian(A.trans(_hermitian(x)))
     trans = lambda x: _hermitian(A.times(_hermitian(x)))
-    return LinearOperator(times=times, trans=trans, m=A.n, n=A.m)
-
-def hcat(A, B):
-    """Returns the linear operator :math:`T = [A \\, B]`"""
-    ma, na = A.m, A.n
-    mb, nb = B.m, B.n
-    assert ma == mb
-    m = ma
-    n = na + nb
-    times = lambda x: jnp.hstack((A.times(x[:na]), B.times(x[na:])))
-    trans = lambda x: jnp.hstack((A.trans(x), B.trans(x)))
-    return LinearOperator(times=times, trans=trans, m=m, n=n)
+    return LinearOperator(times=times, trans=trans, m=A.n, n=A.m, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
 
 def apply_n(func, n, x):
     init = (x, 0)
@@ -145,6 +122,62 @@ def power(A, p):
     assert A.m == A.n
     times = lambda x :apply_n(A.times, p, x)
     trans = lambda x : apply_n(A.trans, p, x)
-    return LinearOperator(times=times, trans=trans, m=A.m, n=A.n)
+    return LinearOperator(times=times, trans=trans, m=A.m, n=A.n, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
 
+
+
+###########################################################################################
+#  Binary operations on linear operators
+###########################################################################################
+
+def add(A, B):
+    """Returns the sum of two linear operators :math:`T = A + B`"""
+    ma, na = A.m, A.n
+    mb, nb = B.m, B.n
+    assert ma == mb
+    assert na == nb
+    jit_safe = A.jit_safe and B.jit_safe
+    matrix_safe = A.matrix_safe and B.matrix_safe
+    times = lambda x: A.times(x) + B.times(x)
+    trans = lambda x: A.trans(x) + B.trans(x)
+    return LinearOperator(times=times, trans=trans, m=ma, n=na, jit_safe=jit_safe, matrix_safe=matrix_safe)
+
+
+def subtract(A, B):
+    """Returns a linear operator :math:`T  = A - B`"""
+    ma, na = A.m, A.n
+    mb, nb = B.m, B.n
+    assert ma == mb
+    assert na == nb
+    jit_safe = A.jit_safe and B.jit_safe
+    matrix_safe = A.matrix_safe and B.matrix_safe
+    times = lambda x: A.times(x) - B.times(x)
+    trans = lambda x: A.trans(x) - B.trans(x)
+    return LinearOperator(times=times, trans=trans, m=ma, n=na, jit_safe=jit_safe, matrix_safe=matrix_safe)
+
+
+def compose(A, B):
+    """Returns the composite linear operator :math:`T = AB` such that :math:`T(x)= A(B(x))`"""
+    ma, na = A.m, A.n
+    mb, nb = B.m, B.n
+    assert na == mb
+    jit_safe = A.jit_safe and B.jit_safe
+    matrix_safe = A.matrix_safe and B.matrix_safe
+    times = lambda x: A.times(B.times(x))
+    trans = lambda x: B.trans(A.trans(x))
+    return LinearOperator(times=times, trans=trans, m=ma, n=nb)
+
+
+def hcat(A, B):
+    """Returns the linear operator :math:`T = [A \\, B]`"""
+    ma, na = A.m, A.n
+    mb, nb = B.m, B.n
+    assert ma == mb
+    m = ma
+    n = na + nb
+    jit_safe = A.jit_safe and B.jit_safe
+    matrix_safe = A.matrix_safe and B.matrix_safe
+    times = lambda x: jnp.hstack((A.times(x[:na]), B.times(x[na:])))
+    trans = lambda x: jnp.hstack((A.trans(x), B.trans(x)))
+    return LinearOperator(times=times, trans=trans, m=m, n=n, jit_safe=jit_safe, matrix_safe=matrix_safe)
 

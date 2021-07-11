@@ -55,3 +55,25 @@ def flipud(n):
     times = lambda x: jnp.flipud(x)
     trans = lambda x: jnp.flipud(x)
     return LinearOperator(times=times, trans=trans, m=n, n=n)
+
+
+def sum(n):
+    """Returns an operator which computes the sum of a vector"""
+    times = lambda x: jnp.sum(x, keepdims=True, axis=0)
+    trans = lambda x: jnp.repeat(x, n, axis=0)
+    return LinearOperator(times=times, trans=trans, m=1, n=n)
+
+def pad_zeros(n, before, after):
+    """Adds zeros before and after a vector.
+
+    Note:
+        This operator is not JIT compliant
+    """
+    pad_1_dim = (before, after)
+    pad_2_dim = ((before, after), (0, 0))
+    m = before + n + after
+    def times(x):
+            return jnp.pad(x, pad_1_dim)
+    def trans(x):
+            return x[before:before+n]
+    return LinearOperator(times=times, trans=trans, m=m, n=n, matrix_safe=False)

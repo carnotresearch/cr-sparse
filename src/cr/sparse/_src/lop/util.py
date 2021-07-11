@@ -12,10 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import jax
 import jax.numpy as jnp
 
 
 def to_matrix(A):
     """Converts a linear operator to a matrix"""
     I = jnp.eye(A.n)
-    return A.times(I)
+    return jax.vmap(A.times, (1), (1))(I)
+
+def to_adjoint_matrix(A):
+    """Converts the adjoint of a linear operator to a matrix"""
+    I = jnp.eye(A.m)
+    return jax.vmap(A.trans, (1), (1))(I)

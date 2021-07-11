@@ -80,6 +80,10 @@ Basic operators
     identity
     matrix
     diagonal
+    zero
+    flipud
+    sum
+    pad_zeros
 
 
 Operator algebra
@@ -105,5 +109,5 @@ Utilities
 .. autosummary::
     :toctree: _autosummary
 
-    hermitian
     to_matrix
+    to_adjoint_matrix

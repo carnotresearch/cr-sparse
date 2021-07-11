@@ -36,9 +36,12 @@ from cr.sparse._src.lop.basic import (
     diagonal,
     zero,
     flipud,
+    sum,
+    pad_zeros,
 )
 
 # utilities
 from cr.sparse._src.lop.util import (
-    to_matrix
+    to_matrix,
+    to_adjoint_matrix
 )
