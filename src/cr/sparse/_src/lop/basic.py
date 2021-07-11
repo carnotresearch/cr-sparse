@@ -21,8 +21,9 @@ from .lop import Operator
 #  Basic operators
 ###########################################################################################
 
-def identity(m, n):
+def identity(m, n=None):
     """Returns an identity linear operator from A to B"""
+    n = m if n is None else n
     times = lambda x:  x
     trans = lambda x : x
     return Operator(times=times, trans=trans, m=m, n=n)
