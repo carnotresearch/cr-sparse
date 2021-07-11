@@ -68,8 +68,10 @@ Data types
 
 .. autosummary::
     :toctree: _autosummary
+    :nosignatures:
+    :template: namedtuple.rst
 
-    LinearOperator
+    Operator
 
 Basic operators
 ------------------

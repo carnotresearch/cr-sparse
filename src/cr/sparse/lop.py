@@ -14,7 +14,7 @@
 
 from cr.sparse._src.lop.lop import (
     # Data type
-    LinearOperator,
+    Operator,
     # jax support
     jit,
     # operator algebra
@@ -43,5 +43,11 @@ from cr.sparse._src.lop.basic import (
 # utilities
 from cr.sparse._src.lop.util import (
     to_matrix,
-    to_adjoint_matrix
+    to_adjoint_matrix,
+    to_complex_matrix
+)
+
+# The following operators are technically not linear
+from cr.sparse._src.lop.basic import (
+    real,
 )
