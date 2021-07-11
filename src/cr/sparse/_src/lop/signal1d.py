@@ -32,3 +32,13 @@ def fourier_basis_1d(n):
     times = lambda x:  n2*jnp.fft.ifft(x, n, axis=0)
     trans = lambda x : n3*jnp.fft.fft(x, n, axis=0)
     return Operator(times=times, trans=trans, m=n, n=n)
+
+
+def dirac_fourier_basis_1d(n):
+    """Returns an operator for a two-ortho basis dictionary consisting of Dirac basis and Fourier basis
+    """
+    n2 = jnp.sqrt(n)
+    n3 = 1/n2
+    times = lambda x:  x[:n] + n2*jnp.fft.ifft(x[n:], n, axis=0)
+    trans = lambda x : jnp.concatenate((x, n3*jnp.fft.fft(x, n, axis=0)), axis=0)
+    return Operator(times=times, trans=trans, m=n, n=2*n)

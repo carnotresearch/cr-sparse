@@ -96,6 +96,7 @@ Signal processing operators
     :toctree: _autosummary
 
     fourier_basis_1d
+    dirac_fourier_basis_1d
 
 
 Random compressive sensing operators

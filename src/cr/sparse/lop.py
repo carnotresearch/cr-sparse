@@ -55,7 +55,8 @@ from cr.sparse._src.lop.basic import (
 )
 
 from cr.sparse._src.lop.signal1d import (
-    fourier_basis_1d
+    fourier_basis_1d,
+    dirac_fourier_basis_1d
 )
 
 from cr.sparse._src.lop.random import (
