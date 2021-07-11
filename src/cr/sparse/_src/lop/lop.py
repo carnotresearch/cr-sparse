@@ -189,7 +189,7 @@ def hcat(A, B):
     n = na + nb
     jit_safe = A.jit_safe and B.jit_safe
     matrix_safe = A.matrix_safe and B.matrix_safe
-    times = lambda x: jnp.hstack((A.times(x[:na]), B.times(x[na:])))
-    trans = lambda x: jnp.hstack((A.trans(x), B.trans(x)))
+    times = lambda x: A.times(x[:na]) + B.times(x[na:])
+    trans = lambda x: jnp.concatenate((A.trans(x), B.trans(x)))
     return Operator(times=times, trans=trans, m=m, n=n, jit_safe=jit_safe, matrix_safe=matrix_safe)
 
