@@ -98,3 +98,11 @@ def symmetrize(n):
     trans = lambda x: x[n:] + x[n-1::-1]
     return Operator(times=times, trans=trans, m=2*n, n=n)
 
+
+def restriction(n, indices):
+    """An operator which computes y = x[I] over an index set I
+    """
+    k = len(indices)
+    times = lambda x: x[indices]
+    trans = lambda x: jnp.zeros((n,)+x.shape[1:]).at[indices].set(x)
+    return Operator(times=times, trans=trans, m=k, n=n)

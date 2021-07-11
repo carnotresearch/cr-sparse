@@ -39,6 +39,7 @@ from cr.sparse._src.lop.basic import (
     sum,
     pad_zeros,
     symmetrize,
+    restriction,
 )
 
 # utilities
