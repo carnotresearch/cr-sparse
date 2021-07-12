@@ -7,7 +7,7 @@ scipy
 matplotlib
 imageio
 click
-sphinx>=3.3.0
+sphinx=4.0.0
 sphinx_rtd_theme>=0.5.0
 sphinxcontrib-katex>=0.7.1
 sphinxcontrib-bibtex>=1.0.0
