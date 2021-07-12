@@ -68,3 +68,7 @@ from cr.sparse._src.lop.random import (
     random_onb_dict,
     random_orthonormal_rows_dict,
 )
+
+from cr.sparse._src.lop.props import (
+    upper_frame_bound,
+)
