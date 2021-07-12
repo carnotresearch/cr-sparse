@@ -175,7 +175,7 @@ Import a sparse recovery solver::
 
 Solve the recovery problem::
 
-  solution =  cosamp.solve(Phi, y, K)
+  solution =  cosamp.matrix_solve(Phi, y, K)
 
 You can choose any other solver. 
 

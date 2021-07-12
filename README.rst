@@ -52,7 +52,7 @@ Import the Compressive Sampling Matching Pursuit sparse recovery solver::
 
 Solve the recovery problem::
 
-  solution =  cosamp.solve(Phi, y, K)
+  solution =  cosamp.matrix_solve(Phi, y, K)
 
 For the complete set of available solvers, see the documentation.
 
