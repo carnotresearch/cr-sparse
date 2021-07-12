@@ -18,7 +18,7 @@ def test():
     )
     # Add solvers
     from cr.sparse.pursuit import htp
-    htp_solve_jit = partial(htp.solve_jit, normalized=False)
+    htp_solve_jit = partial(htp.matrix_solve_jit, normalized=False)
 
     evaluation.add_solver('HTP', htp_solve_jit)
     # Run evaluation
