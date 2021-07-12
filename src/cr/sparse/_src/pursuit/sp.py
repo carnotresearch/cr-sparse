@@ -24,7 +24,7 @@ from cr.sparse import largest_indices
 
 
 def matrix_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
-    """Solves the sparse recovery problem :math:`y = \Phi x + e` using Compressive Sampling Matching Pursuit
+    """Solves the sparse recovery problem :math:`y = \Phi x + e` using Subspace Pursuit for matrices
     """
     ## Initialize some constants for the algorithm
     M, N = Phi.shape
@@ -97,7 +97,7 @@ matrix_solve_jit = jit(matrix_solve, static_argnums=(2), static_argnames=("step_
 
 
 def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
-    """Solves the sparse recovery problem :math:`y = \Phi x + e` using Compressive Sampling Matching Pursuit
+    """Solves the sparse recovery problem :math:`y = \Phi x + e` using Subspace Pursuit for linear operators
     """
     trans = Phi.trans
     ## Initialize some constants for the algorithm
@@ -168,3 +168,5 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
     return state
 
 operator_solve_jit = jit(operator_solve, static_argnums=(0, 2), static_argnames=("step_size", "max_iters", "res_norm_rtol"))
+
+solve = operator_solve_jit

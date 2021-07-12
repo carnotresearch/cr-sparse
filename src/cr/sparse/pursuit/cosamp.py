@@ -13,6 +13,7 @@
 # limitations under the License.
 
 from cr.sparse._src.pursuit.cosamp import (
+    solve,
     matrix_solve,
     matrix_solve_jit,
     operator_solve,

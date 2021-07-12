@@ -20,7 +20,7 @@ from .util import abs_max_idx, gram_chol_update
 from cr.sparse.la import solve_spd_chol
 from .defs import RecoverySolution
 
-def solve(Phi, y, max_iters, max_res_norm=1e-6):
+def matrix_solve(Phi, y, max_iters, max_res_norm=1e-6):
     """Solves the recovery/approximation problem :math:`y = \Phi x + e` using Orthogonal Matching Pursuit
     """
     # initialize residual
@@ -83,10 +83,12 @@ def solve(Phi, y, max_iters, max_res_norm=1e-6):
     return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=norm_r_new_sqr, iterations=k+1)
 
 
-solve_multi = vmap(solve, (None, 1, None), 0)
-"""Solves the recovery/approximation problem :math:`Y = \Phi X + E` using Orthogonal Matching Pursuit
+
+matrix_solve_jit = jit(matrix_solve, static_argnums=(2,), static_argnames=("max_res_norm",))
+
+matrix_solve_multi = vmap(matrix_solve_jit, (None, 1, None), 0)
+"""Solves the MMV recovery/approximation problem :math:`Y = \Phi X + E` using Orthogonal Matching Pursuit
 
 Extends :py:func:`cr.sparse.pursuit.omp.solve` using :py:func:`jax.vmap`.
 """
-
-solve_jit = jit(solve, static_argnums=(2,), static_argnames=("max_res_norm",))
+solve = matrix_solve_jit

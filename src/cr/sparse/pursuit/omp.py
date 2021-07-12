@@ -14,6 +14,7 @@
 
 from cr.sparse._src.pursuit.omp import (
     solve,
-    solve_multi,
-    solve_jit
+    matrix_solve,
+    matrix_solve_jit,
+    matrix_solve_multi,
 )

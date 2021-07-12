@@ -91,7 +91,7 @@ class BPState(NamedTuple):
 
 def solve_bp(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters):
     """
-    Solves the problem $\min \| x \|_1 \text{s.t.} \A x = b$
+    Solves the problem :math:`\min \| x \|_1 \\text{s.t.} \A x = b` using ADMM
 
     This function implements eq 2.29 of the paper.
     """
@@ -214,7 +214,7 @@ solve_bp_jit = jit(solve_bp, static_argnums=(0, 5,6, 7, 8))
 
 def solve_l1_l2(A, b, x0, z0, w, nonneg, rho, gamma, tolerance, max_iters):
     """
-    Solves the problem :math:`\min \| x \|_1  + \frac{1}{2 \rho} \| A x - b \|_2^2`
+    Solves the problem :math:`\min \| x \|_1  + \\frac{1}{2 \\rho} \| A x - b \|_2^2` using ADMM
 
     This function implements eq 2.25 of the paper.
     """
@@ -340,7 +340,7 @@ solve_l1_l2_jit = jit(solve_l1_l2, static_argnums=(0, 5,6,7,8,9))
 
 def solve_l1_l2con(A, b, x0, z0, w, nonneg, delta, gamma, tolerance, max_iters):
     """
-    Solves the problem :math:`\min \| x \|_1  \text{s.t.} \| A x - b \|_2 \leq \delta`
+    Solves the problem :math:`\min \| x \|_1  \\text{s.t.} \| A x - b \|_2 \\leq \\delta` using ADMM
 
     This function implements eq 2.27 of the paper.
     """
@@ -471,8 +471,7 @@ solve_l1_l2con_jit = jit(solve_l1_l2con, static_argnums=(0, 5,6,7,8, 9))
 
 
 def solve(A, b, x0=None, z0=None, W=None, weights=None, nonneg=False, rho=0., delta=0., gamma=1.0, tolerance=5e-3, max_iters=9999, jit=True):
-    """
-    Solves a variety of l1 minimization problems
+    """Wrapper method to solve a variety of l1 minimization problems using ADMM
 
     Args:
         A (jax.numpy.ndarray): Sensing matrix/dictionary

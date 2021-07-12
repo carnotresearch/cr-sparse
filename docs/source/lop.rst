@@ -87,6 +87,7 @@ Basic operators
     sum
     pad_zeros
     symmetrize
+    restriction
 
 
 Signal processing operators
@@ -137,6 +138,25 @@ Operator algebra
     hcat
     power
 
+Operator parts
+------------------
+
+.. autosummary::
+    :toctree: _autosummary
+
+    column
+    columns
+
+Properties of a linear operator
+--------------------------------------------
+
+These are still experimental and not efficient.
+
+.. autosummary::
+    :toctree: _autosummary
+
+    upper_frame_bound
+
 
 Utilities
 -------------------
@@ -144,5 +164,7 @@ Utilities
 .. autosummary::
     :toctree: _autosummary
 
+    jit
     to_matrix
     to_adjoint_matrix
+    to_complex_matrix

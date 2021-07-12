@@ -23,7 +23,7 @@ import cr.sparse.dict as crdict
 import cr.sparse.lop as lop
 
 def matrix_solve(Phi, y, K, normalized=False, step_size=None, max_iters=None, res_norm_rtol=1e-4):
-    """Solves the sparse recovery problem :math:`y = \Phi x + e` using Iterative Hard Thresholding
+    """Solves the sparse recovery problem :math:`y = \Phi x + e` using Iterative Hard Thresholding for matrices
     """
     ## Initialize some constants for the algorithm
     M, N = Phi.shape
@@ -118,7 +118,7 @@ matrix_solve_jit = jit(matrix_solve, static_argnums=(2),
     static_argnames=("normalized", "step_size", "max_iters", "res_norm_rtol"))
 
 def operator_solve(Phi, y, K, normalized=False, step_size=None, max_iters=None, res_norm_rtol=1e-4):
-    """Solves the sparse recovery problem :math:`y = \Phi x + e` using Iterative Hard Thresholding
+    """Solves the sparse recovery problem :math:`y = \Phi x + e` using Iterative Hard Thresholding for linear operators
     """
     ## Initialize some constants for the algorithm
     trans = Phi.trans
@@ -211,3 +211,5 @@ def operator_solve(Phi, y, K, normalized=False, step_size=None, max_iters=None, 
 
 operator_solve_jit = jit(operator_solve, static_argnums=(0, 2), 
     static_argnames=("normalized", "step_size", "max_iters", "res_norm_rtol"))
+
+solve = operator_solve_jit

@@ -44,7 +44,7 @@ y = Phi @ x
 
 
 def test_omp():
-    sol = omp.solve_jit(Phi, y, K)
+    sol = omp.matrix_solve_jit(Phi, y, K)
     rp = RecoveryPerformance(Phi, y, x, sol=sol)
     assert rp.success
 
