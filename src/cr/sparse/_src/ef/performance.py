@@ -120,7 +120,7 @@ class RecoveryPerformance:
         self.overlap = jnp.intersect1d(self.T0, self.R0)
         self.num_correct_atoms = self.overlap.size
         # measurement/signal residual vector [M] length vector
-        r = y - Phi @ x_hat
+        r = y - Phi.times(x_hat)
         self.r = r
         # Norm of measurement error.  This must be less than epsilon
         self.r_norm = jnp.linalg.norm(r)
