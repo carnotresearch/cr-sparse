@@ -1,12 +1,17 @@
 Introduction
 =====================
 
+.. contents::
+    :depth: 2
+    :local:
+
+
 This library aims to provide XLA/JAX based Python implementations for
 various algorithms related to:
 
 * Sparse approximation
 * Compressive sensing
-* Dictionary learning
+* Linear operators
 
 Bulk of this library is built using functional programming techniques
 which is critical for the generation of efficient numerical codes for CPU
@@ -42,8 +47,26 @@ Unlike NumPy, JAX arrays are always immutable. While ``x[0] = 10`` is perfectly 
 in NumPy as arrays are mutable, the equivalent functional code in JAX is
 ``x = x.at[0].set(10)``.
 
-Sparse Recovery/Approximation Algorithms
---------------------------------------------
+
+Linear Operators
+-----------------------------------------
+
+Efficient linear operator implementations provide much faster
+computations compared to direct matrix vector multiplication.
+A framework for building and composing linear operators has been
+provided in ``cr.sparse.lop``. Functionality includes:
+
+* Basic operators: identity, matrix, diagonal, zero, flipud, 
+  sum, pad_zeros, symmetrize, restriction, etc.
+* Signal processing: fourier_basis_1d, dirac_fourier_basis_1d, etc.
+* Random dictionaries: gaussian_dict, rademacher_dict, random_onb_dict, random_orthonormal_rows_dict, etc.
+* Operator algebra: neg, scale, add, subtract, compose, transpose, hermitian, hcat, etc.
+* Additional utilites
+
+
+
+Greedy Sparse Recovery/Approximation Algorithms
+------------------------------------------------
 
 JAX based implementations for the following algorithms are included.
 
@@ -51,9 +74,20 @@ JAX based implementations for the following algorithms are included.
 * Compressive Sampling Matching Pursuit
 * Subspace Pursuit
 * Iterative Hard Thresholding
+* Hard Thresholding Pursuit
+
+Convex Optimization based Recovery Algorithms
+-----------------------------------------------------
+
+A port of ``yall1`` (Your algorithms for :math:`\ell_1`) has been provided.
+It provides alternating directions method of multipliers based solutions for
+basis pursuit, basis pursuit denoising, basis pursuit with inequality constraints,
+their non-negative counterparts and other variants.
 
 
-.. rubric:: Evaluation Framework
+
+Evaluation Framework
+--------------------------
 
 The library also provides
 
@@ -63,8 +97,11 @@ The library also provides
 
 .. highlight:: shell
 
+Installation
+---------------------
 
-Installation::
+
+Basic installation from PYPI::
 
     python -m pip install cr-sparse
 
