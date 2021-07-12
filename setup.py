@@ -43,6 +43,7 @@ setup(
 
     description='Accelerated sparse representations and compressive sensing',
     long_description=long_description,
+    long_description_content_type="text/x-rst",
 
     # The project's main homepage.
     url='https://carnotresearch.github.io/cr-sparse',

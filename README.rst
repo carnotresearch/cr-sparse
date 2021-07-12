@@ -23,7 +23,9 @@ Example usage
 
 .. rubric:: A greedy pursuit based sparse recovery with synthetic data
 
-Build a Gaussian dictionary/sensing matrix::
+Build a Gaussian dictionary/sensing matrix:
+
+.. code:: python
 
   from jax import random
   import cr.sparse.dict as crdict
@@ -32,7 +34,9 @@ Build a Gaussian dictionary/sensing matrix::
   key = random.PRNGKey(0)
   Phi = crdict.gaussian_mtx(key, M,N)
 
-Build a K-sparse signal with Gaussian non-zero entries::
+Build a K-sparse signal with Gaussian non-zero entries:
+
+.. code:: python
 
   import cr.sparse.data as crdata
   import jax.numpy as jnp
@@ -41,16 +45,22 @@ Build a K-sparse signal with Gaussian non-zero entries::
   x, omega = crdata.sparse_normal_representations(key, N, K, 1)
   x = jnp.squeeze(x)
 
-Build the measurement vector::
+Build the measurement vector:
+
+.. code:: python
 
   y = Phi @ x
 
 
-Import the Compressive Sampling Matching Pursuit sparse recovery solver::
+Import the Compressive Sampling Matching Pursuit sparse recovery solver:
+
+.. code:: python
 
   from cr.sparse.pursuit import cosamp
 
-Solve the recovery problem::
+Solve the recovery problem:
+
+.. code:: python
 
   solution =  cosamp.matrix_solve(Phi, y, K)
 
@@ -63,7 +73,7 @@ Citing CR.Sparse
 
 To cite this repository:
 
-.. code-block:: none
+.. code:: tex
 
     @software{crsparse2021github,
     author = {Shailesh Kumar},
