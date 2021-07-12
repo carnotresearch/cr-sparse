@@ -8,6 +8,7 @@ CR.Sparse API Documentation
    dict
    lop
    pursuit
+   cvx_recovery
    data
    util
    ef

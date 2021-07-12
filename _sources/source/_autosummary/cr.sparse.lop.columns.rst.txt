@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.columns
+=====================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: columns

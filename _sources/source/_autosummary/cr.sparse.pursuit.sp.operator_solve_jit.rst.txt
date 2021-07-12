@@ -1,0 +1,6 @@
+﻿cr.sparse.pursuit.sp.operator\_solve\_jit
+=========================================
+
+.. currentmodule:: cr.sparse.pursuit.sp
+
+.. autofunction:: operator_solve_jit

@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.upper\_frame\_bound
+=================================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: upper_frame_bound

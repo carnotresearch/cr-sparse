@@ -115,10 +115,12 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.sum.html">cr.sparse.lop.sum</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.pad_zeros.html">cr.sparse.lop.pad_zeros</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.symmetrize.html">cr.sparse.lop.symmetrize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.restriction.html">cr.sparse.lop.restriction</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#signal-processing-operators">Signal processing operators</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.fourier_basis_1d.html">cr.sparse.lop.fourier_basis_1d</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.dirac_fourier_basis_1d.html">cr.sparse.lop.dirac_fourier_basis_1d</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#random-compressive-sensing-operators">Random compressive sensing operators</a><ul>
@@ -144,14 +146,26 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.power.html">cr.sparse.lop.power</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#operator-parts">Operator parts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.column.html">cr.sparse.lop.column</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.columns.html">cr.sparse.lop.columns</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#properties-of-a-linear-operator">Properties of a linear operator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.upper_frame_bound.html">cr.sparse.lop.upper_frame_bound</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#utilities">Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.jit.html">cr.sparse.lop.jit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.to_matrix.html">cr.sparse.lop.to_matrix</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.to_adjoint_matrix.html">cr.sparse.lop.to_adjoint_matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.to_complex_matrix.html">cr.sparse.lop.to_complex_matrix</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="pursuit.html">Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
@@ -309,7 +323,7 @@ function implements the adjoint operation.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.identity.html#cr.sparse.lop.identity" title="cr.sparse.lop.identity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">identity</span></code></a>(m, n)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.identity.html#cr.sparse.lop.identity" title="cr.sparse.lop.identity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">identity</span></code></a>(m[, n])</p></td>
 <td><p>Returns an identity linear operator from A to B</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.matrix.html#cr.sparse.lop.matrix" title="cr.sparse.lop.matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrix</span></code></a>(A)</p></td>
@@ -333,6 +347,9 @@ function implements the adjoint operation.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.symmetrize.html#cr.sparse.lop.symmetrize" title="cr.sparse.lop.symmetrize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">symmetrize</span></code></a>(n)</p></td>
 <td><p>An operator which constructs a symmetric vector by pre-pending the input in reversed order</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.restriction.html#cr.sparse.lop.restriction" title="cr.sparse.lop.restriction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">restriction</span></code></a>(n, indices)</p></td>
+<td><p>An operator which computes y = x[I] over an index set I</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -346,6 +363,9 @@ function implements the adjoint operation.</p>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.fourier_basis_1d.html#cr.sparse.lop.fourier_basis_1d" title="cr.sparse.lop.fourier_basis_1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fourier_basis_1d</span></code></a>(n)</p></td>
 <td><p>Returns an operator which represents the DFT orthonormal basis</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dirac_fourier_basis_1d.html#cr.sparse.lop.dirac_fourier_basis_1d" title="cr.sparse.lop.dirac_fourier_basis_1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dirac_fourier_basis_1d</span></code></a>(n)</p></td>
+<td><p>Returns an operator for a two-ortho basis dictionary consisting of Dirac basis and Fourier basis</p></td>
 </tr>
 </tbody>
 </table>
@@ -426,6 +446,38 @@ function implements the adjoint operation.</p>
 </tbody>
 </table>
 </div>
+<div class="section" id="operator-parts">
+<h2>Operator parts<a class="headerlink" href="#operator-parts" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.column.html#cr.sparse.lop.column" title="cr.sparse.lop.column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">column</span></code></a>(T, i)</p></td>
+<td><p>Returns the i-th column of the operator T</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.columns.html#cr.sparse.lop.columns" title="cr.sparse.lop.columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">columns</span></code></a>(T, indices)</p></td>
+<td><p>Returns the i-th column of the operator T</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="properties-of-a-linear-operator">
+<h2>Properties of a linear operator<a class="headerlink" href="#properties-of-a-linear-operator" title="Permalink to this headline">¶</a></h2>
+<p>These are still experimental and not efficient.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.upper_frame_bound.html#cr.sparse.lop.upper_frame_bound" title="cr.sparse.lop.upper_frame_bound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">upper_frame_bound</span></code></a>(T)</p></td>
+<td><p>Computes the upper frame bound for a linear operator</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="section" id="utilities">
 <h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
@@ -434,11 +486,17 @@ function implements the adjoint operation.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.to_matrix.html#cr.sparse.lop.to_matrix" title="cr.sparse.lop.to_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_matrix</span></code></a>(A)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.jit.html#cr.sparse.lop.jit" title="cr.sparse.lop.jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jit</span></code></a>(operator)</p></td>
+<td><p>Returns the same linear operator with compiled times and trans functions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.to_matrix.html#cr.sparse.lop.to_matrix" title="cr.sparse.lop.to_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_matrix</span></code></a>(A)</p></td>
 <td><p>Converts a linear operator to a matrix</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.to_adjoint_matrix.html#cr.sparse.lop.to_adjoint_matrix" title="cr.sparse.lop.to_adjoint_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_adjoint_matrix</span></code></a>(A)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.to_adjoint_matrix.html#cr.sparse.lop.to_adjoint_matrix" title="cr.sparse.lop.to_adjoint_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_adjoint_matrix</span></code></a>(A)</p></td>
 <td><p>Converts the adjoint of a linear operator to a matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.to_complex_matrix.html#cr.sparse.lop.to_complex_matrix" title="cr.sparse.lop.to_complex_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_complex_matrix</span></code></a>(A)</p></td>
+<td><p>Converts a linear operator to a matrix in complex numbers</p></td>
 </tr>
 </tbody>
 </table>

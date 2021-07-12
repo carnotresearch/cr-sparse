@@ -1,6 +1,0 @@
-﻿cr.sparse.pursuit.sp.solve\_jit
-===============================
-
-.. currentmodule:: cr.sparse.pursuit.sp
-
-.. autofunction:: solve_jit

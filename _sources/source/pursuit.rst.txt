@@ -1,5 +1,5 @@
-Sparse Recovery/Approximation Algorithms
-=========================================
+Greedy Sparse Recovery/Approximation Algorithms
+================================================
 
 .. contents::
     :depth: 2
@@ -7,7 +7,18 @@ Sparse Recovery/Approximation Algorithms
 
 .. rubric:: Algorithm versions
 
-Several algorithms are available in multiple versions
+Several algorithms are available in multiple versions.
+
+The library allows a dictionary or a sensing process to be represented as either:
+
+* A matrix of real/complex values
+* A linear operator with fast implementation (see ``cr.sparse.lop`` module)
+
+E.g. a partial sensing sensing matrix can be implemented more efficiently using a linear operator consisting of 
+applying the fourier transform followed by selecting a subset of fourier measurements. 
+
+* A prefix ``matrix_`` indicates an implementation which accepts matrices as dictionaries or compressive sensors.
+* A prefix ``operator_`` indicates an implementation which accepts linear operators described in ``cr.sparse.lop`` module as dictionaries or compressive sensors.
 
 * A suffix ``_jit`` means that it is the JIT (Just In Time ) compiled version of the original implementation.
 * A suffix ``_multi`` means that it is the version of implementation which can process multiple signals/measurement vectors 
@@ -18,39 +29,80 @@ Several algorithms are available in multiple versions
   * Each column of :math:`E` representation corresponding measurement error/noise.
 
 
-Greedy pursuit based Algorithms
--------------------------------
+.. rubric:: Conditions on dictionaries/sensing matrices
+
+Different algorithms have different requirements on the dictionaries or sensing matrices:
+
+* Some algorithms accept overcomplete dictionaries/sensing matrices with unit norm columns 
+* Some algorithms accept overcomplete dictionaries/sensing matrices with orthogonal rows
+* Some algorithms accept any overcomplete dictionary
+
+
 
 .. currentmodule:: cr.sparse.pursuit
 
 
-.. rubric:: Matching Pursuit Based Algorithms
+Basic Matching Pursuit Based Algorithms
+------------------------------------------
+
+.. rubric:: Orthogonal Matching Pursuit
 
 .. autosummary::
   :toctree: _autosummary
 
     omp.solve
-    omp.solve_multi
+    omp.matrix_solve
+    omp.matrix_solve_jit
+    omp.matrix_solve_multi
 
-.. rubric:: Compressive Sensing Matching Pursuit (CSMP) Algorithms
+Compressive Sensing Matching Pursuit (CSMP) Algorithms
+
+.. rubric:: Compressive Sampling Matching Pursuit
 
 .. autosummary::
   :toctree: _autosummary
 
     cosamp.solve
-    cosamp.solve_jit
-    sp.solve
-    sp.solve_jit
+    cosamp.matrix_solve
+    cosamp.matrix_solve_jit
+    cosamp.operator_solve
+    cosamp.operator_solve_jit
 
-.. rubric:: Hard Thresholding Based Algorithms
+.. rubric:: Subspace Pursuit
+
+.. autosummary::
+  :toctree: _autosummary
+
+    sp.solve
+    sp.matrix_solve
+    sp.matrix_solve_jit
+    sp.operator_solve
+    sp.operator_solve_jit
+
+Hard Thresholding Based Algorithms
+-----------------------------------------
+
+.. rubric:: Iterative Hard Thresholding
 
 .. autosummary::
   :toctree: _autosummary
 
     iht.solve
-    iht.solve_jit
+    iht.matrix_solve
+    iht.matrix_solve_jit
+    iht.operator_solve
+    iht.operator_solve_jit
+
+.. rubric:: Hard Thresholding Pursuit
+
+.. autosummary::
+  :toctree: _autosummary
+
     htp.solve
-    htp.solve_jit
+    htp.matrix_solve
+    htp.matrix_solve_jit
+    htp.operator_solve
+    htp.operator_solve_jit
 
 
 Data Types
@@ -75,7 +127,7 @@ Utilities
 
 
 
-Using the Algorithms
+Using the greedy algorithms
 -------------------------------
 
 These algorithms solve the inverse problem :math:`y = \Phi x + e` where :math:`\Phi` and :math:`y`
@@ -123,7 +175,7 @@ Import a sparse recovery solver::
 
 Solve the recovery problem::
 
-  solution =  cosamp.solve(Phi, y, K)
+  solution =  cosamp.matrix_solve(Phi, y, K)
 
 You can choose any other solver. 
 

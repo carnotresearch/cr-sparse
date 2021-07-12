@@ -14,9 +14,8 @@
    
       ~Operator.jit_safe
       ~Operator.linear
-      ~Operator.m
       ~Operator.matrix_safe
-      ~Operator.n
+      ~Operator.shape
       ~Operator.times
       ~Operator.trans
    

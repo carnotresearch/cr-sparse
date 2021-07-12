@@ -1,0 +1,6 @@
+﻿cr.sparse.cvx.adm.yall1.solve\_bp\_jit
+======================================
+
+.. currentmodule:: cr.sparse.cvx.adm.yall1
+
+.. autofunction:: solve_bp_jit

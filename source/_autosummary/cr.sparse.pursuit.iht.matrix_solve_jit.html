@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>cr.sparse.pursuit.sp.solve_jit &mdash; CR.Sparse  documentation</title>
+  <title>cr.sparse.pursuit.iht.matrix_solve_jit &mdash; CR.Sparse  documentation</title>
   
 
   
@@ -48,8 +48,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="cr.sparse.pursuit.iht.solve" href="cr.sparse.pursuit.iht.solve.html" />
-    <link rel="prev" title="cr.sparse.pursuit.sp.solve" href="cr.sparse.pursuit.sp.solve.html" /> 
+    <link rel="next" title="cr.sparse.pursuit.iht.operator_solve" href="cr.sparse.pursuit.iht.operator_solve.html" />
+    <link rel="prev" title="cr.sparse.pursuit.iht.matrix_solve" href="cr.sparse.pursuit.iht.matrix_solve.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -102,25 +102,27 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">CR.Sparse API Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lop.html">Linear Operators</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../pursuit.html">Sparse Recovery/Approximation Algorithms</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../pursuit.html#greedy-pursuit-based-algorithms">Greedy pursuit based Algorithms</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.omp.solve.html">cr.sparse.pursuit.omp.solve</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.omp.solve_multi.html">cr.sparse.pursuit.omp.solve_multi</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.cosamp.solve.html">cr.sparse.pursuit.cosamp.solve</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.cosamp.solve_jit.html">cr.sparse.pursuit.cosamp.solve_jit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.sp.solve.html">cr.sparse.pursuit.sp.solve</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.pursuit.sp.solve_jit</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../pursuit.html#basic-matching-pursuit-based-algorithms">Basic Matching Pursuit Based Algorithms</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../pursuit.html#hard-thresholding-based-algorithms">Hard Thresholding Based Algorithms</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.iht.solve.html">cr.sparse.pursuit.iht.solve</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.iht.solve_jit.html">cr.sparse.pursuit.iht.solve_jit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.iht.matrix_solve.html">cr.sparse.pursuit.iht.matrix_solve</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.pursuit.iht.matrix_solve_jit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.iht.operator_solve.html">cr.sparse.pursuit.iht.operator_solve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.iht.operator_solve_jit.html">cr.sparse.pursuit.iht.operator_solve_jit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.htp.solve.html">cr.sparse.pursuit.htp.solve</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.htp.solve_jit.html">cr.sparse.pursuit.htp.solve_jit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.htp.matrix_solve.html">cr.sparse.pursuit.htp.matrix_solve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.htp.matrix_solve_jit.html">cr.sparse.pursuit.htp.matrix_solve_jit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.htp.operator_solve.html">cr.sparse.pursuit.htp.operator_solve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.pursuit.htp.operator_solve_jit.html">cr.sparse.pursuit.htp.operator_solve_jit</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../pursuit.html#data-types">Data Types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../pursuit.html#utilities">Utilities</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../pursuit.html#using-the-algorithms">Using the Algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pursuit.html#using-the-greedy-algorithms">Using the greedy algorithms</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
@@ -178,15 +180,15 @@
         
           <li><a href="../index.html">CR.Sparse API Documentation</a> &raquo;</li>
         
-          <li><a href="../pursuit.html">Sparse Recovery/Approximation Algorithms</a> &raquo;</li>
+          <li><a href="../pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a> &raquo;</li>
         
-      <li>cr.sparse.pursuit.sp.solve_jit</li>
+      <li>cr.sparse.pursuit.iht.matrix_solve_jit</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/source/_autosummary/cr.sparse.pursuit.sp.solve_jit.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/source/_autosummary/cr.sparse.pursuit.iht.matrix_solve_jit.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -223,12 +225,12 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="cr-sparse-pursuit-sp-solve-jit">
-<h1>cr.sparse.pursuit.sp.solve_jit<a class="headerlink" href="#cr-sparse-pursuit-sp-solve-jit" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cr-sparse-pursuit-iht-matrix-solve-jit">
+<h1>cr.sparse.pursuit.iht.matrix_solve_jit<a class="headerlink" href="#cr-sparse-pursuit-iht-matrix-solve-jit" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="cr.sparse.pursuit.sp.solve_jit">
-<span class="sig-prename descclassname"><span class="pre">cr.sparse.pursuit.sp.</span></span><span class="sig-name descname"><span class="pre">solve_jit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_norm_rtol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cr.sparse.pursuit.sp.solve_jit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Solves the sparse recovery problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Compressive Sampling Matching Pursuit</p>
+<dt class="sig sig-object py" id="cr.sparse.pursuit.iht.matrix_solve_jit">
+<span class="sig-prename descclassname"><span class="pre">cr.sparse.pursuit.iht.</span></span><span class="sig-name descname"><span class="pre">matrix_solve_jit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_norm_rtol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cr.sparse.pursuit.iht.matrix_solve_jit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves the sparse recovery problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Iterative Hard Thresholding for matrices</p>
 </dd></dl>
 
 </div>
@@ -239,8 +241,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="cr.sparse.pursuit.iht.solve.html" class="btn btn-neutral float-right" title="cr.sparse.pursuit.iht.solve" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="cr.sparse.pursuit.sp.solve.html" class="btn btn-neutral float-left" title="cr.sparse.pursuit.sp.solve" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cr.sparse.pursuit.iht.operator_solve.html" class="btn btn-neutral float-right" title="cr.sparse.pursuit.iht.operator_solve" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cr.sparse.pursuit.iht.matrix_solve.html" class="btn btn-neutral float-left" title="cr.sparse.pursuit.iht.matrix_solve" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

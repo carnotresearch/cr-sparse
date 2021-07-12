@@ -185,7 +185,7 @@
 <span class="kn">from</span> <span class="nn">cr.sparse.la</span> <span class="kn">import</span> <span class="n">solve_spd_chol</span>
 <span class="kn">from</span> <span class="nn">.defs</span> <span class="kn">import</span> <span class="n">RecoverySolution</span>
 
-<div class="viewcode-block" id="solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.omp.solve.html#cr.sparse.pursuit.omp.solve">[docs]</a><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">max_iters</span><span class="p">,</span> <span class="n">max_res_norm</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+<div class="viewcode-block" id="matrix_solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.omp.matrix_solve.html#cr.sparse.pursuit.omp.matrix_solve">[docs]</a><span class="k">def</span> <span class="nf">matrix_solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">max_iters</span><span class="p">,</span> <span class="n">max_res_norm</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Solves the recovery/approximation problem :math:`y = \Phi x + e` using Orthogonal Matching Pursuit</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># initialize residual</span>
@@ -248,13 +248,15 @@
     <span class="k">return</span> <span class="n">RecoverySolution</span><span class="p">(</span><span class="n">x_I</span><span class="o">=</span><span class="n">x_I</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">r_norm_sqr</span><span class="o">=</span><span class="n">norm_r_new_sqr</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span></div>
 
 
-<span class="n">solve_multi</span> <span class="o">=</span> <span class="n">vmap</span><span class="p">(</span><span class="n">solve</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
-<span class="sd">&quot;&quot;&quot;Solves the recovery/approximation problem :math:`Y = \Phi X + E` using Orthogonal Matching Pursuit</span>
+
+<span class="n">matrix_solve_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">matrix_solve</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;max_res_norm&quot;</span><span class="p">,))</span>
+
+<span class="n">matrix_solve_multi</span> <span class="o">=</span> <span class="n">vmap</span><span class="p">(</span><span class="n">matrix_solve_jit</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;Solves the MMV recovery/approximation problem :math:`Y = \Phi X + E` using Orthogonal Matching Pursuit</span>
 
 <span class="sd">Extends :py:func:`cr.sparse.pursuit.omp.solve` using :py:func:`jax.vmap`.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="n">solve_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">solve</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;max_res_norm&quot;</span><span class="p">,))</span>
+<span class="n">solve</span> <span class="o">=</span> <span class="n">matrix_solve_jit</span>
 </pre></div>
 
            </div>

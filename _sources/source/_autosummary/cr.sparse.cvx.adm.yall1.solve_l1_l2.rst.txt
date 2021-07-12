@@ -1,0 +1,6 @@
+﻿cr.sparse.cvx.adm.yall1.solve\_l1\_l2
+=====================================
+
+.. currentmodule:: cr.sparse.cvx.adm.yall1
+
+.. autofunction:: solve_l1_l2

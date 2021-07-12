@@ -1,0 +1,770 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>cr.sparse._src.cvx.adm.yall1 &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../../" src="../../../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../../_static/jquery.js"></script>
+        <script src="../../../../../../_static/underscore.js"></script>
+        <script src="../../../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../../../../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../benchmarks/index.html">Benchmarks</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>cr.sparse._src.cvx.adm.yall1</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for cr.sparse._src.cvx.adm.yall1</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2021 CR.Sparse Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module implements algorithms from the paper</span>
+<span class="sd">ALTERNATING DIRECTION ALGORITHMS FOR ℓ1-PROBLEMS IN COMPRESSIVE SENSING</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+
+
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">lax</span><span class="p">,</span> <span class="n">vmap</span>
+<span class="n">norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span>
+
+<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">lop</span>
+
+<span class="k">def</span> <span class="nf">project_to_box</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+    <span class="n">ww</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+    <span class="n">factors</span> <span class="o">=</span> <span class="n">w</span> <span class="o">/</span> <span class="n">ww</span>
+    <span class="k">return</span> <span class="n">z</span> <span class="o">*</span> <span class="n">factors</span>
+
+<span class="k">def</span> <span class="nf">project_to_real_upper_limit</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">RecoveryFullSolution</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents the solution of a sparse recovery problem</span>
+
+<span class="sd">    Consider a sparse recovery problem :math:`b=A x + e`.</span>
+
+<span class="sd">    This type combines all of this information together.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">        x : estimate(s) of :math:`x`</span>
+<span class="sd">        r : residual(s) :math:`r = b - A_I x_I `</span>
+<span class="sd">        r_norm_sqr: squared norm of residual :math:`\| r \|_2^2`</span>
+<span class="sd">        iterations: Number of iterations required for the algorithm to converge</span>
+
+<span class="sd">    Note:</span>
+
+<span class="sd">        The tuple can be used to solve multiple measurement vector</span>
+<span class="sd">        problems also. In this case, each column (of individual parameters)</span>
+<span class="sd">        represents the solution of corresponding single vector problems.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># The non-zero values</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Solution vector&quot;&quot;&quot;</span>
+    <span class="n">r</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;The primal residual vector&quot;&quot;&quot;</span>
+    <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span>
+    <span class="n">n_times</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Number of times A x computed &quot;&quot;&quot;</span>
+    <span class="n">n_trans</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Number of times A.T b computed &quot;&quot;&quot;</span>
+
+<span class="k">class</span> <span class="nc">BPState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Primal variable&quot;&quot;&quot;</span>
+    <span class="n">x_prev</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Previous value of the primal variable&quot;&quot;&quot;</span>
+    <span class="n">z</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Dual variable&quot;&quot;&quot;</span>
+    <span class="n">rp</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="s2">&quot;Primal residual&quot;</span>
+    <span class="n">rd</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="s2">&quot;Dual residual&quot;</span>
+    <span class="n">primal_objective</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="s2">&quot;Primal objective function value&quot;</span>
+    <span class="n">dual_objective</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="s2">&quot;Dual objective function value&quot;</span>
+    <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="sd">&quot;&quot;&quot;Number of iterations&quot;&quot;&quot;</span>
+    <span class="n">n_times</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Number of times A x computed &quot;&quot;&quot;</span>
+    <span class="n">n_trans</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Number of times A.T b computed &quot;&quot;&quot;</span>
+
+
+
+<div class="viewcode-block" id="solve_bp"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cvx.adm.yall1.solve_bp.html#cr.sparse.cvx.adm.yall1.solve_bp">[docs]</a><span class="k">def</span> <span class="nf">solve_bp</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">nonneg</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">max_iters</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solves the problem :math:`\min \| x \|_1 \\text{s.t.} \A x = b` using ADMM</span>
+
+<span class="sd">    This function implements eq 2.29 of the paper.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+    <span class="n">mu_orig</span> <span class="o">=</span> <span class="n">mu</span>
+    <span class="n">b_by_mu</span> <span class="o">=</span> <span class="n">b</span>  <span class="o">/</span> <span class="n">mu</span>
+    <span class="n">rp_norm_threshold</span> <span class="o">=</span> <span class="n">tolerance</span> <span class="o">*</span> <span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
+        <span class="c1"># primal residual</span>
+        <span class="n">rp</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">times</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+        <span class="c1"># dual residual</span>
+        <span class="n">rd</span> <span class="o">=</span> <span class="o">-</span> <span class="n">trans</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">primal_objective</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">x0</span><span class="p">))</span>
+        <span class="c1"># update dual objective</span>
+        <span class="n">dual_objective</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="c1"># initial state</span>
+        <span class="k">return</span> <span class="n">BPState</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">x_prev</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">z</span><span class="o">=</span><span class="n">z0</span><span class="p">,</span>
+            <span class="n">rp</span><span class="o">=</span><span class="n">rp</span><span class="p">,</span> <span class="n">rd</span><span class="o">=</span><span class="n">rd</span><span class="p">,</span> 
+            <span class="n">primal_objective</span><span class="o">=</span><span class="n">primal_objective</span><span class="p">,</span> <span class="n">dual_objective</span><span class="o">=</span><span class="n">dual_objective</span><span class="p">,</span>
+            <span class="n">iterations</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_trans</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">iteration</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="c1"># update y</span>
+        <span class="n">x_by_mu</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">x</span> <span class="o">/</span> <span class="n">mu</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">times</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">z</span> <span class="o">-</span> <span class="n">x_by_mu</span><span class="p">)</span> <span class="o">+</span> <span class="n">b_by_mu</span>
+        <span class="n">Aty</span> <span class="o">=</span> <span class="n">trans</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="c1"># update z</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">Aty</span> <span class="o">+</span> <span class="n">x_by_mu</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nonneg</span><span class="p">,</span> <span class="n">project_to_real_upper_limit</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">w</span><span class="p">),</span> <span class="n">project_to_box</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+        <span class="n">n_times</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">n_times</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">n_trans</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">n_trans</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="c1"># dual residual</span>
+        <span class="n">rd</span>  <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="n">Aty</span>
+        
+        <span class="c1"># update x</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="n">gamma</span><span class="o">*</span><span class="n">mu</span><span class="p">)</span> <span class="o">*</span> <span class="n">rd</span>
+        
+        <span class="c1"># primal residual</span>
+        <span class="n">rp</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">n_times</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="c1"># primary objective</span>
+        <span class="n">primal_objective</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>        
+        <span class="c1"># dual objective</span>
+        <span class="n">dual_objective</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span>
+
+        <span class="c1"># print(f&#39;x[{state.iterations+1}]&#39;, end=&#39;&#39;)</span>
+        <span class="c1"># print(x[0:6])</span>
+        <span class="c1"># print(f&#39;y[{state.iterations+1}]&#39;, end=&#39;&#39;)</span>
+        <span class="c1"># print(y[0:6])</span>
+        <span class="c1"># print(f&#39;z[{state.iterations+1}]&#39;, end=&#39;&#39;)</span>
+        <span class="c1"># print(z[0:6])</span>
+        
+        <span class="c1"># updatd state</span>
+        <span class="k">return</span> <span class="n">BPState</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">x_prev</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span>
+            <span class="n">rp</span><span class="o">=</span><span class="n">rp</span><span class="p">,</span> <span class="n">rd</span><span class="o">=</span><span class="n">rd</span><span class="p">,</span>
+            <span class="n">primal_objective</span><span class="o">=</span><span class="n">primal_objective</span><span class="p">,</span> <span class="n">dual_objective</span><span class="o">=</span><span class="n">dual_objective</span><span class="p">,</span>
+            <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="n">n_times</span><span class="p">,</span> <span class="n">n_trans</span><span class="o">=</span><span class="n">n_trans</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">double_iteration</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">iteration</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">iteration</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">cond</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stopping condition:</span>
+<span class="sd">        - Either relative change in x should be within tolerance.</span>
+<span class="sd">        - Or both relative duality gap and relative dual norm should be within tolerance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="c1"># limit on number of iterations</span>
+        <span class="n">more_iters</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">max_iters</span>
+
+        <span class="c1"># x norm</span>
+        <span class="n">x_norm</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># relative change in x norm</span>
+        <span class="n">x_relative_change</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">state</span><span class="o">.</span><span class="n">x_prev</span><span class="p">)</span> <span class="o">/</span> <span class="n">x_norm</span>
+        <span class="c1"># condition on relative change in x norm</span>
+        <span class="n">x_unstable</span> <span class="o">=</span> <span class="n">x_relative_change</span> <span class="o">&gt;</span> <span class="n">tolerance</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">q</span><span class="p">)</span>
+
+        <span class="c1"># condition on dual residual norm</span>
+        <span class="n">rel_rd</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">rd</span><span class="p">)</span> <span class="o">/</span> <span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+        <span class="n">d_infeasible</span> <span class="o">=</span> <span class="n">rel_rd</span> <span class="o">&gt;</span> <span class="n">tolerance</span>
+
+        <span class="c1"># duality gap</span>
+        <span class="n">duality_gap</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dual_objective</span> <span class="o">-</span> <span class="n">state</span><span class="o">.</span><span class="n">primal_objective</span><span class="p">)</span>
+        <span class="c1"># relative duality gap</span>
+        <span class="n">relative_gap</span> <span class="o">=</span> <span class="n">duality_gap</span> <span class="o">/</span> <span class="n">state</span><span class="o">.</span><span class="n">primal_objective</span>
+        <span class="n">gap_infeasible</span> <span class="o">=</span> <span class="n">relative_gap</span> <span class="o">&gt;</span> <span class="n">tolerance</span>
+
+        <span class="c1"># primal residual norm</span>
+        <span class="n">rp_norm</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">rp</span><span class="p">)</span>
+        <span class="c1"># check feasibility of primal residual norm</span>
+        <span class="n">p_infeasible</span> <span class="o">=</span> <span class="n">rp_norm</span> <span class="o">&gt;=</span> <span class="n">rp_norm_threshold</span>
+
+        <span class="c1"># if either duality gap or dual res norm are beyond tolerance, we continue </span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">gap_infeasible</span><span class="p">,</span> <span class="n">d_infeasible</span><span class="p">)</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">p_infeasible</span><span class="p">)</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">more_iters</span><span class="p">)</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">x_unstable</span><span class="p">)</span>
+
+        <span class="c1"># print(f&#39;[{state.iterations:02d}] x_norm: {x_norm:.3f}, rel:{x_relative_change:.2e} &#39; + </span>
+        <span class="c1">#    f&#39;rel_rd {rel_rd:.2e} rp_norm: {rp_norm:.2e} p_infeasible: {p_infeasible}&#39; +</span>
+        <span class="c1">#    f&#39; p_obj: {state.primal_objective:.1e}, d_obj: {state.dual_objective:.1e} relative_gap {relative_gap:.1e}&#39;)</span>
+ 
+        <span class="k">return</span> <span class="n">condition</span>
+
+    <span class="c1"># state = init()</span>
+    <span class="c1"># while cond(state):</span>
+    <span class="c1">#     state = double_iteration(state)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">double_iteration</span><span class="p">,</span> <span class="n">init</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">state</span></div>
+
+<span class="n">solve_bp_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">solve_bp</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="solve_l1_l2"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2.html#cr.sparse.cvx.adm.yall1.solve_l1_l2">[docs]</a><span class="k">def</span> <span class="nf">solve_l1_l2</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">nonneg</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">max_iters</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solves the problem :math:`\min \| x \|_1  + \\frac{1}{2 \\rho} \| A x - b \|_2^2` using ADMM</span>
+
+<span class="sd">    This function implements eq 2.25 of the paper.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+    <span class="n">mu_orig</span> <span class="o">=</span> <span class="n">mu</span>
+    <span class="n">rho_by_mu</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">/</span> <span class="n">mu</span>
+    <span class="n">rho_by_mu_p1</span> <span class="o">=</span> <span class="n">rho_by_mu</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">b_by_mu</span> <span class="o">=</span> <span class="n">b</span>  <span class="o">/</span> <span class="n">mu</span>
+
+    <span class="c1">#print(f&#39;mu: {mu}, rho_by_mu: {rho_by_mu}, rho_by_mu_p1: {rho_by_mu_p1}&#39;)</span>
+
+    <span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">z0</span> 
+        <span class="c1"># primal residual</span>
+        <span class="n">rp</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># dual residual</span>
+        <span class="n">rd</span> <span class="o">=</span> <span class="o">-</span> <span class="n">trans</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">rp_norm_sqr</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">rp</span>
+        <span class="n">primal_objective</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">/</span> <span class="n">rho</span><span class="p">)</span> <span class="o">*</span> <span class="n">rp_norm_sqr</span>
+        <span class="c1"># update dual objective</span>
+        <span class="n">dual_objective</span> <span class="o">=</span> <span class="mf">0.</span>
+
+        <span class="c1"># initial state</span>
+        <span class="k">return</span> <span class="n">BPState</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">x_prev</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span>
+            <span class="n">rp</span><span class="o">=</span><span class="n">rp</span><span class="p">,</span> <span class="n">rd</span><span class="o">=</span><span class="n">rd</span><span class="p">,</span> 
+            <span class="n">primal_objective</span><span class="o">=</span><span class="n">primal_objective</span><span class="p">,</span> <span class="n">dual_objective</span><span class="o">=</span><span class="n">dual_objective</span><span class="p">,</span>
+            <span class="n">iterations</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_trans</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">iteration</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="c1"># update y</span>
+        <span class="n">x_by_mu</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">x</span> <span class="o">/</span> <span class="n">mu</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">times</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">z</span> <span class="o">-</span> <span class="n">x_by_mu</span><span class="p">)</span> <span class="o">+</span> <span class="n">b_by_mu</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">/</span> <span class="n">rho_by_mu_p1</span>
+        <span class="n">Aty</span> <span class="o">=</span> <span class="n">trans</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="c1">#print(f&#39;\n[{state.iterations+1}]&#39;, end=&#39;&#39;)</span>
+        <span class="c1">#print(state.x[0:5])</span>
+        <span class="c1">#print(y[0:5])</span>
+        <span class="c1"># update z</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">Aty</span> <span class="o">+</span> <span class="n">x_by_mu</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nonneg</span><span class="p">,</span> <span class="n">project_to_real_upper_limit</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">w</span><span class="p">),</span> <span class="n">project_to_box</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+        <span class="n">n_times</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">n_times</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">n_trans</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">n_trans</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="c1"># dual residual</span>
+        <span class="n">rd</span>  <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="n">Aty</span>
+        
+        <span class="c1"># update x</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="n">gamma</span><span class="o">*</span><span class="n">mu</span><span class="p">)</span> <span class="o">*</span> <span class="n">rd</span>
+        
+        <span class="c1"># primal residual</span>
+        <span class="n">rp</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">n_times</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="c1"># primal resdiual norm squared</span>
+        <span class="n">rp_norm_sqr</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">rp</span>
+        <span class="c1"># y norm squared</span>
+        <span class="n">y_norm_sqr</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span>
+
+        <span class="c1"># primary objective</span>
+        <span class="n">primal_objective</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">/</span> <span class="n">rho</span><span class="p">)</span> <span class="o">*</span> <span class="n">rp_norm_sqr</span>
+        
+        <span class="c1"># dual objective</span>
+        <span class="n">dual_objective</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">rho</span><span class="p">)</span> <span class="o">*</span> <span class="n">y_norm_sqr</span>
+        
+        <span class="c1"># updatd state</span>
+        <span class="k">return</span> <span class="n">BPState</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">x_prev</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span>
+            <span class="n">rp</span><span class="o">=</span><span class="n">rp</span><span class="p">,</span> <span class="n">rd</span><span class="o">=</span><span class="n">rd</span><span class="p">,</span>
+            <span class="n">primal_objective</span><span class="o">=</span><span class="n">primal_objective</span><span class="p">,</span> <span class="n">dual_objective</span><span class="o">=</span><span class="n">dual_objective</span><span class="p">,</span>
+            <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="n">n_times</span><span class="p">,</span> <span class="n">n_trans</span><span class="o">=</span><span class="n">n_trans</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">double_iteration</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">iteration</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">iteration</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">cond</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stopping condition:</span>
+<span class="sd">        - Either relative change in x should be within tolerance.</span>
+<span class="sd">        - Or both relative duality gap and relative dual norm should be within tolerance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">q</span>  <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="c1"># limit on number of iterations</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">max_iters</span>
+
+        <span class="c1"># x norm</span>
+        <span class="n">x_norm</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># relative change in x norm</span>
+        <span class="n">x_relative_change</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">state</span><span class="o">.</span><span class="n">x_prev</span><span class="p">)</span> <span class="o">/</span> <span class="n">x_norm</span>
+        <span class="c1"># condition on relative change in x norm</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">x_relative_change</span> <span class="o">&gt;</span> <span class="n">tolerance</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">q</span><span class="p">))</span>
+
+        <span class="c1"># condition on dual residual norm</span>
+        <span class="n">rel_rd</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">rd</span><span class="p">)</span> <span class="o">/</span> <span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+
+        <span class="c1"># duality gap</span>
+        <span class="n">duality_gap</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dual_objective</span> <span class="o">-</span> <span class="n">state</span><span class="o">.</span><span class="n">primal_objective</span><span class="p">)</span>
+        <span class="c1"># relative duality gap</span>
+        <span class="n">relative_gap</span> <span class="o">=</span> <span class="n">duality_gap</span> <span class="o">/</span> <span class="n">state</span><span class="o">.</span><span class="n">primal_objective</span>
+
+        <span class="c1"># if either duality gap or dual res norm are beyond tolerance, we continue </span>
+        <span class="n">rd_gap_cond</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">relative_gap</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">rel_rd</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">)</span>
+
+        <span class="c1"># combined condition</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">rd_gap_cond</span><span class="p">)</span>
+        <span class="c1">#print(f&#39;[{state.iterations:02d}] x_norm: {x_norm:.3f}, rel:{x_relative_change:.2e} &#39; + </span>
+        <span class="c1">#    f&#39;rel_rd {rel_rd:.2e} p_obj: {state.primal_objective:.1e}, d_obj: {state.dual_objective:.1e} relative_gap {relative_gap:.1e}&#39;)</span>
+ 
+        <span class="k">return</span> <span class="n">condition</span>
+
+    <span class="c1"># state = init()</span>
+    <span class="c1"># while cond(state):</span>
+    <span class="c1">#     state = double_iteration(state)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">double_iteration</span><span class="p">,</span> <span class="n">init</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">state</span></div>
+
+
+<span class="n">solve_l1_l2_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">solve_l1_l2</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
+
+
+
+<div class="viewcode-block" id="solve_l1_l2con"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2con.html#cr.sparse.cvx.adm.yall1.solve_l1_l2con">[docs]</a><span class="k">def</span> <span class="nf">solve_l1_l2con</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">nonneg</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">max_iters</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solves the problem :math:`\min \| x \|_1  \\text{s.t.} \| A x - b \|_2 \\leq \\delta` using ADMM</span>
+
+<span class="sd">    This function implements eq 2.27 of the paper.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+    <span class="n">mu_orig</span> <span class="o">=</span> <span class="n">mu</span>
+    <span class="n">b_by_mu</span> <span class="o">=</span> <span class="n">b</span>  <span class="o">/</span> <span class="n">mu</span>
+    <span class="n">delta_by_mu</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">/</span> <span class="n">mu</span>
+    <span class="n">rp_norm_threshold</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">tolerance</span><span class="p">)</span>
+
+    <span class="c1"># print(f&#39;mu: {mu}, delta_by_mu: {delta_by_mu}, rp_norm_threshold: {rp_norm_threshold}&#39;)</span>
+    <span class="c1"># print(f&#39;x0&#39;, end=&#39;&#39;)</span>
+    <span class="c1"># print(x0[0:6])</span>
+
+    <span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
+        <span class="c1"># primal residual</span>
+        <span class="n">rp</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">times</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+        <span class="c1"># dual residual</span>
+        <span class="n">rd</span> <span class="o">=</span> <span class="o">-</span> <span class="n">trans</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">primal_objective</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">x0</span><span class="p">))</span>
+        <span class="c1"># update dual objective</span>
+        <span class="n">dual_objective</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="c1"># initial state</span>
+        <span class="k">return</span> <span class="n">BPState</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">x_prev</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">z</span><span class="o">=</span><span class="n">z0</span><span class="p">,</span>
+            <span class="n">rp</span><span class="o">=</span><span class="n">rp</span><span class="p">,</span> <span class="n">rd</span><span class="o">=</span><span class="n">rd</span><span class="p">,</span> 
+            <span class="n">primal_objective</span><span class="o">=</span><span class="n">primal_objective</span><span class="p">,</span> <span class="n">dual_objective</span><span class="o">=</span><span class="n">dual_objective</span><span class="p">,</span>
+            <span class="n">iterations</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_trans</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">iteration</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="c1"># update y</span>
+        <span class="n">x_by_mu</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">x</span> <span class="o">/</span> <span class="n">mu</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">times</span> <span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">z</span> <span class="o">-</span> <span class="n">x_by_mu</span><span class="p">)</span> <span class="o">+</span> <span class="n">b_by_mu</span>
+        <span class="c1"># subtract projection of y to l2 ball from y</span>
+        <span class="n">y_norm</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">delta_by_mu</span> <span class="o">/</span> <span class="n">y_norm</span><span class="p">)</span> <span class="o">*</span> <span class="n">y</span>
+        <span class="n">Aty</span> <span class="o">=</span> <span class="n">trans</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="c1"># update z</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">Aty</span> <span class="o">+</span> <span class="n">x_by_mu</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nonneg</span><span class="p">,</span> <span class="n">project_to_real_upper_limit</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">w</span><span class="p">),</span> <span class="n">project_to_box</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+        <span class="n">n_times</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">n_times</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">n_trans</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">n_trans</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="c1"># dual residual</span>
+        <span class="n">rd</span>  <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="n">Aty</span>
+        
+        <span class="c1"># update x</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="n">gamma</span><span class="o">*</span><span class="n">mu</span><span class="p">)</span> <span class="o">*</span> <span class="n">rd</span>
+        
+        <span class="c1"># primal residual</span>
+        <span class="n">rp</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">n_times</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="c1"># primary objective</span>
+        <span class="n">primal_objective</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>        
+        <span class="c1"># dual objective</span>
+        <span class="n">dual_objective</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span> <span class="o">-</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">norm</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+        <span class="c1"># print(f&#39;x[{state.iterations+1}]&#39;, end=&#39;&#39;)</span>
+        <span class="c1"># print(x[0:6])</span>
+        <span class="c1"># print(f&#39;y[{state.iterations+1}]&#39;, end=&#39;&#39;)</span>
+        <span class="c1"># print(y[0:6])</span>
+        <span class="c1"># print(f&#39;z[{state.iterations+1}]&#39;, end=&#39;&#39;)</span>
+        <span class="c1"># print(z[0:6])</span>
+        
+        <span class="c1"># updatd state</span>
+        <span class="k">return</span> <span class="n">BPState</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">x_prev</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span>
+            <span class="n">rp</span><span class="o">=</span><span class="n">rp</span><span class="p">,</span> <span class="n">rd</span><span class="o">=</span><span class="n">rd</span><span class="p">,</span>
+            <span class="n">primal_objective</span><span class="o">=</span><span class="n">primal_objective</span><span class="p">,</span> <span class="n">dual_objective</span><span class="o">=</span><span class="n">dual_objective</span><span class="p">,</span>
+            <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="n">n_times</span><span class="p">,</span> <span class="n">n_trans</span><span class="o">=</span><span class="n">n_trans</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">double_iteration</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">iteration</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">iteration</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">cond</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stopping condition:</span>
+<span class="sd">        - Either relative change in x should be within tolerance.</span>
+<span class="sd">        - Or both relative duality gap and relative dual norm should be within tolerance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># limit on number of iterations</span>
+        <span class="n">more_iters</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">max_iters</span>
+
+        <span class="c1"># x norm</span>
+        <span class="n">x_norm</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># relative change in x norm</span>
+        <span class="n">x_relative_change</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">state</span><span class="o">.</span><span class="n">x_prev</span><span class="p">)</span> <span class="o">/</span> <span class="n">x_norm</span>
+        <span class="c1"># condition on relative change in x norm</span>
+        <span class="n">x_unstable</span> <span class="o">=</span> <span class="n">x_relative_change</span> <span class="o">&gt;</span> <span class="n">tolerance</span>
+
+        <span class="c1"># condition on dual residual norm</span>
+        <span class="n">rel_rd</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">rd</span><span class="p">)</span> <span class="o">/</span> <span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+        <span class="n">d_infeasible</span> <span class="o">=</span> <span class="n">rel_rd</span> <span class="o">&gt;</span> <span class="n">tolerance</span>
+
+        <span class="c1"># duality gap</span>
+        <span class="n">duality_gap</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">dual_objective</span> <span class="o">-</span> <span class="n">state</span><span class="o">.</span><span class="n">primal_objective</span><span class="p">)</span>
+        <span class="c1"># relative duality gap</span>
+        <span class="n">relative_gap</span> <span class="o">=</span> <span class="n">duality_gap</span> <span class="o">/</span> <span class="n">state</span><span class="o">.</span><span class="n">primal_objective</span>
+        <span class="n">gap_infeasible</span> <span class="o">=</span> <span class="n">relative_gap</span> <span class="o">&gt;</span> <span class="n">tolerance</span>
+
+        <span class="c1"># primal residual norm</span>
+        <span class="n">rp_norm</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">rp</span><span class="p">)</span>
+        <span class="c1"># check feasibility of primal residual norm</span>
+        <span class="n">p_infeasible</span> <span class="o">=</span> <span class="n">rp_norm</span> <span class="o">&gt;</span> <span class="n">rp_norm_threshold</span>
+
+        <span class="c1"># if either duality gap or dual res norm are beyond tolerance, we continue </span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">gap_infeasible</span><span class="p">,</span> <span class="n">d_infeasible</span><span class="p">)</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">p_infeasible</span><span class="p">)</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">more_iters</span><span class="p">)</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">x_unstable</span><span class="p">)</span>
+
+        <span class="c1"># print(f&#39;[{state.iterations:02d}] x_norm: {x_norm:.3f}, rel:{x_relative_change:.2e} &#39; + </span>
+        <span class="c1">#    f&#39;rel_rd {rel_rd:.2e} rp_norm: {rp_norm:.2e} p_infeasible: {p_infeasible}&#39; +</span>
+        <span class="c1">#    f&#39; p_obj: {state.primal_objective:.1e}, d_obj: {state.dual_objective:.1e} relative_gap {relative_gap:.1e}&#39;)</span>
+ 
+        <span class="k">return</span> <span class="n">condition</span>
+
+    <span class="c1"># state = init()</span>
+    <span class="c1"># while cond(state):</span>
+    <span class="c1">#     state = double_iteration(state)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">double_iteration</span><span class="p">,</span> <span class="n">init</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">state</span></div>
+
+
+<span class="n">solve_l1_l2con_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">solve_l1_l2con</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+
+
+
+<div class="viewcode-block" id="solve"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cvx.adm.yall1.solve.html#cr.sparse.cvx.adm.yall1.solve">[docs]</a><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">W</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nonneg</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">5e-3</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="mi">9999</span><span class="p">,</span> <span class="n">jit</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Wrapper method to solve a variety of l1 minimization problems using ADMM</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (jax.numpy.ndarray): Sensing matrix/dictionary</span>
+<span class="sd">        b (jax.numpy.ndarray): Signal being approximated</span>
+<span class="sd">        x0 (jax.numpy.ndarray): Initial value of solutiion (primary variable) :math:`x`</span>
+<span class="sd">        z0 (jax.numpy.ndarray): Initial value of dual variable :math:`z`</span>
+<span class="sd">        nonneg (bool): Flag to indicate if values in the solution are all non-negative</span>
+<span class="sd">        W (jax.numpy.ndarray): The sparsifying orthonormal basis such that :math:`W x` is sparse</span>
+<span class="sd">        weights (jax.numpy.ndarray): The weights for individual entries in :math:`x`</span>
+<span class="sd">        rho (float): weight for the quadratic penalty term</span>
+<span class="sd">        delta (float): constraint on the residual norm</span>
+<span class="sd">        gamma (float): ADMM update parameter for :math:`x`</span>
+<span class="sd">        max_iters (int): maximum number of ADMM iterations</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        RecoveryFullSolution: Solution vector :math:`x` and residual :math:`r`</span>
+
+<span class="sd">    This function implements eq 2.25 of the paper.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">Atb</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">n_times</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_trans</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">Atb</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">b_max</span>  <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">inf</span><span class="p">))</span>
+    <span class="n">atb_max</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">Atb</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">inf</span><span class="p">))</span>
+    <span class="n">zero_solution</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">rho</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">zero_solution</span> <span class="o">=</span> <span class="n">atb_max</span> <span class="o">&lt;=</span> <span class="n">rho</span>
+    <span class="k">if</span> <span class="n">delta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">zero_solution</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">delta</span>
+    <span class="k">if</span> <span class="n">zero_solution</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">RecoveryFullSolution</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> 
+            <span class="n">iterations</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+            <span class="n">n_times</span><span class="o">=</span><span class="n">n_times</span><span class="p">,</span> <span class="n">n_trans</span><span class="o">=</span><span class="n">n_trans</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">x0</span> <span class="o">=</span> <span class="n">Atb</span> <span class="o">/</span> <span class="n">b_max</span>
+
+    <span class="k">if</span> <span class="n">z0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">z0</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">W</span><span class="p">:</span>
+        <span class="c1"># change A to solve for alpha = W x</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">A</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">C</span> <span class="o">@</span> <span class="n">B</span><span class="o">.</span><span class="n">T</span>
+    
+    <span class="n">w</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">weights</span><span class="p">:</span>
+        <span class="c1"># make sure that the final weights are an array of size n</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">weights</span>
+
+    <span class="c1"># scale data and model parameters</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">/</span> <span class="n">b_max</span>
+    <span class="k">if</span> <span class="n">rho</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="n">rho</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">/</span> <span class="n">b_max</span>
+    <span class="k">if</span> <span class="n">delta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">/</span> <span class="n">b_max</span>
+
+    <span class="k">if</span> <span class="n">jit</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">rho</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># It&#39;s an l1-l2 problem</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">solve_l1_l2_jit</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">nonneg</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">max_iters</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">delta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># It&#39;s an l1-l2 constrained problem BPIC</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">solve_l1_l2con_jit</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">nonneg</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">max_iters</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># It&#39;s a basis pursuit problem</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">solve_bp_jit</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">nonneg</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">max_iters</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">rho</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># It&#39;s an l1-l2 problem BPDN</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">solve_l1_l2</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">nonneg</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">max_iters</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">delta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># It&#39;s an l1-l2 constrained problem BPIC</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">solve_l1_l2con</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">nonneg</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">max_iters</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># It&#39;s a basis pursuit problem</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">solve_bp</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">nonneg</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">max_iters</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nonneg</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">x</span><span class="p">),</span> <span class="n">state</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">W</span><span class="p">:</span>
+        <span class="c1"># alpha = W x has been found. x = W.T @ alpha</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">RecoveryFullSolution</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">b_max</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">b_max</span><span class="o">*</span><span class="n">state</span><span class="o">.</span><span class="n">rp</span><span class="p">,</span> 
+        <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="p">,</span>
+        <span class="n">n_times</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">n_times</span><span class="o">+</span><span class="n">n_times</span><span class="p">,</span> 
+        <span class="n">n_trans</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">n_trans</span><span class="o">+</span><span class="n">n_trans</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
