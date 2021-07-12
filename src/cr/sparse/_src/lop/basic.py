@@ -26,14 +26,14 @@ def identity(m, n=None):
     n = m if n is None else n
     times = lambda x:  x
     trans = lambda x : x
-    return Operator(times=times, trans=trans, m=m, n=n)
+    return Operator(times=times, trans=trans, shape=(m,n))
 
 def matrix(A):
     """Converts a two-dimensional matrix to a linear operator"""
     m, n = A.shape
     times = lambda x: A @ x
     trans = lambda x : _hermitian(_hermitian(x) @ A )
-    return Operator(times=times, trans=trans, m=m, n=n)
+    return Operator(times=times, trans=trans, shape=(m,n))
 
 def diagonal(d):
     """Returns a linear operator which can be represented by a diagonal matrix"""
@@ -41,7 +41,7 @@ def diagonal(d):
     n = d.shape[0]
     times = lambda x: d * x
     trans = lambda x: _hermitian(d) * x
-    return Operator(times=times, trans=trans, m=n, n=n)
+    return Operator(times=times, trans=trans, shape=(n,n))
 
 
 def zero(m,n=None):
@@ -49,20 +49,20 @@ def zero(m,n=None):
     n = m if n is None else n
     times = lambda x: jnp.zeros( (m,) + x.shape[1:] )
     trans = lambda x: jnp.zeros((n,) + x.shape[1:])
-    return Operator(times=times, trans=trans, m=n, n=n)
+    return Operator(times=times, trans=trans, shape=(n,n))
 
 def flipud(n):
     """Returns an operator which flips the order of entries in input upside down"""
     times = lambda x: jnp.flipud(x)
     trans = lambda x: jnp.flipud(x)
-    return Operator(times=times, trans=trans, m=n, n=n)
+    return Operator(times=times, trans=trans, shape=(n,n))
 
 
 def sum(n):
     """Returns an operator which computes the sum of a vector"""
     times = lambda x: jnp.sum(x, keepdims=True, axis=0)
     trans = lambda x: jnp.repeat(x, n, axis=0)
-    return Operator(times=times, trans=trans, m=1, n=n)
+    return Operator(times=times, trans=trans, shape=(1,n))
 
 def pad_zeros(n, before, after):
     """Adds zeros before and after a vector.
@@ -77,7 +77,7 @@ def pad_zeros(n, before, after):
             return jnp.pad(x, pad_1_dim)
     def trans(x):
             return x[before:before+n]
-    return Operator(times=times, trans=trans, m=m, n=n, matrix_safe=False)
+    return Operator(times=times, trans=trans, shape=(m,n), matrix_safe=False)
 
 
 def real(n):
@@ -89,7 +89,7 @@ def real(n):
     """
     times = lambda x: jnp.real(x)
     trans = lambda x: jnp.real(x)
-    return Operator(times=times, trans=trans, m=n, n=n, linear=False)
+    return Operator(times=times, trans=trans, shape=(n,n), linear=False)
 
 
 def symmetrize(n):
@@ -97,7 +97,7 @@ def symmetrize(n):
     """
     times = lambda x: jnp.concatenate((jnp.flipud(x), x))
     trans = lambda x: x[n:] + x[n-1::-1]
-    return Operator(times=times, trans=trans, m=2*n, n=n)
+    return Operator(times=times, trans=trans, shape=(2*n,n))
 
 
 def restriction(n, indices):
@@ -106,4 +106,4 @@ def restriction(n, indices):
     k = len(indices)
     times = lambda x: x[indices]
     trans = lambda x: jnp.zeros((n,)+x.shape[1:]).at[indices].set(x)
-    return Operator(times=times, trans=trans, m=k, n=n)
+    return Operator(times=times, trans=trans, shape=(k,n))

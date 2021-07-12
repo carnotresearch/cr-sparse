@@ -31,7 +31,7 @@ def fourier_basis_1d(n):
     n3 = 1/n2
     times = lambda x:  n2*jnp.fft.ifft(x, n, axis=0)
     trans = lambda x : n3*jnp.fft.fft(x, n, axis=0)
-    return Operator(times=times, trans=trans, m=n, n=n)
+    return Operator(times=times, trans=trans, shape=(n,n))
 
 
 def dirac_fourier_basis_1d(n):
@@ -41,4 +41,4 @@ def dirac_fourier_basis_1d(n):
     n3 = 1/n2
     times = lambda x:  x[:n] + n2*jnp.fft.ifft(x[n:], n, axis=0)
     trans = lambda x : jnp.concatenate((x, n3*jnp.fft.fft(x, n, axis=0)), axis=0)
-    return Operator(times=times, trans=trans, m=n, n=2*n)
+    return Operator(times=times, trans=trans, shape=(n,2*n))

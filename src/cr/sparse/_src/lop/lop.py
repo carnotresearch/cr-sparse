@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import NamedTuple, Callable
+from typing import NamedTuple, Callable, Tuple
 import jax
 import jax.numpy as jnp
 
@@ -21,7 +21,7 @@ from .impl import _hermitian
 def column(T, i):
     """Returns the i-th column of the operator T
     """
-    e = jnp.zeros(T.n).at[i].set(1.)
+    e = jnp.zeros(T.shape[1]).at[i].set(1.)
     return T.times(e)
 
 column = jax.jit(column, static_argnums=(0, 1))
@@ -29,8 +29,9 @@ column = jax.jit(column, static_argnums=(0, 1))
 def columns(T, indices):
     """Returns the i-th column of the operator T
     """
+    n = T.shape[1]
     k = len(indices)
-    e = jnp.zeros((T.n, k))
+    e = jnp.zeros((n, k))
     e = e.at[indices, jnp.arange(k)].set(1.)
     return T.times(e)
 
@@ -60,10 +61,8 @@ class Operator(NamedTuple):
     """A linear function mapping from A to B """
     trans : Callable[[jnp.ndarray], jnp.ndarray]
     """Corresponding adjoint linear function mapping from B to A"""
-    m : int
-    """Dimension of space B"""
-    n : int
-    """Dimension of space A"""
+    shape : Tuple[int, int]
+    """Dimension of the linear operator (m, n)"""
     linear : bool = True
     """Indicates if the operator is linear or not"""
     jit_safe: bool = True
@@ -104,7 +103,7 @@ def jit(operator):
         raise Exception("This operator is not suitable for JIT compilation.")
     times = jax.jit(operator.times)
     trans = jax.jit(operator.trans)
-    return Operator(times=times, trans=trans, m=operator.m, n=operator.n, matrix_safe=operator.matrix_safe)
+    return Operator(times=times, trans=trans, shape=operator.shape, matrix_safe=operator.matrix_safe)
 
 ###########################################################################################
 #
@@ -120,23 +119,25 @@ def neg(A):
     """Returns the negative of a linear operator :math:`T = -A`"""
     times = lambda x : -A.times(x)
     trans = lambda x : -A.trans(x)
-    return Operator(times=times, trans=trans, m=A.m, n=A.n, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
+    return Operator(times=times, trans=trans, shape=A.shape, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
 
 def scale(A, alpha):
     """Returns the linear operator :math:`T = \\alpha A` for the operator :math:`A`"""
     times = lambda x : alpha * A.times(x)
     trans = lambda x : alpha * A.trans(x)
-    return Operator(times=times, trans=trans, m=A.m, n=A.n, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
+    return Operator(times=times, trans=trans, shape=A.shape, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
 
 def hermitian(A):
     """Returns the Hermitian transpose of a given operator :math:`T = A^H`"""
-    return Operator(times=A.trans, trans=A.times, m=A.n, n=A.m, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
+    m, n = A.shape
+    return Operator(times=A.trans, trans=A.times, shape=(n,m), jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
 
 def transpose(A):
     """Returns the transpose of a given operator :math:`T = A^T`"""
     times = lambda x: _hermitian(A.trans(_hermitian(x)))
     trans = lambda x: _hermitian(A.times(_hermitian(x)))
-    return Operator(times=times, trans=trans, m=A.n, n=A.m, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
+    m, n = A.shape
+    return Operator(times=times, trans=trans, shape=(n,m), jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
 
 def apply_n(func, n, x):
     init = (x, 0)
@@ -152,10 +153,11 @@ apply_n =  jax.jit(apply_n, static_argnums=(0, 1))
 
 def power(A, p):
     """Returns the linear operator :math:`T = A^p`"""
-    assert A.m == A.n
+    m, n = A.shape
+    assert m == n
     times = lambda x :apply_n(A.times, p, x)
     trans = lambda x : apply_n(A.trans, p, x)
-    return Operator(times=times, trans=trans, m=A.m, n=A.n, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
+    return Operator(times=times, trans=trans, shape=A.shape, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
 
 
 
@@ -165,46 +167,46 @@ def power(A, p):
 
 def add(A, B):
     """Returns the sum of two linear operators :math:`T = A + B`"""
-    ma, na = A.m, A.n
-    mb, nb = B.m, B.n
+    ma, na = A.shape
+    mb, nb = B.shape
     assert ma == mb
     assert na == nb
     jit_safe = A.jit_safe and B.jit_safe
     matrix_safe = A.matrix_safe and B.matrix_safe
     times = lambda x: A.times(x) + B.times(x)
     trans = lambda x: A.trans(x) + B.trans(x)
-    return Operator(times=times, trans=trans, m=ma, n=na, jit_safe=jit_safe, matrix_safe=matrix_safe)
+    return Operator(times=times, trans=trans, shape=A.shape, jit_safe=jit_safe, matrix_safe=matrix_safe)
 
 
 def subtract(A, B):
     """Returns a linear operator :math:`T  = A - B`"""
-    ma, na = A.m, A.n
-    mb, nb = B.m, B.n
+    ma, na = A.shape
+    mb, nb = B.shape
     assert ma == mb
     assert na == nb
     jit_safe = A.jit_safe and B.jit_safe
     matrix_safe = A.matrix_safe and B.matrix_safe
     times = lambda x: A.times(x) - B.times(x)
     trans = lambda x: A.trans(x) - B.trans(x)
-    return Operator(times=times, trans=trans, m=ma, n=na, jit_safe=jit_safe, matrix_safe=matrix_safe)
+    return Operator(times=times, trans=trans, shape=A.shape, jit_safe=jit_safe, matrix_safe=matrix_safe)
 
 
 def compose(A, B):
     """Returns the composite linear operator :math:`T = AB` such that :math:`T(x)= A(B(x))`"""
-    ma, na = A.m, A.n
-    mb, nb = B.m, B.n
+    ma, na = A.shape
+    mb, nb = B.shape
     assert na == mb
     jit_safe = A.jit_safe and B.jit_safe
     matrix_safe = A.matrix_safe and B.matrix_safe
     times = lambda x: A.times(B.times(x))
     trans = lambda x: B.trans(A.trans(x))
-    return Operator(times=times, trans=trans, m=ma, n=nb)
+    return Operator(times=times, trans=trans, shape=(ma, nb))
 
 
 def hcat(A, B):
     """Returns the linear operator :math:`T = [A \\, B]`"""
-    ma, na = A.m, A.n
-    mb, nb = B.m, B.n
+    ma, na = A.shape
+    mb, nb = B.shape
     assert ma == mb
     m = ma
     n = na + nb
@@ -212,7 +214,7 @@ def hcat(A, B):
     matrix_safe = A.matrix_safe and B.matrix_safe
     times = lambda x: A.times(x[:na]) + B.times(x[na:])
     trans = lambda x: jnp.concatenate((A.trans(x), B.trans(x)))
-    return Operator(times=times, trans=trans, m=m, n=n, jit_safe=jit_safe, matrix_safe=matrix_safe)
+    return Operator(times=times, trans=trans, shape=(m,n), jit_safe=jit_safe, matrix_safe=matrix_safe)
 
 
 

@@ -18,16 +18,18 @@ import jax.numpy as jnp
 
 def to_matrix(A):
     """Converts a linear operator to a matrix"""
+    n = A.shape[1]
     if not A.linear:
         raise Exception("This operator is not linear.")
-    I = jnp.eye(A.n)
+    I = jnp.eye(n)
     return jax.vmap(A.times, (1), (1))(I)
 
 def to_adjoint_matrix(A):
     """Converts the adjoint of a linear operator to a matrix"""
     if not A.linear:
         raise Exception("This operator is not linear.")
-    I = jnp.eye(A.m)
+    m = A.shape[0]
+    I = jnp.eye(m)
     return jax.vmap(A.trans, (1), (1))(I)
 
 
@@ -35,5 +37,6 @@ def to_complex_matrix(A):
     """Converts a linear operator to a matrix in complex numbers"""
     if not A.linear:
         raise Exception("This operator is not linear.")
-    I = jnp.eye(A.n) + 0j
+    n = A.shape[1]
+    I = jnp.eye(n) + 0j
     return jax.vmap(A.times, (1), (1))(I)
