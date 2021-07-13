@@ -1,0 +1,12 @@
+
+:orphan:
+
+.. _sphx_glr_gallery_sg_execution_times:
+
+Computation times
+=================
+**00:01.739** total execution time for **gallery** files:
+
++---------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_gallery_sparse_vector_normals.py` (``sparse_vector_normals.py``) | 00:01.739 | 0.0 MB |
++---------------------------------------------------------------------------------+-----------+--------+
