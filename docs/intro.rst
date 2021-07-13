@@ -9,8 +9,8 @@ Introduction
 This library aims to provide XLA/JAX based Python implementations for
 various algorithms related to:
 
-* Sparse approximation
-* Compressive sensing
+* Sparse approximation :cite:`mallat2008wavelet,elad2010sparse`
+* Compressive sensing :cite:`donoho2006compressed,candes2006compressive,candes2008introduction,baraniuk2011introduction`
 * Linear operators
 
 Bulk of this library is built using functional programming techniques
@@ -53,6 +53,9 @@ Linear Operators
 
 Efficient linear operator implementations provide much faster
 computations compared to direct matrix vector multiplication.
+PyLops :cite:`ravasi2019pylops` is a popular collection of
+linear operators implemented in Python. 
+
 A framework for building and composing linear operators has been
 provided in ``cr.sparse.lop``. Functionality includes:
 
@@ -70,15 +73,26 @@ Greedy Sparse Recovery/Approximation Algorithms
 
 JAX based implementations for the following algorithms are included.
 
-* Orthogonal Matching Pursuit
-* Compressive Sampling Matching Pursuit
-* Subspace Pursuit
-* Iterative Hard Thresholding
-* Hard Thresholding Pursuit
+* Orthogonal Matching Pursuit :cite:`pati1993orthogonal,tropp2004greed`
+* Compressive Sampling Matching Pursuit :cite:`needell2009cosamp`
+* Subspace Pursuit :cite:`dai2009subspace`
+* Iterative Hard Thresholding :cite:`blumensath2009iterative`
+* Hard Thresholding Pursuit :cite:`foucart2011recovering`
 
 Convex Optimization based Recovery Algorithms
 -----------------------------------------------------
 
+Convex optimization :cite:`boyd2004convex` based methods provide more 
+reliable solutions to sparse recovery problems although they tend to be
+computationally more complex. 
+The first method appeared around 1998 as basis pursuit :cite:`chen1998atomic`.
+
+Alternating directions :cite:`boyd2011distributed` based methods provide
+simple yet efficient iterative solutions for sparse recovery. 
+
+:cite:`yang2011alternating` describes inexact ADMM based solutions 
+for a variety of :math:`\ell_1` minimization problems. The authors
+provide a MATLAB package ``yall1`` :cite:`zhang2010user`. 
 A port of ``yall1`` (Your algorithms for :math:`\ell_1`) has been provided.
 It provides alternating directions method of multipliers based solutions for
 basis pursuit, basis pursuit denoising, basis pursuit with inequality constraints,
@@ -116,6 +130,9 @@ Further Reading
 * `How to Think in JAX <https://jax.readthedocs.io/en/latest/notebooks/thinking_in_jax.html>`_
 * `JAX - The Sharp Bits <https://jax.readthedocs.io/en/latest/notebooks/Common_Gotchas_in_JAX.html>`_
 
+
+.. bibliography::
+   :filter: docname in docnames
 
 
 `Documentation <https://carnotresearch.github.io/cr-sparse>`_ | 

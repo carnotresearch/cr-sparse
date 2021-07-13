@@ -50,7 +50,7 @@ extensions = [
     "sphinx.ext.githubpages",
     'matplotlib.sphinxext.plot_directive',
     'sphinx_autodoc_typehints',
-    #'sphinxcontrib.bibtex',
+    'sphinxcontrib.bibtex',
 ]
 
 intersphinx_mapping = {
@@ -156,3 +156,6 @@ matplotlib.use("agg")
 # Tell sphinx-autodoc-typehints to generate stub parameter annotations including
 # types, even if the parameters aren't explicitly documented.
 always_document_param_types = True
+
+# BIBTEX Settings
+bibtex_bibfiles = ['references.bib']
