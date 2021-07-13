@@ -14,6 +14,11 @@ import os
 import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+import sphinx_gallery
+from sphinx_gallery.sorting import ExampleTitleSortKey
+
+
+
 sys.path.insert(0, os.path.join(os.path.abspath(".."), 'src'))
 sys.path.append(os.path.abspath('extensions'))
 
@@ -42,6 +47,7 @@ extensions = [
     'sphinx.ext.autosummary',
     "sphinx.ext.doctest",
     'sphinx.ext.ifconfig',
+    'sphinx.ext.extlinks',
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
     "sphinx.ext.mathjax",
@@ -51,6 +57,7 @@ extensions = [
     'matplotlib.sphinxext.plot_directive',
     'sphinx_autodoc_typehints',
     'sphinxcontrib.bibtex',
+    'sphinx_gallery.gen_gallery',
 ]
 
 intersphinx_mapping = {
@@ -58,6 +65,11 @@ intersphinx_mapping = {
     'numpy': ('https://numpy.org/doc/stable/', None),
     'scipy': ('https://docs.scipy.org/doc/scipy/reference/', None),
     'jax': ('https://jax.readthedocs.io/en/latest/', None),
+    "sklearn": ("http://scikit-learn.org/stable/", None),
+    "pandas": ("http://pandas.pydata.org/pandas-docs/stable/", None),
+    "matplotlib": ("https://matplotlib.org/", None),
+    "pyfftw": ("https://pyfftw.readthedocs.io/en/latest/", None),
+    "spgl1": ("https://spgl1.readthedocs.io/en/latest/", None),
 }
 
 suppress_warnings = [
@@ -159,3 +171,17 @@ always_document_param_types = True
 
 # BIBTEX Settings
 bibtex_bibfiles = ['references.bib']
+
+
+sphinx_gallery_conf = {
+     'examples_dirs': '../examples',   # path to your example scripts
+     'gallery_dirs': 'gallery',  # path to where to save gallery generated output
+     # pattern of files to match
+    'filename_pattern': '\.py',
+    # Remove the "Download all examples" button from the top level gallery
+    'download_all_examples': False,
+    # Sort gallery example by file name instead of number of lines (default)
+    'within_subsection_order': ExampleTitleSortKey,
+    # Modules for which function level galleries are created.
+    'doc_module': 'cr.sparse',
+}

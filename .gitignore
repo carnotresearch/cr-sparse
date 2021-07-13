@@ -125,3 +125,5 @@ record_*.csv
 *.mat
 
 tmp/*
+
+docs/gallery/
