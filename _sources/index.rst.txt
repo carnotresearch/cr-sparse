@@ -12,6 +12,7 @@ GITHUB Repo: `cr-sparse <https://github.com/carnotresearch/cr-sparse>`_
    start
    source/index
    benchmarks/index
+   zzzreference
 
 
 
