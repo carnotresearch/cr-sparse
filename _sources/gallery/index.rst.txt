@@ -4,6 +4,8 @@
 
 .. _sphx_glr_gallery:
 
+.. _gallery:
+
 Examples
 ===========================
 
@@ -30,6 +32,42 @@ Examples
    :hidden:
 
    /gallery/sparse_vector_normals
+.. raw:: html
+
+    <div class="sphx-glr-clear"></div>
+
+
+
+.. _sphx_glr_gallery_lop:
+
+.. _lop_examples:
+
+.. _lop-examples-index:
+
+Linear Operators
+==================
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to construct a linear operator from an ordinary matrix.">
+
+.. only:: html
+
+ .. figure:: /gallery/lop/images/thumb/sphx_glr_matrix_operator_thumb.png
+     :alt: A matrix backed linear operator
+
+     :ref:`sphx_glr_gallery_lop_matrix_operator.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/lop/matrix_operator
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>
