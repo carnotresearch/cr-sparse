@@ -120,13 +120,14 @@ Random compressive sensing operators
     random_orthonormal_rows_dict
 
 
-Finite difference operators
+Derivatives (finite differences)
 --------------------------------------
 
 .. autosummary::
     :toctree: _autosummary
 
     first_derivative
+    second_derivative
 
 Convenience operators
 -----------------------
