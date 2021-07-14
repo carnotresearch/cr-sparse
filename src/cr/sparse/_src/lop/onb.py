@@ -18,7 +18,7 @@ from .impl import _hermitian
 from .lop import Operator
 
 
-def fourier_basis_1d(n):
+def fourier_basis(n):
     """Returns an operator which represents the DFT orthonormal basis
     
     Forward operation is akin to computing inverse fast fourier transform
@@ -34,7 +34,7 @@ def fourier_basis_1d(n):
     return Operator(times=times, trans=trans, shape=(n,n))
 
 
-def dirac_fourier_basis_1d(n):
+def dirac_fourier_basis(n):
     """Returns an operator for a two-ortho basis dictionary consisting of Dirac basis and Fourier basis
     """
     n2 = jnp.sqrt(n)

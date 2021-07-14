@@ -89,15 +89,23 @@ Basic operators
     symmetrize
     restriction
 
-
 Signal processing operators
 ------------------------------------
 
 .. autosummary::
     :toctree: _autosummary
 
-    fourier_basis_1d
-    dirac_fourier_basis_1d
+    running_average
+    fir_filter
+
+Orthonormal bases and multi-base dictionaries
+------------------------------------------------
+
+.. autosummary::
+    :toctree: _autosummary
+
+    fourier_basis
+    dirac_fourier_basis
 
 
 Random compressive sensing operators
@@ -111,6 +119,14 @@ Random compressive sensing operators
     random_onb_dict
     random_orthonormal_rows_dict
 
+
+Finite difference operators
+--------------------------------------
+
+.. autosummary::
+    :toctree: _autosummary
+
+    first_derivative
 
 Convenience operators
 -----------------------

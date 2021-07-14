@@ -57,11 +57,20 @@ from cr.sparse._src.lop.basic import (
     real,
 )
 
-from cr.sparse._src.lop.signal1d import (
-    fourier_basis_1d,
-    dirac_fourier_basis_1d
+# Basic signal processing
+from cr.sparse._src.lop.filters import (
+    running_average,
+    fir_filter,
 )
 
+# Orthogonal bases
+from cr.sparse._src.lop.onb import (
+    fourier_basis,
+    dirac_fourier_basis,
+)
+
+
+# Derivatives
 from cr.sparse._src.lop.calculus import (
     first_derivative,
 )
