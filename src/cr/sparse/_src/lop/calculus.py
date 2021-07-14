@@ -41,7 +41,14 @@ def _derivative_bwd_adj(x, dx):
     return jnp.diff(-x, append=append) / dx
 
 def _derivative_centered(x, dx):
-    pass
+    diffs = (0.5 * x[2:] - 0.5 * x[:-2]) / dx
+    return jnp.pad(diffs, (1,1))
+
+def _derivative_centered_adj(x, dx):
+    y = jnp.zeros(x.shape)
+    y = y.at[0:-2].add(-0.5*x[1:-1])
+    y = y.at[2:].add(0.5*x[1:-1])
+    return y
 
 
 def first_derivative(n, dx=1., kind='forward'):
@@ -53,6 +60,9 @@ def first_derivative(n, dx=1., kind='forward'):
     elif kind == 'backward':
         times = partial(_derivative_bwd, dx=dx)
         trans = partial(_derivative_bwd_adj, dx=dx)
+    elif kind == 'centered':
+        times = partial(_derivative_centered, dx=dx)
+        trans = partial(_derivative_centered_adj, dx=dx)
     else:
         raise NotImplemented
     return Operator(times=times, trans=trans, shape=(n,n))
