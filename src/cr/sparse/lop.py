@@ -73,6 +73,7 @@ from cr.sparse._src.lop.onb import (
 # Derivatives
 from cr.sparse._src.lop.calculus import (
     first_derivative,
+    second_derivative,
 )
 
 from cr.sparse._src.lop.random import (

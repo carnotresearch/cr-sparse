@@ -51,7 +51,7 @@ def _derivative_centered_adj(x, dx):
     return y
 
 
-def first_derivative(n, dx=1., kind='forward'):
+def first_derivative(n, dx=1., kind='centered'):
     """Computes the first derivative
     """
     if kind == 'forward':
@@ -66,3 +66,11 @@ def first_derivative(n, dx=1., kind='forward'):
     else:
         raise NotImplemented
     return Operator(times=times, trans=trans, shape=(n,n))
+
+
+def second_derivative(n, dx=1.):
+    filter = jnp.array([1., -2., 1.]) / dx / dx
+    times = lambda x : jnp.pad(jnp.convolve(x, filter, 'valid'), (1,1))
+    trans = lambda x : jnp.convolve(x[1:-1], filter, 'full')
+    return Operator(times=times, trans=trans, shape=(n,n))
+
