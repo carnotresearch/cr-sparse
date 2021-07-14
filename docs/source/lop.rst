@@ -120,6 +120,15 @@ Random compressive sensing operators
     random_orthonormal_rows_dict
 
 
+Operators for special matrices
+------------------------------------
+
+.. autosummary::
+    :toctree: _autosummary
+
+    circulant
+
+
 Derivatives (finite differences)
 --------------------------------------
 

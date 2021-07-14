@@ -76,6 +76,11 @@ from cr.sparse._src.lop.calculus import (
     second_derivative,
 )
 
+# Derivatives
+from cr.sparse._src.lop.special_matrices import (
+    circulant,
+)
+
 from cr.sparse._src.lop.random import (
     gaussian_dict,
     rademacher_dict,

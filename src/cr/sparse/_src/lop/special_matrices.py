@@ -18,23 +18,14 @@ from .impl import _hermitian
 from .lop import Operator
 
 
-def running_average(n, length):
-    """Computes a running average of entries in x
-    """
-    start = length // 2
-    filter = jnp.ones(length) / length
-    times = lambda x : jnp.convolve(x, filter, 'same')
-    trans = lambda x : jnp.convolve(x, filter, 'full')[start:start+n]
+
+def circulant(n, c):
+    r = len(c)
+    assert n >= r
+    c_padded = jnp.pad(c, (0, n-r))
+    cf = jnp.fft.rfft(c_padded)
+    c_j = jnp.roll(c_padded[::-1], 1)
+    cjf = jnp.fft.rfft(c_j)
+    times = lambda x : jnp.fft.irfft(jnp.fft.rfft(x) * cf)
+    trans = lambda x : jnp.fft.irfft(jnp.fft.rfft(x) * cjf)
     return Operator(times=times, trans=trans, shape=(n,n))
-
-
-def fir_filter(n, h):
-    """Implements an FIR filter defined by coeffs
-    """
-    h_conj = _hermitian(h[::-1])
-    m = len(h)
-    start = m // 2
-    times = lambda x : jnp.convolve(x, h, 'same')
-    trans = lambda x : jnp.convolve(x, h_conj, 'full')[start:start+n]
-    return Operator(times=times, trans=trans, shape=(n,n))
-
