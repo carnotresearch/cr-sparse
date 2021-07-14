@@ -62,6 +62,10 @@ from cr.sparse._src.lop.signal1d import (
     dirac_fourier_basis_1d
 )
 
+from cr.sparse._src.lop.calculus import (
+    first_derivative,
+)
+
 from cr.sparse._src.lop.random import (
     gaussian_dict,
     rademacher_dict,
