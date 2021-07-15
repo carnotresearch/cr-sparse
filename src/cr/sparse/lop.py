@@ -67,6 +67,7 @@ from cr.sparse._src.lop.filters import (
 from cr.sparse._src.lop.onb import (
     fourier_basis,
     dirac_fourier_basis,
+    dct_basis,
 )
 
 

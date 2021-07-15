@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import jax.numpy as jnp
+import jax.numpy.fft as jfft
 
 from .impl import _hermitian
 from .lop import Operator
@@ -42,3 +43,41 @@ def dirac_fourier_basis(n):
     times = lambda x:  x[:n] + n2*jnp.fft.ifft(x[n:], n, axis=0)
     trans = lambda x : jnp.concatenate((x, n3*jnp.fft.fft(x, n, axis=0)), axis=0)
     return Operator(times=times, trans=trans, shape=(n,2*n))
+
+
+
+def dct_basis(n):
+    """Returns an operator which represents the DCT orthonormal basis
+    
+    Forward operation is akin to computing inverse discrete cosine transform
+    scaled appropriately
+
+    Adjoint operation is akin to computing forward discrete cosine transform
+    scaled appropriately
+    """
+
+    factor = jnp.sqrt(2*n)
+    ks = jnp.arange(n)
+
+    phi_f = jnp.exp(1j*jnp.pi*ks/(2*n))
+    phi_f = phi_f*factor
+    phi_f = phi_f.at[0].set(phi_f[0]*jnp.sqrt(2))
+
+    phi_a = jnp.exp(-1j*jnp.pi*ks/(2*n))
+    phi_a = phi_a.at[0].set(phi_a[0]*1/jnp.sqrt(2))
+    phi_a = phi_a / factor
+
+
+    def times(x):
+        upper = (phi_f*x.T).T
+        lower = jnp.zeros((1,)+x.shape[1:])
+        c = jnp.concatenate((upper, lower))
+        return jfft.irfft(c, axis=0)[:n]
+
+    def trans(x):
+        x = jnp.concatenate( (x[:],  x[::-1]))
+        c = jfft.rfft(x, axis=0)[:n]
+        prod = jnp.real(phi_a*c.T).T
+        return prod
+
+    return Operator(times=times, trans=trans, shape=(n,n))
