@@ -113,7 +113,7 @@ def is_positive_definite(A):
     return jnp.all(jnp.real(jnp.linalg.eigvals(A)) > 0)
 
 
-def has_orthogonal_columns(A):
+def has_orthogonal_columns(A, atol=1e-6):
     """Checks if a matrix has orthogonal columns
 
     Args:
@@ -126,10 +126,10 @@ def has_orthogonal_columns(A):
     G = A.T @ A
     m = G.shape[0]
     I = jnp.eye(m)
-    return jnp.allclose(G, I, atol=m*1e-6)
+    return jnp.allclose(G, I, atol=m*m*atol)
 
 
-def has_orthogonal_rows(A):
+def has_orthogonal_rows(A, atol=1e-6):
     """Checks if a matrix has orthogonal rows
 
     Args:
@@ -142,7 +142,7 @@ def has_orthogonal_rows(A):
     G = A @ A.T
     m = G.shape[0]
     I = jnp.eye(m)
-    return jnp.allclose(G, I, atol=m*1e-6)
+    return jnp.allclose(G, I, atol=m*m*atol)
 
 def has_unitary_columns(A):
     """Checks if a matrix has unitary columns
