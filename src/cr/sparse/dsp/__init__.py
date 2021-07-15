@@ -15,6 +15,6 @@
 from cr.sparse._src.dsp.dct import (
     dct,
     idct,
-    orthogonal_dct,
-    orthogonal_idct
+    orthonormal_dct,
+    orthonormal_idct
 )
