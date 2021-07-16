@@ -89,7 +89,7 @@ def dirac_hadamard_basis(n):
     return jnp.hstack((I, H))
 
 
-def dct_basis(N):
+def cosine_basis(N):
     """DCT Basis
     """
     n, k = jnp.ogrid[1:2*N+1:2, :N]
@@ -97,19 +97,19 @@ def dct_basis(N):
     D = normalize_l2_cw(D)
     return D.T
 
-def dirac_dct_basis(n):
+def dirac_cosine_basis(n):
     """A dictionary consisting of identity and DCT bases
     """
     I = jnp.eye(n)
-    H = dct_basis(n)
+    H = cosine_basis(n)
     return jnp.hstack((I, H))
 
-def dirac_hadamard_dct_basis(n):
+def dirac_hadamard_cosine_basis(n):
     """A dictionary consisting of identity, Hadamard and DCT bases
     """
     I = jnp.eye(n)
     H = hadamard_basis(n)
-    D = dct_basis(n)
+    D = cosine_basis(n)
     return jnp.hstack((I, H, D))
 
 

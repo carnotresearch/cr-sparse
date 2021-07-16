@@ -32,9 +32,9 @@ def test_hadamard_basis():
     assert crs.is_symmetric(F)
     assert crs.is_positive_definite(F)
 
-def test_dct_basis():
+def test_cosine_basis():
     N = 16
-    A = crdict.dct_basis(N)
+    A = crdict.cosine_basis(N)
     assert crs.is_matrix(A)
     assert crs.is_square(A)
     assert A.shape == (N, N)

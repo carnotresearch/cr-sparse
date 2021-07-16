@@ -25,10 +25,10 @@ def test_dirac_hadamard_basis():
     n = 16
     A = crdict.dirac_hadamard_basis(n)
 
-def test_dirac_dct_basis():
+def test_dirac_cosine_basis():
     n = 16
-    A = crdict.dirac_dct_basis(n)
+    A = crdict.dirac_cosine_basis(n)
 
-def test_dirac_hadamard_dct_basis():
+def test_dirac_hadamard_cosine_basis():
     n = 16
-    A = crdict.dirac_hadamard_dct_basis(n)
+    A = crdict.dirac_hadamard_cosine_basis(n)

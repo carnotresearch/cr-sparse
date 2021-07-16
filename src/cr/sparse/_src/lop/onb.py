@@ -18,6 +18,8 @@ import jax.numpy.fft as jfft
 from .impl import _hermitian
 from .lop import Operator
 
+import cr.sparse as crs
+import cr.sparse.dsp as crdsp
 
 def fourier_basis(n):
     """Returns an operator which represents the DFT orthonormal basis
@@ -42,12 +44,12 @@ def dirac_fourier_basis(n):
     n3 = 1/n2
     times = lambda x:  x[:n] + n2*jnp.fft.ifft(x[n:], n, axis=0)
     trans = lambda x : jnp.concatenate((x, n3*jnp.fft.fft(x, n, axis=0)), axis=0)
-    return Operator(times=times, trans=trans, shape=(n,2*n))
+    return Operator(times=times, trans=trans, shape=(n,2*n), real=False)
 
 
 
-def dct_basis(n):
-    """Returns an operator which represents the DCT orthonormal basis
+def cosine_basis(n):
+    """Returns an operator which represents the DCT-II orthonormal basis
     
     Forward operation is akin to computing inverse discrete cosine transform
     scaled appropriately
@@ -80,4 +82,16 @@ def dct_basis(n):
         prod = jnp.real(phi_a*c.T).T
         return prod
 
+    return Operator(times=times, trans=trans, shape=(n,n))
+
+def walsh_hadamard_basis(n):
+    """Returns an operator which represents the Walsh Hadamard Transform Basis
+
+    Note:
+        This is a self-adjoint operator
+    """
+    assert crs.is_power_of_2(n), "Only powers of 2 are supported as n"
+    factor = 1/jnp.sqrt(n)
+    times = lambda x: factor * crdsp.fwht(x)
+    trans = times
     return Operator(times=times, trans=trans, shape=(n,n))
