@@ -5,8 +5,8 @@
 
 Computation times
 =================
-**00:02.138** total execution time for **gallery** files:
+**00:02.061** total execution time for **gallery** files:
 
 +---------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_sparse_vector_normals.py` (``sparse_vector_normals.py``) | 00:02.138 | 0.0 MB |
+| :ref:`sphx_glr_gallery_sparse_vector_normals.py` (``sparse_vector_normals.py``) | 00:02.061 | 0.0 MB |
 +---------------------------------------------------------------------------------+-----------+--------+
