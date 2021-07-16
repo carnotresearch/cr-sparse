@@ -49,13 +49,15 @@ class Operator(NamedTuple):
         linear: Indicates if the operator is linear or not
         jit_safe: Indicates if the operator can be safely JIT compiled
         matrix_safe: Indicates if the operator can accept a matrix of vectors
+        real: Indicates if a linear operator is real i.e. has a matrix representation of real numbers
 
     Note:
         While most of the operators in the library are linear operators,
         some are not. Prominent examples include operators
         like real part operator, imaginary part operator.
-
         These operators are provided for convenience.
+
+        Most operators in this collection are real.
     """
     times : Callable[[jnp.ndarray], jnp.ndarray]
     """A linear function mapping from A to B """
@@ -69,6 +71,8 @@ class Operator(NamedTuple):
     """Indicates if the times and trans functions can be safely jit compiled"""
     matrix_safe: bool = True
     """Indicates if the operator can accept a matrix of vectors"""
+    real: bool = True
+    """Indicates if a linear operator is real i.e. has a matrix representation of real numbers"""
     column = column
     """Returns a specific column of the matrix representation of the operator"""
     columns = columns
@@ -119,25 +123,30 @@ def neg(A):
     """Returns the negative of a linear operator :math:`T = -A`"""
     times = lambda x : -A.times(x)
     trans = lambda x : -A.trans(x)
-    return Operator(times=times, trans=trans, shape=A.shape, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
+    return Operator(times=times, trans=trans, shape=A.shape, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe, real=A.real)
 
 def scale(A, alpha):
     """Returns the linear operator :math:`T = \\alpha A` for the operator :math:`A`"""
+    real = A.real and not  isinstance(alpha, complex)
     times = lambda x : alpha * A.times(x)
     trans = lambda x : alpha * A.trans(x)
-    return Operator(times=times, trans=trans, shape=A.shape, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
+    return Operator(times=times, trans=trans, shape=A.shape, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe, real=real)
 
 def hermitian(A):
     """Returns the Hermitian transpose of a given operator :math:`T = A^H`"""
     m, n = A.shape
-    return Operator(times=A.trans, trans=A.times, shape=(n,m), jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
+    return Operator(times=A.trans, trans=A.times, shape=(n,m), jit_safe=A.jit_safe, matrix_safe=A.matrix_safe, real=A.real)
 
 def transpose(A):
     """Returns the transpose of a given operator :math:`T = A^T`"""
-    times = lambda x: _hermitian(A.trans(_hermitian(x)))
-    trans = lambda x: _hermitian(A.times(_hermitian(x)))
     m, n = A.shape
-    return Operator(times=times, trans=trans, shape=(n,m), jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
+    if A.real:
+        times = A.trans
+        trans = A.times
+    else:
+        times = lambda x: _hermitian(A.trans(_hermitian(x)))
+        trans = lambda x: _hermitian(A.times(_hermitian(x)))
+    return Operator(times=times, trans=trans, shape=(n,m), jit_safe=A.jit_safe, matrix_safe=A.matrix_safe, real=A.real)
 
 def apply_n(func, n, x):
     init = (x, 0)
@@ -157,7 +166,7 @@ def power(A, p):
     assert m == n
     times = lambda x :apply_n(A.times, p, x)
     trans = lambda x : apply_n(A.trans, p, x)
-    return Operator(times=times, trans=trans, shape=A.shape, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe)
+    return Operator(times=times, trans=trans, shape=A.shape, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe, real=A.real)
 
 
 
@@ -173,9 +182,10 @@ def add(A, B):
     assert na == nb
     jit_safe = A.jit_safe and B.jit_safe
     matrix_safe = A.matrix_safe and B.matrix_safe
+    real = A.real and B.real
     times = lambda x: A.times(x) + B.times(x)
     trans = lambda x: A.trans(x) + B.trans(x)
-    return Operator(times=times, trans=trans, shape=A.shape, jit_safe=jit_safe, matrix_safe=matrix_safe)
+    return Operator(times=times, trans=trans, shape=A.shape, jit_safe=jit_safe, matrix_safe=matrix_safe, real=real)
 
 
 def subtract(A, B):
@@ -186,9 +196,10 @@ def subtract(A, B):
     assert na == nb
     jit_safe = A.jit_safe and B.jit_safe
     matrix_safe = A.matrix_safe and B.matrix_safe
+    real = A.real and B.real
     times = lambda x: A.times(x) - B.times(x)
     trans = lambda x: A.trans(x) - B.trans(x)
-    return Operator(times=times, trans=trans, shape=A.shape, jit_safe=jit_safe, matrix_safe=matrix_safe)
+    return Operator(times=times, trans=trans, shape=A.shape, jit_safe=jit_safe, matrix_safe=matrix_safe, real=real)
 
 
 def compose(A, B):
@@ -198,9 +209,10 @@ def compose(A, B):
     assert na == mb
     jit_safe = A.jit_safe and B.jit_safe
     matrix_safe = A.matrix_safe and B.matrix_safe
+    real = A.real and B.real
     times = lambda x: A.times(B.times(x))
     trans = lambda x: B.trans(A.trans(x))
-    return Operator(times=times, trans=trans, shape=(ma, nb))
+    return Operator(times=times, trans=trans, shape=(ma, nb), real=real)
 
 
 def hcat(A, B):
@@ -212,9 +224,10 @@ def hcat(A, B):
     n = na + nb
     jit_safe = A.jit_safe and B.jit_safe
     matrix_safe = A.matrix_safe and B.matrix_safe
+    real = A.real and B.real
     times = lambda x: A.times(x[:na]) + B.times(x[na:])
     trans = lambda x: jnp.concatenate((A.trans(x), B.trans(x)))
-    return Operator(times=times, trans=trans, shape=(m,n), jit_safe=jit_safe, matrix_safe=matrix_safe)
+    return Operator(times=times, trans=trans, shape=(m,n), jit_safe=jit_safe, matrix_safe=matrix_safe, real=real)
 
 
 

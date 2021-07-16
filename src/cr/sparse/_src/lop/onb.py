@@ -32,7 +32,7 @@ def fourier_basis(n):
     n3 = 1/n2
     times = lambda x:  n2*jnp.fft.ifft(x, n, axis=0)
     trans = lambda x : n3*jnp.fft.fft(x, n, axis=0)
-    return Operator(times=times, trans=trans, shape=(n,n))
+    return Operator(times=times, trans=trans, shape=(n,n), real=False)
 
 
 def dirac_fourier_basis(n):
