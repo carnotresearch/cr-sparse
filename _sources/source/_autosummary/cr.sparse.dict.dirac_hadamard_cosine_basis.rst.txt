@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.dirac\_hadamard\_cosine\_basis
+=============================================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: dirac_hadamard_cosine_basis

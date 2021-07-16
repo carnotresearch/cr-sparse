@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>cr.sparse.dict.gaussian_mtx &mdash; CR.Sparse  documentation</title>
+  <title>cr.sparse.dict.dirac_hadamard_cosine_basis &mdash; CR.Sparse  documentation</title>
   
 
   
@@ -50,8 +50,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="cr.sparse.dict.rademacher_mtx" href="cr.sparse.dict.rademacher_mtx.html" />
-    <link rel="prev" title="Sparsifying Dictionaries and Sensing Matrices" href="../dict.html" /> 
+    <link rel="next" title="cr.sparse.dict.fourier_basis" href="cr.sparse.dict.fourier_basis.html" />
+    <link rel="prev" title="cr.sparse.dict.dirac_cosine_basis" href="cr.sparse.dict.dirac_cosine_basis.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -104,7 +104,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">CR.Sparse API Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../dict.html#functions-for-constructing-sparsying-dictionaries-and-sensing-matrices">Functions for constructing sparsying dictionaries and sensing matrices</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.dict.gaussian_mtx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.dict.gaussian_mtx.html">cr.sparse.dict.gaussian_mtx</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.dict.rademacher_mtx.html">cr.sparse.dict.rademacher_mtx</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.dict.random_onb.html">cr.sparse.dict.random_onb</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.dict.hadamard.html">cr.sparse.dict.hadamard</a></li>
@@ -112,7 +112,7 @@
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.dict.dirac_hadamard_basis.html">cr.sparse.dict.dirac_hadamard_basis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.dict.cosine_basis.html">cr.sparse.dict.cosine_basis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.dict.dirac_cosine_basis.html">cr.sparse.dict.dirac_cosine_basis</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.dict.dirac_hadamard_cosine_basis.html">cr.sparse.dict.dirac_hadamard_cosine_basis</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.dict.dirac_hadamard_cosine_basis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.dict.fourier_basis.html">cr.sparse.dict.fourier_basis</a></li>
 </ul>
 </li>
@@ -185,13 +185,13 @@
         
           <li><a href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a> &raquo;</li>
         
-      <li>cr.sparse.dict.gaussian_mtx</li>
+      <li>cr.sparse.dict.dirac_hadamard_cosine_basis</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/source/_autosummary/cr.sparse.dict.gaussian_mtx.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/source/_autosummary/cr.sparse.dict.dirac_hadamard_cosine_basis.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -228,12 +228,12 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="cr-sparse-dict-gaussian-mtx">
-<h1>cr.sparse.dict.gaussian_mtx<a class="headerlink" href="#cr-sparse-dict-gaussian-mtx" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cr-sparse-dict-dirac-hadamard-cosine-basis">
+<h1>cr.sparse.dict.dirac_hadamard_cosine_basis<a class="headerlink" href="#cr-sparse-dict-dirac-hadamard-cosine-basis" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="cr.sparse.dict.gaussian_mtx">
-<span class="sig-prename descclassname"><span class="pre">cr.sparse.dict.</span></span><span class="sig-name descname"><span class="pre">gaussian_mtx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize_atoms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/dict/simple.html#gaussian_mtx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.dict.gaussian_mtx" title="Permalink to this definition">¶</a></dt>
-<dd><p>A dictionary/sensing matrix where entries are drawn independently from normal distribution.</p>
+<dt class="sig sig-object py" id="cr.sparse.dict.dirac_hadamard_cosine_basis">
+<span class="sig-prename descclassname"><span class="pre">cr.sparse.dict.</span></span><span class="sig-name descname"><span class="pre">dirac_hadamard_cosine_basis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/dict/simple.html#dirac_hadamard_cosine_basis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.dict.dirac_hadamard_cosine_basis" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary consisting of identity, Hadamard and DCT bases</p>
 </dd></dl>
 
 </div>
@@ -244,8 +244,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="cr.sparse.dict.rademacher_mtx.html" class="btn btn-neutral float-right" title="cr.sparse.dict.rademacher_mtx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../dict.html" class="btn btn-neutral float-left" title="Sparsifying Dictionaries and Sensing Matrices" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cr.sparse.dict.fourier_basis.html" class="btn btn-neutral float-right" title="cr.sparse.dict.fourier_basis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cr.sparse.dict.dirac_cosine_basis.html" class="btn btn-neutral float-left" title="cr.sparse.dict.dirac_cosine_basis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

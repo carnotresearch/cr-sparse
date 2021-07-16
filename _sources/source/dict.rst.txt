@@ -19,9 +19,9 @@ Functions for constructing sparsying dictionaries and sensing matrices
     hadamard
     hadamard_basis
     dirac_hadamard_basis
-    dct_basis
-    dirac_dct_basis
-    dirac_hadamard_dct_basis
+    cosine_basis
+    dirac_cosine_basis
+    dirac_hadamard_cosine_basis
     fourier_basis
 
 

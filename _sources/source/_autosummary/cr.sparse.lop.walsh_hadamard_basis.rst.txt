@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.walsh\_hadamard\_basis
+====================================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: walsh_hadamard_basis

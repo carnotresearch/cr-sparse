@@ -1,6 +1,0 @@
-﻿cr.sparse.dict.dct\_basis
-=========================
-
-.. currentmodule:: cr.sparse.dict
-
-.. autofunction:: dct_basis

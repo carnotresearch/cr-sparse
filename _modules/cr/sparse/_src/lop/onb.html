@@ -190,6 +190,8 @@
 <span class="kn">from</span> <span class="nn">.impl</span> <span class="kn">import</span> <span class="n">_hermitian</span>
 <span class="kn">from</span> <span class="nn">.lop</span> <span class="kn">import</span> <span class="n">Operator</span>
 
+<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="kn">import</span> <span class="nn">cr.sparse.dsp</span> <span class="k">as</span> <span class="nn">crdsp</span>
 
 <div class="viewcode-block" id="fourier_basis"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.fourier_basis.html#cr.sparse.lop.fourier_basis">[docs]</a><span class="k">def</span> <span class="nf">fourier_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns an operator which represents the DFT orthonormal basis</span>
@@ -214,12 +216,12 @@
     <span class="n">n3</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">n2</span>
     <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>  <span class="n">x</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> <span class="n">n2</span><span class="o">*</span><span class="n">jnp</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">:],</span> <span class="n">n</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">trans</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">n3</span><span class="o">*</span><span class="n">jnp</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">),</span> <span class="n">real</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
 
 
-<span class="k">def</span> <span class="nf">dct_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns an operator which represents the DCT orthonormal basis</span>
+<div class="viewcode-block" id="cosine_basis"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.cosine_basis.html#cr.sparse.lop.cosine_basis">[docs]</a><span class="k">def</span> <span class="nf">cosine_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns an operator which represents the DCT-II orthonormal basis</span>
 <span class="sd">    </span>
 <span class="sd">    Forward operation is akin to computing inverse discrete cosine transform</span>
 <span class="sd">    scaled appropriately</span>
@@ -252,7 +254,19 @@
         <span class="n">prod</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">phi_a</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
         <span class="k">return</span> <span class="n">prod</span>
 
-    <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="walsh_hadamard_basis"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.walsh_hadamard_basis.html#cr.sparse.lop.walsh_hadamard_basis">[docs]</a><span class="k">def</span> <span class="nf">walsh_hadamard_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns an operator which represents the Walsh Hadamard Transform Basis</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This is a self-adjoint operator</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">crs</span><span class="o">.</span><span class="n">is_power_of_2</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="s2">&quot;Only powers of 2 are supported as n&quot;</span>
+    <span class="n">factor</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">factor</span> <span class="o">*</span> <span class="n">crdsp</span><span class="o">.</span><span class="n">fwht</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="n">times</span>
+    <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span></div>
 </pre></div>
 
            </div>

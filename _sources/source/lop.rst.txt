@@ -106,6 +106,8 @@ Orthonormal bases and multi-base dictionaries
 
     fourier_basis
     dirac_fourier_basis
+    cosine_basis
+    walsh_hadamard_basis
 
 
 Random compressive sensing operators
