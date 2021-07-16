@@ -123,8 +123,13 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#signal-processing-operators">Signal processing operators</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.fourier_basis_1d.html">cr.sparse.lop.fourier_basis_1d</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.dirac_fourier_basis_1d.html">cr.sparse.lop.dirac_fourier_basis_1d</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.running_average.html">cr.sparse.lop.running_average</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.fir_filter.html">cr.sparse.lop.fir_filter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#orthonormal-bases-and-multi-base-dictionaries">Orthonormal bases and multi-base dictionaries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.fourier_basis.html">cr.sparse.lop.fourier_basis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.dirac_fourier_basis.html">cr.sparse.lop.dirac_fourier_basis</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#random-compressive-sensing-operators">Random compressive sensing operators</a><ul>
@@ -132,6 +137,15 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.rademacher_dict.html">cr.sparse.lop.rademacher_dict</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.random_onb_dict.html">cr.sparse.lop.random_onb_dict</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.random_orthonormal_rows_dict.html">cr.sparse.lop.random_orthonormal_rows_dict</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#operators-for-special-matrices">Operators for special matrices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.circulant.html">cr.sparse.lop.circulant</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#derivatives-finite-differences">Derivatives (finite differences)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.first_derivative.html">cr.sparse.lop.first_derivative</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.second_derivative.html">cr.sparse.lop.second_derivative</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#convenience-operators">Convenience operators</a><ul>
@@ -368,10 +382,27 @@ function implements the adjoint operation.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.fourier_basis_1d.html#cr.sparse.lop.fourier_basis_1d" title="cr.sparse.lop.fourier_basis_1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fourier_basis_1d</span></code></a>(n)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.running_average.html#cr.sparse.lop.running_average" title="cr.sparse.lop.running_average"><code class="xref py py-obj docutils literal notranslate"><span class="pre">running_average</span></code></a>(n, length)</p></td>
+<td><p>Computes a running average of entries in x</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.fir_filter.html#cr.sparse.lop.fir_filter" title="cr.sparse.lop.fir_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fir_filter</span></code></a>(n, h)</p></td>
+<td><p>Implements an FIR filter defined by coeffs</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="orthonormal-bases-and-multi-base-dictionaries">
+<h2>Orthonormal bases and multi-base dictionaries<a class="headerlink" href="#orthonormal-bases-and-multi-base-dictionaries" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.fourier_basis.html#cr.sparse.lop.fourier_basis" title="cr.sparse.lop.fourier_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fourier_basis</span></code></a>(n)</p></td>
 <td><p>Returns an operator which represents the DFT orthonormal basis</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dirac_fourier_basis_1d.html#cr.sparse.lop.dirac_fourier_basis_1d" title="cr.sparse.lop.dirac_fourier_basis_1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dirac_fourier_basis_1d</span></code></a>(n)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dirac_fourier_basis.html#cr.sparse.lop.dirac_fourier_basis" title="cr.sparse.lop.dirac_fourier_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dirac_fourier_basis</span></code></a>(n)</p></td>
 <td><p>Returns an operator for a two-ortho basis dictionary consisting of Dirac basis and Fourier basis</p></td>
 </tr>
 </tbody>
@@ -396,6 +427,37 @@ function implements the adjoint operation.</p>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.random_orthonormal_rows_dict.html#cr.sparse.lop.random_orthonormal_rows_dict" title="cr.sparse.lop.random_orthonormal_rows_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_orthonormal_rows_dict</span></code></a>(key, m, n)</p></td>
 <td><p>An operator whose rows are orthonormal (sampled from a random orthonormal basis)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="operators-for-special-matrices">
+<h2>Operators for special matrices<a class="headerlink" href="#operators-for-special-matrices" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.circulant.html#cr.sparse.lop.circulant" title="cr.sparse.lop.circulant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">circulant</span></code></a>(n, c)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="derivatives-finite-differences">
+<h2>Derivatives (finite differences)<a class="headerlink" href="#derivatives-finite-differences" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.first_derivative.html#cr.sparse.lop.first_derivative" title="cr.sparse.lop.first_derivative"><code class="xref py py-obj docutils literal notranslate"><span class="pre">first_derivative</span></code></a>(n[, dx, kind])</p></td>
+<td><p>Computes the first derivative</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.second_derivative.html#cr.sparse.lop.second_derivative" title="cr.sparse.lop.second_derivative"><code class="xref py py-obj docutils literal notranslate"><span class="pre">second_derivative</span></code></a>(n[, dx])</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>

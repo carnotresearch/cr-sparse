@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.second\_derivative
+================================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: second_derivative

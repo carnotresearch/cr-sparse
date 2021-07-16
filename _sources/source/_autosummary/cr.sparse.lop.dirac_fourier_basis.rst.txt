@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.dirac\_fourier\_basis
+===================================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: dirac_fourier_basis

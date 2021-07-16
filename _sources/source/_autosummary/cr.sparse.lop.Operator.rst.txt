@@ -15,6 +15,7 @@
       ~Operator.jit_safe
       ~Operator.linear
       ~Operator.matrix_safe
+      ~Operator.real
       ~Operator.shape
       ~Operator.times
       ~Operator.trans

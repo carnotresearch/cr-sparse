@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>cr.sparse.lop.jit &mdash; CR.Sparse  documentation</title>
+  <title>cr.sparse.lop.fir_filter &mdash; CR.Sparse  documentation</title>
   
 
   
@@ -50,8 +50,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="cr.sparse.lop.to_matrix" href="cr.sparse.lop.to_matrix.html" />
-    <link rel="prev" title="cr.sparse.lop.upper_frame_bound" href="cr.sparse.lop.upper_frame_bound.html" /> 
+    <link rel="next" title="cr.sparse.lop.fourier_basis" href="cr.sparse.lop.fourier_basis.html" />
+    <link rel="prev" title="cr.sparse.lop.running_average" href="cr.sparse.lop.running_average.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -106,7 +106,11 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../lop.html">Linear Operators</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#data-types">Data types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#basic-operators">Basic operators</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../lop.html#signal-processing-operators">Signal processing operators</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../lop.html#signal-processing-operators">Signal processing operators</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.lop.running_average.html">cr.sparse.lop.running_average</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.lop.fir_filter</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#orthonormal-bases-and-multi-base-dictionaries">Orthonormal bases and multi-base dictionaries</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#random-compressive-sensing-operators">Random compressive sensing operators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#operators-for-special-matrices">Operators for special matrices</a></li>
@@ -115,13 +119,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#operator-algebra">Operator algebra</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#operator-parts">Operator parts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#properties-of-a-linear-operator">Properties of a linear operator</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../lop.html#utilities">Utilities</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.lop.jit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.lop.to_matrix.html">cr.sparse.lop.to_matrix</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.lop.to_adjoint_matrix.html">cr.sparse.lop.to_adjoint_matrix</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.lop.to_complex_matrix.html">cr.sparse.lop.to_complex_matrix</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="../lop.html#utilities">Utilities</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
@@ -188,13 +186,13 @@
         
           <li><a href="../lop.html">Linear Operators</a> &raquo;</li>
         
-      <li>cr.sparse.lop.jit</li>
+      <li>cr.sparse.lop.fir_filter</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/source/_autosummary/cr.sparse.lop.jit.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/source/_autosummary/cr.sparse.lop.fir_filter.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -231,12 +229,12 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="cr-sparse-lop-jit">
-<h1>cr.sparse.lop.jit<a class="headerlink" href="#cr-sparse-lop-jit" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cr-sparse-lop-fir-filter">
+<h1>cr.sparse.lop.fir_filter<a class="headerlink" href="#cr-sparse-lop-fir-filter" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="cr.sparse.lop.jit">
-<span class="sig-prename descclassname"><span class="pre">cr.sparse.lop.</span></span><span class="sig-name descname"><span class="pre">jit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/lop/lop.html#jit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.lop.jit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the same linear operator with compiled times and trans functions</p>
+<dt class="sig sig-object py" id="cr.sparse.lop.fir_filter">
+<span class="sig-prename descclassname"><span class="pre">cr.sparse.lop.</span></span><span class="sig-name descname"><span class="pre">fir_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/lop/filters.html#fir_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.lop.fir_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements an FIR filter defined by coeffs</p>
 </dd></dl>
 
 </div>
@@ -247,8 +245,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="cr.sparse.lop.to_matrix.html" class="btn btn-neutral float-right" title="cr.sparse.lop.to_matrix" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="cr.sparse.lop.upper_frame_bound.html" class="btn btn-neutral float-left" title="cr.sparse.lop.upper_frame_bound" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cr.sparse.lop.fourier_basis.html" class="btn btn-neutral float-right" title="cr.sparse.lop.fourier_basis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cr.sparse.lop.running_average.html" class="btn btn-neutral float-left" title="cr.sparse.lop.running_average" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

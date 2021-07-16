@@ -1,6 +1,0 @@
-﻿cr.sparse.lop.fourier\_basis\_1d
-================================
-
-.. currentmodule:: cr.sparse.lop
-
-.. autofunction:: fourier_basis_1d

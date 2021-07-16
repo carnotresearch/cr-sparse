@@ -112,7 +112,10 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#basic-operators">Basic operators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#signal-processing-operators">Signal processing operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lop.html#orthonormal-bases-and-multi-base-dictionaries">Orthonormal bases and multi-base dictionaries</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#random-compressive-sensing-operators">Random compressive sensing operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lop.html#operators-for-special-matrices">Operators for special matrices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lop.html#derivatives-finite-differences">Derivatives (finite differences)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#convenience-operators">Convenience operators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#operator-algebra">Operator algebra</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../lop.html#operator-parts">Operator parts</a></li>
@@ -231,7 +234,7 @@
 <h1>cr.sparse.lop.Operator<a class="headerlink" href="#cr-sparse-lop-operator" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="cr.sparse.lop.Operator">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cr.sparse.lop.</span></span><span class="sig-name descname"><span class="pre">Operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trans</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linear</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jit_safe</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_safe</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/lop/lop.html#Operator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.lop.Operator" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cr.sparse.lop.</span></span><span class="sig-name descname"><span class="pre">Operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trans</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linear</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jit_safe</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_safe</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">real</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/lop/lop.html#Operator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.lop.Operator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a finite linear operator <span class="math notranslate nohighlight">\(T : A -&gt; B\)</span> where <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are finite vector spaces.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -243,6 +246,7 @@
 <li><p><strong>linear</strong> – Indicates if the operator is linear or not</p></li>
 <li><p><strong>jit_safe</strong> – Indicates if the operator can be safely JIT compiled</p></li>
 <li><p><strong>matrix_safe</strong> – Indicates if the operator can accept a matrix of vectors</p></li>
+<li><p><strong>real</strong> – Indicates if a linear operator is real i.e. has a matrix representation of real numbers</p></li>
 </ul>
 </dd>
 </dl>
@@ -250,8 +254,9 @@
 <p class="admonition-title">Note</p>
 <p>While most of the operators in the library are linear operators,
 some are not. Prominent examples include operators
-like real part operator, imaginary part operator.</p>
-<p>These operators are provided for convenience.</p>
+like real part operator, imaginary part operator.
+These operators are provided for convenience.</p>
+<p>Most operators in this collection are real.</p>
 </div>
 <p class="rubric">Attributes</p>
 <table class="longtable docutils align-default">
@@ -269,13 +274,16 @@ like real part operator, imaginary part operator.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrix_safe</span></code></p></td>
 <td><p>Indicates if the operator can accept a matrix of vectors</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">shape</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">real</span></code></p></td>
+<td><p>Indicates if a linear operator is real i.e. has a matrix representation of real numbers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">shape</span></code></p></td>
 <td><p>Dimension of the linear operator (m, n)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">times</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">times</span></code></p></td>
 <td><p>A linear function mapping from A to B</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">trans</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">trans</span></code></p></td>
 <td><p>Corresponding adjoint linear function mapping from B to A</p></td>
 </tr>
 </tbody>

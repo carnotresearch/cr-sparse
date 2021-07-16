@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>cr.sparse._src.lop.signal1d &mdash; CR.Sparse  documentation</title>
+  <title>cr.sparse._src.lop.onb &mdash; CR.Sparse  documentation</title>
   
 
   
@@ -154,7 +154,7 @@
         
           <li><a href="../../../../index.html">Module code</a> &raquo;</li>
         
-      <li>cr.sparse._src.lop.signal1d</li>
+      <li>cr.sparse._src.lop.onb</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -169,7 +169,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for cr.sparse._src.lop.signal1d</h1><div class="highlight"><pre>
+  <h1>Source code for cr.sparse._src.lop.onb</h1><div class="highlight"><pre>
 <span></span><span class="c1"># Copyright 2021 CR.Sparse Development Team</span>
 <span class="c1">#</span>
 <span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
@@ -185,12 +185,13 @@
 <span class="c1"># limitations under the License.</span>
 
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">import</span> <span class="nn">jax.numpy.fft</span> <span class="k">as</span> <span class="nn">jfft</span>
 
 <span class="kn">from</span> <span class="nn">.impl</span> <span class="kn">import</span> <span class="n">_hermitian</span>
 <span class="kn">from</span> <span class="nn">.lop</span> <span class="kn">import</span> <span class="n">Operator</span>
 
 
-<div class="viewcode-block" id="fourier_basis_1d"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.fourier_basis_1d.html#cr.sparse.lop.fourier_basis_1d">[docs]</a><span class="k">def</span> <span class="nf">fourier_basis_1d</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="fourier_basis"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.fourier_basis.html#cr.sparse.lop.fourier_basis">[docs]</a><span class="k">def</span> <span class="nf">fourier_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns an operator which represents the DFT orthonormal basis</span>
 <span class="sd">    </span>
 <span class="sd">    Forward operation is akin to computing inverse fast fourier transform</span>
@@ -203,10 +204,10 @@
     <span class="n">n3</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">n2</span>
     <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>  <span class="n">n2</span><span class="o">*</span><span class="n">jnp</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">trans</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">n3</span><span class="o">*</span><span class="n">jnp</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">),</span> <span class="n">real</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="dirac_fourier_basis_1d"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.dirac_fourier_basis_1d.html#cr.sparse.lop.dirac_fourier_basis_1d">[docs]</a><span class="k">def</span> <span class="nf">dirac_fourier_basis_1d</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="dirac_fourier_basis"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.dirac_fourier_basis.html#cr.sparse.lop.dirac_fourier_basis">[docs]</a><span class="k">def</span> <span class="nf">dirac_fourier_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns an operator for a two-ortho basis dictionary consisting of Dirac basis and Fourier basis</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n2</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
@@ -214,6 +215,44 @@
     <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>  <span class="n">x</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> <span class="n">n2</span><span class="o">*</span><span class="n">jnp</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">:],</span> <span class="n">n</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">trans</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">n3</span><span class="o">*</span><span class="n">jnp</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">))</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">dct_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns an operator which represents the DCT orthonormal basis</span>
+<span class="sd">    </span>
+<span class="sd">    Forward operation is akin to computing inverse discrete cosine transform</span>
+<span class="sd">    scaled appropriately</span>
+
+<span class="sd">    Adjoint operation is akin to computing forward discrete cosine transform</span>
+<span class="sd">    scaled appropriately</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">factor</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">ks</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="n">phi_f</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">jnp</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">ks</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">phi_f</span> <span class="o">=</span> <span class="n">phi_f</span><span class="o">*</span><span class="n">factor</span>
+    <span class="n">phi_f</span> <span class="o">=</span> <span class="n">phi_f</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">phi_f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="n">phi_a</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">jnp</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">ks</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">phi_a</span> <span class="o">=</span> <span class="n">phi_a</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">phi_a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">1</span><span class="o">/</span><span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">phi_a</span> <span class="o">=</span> <span class="n">phi_a</span> <span class="o">/</span> <span class="n">factor</span>
+
+
+    <span class="k">def</span> <span class="nf">times</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">upper</span> <span class="o">=</span> <span class="p">(</span><span class="n">phi_f</span><span class="o">*</span><span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">lower</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,)</span><span class="o">+</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">upper</span><span class="p">,</span> <span class="n">lower</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">jfft</span><span class="o">.</span><span class="n">irfft</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[:</span><span class="n">n</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">trans</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span> <span class="p">(</span><span class="n">x</span><span class="p">[:],</span>  <span class="n">x</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">jfft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[:</span><span class="n">n</span><span class="p">]</span>
+        <span class="n">prod</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">phi_a</span><span class="o">*</span><span class="n">c</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="k">return</span> <span class="n">prod</span>
+
+    <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span>
 </pre></div>
 
            </div>
