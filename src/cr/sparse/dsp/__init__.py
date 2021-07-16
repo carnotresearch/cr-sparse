@@ -18,3 +18,9 @@ from cr.sparse._src.dsp.dct import (
     orthonormal_dct,
     orthonormal_idct
 )
+
+
+from cr.sparse._src.dsp.wht import (
+    fwht_ref,
+    fwht,
+)
