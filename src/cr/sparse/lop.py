@@ -20,6 +20,7 @@ from cr.sparse._src.lop.lop import (
     # operator algebra
     neg,
     scale,
+    partial_op,
     add,
     subtract,
     compose,

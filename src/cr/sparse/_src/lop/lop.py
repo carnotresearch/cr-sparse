@@ -168,6 +168,47 @@ def power(A, p):
     trans = lambda x : apply_n(A.trans, p, x)
     return Operator(times=times, trans=trans, shape=A.shape, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe, real=A.real)
 
+def partial_op(A, picks, perm=None):
+    """Returns the linear operator T that computes  (A x[perm])[picks]
+
+    We are allowing for two kinds of randomizations
+    - entries in the model vector x can be permuted (as per a random perm)
+    - From the result y = A x[perm], a limited number of entries can be picked (as per picks)
+    """
+    assert picks.ndim == 1
+    m, n = A.shape
+    k = picks.shape[0]
+    if perm is not None:
+        assert perm.ndim == 1
+
+
+    if perm is None:
+        times = lambda x: (A.times(x))[picks]
+
+        def trans(x):
+            # expand the input with zero entries
+            shape = (m,) + x.shape[1:]
+            tmp = jnp.zeros(shape, dtype=x.dtype)
+            tmp = tmp.at[picks].set(x)
+            # apply the adjoint
+            y = A.trans(tmp)
+            return y
+    else:
+        times = lambda x: (A.times(x[perm]))[picks]
+
+        def trans(x):
+            # expand the input with zero entries
+            shape = (m,) + x.shape[1:]
+            tmp = jnp.zeros(shape, dtype=x.dtype)
+            tmp = tmp.at[picks].set(x)
+            # apply the adjoint
+            y = A.trans(tmp)
+            # place the output in correct permutation
+            out = jnp.empty(y.shape, dtype=y.dtype)
+            out = out.at[perm].set(y)
+            return out
+
+    return Operator(times=times, trans=trans, shape=(k, n), jit_safe=A.jit_safe, matrix_safe=A.matrix_safe, real=A.real)
 
 
 ###########################################################################################
