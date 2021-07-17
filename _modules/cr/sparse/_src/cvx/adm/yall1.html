@@ -663,6 +663,9 @@
 
 <span class="sd">    This function implements eq 2.25 of the paper.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">W</span><span class="p">:</span>
+        <span class="c1"># change A to solve for alpha = W x</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">W</span>    
     <span class="n">m</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">Atb</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
     <span class="n">n_times</span> <span class="o">=</span> <span class="mi">0</span>
@@ -686,11 +689,6 @@
     <span class="k">if</span> <span class="n">z0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">z0</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">W</span><span class="p">:</span>
-        <span class="c1"># change A to solve for alpha = W x</span>
-        <span class="n">C</span> <span class="o">=</span> <span class="n">A</span>
-        <span class="n">A</span> <span class="o">=</span> <span class="n">C</span> <span class="o">@</span> <span class="n">B</span><span class="o">.</span><span class="n">T</span>
-    
     <span class="n">w</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">weights</span><span class="p">:</span>
         <span class="c1"># make sure that the final weights are an array of size n</span>
@@ -723,8 +721,8 @@
             <span class="n">state</span> <span class="o">=</span> <span class="n">solve_bp</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">nonneg</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">max_iters</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nonneg</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">x</span><span class="p">),</span> <span class="n">state</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">W</span><span class="p">:</span>
-        <span class="c1"># alpha = W x has been found. x = W.T @ alpha</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">x</span>
+        <span class="c1"># go back from sparsifying basis to signal space</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">RecoveryFullSolution</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">b_max</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">b_max</span><span class="o">*</span><span class="n">state</span><span class="o">.</span><span class="n">rp</span><span class="p">,</span> 
         <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="p">,</span>
         <span class="n">n_times</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">n_times</span><span class="o">+</span><span class="n">n_times</span><span class="p">,</span> 

@@ -340,6 +340,47 @@
     <span class="n">trans</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">apply_n</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">jit_safe</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">jit_safe</span><span class="p">,</span> <span class="n">matrix_safe</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">matrix_safe</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">real</span><span class="p">)</span></div>
 
+<span class="k">def</span> <span class="nf">partial_op</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">picks</span><span class="p">,</span> <span class="n">perm</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the linear operator T that computes  (A x[perm])[picks]</span>
+
+<span class="sd">    We are allowing for two kinds of randomizations</span>
+<span class="sd">    - entries in the model vector x can be permuted (as per a random perm)</span>
+<span class="sd">    - From the result y = A x[perm], a limited number of entries can be picked (as per picks)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">picks</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">picks</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">perm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">perm</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span>
+
+
+    <span class="k">if</span> <span class="n">perm</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">))[</span><span class="n">picks</span><span class="p">]</span>
+
+        <span class="k">def</span> <span class="nf">trans</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="c1"># expand the input with zero entries</span>
+            <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span><span class="p">,)</span> <span class="o">+</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">picks</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="c1"># apply the adjoint</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">y</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">perm</span><span class="p">]))[</span><span class="n">picks</span><span class="p">]</span>
+
+        <span class="k">def</span> <span class="nf">trans</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="c1"># expand the input with zero entries</span>
+            <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span><span class="p">,)</span> <span class="o">+</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">picks</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="c1"># apply the adjoint</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+            <span class="c1"># place the output in correct permutation</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">y</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">perm</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">out</span>
+
+    <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">jit_safe</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">jit_safe</span><span class="p">,</span> <span class="n">matrix_safe</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">matrix_safe</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
 
 
 <span class="c1">###########################################################################################</span>
