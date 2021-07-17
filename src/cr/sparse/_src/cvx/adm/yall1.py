@@ -491,6 +491,9 @@ def solve(A, b, x0=None, z0=None, W=None, weights=None, nonneg=False, rho=0., de
 
     This function implements eq 2.25 of the paper.
     """
+    if W:
+        # change A to solve for alpha = W x
+        A = A @ W    
     m = b.shape[0]
     Atb = A.trans(b)
     n_times = 0
@@ -514,11 +517,6 @@ def solve(A, b, x0=None, z0=None, W=None, weights=None, nonneg=False, rho=0., de
     if z0 is None:
         z0 = jnp.zeros(n)
 
-    if W:
-        # change A to solve for alpha = W x
-        C = A
-        A = C @ B.T
-    
     w = jnp.ones(n)
     if weights:
         # make sure that the final weights are an array of size n
@@ -551,8 +549,8 @@ def solve(A, b, x0=None, z0=None, W=None, weights=None, nonneg=False, rho=0., de
             state = solve_bp(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters)
     x = jnp.where(nonneg, jnp.maximum(0, state.x), state.x)
     if W:
-        # alpha = W x has been found. x = W.T @ alpha
-        x = W.T @ x
+        # go back from sparsifying basis to signal space
+        x = W.times(x)
     return RecoveryFullSolution(x=b_max*x, r=b_max*state.rp, 
         iterations=state.iterations,
         n_times=state.n_times+n_times, 
