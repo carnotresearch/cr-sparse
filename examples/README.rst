@@ -1,5 +1,5 @@
 .. _gallery:
 
-Examples
+Examples Gallery
 ===========================
 

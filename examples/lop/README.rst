@@ -1,6 +1,4 @@
-.. _lop_examples:
-
-.. _lop-examples-index:
+.. _lop_gallery:
 
 Linear Operators
-==================
+-----------------------------------------------
