@@ -106,6 +106,7 @@ from cr.sparse._src.vector import (
 from cr.sparse._src.signal import (
     nonzero_values,
     nonzero_indices,
+    support,
     randomize_rows,
     randomize_cols,
     largest_indices,

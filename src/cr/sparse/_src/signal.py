@@ -134,6 +134,12 @@ def nonzero_indices(x):
     return jnp.nonzero(x)[0]
 
 
+def support(x):
+    """Returns the indices of non-zero entries in x
+    """
+    return jnp.nonzero(x)[0]
+
+
 def hard_threshold(x, K):
     """Returns the indices and corresponding values of largest K non-zero entries in a vector x
     """
