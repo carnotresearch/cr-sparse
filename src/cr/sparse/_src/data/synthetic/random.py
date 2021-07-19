@@ -28,5 +28,23 @@ def sparse_normal_representations(key, D, K, S):
     values = random.normal(key, shape)
     result = jnp.zeros([D, S])
     result = result.at[omega, :].set(values)
+    result = jnp.squeeze(result)
     return result, omega
+
+
+def sparse_spikes(key, N, K, S=1):
+    """
+    Generates a block of representation vectors where each vector is
+    K-sparse, the non-zero basis indexes are randomly selected
+    and shared among all vectors and non-zero values are Rademacher distributed spikes. 
+    """
+    key, subkey = random.split(key)
+    perm = random.permutation(key, N)
+    omega = jnp.sort(perm[:K])
+    spikes = jnp.sign(random.normal(subkey, (K,S)))
+    X = jnp.zeros((N, S))
+    X = X.at[omega, :].set(spikes)
+    # reduce the dimension if S = 1
+    X = jnp.squeeze(X)
+    return X, omega
 
