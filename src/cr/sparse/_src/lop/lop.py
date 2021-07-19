@@ -95,10 +95,18 @@ class Operator(NamedTuple):
         return power(self, n)
 
     def times_2d(self, X):
+        """Computes Y = T X  where y = T x for each column in X"""
         return jax.vmap(self.times, (1), (1))(X)
 
     def trans_2d(self, Y):
+        """Computes Y = T^H X  where y = T^H x for each column in X"""
         return jax.vmap(self.trans, (1), (1))(Y)
+
+    def apply_columns(self, x):
+        """Computes y = T_I x where I is an index set selecting  a subset of columns of T"""
+        xr = jnp.zeros(x.shape, x.dtype)
+        xr = xr.at[I].set(x[I])
+        return self.times(xr)
 
 
 def jit(operator):
