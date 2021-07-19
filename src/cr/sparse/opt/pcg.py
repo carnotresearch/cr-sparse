@@ -12,13 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
-Functions for solving linear problems using Conjugate gradient method
-"""
-
-from cr.sparse._src.opt.cg import (
-    solve_from,
-    solve_from_jit,
+from cr.sparse._src.opt.pcg import (
     solve,
     solve_jit
 )
