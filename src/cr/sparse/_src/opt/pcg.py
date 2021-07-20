@@ -34,7 +34,7 @@ class PCGState(NamedTuple):
     iterations: int
     """The number of iterations it took to complete"""
 
-def solve(A, b, x0=None, max_iters=20, tol=1e-4, atol=0.0, M=_identity):
+def solve_from(A, b, x0, max_iters=20, tol=1e-4, atol=0.0, M=_identity):
     """Solves the problem :math:`Ax  = b` for a symmetric positive definite :math:`A` via preconditioned conjugate gradients iterations
     """
     # Boyd Conjugate Gradients slide 22
@@ -44,8 +44,6 @@ def solve(A, b, x0=None, max_iters=20, tol=1e-4, atol=0.0, M=_identity):
     #print(f'{b_norm_sqr=}, {max_gamma=}, {max_iters=}')
     # if max_iters is None:
     #     max_iters = b.shape[0]
-    x0 = jnp.zeros_like(b) if x0 is None else x0
-
     def init():
         # Complete one iteration
         r0 = b - A (x0)
@@ -55,7 +53,7 @@ def solve(A, b, x0=None, max_iters=20, tol=1e-4, atol=0.0, M=_identity):
         gamma = jnp.dot(r0, z0).astype(float)
         return PCGState(x=x0, r=r0, p=p0, 
             gamma=gamma,
-            iterations=0)
+            iterations=1)
 
     def body(state):
         # individual iteration
@@ -96,5 +94,13 @@ def solve(A, b, x0=None, max_iters=20, tol=1e-4, atol=0.0, M=_identity):
     state = lax.while_loop(cond, body, init())
     return state
 
+solve_from_jit  = jit(solve_from,
+    static_argnames=("A", "max_iters", "tol", "atol", "M"))
+
+def solve(A, b, max_iters=20, tol=1e-4, atol=0.0, M=_identity):
+    x0 = jnp.zeros_like(b)
+    return solve_from_jit(A, b, x0, max_iters, tol, atol, M)
+
+
 solve_jit  = jit(solve,
-    static_argnames=("A", "x0", "max_iters", "tol", "atol", "M"))
+    static_argnames=("A", "max_iters", "tol", "atol", "M"))

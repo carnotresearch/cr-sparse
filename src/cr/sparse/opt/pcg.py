@@ -13,6 +13,8 @@
 # limitations under the License.
 
 from cr.sparse._src.opt.pcg import (
+    solve_from,
+    solve_from_jit,
     solve,
     solve_jit
 )
