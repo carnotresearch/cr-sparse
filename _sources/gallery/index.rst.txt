@@ -6,7 +6,7 @@
 
 .. _gallery:
 
-Examples
+Examples Gallery
 ===========================
 
 
@@ -40,12 +40,11 @@ Examples
 
 .. _sphx_glr_gallery_lop:
 
-.. _lop_examples:
-
-.. _lop-examples-index:
+.. _lop_gallery:
 
 Linear Operators
-==================
+-----------------------------------------------
+
 
 
 .. raw:: html
@@ -68,6 +67,42 @@ Linear Operators
    :hidden:
 
    /gallery/lop/matrix_operator
+.. raw:: html
+
+    <div class="sphx-glr-clear"></div>
+
+
+
+.. _sphx_glr_gallery_rec_admm:
+
+.. _recovery_admm_gallery:
+
+Sparse Recovery with ADMM
+-----------------------------------------------
+
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example has following features:">
+
+.. only:: html
+
+ .. figure:: /gallery/rec_admm/images/thumb/sphx_glr_partial_wh_sensor_cosine_basis_thumb.png
+     :alt: Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery
+
+     :ref:`sphx_glr_gallery_rec_admm_partial_wh_sensor_cosine_basis.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/rec_admm/partial_wh_sensor_cosine_basis
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>
