@@ -38,6 +38,8 @@ Acronyms
       - Iterative Hard Thresholding
     * - IP
       - Integer Programming, Interior Point methods
+    * - IPM
+      - Interior Points Method
     * - IST
       - Iterative Shrinkage/Thresholding algorithms
     * - LARS
@@ -48,6 +50,8 @@ Acronyms
       - Linear Programming
     * - LS
       - Least Squares
+    * - LSP
+      - Least Squares Program
     * - LSQR
       - Least Squares
     * - MM
@@ -76,5 +80,7 @@ Acronyms
       - Subspace Pursuit
     * - SSC
       - Sparse Subspace Clustering 
+    * - TNIPM
+      - Truncated Newton Interior Point Method
     * - WHT
       - Walsh Hadamard Transform
