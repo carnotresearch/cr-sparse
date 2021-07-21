@@ -293,22 +293,25 @@ def solve_from(A, y, lambda_, x0, u0, tol=1e-3, xi=1e-3, t0=None,
             newx, newu, newf, s = lax.while_loop(f_cond, f_body, f_init(s))
             newz = times(newx) - y
             newphi =  get_phi(newu, newz, newf, t)
-            return newx, newu, newf, newz, newphi, s
+            times_count = 1
+            return newx, newu, newf, newz, newphi, s, times_count
 
         def bt_body(state):
-            newx, newu, newf, newz, newphi, s = state
+            newx, newu, newf, newz, newphi, s, times_count = state
             s = BETA * s
             newx, newu, newf, s = lax.while_loop(f_cond, f_body, f_init(s))
             newz = times(newx) - y
             newphi =  get_phi(newu, newz, newf, t)
-            return newx, newu, newf, newz, newphi, s
+            return newx, newu, newf, newz, newphi, s, times_count + 1
 
         def bt_cond(state):
-            newx, newu, newf, newz, newphi, s = state
+            newphi = state[4]
+            s = state[5]
             return newphi - phi > ALPHA * s * gdx
 
-        newx, newu, newf, newz, newphi, s = lax.while_loop(bt_cond, bt_body, bt_init(1.0))
-
+        newx, newu, newf, newz, newphi, s, times_count = lax.while_loop(bt_cond, bt_body, bt_init(1.0))
+        # add the number of times A x was run in backtracking
+        n_times += times_count
         #--------------------------------------------------------------------------------
         # x,u update TNIPM step 3
         #--------------------------------------------------------------------------------
