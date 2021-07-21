@@ -14,7 +14,8 @@
 
 
 from cr.sparse._src.cvx.l1ls import (
-    solve_from, 
+    solve_from,
+    solve_from_jit,
     solve,
     solve_jit
 )

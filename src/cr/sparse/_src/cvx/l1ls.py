@@ -116,6 +116,9 @@ class State(NamedTuple):
 
 def solve_from(A, y, lambda_, x0, u0, tol=1e-3, xi=1e-3, t0=None,
     max_iters=MAX_ITERS, pcg_max_iters=PCG_MAX_ITERS):
+    """
+    Solves :math:`\min \| A x - b \|_2^2 + \\lambda \| x \|_1` using the Truncated Newton Interior Point Method
+    """
     trans = A.trans
     times = A.times
     #TODO check for zero solution
@@ -363,8 +366,14 @@ def solve_from(A, y, lambda_, x0, u0, tol=1e-3, xi=1e-3, t0=None,
         iterations=state.iterations, 
         n_times=state.n_times, n_trans=state.n_trans)
 
+solve_from_jit  = jit(solve_from,
+    static_argnames=("A", "tol", "xi", "t0", "max_iters", "pcg_max_iters"))
+
 def solve(A, y, lambda_, x0=None, u0=None, tol=1e-3, xi=1e-3, t0=None,
     max_iters=MAX_ITERS, pcg_max_iters=PCG_MAX_ITERS):
+    """
+    Solves :math:`\min \| A x - b \|_2^2 + \\lambda \| x \|_1` using the Truncated Newton Interior Point Method
+    """
     m, n = A.shape
     x0 = x0 if x0 is not None else jnp.zeros(n)
     u0 = u0 if u0 is not None else jnp.ones(n)
