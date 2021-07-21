@@ -114,6 +114,8 @@ from cr.sparse._src.signal import (
     hard_threshold_sorted,
     sparse_approximation,
     build_signal_from_indices_and_values,
+    hard_threshold_by,
+    largest_indices_by,
     dynamic_range,
     nonzero_dynamic_range,
 
@@ -146,4 +148,8 @@ from cr.sparse._src.signalcomparison import (
 from cr.sparse._src.special import (
     pascal,
     pascal_jit
+)
+
+from cr.sparse._src.types import (
+    RecoveryFullSolution
 )
