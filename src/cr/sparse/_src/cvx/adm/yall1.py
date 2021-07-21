@@ -59,7 +59,7 @@ class BPState(NamedTuple):
 
 def solve_bp(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters):
     """
-    Solves the problem :math:`\min \| x \|_1 \\text{s.t.} \A x = b` using ADMM
+    Solves the problem :math:`\min \| x \|_1 \, \\text{s.t.}\, A x = b` using ADMM
 
     This function implements eq 2.29 of the paper.
     """
