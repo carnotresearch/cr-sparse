@@ -64,6 +64,7 @@ norm = jnp.linalg.norm
 
 
 from cr.sparse.opt import pcg
+from cr.sparse import RecoveryFullSolution
 
 # IPM parameters
 MAX_ITERS = 400
@@ -355,7 +356,9 @@ def solve_from(A, y, lambda_, x0, u0, tol=1e-3, xi=1e-3, t0=None,
     # state = init()
     # while cond(state):
     #     state = body(state)
-    return state
+    return RecoveryFullSolution(x=state.x, r=-state.z,
+        iterations=state.iterations, 
+        n_times=state.n_times, n_trans=state.n_trans)
 
 def solve(A, y, lambda_, x0=None, u0=None, tol=1e-3, xi=1e-3, t0=None,
     max_iters=MAX_ITERS, pcg_max_iters=PCG_MAX_ITERS):
