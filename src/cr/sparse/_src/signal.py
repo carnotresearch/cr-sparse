@@ -161,6 +161,18 @@ def hard_threshold_sorted(x, K):
     x_I = x[I]
     return I, x_I
 
+def hard_threshold_by(x, t):
+    """
+    Sets all entries in x to be zero which are less than t in magnitude
+    """
+    valid = jnp.abs(x) >= t
+    return x * valid
+
+def largest_indices_by(x, t):
+    """
+    Returns the locations of all entries in x which are larger than t in magnitude
+    """
+    return jnp.where(jnp.abs(x) >= t)
 
 def dynamic_range(x):
     """Returns the ratio of largest and smallest values (by magnitude) in x (dB)
