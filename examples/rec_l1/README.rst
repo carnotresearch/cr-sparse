@@ -1,5 +1,5 @@
 .. _recovery_admm_gallery:
 
-Sparse Recovery with ADMM
+Sparse Recovery via L1 minimization
 -----------------------------------------------
 
