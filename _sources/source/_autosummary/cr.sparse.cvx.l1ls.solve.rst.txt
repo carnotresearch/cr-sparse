@@ -1,0 +1,6 @@
+﻿cr.sparse.cvx.l1ls.solve
+========================
+
+.. currentmodule:: cr.sparse.cvx.l1ls
+
+.. autofunction:: solve

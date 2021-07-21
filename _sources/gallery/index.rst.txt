@@ -73,11 +73,11 @@ Linear Operators
 
 
 
-.. _sphx_glr_gallery_rec_admm:
+.. _sphx_glr_gallery_rec_l1:
 
-.. _recovery_admm_gallery:
+.. _recovery_l1_gallery:
 
-Sparse Recovery with ADMM
+Sparse Recovery via L1 minimization
 -----------------------------------------------
 
 
@@ -89,10 +89,10 @@ Sparse Recovery with ADMM
 
 .. only:: html
 
- .. figure:: /gallery/rec_admm/images/thumb/sphx_glr_partial_wh_sensor_cosine_basis_thumb.png
+ .. figure:: /gallery/rec_l1/images/thumb/sphx_glr_partial_wh_sensor_cosine_basis_thumb.png
      :alt: Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery
 
-     :ref:`sphx_glr_gallery_rec_admm_partial_wh_sensor_cosine_basis.py`
+     :ref:`sphx_glr_gallery_rec_l1_partial_wh_sensor_cosine_basis.py`
 
 .. raw:: html
 
@@ -102,7 +102,28 @@ Sparse Recovery with ADMM
 .. toctree::
    :hidden:
 
-   /gallery/rec_admm/partial_wh_sensor_cosine_basis
+   /gallery/rec_l1/partial_wh_sensor_cosine_basis
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example has following features:">
+
+.. only:: html
+
+ .. figure:: /gallery/rec_l1/images/thumb/sphx_glr_spikes_l1ls_thumb.png
+     :alt: Recovering spikes via TNIPM
+
+     :ref:`sphx_glr_gallery_rec_l1_spikes_l1ls.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/rec_l1/spikes_l1ls
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

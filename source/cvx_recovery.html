@@ -52,7 +52,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cr.sparse.cvx.adm.yall1.solve" href="_autosummary/cr.sparse.cvx.adm.yall1.solve.html" />
+    <link rel="next" title="cr.sparse.cvx.l1ls.solve_from" href="_autosummary/cr.sparse.cvx.l1ls.solve_from.html" />
     <link rel="prev" title="cr.sparse.pursuit.gram_chol_update" href="_autosummary/cr.sparse.pursuit.gram_chol_update.html" /> 
 </head>
 
@@ -108,6 +108,13 @@
 <li class="toctree-l2"><a class="reference internal" href="lop.html">Linear Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Convex Optimization based Sparse Recovery/Approximation Algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#truncated-newton-interior-points-method-tnipm">Truncated Newton Interior Points Method (TNIPM)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve_from.html">cr.sparse.cvx.l1ls.solve_from</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve_from_jit.html">cr.sparse.cvx.l1ls.solve_from_jit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve.html">cr.sparse.cvx.l1ls.solve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve_jit.html">cr.sparse.cvx.l1ls.solve_jit</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#alternating-directions-methods">Alternating Directions Methods</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve.html">cr.sparse.cvx.adm.yall1.solve</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_bp.html">cr.sparse.cvx.adm.yall1.solve_bp</a></li>
@@ -227,11 +234,61 @@
 <h1>Convex Optimization based Sparse Recovery/Approximation Algorithms<a class="headerlink" href="#convex-optimization-based-sparse-recovery-approximation-algorithms" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#alternating-directions-methods" id="id1">Alternating Directions Methods</a></p></li>
+<li><p><a class="reference internal" href="#truncated-newton-interior-points-method-tnipm" id="id1">Truncated Newton Interior Points Method (TNIPM)</a></p></li>
+<li><p><a class="reference internal" href="#alternating-directions-methods" id="id2">Alternating Directions Methods</a></p></li>
 </ul>
 </div>
+<div class="section" id="truncated-newton-interior-points-method-tnipm">
+<h2><a class="toc-backref" href="#id1">Truncated Newton Interior Points Method (TNIPM)</a><a class="headerlink" href="#truncated-newton-interior-points-method-tnipm" title="Permalink to this headline">¶</a></h2>
+<p>This method can be used to solve problems of type:</p>
+<div class="math notranslate nohighlight">
+\[\min \| A x  - b \|_2^2 + \lambda \| x \|_1\]</div>
+<p>The method works as follows:</p>
+<ul class="simple">
+<li><p>The <span class="math notranslate nohighlight">\(\ell_1\)</span> regularized LSP (Least Squares Program) above is
+transformed into a convex quadratic program with linear inequality constraints.</p></li>
+<li><p>The logarithmic barrier for the quadratic program is constructed.</p></li>
+<li><p>The central path for this logarithmic barrier minimizer is identified.</p></li>
+<li><p>Truncated newton method is used to solve for points on the central path.</p>
+<ul>
+<li><p>Compute the search direction as an approximate solution to the Newton system</p></li>
+<li><p>Compute the step size by backtracking line search</p></li>
+<li><p>Update the iterate</p></li>
+<li><p>Construct a dual feasible point</p></li>
+<li><p>Evaluate the duality gap</p></li>
+<li><p>Repeat till the relative duality gap is within a specified threshold</p></li>
+</ul>
+</li>
+<li><p>The Newton system is solved approximately using preconditioned conjugate gradients.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">solve_from</span></code> versions below are useful if the solution is known partially.
+The <code class="docutils literal notranslate"><span class="pre">solve</span></code> versions are more directly applicable when solution is not known.
+Both <code class="docutils literal notranslate"><span class="pre">solve_from</span></code> and <code class="docutils literal notranslate"><span class="pre">solve</span></code> are available as regular and JIT-compiled
+versions.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve_from.html#cr.sparse.cvx.l1ls.solve_from" title="cr.sparse.cvx.l1ls.solve_from"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1ls.solve_from</span></code></a>(A, y, lambda_, x0, u0[, …])</p></td>
+<td><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve_from_jit.html#cr.sparse.cvx.l1ls.solve_from_jit" title="cr.sparse.cvx.l1ls.solve_from_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1ls.solve_from_jit</span></code></a>(A, y, lambda_, x0, u0[, …])</p></td>
+<td><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve.html#cr.sparse.cvx.l1ls.solve" title="cr.sparse.cvx.l1ls.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1ls.solve</span></code></a>(A, y, lambda_[, x0, u0, tol, xi, …])</p></td>
+<td><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve_jit.html#cr.sparse.cvx.l1ls.solve_jit" title="cr.sparse.cvx.l1ls.solve_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1ls.solve_jit</span></code></a>(A, y, lambda_[, x0, u0, tol, …])</p></td>
+<td><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p></td>
+</tr>
+</tbody>
+</table>
+<p>An example is provided in <a class="reference internal" href="../gallery/index.html#recovery-l1-gallery"><span class="std std-ref">Sparse Recovery via L1 minimization</span></a>.</p>
+</div>
 <div class="section" id="alternating-directions-methods">
-<h2><a class="toc-backref" href="#id1">Alternating Directions Methods</a><a class="headerlink" href="#alternating-directions-methods" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">Alternating Directions Methods</a><a class="headerlink" href="#alternating-directions-methods" title="Permalink to this headline">¶</a></h2>
 <p>A tutorial has been provided to explore these
 methods in action.
 The <code class="docutils literal notranslate"><span class="pre">yall1.solve</span></code> method is an overall wrapper method
@@ -248,10 +305,10 @@ specific types of problems.</p>
 <td><p>Wrapper method to solve a variety of l1 minimization problems using ADMM</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_bp.html#cr.sparse.cvx.adm.yall1.solve_bp" title="cr.sparse.cvx.adm.yall1.solve_bp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_bp</span></code></a>(A, b, x0, z0, w, nonneg, …)</p></td>
-<td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1 \text{s.t.} \A x = b\)</span> using ADMM</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1 \, \text{s.t.}\, A x = b\)</span> using ADMM</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_bp_jit.html#cr.sparse.cvx.adm.yall1.solve_bp_jit" title="cr.sparse.cvx.adm.yall1.solve_bp_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_bp_jit</span></code></a>(A, b, x0, z0, w, nonneg, …)</p></td>
-<td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1 \text{s.t.} \A x = b\)</span> using ADMM</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1 \, \text{s.t.}\, A x = b\)</span> using ADMM</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2.html#cr.sparse.cvx.adm.yall1.solve_l1_l2" title="cr.sparse.cvx.adm.yall1.solve_l1_l2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_l1_l2</span></code></a>(A, b, x0, z0, w, nonneg, …)</p></td>
 <td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1  + \frac{1}{2 \rho} \| A x - b \|_2^2\)</span> using ADMM</p></td>
@@ -276,7 +333,7 @@ specific types of problems.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="_autosummary/cr.sparse.cvx.adm.yall1.solve.html" class="btn btn-neutral float-right" title="cr.sparse.cvx.adm.yall1.solve" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="_autosummary/cr.sparse.cvx.l1ls.solve_from.html" class="btn btn-neutral float-right" title="cr.sparse.cvx.l1ls.solve_from" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="_autosummary/cr.sparse.pursuit.gram_chol_update.html" class="btn btn-neutral float-left" title="cr.sparse.pursuit.gram_chol_update" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

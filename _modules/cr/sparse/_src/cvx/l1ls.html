@@ -1,0 +1,601 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>cr.sparse._src.cvx.l1ls &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../../../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../zzzreference.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>cr.sparse._src.cvx.l1ls</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for cr.sparse._src.cvx.l1ls</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2021 CR.Sparse Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Solves the l1 minimization problem using the Truncated Newton Interior Point Method</span>
+
+
+<span class="sd">References: </span>
+
+<span class="sd">- An interior point method for large scale l-1 regularized least squares</span>
+
+<span class="sd">Summary of variables involved in the algorithm</span>
+
+<span class="sd">* x:  primal variable</span>
+<span class="sd">* y: the observation vector/measurements y = A x + v</span>
+<span class="sd">* v: the noise term</span>
+<span class="sd">* A: the sensing matrix operator (Phi W)</span>
+<span class="sd">* z: primal residual z = Ax - y</span>
+<span class="sd">* lambda: regularization parameter</span>
+<span class="sd">* lambda_i: used when regularization parameter is different for x_i</span>
+<span class="sd">* Aty: A^T y </span>
+<span class="sd">* nu: dual variable/dual feasible point, eq 11, central path</span>
+<span class="sd">* p_obj : primal objective, eq 3,6,7,8 </span>
+<span class="sd">* d_obj : dual objective, eq 10</span>
+<span class="sd">* s : scaling factor for constructing a dual feasible point from an arbitrary x, eq 11</span>
+<span class="sd">* eta: duality gap, eq 12</span>
+<span class="sd">* u : auxiliary primal variable, converting L1-LSP to QP, eq 13</span>
+<span class="sd">* t : central path parameter</span>
+<span class="sd">* mu: scale factor for t [2-50]</span>
+<span class="sd">* t_0: initial value for the central path parameter, 1/lambda</span>
+<span class="sd">* tol, epsilon: target duality gap</span>
+<span class="sd">* 2n/t: how sub-optimal x(t) is</span>
+<span class="sd">* H : Hessian of  Phi_t, eq 14</span>
+<span class="sd">* g : gradient of Phi_t , eq 14</span>
+<span class="sd">* s : step size for backtracking line search</span>
+<span class="sd">* alpha, beta: parameters for backtracking line search</span>
+<span class="sd">* s_min: parameter for t update</span>
+<span class="sd">* d_1, d_2: diagonals for Hessian compact representation, IV.B</span>
+<span class="sd">* g_1, g_2: parts of gradient of Phi_t</span>
+<span class="sd">* g_1: gradient w.r.t. x</span>
+<span class="sd">* g_2: gradient w.r.t. u</span>
+<span class="sd">* P: the preconditioner, eq 15, 16</span>
+<span class="sd">* tau: positive constant for the preconditioner, eq 16</span>
+<span class="sd">* xi: parameter for PCG tolerance termination </span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">lax</span>
+<span class="n">norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span>
+
+
+<span class="kn">from</span> <span class="nn">cr.sparse.opt</span> <span class="kn">import</span> <span class="n">pcg</span>
+<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">RecoveryFullSolution</span>
+
+<span class="c1"># IPM parameters</span>
+<span class="n">MAX_ITERS</span> <span class="o">=</span> <span class="mi">400</span>
+
+<span class="n">MU</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># PCG parameters</span>
+<span class="n">PCG_MAX_ITERS</span> <span class="o">=</span> <span class="mi">5000</span>
+
+<span class="c1"># Line search parameters</span>
+<span class="n">ALPHA</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">BETA</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="c1"># Maximum number of iterations for the backtracking line search</span>
+<span class="n">MAX_LS_ITER</span> <span class="o">=</span> <span class="mi">100</span>
+
+
+<span class="k">class</span> <span class="nc">State</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;State of the TNIPM algorithm</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Primal variable&quot;&quot;&quot;</span>
+    <span class="n">u</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Auxiliary Primal variable&quot;&quot;&quot;</span>
+    <span class="n">z</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Primal residual z = A x - y&quot;&quot;&quot;</span>
+    <span class="n">nu</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Dual variable&quot;&quot;&quot;</span>
+    <span class="n">dxu</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot; Delta in x and u, the result of PCG step&quot;&quot;&quot;</span>
+    <span class="n">primal_obj</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="s2">&quot;Primal objective function value&quot;</span>
+    <span class="n">dual_obj</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="s2">&quot;Dual objective function value&quot;</span>
+    <span class="n">gap</span> <span class="p">:</span> <span class="nb">float</span>
+    <span class="s2">&quot;duality gap&quot;</span>
+    <span class="n">rel_gap</span> <span class="p">:</span> <span class="nb">float</span>
+    <span class="s2">&quot;relative gap&quot;</span>
+    <span class="n">s</span> <span class="p">:</span> <span class="nb">float</span>
+    <span class="sd">&quot;&quot;&quot; Step size for line search&quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="p">:</span> <span class="nb">float</span> 
+    <span class="sd">&quot;&quot;&quot; Central path parameter&quot;&quot;&quot;</span>
+    <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span>
+    <span class="n">n_times</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="sd">&quot;&quot;&quot;Number of times A x computed &quot;&quot;&quot;</span>
+    <span class="n">n_trans</span> <span class="p">:</span> <span class="nb">int</span>
+    <span class="sd">&quot;&quot;&quot;Number of times A.T b computed &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="solve_from"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cvx.l1ls.solve_from.html#cr.sparse.cvx.l1ls.solve_from">[docs]</a><span class="k">def</span> <span class="nf">solve_from</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">xi</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">t0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_iters</span><span class="o">=</span><span class="n">MAX_ITERS</span><span class="p">,</span> <span class="n">pcg_max_iters</span><span class="o">=</span><span class="n">PCG_MAX_ITERS</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solves :math:`\min \| A x - b \|_2^2 + \\lambda \| x \|_1` using the Truncated Newton Interior Point Method</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span>
+    <span class="c1">#TODO check for zero solution</span>
+    <span class="n">Aty</span> <span class="o">=</span> <span class="n">trans</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">Aty</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">lambda_max</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">Aty</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+    <span class="c1"># initialize other parameters</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">t0</span> <span class="k">if</span> <span class="n">t0</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">jnp</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">lambda_</span><span class="p">),</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="mf">1e-3</span><span class="p">)</span>
+    <span class="c1"># if lambda_ &gt; lambda_max: we have a zero solution</span>
+    
+    <span class="c1"># Diagonal for 2 * A^T A (preconditioner simplified)</span>
+    <span class="n">diag_AtA</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_primal_obj</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Computes the primal objective from primal variables&quot;&quot;&quot;</span>
+        <span class="c1"># eq 7</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="o">+</span> <span class="n">lambda_</span><span class="o">*</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">get_dual_obj</span><span class="p">(</span><span class="n">nu</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Computes dual objective from dual variables&quot;&quot;&quot;</span>
+        <span class="c1"># Eq 10</span>
+        <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.25</span><span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">nu</span><span class="p">)</span> <span class="o">-</span> <span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">get_nu</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Computes the dual variable nu from primal residual z&quot;&quot;&quot;</span>
+        <span class="n">nu</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">z</span> <span class="c1"># eq 11</span>
+        <span class="n">Atnu</span> <span class="o">=</span> <span class="n">trans</span><span class="p">(</span><span class="n">nu</span><span class="p">)</span>
+        <span class="n">Atnu_max</span>  <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">Atnu</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+        <span class="n">sf</span> <span class="o">=</span> <span class="n">lambda_</span> <span class="o">/</span> <span class="n">Atnu_max</span>  <span class="c1"># eq 11</span>
+        <span class="c1"># contract nu if necessary</span>
+        <span class="n">nu</span> <span class="o">=</span>  <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">sf</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sf</span> <span class="o">*</span> <span class="n">nu</span><span class="p">,</span> <span class="n">nu</span><span class="p">)</span> <span class="c1"># eq 11 </span>
+        <span class="k">return</span> <span class="n">nu</span>
+
+    <span class="k">def</span> <span class="nf">get_phi</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes the log barrier Phi_t Sec IV.A [scaled by 1/t]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">z</span><span class="p">)</span> <span class="o">+</span> <span class="n">lambda_</span><span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="o">-</span><span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="n">f</span><span class="p">))</span><span class="o">/</span><span class="n">t</span>
+
+    <span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">times</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span>
+        <span class="n">nu</span> <span class="o">=</span> <span class="n">get_nu</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        <span class="c1"># initial value of primal objective</span>
+        <span class="n">primal_obj</span>  <span class="o">=</span>  <span class="n">get_primal_obj</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+        <span class="c1"># initial value of the dual objective</span>
+        <span class="n">dual_obj</span> <span class="o">=</span> <span class="n">get_dual_obj</span><span class="p">(</span><span class="n">nu</span><span class="p">)</span>
+        <span class="n">gap</span> <span class="o">=</span> <span class="n">primal_obj</span> <span class="o">-</span> <span class="n">dual_obj</span>
+        <span class="n">rel_gap</span> <span class="o">=</span> <span class="n">gap</span> <span class="o">/</span> <span class="n">dual_obj</span>
+        <span class="n">dxu</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">State</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="n">u0</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="n">nu</span><span class="p">,</span> <span class="n">dxu</span><span class="o">=</span><span class="n">dxu</span><span class="p">,</span>
+            <span class="n">primal_obj</span><span class="o">=</span><span class="n">primal_obj</span><span class="p">,</span> <span class="n">dual_obj</span><span class="o">=</span><span class="n">dual_obj</span><span class="p">,</span> <span class="n">gap</span><span class="o">=</span><span class="n">gap</span><span class="p">,</span> <span class="n">rel_gap</span><span class="o">=</span><span class="n">rel_gap</span><span class="p">,</span> 
+            <span class="n">s</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t0</span><span class="p">,</span>
+            <span class="n">iterations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_trans</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">x</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">u</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">z</span>
+        <span class="n">nu</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">nu</span>
+        <span class="n">dxu</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">dxu</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">t</span>
+        <span class="c1"># print(f&#39;{x=}&#39;)</span>
+        <span class="c1"># print(f&#39;{u=}&#39;)</span>
+        <span class="c1"># print(f&#39;{z=}&#39;)</span>
+        <span class="c1"># print(f&#39;{nu=}&#39;)</span>
+        <span class="c1"># print(f&#39;{dxu=}&#39;)</span>
+        <span class="c1"># count of A.times in this iteration </span>
+        <span class="n">n_times</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># count of A.trans in this iteration</span>
+        <span class="n">n_trans</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1"># Newton step calculation</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="n">q1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">u</span><span class="o">+</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">q2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">u</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># note d1, d2 are scaled by 1/t w.r.t. D1, D2 in the paper</span>
+        <span class="n">d1</span> <span class="o">=</span> <span class="p">(</span><span class="n">q1</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">q2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">t</span>
+        <span class="n">d2</span> <span class="o">=</span> <span class="p">(</span><span class="n">q1</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">q2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">t</span>
+
+        <span class="c1"># calculate gradient Sec IV.B</span>
+        <span class="n">upper</span> <span class="o">=</span> <span class="n">trans</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">state</span><span class="o">.</span><span class="n">z</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">q1</span><span class="o">-</span><span class="n">q2</span><span class="p">)</span><span class="o">/</span><span class="n">t</span> 
+        <span class="n">n_trans</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">lower</span> <span class="o">=</span> <span class="n">lambda_</span><span class="o">*</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">q1</span><span class="o">+</span><span class="n">q2</span><span class="p">)</span><span class="o">/</span><span class="n">t</span>
+        <span class="n">gradient_phi</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">upper</span><span class="p">,</span> <span class="n">lower</span><span class="p">))</span>
+
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1"># Hessian operator IV.B</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="k">def</span> <span class="nf">hessian</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Computes the Hessian of Phi for a given x : y = H x&quot;&quot;&quot;</span>
+            <span class="c1"># split x into upper and lower parts</span>
+            <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+            <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">:]</span>
+            <span class="n">upper</span> <span class="o">=</span> <span class="n">trans</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">times</span><span class="p">(</span><span class="n">x1</span><span class="p">))</span> <span class="o">+</span> <span class="n">d1</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">d2</span> <span class="o">*</span> <span class="n">x2</span>
+            <span class="n">lower</span> <span class="o">=</span> <span class="n">d2</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">d1</span> <span class="o">*</span> <span class="n">x2</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">upper</span><span class="p">,</span> <span class="n">lower</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">y</span>
+
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1"># Preconditioner eq 15-16</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1"># calculate vectors to be used in the preconditioner</span>
+        <span class="c1"># eq 15-16</span>
+        <span class="c1"># 2 diag(A^T A) + D_1/t</span>
+        <span class="n">prb</span> <span class="o">=</span> <span class="n">diag_AtA</span><span class="o">+</span><span class="n">d1</span>
+        <span class="c1"># (D_1 D_3 - D_2^2)</span>
+        <span class="n">prs</span> <span class="o">=</span> <span class="n">prb</span><span class="o">*</span><span class="n">d1</span><span class="o">-</span><span class="p">(</span><span class="n">d2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">p1</span> <span class="o">=</span> <span class="n">d1</span> <span class="o">/</span> <span class="n">prs</span>
+        <span class="n">p2</span> <span class="o">=</span> <span class="n">d2</span> <span class="o">/</span> <span class="n">prs</span>
+        <span class="n">p3</span> <span class="o">=</span> <span class="n">prb</span> <span class="o">/</span> <span class="n">prs</span>
+
+        <span class="k">def</span> <span class="nf">preconditioner</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Computes the inverse y = M \ x where M is the preconditioner operator&quot;&quot;&quot;</span>
+            <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+            <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">:]</span>
+            <span class="n">upper</span> <span class="o">=</span>  <span class="n">p1</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">p2</span> <span class="o">*</span> <span class="n">x2</span>
+            <span class="n">lower</span> <span class="o">=</span> <span class="o">-</span><span class="n">p2</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">p3</span> <span class="o">*</span> <span class="n">x2</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">upper</span><span class="p">,</span> <span class="n">lower</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">y</span>
+
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1"># Preconditioned Conjugate Gradients TNIPM step 1</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1"># set pcg tol (relative)</span>
+        <span class="n">gradient_norm</span>   <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">gradient_phi</span><span class="p">)</span>
+        <span class="c1"># See truncation rule</span>
+        <span class="n">eta</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">gap</span>
+        <span class="n">pcg_tol</span>  <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">1e-1</span><span class="p">,</span><span class="n">xi</span><span class="o">*</span><span class="n">eta</span><span class="o">/</span><span class="n">jnp</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">gradient_norm</span><span class="p">))</span>
+        <span class="c1"># pcg_tol = jnp.where (ntiter != 0 and pitr == 0, pcg_tol*0.1, pcg_tol)</span>
+        <span class="n">pcg_sol</span> <span class="o">=</span> <span class="n">pcg</span><span class="o">.</span><span class="n">solve_from</span><span class="p">(</span><span class="n">hessian</span><span class="p">,</span> <span class="o">-</span><span class="n">gradient_phi</span><span class="p">,</span> <span class="n">dxu</span><span class="p">,</span> 
+            <span class="n">max_iters</span><span class="o">=</span><span class="n">pcg_max_iters</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">pcg_tol</span><span class="p">,</span>
+            <span class="n">M</span><span class="o">=</span><span class="n">preconditioner</span><span class="p">)</span>
+        <span class="n">dxu</span> <span class="o">=</span> <span class="n">pcg_sol</span><span class="o">.</span><span class="n">x</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="n">dxu</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+        <span class="n">du</span> <span class="o">=</span> <span class="n">dxu</span><span class="p">[</span><span class="n">n</span><span class="p">:]</span>
+        <span class="c1"># how many iterations in PCG</span>
+        <span class="n">pcg_iters</span> <span class="o">=</span> <span class="n">pcg_sol</span><span class="o">.</span><span class="n">iterations</span>
+        <span class="c1"># print(f&quot;pcg: {pcg_tol=:.4f} {pcg_iters=}&quot;)</span>
+        <span class="c1"># print(f&#39;{dxu=}&#39;)</span>
+        <span class="c1"># Every pcg iteration is one H(x) and one M(x)</span>
+        <span class="c1"># M(x) is vector-vector stuff</span>
+        <span class="c1"># H(x) involves one A x and one A^T x</span>
+        <span class="n">n_times</span> <span class="o">+=</span> <span class="n">pcg_iters</span>
+        <span class="n">n_trans</span> <span class="o">+=</span> <span class="n">pcg_iters</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1"># Backtracking line search TNIPM step 2</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">-</span><span class="n">u</span><span class="p">))</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="n">get_phi</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">gdx</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">gradient_phi</span><span class="p">,</span> <span class="n">dxu</span><span class="p">)</span>
+        <span class="c1"># print(f&#39;{phi=}&#39;)</span>
+        <span class="c1"># print(f&#39;{gdx=}&#39;)</span>
+        <span class="k">def</span> <span class="nf">f_init</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+            <span class="n">newx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">s</span> <span class="o">*</span> <span class="n">dx</span>
+            <span class="n">newu</span> <span class="o">=</span> <span class="n">u</span> <span class="o">+</span> <span class="n">s</span> <span class="o">*</span> <span class="n">du</span>
+            <span class="n">newf</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">newx</span><span class="o">-</span><span class="n">newu</span><span class="p">,</span> <span class="o">-</span><span class="n">newx</span><span class="o">-</span><span class="n">newu</span><span class="p">))</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">newx</span><span class="p">,</span> <span class="n">newu</span><span class="p">,</span> <span class="n">newf</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">f_body</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">BETA</span> <span class="o">*</span> <span class="n">state</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">newx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">s</span> <span class="o">*</span> <span class="n">dx</span>
+            <span class="n">newu</span> <span class="o">=</span> <span class="n">u</span> <span class="o">+</span> <span class="n">s</span> <span class="o">*</span> <span class="n">du</span>
+            <span class="n">newf</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">newx</span><span class="o">-</span><span class="n">newu</span><span class="p">,</span> <span class="o">-</span><span class="n">newx</span><span class="o">-</span><span class="n">newu</span><span class="p">))</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">newx</span><span class="p">,</span> <span class="n">newu</span><span class="p">,</span> <span class="n">newf</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">f_cond</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+            <span class="n">newf</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">newf</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+
+
+        <span class="k">def</span> <span class="nf">bt_init</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+            <span class="n">newx</span><span class="p">,</span> <span class="n">newu</span><span class="p">,</span> <span class="n">newf</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">f_cond</span><span class="p">,</span> <span class="n">f_body</span><span class="p">,</span> <span class="n">f_init</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+            <span class="n">newz</span> <span class="o">=</span> <span class="n">times</span><span class="p">(</span><span class="n">newx</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span>
+            <span class="n">newphi</span> <span class="o">=</span>  <span class="n">get_phi</span><span class="p">(</span><span class="n">newu</span><span class="p">,</span> <span class="n">newz</span><span class="p">,</span> <span class="n">newf</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+            <span class="n">times_count</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">newx</span><span class="p">,</span> <span class="n">newu</span><span class="p">,</span> <span class="n">newf</span><span class="p">,</span> <span class="n">newz</span><span class="p">,</span> <span class="n">newphi</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">times_count</span>
+
+        <span class="k">def</span> <span class="nf">bt_body</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+            <span class="n">newx</span><span class="p">,</span> <span class="n">newu</span><span class="p">,</span> <span class="n">newf</span><span class="p">,</span> <span class="n">newz</span><span class="p">,</span> <span class="n">newphi</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">times_count</span> <span class="o">=</span> <span class="n">state</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">BETA</span> <span class="o">*</span> <span class="n">s</span>
+            <span class="n">newx</span><span class="p">,</span> <span class="n">newu</span><span class="p">,</span> <span class="n">newf</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">f_cond</span><span class="p">,</span> <span class="n">f_body</span><span class="p">,</span> <span class="n">f_init</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+            <span class="n">newz</span> <span class="o">=</span> <span class="n">times</span><span class="p">(</span><span class="n">newx</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span>
+            <span class="n">newphi</span> <span class="o">=</span>  <span class="n">get_phi</span><span class="p">(</span><span class="n">newu</span><span class="p">,</span> <span class="n">newz</span><span class="p">,</span> <span class="n">newf</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">newx</span><span class="p">,</span> <span class="n">newu</span><span class="p">,</span> <span class="n">newf</span><span class="p">,</span> <span class="n">newz</span><span class="p">,</span> <span class="n">newphi</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">times_count</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">def</span> <span class="nf">bt_cond</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+            <span class="n">newphi</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">newphi</span> <span class="o">-</span> <span class="n">phi</span> <span class="o">&gt;</span> <span class="n">ALPHA</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">gdx</span>
+
+        <span class="n">newx</span><span class="p">,</span> <span class="n">newu</span><span class="p">,</span> <span class="n">newf</span><span class="p">,</span> <span class="n">newz</span><span class="p">,</span> <span class="n">newphi</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">times_count</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">bt_cond</span><span class="p">,</span> <span class="n">bt_body</span><span class="p">,</span> <span class="n">bt_init</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+        <span class="c1"># add the number of times A x was run in backtracking</span>
+        <span class="n">n_times</span> <span class="o">+=</span> <span class="n">times_count</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1"># x,u update TNIPM step 3</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1">#update x</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">newx</span>
+        <span class="c1"># update u</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">newu</span>
+        <span class="c1"># update z (eq 9)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">newz</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1"># Dual feasible point TNIPM step 4</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1"># update nu (eq 11)</span>
+        <span class="n">nu</span> <span class="o">=</span> <span class="n">get_nu</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1"># Duality gap calculation TNIPM step 5</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1"># update primal objective</span>
+        <span class="n">primal_obj</span>  <span class="o">=</span>  <span class="n">get_primal_obj</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+        <span class="c1"># update dual objective (only if it increases)</span>
+        <span class="n">dual_obj</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">get_dual_obj</span><span class="p">(</span><span class="n">nu</span><span class="p">),</span> <span class="n">state</span><span class="o">.</span><span class="n">dual_obj</span><span class="p">)</span>
+        <span class="c1"># duality gap</span>
+        <span class="n">gap</span> <span class="o">=</span> <span class="n">primal_obj</span> <span class="o">-</span> <span class="n">dual_obj</span>
+        <span class="c1"># relative gap</span>
+        <span class="n">rel_gap</span> <span class="o">=</span> <span class="n">gap</span> <span class="o">/</span> <span class="n">state</span><span class="o">.</span><span class="n">dual_obj</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1"># update t if required TNIPM step 7</span>
+        <span class="c1">#--------------------------------------------------------------------------------</span>
+        <span class="c1"># t = t if s &lt; 0.5 else jnp.maximum(jnp.minimum(2*n*MU/gap, MU*t), t)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">s</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">MU</span><span class="o">/</span><span class="n">gap</span><span class="p">,</span> <span class="n">MU</span><span class="o">*</span><span class="n">t</span><span class="p">),</span> <span class="n">t</span><span class="p">))</span> 
+        <span class="k">return</span> <span class="n">State</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="n">nu</span><span class="p">,</span> <span class="n">dxu</span><span class="o">=</span><span class="n">dxu</span><span class="p">,</span>
+            <span class="n">primal_obj</span><span class="o">=</span><span class="n">primal_obj</span><span class="p">,</span> <span class="n">dual_obj</span><span class="o">=</span><span class="n">dual_obj</span><span class="p">,</span> <span class="n">gap</span><span class="o">=</span><span class="n">gap</span><span class="p">,</span> <span class="n">rel_gap</span><span class="o">=</span><span class="n">rel_gap</span><span class="p">,</span>
+            <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> 
+            <span class="n">n_times</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">n_times</span><span class="o">+</span><span class="n">n_times</span><span class="p">,</span> 
+            <span class="n">n_trans</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">n_trans</span><span class="o">+</span><span class="n">n_trans</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">cond</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Condition for continuing the iterations TNIPM step 6</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#print(f&#39;[{state.iterations}] primal:{float(state.primal_obj):.3e} dual:{float(state.dual_obj):.3e} gap:{float(state.gap):.3e} rel:{float(state.rel_gap):.2f}&#39;)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">rel_gap</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">max_iters</span><span class="p">)</span>
+
+    <span class="n">state</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">init</span><span class="p">())</span>
+
+    <span class="c1"># state = init()</span>
+    <span class="c1"># while cond(state):</span>
+    <span class="c1">#     state = body(state)</span>
+    <span class="k">return</span> <span class="n">RecoveryFullSolution</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="o">=-</span><span class="n">state</span><span class="o">.</span><span class="n">z</span><span class="p">,</span>
+        <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="p">,</span> 
+        <span class="n">n_times</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">n_times</span><span class="p">,</span> <span class="n">n_trans</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">n_trans</span><span class="p">)</span></div>
+
+<span class="n">solve_from_jit</span>  <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">solve_from</span><span class="p">,</span>
+    <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;tol&quot;</span><span class="p">,</span> <span class="s2">&quot;xi&quot;</span><span class="p">,</span> <span class="s2">&quot;t0&quot;</span><span class="p">,</span> <span class="s2">&quot;max_iters&quot;</span><span class="p">,</span> <span class="s2">&quot;pcg_max_iters&quot;</span><span class="p">))</span>
+
+<div class="viewcode-block" id="solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cvx.l1ls.solve.html#cr.sparse.cvx.l1ls.solve">[docs]</a><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">xi</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">t0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_iters</span><span class="o">=</span><span class="n">MAX_ITERS</span><span class="p">,</span> <span class="n">pcg_max_iters</span><span class="o">=</span><span class="n">PCG_MAX_ITERS</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solves :math:`\min \| A x - b \|_2^2 + \\lambda \| x \|_1` using the Truncated Newton Interior Point Method</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">x0</span> <span class="k">if</span> <span class="n">x0</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">u0</span> <span class="o">=</span> <span class="n">u0</span> <span class="k">if</span> <span class="n">u0</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">solve_from</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">max_iters</span><span class="p">,</span> <span class="n">pcg_max_iters</span><span class="p">)</span></div>
+
+<span class="n">solve_jit</span>  <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">solve</span><span class="p">,</span>
+    <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;x0&quot;</span><span class="p">,</span> <span class="s2">&quot;u0&quot;</span><span class="p">,</span> <span class="s2">&quot;tol&quot;</span><span class="p">,</span> <span class="s2">&quot;xi&quot;</span><span class="p">,</span> <span class="s2">&quot;t0&quot;</span><span class="p">,</span> <span class="s2">&quot;max_iters&quot;</span><span class="p">,</span> <span class="s2">&quot;pcg_max_iters&quot;</span><span class="p">))</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

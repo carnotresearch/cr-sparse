@@ -196,6 +196,7 @@
 <span class="n">norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span>
 
 <span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">lop</span>
+<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">RecoveryFullSolution</span>
 
 <span class="k">def</span> <span class="nf">project_to_box</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
     <span class="n">ww</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
@@ -205,37 +206,6 @@
 <span class="k">def</span> <span class="nf">project_to_real_upper_limit</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
 
-<span class="k">class</span> <span class="nc">RecoveryFullSolution</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents the solution of a sparse recovery problem</span>
-
-<span class="sd">    Consider a sparse recovery problem :math:`b=A x + e`.</span>
-
-<span class="sd">    This type combines all of this information together.</span>
-
-<span class="sd">    Parameters:</span>
-
-<span class="sd">        x : estimate(s) of :math:`x`</span>
-<span class="sd">        r : residual(s) :math:`r = b - A_I x_I `</span>
-<span class="sd">        r_norm_sqr: squared norm of residual :math:`\| r \|_2^2`</span>
-<span class="sd">        iterations: Number of iterations required for the algorithm to converge</span>
-
-<span class="sd">    Note:</span>
-
-<span class="sd">        The tuple can be used to solve multiple measurement vector</span>
-<span class="sd">        problems also. In this case, each column (of individual parameters)</span>
-<span class="sd">        represents the solution of corresponding single vector problems.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># The non-zero values</span>
-    <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;Solution vector&quot;&quot;&quot;</span>
-    <span class="n">r</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;The primal residual vector&quot;&quot;&quot;</span>
-    <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span>
-    <span class="n">n_times</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="sd">&quot;&quot;&quot;Number of times A x computed &quot;&quot;&quot;</span>
-    <span class="n">n_trans</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="sd">&quot;&quot;&quot;Number of times A.T b computed &quot;&quot;&quot;</span>
 
 <span class="k">class</span> <span class="nc">BPState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
@@ -259,11 +229,9 @@
     <span class="n">n_trans</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="sd">&quot;&quot;&quot;Number of times A.T b computed &quot;&quot;&quot;</span>
 
-
-
 <div class="viewcode-block" id="solve_bp"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cvx.adm.yall1.solve_bp.html#cr.sparse.cvx.adm.yall1.solve_bp">[docs]</a><span class="k">def</span> <span class="nf">solve_bp</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">nonneg</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">max_iters</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Solves the problem :math:`\min \| x \|_1 \\text{s.t.} \A x = b` using ADMM</span>
+<span class="sd">    Solves the problem :math:`\min \| x \|_1 \, \\text{s.t.}\, A x = b` using ADMM</span>
 
 <span class="sd">    This function implements eq 2.29 of the paper.</span>
 <span class="sd">    &quot;&quot;&quot;</span>

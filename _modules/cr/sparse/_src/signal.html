@@ -333,6 +333,18 @@
     <span class="n">x_I</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">I</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">I</span><span class="p">,</span> <span class="n">x_I</span></div>
 
+<span class="k">def</span> <span class="nf">hard_threshold_by</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sets all entries in x to be zero which are less than t in magnitude</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">valid</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">t</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">valid</span>
+
+<span class="k">def</span> <span class="nf">largest_indices_by</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the locations of all entries in x which are larger than t in magnitude</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">t</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
 <div class="viewcode-block" id="dynamic_range"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.dynamic_range.html#cr.sparse.dynamic_range">[docs]</a><span class="k">def</span> <span class="nf">dynamic_range</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the ratio of largest and smallest values (by magnitude) in x (dB)</span>

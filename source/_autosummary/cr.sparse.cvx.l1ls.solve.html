@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>cr.sparse.cvx.adm.yall1.solve_bp_jit &mdash; CR.Sparse  documentation</title>
+  <title>cr.sparse.cvx.l1ls.solve &mdash; CR.Sparse  documentation</title>
   
 
   
@@ -52,8 +52,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="cr.sparse.cvx.adm.yall1.solve_l1_l2" href="cr.sparse.cvx.adm.yall1.solve_l1_l2.html" />
-    <link rel="prev" title="cr.sparse.cvx.adm.yall1.solve_bp" href="cr.sparse.cvx.adm.yall1.solve_bp.html" /> 
+    <link rel="next" title="cr.sparse.cvx.l1ls.solve_jit" href="cr.sparse.cvx.l1ls.solve_jit.html" />
+    <link rel="prev" title="cr.sparse.cvx.l1ls.solve_from_jit" href="cr.sparse.cvx.l1ls.solve_from_jit.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -108,17 +108,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../lop.html">Linear Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../cvx_recovery.html#truncated-newton-interior-points-method-tnipm">Truncated Newton Interior Points Method (TNIPM)</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../cvx_recovery.html#alternating-directions-methods">Alternating Directions Methods</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.cvx.adm.yall1.solve.html">cr.sparse.cvx.adm.yall1.solve</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.cvx.adm.yall1.solve_bp.html">cr.sparse.cvx.adm.yall1.solve_bp</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.cvx.adm.yall1.solve_bp_jit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.cvx.adm.yall1.solve_l1_l2.html">cr.sparse.cvx.adm.yall1.solve_l1_l2</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.cvx.adm.yall1.solve_l1_l2_jit.html">cr.sparse.cvx.adm.yall1.solve_l1_l2_jit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.cvx.adm.yall1.solve_l1_l2con.html">cr.sparse.cvx.adm.yall1.solve_l1_l2con</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit.html">cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../cvx_recovery.html#truncated-newton-interior-points-method-tnipm">Truncated Newton Interior Points Method (TNIPM)</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.cvx.l1ls.solve_from.html">cr.sparse.cvx.l1ls.solve_from</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.cvx.l1ls.solve_from_jit.html">cr.sparse.cvx.l1ls.solve_from_jit</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.cvx.l1ls.solve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.cvx.l1ls.solve_jit.html">cr.sparse.cvx.l1ls.solve_jit</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../cvx_recovery.html#alternating-directions-methods">Alternating Directions Methods</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
@@ -183,13 +180,13 @@
         
           <li><a href="../cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a> &raquo;</li>
         
-      <li>cr.sparse.cvx.adm.yall1.solve_bp_jit</li>
+      <li>cr.sparse.cvx.l1ls.solve</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/source/_autosummary/cr.sparse.cvx.adm.yall1.solve_bp_jit.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/source/_autosummary/cr.sparse.cvx.l1ls.solve.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -226,13 +223,12 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="cr-sparse-cvx-adm-yall1-solve-bp-jit">
-<h1>cr.sparse.cvx.adm.yall1.solve_bp_jit<a class="headerlink" href="#cr-sparse-cvx-adm-yall1-solve-bp-jit" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cr-sparse-cvx-l1ls-solve">
+<h1>cr.sparse.cvx.l1ls.solve<a class="headerlink" href="#cr-sparse-cvx-l1ls-solve" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="cr.sparse.cvx.adm.yall1.solve_bp_jit">
-<span class="sig-prename descclassname"><span class="pre">cr.sparse.cvx.adm.yall1.</span></span><span class="sig-name descname"><span class="pre">solve_bp_jit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonneg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cr.sparse.cvx.adm.yall1.solve_bp_jit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1 \, \text{s.t.}\, A x = b\)</span> using ADMM</p>
-<p>This function implements eq 2.29 of the paper.</p>
+<dt class="sig sig-object py" id="cr.sparse.cvx.l1ls.solve">
+<span class="sig-prename descclassname"><span class="pre">cr.sparse.cvx.l1ls.</span></span><span class="sig-name descname"><span class="pre">solve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pcg_max_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/cvx/l1ls.html#solve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.cvx.l1ls.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p>
 </dd></dl>
 
 </div>
@@ -243,8 +239,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="cr.sparse.cvx.adm.yall1.solve_l1_l2.html" class="btn btn-neutral float-right" title="cr.sparse.cvx.adm.yall1.solve_l1_l2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="cr.sparse.cvx.adm.yall1.solve_bp.html" class="btn btn-neutral float-left" title="cr.sparse.cvx.adm.yall1.solve_bp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cr.sparse.cvx.l1ls.solve_jit.html" class="btn btn-neutral float-right" title="cr.sparse.cvx.l1ls.solve_jit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cr.sparse.cvx.l1ls.solve_from_jit.html" class="btn btn-neutral float-left" title="cr.sparse.cvx.l1ls.solve_from_jit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
