@@ -172,7 +172,7 @@ def largest_indices_by(x, t):
     """
     Returns the locations of all entries in x which are larger than t in magnitude
     """
-    return jnp.where(jnp.abs(x) >= t)
+    return jnp.where(jnp.abs(x) >= t)[0]
 
 def dynamic_range(x):
     """Returns the ratio of largest and smallest values (by magnitude) in x (dB)
