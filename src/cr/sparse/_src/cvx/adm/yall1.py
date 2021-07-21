@@ -24,6 +24,7 @@ from jax import jit, lax, vmap
 norm = jnp.linalg.norm
 
 from cr.sparse import lop
+from cr.sparse import RecoveryFullSolution
 
 def project_to_box(z, w):
     ww = jnp.maximum(w, jnp.abs(z))
@@ -33,37 +34,6 @@ def project_to_box(z, w):
 def project_to_real_upper_limit(z, w):
     return jnp.minimum(w, jnp.real(z))
 
-class RecoveryFullSolution(NamedTuple):
-    """Represents the solution of a sparse recovery problem
-
-    Consider a sparse recovery problem :math:`b=A x + e`.
-
-    This type combines all of this information together.
-
-    Parameters:
-
-        x : estimate(s) of :math:`x`
-        r : residual(s) :math:`r = b - A_I x_I `
-        r_norm_sqr: squared norm of residual :math:`\| r \|_2^2`
-        iterations: Number of iterations required for the algorithm to converge
-
-    Note:
-
-        The tuple can be used to solve multiple measurement vector
-        problems also. In this case, each column (of individual parameters)
-        represents the solution of corresponding single vector problems.
-    """
-    # The non-zero values
-    x: jnp.ndarray
-    """Solution vector"""
-    r: jnp.ndarray
-    """The primal residual vector"""
-    iterations: int
-    """The number of iterations it took to complete"""
-    n_times: int = 0
-    """Number of times A x computed """
-    n_trans : int = 0
-    """Number of times A.T b computed """
 
 class BPState(NamedTuple):
     x: jnp.ndarray
@@ -86,8 +56,6 @@ class BPState(NamedTuple):
     """Number of times A x computed """
     n_trans : int = 0
     """Number of times A.T b computed """
-
-
 
 def solve_bp(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters):
     """
