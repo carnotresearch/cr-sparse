@@ -1,4 +1,4 @@
-.. _recovery_admm_gallery:
+.. _recovery_l1_gallery:
 
 Sparse Recovery via L1 minimization
 -----------------------------------------------
