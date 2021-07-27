@@ -47,9 +47,9 @@ def diagonal(d):
 def zero(m,n=None):
     """Returns a linear operator which maps everything to 0 vector in data space"""
     n = m if n is None else n
-    times = lambda x: jnp.zeros( (m,) + x.shape[1:] )
-    trans = lambda x: jnp.zeros((n,) + x.shape[1:])
-    return Operator(times=times, trans=trans, shape=(n,n))
+    times = lambda x: jnp.zeros( (m,) + x.shape[1:], dtype=x.dtype)
+    trans = lambda x: jnp.zeros((n,) + x.shape[1:], dtype=x.dtype)
+    return Operator(times=times, trans=trans, shape=(m,n))
 
 def flipud(n):
     """Returns an operator which flips the order of entries in input upside down"""
