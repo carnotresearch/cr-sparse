@@ -50,7 +50,9 @@ from cr.sparse._src.lop.basic import (
 from cr.sparse._src.lop.util import (
     to_matrix,
     to_adjoint_matrix,
-    to_complex_matrix
+    to_complex_matrix,
+    dot_test_real,
+    dot_test_complex
 )
 
 # The following operators are technically not linear

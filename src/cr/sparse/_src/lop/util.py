@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import jax
+from jax import random
 import jax.numpy as jnp
 
 
@@ -40,3 +41,38 @@ def to_complex_matrix(A):
     n = A.shape[1]
     I = jnp.eye(n) + 0j
     return jax.vmap(A.times, (1), (1))(I)
+
+
+
+def dot_test_real(key, A, tol=1e-6):
+    """Performs a dot test on the linear operator A"""
+    m, n = A.shape
+    #print(f"{m=}, {n=}")
+    keys = random.split(key, 2)
+    u = random.normal(keys[0], (n,))
+    v = random.normal(keys[1], (m,))
+    y = A.times(u)
+    x = A.trans(v)
+    yy = jnp.vdot(y, v)
+    xx = jnp.vdot(u, x)
+    return jnp.abs(yy - xx) / ((yy + xx + 1e-15) / 2) < tol 
+
+
+def dot_test_complex(key, A, tol=1e-6):
+    m, n = A.shape
+    keys = random.split(key, 4)
+    u = random.normal(keys[0], (n,)) + 1j * random.normal(keys[1], (n,))
+    v = random.normal(keys[2], (m,)) + 1j * random.normal(keys[3], (m,))
+    y = A.times(u)
+    x = A.trans(v)
+    yy = jnp.vdot(y, v)
+    xx = jnp.vdot(u, x)
+
+    yyr = jnp.real(yy)
+    yyi = jnp.imag(yy)
+    xxr = jnp.real(xx)
+    xxi = jnp.imag(xx)
+
+    real_flag = jnp.abs(yyr - xxr) / ((yyr + xxr + 1e-15) / 2) < tol 
+    imag_flag = jnp.abs(yyi - xxi) / ((yyi + xxi + 1e-15) / 2) < tol 
+    return real_flag & imag_flag
