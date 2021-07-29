@@ -127,3 +127,6 @@ record_*.csv
 tmp/*
 
 docs/gallery/
+
+# airspeed velocity benchmark results
+.asv/*
