@@ -1,7 +1,7 @@
 **What do I need to know to help?**
 
 If you are looking to help to with a code contribution our project is primarily written in Python 
-and uses NumPy, SciPy, Tensorflow, OpenCV, Keras, Rx, Scikit-Image, and related technologies. 
+and uses Numpy, JAX and related technologies. 
 If you don't feel ready to make a code contribution yet, no problem! 
 You can also check out the documentation issues 
 or the design issues that we have.
@@ -10,10 +10,9 @@ If you are interested in making a code contribution
 and would like to learn more about the technologies that we use, 
 check out the list below.
 
+* [JAX reference documentation](https://jax.readthedocs.io/en/latest/)
 * [SciPy Lectures](https://scipy-lectures.org/)
-* [Keras](https://keras.io/guides)
-* [Tensorflow](https://www.tensorflow.org/overview)
-* [OpenCV Python](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_tutorials.html)
+* [CR-Sparse reference documentation](https://carnotresearch.github.io/cr-sparse/)
 
 **How do I make a contribution?**
 
@@ -21,9 +20,9 @@ Never made an open source contribution before? Wondering how contributions work 
 
 * Find an issue that you are interested in addressing or a feature that you would like to add.
 * Fork the repository associated with the issue to your local GitHub organization. 
-  This means that you will have a copy of the repository under your-GitHub-username/repository-name.
+  This means that you will have a copy of the repository under your-GitHub-username/cr-sparse.
 * Clone the repository to your local machine using 
-  `git clone https://github.com/github-username/repository-name.git`.
+  `git clone https://github.com/your-user-name/cr-sparse.git`.
 * Create a new branch for your fix using `git checkout -b branch-name-here`.
 * Make the appropriate changes for the issue you are trying to address or the feature that you want to add.
 * Use `git add insert-paths-of-changed-files-here` to add the file contents of the changed files to the 
@@ -43,7 +42,7 @@ Never made an open source contribution before? Wondering how contributions work 
 
 **Where can I go for help?**
 
-If you need help, you can ask questions on our [Discussions](https://github.com/carnotresearch/cr-vision/discussions) forum for this project.
+If you need help, you can ask questions on our [Discussions](https://github.com/carnotresearch/cr-sparse/discussions) forum for this project.
 
 **What does the Code of Conduct mean for me?**
 
