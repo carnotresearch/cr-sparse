@@ -25,4 +25,13 @@ from cr.sparse._src.wt.dyad import (
 from cr.sparse._src.wt.conv import (
     iconv,
     aconv,
+    mirror_filter,
+)
+
+from cr.sparse._src.wt.multirate import (
+    up_sample,
+    lo_pass_down_sample,
+    hi_pass_down_sample,
+    up_sample_lo_pass,
+    up_sample_hi_pass,
 )
