@@ -79,6 +79,12 @@ def dyadic_length(x):
     n = x.shape[0]
     return jnp.ceil(jnp.log2(n)).astype(int)
 
+def dyadic_length_int(x):
+    """Returns the dydadic length of x"""
+    n = x.shape[0]
+    return math.ceil(math.log2(n))
+
+
 def has_dyadic_length(x):
     """Returns if the x covers a full dyad"""
     n = x.shape[0]

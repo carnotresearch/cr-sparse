@@ -95,8 +95,8 @@ def up_sample_cdjv(x, h, left_edge, right_edge):
         # final computation of y
         y = jnp.zeros(2*n, dtype=x.dtype)
         # copy left boundary corrected values
-        y(1:3*m - 1) = left_bc(:)
-        y(2*n:-1:(2*n - 3*m + 2)) = right_bc(:)
+        # y(1:3*m - 1) = left_bc(:)
+        # y(2*n:-1:(2*n - 3*m + 2)) = right_bc(:)
         # add the middle values
-        y = y + y_padded(1:2*n)
+        # y = y + y_padded(1:2*n)
         return y
