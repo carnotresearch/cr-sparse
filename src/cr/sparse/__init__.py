@@ -102,7 +102,22 @@ from cr.sparse._src.vector import (
     is_col_vec,
     to_row_vec,
     to_col_vec,
+    vec_unit,
+    vec_unit_jit,
+    vec_shift_right,
+    vec_rotate_right,
+    vec_shift_left,
+    vec_rotate_left,
+    vec_shift_right_n,
+    vec_rotate_right_n,
+    vec_shift_left_n, 
+    vec_rotate_left_n,   
+    vec_repeat_at_end,
+    vec_repeat_at_end_jit,
+    vec_repeat_at_start,
+    vec_repeat_at_start_jit
 )
+
 from cr.sparse._src.signal import (
     nonzero_values,
     nonzero_indices,

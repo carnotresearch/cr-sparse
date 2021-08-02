@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+from jax import jit
 import jax.numpy as jnp
 
 from .util import promote_arg_dtypes
@@ -40,3 +40,61 @@ def to_row_vec(x):
 def to_col_vec(x):
     assert x.ndim == 1
     return jnp.expand_dims(x, 1)
+
+def vec_unit(n, i):
+    """Returns a unit vector in i-th dimension"""
+    return jnp.zeros(n).at[i].set(1)
+
+vec_unit_jit = jit(vec_unit, static_argnums=(0, 1))
+
+def vec_shift_right(x):
+    """Right shift the contents of the vector"""
+    return jnp.zeros_like(x).at[1:].set(x[:-1])
+
+def vec_rotate_right(x):
+    """Circular right shift the contents of the vector"""
+    return jnp.roll(x, 1)
+
+
+def vec_shift_left(x):
+    """Left shift the contents of the vector"""
+    return jnp.zeros_like(x).at[0:-1].set(x[1:])
+
+def vec_rotate_left(x):
+    """Circular left shift the contents of the vector"""
+    return jnp.roll(x, -1)
+
+def vec_shift_right_n(x, n):
+    """Right shift the contents of the vector by n places"""
+    return jnp.zeros_like(x).at[n:].set(x[:-n])
+
+def vec_rotate_right_n(x, n):
+    """Circular right shift the contents of the vector by n places"""
+    return jnp.roll(x, n)
+
+
+def vec_shift_left_n(x, n):
+    """Left shift the contents of the vector by n places"""
+    return jnp.zeros_like(x).at[0:-n].set(x[n:])
+
+def vec_rotate_left_n(x, n):
+    """Circular left shift the contents of the vector by n places"""
+    return jnp.roll(x, -n)
+
+
+def vec_repeat_at_end(x, p):
+    n = x.shape[0]
+    indices = jnp.arange(p) % n
+    padding = x[indices]
+    return jnp.concatenate((x, padding))
+
+vec_repeat_at_end_jit = jit(vec_repeat_at_end, static_argnums=(1,))
+
+
+def vec_repeat_at_start(x, p):
+    n = x.shape[0]
+    indices = (jnp.arange(p) + n - p) % n
+    padding = x[indices]
+    return jnp.concatenate((padding, x))
+
+vec_repeat_at_start_jit = jit(vec_repeat_at_start, static_argnums=(1,))
