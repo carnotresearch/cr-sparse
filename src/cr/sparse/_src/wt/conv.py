@@ -18,6 +18,8 @@ import jax.numpy as jnp
 import cr.sparse as crs
 
 def iconv(f, x):
+    """Filtering by periodic convolution of x with f
+    """
     n = x.shape[0]
     p = f.shape[0]
     x_padded = crs.vec_repeat_at_start(x, p)
@@ -25,6 +27,8 @@ def iconv(f, x):
     return x_filtered[p:n+p]
 
 def aconv(f, x):
+    """Filtering by periodic convolution of x with the time reverse of f
+    """
     n = x.shape[0]
     p = f.shape[0]
     x_padded = crs.vec_repeat_at_end(x, p)
@@ -32,3 +36,11 @@ def aconv(f, x):
     f = f[::-1]
     x_filtered = jnp.convolve(x_padded, f)
     return x_filtered[p-1:n+p-1]
+
+
+def mirror_filter(h):
+    """Constructs the mirror filter for a given qmf filter by applying (-1)^t modulation
+    """
+    n = h.shape[0]
+    modulation = (-1)**jnp.arange(n)
+    return modulation * h
