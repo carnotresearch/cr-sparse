@@ -57,4 +57,9 @@ from cr.sparse._src.wt.orth import (
     db18,
     db20,
     baylkin,
+    coif1,
+    coif2,
+    coif3,
+    coif4,
+    coif5,
 )
