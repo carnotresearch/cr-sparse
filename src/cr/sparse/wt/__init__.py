@@ -62,4 +62,11 @@ from cr.sparse._src.wt.orth import (
     coif3,
     coif4,
     coif5,
+    symm4,
+    symm5,
+    symm6,
+    symm7,
+    symm8,
+    symm9,
+    symm10,
 )
