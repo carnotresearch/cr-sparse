@@ -38,5 +38,7 @@ from cr.sparse._src.wt.multirate import (
 
 from cr.sparse._src.wt.transform import (
     forward_periodized_orthogonal,
-    forward_periodized_orthogonal_jit
+    forward_periodized_orthogonal_jit,
+    inverse_periodized_orthogonal,
+    inverse_periodized_orthogonal_jit
 )

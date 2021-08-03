@@ -69,3 +69,32 @@ def forward_periodized_orthogonal(qmf, x, L=0):
 
 forward_periodized_orthogonal_jit = jit(forward_periodized_orthogonal, static_argnums=(2,))
 
+
+
+def inverse_periodized_orthogonal(qmf, w, L=0):
+        """ Computes the inverse wavelet transform of x
+
+        * Uses the periodized version of x 
+        * with an orthogonal wavelet basis
+        * length of x must be dyadic.
+        """
+        # Let's get the dyadic length of w 
+        n = w.shape[0]
+        J = dyadic_length_int(w)
+        # initialize x with its coerce approximation
+        mid = 2**L
+        lo = w[:mid]
+        end = mid*2
+        for j in range(L, J):
+            hi = w[mid:end]
+            # Compute the low pass portion of the next level of approximation
+            x_low = up_sample_lo_pass(qmf, lo)
+            # Compute the high pass portion of the next level of approximation
+            x_hi = up_sample_hi_pass(qmf, hi)
+            # Compute the next level approximation of x
+            lo = x_low + x_hi
+            mid = end
+            end = mid * 2
+        return lo
+
+inverse_periodized_orthogonal_jit = jit(inverse_periodized_orthogonal, static_argnums=(2,))
