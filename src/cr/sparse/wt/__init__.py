@@ -42,3 +42,18 @@ from cr.sparse._src.wt.transform import (
     inverse_periodized_orthogonal,
     inverse_periodized_orthogonal_jit
 )
+
+from cr.sparse._src.wt.orth import (
+    wavelet_function,
+    scaling_function,
+    haar,
+    db4,
+    db6,
+    db8,
+    db10,
+    db12,
+    db14,
+    db16,
+    db18,
+    db20,
+)
