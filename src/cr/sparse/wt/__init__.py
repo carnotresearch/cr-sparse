@@ -56,4 +56,5 @@ from cr.sparse._src.wt.orth import (
     db16,
     db18,
     db20,
+    baylkin,
 )
