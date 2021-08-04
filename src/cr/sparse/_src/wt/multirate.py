@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from jax import jit
+from jax import jit, lax
 import jax.numpy as jnp
 
 import cr.sparse as crs
@@ -29,17 +29,22 @@ def up_sample(x, s):
 
 up_sample_jit = jit(up_sample, static_argnums=(1,))
 
-
+@jit
 def lo_pass_down_sample(h, x):
         """Performs low pass filtering followed by downsampling on periodic extension of x
+
+        Reverse the filter and convolve with periodic extension
         """
         # Perform filtering
         y = aconv(h, x)
         # Perform downsampling
         return y[::2]
 
+@jit
 def hi_pass_down_sample(h, x):
         """Performs high pass filtering followed by downsampling on periodic extension of x
+
+        Mirror the filter and convolve with periodic extension
         """
         # Construct  the high pass mirror filter 
         g = mirror_filter(h)
@@ -51,16 +56,24 @@ def hi_pass_down_sample(h, x):
         return y[::2]
 
 
+@jit
 def up_sample_lo_pass(h, x):
-        """Performs upsampling followed by low pass filtering"""
+        """Performs upsampling followed by low pass filtering
+        
+        Convolve the filter with periodic extension
+        """
         # Upsample by a factor of 2 and introduce zeros
         x = up_sample(x, 2)
         # Perform low pass filtering
         return iconv(h, x)
 
 
+@jit
 def up_sample_hi_pass(h, x):
-        """Performs upsampling followed by high pass filtering"""
+        """Performs upsampling followed by high pass filtering
+        
+        Mirror the filter, reverse it and convolve with periodic extension
+        """
         # Construct  the high pass mirror filter 
         g = mirror_filter(h)
         # Upsample by a factor of 2 and introduce zeros
@@ -100,3 +113,13 @@ def up_sample_cdjv(x, h, left_edge, right_edge):
         # add the middle values
         # y = y + y_padded(1:2*n)
         return y
+
+
+def downsampling_convolution_periodization(h, x):
+        p = h.shape[0]
+        x_padded = jnp.pad(x, p//2, mode='wrap')
+        x_in = x_padded[None, None, :]
+        y_in = h[::-1][None, None, :]
+        out = lax.conv_general_dilated(x_in, y_in, (2,), [(1,0)])
+        out = out[0, 0, slice(None)]
+        return out[1:]
