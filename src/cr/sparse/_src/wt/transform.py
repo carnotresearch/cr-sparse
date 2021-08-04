@@ -30,6 +30,7 @@ s_8 = s_0 + d_0 + d_1 + d_2 + d_3 + d_4 + d_5 + d_6 + d_7.
 s_J = s_L + sum(L <= j < J) d_j.
 
 """
+from functools import partial
 
 from jax import jit, lax
 import jax.numpy as jnp
@@ -37,6 +38,87 @@ import jax.numpy as jnp
 from .dyad import *
 
 from .multirate import *
+
+######################################################################################
+# Single level wavelet decomposition/reconstruction
+######################################################################################
+
+@partial(jit, static_argnums=(3,))
+def dwt_(data, dec_lo, dec_hi, mode):
+    """Computes single level wavelet decomposition
+    """
+    p = len(dec_lo)
+    if mode == 'symmetric':
+        x_padded = jnp.pad(data, p, mode='symmetric')
+    elif mode == 'reflect':
+        x_padded = jnp.pad(data, p, mode='reflect')
+    elif mode == 'constant':
+        x_padded = jnp.pad(data, p, mode='edge')
+    elif mode == 'zero':
+        x_padded = jnp.pad(data, p, mode='constant', constant_values=0)
+    elif mode == 'periodic':
+        x_padded = jnp.pad(data, p, mode='wrap')
+    elif mode == 'periodization':
+        x_padded = jnp.pad(data, p//2, mode='wrap')
+    else:
+        raise ValueError("mode must be one of ['symmetric', 'constant', 'reflect', 'zero', 'periodic', 'periodization']")
+
+    x_in = x_padded[None, None, :]
+
+    padding = [(1, 0)] if mode == 'periodization' else [(0, 0)]
+    strides = (2,)
+
+
+    lo_in = dec_lo[::-1][None, None, :]
+    lo = lax.conv_general_dilated(x_in, lo_in, strides, padding)
+    lo = lo[0, 0, slice(None)]
+
+    hi_in = dec_hi[::-1][None, None, :]
+    hi = lax.conv_general_dilated(x_in, hi_in, strides, padding)
+    hi =  hi[0, 0, slice(None)]
+
+    if mode == 'periodization':
+        return lo[1:], hi[1:] 
+    else:
+        return lo[1:-1], hi[1:-1]
+
+def dwt(data, wavelet, mode="symmetric"):
+    """Computes single level wavelet decomposition
+    """
+    return dwt_(data, wavelet.dec_lo, wavelet.dec_hi, mode)
+
+
+@partial(jit, static_argnums=(4,))
+def idwt_(ca, cd, rec_lo, rec_hi, mode):
+    """Computes single level wavelet reconstruction
+    """
+    p = len(rec_lo)
+    ca = up_sample(ca, 2)
+    cd = up_sample(cd, 2)
+    if mode == 'periodization':
+        ca = jnp.pad(ca, p//2, mode='wrap')
+        cd = jnp.pad(cd, p//2, mode='wrap')
+    # Compute the low pass portion of the next level of approximation
+    a = jnp.convolve(ca, rec_lo, 'same')
+    # Compute the high pass portion of the next level of approximation
+    d = jnp.convolve(cd, rec_hi, 'same')
+    # Compute the sum
+    sum = a + d
+    if mode == 'periodization':
+        return sum[p//2:-p//2]
+    skip = p//2 - 1
+    return sum[skip:-skip]
+
+
+def idwt(ca, cd, wavelet, mode="symmetric"):
+    """Computes single level wavelet reconstruction
+    """
+    return idwt_(ca, cd, wavelet.rec_lo, wavelet.rec_hi, mode)
+
+
+######################################################################################
+#  Multi level wavelet decomposition/reconstruction
+######################################################################################
 
 def forward_periodized_orthogonal(qmf, x, L=0):
         """Computes the forward wavelet transform of x
