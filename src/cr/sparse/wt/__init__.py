@@ -12,6 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from cr.sparse._src.wt.wavelet import (
+    SYMMETRY,
+    FAMILY,
+    BaseWavelet,
+    DiscreteWavelet,
+    is_discrete_wavelet,
+    build_discrete_wavelet,
+)
+
 
 from cr.sparse._src.wt.dyad import (
     dyad,
@@ -34,9 +43,14 @@ from cr.sparse._src.wt.multirate import (
     hi_pass_down_sample,
     up_sample_lo_pass,
     up_sample_hi_pass,
+    downsampling_convolution_periodization,
 )
 
 from cr.sparse._src.wt.transform import (
+    dwt_,
+    dwt, 
+    idwt_,
+    idwt,
     forward_periodized_orthogonal,
     forward_periodized_orthogonal_jit,
     inverse_periodized_orthogonal,
@@ -69,4 +83,5 @@ from cr.sparse._src.wt.orth import (
     symm8,
     symm9,
     symm10,
+    vaidyanathan,
 )
