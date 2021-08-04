@@ -40,7 +40,9 @@ def aconv(f, x):
 
 def mirror_filter(h):
     """Constructs the mirror filter for a given qmf filter by applying (-1)^t modulation
+
+    Note that modulation starts from -1 rather than 1. This aligns the results with pywt
     """
     n = h.shape[0]
-    modulation = (-1)**jnp.arange(n)
+    modulation = (-1)**jnp.arange(1, n+1)
     return modulation * h
