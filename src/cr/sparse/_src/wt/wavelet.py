@@ -110,11 +110,29 @@ def mirror(h):
 
 def build_discrete_wavelet(name: FAMILY, order: int):
     nv = name.value
-    if name is FAMILY.HAAR:
-        wavelet = build_discrete_wavelet(FAMILY.DB, 1)
-        wavelet.family_name = name
-        wavelet.short_name = "haar"
-        return wavelet
+    if nv is FAMILY.HAAR.value:
+        qmf = db[0]
+        dec_hi = mirror(qmf)
+        dec_lo = qmf[::-1]
+        rec_lo = qmf
+        rec_hi = dec_hi[::-1]
+        w = DiscreteWavelet(support_width=1,
+            symmetry=SYMMETRY.ASYMMETRIC,
+            orthogonal=True,
+            biorthogonal=True,
+            compact_support=True,
+            name=name,
+            family_name = "Haar",
+            short_name="haar", 
+            dec_hi=dec_hi,
+            dec_lo=dec_lo,
+            rec_hi=rec_hi,
+            rec_lo=rec_lo,
+            dec_len=2,
+            rec_len=2,
+            vanishing_moments_psi=1,
+            vanishing_moments_phi=0)
+        return w
     if nv == FAMILY.DB.value:
         index = order - 1
         if index >= len(db):
