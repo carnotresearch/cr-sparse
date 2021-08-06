@@ -118,6 +118,31 @@ class DiscreteWavelet(NamedTuple):
         return u'\n'.join(s)
 
 
+def qmf(h):
+    """Returns the quadrature mirror filter of a given filter"""
+    g = h[::-1]
+    g = g.at[1::2].set(-g[1::2])
+    return g
+
+def orthogonal_filter_bank(scaling_filter):
+    """Returns the orthogonal filter bank for a given scaling filter"""
+    # scaling filter must be even
+    if not (scaling_filter.shape[0] % 2) == 0:
+        raise ValueError('scaling_filter must be of even length.')
+    # normalize
+    rec_lo = sqrt2 * scaling_filter / jnp.sum(scaling_filter)
+    dec_lo = rec_lo[::-1]
+    rec_hi = qmf(rec_lo)
+    dec_hi = rec_hi[::-1]
+    return (dec_lo, dec_hi, rec_lo, rec_hi)
+
+def filter_bank_(rec_lo):
+    """Construct a filter bank from the saved values in coeffs.py"""
+    dec_lo = rec_lo[::-1]
+    rec_hi = qmf(rec_lo)
+    dec_hi = rec_hi[::-1]
+    return (dec_lo, dec_hi, rec_lo, rec_hi)
+
 def mirror(h):
     n = h.shape[0]
     modulation = (-1)**jnp.arange(1, n+1)
@@ -126,11 +151,7 @@ def mirror(h):
 def build_discrete_wavelet(family: FAMILY, order: int):
     nv = family.value
     if nv is FAMILY.HAAR.value:
-        qmf = db[0]
-        dec_hi = mirror(qmf)
-        dec_lo = qmf[::-1]
-        rec_lo = qmf
-        rec_hi = dec_hi[::-1]
+        dec_lo, dec_hi, rec_lo, rec_hi = filter_bank_(db[0])
         w = DiscreteWavelet(support_width=1,
             symmetry=SYMMETRY.ASYMMETRIC,
             orthogonal=True,
@@ -153,13 +174,8 @@ def build_discrete_wavelet(family: FAMILY, order: int):
         if index >= len(db):
             return None
         filters_length = 2 * order
-        dec_len = filters_length
-        rec_len = filters_length
-        qmf = db[index]
-        dec_hi = mirror(qmf)
-        dec_lo = qmf[::-1]
-        rec_lo = qmf
-        rec_hi = dec_hi[::-1]
+        dec_len = rec_len = filters_length
+        dec_lo, dec_hi, rec_lo, rec_hi = filter_bank_(db[index])
         w = DiscreteWavelet(support_width=2*order-1,
             symmetry=SYMMETRY.ASYMMETRIC,
             orthogonal=True,
@@ -182,13 +198,8 @@ def build_discrete_wavelet(family: FAMILY, order: int):
         if index >= len(sym):
             return None
         filters_length = 2 * order
-        dec_len = filters_length
-        rec_len = filters_length
-        qmf = sym[index]
-        dec_hi = mirror(qmf)
-        dec_lo = qmf[::-1]
-        rec_lo = qmf
-        rec_hi = dec_hi[::-1]
+        dec_len = rec_len = filters_length
+        dec_lo, dec_hi, rec_lo, rec_hi = filter_bank_(sym[index])
         w = DiscreteWavelet(support_width=2*order-1,
             symmetry=SYMMETRY.NEAR_SYMMETRIC,
             orthogonal=True,
@@ -211,13 +222,8 @@ def build_discrete_wavelet(family: FAMILY, order: int):
         if index >= len(coif):
             return None
         filters_length = 6 * order
-        dec_len = filters_length
-        rec_len = filters_length
-        qmf = coif[index] * sqrt2
-        dec_hi = mirror(qmf)
-        dec_lo = qmf[::-1]
-        rec_lo = qmf
-        rec_hi = dec_hi[::-1]
+        dec_len = rec_len = filters_length
+        dec_lo, dec_hi, rec_lo, rec_hi = filter_bank_(coif[index]*sqrt2)
         w = DiscreteWavelet(support_width=6*order-1,
             symmetry=SYMMETRY.NEAR_SYMMETRIC,
             orthogonal=True,
