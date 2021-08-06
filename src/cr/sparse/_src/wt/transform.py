@@ -32,7 +32,7 @@ s_J = s_L + sum(L <= j < J) d_j.
 """
 from functools import partial
 
-from jax import jit, lax
+from jax import jit, lax, vmap
 import jax.numpy as jnp
 
 from .dyad import *
@@ -88,6 +88,7 @@ def dwt(data, wavelet, mode="symmetric"):
     return dwt_(data, wavelet.dec_lo, wavelet.dec_hi, mode)
 
 
+
 @partial(jit, static_argnums=(4,))
 def idwt_(ca, cd, rec_lo, rec_hi, mode):
     """Computes single level wavelet reconstruction
@@ -107,13 +108,102 @@ def idwt_(ca, cd, rec_lo, rec_hi, mode):
     if mode == 'periodization':
         return sum[p//2:-p//2]
     skip = p//2 - 1
-    return sum[skip:-skip]
+    if skip > 0:
+        return sum[skip:-skip]
+    return sum
+
+@partial(jit, static_argnums=(3,))
+def idwt_joined_(w, rec_lo, rec_hi, mode):
+    """Computes single level wavelet reconstruction
+    """
+    n = len(w)
+    m = n // 2
+    ca = w[:m]
+    cd = w[m:]
+    x = idwt_(ca, cd, rec_lo, rec_hi, mode)
+    return x
 
 
 def idwt(ca, cd, wavelet, mode="symmetric"):
     """Computes single level wavelet reconstruction
     """
     return idwt_(ca, cd, wavelet.rec_lo, wavelet.rec_hi, mode)
+
+######################################################################################
+#  Single level wavelet decomposition/reconstruction along a given axis
+######################################################################################
+
+@partial(jit, static_argnums=(3,4))
+def dwt_axis_(data, dec_lo, dec_hi, axis, mode):
+    """Applies the DWT along a given axis
+    """
+    return jnp.apply_along_axis(dwt_, axis, data, dec_lo, dec_hi, mode)
+
+def dwt_axis(data, wavelet, axis, mode="symmetric"):
+    """Computes single level wavelet decomposition along a given axis
+    """
+    return dwt_axis_(data, wavelet.dec_lo, wavelet.dec_hi, axis, mode)
+
+
+
+@partial(jit, static_argnums=(4,5))
+def idwt_axis_(ca, cd, rec_lo, rec_hi, axis, mode):
+    """Applies the Inverse DWT along a given axis
+    """
+    w = jnp.concatenate((ca, cd), axis=axis)
+    return jnp.apply_along_axis(idwt_joined_, axis, w, rec_lo, rec_hi, mode)
+
+def idwt_axis(ca, cd, wavelet, axis, mode="symmetric"):
+    """Computes single level wavelet reconstruction along a given axis
+    """
+    return idwt_axis_(ca, cd, wavelet.rec_lo, wavelet.rec_hi, axis, mode)
+
+def dwt_column(data, wavelet, mode="symmetric"):
+    return dwt_axis(data, wavelet, 0, mode)
+
+def dwt_row(data, wavelet, mode="symmetric"):
+    return dwt_axis(data, wavelet, 1, mode)
+
+def dwt_tube(data, wavelet, mode="symmetric"):
+    return dwt_axis(data, wavelet, 2, mode)
+
+def idwt_column(ca, cd, wavelet, mode="symmetric"):
+    return idwt_axis(ca, cd, wavelet, 0, mode)
+
+def idwt_row(ca, cd, wavelet, mode="symmetric"):
+    return idwt_axis(ca, cd, wavelet, 1, mode)
+
+def idwt_tube(ca, cd, wavelet, mode="symmetric"):
+    return idwt_axis(ca, cd, wavelet, 2, mode)
+
+######################################################################################
+#  Single level wavelet decomposition/reconstruction on 2 dimensions
+######################################################################################
+
+dwt2_rw_ = vmap(dwt_, in_axes=(0, None, None, None), out_axes=0)
+
+dwt2_cw_ = vmap(dwt_, in_axes=(1, None, None, None), out_axes=1)
+
+def dwt2(image, wavelet, mode="symmetric", axes=(-2, -1)):
+    """Computes single level wavelet decomposition for 2D images
+    """
+    dec_lo = wavelet.dec_lo
+    dec_hi = wavelet.dec_hi
+    axes = tuple(axes)
+    if len(axes) != 2:
+        raise ValueError("Expected two dimensions")
+    # make sure that axes are positive
+    axes = [a + image.ndim if a < 0 else a for a in axes]
+    ca, cd = dwt_axis(image, wavelet, axes[0], mode)
+    caa, cad = dwt_axis(ca, wavelet, axes[1], mode)
+    cda, cdd = dwt_axis(cd, wavelet, axes[1], mode)
+    return caa, (cda, cad, cdd)
+
+
+
+######################################################################################
+#  Single level wavelet decomposition/reconstruction on n dimensions
+######################################################################################
 
 
 ######################################################################################

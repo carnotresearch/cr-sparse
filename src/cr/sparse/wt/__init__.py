@@ -47,10 +47,26 @@ from cr.sparse._src.wt.multirate import (
 )
 
 from cr.sparse._src.wt.transform import (
+    # Single level transforms
+    # 1D
     dwt_,
     dwt, 
     idwt_,
     idwt,
+    # along an exis
+    dwt_axis_,
+    dwt_axis,
+    idwt_axis_,
+    idwt_axis,
+    dwt_column,
+    dwt_row,
+    dwt_tube,
+    idwt_column,
+    idwt_row,
+    idwt_tube,
+    # 2D 
+    dwt2,
+    ## multi-level transforms
     forward_periodized_orthogonal,
     forward_periodized_orthogonal_jit,
     inverse_periodized_orthogonal,
