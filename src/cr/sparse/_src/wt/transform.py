@@ -200,6 +200,20 @@ def dwt2(image, wavelet, mode="symmetric", axes=(-2, -1)):
     return caa, (cda, cad, cdd)
 
 
+def idwt2(coeffs, wavelet, mode="symmetric", axes=(-2, -1)):
+    """Computes single level wavelet reconstruction for 2D images
+    """
+    caa, (cda, cad, cdd) = coeffs
+    axes = tuple(axes)
+    if len(axes) != 2:
+        raise ValueError("Expected two dimensions")
+    # make sure that axes are positive
+    axes = [a + caa.ndim if a < 0 else a for a in axes]
+    ca = idwt_axis(caa, cad, wavelet, axes[1], mode)
+    cd = idwt_axis(cda, cdd, wavelet, axes[1], mode)
+    image = idwt_axis(ca, cd, wavelet, axes[0], mode)
+    return image
+
 
 ######################################################################################
 #  Single level wavelet decomposition/reconstruction on n dimensions

@@ -66,6 +66,7 @@ from cr.sparse._src.wt.transform import (
     idwt_tube,
     # 2D 
     dwt2,
+    idwt2,
     ## multi-level transforms
     forward_periodized_orthogonal,
     forward_periodized_orthogonal_jit,
