@@ -18,7 +18,7 @@ from typing import NamedTuple, List, Dict, Tuple
 
 import jax.numpy as jnp
 
-from .coeffs import db, sym, coif, bior, dmey
+from .coeffs import db, sym, coif, bior, dmey, sqrt2
 
 class SYMMETRY(Enum):
     UNKNOWN = -1
@@ -27,13 +27,12 @@ class SYMMETRY(Enum):
     SYMMETRIC = 2
     ANTI_SYMMETRIC = 3
 
-
 class FAMILY(Enum):
     HAAR = 0
     RBIO = 1
     DB = 2
     SYM = 3
-    COIF = 3
+    COIF = 4
     BIOR = 5
     DMEY = 6
     GAUS = 7
@@ -79,11 +78,11 @@ class DiscreteWavelet(NamedTuple):
     """Indicates if the wavelet is biorthogonal"""
     compact_support: bool = False
     """Indicates if the wavelet has compact support"""
-    name: FAMILY = None
+    name: str = ''
+    """Name of the wavelet"""
+    family_name: str = ''
     """Name of the wavelet family"""
-    family_name: str = None
-    """Name of the wavelet family"""
-    short_name: str = None
+    short_name: str = ''
     """Short name of the wavelet family"""
     dec_hi: jnp.DeviceArray = None
     """Decomposition high pass filter"""
@@ -102,14 +101,30 @@ class DiscreteWavelet(NamedTuple):
     vanishing_moments_phi: int = 0
     """Number of vanishing moments of the scaling function"""
 
+    def __str__(self):
+        s = []
+        for x in [
+            u"Wavelet %s"           % self.name,
+            u"  Family name:    %s" % self.family_name,
+            u"  Short name:     %s" % self.short_name,
+            u"  Filters length: %d" % self.dec_len,
+            u"  Orthogonal:     %s" % self.orthogonal,
+            u"  Biorthogonal:   %s" % self.biorthogonal,
+            u"  Symmetry:       %s" % self.symmetry.name.lower(),
+            u"  DWT:            True",
+            u"  CWT:            False"
+            ]:
+            s.append(x.rstrip())
+        return u'\n'.join(s)
+
 
 def mirror(h):
     n = h.shape[0]
     modulation = (-1)**jnp.arange(1, n+1)
     return modulation * h
 
-def build_discrete_wavelet(name: FAMILY, order: int):
-    nv = name.value
+def build_discrete_wavelet(family: FAMILY, order: int):
+    nv = family.value
     if nv is FAMILY.HAAR.value:
         qmf = db[0]
         dec_hi = mirror(qmf)
@@ -121,7 +136,7 @@ def build_discrete_wavelet(name: FAMILY, order: int):
             orthogonal=True,
             biorthogonal=True,
             compact_support=True,
-            name=name,
+            name="Haar",
             family_name = "Haar",
             short_name="haar", 
             dec_hi=dec_hi,
@@ -150,7 +165,7 @@ def build_discrete_wavelet(name: FAMILY, order: int):
             orthogonal=True,
             biorthogonal=True,
             compact_support=True,
-            name=name,
+            name=f'db{order}',
             family_name = "Daubechies",
             short_name="db", 
             dec_hi=dec_hi,
@@ -179,7 +194,7 @@ def build_discrete_wavelet(name: FAMILY, order: int):
             orthogonal=True,
             biorthogonal=True,
             compact_support=True,
-            name=name,
+            name=f'sym{order}',
             family_name = "Symlets",
             short_name="sym", 
             dec_hi=dec_hi,
@@ -190,6 +205,35 @@ def build_discrete_wavelet(name: FAMILY, order: int):
             rec_len=rec_len,
             vanishing_moments_psi=order,
             vanishing_moments_phi=0)
+        return w
+    if nv == FAMILY.COIF.value:
+        index = order - 1
+        if index >= len(coif):
+            return None
+        filters_length = 6 * order
+        dec_len = filters_length
+        rec_len = filters_length
+        qmf = coif[index] * sqrt2
+        dec_hi = mirror(qmf)
+        dec_lo = qmf[::-1]
+        rec_lo = qmf
+        rec_hi = dec_hi[::-1]
+        w = DiscreteWavelet(support_width=6*order-1,
+            symmetry=SYMMETRY.NEAR_SYMMETRIC,
+            orthogonal=True,
+            biorthogonal=True,
+            compact_support=True,
+            name=f'coif{order}',
+            family_name = "Coiflets",
+            short_name="coif", 
+            dec_hi=dec_hi,
+            dec_lo=dec_lo,
+            rec_hi=rec_hi,
+            rec_lo=rec_lo,
+            dec_len=dec_len,
+            rec_len=rec_len,
+            vanishing_moments_psi=2*order,
+            vanishing_moments_phi=2*order-1)
         return w
     return None
 
