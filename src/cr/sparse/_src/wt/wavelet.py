@@ -148,6 +148,37 @@ def mirror(h):
     modulation = (-1)**jnp.arange(1, n+1)
     return modulation * h
 
+def negate_evens(g):
+    return g.at[0::2].set(-g[0::2])
+
+def negate_odds(g):
+    return g.at[1::2].set(-g[1::2])
+
+
+def bior_index(n, m):
+    idx = max = None
+    if n == 1:
+        idx = m // 2
+        max = 5
+    elif n == 2:
+        idx = m // 2 -1 
+        max = 8
+    elif n == 3:
+        idx = m // 2
+        max = 9
+    elif n == 4 or n == 5:
+        if n == m:
+            idx = 0
+            max = m
+    elif n == 6:
+        if m == 8:
+            idx = 0
+            max = 8
+    else:
+        pass
+    return idx, max
+
+
 def build_discrete_wavelet(family: FAMILY, order: int):
     nv = family.value
     if nv is FAMILY.HAAR.value:
@@ -232,6 +263,39 @@ def build_discrete_wavelet(family: FAMILY, order: int):
             name=f'coif{order}',
             family_name = "Coiflets",
             short_name="coif", 
+            dec_hi=dec_hi,
+            dec_lo=dec_lo,
+            rec_hi=rec_hi,
+            rec_lo=rec_lo,
+            dec_len=dec_len,
+            rec_len=rec_len,
+            vanishing_moments_psi=2*order,
+            vanishing_moments_phi=2*order-1)
+        return w
+    if nv == FAMILY.BIOR.value:
+        n = order // 10
+        m = order % 10
+        idx, max = bior_index(n, m)
+        if idx is None or max is None:
+            return None
+        arr = bior[n-1]
+        if idx >= len(arr):
+            return None
+        filters_length = 2*m if n == 1 else 2*m + 2
+        dec_len = rec_len = filters_length
+        start = max - m
+        rec_lo = arr[0][start:start+rec_len]
+        dec_lo = arr[idx+1][::-1]
+        rec_hi = negate_odds(dec_lo)
+        dec_hi = negate_evens(rec_lo)
+        w = DiscreteWavelet(support_width=6*order-1,
+            symmetry=SYMMETRY.SYMMETRIC,
+            orthogonal=False,
+            biorthogonal=True,
+            compact_support=True,
+            name=f'bior{n}.{m}',
+            family_name = "Biorthogonal",
+            short_name="bior", 
             dec_hi=dec_hi,
             dec_lo=dec_lo,
             rec_hi=rec_hi,
