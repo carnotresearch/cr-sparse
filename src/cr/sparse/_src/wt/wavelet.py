@@ -305,6 +305,39 @@ def build_discrete_wavelet(family: FAMILY, order: int):
             vanishing_moments_psi=2*order,
             vanishing_moments_phi=2*order-1)
         return w
+    if nv == FAMILY.RBIO.value:
+        n = order // 10
+        m = order % 10
+        idx, max = bior_index(n, m)
+        if idx is None or max is None:
+            return None
+        arr = bior[n-1]
+        if idx >= len(arr):
+            return None
+        filters_length = 2*m if n == 1 else 2*m + 2
+        dec_len = rec_len = filters_length
+        start = max - m
+        dec_lo = arr[0][start:start+rec_len][::-1]
+        rec_lo = arr[idx+1]
+        rec_hi = negate_odds(dec_lo)
+        dec_hi = negate_evens(rec_lo)
+        w = DiscreteWavelet(support_width=6*order-1,
+            symmetry=SYMMETRY.SYMMETRIC,
+            orthogonal=False,
+            biorthogonal=True,
+            compact_support=True,
+            name=f'rbio{n}.{m}',
+            family_name = "Reverse biorthogonal",
+            short_name="rbio", 
+            dec_hi=dec_hi,
+            dec_lo=dec_lo,
+            rec_hi=rec_hi,
+            rec_lo=rec_lo,
+            dec_len=dec_len,
+            rec_len=rec_len,
+            vanishing_moments_psi=2*order,
+            vanishing_moments_phi=2*order-1)
+        return w
     if nv is FAMILY.DMEY.value:
         dec_len = rec_len = filters_length = 62
         dec_lo, dec_hi, rec_lo, rec_hi = filter_bank_(dmey)
