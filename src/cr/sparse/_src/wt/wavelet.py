@@ -305,5 +305,25 @@ def build_discrete_wavelet(family: FAMILY, order: int):
             vanishing_moments_psi=2*order,
             vanishing_moments_phi=2*order-1)
         return w
+    if nv is FAMILY.DMEY.value:
+        dec_len = rec_len = filters_length = 62
+        dec_lo, dec_hi, rec_lo, rec_hi = filter_bank_(dmey)
+        w = DiscreteWavelet(support_width=1,
+            symmetry=SYMMETRY.SYMMETRIC,
+            orthogonal=True,
+            biorthogonal=True,
+            compact_support=True,
+            name="dmey",
+            family_name = "Discrete Meyer (FIR Approximation)",
+            short_name="dmey", 
+            dec_hi=dec_hi,
+            dec_lo=dec_lo,
+            rec_hi=rec_hi,
+            rec_lo=rec_lo,
+            dec_len=dec_len,
+            rec_len=rec_len,
+            vanishing_moments_psi=-1,
+            vanishing_moments_phi=-1)
+        return w
     return None
 
