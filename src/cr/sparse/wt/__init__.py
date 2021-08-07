@@ -12,13 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from cr.sparse._src.wt.families import (
+    FAMILY,
+    is_discrete_wavelet,
+    wavelist,
+    wname_to_family_order
+)
+
 from cr.sparse._src.wt.wavelet import (
     SYMMETRY,
-    FAMILY,
     BaseWavelet,
     DiscreteWavelet,
-    is_discrete_wavelet,
     build_discrete_wavelet,
+    build_wavelet,
 )
 
 

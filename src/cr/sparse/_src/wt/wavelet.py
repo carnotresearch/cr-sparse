@@ -18,6 +18,7 @@ from typing import NamedTuple, List, Dict, Tuple
 
 import jax.numpy as jnp
 
+from .families import FAMILY, wname_to_family_order, is_discrete_wavelet
 from .coeffs import db, sym, coif, bior, dmey, sqrt2
 
 class SYMMETRY(Enum):
@@ -27,31 +28,7 @@ class SYMMETRY(Enum):
     SYMMETRIC = 2
     ANTI_SYMMETRIC = 3
 
-class FAMILY(Enum):
-    HAAR = 0
-    RBIO = 1
-    DB = 2
-    SYM = 3
-    COIF = 4
-    BIOR = 5
-    DMEY = 6
-    GAUS = 7
-    MEXH = 8
-    MORL = 9
-    CGAU = 10
-    SHAN = 11
-    FBSP = 12
-    CMOR = 13
 
-def is_discrete_wavelet(name: FAMILY):
-    return name.value in [FAMILY.HAAR.value,
-    FAMILY.RBIO.value, 
-    FAMILY.DB.value, 
-    FAMILY.SYM.value, 
-    FAMILY.COIF.value, 
-    FAMILY.BIOR.value, 
-    FAMILY.DMEY.value
-    ]
 
 class BaseWavelet(NamedTuple):
     """Represents basic information about a wavelet
@@ -360,3 +337,12 @@ def build_discrete_wavelet(family: FAMILY, order: int):
         return w
     return None
 
+def build_wavelet(name):
+    """Builds a wavelet object by its name
+    """
+    name = name.lower()
+    family, order = wname_to_family_order(name)
+    if is_discrete_wavelet(family):
+        return build_discrete_wavelet(family, order)
+    # other wavelet types are not supported for now
+    return None
