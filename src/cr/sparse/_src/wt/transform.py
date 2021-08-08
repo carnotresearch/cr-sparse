@@ -91,7 +91,7 @@ def dwt_(data, dec_lo, dec_hi, mode):
     else:
         return lo[1:-1], hi[1:-1]
 
-def dwt(data, wavelet, mode="symmetric"):
+def dwt(data, wavelet, mode="symmetric", axis=-1):
     """Computes single level wavelet decomposition
     """
     wavelet = ensure_wavelet_(wavelet)
@@ -99,10 +99,12 @@ def dwt(data, wavelet, mode="symmetric"):
         car, cdr = dwt(data.real, wavelet, mode)
         cai, cdi = dwt(data.imag, wavelet, mode)
         return lax.complex(car, cai), lax.complex(cdr, cdi)
+    axis = check_axis_(axis, data.ndim)
     data, dec_lo, dec_hi = promote_arg_dtypes(data, wavelet.dec_lo, wavelet.dec_hi)
-    return dwt_(data, dec_lo, dec_hi, mode)
-
-
+    if data.ndim == 1:
+        return dwt_(data, dec_lo, dec_hi, mode)
+    else:
+        return dwt_axis_(data, dec_lo, dec_hi, axis, mode)
 
 @partial(jit, static_argnums=(4,))
 def idwt_(ca, cd, rec_lo, rec_hi, mode):
@@ -139,7 +141,7 @@ def idwt_joined_(w, rec_lo, rec_hi, mode):
     return x
 
 
-def idwt(ca, cd, wavelet, mode="symmetric"):
+def idwt(ca, cd, wavelet, mode="symmetric", axis=-1):
     """Computes single level wavelet reconstruction
     """
     if ca is None and cd is None:
@@ -153,6 +155,7 @@ def idwt(ca, cd, wavelet, mode="symmetric"):
     wavelet = ensure_wavelet_(wavelet)
     if ca.shape[0] < wavelet.rec_len // 2:
         raise ValueError("Insufficient coefficients for wavelet reconstruction.")
+    axis = check_axis_(axis, ca.ndim)
     if jnp.iscomplexobj(ca) or jnp.iscomplexobj(ca):
         car = jnp.real(ca)
         cai = jnp.imag(ca)
@@ -161,7 +164,12 @@ def idwt(ca, cd, wavelet, mode="symmetric"):
         xr = idwt(car, cdr, wavelet, mode)
         xi = idwt(cai, cdi, wavelet, mode)
         return lax.complex(xr, xi)
-    return idwt_(ca, cd, wavelet.rec_lo, wavelet.rec_hi, mode)
+    rec_lo = wavelet.rec_lo
+    rec_hi = wavelet.rec_hi
+    if ca.ndim == 1:
+        return idwt_(ca, cd, rec_lo, rec_hi, mode)
+    else:
+        return idwt_axis_(ca, cd, rec_lo, rec_hi, axis, mode)
 
 
 ######################################################################################

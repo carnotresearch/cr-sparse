@@ -138,3 +138,33 @@ def test_idwt_none_input():
 def test_idwt_invalid_input():
     # Too short, min length is 4 for 'db4':
     assert_raises(ValueError, wt.idwt, jnp.array([1, 2, 4]), jnp.array([4, 1, 3]), 'db4', 'symmetric')
+
+
+def test_dwt_single_axis():
+    x = jnp.array([[3, 7, 1, 1],
+         [-2, 5, 4, 6]])
+
+    cA, cD = wt.dwt(x, 'db2', axis=-1)
+
+    cA0, cD0 = wt.dwt(x[0], 'db2')
+    cA1, cD1 = wt.dwt(x[1], 'db2')
+
+    assert_allclose(cA[0], cA0)
+    assert_allclose(cA[1], cA1)
+
+    assert_allclose(cD[0], cD0)
+    assert_allclose(cD[1], cD1)
+
+def test_idwt_single_axis():
+    x = jnp.array([[3, 7, 1, 1],
+         [-2, 5, 4, 6]])
+
+    x = np.asarray(x)
+    x = x + 1j*x   # test with complex data
+    cA, cD = wt.dwt(x, 'db2', axis=-1)
+
+    x0 = wt.idwt(cA[0], cD[0], 'db2', axis=-1)
+    x1 = wt.idwt(cA[1], cD[1], 'db2', axis=-1)
+
+    assert_allclose(x[0], x0)
+    assert_allclose(x[1], x1)

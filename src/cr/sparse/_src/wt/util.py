@@ -81,3 +81,11 @@ def part_rec_filter_(part, wavelet):
     if part == 'd':
         return wavelet.rec_hi
     raise ValueError(f'Invalid part: {part}')
+
+
+def check_axis_(axis, ndim):
+    if axis < 0:
+        axis = ndim + axis
+    if axis >= ndim:
+        raise ValueError(f"Invalid axis: {axis} with ndim: {ndim}")
+    return axis
