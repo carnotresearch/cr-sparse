@@ -99,8 +99,8 @@ def dwt(data, wavelet, mode="symmetric"):
         car, cdr = dwt(data.real, wavelet, mode)
         cai, cdi = dwt(data.imag, wavelet, mode)
         return lax.complex(car, cai), lax.complex(cdr, cdi)
-    data = promote_arg_dtypes(data)
-    return dwt_(data, wavelet.dec_lo, wavelet.dec_hi, mode)
+    data, dec_lo, dec_hi = promote_arg_dtypes(data, wavelet.dec_lo, wavelet.dec_hi)
+    return dwt_(data, dec_lo, dec_hi, mode)
 
 
 
@@ -142,6 +142,12 @@ def idwt_joined_(w, rec_lo, rec_hi, mode):
 def idwt(ca, cd, wavelet, mode="symmetric"):
     """Computes single level wavelet reconstruction
     """
+    if ca is None and cd is None:
+        raise ValueError("Both ca and cd cannot be None")
+    if cd is None:
+        cd = jnp.zeros_like(ca)
+    if ca is None:
+        ca = jnp.zeros_like(cd)
     wavelet = ensure_wavelet_(wavelet)
     if jnp.iscomplexobj(ca) or jnp.iscomplexobj(ca):
         car = jnp.real(ca)
