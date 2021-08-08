@@ -95,6 +95,10 @@ def dwt(data, wavelet, mode="symmetric"):
     """Computes single level wavelet decomposition
     """
     wavelet = ensure_wavelet_(wavelet)
+    if jnp.iscomplexobj(data):
+        car, cdr = dwt(data.real, wavelet, mode)
+        cai, cdi = dwt(data.imag, wavelet, mode)
+        return lax.complex(car, cai), lax.complex(cdr, cdi)
     data = promote_arg_dtypes(data)
     return dwt_(data, wavelet.dec_lo, wavelet.dec_hi, mode)
 
@@ -139,6 +143,14 @@ def idwt(ca, cd, wavelet, mode="symmetric"):
     """Computes single level wavelet reconstruction
     """
     wavelet = ensure_wavelet_(wavelet)
+    if jnp.iscomplexobj(ca) or jnp.iscomplexobj(ca):
+        car = jnp.real(ca)
+        cai = jnp.imag(ca)
+        cdr = jnp.real(cd)
+        cdi = jnp.imag(cd)
+        xr = idwt(car, cdr, wavelet, mode)
+        xi = idwt(cai, cdi, wavelet, mode)
+        return lax.complex(xr, xi)
     return idwt_(ca, cd, wavelet.rec_lo, wavelet.rec_hi, mode)
 
 
