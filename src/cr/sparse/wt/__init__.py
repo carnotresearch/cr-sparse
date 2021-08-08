@@ -38,8 +38,11 @@ from cr.sparse._src.wt.dyad import (
 )
 
 from cr.sparse._src.wt.util import (
+    # utility definitions
+    modes,
     # Utility functions
     dwt_max_level,
+    dwt_coeff_len,
 )
 
 from cr.sparse._src.wt.transform import (

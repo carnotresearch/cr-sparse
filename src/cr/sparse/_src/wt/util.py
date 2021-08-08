@@ -33,6 +33,29 @@ def dwt_max_level(input_len, filter_len):
         return 0
     return int(math.log2(input_len // (filter_len - 1)))
 
+# some modes are not supported yet
+modes = ["zero", "constant", "symmetric", "periodic", 
+            # "smooth",
+             "periodization", "reflect", 
+             # "antisymmetric", "antireflect"
+        ]
+
+def dwt_coeff_len(data_len, filter_len, mode):
+    if isinstance (filter_len, str):
+        filter_len = build_wavelet(filter_len)
+        if filter_len is None: 
+            raise ValueError("Invalid wavelet")
+    if isinstance(filter_len, DiscreteWavelet):
+        filter_len = filter_len.dec_len
+    if data_len < 1:
+        raise ValueError("Value of data_len must be greater than zero.")
+    if filter_len < 1:
+        raise ValueError("Value of filter_len must be greater than zero.")
+    if mode == 'periodization':
+        return (data_len + 1) // 2
+    else:
+        return (data_len + filter_len - 1) // 2
+
 ######################################################################################
 # Local utility functions
 ######################################################################################
