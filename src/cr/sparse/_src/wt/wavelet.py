@@ -342,7 +342,10 @@ def build_wavelet(name):
     """
     name = name.lower()
     family, order = wname_to_family_order(name)
+    wavelet = None
     if is_discrete_wavelet(family):
-        return build_discrete_wavelet(family, order)
+        wavelet = build_discrete_wavelet(family, order)
     # other wavelet types are not supported for now
-    return None
+    if wavelet is None:
+        raise ValueError(f"Invalid wavelet name {name}")
+    return wavelet
