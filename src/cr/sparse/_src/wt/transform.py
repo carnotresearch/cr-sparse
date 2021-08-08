@@ -166,6 +166,10 @@ def downcoef_(data, filter, mode):
         return out[1:-1]
 
 def downcoef(part, data, wavelet, mode='symmetric', level=1):
+    if level < 1:
+        raise ValueError("Value of level must be greater than 0.")
+    if data.ndim > 1:
+        raise ValueError("downcoef only supports 1d data.")
     if jnp.iscomplexobj(data):
         real = downcoef(part, data.real, wavelet, mode, level)
         imag = downcoef(part, data.imag, wavelet, mode, level)
@@ -197,6 +201,10 @@ def upcoef_(coeffs, filter, mode):
     return sum
 
 def upcoef(part, coeffs, wavelet, mode='symmetric', level=1):
+    if level < 1:
+        raise ValueError("Value of level must be greater than 0.")
+    if coeffs.ndim > 1:
+        raise ValueError("upcoef only supports 1d coeffs.")
     if jnp.iscomplexobj(coeffs):
         real = upcoef(part, coeffs.real, wavelet, mode, level)
         imag = upcoef(part, coeffs.imag, wavelet, mode, level)
