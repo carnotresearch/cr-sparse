@@ -168,3 +168,38 @@ def test_idwt_single_axis():
 
     assert_allclose(x[0], x0)
     assert_allclose(x[1], x1)
+
+
+def test_dwt_axis_arg():
+    x = jnp.array([[3, 7, 1, 1],
+         [-2, 5, 4, 6]])
+
+    cA_, cD_ = wt.dwt(x, 'db2', axis=-1)
+    cA, cD = wt.dwt(x, 'db2', axis=1)
+
+    assert_allclose(cA_, cA)
+    assert_allclose(cD_, cD)
+
+
+def test_idwt_axis_arg():
+    x = jnp.array([[3, 7, 1, 1],
+         [-2, 5, 4, 6]])
+
+    cA, cD = wt.dwt(x, 'db2', axis=1)
+
+    x_ = wt.idwt(cA, cD, 'db2', axis=-1)
+    x = wt.idwt(cA, cD, 'db2', axis=1)
+
+    assert_allclose(x_, x)
+
+def test_dwt_idwt_axis_excess():
+    x = jnp.array([[3, 7, 1, 1],
+         [-2, 5, 4, 6]])
+    # can't transform over axes that aren't there
+    assert_raises(ValueError,
+                  wt.dwt, x, 'db2', 'symmetric', axis=2)
+
+    assert_raises(ValueError,
+                  wt.idwt, jnp.array([1, 2, 4]), jnp.array([4, 1, 3]), 'db2', 'symmetric', axis=1)
+
+

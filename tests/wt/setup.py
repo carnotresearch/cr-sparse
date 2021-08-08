@@ -1,7 +1,7 @@
 import pytest
 
 import numpy as np
-from numpy.testing import assert_allclose, assert_, assert_raises
+from numpy.testing import (assert_allclose, assert_, assert_raises, assert_array_equal)
 
 # from jax.config import config
 # config.update("jax_enable_x64", True)
