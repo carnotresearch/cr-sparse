@@ -95,6 +95,7 @@ def dwt(data, wavelet, mode="symmetric", axis=-1):
     """Computes single level wavelet decomposition
     """
     wavelet = ensure_wavelet_(wavelet)
+    data = jnp.asarray(data)
     if jnp.iscomplexobj(data):
         car, cdr = dwt(data.real, wavelet, mode)
         cai, cdi = dwt(data.imag, wavelet, mode)
@@ -146,6 +147,11 @@ def idwt(ca, cd, wavelet, mode="symmetric", axis=-1):
     """
     if ca is None and cd is None:
         raise ValueError("Both ca and cd cannot be None")
+    # make sure that ca and cd are arrays
+    if ca is not None:
+        ca = jnp.asarray(ca)
+    if cd is not None:
+        cd = jnp.asarray(cd)
     if cd is None:
         cd = jnp.zeros_like(ca)
     if ca is None:
