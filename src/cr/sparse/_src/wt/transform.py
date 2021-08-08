@@ -40,29 +40,7 @@ from cr.sparse import promote_arg_dtypes
 from .dyad import *
 from .multirate import *
 from .wavelet import build_wavelet
-
-
-######################################################################################
-# Local utility functions
-######################################################################################
-
-def ensure_wavelet_(wavelet):
-    if isinstance(wavelet, str):
-        wavelet = build_wavelet(wavelet)
-    if wavelet is None:
-        raise ValueError("Invalid wavelet")
-    return wavelet
-
-
-def part_dec_filter_(part, wavelet):
-    if part == 'a':
-        return wavelet.dec_lo
-    return wavelet.dec_hi
-
-def part_rec_filter_(part, wavelet):
-    if part == 'a':
-        return wavelet.rec_lo
-    return wavelet.rec_hi
+from .util import *
 
 ######################################################################################
 # Single level wavelet decomposition/reconstruction
@@ -193,10 +171,14 @@ def downcoef(part, data, wavelet, mode='symmetric', level=1):
         imag = downcoef(part, data.imag, wavelet, mode, level)
         return lax.complex(real, imag)
     wavelet = ensure_wavelet_(wavelet)
-    filter = part_dec_filter_(part, wavelet)
     data = promote_arg_dtypes(data)
-    for i in range(level):
-        data = downcoef_(data, filter, mode)
+    filter = part_dec_filter_(part, wavelet)
+    # We do averaging for all levels except the last one
+    dec_lo = wavelet.dec_lo
+    for i in range(level-1):
+        data = downcoef_(data, dec_lo, mode)
+    # In the last iteration, we apply 'a' or 'd' as needed
+    data = downcoef_(data, filter, mode)
     return data
 
 
