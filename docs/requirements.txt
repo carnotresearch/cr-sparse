@@ -18,3 +18,4 @@ ipykernel>=5.3.4
 pandoc>=1.0.2
 nbsphinx>=0.8.0
 sphinx-gallery>=0.8.0
+sphinx-panels

@@ -58,6 +58,7 @@ extensions = [
     'sphinx_autodoc_typehints',
     'sphinxcontrib.bibtex',
     'sphinx_gallery.gen_gallery',
+    'sphinx_panels',
 ]
 
 intersphinx_mapping = {
