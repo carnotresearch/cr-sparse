@@ -1,17 +1,5 @@
-import pytest
+from .setup import *
 
-import numpy as np
-from numpy.testing import assert_allclose, assert_, assert_raises
-
-import jax.numpy as jnp
-from jax import random
-
-
-from cr.sparse import *
-import cr.sparse.wt as wt
-
-key = random.PRNGKey(0)
-keys = random.split(key, 16)
 
 
 def test_downcoef_multilevel():
