@@ -41,6 +41,7 @@ from cr.sparse._src.wt.util import (
     # utility definitions
     modes,
     # Utility functions
+    pad,
     dwt_max_level,
     dwt_coeff_len,
 )

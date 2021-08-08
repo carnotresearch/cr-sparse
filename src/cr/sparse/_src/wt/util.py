@@ -14,6 +14,9 @@
 
 import math
 
+from jax import jit, lax, vmap
+import jax.numpy as jnp
+
 from .wavelet import build_wavelet, DiscreteWavelet
 
 ######################################################################################
@@ -55,6 +58,84 @@ def dwt_coeff_len(data_len, filter_len, mode):
         return (data_len + 1) // 2
     else:
         return (data_len + filter_len - 1) // 2
+
+
+def pad_smooth(vector, pad_width, iaxis, kwargs):
+    # smooth extension to left
+    left = vector[pad_width[0]]
+    slope_left = (left - vector[pad_width[0] + 1])
+    vector = vector.at[:pad_width[0]].set(
+        left + jnp.arange(pad_width[0], 0, -1) * slope_left)
+
+    # smooth extension to right
+    right = vector[-pad_width[1] - 1]
+    slope_right = (right - vector[-pad_width[1] - 2])
+    vector = vector.at[-pad_width[1]:].set(
+        right + jnp.arange(1, pad_width[1] + 1) * slope_right)
+    return vector
+
+def pad_antisymmetric(vector, pad_width, iaxis, kwargs):
+    # smooth extension to left
+    # implement by flipping portions symmetric padding
+    npad_l, npad_r = pad_width
+    vsize_nonpad = vector.size - npad_l - npad_r
+    # Note: must modify vector in-place
+    vector = vector.at[:].set(jnp.pad(vector[pad_width[0]:-pad_width[-1]],
+                        pad_width, mode='symmetric'))
+    r_edge = npad_l + vsize_nonpad - 1
+    l_edge = npad_l
+    # width of each reflected segment
+    seg_width = vsize_nonpad
+    # flip reflected segments on the right of the original signal
+    n = 1
+    while r_edge <= vector.size:
+        segment_slice = slice(r_edge + 1,
+                                min(r_edge + 1 + seg_width, vector.size))
+        if n % 2:
+            vector = vector.at[segment_slice].set(vector[segment_slice]*-1)
+        r_edge += seg_width
+        n += 1
+
+    # flip reflected segments on the left of the original signal
+    n = 1
+    while l_edge >= 0:
+        segment_slice = slice(max(0, l_edge - seg_width), l_edge)
+        if n % 2:
+            vector.at[segment_slice].set(vector[segment_slice]*-1)
+        l_edge -= seg_width
+        n += 1
+    return vector
+
+
+def pad(data, pad_widths, mode):
+    data = jnp.asarray(data)
+    pad_widths = jnp.asarray(pad_widths)
+    if mode == 'symmetric':
+        return jnp.pad(data, pad_widths, mode='symmetric')
+    elif mode == 'reflect':
+        return jnp.pad(data, pad_widths, mode='reflect')
+    elif mode == 'antireflect':
+        return jnp.pad(data, pad_widths, mode='reflect', reflect_type="odd")
+    elif mode == 'constant':
+        return jnp.pad(data, pad_widths, mode='edge')
+    elif mode == 'zero':
+        return jnp.pad(data, pad_widths, mode='constant', constant_values=0)
+    elif mode == 'smooth':
+        return jnp.pad(data, pad_widths, pad_smooth)
+    # elif mode == 'antisymmetric':
+    #     return jnp.pad(data, pad_widths, pad_antisymmetric)
+    elif mode == 'periodic':
+        return jnp.pad(data, pad_widths, mode='wrap')
+    elif mode == 'periodization':
+        # Promote odd-sized dimensions to even length by duplicating the
+        # last value.
+        edge_pad_widths = [(0, data.shape[ax] % 2)
+                            for ax in range(data.ndim)]
+        data = jnp.pad(data, edge_pad_widths, mode='edge')
+        return jnp.pad(data, pad_widths, mode='wrap')
+    else:
+        raise ValueError("mode must be one of ['symmetric', 'constant', 'reflect', 'antireflect', 'zero', 'smooth', 'periodic',  'periodization']")
+
 
 ######################################################################################
 # Local utility functions
