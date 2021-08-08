@@ -196,9 +196,17 @@ def upcoef_(coeffs, filter, mode):
         return sum[skip:-skip]
     return sum
 
-def upcoef(part, coeffs, wavelet, mode='symmetric'):
+def upcoef(part, coeffs, wavelet, mode='symmetric', level=1):
+    if jnp.iscomplexobj(coeffs):
+        real = upcoef(part, coeffs.real, wavelet, mode, level)
+        imag = upcoef(part, coeffs.imag, wavelet, mode, level)
+        return lax.complex(real, imag)
     wavelet = ensure_wavelet_(wavelet)
     filter = part_rec_filter_(part, wavelet)
+    # We do averaging for all levels except the last one
+    rec_lo = wavelet.rec_lo
+    for i in range(level-1):
+        coeffs = upcoef_(coeffs, rec_lo, mode)
     return upcoef_(coeffs, filter, mode)
 
 
