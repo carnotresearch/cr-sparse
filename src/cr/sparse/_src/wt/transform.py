@@ -148,7 +148,11 @@ def idwt(ca, cd, wavelet, mode="symmetric"):
         cd = jnp.zeros_like(ca)
     if ca is None:
         ca = jnp.zeros_like(cd)
+    if ca.shape != cd.shape:
+        raise Value("ca and cd must have identical shape.")
     wavelet = ensure_wavelet_(wavelet)
+    if ca.shape[0] < wavelet.rec_len // 2:
+        raise ValueError("Insufficient coefficients for wavelet reconstruction.")
     if jnp.iscomplexobj(ca) or jnp.iscomplexobj(ca):
         car = jnp.real(ca)
         cai = jnp.imag(ca)
