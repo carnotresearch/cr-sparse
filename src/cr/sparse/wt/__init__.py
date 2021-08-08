@@ -59,6 +59,11 @@ from cr.sparse._src.wt.transform import (
     dwt, 
     idwt_,
     idwt,
+    # decomposition/reconstruction only for a part
+    downcoef_,
+    downcoef,
+    upcoef_,
+    upcoef,
     # along an exis
     dwt_axis_,
     dwt_axis,

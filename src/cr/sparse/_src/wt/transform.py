@@ -35,34 +35,64 @@ from functools import partial
 from jax import jit, lax, vmap
 import jax.numpy as jnp
 
-from .dyad import *
-
-from .multirate import *
 from cr.sparse import promote_arg_dtypes
+
+from .dyad import *
+from .multirate import *
+from .wavelet import build_wavelet
+
+
+######################################################################################
+# Local utility functions
+######################################################################################
+
+def ensure_wavelet_(wavelet):
+    if isinstance(wavelet, str):
+        wavelet = build_wavelet(wavelet)
+    if wavelet is None:
+        raise ValueError("Invalid wavelet")
+    return wavelet
+
+
+def part_dec_filter_(part, wavelet):
+    if part == 'a':
+        return wavelet.dec_lo
+    return wavelet.dec_hi
+
+def part_rec_filter_(part, wavelet):
+    if part == 'a':
+        return wavelet.rec_lo
+    return wavelet.rec_hi
 
 ######################################################################################
 # Single level wavelet decomposition/reconstruction
 ######################################################################################
+
+@partial(jit, static_argnums=(1,2))
+def pad_(data, p, mode):
+    if mode == 'symmetric':
+        return jnp.pad(data, p, mode='symmetric')
+    elif mode == 'reflect':
+        return jnp.pad(data, p, mode='reflect')
+    elif mode == 'constant':
+        return jnp.pad(data, p, mode='edge')
+    elif mode == 'zero':
+        return jnp.pad(data, p, mode='constant', constant_values=0)
+    elif mode == 'periodic':
+        return jnp.pad(data, p, mode='wrap')
+    elif mode == 'periodization':
+        return jnp.pad(data, p//2, mode='wrap')
+    else:
+        raise ValueError("mode must be one of ['symmetric', 'constant', 'reflect', 'zero', 'periodic', 'periodization']")
+
+
 
 @partial(jit, static_argnums=(3,))
 def dwt_(data, dec_lo, dec_hi, mode):
     """Computes single level wavelet decomposition
     """
     p = len(dec_lo)
-    if mode == 'symmetric':
-        x_padded = jnp.pad(data, p, mode='symmetric')
-    elif mode == 'reflect':
-        x_padded = jnp.pad(data, p, mode='reflect')
-    elif mode == 'constant':
-        x_padded = jnp.pad(data, p, mode='edge')
-    elif mode == 'zero':
-        x_padded = jnp.pad(data, p, mode='constant', constant_values=0)
-    elif mode == 'periodic':
-        x_padded = jnp.pad(data, p, mode='wrap')
-    elif mode == 'periodization':
-        x_padded = jnp.pad(data, p//2, mode='wrap')
-    else:
-        raise ValueError("mode must be one of ['symmetric', 'constant', 'reflect', 'zero', 'periodic', 'periodization']")
+    x_padded = pad_(data, p, mode)
 
     x_in = x_padded[None, None, :]
 
@@ -86,6 +116,7 @@ def dwt_(data, dec_lo, dec_hi, mode):
 def dwt(data, wavelet, mode="symmetric"):
     """Computes single level wavelet decomposition
     """
+    wavelet = ensure_wavelet_(wavelet)
     data = promote_arg_dtypes(data)
     return dwt_(data, wavelet.dec_lo, wavelet.dec_hi, mode)
 
@@ -129,7 +160,65 @@ def idwt_joined_(w, rec_lo, rec_hi, mode):
 def idwt(ca, cd, wavelet, mode="symmetric"):
     """Computes single level wavelet reconstruction
     """
+    wavelet = ensure_wavelet_(wavelet)
     return idwt_(ca, cd, wavelet.rec_lo, wavelet.rec_hi, mode)
+
+
+######################################################################################
+#  Wavelet decomposition/reconstruction for only one set of coefficients
+######################################################################################
+
+@partial(jit, static_argnums=(2,))
+def downcoef_(data, filter, mode):
+    p = len(filter)
+    x_padded = pad_(data, p, mode)
+
+    x_in = x_padded[None, None, :]
+
+    padding = [(1, 0)] if mode == 'periodization' else [(0, 0)]
+    strides = (2,)
+
+    filter = filter[::-1][None, None, :]
+    out = lax.conv_general_dilated(x_in, filter, strides, padding)
+    out = out[0, 0, slice(None)]
+
+    if mode == 'periodization':
+        return out[1:] 
+    else:
+        return out[1:-1]
+
+def downcoef(part, data, wavelet, mode='symmetric', level=1):
+    if jnp.iscomplexobj(data):
+        real = downcoef(part, data.real, wavelet, mode, level)
+        imag = downcoef(part, data.imag, wavelet, mode, level)
+        return lax.complex(real, imag)
+    wavelet = ensure_wavelet_(wavelet)
+    filter = part_dec_filter_(part, wavelet)
+    data = promote_arg_dtypes(data)
+    for i in range(level):
+        data = downcoef_(data, filter, mode)
+    return data
+
+
+@partial(jit, static_argnums=(2,))
+def upcoef_(coeffs, filter, mode):
+    p = len(filter)
+    coeffs = up_sample(coeffs, 2)
+    if mode == 'periodization':
+        coeffs = jnp.pad(coeffs, p//2, mode='wrap')
+    sum = jnp.convolve(coeffs, filter, 'same')
+    if mode == 'periodization':
+        return sum[p//2:-p//2]
+    skip = p//2 - 1
+    if skip > 0:
+        return sum[skip:-skip]
+    return sum
+
+def upcoef(part, coeffs, wavelet, mode='symmetric'):
+    wavelet = ensure_wavelet_(wavelet)
+    filter = part_rec_filter_(part, wavelet)
+    return upcoef_(coeffs, filter, mode)
+
 
 ######################################################################################
 #  Single level wavelet decomposition/reconstruction along a given axis
@@ -144,6 +233,7 @@ def dwt_axis_(data, dec_lo, dec_hi, axis, mode):
 def dwt_axis(data, wavelet, axis, mode="symmetric"):
     """Computes single level wavelet decomposition along a given axis
     """
+    wavelet = ensure_wavelet_(wavelet)
     data = promote_arg_dtypes(data)
     return dwt_axis_(data, wavelet.dec_lo, wavelet.dec_hi, axis, mode)
 
@@ -159,6 +249,7 @@ def idwt_axis_(ca, cd, rec_lo, rec_hi, axis, mode):
 def idwt_axis(ca, cd, wavelet, axis, mode="symmetric"):
     """Computes single level wavelet reconstruction along a given axis
     """
+    wavelet = ensure_wavelet_(wavelet)
     return idwt_axis_(ca, cd, wavelet.rec_lo, wavelet.rec_hi, axis, mode)
 
 def dwt_column(data, wavelet, mode="symmetric"):
@@ -190,6 +281,7 @@ dwt2_cw_ = vmap(dwt_, in_axes=(1, None, None, None), out_axes=1)
 def dwt2(image, wavelet, mode="symmetric", axes=(-2, -1)):
     """Computes single level wavelet decomposition for 2D images
     """
+    wavelet = ensure_wavelet_(wavelet)
     image = promote_arg_dtypes(image)
     dec_lo = wavelet.dec_lo
     dec_hi = wavelet.dec_hi
@@ -207,6 +299,7 @@ def dwt2(image, wavelet, mode="symmetric", axes=(-2, -1)):
 def idwt2(coeffs, wavelet, mode="symmetric", axes=(-2, -1)):
     """Computes single level wavelet reconstruction for 2D images
     """
+    wavelet = ensure_wavelet_(wavelet)
     caa, (cda, cad, cdd) = coeffs
     axes = tuple(axes)
     if len(axes) != 2:
