@@ -38,6 +38,7 @@ import jax.numpy as jnp
 from .dyad import *
 
 from .multirate import *
+from cr.sparse import promote_arg_dtypes
 
 ######################################################################################
 # Single level wavelet decomposition/reconstruction
@@ -85,6 +86,7 @@ def dwt_(data, dec_lo, dec_hi, mode):
 def dwt(data, wavelet, mode="symmetric"):
     """Computes single level wavelet decomposition
     """
+    data = promote_arg_dtypes(data)
     return dwt_(data, wavelet.dec_lo, wavelet.dec_hi, mode)
 
 
@@ -142,6 +144,7 @@ def dwt_axis_(data, dec_lo, dec_hi, axis, mode):
 def dwt_axis(data, wavelet, axis, mode="symmetric"):
     """Computes single level wavelet decomposition along a given axis
     """
+    data = promote_arg_dtypes(data)
     return dwt_axis_(data, wavelet.dec_lo, wavelet.dec_hi, axis, mode)
 
 
@@ -187,6 +190,7 @@ dwt2_cw_ = vmap(dwt_, in_axes=(1, None, None, None), out_axes=1)
 def dwt2(image, wavelet, mode="symmetric", axes=(-2, -1)):
     """Computes single level wavelet decomposition for 2D images
     """
+    image = promote_arg_dtypes(image)
     dec_lo = wavelet.dec_lo
     dec_hi = wavelet.dec_hi
     axes = tuple(axes)
