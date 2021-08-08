@@ -14,14 +14,22 @@
 
 import math
 
-from .wavelet import build_wavelet
+from .wavelet import build_wavelet, DiscreteWavelet
 
 ######################################################################################
 # Utility functions
 ######################################################################################
 
 def dwt_max_level(input_len, filter_len):
-    if filter_len <= 1 or input_len < filter_len - 1:
+    if isinstance (filter_len, str):
+        filter_len = build_wavelet(filter_len)
+        if filter_len is None: 
+            raise ValueError("Invalid wavelet")
+    if isinstance(filter_len, DiscreteWavelet):
+        filter_len = filter_len.dec_len
+    if filter_len < 2 or int(filter_len) != filter_len:
+        raise ValueError("filter_len must be an integer >= 2")
+    if input_len < filter_len - 1:
         return 0
     return int(math.log2(input_len // (filter_len - 1)))
 
