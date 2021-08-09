@@ -124,6 +124,7 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.downcoef.html">cr.sparse.wt.downcoef</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.upcoef.html">cr.sparse.wt.upcoef</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.wavedec.html">cr.sparse.wt.wavedec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.waverec.html">cr.sparse.wt.waverec</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_axis.html">cr.sparse.wt.dwt_axis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_axis.html">cr.sparse.wt.idwt_axis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_column.html">cr.sparse.wt.dwt_column</a></li>
@@ -357,30 +358,33 @@ Following wavelets are supported.</p>
 <td><p>Partial discrete wavelet reconstruction from one part of coefficients (multi-level)</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.wavedec.html#cr.sparse.wt.wavedec" title="cr.sparse.wt.wavedec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wavedec</span></code></a>(data, wavelet[, mode, level, axis])</p></td>
-<td><p>Multilevel 1-D transform</p></td>
+<td><p>Multilevel 1D discrete wavelet transform</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_axis.html#cr.sparse.wt.dwt_axis" title="cr.sparse.wt.dwt_axis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt_axis</span></code></a>(data, wavelet, axis[, mode])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.waverec.html#cr.sparse.wt.waverec" title="cr.sparse.wt.waverec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">waverec</span></code></a>(coeffs, wavelet[, mode, axis])</p></td>
+<td><p>Multilevel 1D inverse discrete wavelet transform</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_axis.html#cr.sparse.wt.dwt_axis" title="cr.sparse.wt.dwt_axis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt_axis</span></code></a>(data, wavelet, axis[, mode])</p></td>
 <td><p>Computes single level wavelet decomposition along a given axis</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_axis.html#cr.sparse.wt.idwt_axis" title="cr.sparse.wt.idwt_axis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idwt_axis</span></code></a>(ca, cd, wavelet, axis[, mode])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_axis.html#cr.sparse.wt.idwt_axis" title="cr.sparse.wt.idwt_axis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idwt_axis</span></code></a>(ca, cd, wavelet, axis[, mode])</p></td>
 <td><p>Computes single level wavelet reconstruction along a given axis</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_column.html#cr.sparse.wt.dwt_column" title="cr.sparse.wt.dwt_column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt_column</span></code></a>(data, wavelet[, mode])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_column.html#cr.sparse.wt.dwt_column" title="cr.sparse.wt.dwt_column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt_column</span></code></a>(data, wavelet[, mode])</p></td>
 <td><p>Computes single level wavelet decomposition along columns (axis-0)</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_row.html#cr.sparse.wt.dwt_row" title="cr.sparse.wt.dwt_row"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt_row</span></code></a>(data, wavelet[, mode])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_row.html#cr.sparse.wt.dwt_row" title="cr.sparse.wt.dwt_row"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt_row</span></code></a>(data, wavelet[, mode])</p></td>
 <td><p>Computes single level wavelet decomposition along rows (axis-1)</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_tube.html#cr.sparse.wt.dwt_tube" title="cr.sparse.wt.dwt_tube"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt_tube</span></code></a>(data, wavelet[, mode])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_tube.html#cr.sparse.wt.dwt_tube" title="cr.sparse.wt.dwt_tube"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt_tube</span></code></a>(data, wavelet[, mode])</p></td>
 <td><p>Computes single level wavelet decomposition along tubes (axis-2)</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_column.html#cr.sparse.wt.idwt_column" title="cr.sparse.wt.idwt_column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idwt_column</span></code></a>(ca, cd, wavelet[, mode])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_column.html#cr.sparse.wt.idwt_column" title="cr.sparse.wt.idwt_column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idwt_column</span></code></a>(ca, cd, wavelet[, mode])</p></td>
 <td><p>Computes single level wavelet reconstruction along columns (axis-0)</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_row.html#cr.sparse.wt.idwt_row" title="cr.sparse.wt.idwt_row"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idwt_row</span></code></a>(ca, cd, wavelet[, mode])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_row.html#cr.sparse.wt.idwt_row" title="cr.sparse.wt.idwt_row"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idwt_row</span></code></a>(ca, cd, wavelet[, mode])</p></td>
 <td><p>Computes single level wavelet reconstruction along rows (axis-1)</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_tube.html#cr.sparse.wt.idwt_tube" title="cr.sparse.wt.idwt_tube"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idwt_tube</span></code></a>(ca, cd, wavelet[, mode])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_tube.html#cr.sparse.wt.idwt_tube" title="cr.sparse.wt.idwt_tube"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idwt_tube</span></code></a>(ca, cd, wavelet[, mode])</p></td>
 <td><p>Computes single level wavelet reconstruction along tubes (axis-2)</p></td>
 </tr>
 </tbody>

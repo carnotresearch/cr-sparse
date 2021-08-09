@@ -75,6 +75,7 @@ High-level API
     downcoef
     upcoef
     wavedec
+    waverec
     dwt_axis
     idwt_axis
     dwt_column

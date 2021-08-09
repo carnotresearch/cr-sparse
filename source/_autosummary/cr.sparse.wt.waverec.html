@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>cr.sparse.wt.idwt2 &mdash; CR.Sparse  documentation</title>
+  <title>cr.sparse.wt.waverec &mdash; CR.Sparse  documentation</title>
   
 
   
@@ -53,8 +53,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="cr.sparse.wt.downcoef" href="cr.sparse.wt.downcoef.html" />
-    <link rel="prev" title="cr.sparse.wt.dwt2" href="cr.sparse.wt.dwt2.html" /> 
+    <link rel="next" title="cr.sparse.wt.dwt_axis" href="cr.sparse.wt.dwt_axis.html" />
+    <link rel="prev" title="cr.sparse.wt.wavedec" href="cr.sparse.wt.wavedec.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -120,11 +120,11 @@
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.wt.dwt.html">cr.sparse.wt.dwt</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.wt.idwt.html">cr.sparse.wt.idwt</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.wt.dwt2.html">cr.sparse.wt.dwt2</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.wt.idwt2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cr.sparse.wt.idwt2.html">cr.sparse.wt.idwt2</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.wt.downcoef.html">cr.sparse.wt.downcoef</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.wt.upcoef.html">cr.sparse.wt.upcoef</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.wt.wavedec.html">cr.sparse.wt.wavedec</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.wt.waverec.html">cr.sparse.wt.waverec</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.wt.waverec</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.wt.dwt_axis.html">cr.sparse.wt.dwt_axis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.wt.idwt_axis.html">cr.sparse.wt.idwt_axis</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cr.sparse.wt.dwt_column.html">cr.sparse.wt.dwt_column</a></li>
@@ -207,13 +207,13 @@
         
           <li><a href="../wavelets.html">Wavelets</a> &raquo;</li>
         
-      <li>cr.sparse.wt.idwt2</li>
+      <li>cr.sparse.wt.waverec</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/source/_autosummary/cr.sparse.wt.idwt2.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/source/_autosummary/cr.sparse.wt.waverec.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -250,12 +250,12 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="cr-sparse-wt-idwt2">
-<h1>cr.sparse.wt.idwt2<a class="headerlink" href="#cr-sparse-wt-idwt2" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cr-sparse-wt-waverec">
+<h1>cr.sparse.wt.waverec<a class="headerlink" href="#cr-sparse-wt-waverec" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="cr.sparse.wt.idwt2">
-<span class="sig-prename descclassname"><span class="pre">cr.sparse.wt.</span></span><span class="sig-name descname"><span class="pre">idwt2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coeffs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'symmetric'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(-</span> <span class="pre">2,</span> <span class="pre">-</span> <span class="pre">1)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/wt/transform.html#idwt2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.wt.idwt2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes single level wavelet reconstruction for 2D images</p>
+<dt class="sig sig-object py" id="cr.sparse.wt.waverec">
+<span class="sig-prename descclassname"><span class="pre">cr.sparse.wt.</span></span><span class="sig-name descname"><span class="pre">waverec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coeffs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'symmetric'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/wt/multilevel.html#waverec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.wt.waverec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multilevel 1D inverse discrete wavelet transform</p>
 </dd></dl>
 
 </div>
@@ -266,8 +266,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="cr.sparse.wt.downcoef.html" class="btn btn-neutral float-right" title="cr.sparse.wt.downcoef" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="cr.sparse.wt.dwt2.html" class="btn btn-neutral float-left" title="cr.sparse.wt.dwt2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cr.sparse.wt.dwt_axis.html" class="btn btn-neutral float-right" title="cr.sparse.wt.dwt_axis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cr.sparse.wt.wavedec.html" class="btn btn-neutral float-left" title="cr.sparse.wt.wavedec" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
