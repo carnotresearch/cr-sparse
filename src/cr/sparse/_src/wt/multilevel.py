@@ -84,7 +84,8 @@ def waverec(coeffs, wavelet, mode='symmetric', axis=-1):
         return jnp.asarray(coeffs[0])
     wavelet = ensure_wavelet_(wavelet)
     a, ds = coeffs[0], coeffs[1:]
-    a = jnp.asarray(a)
+    if a is not None:
+        a = jnp.asarray(a)
     for d in ds:
         if (a is not None) and (d is not None):
             if a.shape[axis] != d.shape[axis]:

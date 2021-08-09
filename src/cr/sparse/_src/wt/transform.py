@@ -296,6 +296,16 @@ def idwt_axis(ca, cd, wavelet, axis, mode="symmetric"):
     """Computes single level wavelet reconstruction along a given axis
     """
     wavelet = ensure_wavelet_(wavelet)
+    if ca is not None:
+        ca = jnp.asarray(ca)
+    if cd is not None:
+        cd = jnp.asarray(cd)
+    if cd is None:
+        cd = jnp.zeros_like(ca)
+    if ca is None:
+        ca = jnp.zeros_like(cd)
+    if ca.shape != cd.shape:
+        raise Value("ca and cd must have identical shape.")
     if jnp.iscomplexobj(ca) or jnp.iscomplexobj(ca):
         car = jnp.real(ca)
         cai = jnp.imag(ca)
