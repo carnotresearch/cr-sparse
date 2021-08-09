@@ -10,13 +10,16 @@ sparse representation and compressive sensing.
 
 
    ----
-   .. dropdown:: :fa:`eye,mr-1` Wavelets
-
+   Wavelets
+   ^^^^^^^^^^^^^^
       * Haar, Daubechies, Symlets, Coiflets, Biorthogonal, 
         Reverse biorthogonal, Discrete Meyer
-      * dwt, idwt, dwt2, idwt2, wavedec
+      * dwt, idwt, upcoef, downcoef
+      * wavedec, waverec
+      * dwt2, idwt2
    ----
-   .. dropdown:: :fa:`eye,mr-1` Linear Operators
+   Linear Operators
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
       * identity, matrix, diagonal, zero, flipud, sum, pad_zeros, 
         symmetrize, restriction
@@ -27,25 +30,31 @@ sparse representation and compressive sensing.
       * first_derivative, second_derivative
       * neg, scale, add, subtract, compose, transpose, hermitian, hcat, power
    ----
-   .. dropdown:: :fa:`eye,mr-1` Dictionaries
+   Dictionaries
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
      * gaussian, rademacher, dirac fourier, dirac cosine, 
 
    ----
-   .. dropdown:: :fa:`eye,mr-1` Sparse Recovery
+   Sparse Recovery
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
       * Greedy Recovery Algorithms: OMP, CoSaMP, SP, IHT, NIHT, HTP, NHTP,
       * Convex Optimization Algorithms: TNIPM, ADMM, 
    ----
-   .. dropdown:: :fa:`eye,mr-1` Linear Algebra Routines
+   Linear Algebra Routines
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
       * Triangular systems
    ----
-   .. dropdown:: :fa:`eye,mr-1` Evaluation Framework
+   Evaluation Framework
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    ----
-   .. dropdown:: :fa:`eye,mr-1` Sample Data Generation
+   Sample Data Generation
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    ----
-   .. dropdown:: :fa:`eye,mr-1` Utilities
+   Utilities
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 .. toctree::
