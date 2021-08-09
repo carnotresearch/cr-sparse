@@ -8,6 +8,7 @@ matplotlib
 imageio
 click
 pillow
+pywt
 sphinx==4.0.0
 sphinx_rtd_theme>=0.5.0
 sphinxcontrib-katex>=0.7.1

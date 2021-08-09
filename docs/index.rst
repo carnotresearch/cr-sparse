@@ -1,6 +1,10 @@
 CR.Sparse
 =====================================
 
+A JAX/XLA based library of accelerated algorithms for inverse problems in 
+sparse representation and compressive sensing. 
+`GITHUB <https://github.com/carnotresearch/cr-sparse>`_.
+
 .. panels::
    :card: shadow
 
@@ -33,7 +37,7 @@ CR.Sparse
       * Greedy Recovery Algorithms: OMP, CoSaMP, SP, IHT, NIHT, HTP, NHTP,
       * Convex Optimization Algorithms: TNIPM, ADMM, 
    ----
-   .. dropdown:: :fa:`eye,mr-1` Linear algorithms
+   .. dropdown:: :fa:`eye,mr-1` Linear Algebra Routines
 
       * Triangular systems
    ----
@@ -43,8 +47,6 @@ CR.Sparse
    ----
    .. dropdown:: :fa:`eye,mr-1` Utilities
 
-
-GITHUB Repo: `cr-sparse <https://github.com/carnotresearch/cr-sparse>`_
 
 .. toctree::
    :maxdepth: 2

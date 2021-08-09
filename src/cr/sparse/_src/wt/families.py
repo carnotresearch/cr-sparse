@@ -15,13 +15,25 @@
 from enum import Enum
 
 class FAMILY(Enum):
+    """An enumeration describing the wavelet families supported in this library
+    """
     HAAR = 0
+    """Haar wavelets"""
+
     RBIO = 1
+    """Reverse Biorthogonal Wavelets"""
     DB = 2
+    """Daubechies Wavelets"""
+
     SYM = 3
+    """Symlets"""
     COIF = 4
+    """Coiflets"""
     BIOR = 5
+    """Biorthogonal Wavelets"""
     DMEY = 6
+    """"Discrete Meyer (FIR Approximation) Wavelets"""
+    
     GAUS = 7
     MEXH = 8
     MORL = 9
@@ -31,6 +43,8 @@ class FAMILY(Enum):
     CMOR = 13
 
 def is_discrete_wavelet(name: FAMILY):
+    """Returns if the wavelet family is a family of discrete wavelets
+    """
     return name.value in [FAMILY.HAAR.value,
     FAMILY.RBIO.value, 
     FAMILY.DB.value, 
@@ -205,6 +219,8 @@ _family_long_names = [
 ]
 
 def wname_to_family_order(name):
+    """Returns the wavelet family and order from the name
+    """
     try:
         if len(name) > 4 and name[:4] in ['cmor', 'shan', 'fbsp']:
             name = name[:4]
@@ -226,6 +242,8 @@ def _check_kind(name, kind):
         return not is_discrete
 
 def wavelist(family=None, kind='all'):
+    """Returns the list of wavelts supported by this library
+    """
     if kind not in ('all', 'continuous', 'discrete'):
         raise ValueError(f"Unrecognized value for `kind`: {kind}")
 

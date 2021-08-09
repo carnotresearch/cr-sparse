@@ -67,7 +67,7 @@ def pad_(data, p, mode):
 
 @partial(jit, static_argnums=(3,))
 def dwt_(data, dec_lo, dec_hi, mode):
-    """Computes single level wavelet decomposition
+    """Computes single level discrete wavelet decomposition
     """
     p = len(dec_lo)
     x_padded = pad_(data, p, mode)
@@ -92,7 +92,7 @@ def dwt_(data, dec_lo, dec_hi, mode):
         return lo[1:-1], hi[1:-1]
 
 def dwt(data, wavelet, mode="symmetric", axis=-1):
-    """Computes single level wavelet decomposition
+    """Computes single level discrete wavelet decomposition
     """
     wavelet = ensure_wavelet_(wavelet)
     data = jnp.asarray(data)
@@ -109,7 +109,7 @@ def dwt(data, wavelet, mode="symmetric", axis=-1):
 
 @partial(jit, static_argnums=(4,))
 def idwt_(ca, cd, rec_lo, rec_hi, mode):
-    """Computes single level wavelet reconstruction
+    """Computes single level discrete wavelet reconstruction
     """
     p = len(rec_lo)
     ca = up_sample(ca, 2)
@@ -132,7 +132,7 @@ def idwt_(ca, cd, rec_lo, rec_hi, mode):
 
 @partial(jit, static_argnums=(3,))
 def idwt_joined_(w, rec_lo, rec_hi, mode):
-    """Computes single level wavelet reconstruction
+    """Computes single level discrete wavelet reconstruction
     """
     n = len(w)
     m = n // 2
@@ -143,7 +143,7 @@ def idwt_joined_(w, rec_lo, rec_hi, mode):
 
 
 def idwt(ca, cd, wavelet, mode="symmetric", axis=-1):
-    """Computes single level wavelet reconstruction
+    """Computes single level discrete wavelet reconstruction
     """
     if ca is None and cd is None:
         raise ValueError("Both ca and cd cannot be None")
@@ -184,6 +184,8 @@ def idwt(ca, cd, wavelet, mode="symmetric", axis=-1):
 
 @partial(jit, static_argnums=(2,))
 def downcoef_(data, filter, mode):
+    """Partial discrete wavelet decomposition
+    """
     p = len(filter)
     x_padded = pad_(data, p, mode)
 
@@ -202,6 +204,8 @@ def downcoef_(data, filter, mode):
         return out[1:-1]
 
 def downcoef(part, data, wavelet, mode='symmetric', level=1):
+    """Partial discrete wavelet decomposition (multi-level)
+    """
     if level < 1:
         raise ValueError("Value of level must be greater than 0.")
     if data.ndim > 1:
@@ -224,6 +228,8 @@ def downcoef(part, data, wavelet, mode='symmetric', level=1):
 
 @partial(jit, static_argnums=(2,))
 def upcoef_(coeffs, filter, mode):
+    """Partial discrete wavelet reconstruction from one part of coefficients
+    """
     p = len(filter)
     coeffs = up_sample(coeffs, 2)
     if mode == 'periodization':
@@ -237,6 +243,8 @@ def upcoef_(coeffs, filter, mode):
     return sum
 
 def upcoef(part, coeffs, wavelet, mode='symmetric', level=1):
+    """Partial discrete wavelet reconstruction from one part of coefficients (multi-level)
+    """
     if level < 1:
         raise ValueError("Value of level must be greater than 0.")
     if coeffs.ndim > 1:
@@ -287,21 +295,33 @@ def idwt_axis(ca, cd, wavelet, axis, mode="symmetric"):
     return idwt_axis_(ca, cd, wavelet.rec_lo, wavelet.rec_hi, axis, mode)
 
 def dwt_column(data, wavelet, mode="symmetric"):
+    """Computes single level wavelet decomposition along columns (axis-0)
+    """
     return dwt_axis(data, wavelet, 0, mode)
 
 def dwt_row(data, wavelet, mode="symmetric"):
+    """Computes single level wavelet decomposition along rows (axis-1)
+    """
     return dwt_axis(data, wavelet, 1, mode)
 
 def dwt_tube(data, wavelet, mode="symmetric"):
+    """Computes single level wavelet decomposition along tubes (axis-2)
+    """
     return dwt_axis(data, wavelet, 2, mode)
 
 def idwt_column(ca, cd, wavelet, mode="symmetric"):
+    """Computes single level wavelet reconstruction along columns (axis-0)
+    """
     return idwt_axis(ca, cd, wavelet, 0, mode)
 
 def idwt_row(ca, cd, wavelet, mode="symmetric"):
+    """Computes single level wavelet reconstruction along rows (axis-1)
+    """
     return idwt_axis(ca, cd, wavelet, 1, mode)
 
 def idwt_tube(ca, cd, wavelet, mode="symmetric"):
+    """Computes single level wavelet reconstruction along tubes (axis-2)
+    """
     return idwt_axis(ca, cd, wavelet, 2, mode)
 
 ######################################################################################

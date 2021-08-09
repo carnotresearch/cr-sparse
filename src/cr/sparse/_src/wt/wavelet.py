@@ -22,11 +22,18 @@ from .families import FAMILY, wname_to_family_order, is_discrete_wavelet
 from .coeffs import db, sym, coif, bior, dmey, sqrt2
 
 class SYMMETRY(Enum):
+    """Describes the type of symmetry in a wavelet
+    """
     UNKNOWN = -1
+    """Unknown Symmetry"""
     ASYMMETRIC = 0
+    """Assymetric Wavelet"""
     NEAR_SYMMETRIC = 1
+    """Near Symmetric Wavelet"""
     SYMMETRIC = 2
+    """Symmetric Wavelet"""
     ANTI_SYMMETRIC = 3
+    """Anti-symmetric Wavelet"""
 
 
 
@@ -157,6 +164,8 @@ def bior_index(n, m):
 
 
 def build_discrete_wavelet(family: FAMILY, order: int):
+    """Builds a descrete wavelet by its family and order
+    """
     nv = family.value
     if nv is FAMILY.HAAR.value:
         dec_lo, dec_hi, rec_lo, rec_hi = filter_bank_(db[0])

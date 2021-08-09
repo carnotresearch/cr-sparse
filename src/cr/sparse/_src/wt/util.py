@@ -24,6 +24,8 @@ from .wavelet import build_wavelet, DiscreteWavelet
 ######################################################################################
 
 def dwt_max_level(input_len, filter_len):
+    """Returns the maximum level of useful DWT decomposition based on data length and filter length
+    """
     if isinstance (filter_len, str):
         filter_len = build_wavelet(filter_len)
         if filter_len is None: 
@@ -44,6 +46,8 @@ modes = ["zero", "constant", "symmetric", "periodic",
         ]
 
 def dwt_coeff_len(data_len, filter_len, mode):
+    """Returns the length of wavelet decomposition output based on data length, filter length and mode
+    """
     if isinstance (filter_len, str):
         filter_len = build_wavelet(filter_len)
         if filter_len is None: 
@@ -108,6 +112,8 @@ def pad_antisymmetric(vector, pad_width, iaxis, kwargs):
 
 
 def pad(data, pad_widths, mode):
+    """Pads a given 1D signal using a given boundary mode.
+    """
     data = jnp.asarray(data)
     pad_widths = jnp.asarray(pad_widths)
     if mode == 'symmetric':
