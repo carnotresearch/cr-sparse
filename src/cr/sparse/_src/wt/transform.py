@@ -59,6 +59,10 @@ def pad_(data, p, mode):
     elif mode == 'periodic':
         return jnp.pad(data, p, mode='wrap')
     elif mode == 'periodization':
+        # Promote odd-sized dimensions to even length by duplicating the
+        # last value.
+        edge_pad_width = (0, data.shape[0] % 2)
+        data = jnp.pad(data, edge_pad_width, mode='edge')
         return jnp.pad(data, p//2, mode='wrap')
     else:
         raise ValueError("mode must be one of ['symmetric', 'constant', 'reflect', 'zero', 'periodic', 'periodization']")
@@ -74,7 +78,7 @@ def dwt_(data, dec_lo, dec_hi, mode):
 
     x_in = x_padded[None, None, :]
 
-    padding = [(1, 0)] if mode == 'periodization' else [(0, 0)]
+    padding = [(1, 1)] if mode == 'periodization' else [(0, 1)]
     strides = (2,)
 
 
@@ -87,7 +91,8 @@ def dwt_(data, dec_lo, dec_hi, mode):
     hi =  hi[0, 0, slice(None)]
 
     if mode == 'periodization':
-        return lo[1:], hi[1:] 
+        #return lo, hi
+        return lo[1:-1], hi[1:-1] 
     else:
         return lo[1:-1], hi[1:-1]
 
@@ -191,7 +196,7 @@ def downcoef_(data, filter, mode):
 
     x_in = x_padded[None, None, :]
 
-    padding = [(1, 0)] if mode == 'periodization' else [(0, 0)]
+    padding = [(1, 1)] if mode == 'periodization' else [(0, 1)]
     strides = (2,)
 
     filter = filter[::-1][None, None, :]
@@ -199,7 +204,7 @@ def downcoef_(data, filter, mode):
     out = out[0, 0, slice(None)]
 
     if mode == 'periodization':
-        return out[1:] 
+        return out[1:-1] 
     else:
         return out[1:-1]
 
