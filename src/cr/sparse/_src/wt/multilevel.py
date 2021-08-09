@@ -49,9 +49,10 @@ def check_level_(sizes, dec_lens, level):
 
 def wavedec(data, wavelet, mode='symmetric', level=None, axis=-1):
     """
-    Multilevel 1-D transform
+    Multilevel 1D discrete wavelet transform
     """
     wavelet = ensure_wavelet_(wavelet)
+    data = jnp.asarray(data)
     data = promote_arg_dtypes(data)
     try:
         axes_shape = data.shape[axis]
@@ -68,3 +69,25 @@ def wavedec(data, wavelet, mode='symmetric', level=None, axis=-1):
     coeffs_list.append(a)
     coeffs_list.reverse()
     return coeffs_list
+
+
+def waverec(coeffs, wavelet, mode='symmetric', axis=-1):
+    """Multilevel 1D inverse discrete wavelet transform
+    """
+    if not isinstance(coeffs, (list, tuple)):
+        raise ValueError("Expected sequence of coefficient arrays.")
+    if len(coeffs) < 1:
+        raise ValueError(
+            "Coefficient list too short (minimum 1 arrays required).")
+    elif len(coeffs) == 1:
+        # level 0 transform (just returns the approximation coefficients)
+        return jnp.asarray(coeffs[0])
+    wavelet = ensure_wavelet_(wavelet)
+    a, ds = coeffs[0], coeffs[1:]
+    a = jnp.asarray(a)
+    for d in ds:
+        if (a is not None) and (d is not None):
+            if a.shape[axis] != d.shape[axis]:
+                raise ValueError("coefficient shape mismatch")
+        a = idwt_axis(a, d, wavelet, axis, mode)
+    return a
