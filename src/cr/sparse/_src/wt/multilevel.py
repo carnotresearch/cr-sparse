@@ -88,6 +88,10 @@ def waverec(coeffs, wavelet, mode='symmetric', axis=-1):
         a = jnp.asarray(a)
     for d in ds:
         if (a is not None) and (d is not None):
+            # sometimes a may have one more coefficient than d
+            # then it should be dropped
+            if a.shape[axis] == d.shape[axis] + 1:
+                a = a[tuple(slice(s) for s in d.shape)]
             if a.shape[axis] != d.shape[axis]:
                 raise ValueError("coefficient shape mismatch")
         a = idwt_axis(a, d, wavelet, axis, mode)
