@@ -7,6 +7,7 @@ CR.Sparse API Documentation
 
    dict
    lop
+   wavelets
    pursuit
    cvx_recovery
    data

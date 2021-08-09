@@ -1,0 +1,581 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>cr.sparse._src.wt.wavelet &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../../../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../zzzreference.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>cr.sparse._src.wt.wavelet</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for cr.sparse._src.wt.wavelet</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2021 CR.Sparse Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">auto</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+
+<span class="kn">from</span> <span class="nn">.families</span> <span class="kn">import</span> <span class="n">FAMILY</span><span class="p">,</span> <span class="n">wname_to_family_order</span><span class="p">,</span> <span class="n">is_discrete_wavelet</span>
+<span class="kn">from</span> <span class="nn">.coeffs</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">sym</span><span class="p">,</span> <span class="n">coif</span><span class="p">,</span> <span class="n">bior</span><span class="p">,</span> <span class="n">dmey</span><span class="p">,</span> <span class="n">sqrt2</span>
+
+<div class="viewcode-block" id="SYMMETRY"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.wt.SYMMETRY.html#cr.sparse.wt.SYMMETRY">[docs]</a><span class="k">class</span> <span class="nc">SYMMETRY</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Describes the type of symmetry in a wavelet</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="sd">&quot;&quot;&quot;Unknown Symmetry&quot;&quot;&quot;</span>
+    <span class="n">ASYMMETRIC</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Assymetric Wavelet&quot;&quot;&quot;</span>
+    <span class="n">NEAR_SYMMETRIC</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="sd">&quot;&quot;&quot;Near Symmetric Wavelet&quot;&quot;&quot;</span>
+    <span class="n">SYMMETRIC</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="sd">&quot;&quot;&quot;Symmetric Wavelet&quot;&quot;&quot;</span>
+    <span class="n">ANTI_SYMMETRIC</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="sd">&quot;&quot;&quot;Anti-symmetric Wavelet&quot;&quot;&quot;</span></div>
+
+
+
+<span class="k">class</span> <span class="nc">BaseWavelet</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents basic information about a wavelet</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">support_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">symmetry</span><span class="p">:</span> <span class="n">SYMMETRY</span> <span class="o">=</span> <span class="n">SYMMETRY</span><span class="o">.</span><span class="n">UNKNOWN</span>
+    <span class="n">orthogonal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">biorthogonal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">compact_support</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">FAMILY</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">family_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">short_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="DiscreteWavelet"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.wt.DiscreteWavelet.html#cr.sparse.wt.DiscreteWavelet">[docs]</a><span class="k">class</span> <span class="nc">DiscreteWavelet</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents information about a discrete wavelet</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">support_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="sd">&quot;&quot;&quot;Length of the support for finite support wavelets&quot;&quot;&quot;</span>
+    <span class="n">symmetry</span><span class="p">:</span> <span class="n">SYMMETRY</span> <span class="o">=</span> <span class="n">SYMMETRY</span><span class="o">.</span><span class="n">UNKNOWN</span>
+    <span class="sd">&quot;&quot;&quot;Indicates the kind of symmetry inside the wavelet&quot;&quot;&quot;</span>
+    <span class="n">orthogonal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="sd">&quot;&quot;&quot;Indicates if the wavelet is orthogonal&quot;&quot;&quot;</span>
+    <span class="n">biorthogonal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="sd">&quot;&quot;&quot;Indicates if the wavelet is biorthogonal&quot;&quot;&quot;</span>
+    <span class="n">compact_support</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="sd">&quot;&quot;&quot;Indicates if the wavelet has compact support&quot;&quot;&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Name of the wavelet&quot;&quot;&quot;</span>
+    <span class="n">family_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Name of the wavelet family&quot;&quot;&quot;</span>
+    <span class="n">short_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot;Short name of the wavelet family&quot;&quot;&quot;</span>
+    <span class="n">dec_hi</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;Decomposition high pass filter&quot;&quot;&quot;</span>
+    <span class="n">dec_lo</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;Decomposition low pass filter&quot;&quot;&quot;</span>
+    <span class="n">rec_hi</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;Reconstruction high pass filter&quot;&quot;&quot;</span>
+    <span class="n">rec_lo</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;Reconstruction low pass filter&quot;&quot;&quot;</span>
+    <span class="n">dec_len</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Length of decomposition filters&quot;&quot;&quot;</span>
+    <span class="n">rec_len</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Length of reconstruction filters&quot;&quot;&quot;</span>
+    <span class="n">vanishing_moments_psi</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Number of vanishing moments of the wavelet function&quot;&quot;&quot;</span>
+    <span class="n">vanishing_moments_phi</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Number of vanishing moments of the scaling function&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="sa">u</span><span class="s2">&quot;Wavelet </span><span class="si">%s</span><span class="s2">&quot;</span>           <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s2">&quot;  Family name:    </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">family_name</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s2">&quot;  Short name:     </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">short_name</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s2">&quot;  Filters length: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">dec_len</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s2">&quot;  Orthogonal:     </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">orthogonal</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s2">&quot;  Biorthogonal:   </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">biorthogonal</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s2">&quot;  Symmetry:       </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">symmetry</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
+            <span class="sa">u</span><span class="s2">&quot;  DWT:            True&quot;</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s2">&quot;  CWT:            False&quot;</span>
+            <span class="p">]:</span>
+            <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+        <span class="k">return</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">qmf</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the quadrature mirror filter of a given filter&quot;&quot;&quot;</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">h</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">g</span>
+
+<span class="k">def</span> <span class="nf">orthogonal_filter_bank</span><span class="p">(</span><span class="n">scaling_filter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the orthogonal filter bank for a given scaling filter&quot;&quot;&quot;</span>
+    <span class="c1"># scaling filter must be even</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">scaling_filter</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;scaling_filter must be of even length.&#39;</span><span class="p">)</span>
+    <span class="c1"># normalize</span>
+    <span class="n">rec_lo</span> <span class="o">=</span> <span class="n">sqrt2</span> <span class="o">*</span> <span class="n">scaling_filter</span> <span class="o">/</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">scaling_filter</span><span class="p">)</span>
+    <span class="n">dec_lo</span> <span class="o">=</span> <span class="n">rec_lo</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">rec_hi</span> <span class="o">=</span> <span class="n">qmf</span><span class="p">(</span><span class="n">rec_lo</span><span class="p">)</span>
+    <span class="n">dec_hi</span> <span class="o">=</span> <span class="n">rec_hi</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">filter_bank_</span><span class="p">(</span><span class="n">rec_lo</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct a filter bank from the saved values in coeffs.py&quot;&quot;&quot;</span>
+    <span class="n">dec_lo</span> <span class="o">=</span> <span class="n">rec_lo</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">rec_hi</span> <span class="o">=</span> <span class="n">qmf</span><span class="p">(</span><span class="n">rec_lo</span><span class="p">)</span>
+    <span class="n">dec_hi</span> <span class="o">=</span> <span class="n">rec_hi</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">mirror</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">modulation</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">modulation</span> <span class="o">*</span> <span class="n">h</span>
+
+<span class="k">def</span> <span class="nf">negate_evens</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">negate_odds</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">bior_index</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="nb">max</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">m</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="nb">max</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">m</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span><span class="mi">1</span> 
+        <span class="nb">max</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">m</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="nb">max</span> <span class="o">=</span> <span class="mi">9</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">4</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="n">m</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="nb">max</span> <span class="o">=</span> <span class="n">m</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="nb">max</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">idx</span><span class="p">,</span> <span class="nb">max</span>
+
+
+<div class="viewcode-block" id="build_discrete_wavelet"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.wt.build_discrete_wavelet.html#cr.sparse.wt.build_discrete_wavelet">[docs]</a><span class="k">def</span> <span class="nf">build_discrete_wavelet</span><span class="p">(</span><span class="n">family</span><span class="p">:</span> <span class="n">FAMILY</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Builds a descrete wavelet by its family and order</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nv</span> <span class="o">=</span> <span class="n">family</span><span class="o">.</span><span class="n">value</span>
+    <span class="k">if</span> <span class="n">nv</span> <span class="ow">is</span> <span class="n">FAMILY</span><span class="o">.</span><span class="n">HAAR</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+        <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span> <span class="o">=</span> <span class="n">filter_bank_</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">DiscreteWavelet</span><span class="p">(</span><span class="n">support_width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">symmetry</span><span class="o">=</span><span class="n">SYMMETRY</span><span class="o">.</span><span class="n">ASYMMETRIC</span><span class="p">,</span>
+            <span class="n">orthogonal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">biorthogonal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">compact_support</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Haar&quot;</span><span class="p">,</span>
+            <span class="n">family_name</span> <span class="o">=</span> <span class="s2">&quot;Haar&quot;</span><span class="p">,</span>
+            <span class="n">short_name</span><span class="o">=</span><span class="s2">&quot;haar&quot;</span><span class="p">,</span> 
+            <span class="n">dec_hi</span><span class="o">=</span><span class="n">dec_hi</span><span class="p">,</span>
+            <span class="n">dec_lo</span><span class="o">=</span><span class="n">dec_lo</span><span class="p">,</span>
+            <span class="n">rec_hi</span><span class="o">=</span><span class="n">rec_hi</span><span class="p">,</span>
+            <span class="n">rec_lo</span><span class="o">=</span><span class="n">rec_lo</span><span class="p">,</span>
+            <span class="n">dec_len</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">rec_len</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">vanishing_moments_psi</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">vanishing_moments_phi</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">w</span>
+    <span class="k">if</span> <span class="n">nv</span> <span class="o">==</span> <span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">order</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">db</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">filters_length</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">order</span>
+        <span class="n">dec_len</span> <span class="o">=</span> <span class="n">rec_len</span> <span class="o">=</span> <span class="n">filters_length</span>
+        <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span> <span class="o">=</span> <span class="n">filter_bank_</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">DiscreteWavelet</span><span class="p">(</span><span class="n">support_width</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">order</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">symmetry</span><span class="o">=</span><span class="n">SYMMETRY</span><span class="o">.</span><span class="n">ASYMMETRIC</span><span class="p">,</span>
+            <span class="n">orthogonal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">biorthogonal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">compact_support</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;db</span><span class="si">{order}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">family_name</span> <span class="o">=</span> <span class="s2">&quot;Daubechies&quot;</span><span class="p">,</span>
+            <span class="n">short_name</span><span class="o">=</span><span class="s2">&quot;db&quot;</span><span class="p">,</span> 
+            <span class="n">dec_hi</span><span class="o">=</span><span class="n">dec_hi</span><span class="p">,</span>
+            <span class="n">dec_lo</span><span class="o">=</span><span class="n">dec_lo</span><span class="p">,</span>
+            <span class="n">rec_hi</span><span class="o">=</span><span class="n">rec_hi</span><span class="p">,</span>
+            <span class="n">rec_lo</span><span class="o">=</span><span class="n">rec_lo</span><span class="p">,</span>
+            <span class="n">dec_len</span><span class="o">=</span><span class="n">dec_len</span><span class="p">,</span>
+            <span class="n">rec_len</span><span class="o">=</span><span class="n">rec_len</span><span class="p">,</span>
+            <span class="n">vanishing_moments_psi</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+            <span class="n">vanishing_moments_phi</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">w</span>
+    <span class="k">if</span> <span class="n">nv</span> <span class="o">==</span> <span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">order</span> <span class="o">-</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sym</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">filters_length</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">order</span>
+        <span class="n">dec_len</span> <span class="o">=</span> <span class="n">rec_len</span> <span class="o">=</span> <span class="n">filters_length</span>
+        <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span> <span class="o">=</span> <span class="n">filter_bank_</span><span class="p">(</span><span class="n">sym</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">DiscreteWavelet</span><span class="p">(</span><span class="n">support_width</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">order</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">symmetry</span><span class="o">=</span><span class="n">SYMMETRY</span><span class="o">.</span><span class="n">NEAR_SYMMETRIC</span><span class="p">,</span>
+            <span class="n">orthogonal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">biorthogonal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">compact_support</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;sym</span><span class="si">{order}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">family_name</span> <span class="o">=</span> <span class="s2">&quot;Symlets&quot;</span><span class="p">,</span>
+            <span class="n">short_name</span><span class="o">=</span><span class="s2">&quot;sym&quot;</span><span class="p">,</span> 
+            <span class="n">dec_hi</span><span class="o">=</span><span class="n">dec_hi</span><span class="p">,</span>
+            <span class="n">dec_lo</span><span class="o">=</span><span class="n">dec_lo</span><span class="p">,</span>
+            <span class="n">rec_hi</span><span class="o">=</span><span class="n">rec_hi</span><span class="p">,</span>
+            <span class="n">rec_lo</span><span class="o">=</span><span class="n">rec_lo</span><span class="p">,</span>
+            <span class="n">dec_len</span><span class="o">=</span><span class="n">dec_len</span><span class="p">,</span>
+            <span class="n">rec_len</span><span class="o">=</span><span class="n">rec_len</span><span class="p">,</span>
+            <span class="n">vanishing_moments_psi</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+            <span class="n">vanishing_moments_phi</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">w</span>
+    <span class="k">if</span> <span class="n">nv</span> <span class="o">==</span> <span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">order</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">coif</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">filters_length</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">order</span>
+        <span class="n">dec_len</span> <span class="o">=</span> <span class="n">rec_len</span> <span class="o">=</span> <span class="n">filters_length</span>
+        <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span> <span class="o">=</span> <span class="n">filter_bank_</span><span class="p">(</span><span class="n">coif</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">*</span><span class="n">sqrt2</span><span class="p">)</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">DiscreteWavelet</span><span class="p">(</span><span class="n">support_width</span><span class="o">=</span><span class="mi">6</span><span class="o">*</span><span class="n">order</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">symmetry</span><span class="o">=</span><span class="n">SYMMETRY</span><span class="o">.</span><span class="n">NEAR_SYMMETRIC</span><span class="p">,</span>
+            <span class="n">orthogonal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">biorthogonal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">compact_support</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;coif</span><span class="si">{order}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">family_name</span> <span class="o">=</span> <span class="s2">&quot;Coiflets&quot;</span><span class="p">,</span>
+            <span class="n">short_name</span><span class="o">=</span><span class="s2">&quot;coif&quot;</span><span class="p">,</span> 
+            <span class="n">dec_hi</span><span class="o">=</span><span class="n">dec_hi</span><span class="p">,</span>
+            <span class="n">dec_lo</span><span class="o">=</span><span class="n">dec_lo</span><span class="p">,</span>
+            <span class="n">rec_hi</span><span class="o">=</span><span class="n">rec_hi</span><span class="p">,</span>
+            <span class="n">rec_lo</span><span class="o">=</span><span class="n">rec_lo</span><span class="p">,</span>
+            <span class="n">dec_len</span><span class="o">=</span><span class="n">dec_len</span><span class="p">,</span>
+            <span class="n">rec_len</span><span class="o">=</span><span class="n">rec_len</span><span class="p">,</span>
+            <span class="n">vanishing_moments_psi</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">order</span><span class="p">,</span>
+            <span class="n">vanishing_moments_phi</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">order</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">w</span>
+    <span class="k">if</span> <span class="n">nv</span> <span class="o">==</span> <span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">order</span> <span class="o">//</span> <span class="mi">10</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">order</span> <span class="o">%</span> <span class="mi">10</span>
+        <span class="n">idx</span><span class="p">,</span> <span class="nb">max</span> <span class="o">=</span> <span class="n">bior_index</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">max</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">bior</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">filters_length</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">m</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">2</span><span class="o">*</span><span class="n">m</span> <span class="o">+</span> <span class="mi">2</span>
+        <span class="n">dec_len</span> <span class="o">=</span> <span class="n">rec_len</span> <span class="o">=</span> <span class="n">filters_length</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="nb">max</span> <span class="o">-</span> <span class="n">m</span>
+        <span class="n">rec_lo</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">start</span><span class="p">:</span><span class="n">start</span><span class="o">+</span><span class="n">rec_len</span><span class="p">]</span>
+        <span class="n">dec_lo</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">rec_hi</span> <span class="o">=</span> <span class="n">negate_odds</span><span class="p">(</span><span class="n">dec_lo</span><span class="p">)</span>
+        <span class="n">dec_hi</span> <span class="o">=</span> <span class="n">negate_evens</span><span class="p">(</span><span class="n">rec_lo</span><span class="p">)</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">DiscreteWavelet</span><span class="p">(</span><span class="n">support_width</span><span class="o">=</span><span class="mi">6</span><span class="o">*</span><span class="n">order</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">symmetry</span><span class="o">=</span><span class="n">SYMMETRY</span><span class="o">.</span><span class="n">SYMMETRIC</span><span class="p">,</span>
+            <span class="n">orthogonal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">biorthogonal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">compact_support</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;bior</span><span class="si">{n}</span><span class="s1">.</span><span class="si">{m}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">family_name</span> <span class="o">=</span> <span class="s2">&quot;Biorthogonal&quot;</span><span class="p">,</span>
+            <span class="n">short_name</span><span class="o">=</span><span class="s2">&quot;bior&quot;</span><span class="p">,</span> 
+            <span class="n">dec_hi</span><span class="o">=</span><span class="n">dec_hi</span><span class="p">,</span>
+            <span class="n">dec_lo</span><span class="o">=</span><span class="n">dec_lo</span><span class="p">,</span>
+            <span class="n">rec_hi</span><span class="o">=</span><span class="n">rec_hi</span><span class="p">,</span>
+            <span class="n">rec_lo</span><span class="o">=</span><span class="n">rec_lo</span><span class="p">,</span>
+            <span class="n">dec_len</span><span class="o">=</span><span class="n">dec_len</span><span class="p">,</span>
+            <span class="n">rec_len</span><span class="o">=</span><span class="n">rec_len</span><span class="p">,</span>
+            <span class="n">vanishing_moments_psi</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">order</span><span class="p">,</span>
+            <span class="n">vanishing_moments_phi</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">order</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">w</span>
+    <span class="k">if</span> <span class="n">nv</span> <span class="o">==</span> <span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">order</span> <span class="o">//</span> <span class="mi">10</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">order</span> <span class="o">%</span> <span class="mi">10</span>
+        <span class="n">idx</span><span class="p">,</span> <span class="nb">max</span> <span class="o">=</span> <span class="n">bior_index</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">max</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">bior</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">filters_length</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">m</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">2</span><span class="o">*</span><span class="n">m</span> <span class="o">+</span> <span class="mi">2</span>
+        <span class="n">dec_len</span> <span class="o">=</span> <span class="n">rec_len</span> <span class="o">=</span> <span class="n">filters_length</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="nb">max</span> <span class="o">-</span> <span class="n">m</span>
+        <span class="n">dec_lo</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">start</span><span class="p">:</span><span class="n">start</span><span class="o">+</span><span class="n">rec_len</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">rec_lo</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">rec_hi</span> <span class="o">=</span> <span class="n">negate_odds</span><span class="p">(</span><span class="n">dec_lo</span><span class="p">)</span>
+        <span class="n">dec_hi</span> <span class="o">=</span> <span class="n">negate_evens</span><span class="p">(</span><span class="n">rec_lo</span><span class="p">)</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">DiscreteWavelet</span><span class="p">(</span><span class="n">support_width</span><span class="o">=</span><span class="mi">6</span><span class="o">*</span><span class="n">order</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">symmetry</span><span class="o">=</span><span class="n">SYMMETRY</span><span class="o">.</span><span class="n">SYMMETRIC</span><span class="p">,</span>
+            <span class="n">orthogonal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">biorthogonal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">compact_support</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;rbio</span><span class="si">{n}</span><span class="s1">.</span><span class="si">{m}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">family_name</span> <span class="o">=</span> <span class="s2">&quot;Reverse biorthogonal&quot;</span><span class="p">,</span>
+            <span class="n">short_name</span><span class="o">=</span><span class="s2">&quot;rbio&quot;</span><span class="p">,</span> 
+            <span class="n">dec_hi</span><span class="o">=</span><span class="n">dec_hi</span><span class="p">,</span>
+            <span class="n">dec_lo</span><span class="o">=</span><span class="n">dec_lo</span><span class="p">,</span>
+            <span class="n">rec_hi</span><span class="o">=</span><span class="n">rec_hi</span><span class="p">,</span>
+            <span class="n">rec_lo</span><span class="o">=</span><span class="n">rec_lo</span><span class="p">,</span>
+            <span class="n">dec_len</span><span class="o">=</span><span class="n">dec_len</span><span class="p">,</span>
+            <span class="n">rec_len</span><span class="o">=</span><span class="n">rec_len</span><span class="p">,</span>
+            <span class="n">vanishing_moments_psi</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">order</span><span class="p">,</span>
+            <span class="n">vanishing_moments_phi</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">order</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">w</span>
+    <span class="k">if</span> <span class="n">nv</span> <span class="ow">is</span> <span class="n">FAMILY</span><span class="o">.</span><span class="n">DMEY</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+        <span class="n">dec_len</span> <span class="o">=</span> <span class="n">rec_len</span> <span class="o">=</span> <span class="n">filters_length</span> <span class="o">=</span> <span class="mi">62</span>
+        <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span> <span class="o">=</span> <span class="n">filter_bank_</span><span class="p">(</span><span class="n">dmey</span><span class="p">)</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">DiscreteWavelet</span><span class="p">(</span><span class="n">support_width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">symmetry</span><span class="o">=</span><span class="n">SYMMETRY</span><span class="o">.</span><span class="n">SYMMETRIC</span><span class="p">,</span>
+            <span class="n">orthogonal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">biorthogonal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">compact_support</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dmey&quot;</span><span class="p">,</span>
+            <span class="n">family_name</span> <span class="o">=</span> <span class="s2">&quot;Discrete Meyer (FIR Approximation)&quot;</span><span class="p">,</span>
+            <span class="n">short_name</span><span class="o">=</span><span class="s2">&quot;dmey&quot;</span><span class="p">,</span> 
+            <span class="n">dec_hi</span><span class="o">=</span><span class="n">dec_hi</span><span class="p">,</span>
+            <span class="n">dec_lo</span><span class="o">=</span><span class="n">dec_lo</span><span class="p">,</span>
+            <span class="n">rec_hi</span><span class="o">=</span><span class="n">rec_hi</span><span class="p">,</span>
+            <span class="n">rec_lo</span><span class="o">=</span><span class="n">rec_lo</span><span class="p">,</span>
+            <span class="n">dec_len</span><span class="o">=</span><span class="n">dec_len</span><span class="p">,</span>
+            <span class="n">rec_len</span><span class="o">=</span><span class="n">rec_len</span><span class="p">,</span>
+            <span class="n">vanishing_moments_psi</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">vanishing_moments_phi</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">w</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="build_wavelet"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.wt.build_wavelet.html#cr.sparse.wt.build_wavelet">[docs]</a><span class="k">def</span> <span class="nf">build_wavelet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Builds a wavelet object by its name</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">family</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="n">wname_to_family_order</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">wavelet</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">is_discrete_wavelet</span><span class="p">(</span><span class="n">family</span><span class="p">):</span>
+        <span class="n">wavelet</span> <span class="o">=</span> <span class="n">build_discrete_wavelet</span><span class="p">(</span><span class="n">family</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
+    <span class="c1"># other wavelet types are not supported for now</span>
+    <span class="k">if</span> <span class="n">wavelet</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid wavelet name </span><span class="si">{name}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wavelet</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

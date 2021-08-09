@@ -1,0 +1,21 @@
+﻿cr.sparse.wt.SYMMETRY
+=====================
+
+.. currentmodule:: cr.sparse.wt
+
+.. autoclass:: SYMMETRY
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SYMMETRY.ANTI_SYMMETRIC
+      ~SYMMETRY.ASYMMETRIC
+      ~SYMMETRY.NEAR_SYMMETRIC
+      ~SYMMETRY.SYMMETRIC
+      ~SYMMETRY.UNKNOWN
+   
+   

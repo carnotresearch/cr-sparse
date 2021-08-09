@@ -1,0 +1,492 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Wavelets &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cr.sparse.wt.FAMILY" href="_autosummary/cr.sparse.wt.FAMILY.html" />
+    <link rel="prev" title="cr.sparse.lop.to_complex_matrix" href="_autosummary/cr.sparse.lop.to_complex_matrix.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CR.Sparse API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lop.html">Linear Operators</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Wavelets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#high-level-api">High-level API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.FAMILY.html">cr.sparse.wt.FAMILY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.SYMMETRY.html">cr.sparse.wt.SYMMETRY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.DiscreteWavelet.html">cr.sparse.wt.DiscreteWavelet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.build_wavelet.html">cr.sparse.wt.build_wavelet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.wavelist.html">cr.sparse.wt.wavelist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.is_discrete_wavelet.html">cr.sparse.wt.is_discrete_wavelet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.wname_to_family_order.html">cr.sparse.wt.wname_to_family_order</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.build_discrete_wavelet.html">cr.sparse.wt.build_discrete_wavelet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt.html">cr.sparse.wt.dwt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt.html">cr.sparse.wt.idwt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt2.html">cr.sparse.wt.dwt2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt2.html">cr.sparse.wt.idwt2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.downcoef.html">cr.sparse.wt.downcoef</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.upcoef.html">cr.sparse.wt.upcoef</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.wavedec.html">cr.sparse.wt.wavedec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_axis.html">cr.sparse.wt.dwt_axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_axis.html">cr.sparse.wt.idwt_axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_column.html">cr.sparse.wt.dwt_column</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_row.html">cr.sparse.wt.dwt_row</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_tube.html">cr.sparse.wt.dwt_tube</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_column.html">cr.sparse.wt.idwt_column</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_row.html">cr.sparse.wt.idwt_row</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_tube.html">cr.sparse.wt.idwt_tube</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.modes.html">cr.sparse.wt.modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.pad.html">cr.sparse.wt.pad</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_max_level.html">cr.sparse.wt.dwt_max_level</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_coeff_len.html">cr.sparse.wt.dwt_coeff_len</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.up_sample.html">cr.sparse.wt.up_sample</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lower-level-api">Lower-level API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_.html">cr.sparse.wt.dwt_</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_.html">cr.sparse.wt.idwt_</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.downcoef_.html">cr.sparse.wt.downcoef_</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.upcoef_.html">cr.sparse.wt.upcoef_</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_axis_.html">cr.sparse.wt.dwt_axis_</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_axis_.html">cr.sparse.wt.idwt_axis_</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">Utilities in cr.sparse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="la.html">Linear Algebra Subroutines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">CR.Sparse API Documentation</a> &raquo;</li>
+        
+      <li>Wavelets</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/source/wavelets.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="wavelets">
+<h1>Wavelets<a class="headerlink" href="#wavelets" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#high-level-api" id="id1">High-level API</a></p></li>
+<li><p><a class="reference internal" href="#lower-level-api" id="id2">Lower-level API</a></p></li>
+</ul>
+</div>
+<p>This is a partial port of wavelets functionality from the <a class="reference external" href="https://pywavelets.readthedocs.io/en/latest/">PyWavelets</a> project.
+The functionality has been written on top of JAX. While PyWavelets gets its performance from the C extensions in its
+implementation, we have built the functionality on top of JAX API.</p>
+<ul class="simple">
+<li><p>API and implementation are both based on functional programming paradigm.</p></li>
+<li><p>There are no C extensions. All implementation is pure Python.</p></li>
+<li><p>The implementation takes advantage of XLA and can run easily on GPUs and TPUs.</p></li>
+</ul>
+<p>API is available at two levels</p>
+<ul class="simple">
+<li><p>Functions which directly correspond to the high level API of PyWavelets.</p></li>
+<li><p>Lower level functions which are JIT compiled.</p></li>
+</ul>
+<p>The high level functions involve handling a variety of use cases for
+the arguments passed. For example, they can accept lists as well as
+JAX nd-arrays. These functions cannot be JIT compiled. Lower level
+functions have been carefully designed to accept arguments which
+fit the JIT rules of JAX. They can be embedded in another JIT
+compiled function.</p>
+<p>Current support is focused on discrete wavelet transforms.
+Following wavelets are supported.</p>
+<blockquote>
+<div><p>bior1.1 bior1.3 bior1.5 bior2.2 bior2.4 bior2.6 bior2.8 bior3.1 bior3.3 bior3.5 bior3.7 bior3.9 bior4.4 bior5.5 bior6.8 coif1 coif2 coif3 coif4 coif5 coif6 coif7 coif8 coif9 coif10 coif11 coif12 coif13 coif14 coif15 coif16 coif17 db1 db2 db3 db4 db5 db6 db7 db8 db9 db10 db11 db12 db13 db14 db15 db16 db17 db18 db19 db20 db21 db22 db23 db24 db25 db26 db27 db28 db29 db30 db31 db32 db33 db34 db35 db36 db37 db38 dmey haar rbio1.1 rbio1.3 rbio1.5 rbio2.2 rbio2.4 rbio2.6 rbio2.8 rbio3.1 rbio3.3 rbio3.5 rbio3.7 rbio3.9 rbio4.4 rbio5.5 rbio6.8 sym2 sym3 sym4 sym5 sym6 sym7 sym8 sym9 sym10 sym11 sym12 sym13 sym14 sym15 sym16 sym17 sym18 sym19 sym20</p>
+</div></blockquote>
+<div class="section" id="high-level-api">
+<h2><a class="toc-backref" href="#id1">High-level API</a><a class="headerlink" href="#high-level-api" title="Permalink to this headline">¶</a></h2>
+<p class="rubric">Data types</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.FAMILY.html#cr.sparse.wt.FAMILY" title="cr.sparse.wt.FAMILY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FAMILY</span></code></a></p></td>
+<td><p>An enumeration describing the wavelet families supported in this library</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.SYMMETRY.html#cr.sparse.wt.SYMMETRY" title="cr.sparse.wt.SYMMETRY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SYMMETRY</span></code></a></p></td>
+<td><p>Describes the type of symmetry in a wavelet</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.DiscreteWavelet.html#cr.sparse.wt.DiscreteWavelet" title="cr.sparse.wt.DiscreteWavelet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DiscreteWavelet</span></code></a></p></td>
+<td><p>Represents information about a discrete wavelet</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Wavelets</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.build_wavelet.html#cr.sparse.wt.build_wavelet" title="cr.sparse.wt.build_wavelet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_wavelet</span></code></a>(name)</p></td>
+<td><p>Builds a wavelet object by its name</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.wavelist.html#cr.sparse.wt.wavelist" title="cr.sparse.wt.wavelist"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wavelist</span></code></a>([family, kind])</p></td>
+<td><p>Returns the list of wavelts supported by this library</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.is_discrete_wavelet.html#cr.sparse.wt.is_discrete_wavelet" title="cr.sparse.wt.is_discrete_wavelet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_discrete_wavelet</span></code></a>(name)</p></td>
+<td><p>Returns if the wavelet family is a family of discrete wavelets</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.wname_to_family_order.html#cr.sparse.wt.wname_to_family_order" title="cr.sparse.wt.wname_to_family_order"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wname_to_family_order</span></code></a>(name)</p></td>
+<td><p>Returns the wavelet family and order from the name</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.build_discrete_wavelet.html#cr.sparse.wt.build_discrete_wavelet" title="cr.sparse.wt.build_discrete_wavelet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_discrete_wavelet</span></code></a>(family, order)</p></td>
+<td><p>Builds a descrete wavelet by its family and order</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Wavelet transforms</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt.html#cr.sparse.wt.dwt" title="cr.sparse.wt.dwt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt</span></code></a>(data, wavelet[, mode, axis])</p></td>
+<td><p>Computes single level discrete wavelet decomposition</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt.html#cr.sparse.wt.idwt" title="cr.sparse.wt.idwt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idwt</span></code></a>(ca, cd, wavelet[, mode, axis])</p></td>
+<td><p>Computes single level discrete wavelet reconstruction</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt2.html#cr.sparse.wt.dwt2" title="cr.sparse.wt.dwt2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt2</span></code></a>(image, wavelet[, mode, axes])</p></td>
+<td><p>Computes single level wavelet decomposition for 2D images</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt2.html#cr.sparse.wt.idwt2" title="cr.sparse.wt.idwt2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idwt2</span></code></a>(coeffs, wavelet[, mode, axes])</p></td>
+<td><p>Computes single level wavelet reconstruction for 2D images</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.downcoef.html#cr.sparse.wt.downcoef" title="cr.sparse.wt.downcoef"><code class="xref py py-obj docutils literal notranslate"><span class="pre">downcoef</span></code></a>(part, data, wavelet[, mode, level])</p></td>
+<td><p>Partial discrete wavelet decomposition (multi-level)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.upcoef.html#cr.sparse.wt.upcoef" title="cr.sparse.wt.upcoef"><code class="xref py py-obj docutils literal notranslate"><span class="pre">upcoef</span></code></a>(part, coeffs, wavelet[, mode, level])</p></td>
+<td><p>Partial discrete wavelet reconstruction from one part of coefficients (multi-level)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.wavedec.html#cr.sparse.wt.wavedec" title="cr.sparse.wt.wavedec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wavedec</span></code></a>(data, wavelet[, mode, level, axis])</p></td>
+<td><p>Multilevel 1-D transform</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_axis.html#cr.sparse.wt.dwt_axis" title="cr.sparse.wt.dwt_axis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt_axis</span></code></a>(data, wavelet, axis[, mode])</p></td>
+<td><p>Computes single level wavelet decomposition along a given axis</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_axis.html#cr.sparse.wt.idwt_axis" title="cr.sparse.wt.idwt_axis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idwt_axis</span></code></a>(ca, cd, wavelet, axis[, mode])</p></td>
+<td><p>Computes single level wavelet reconstruction along a given axis</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_column.html#cr.sparse.wt.dwt_column" title="cr.sparse.wt.dwt_column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt_column</span></code></a>(data, wavelet[, mode])</p></td>
+<td><p>Computes single level wavelet decomposition along columns (axis-0)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_row.html#cr.sparse.wt.dwt_row" title="cr.sparse.wt.dwt_row"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt_row</span></code></a>(data, wavelet[, mode])</p></td>
+<td><p>Computes single level wavelet decomposition along rows (axis-1)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_tube.html#cr.sparse.wt.dwt_tube" title="cr.sparse.wt.dwt_tube"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt_tube</span></code></a>(data, wavelet[, mode])</p></td>
+<td><p>Computes single level wavelet decomposition along tubes (axis-2)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_column.html#cr.sparse.wt.idwt_column" title="cr.sparse.wt.idwt_column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idwt_column</span></code></a>(ca, cd, wavelet[, mode])</p></td>
+<td><p>Computes single level wavelet reconstruction along columns (axis-0)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_row.html#cr.sparse.wt.idwt_row" title="cr.sparse.wt.idwt_row"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idwt_row</span></code></a>(ca, cd, wavelet[, mode])</p></td>
+<td><p>Computes single level wavelet reconstruction along rows (axis-1)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_tube.html#cr.sparse.wt.idwt_tube" title="cr.sparse.wt.idwt_tube"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idwt_tube</span></code></a>(ca, cd, wavelet[, mode])</p></td>
+<td><p>Computes single level wavelet reconstruction along tubes (axis-2)</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Utilities</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.modes.html#cr.sparse.wt.modes" title="cr.sparse.wt.modes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modes</span></code></a></p></td>
+<td><p>Built-in mutable sequence.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.pad.html#cr.sparse.wt.pad" title="cr.sparse.wt.pad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pad</span></code></a>(data, pad_widths, mode)</p></td>
+<td><p>Pads a given 1D signal using a given boundary mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_max_level.html#cr.sparse.wt.dwt_max_level" title="cr.sparse.wt.dwt_max_level"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt_max_level</span></code></a>(input_len, filter_len)</p></td>
+<td><p>Returns the maximum level of useful DWT decomposition based on data length and filter length</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_coeff_len.html#cr.sparse.wt.dwt_coeff_len" title="cr.sparse.wt.dwt_coeff_len"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt_coeff_len</span></code></a>(data_len, filter_len, mode)</p></td>
+<td><p>Returns the length of wavelet decomposition output based on data length, filter length and mode</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.up_sample.html#cr.sparse.wt.up_sample" title="cr.sparse.wt.up_sample"><code class="xref py py-obj docutils literal notranslate"><span class="pre">up_sample</span></code></a>(x, s)</p></td>
+<td><p>Upsample x by a factor s by introducing zeros in between</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lower-level-api">
+<h2><a class="toc-backref" href="#id2">Lower-level API</a><a class="headerlink" href="#lower-level-api" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_.html#cr.sparse.wt.dwt_" title="cr.sparse.wt.dwt_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt_</span></code></a>(data, dec_lo, dec_hi, mode)</p></td>
+<td><p>Computes single level discrete wavelet decomposition</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_.html#cr.sparse.wt.idwt_" title="cr.sparse.wt.idwt_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idwt_</span></code></a>(ca, cd, rec_lo, rec_hi, mode)</p></td>
+<td><p>Computes single level discrete wavelet reconstruction</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.downcoef_.html#cr.sparse.wt.downcoef_" title="cr.sparse.wt.downcoef_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">downcoef_</span></code></a>(data, filter, mode)</p></td>
+<td><p>Partial discrete wavelet decomposition</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.upcoef_.html#cr.sparse.wt.upcoef_" title="cr.sparse.wt.upcoef_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">upcoef_</span></code></a>(coeffs, filter, mode)</p></td>
+<td><p>Partial discrete wavelet reconstruction from one part of coefficients</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.dwt_axis_.html#cr.sparse.wt.dwt_axis_" title="cr.sparse.wt.dwt_axis_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt_axis_</span></code></a>(data, dec_lo, dec_hi, axis, mode)</p></td>
+<td><p>Applies the DWT along a given axis</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.wt.idwt_axis_.html#cr.sparse.wt.idwt_axis_" title="cr.sparse.wt.idwt_axis_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idwt_axis_</span></code></a>(ca, cd, rec_lo, rec_hi, axis, mode)</p></td>
+<td><p>Applies the Inverse DWT along a given axis</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="_autosummary/cr.sparse.wt.FAMILY.html" class="btn btn-neutral float-right" title="cr.sparse.wt.FAMILY" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="_autosummary/cr.sparse.lop.to_complex_matrix.html" class="btn btn-neutral float-left" title="cr.sparse.lop.to_complex_matrix" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

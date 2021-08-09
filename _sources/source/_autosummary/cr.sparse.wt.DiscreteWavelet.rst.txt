@@ -1,0 +1,32 @@
+﻿cr.sparse.wt.DiscreteWavelet
+============================
+
+.. currentmodule:: cr.sparse.wt
+
+.. autoclass:: DiscreteWavelet
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~DiscreteWavelet.biorthogonal
+      ~DiscreteWavelet.compact_support
+      ~DiscreteWavelet.dec_hi
+      ~DiscreteWavelet.dec_len
+      ~DiscreteWavelet.dec_lo
+      ~DiscreteWavelet.family_name
+      ~DiscreteWavelet.name
+      ~DiscreteWavelet.orthogonal
+      ~DiscreteWavelet.rec_hi
+      ~DiscreteWavelet.rec_len
+      ~DiscreteWavelet.rec_lo
+      ~DiscreteWavelet.short_name
+      ~DiscreteWavelet.support_width
+      ~DiscreteWavelet.symmetry
+      ~DiscreteWavelet.vanishing_moments_phi
+      ~DiscreteWavelet.vanishing_moments_psi
+   
+   

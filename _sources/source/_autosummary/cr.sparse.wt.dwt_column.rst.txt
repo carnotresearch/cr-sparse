@@ -1,0 +1,6 @@
+﻿cr.sparse.wt.dwt\_column
+========================
+
+.. currentmodule:: cr.sparse.wt
+
+.. autofunction:: dwt_column

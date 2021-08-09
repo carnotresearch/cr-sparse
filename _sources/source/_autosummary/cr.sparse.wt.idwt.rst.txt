@@ -1,0 +1,6 @@
+﻿cr.sparse.wt.idwt
+=================
+
+.. currentmodule:: cr.sparse.wt
+
+.. autofunction:: idwt

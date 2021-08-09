@@ -1,0 +1,487 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>cr.sparse._src.wt.families &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../../../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../zzzreference.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>cr.sparse._src.wt.families</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for cr.sparse._src.wt.families</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2021 CR.Sparse Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+<div class="viewcode-block" id="FAMILY"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.wt.FAMILY.html#cr.sparse.wt.FAMILY">[docs]</a><span class="k">class</span> <span class="nc">FAMILY</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An enumeration describing the wavelet families supported in this library</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">HAAR</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Haar wavelets&quot;&quot;&quot;</span>
+
+    <span class="n">RBIO</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="sd">&quot;&quot;&quot;Reverse Biorthogonal Wavelets&quot;&quot;&quot;</span>
+    <span class="n">DB</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="sd">&quot;&quot;&quot;Daubechies Wavelets&quot;&quot;&quot;</span>
+
+    <span class="n">SYM</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="sd">&quot;&quot;&quot;Symlets&quot;&quot;&quot;</span>
+    <span class="n">COIF</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="sd">&quot;&quot;&quot;Coiflets&quot;&quot;&quot;</span>
+    <span class="n">BIOR</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="sd">&quot;&quot;&quot;Biorthogonal Wavelets&quot;&quot;&quot;</span>
+    <span class="n">DMEY</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="sd">&quot;&quot;&quot;&quot;Discrete Meyer (FIR Approximation) Wavelets&quot;&quot;&quot;</span>
+    
+    <span class="n">GAUS</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">MEXH</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="n">MORL</span> <span class="o">=</span> <span class="mi">9</span>
+    <span class="n">CGAU</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">SHAN</span> <span class="o">=</span> <span class="mi">11</span>
+    <span class="n">FBSP</span> <span class="o">=</span> <span class="mi">12</span>
+    <span class="n">CMOR</span> <span class="o">=</span> <span class="mi">13</span></div>
+
+<div class="viewcode-block" id="is_discrete_wavelet"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.wt.is_discrete_wavelet.html#cr.sparse.wt.is_discrete_wavelet">[docs]</a><span class="k">def</span> <span class="nf">is_discrete_wavelet</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">FAMILY</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns if the wavelet family is a family of discrete wavelets</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">name</span><span class="o">.</span><span class="n">value</span> <span class="ow">in</span> <span class="p">[</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">HAAR</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> 
+    <span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> 
+    <span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> 
+    <span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> 
+    <span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> 
+    <span class="n">FAMILY</span><span class="o">.</span><span class="n">DMEY</span><span class="o">.</span><span class="n">value</span>
+    <span class="p">]</span></div>
+
+
+<span class="n">__wname_to_family_order</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;haar&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">HAAR</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+
+    <span class="s2">&quot;db1&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s2">&quot;db2&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s2">&quot;db3&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="s2">&quot;db4&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="s2">&quot;db5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="s2">&quot;db6&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="s2">&quot;db7&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="s2">&quot;db8&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="s2">&quot;db9&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+
+    <span class="s2">&quot;db10&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="s2">&quot;db11&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="s2">&quot;db12&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="s2">&quot;db13&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="s2">&quot;db14&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span>
+    <span class="s2">&quot;db15&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+    <span class="s2">&quot;db16&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+    <span class="s2">&quot;db17&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
+    <span class="s2">&quot;db18&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span>
+    <span class="s2">&quot;db19&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span>
+
+    <span class="s2">&quot;db20&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+    <span class="s2">&quot;db21&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">21</span><span class="p">),</span>
+    <span class="s2">&quot;db22&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">22</span><span class="p">),</span>
+    <span class="s2">&quot;db23&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">23</span><span class="p">),</span>
+    <span class="s2">&quot;db24&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span>
+    <span class="s2">&quot;db25&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
+    <span class="s2">&quot;db26&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">26</span><span class="p">),</span>
+    <span class="s2">&quot;db27&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">27</span><span class="p">),</span>
+    <span class="s2">&quot;db28&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span>
+    <span class="s2">&quot;db29&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">29</span><span class="p">),</span>
+
+    <span class="s2">&quot;db30&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+    <span class="s2">&quot;db31&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">31</span><span class="p">),</span>
+    <span class="s2">&quot;db32&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span>
+    <span class="s2">&quot;db33&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">33</span><span class="p">),</span>
+    <span class="s2">&quot;db34&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">34</span><span class="p">),</span>
+    <span class="s2">&quot;db35&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">35</span><span class="p">),</span>
+    <span class="s2">&quot;db36&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">36</span><span class="p">),</span>
+    <span class="s2">&quot;db37&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">37</span><span class="p">),</span>
+    <span class="s2">&quot;db38&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DB</span><span class="p">,</span> <span class="mi">38</span><span class="p">),</span>
+
+    <span class="s2">&quot;sym2&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s2">&quot;sym3&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="s2">&quot;sym4&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="s2">&quot;sym5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="s2">&quot;sym6&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="s2">&quot;sym7&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="s2">&quot;sym8&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="s2">&quot;sym9&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+
+    <span class="s2">&quot;sym10&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="s2">&quot;sym11&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="s2">&quot;sym12&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="s2">&quot;sym13&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="s2">&quot;sym14&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span>
+    <span class="s2">&quot;sym15&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+    <span class="s2">&quot;sym16&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+    <span class="s2">&quot;sym17&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
+    <span class="s2">&quot;sym18&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span>
+    <span class="s2">&quot;sym19&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">19</span><span class="p">),</span>
+    <span class="s2">&quot;sym20&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SYM</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+
+    <span class="s2">&quot;coif1&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s2">&quot;coif2&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s2">&quot;coif3&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="s2">&quot;coif4&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="s2">&quot;coif5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="s2">&quot;coif6&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="s2">&quot;coif7&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="s2">&quot;coif8&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="s2">&quot;coif9&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+
+    <span class="s2">&quot;coif10&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="s2">&quot;coif11&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="s2">&quot;coif12&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+    <span class="s2">&quot;coif13&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="s2">&quot;coif14&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span>
+    <span class="s2">&quot;coif15&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+    <span class="s2">&quot;coif16&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+    <span class="s2">&quot;coif17&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">COIF</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
+
+
+    <span class="s2">&quot;bior1.1&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="s2">&quot;bior1.3&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="s2">&quot;bior1.5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+    <span class="s2">&quot;bior2.2&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="p">,</span> <span class="mi">22</span><span class="p">),</span>
+    <span class="s2">&quot;bior2.4&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span>
+    <span class="s2">&quot;bior2.6&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="p">,</span> <span class="mi">26</span><span class="p">),</span>
+    <span class="s2">&quot;bior2.8&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span>
+    <span class="s2">&quot;bior3.1&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="p">,</span> <span class="mi">31</span><span class="p">),</span>
+    <span class="s2">&quot;bior3.3&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="p">,</span> <span class="mi">33</span><span class="p">),</span>
+    <span class="s2">&quot;bior3.5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="p">,</span> <span class="mi">35</span><span class="p">),</span>
+    <span class="s2">&quot;bior3.7&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="p">,</span> <span class="mi">37</span><span class="p">),</span>
+    <span class="s2">&quot;bior3.9&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="p">,</span> <span class="mi">39</span><span class="p">),</span>
+    <span class="s2">&quot;bior4.4&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="p">,</span> <span class="mi">44</span><span class="p">),</span>
+    <span class="s2">&quot;bior5.5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="p">,</span> <span class="mi">55</span><span class="p">),</span>
+    <span class="s2">&quot;bior6.8&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">BIOR</span><span class="p">,</span> <span class="mi">68</span><span class="p">),</span>
+
+    <span class="s2">&quot;rbio1.1&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="s2">&quot;rbio1.3&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+    <span class="s2">&quot;rbio1.5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+    <span class="s2">&quot;rbio2.2&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="p">,</span> <span class="mi">22</span><span class="p">),</span>
+    <span class="s2">&quot;rbio2.4&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span>
+    <span class="s2">&quot;rbio2.6&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="p">,</span> <span class="mi">26</span><span class="p">),</span>
+    <span class="s2">&quot;rbio2.8&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span>
+    <span class="s2">&quot;rbio3.1&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="p">,</span> <span class="mi">31</span><span class="p">),</span>
+    <span class="s2">&quot;rbio3.3&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="p">,</span> <span class="mi">33</span><span class="p">),</span>
+    <span class="s2">&quot;rbio3.5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="p">,</span> <span class="mi">35</span><span class="p">),</span>
+    <span class="s2">&quot;rbio3.7&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="p">,</span> <span class="mi">37</span><span class="p">),</span>
+    <span class="s2">&quot;rbio3.9&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="p">,</span> <span class="mi">39</span><span class="p">),</span>
+    <span class="s2">&quot;rbio4.4&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="p">,</span> <span class="mi">44</span><span class="p">),</span>
+    <span class="s2">&quot;rbio5.5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="p">,</span> <span class="mi">55</span><span class="p">),</span>
+    <span class="s2">&quot;rbio6.8&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">RBIO</span><span class="p">,</span> <span class="mi">68</span><span class="p">),</span>
+
+    <span class="s2">&quot;dmey&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DMEY</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+
+    <span class="s2">&quot;gaus1&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">GAUS</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s2">&quot;gaus2&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">GAUS</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s2">&quot;gaus3&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">GAUS</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="s2">&quot;gaus4&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">GAUS</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="s2">&quot;gaus5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">GAUS</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="s2">&quot;gaus6&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">GAUS</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="s2">&quot;gaus7&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">GAUS</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="s2">&quot;gaus8&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">GAUS</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+
+    <span class="s2">&quot;mexh&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">MEXH</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+
+    <span class="s2">&quot;morl&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">MORL</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+
+    <span class="s2">&quot;cgau1&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CGAU</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s2">&quot;cgau2&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CGAU</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s2">&quot;cgau3&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CGAU</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="s2">&quot;cgau4&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CGAU</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="s2">&quot;cgau5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CGAU</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="s2">&quot;cgau6&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CGAU</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="s2">&quot;cgau7&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CGAU</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="s2">&quot;cgau8&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CGAU</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+
+    <span class="s2">&quot;shan&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SHAN</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+
+    <span class="s2">&quot;fbsp&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">FBSP</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+
+    <span class="s2">&quot;cmor&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CMOR</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">_family_short_names</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;haar&quot;</span><span class="p">,</span> <span class="s2">&quot;db&quot;</span><span class="p">,</span> <span class="s2">&quot;sym&quot;</span><span class="p">,</span> <span class="s2">&quot;coif&quot;</span><span class="p">,</span> <span class="s2">&quot;bior&quot;</span><span class="p">,</span> <span class="s2">&quot;rbio&quot;</span><span class="p">,</span> <span class="s2">&quot;dmey&quot;</span><span class="p">,</span> 
+    <span class="c1">#&quot;gaus&quot;, &quot;mexh&quot;, &quot;morl&quot;, &quot;cgau&quot;, &quot;shan&quot;, &quot;fbsp&quot;, &quot;cmor&quot;</span>
+<span class="p">]</span>
+
+<span class="n">_family_long_names</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Haar&quot;</span><span class="p">,</span> <span class="s2">&quot;Daubechies&quot;</span><span class="p">,</span> <span class="s2">&quot;Symlets&quot;</span><span class="p">,</span> <span class="s2">&quot;Coiflets&quot;</span><span class="p">,</span> <span class="s2">&quot;Biorthogonal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Reverse biorthogonal&quot;</span><span class="p">,</span> <span class="s2">&quot;Discrete Meyer (FIR Approximation)&quot;</span><span class="p">,</span> 
+    <span class="c1"># &quot;Gaussian&quot;,</span>
+    <span class="c1"># &quot;Mexican hat wavelet&quot;, &quot;Morlet wavelet&quot;, &quot;Complex Gaussian wavelets&quot;,</span>
+    <span class="c1"># &quot;Shannon wavelets&quot;, &quot;Frequency B-Spline wavelets&quot;,</span>
+    <span class="c1"># &quot;Complex Morlet wavelets&quot;</span>
+<span class="p">]</span>
+
+<div class="viewcode-block" id="wname_to_family_order"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.wt.wname_to_family_order.html#cr.sparse.wt.wname_to_family_order">[docs]</a><span class="k">def</span> <span class="nf">wname_to_family_order</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the wavelet family and order from the name</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">name</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;cmor&#39;</span><span class="p">,</span> <span class="s1">&#39;shan&#39;</span><span class="p">,</span> <span class="s1">&#39;fbsp&#39;</span><span class="p">]:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">code</span> <span class="o">=</span> <span class="n">__wname_to_family_order</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">code</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown wavelet name &#39;</span><span class="si">{name}</span><span class="s2">&#39;, check wavelist() for the &quot;</span>
+                         <span class="s2">&quot;list of available builtin wavelets.&quot;</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_check_kind</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">kind</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="n">family</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="n">wname_to_family_order</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">is_discrete</span> <span class="o">=</span> <span class="n">is_discrete_wavelet</span><span class="p">(</span><span class="n">family</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;discrete&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">is_discrete</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="n">is_discrete</span>
+
+<div class="viewcode-block" id="wavelist"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.wt.wavelist.html#cr.sparse.wt.wavelist">[docs]</a><span class="k">def</span> <span class="nf">wavelist</span><span class="p">(</span><span class="n">family</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the list of wavelts supported by this library</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">kind</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;discrete&#39;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unrecognized value for `kind`: </span><span class="si">{kind}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">sorting_list</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># for natural sorting order</span>
+    <span class="k">if</span> <span class="n">family</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">__wname_to_family_order</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_check_kind</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">kind</span><span class="p">):</span>
+                <span class="n">sorting_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">name</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="n">name</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">family</span> <span class="ow">in</span> <span class="n">_family_short_names</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">__wname_to_family_order</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">family</span><span class="p">):</span>
+                <span class="n">sorting_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">name</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="n">name</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid short family name &#39;</span><span class="si">{family}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+    <span class="n">sorting_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">wavelets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">sorting_list</span><span class="p">:</span>
+        <span class="n">wavelets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wavelets</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

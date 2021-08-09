@@ -1,0 +1,6 @@
+﻿cr.sparse.wt.wname\_to\_family\_order
+=====================================
+
+.. currentmodule:: cr.sparse.wt
+
+.. autofunction:: wname_to_family_order

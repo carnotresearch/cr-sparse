@@ -1,0 +1,6 @@
+﻿cr.sparse.wt.dwt\_tube
+======================
+
+.. currentmodule:: cr.sparse.wt
+
+.. autofunction:: dwt_tube

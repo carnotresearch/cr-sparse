@@ -1,0 +1,6 @@
+﻿cr.sparse.wt.idwt\_axis
+=======================
+
+.. currentmodule:: cr.sparse.wt
+
+.. autofunction:: idwt_axis

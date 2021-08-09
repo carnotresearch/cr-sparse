@@ -1,0 +1,6 @@
+﻿cr.sparse.wt.pad
+================
+
+.. currentmodule:: cr.sparse.wt
+
+.. autofunction:: pad

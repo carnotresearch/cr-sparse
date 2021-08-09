@@ -1,0 +1,30 @@
+﻿cr.sparse.wt.FAMILY
+===================
+
+.. currentmodule:: cr.sparse.wt
+
+.. autoclass:: FAMILY
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FAMILY.BIOR
+      ~FAMILY.CGAU
+      ~FAMILY.CMOR
+      ~FAMILY.COIF
+      ~FAMILY.DB
+      ~FAMILY.DMEY
+      ~FAMILY.FBSP
+      ~FAMILY.GAUS
+      ~FAMILY.HAAR
+      ~FAMILY.MEXH
+      ~FAMILY.MORL
+      ~FAMILY.RBIO
+      ~FAMILY.SHAN
+      ~FAMILY.SYM
+   
+   

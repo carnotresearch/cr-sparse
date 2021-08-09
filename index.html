@@ -21,6 +21,9 @@
   <link rel="stylesheet" href="_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="_static/gallery-dataframe.css" type="text/css" />
   <link rel="stylesheet" href="_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
 
   
@@ -198,7 +201,150 @@
 </style>
 <div class="section" id="cr-sparse">
 <h1>CR.Sparse<a class="headerlink" href="#cr-sparse" title="Permalink to this headline">¶</a></h1>
-<p>GITHUB Repo: <a class="reference external" href="https://github.com/carnotresearch/cr-sparse">cr-sparse</a></p>
+<p>A JAX/XLA based library of accelerated algorithms for inverse problems in
+sparse representation and compressive sensing.
+<a class="reference external" href="https://github.com/carnotresearch/cr-sparse">GITHUB</a>.</p>
+<div class="sphinx-bs container pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-body docutils">
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+<span class="fa fa-eye mr-1"></span> Wavelets<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<ul class="simple">
+<li><p class="card-text">Haar, Daubechies, Symlets, Coiflets, Biorthogonal,
+Reverse biorthogonal, Discrete Meyer</p></li>
+<li><p class="card-text">dwt, idwt, dwt2, idwt2, wavedec</p></li>
+</ul>
+</div>
+</details></div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-body docutils">
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+<span class="fa fa-eye mr-1"></span> Linear Operators<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<ul class="simple">
+<li><p class="card-text">identity, matrix, diagonal, zero, flipud, sum, pad_zeros,
+symmetrize, restriction</p></li>
+<li><p class="card-text">running_average, fir_filter</p></li>
+<li><p class="card-text">fourier_basis, dirac_fourier_basis, cosine_basis, walsh_hadamard_basis</p></li>
+<li><p class="card-text">gaussian_dict, rademacher_dict, random_onb_dict, random_orthonormal_rows_dict</p></li>
+<li><p class="card-text">circulant</p></li>
+<li><p class="card-text">first_derivative, second_derivative</p></li>
+<li><p class="card-text">neg, scale, add, subtract, compose, transpose, hermitian, hcat, power</p></li>
+</ul>
+</div>
+</details></div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-body docutils">
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+<span class="fa fa-eye mr-1"></span> Dictionaries<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<ul class="simple">
+<li><p class="card-text">gaussian, rademacher, dirac fourier, dirac cosine,</p></li>
+</ul>
+</div>
+</details></div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-body docutils">
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+<span class="fa fa-eye mr-1"></span> Sparse Recovery<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<ul class="simple">
+<li><p class="card-text">Greedy Recovery Algorithms: OMP, CoSaMP, SP, IHT, NIHT, HTP, NHTP,</p></li>
+<li><p class="card-text">Convex Optimization Algorithms: TNIPM, ADMM,</p></li>
+</ul>
+</div>
+</details></div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-body docutils">
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+<span class="fa fa-eye mr-1"></span> Linear Algebra Routines<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<ul class="simple">
+<li><p class="card-text">Triangular systems</p></li>
+</ul>
+</div>
+</details></div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-body docutils">
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+<span class="fa fa-eye mr-1"></span> Evaluation Framework<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+</div>
+</details></div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-body docutils">
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+<span class="fa fa-eye mr-1"></span> Sample Data Generation<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+</div>
+</details></div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-body docutils">
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+<span class="fa fa-eye mr-1"></span> Utilities<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+</div>
+</details></div>
+</div>
+</div>
+</div>
+</div>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
@@ -226,6 +372,7 @@
 <li class="toctree-l1"><a class="reference internal" href="source/index.html">CR.Sparse API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="source/dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="source/lop.html">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/wavelets.html">Wavelets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="source/pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="source/cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="source/data.html">Sample Data Generation Utilities</a></li>
