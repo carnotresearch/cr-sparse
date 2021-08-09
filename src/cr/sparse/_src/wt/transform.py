@@ -276,8 +276,12 @@ def dwt_axis(data, wavelet, axis, mode="symmetric"):
     """Computes single level wavelet decomposition along a given axis
     """
     wavelet = ensure_wavelet_(wavelet)
-    data = promote_arg_dtypes(data)
-    return dwt_axis_(data, wavelet.dec_lo, wavelet.dec_hi, axis, mode)
+    if jnp.iscomplexobj(data):
+        car, cdr = dwt_axis(data.real, wavelet, axis, mode)
+        cai, cdi = dwt_axis(data.imag, wavelet, axis, mode)
+        return lax.complex(car, cai), lax.complex(cdr, cdi)
+    data, dec_lo, dec_hi = promote_arg_dtypes(data, wavelet.dec_lo, wavelet.dec_hi)
+    return dwt_axis_(data, dec_lo, dec_hi, axis, mode)
 
 
 
@@ -292,6 +296,14 @@ def idwt_axis(ca, cd, wavelet, axis, mode="symmetric"):
     """Computes single level wavelet reconstruction along a given axis
     """
     wavelet = ensure_wavelet_(wavelet)
+    if jnp.iscomplexobj(ca) or jnp.iscomplexobj(ca):
+        car = jnp.real(ca)
+        cai = jnp.imag(ca)
+        cdr = jnp.real(cd)
+        cdi = jnp.imag(cd)
+        xr = idwt_axis(car, cdr, wavelet, axis, mode)
+        xi = idwt_axis(cai, cdi, wavelet, axis, mode)
+        return lax.complex(xr, xi)
     return idwt_axis_(ca, cd, wavelet.rec_lo, wavelet.rec_hi, axis, mode)
 
 def dwt_column(data, wavelet, mode="symmetric"):
