@@ -110,6 +110,14 @@ def pad_antisymmetric(vector, pad_width, iaxis, kwargs):
         n += 1
     return vector
 
+def make_even_shape(data):
+    """Makes the data shape to be even in all dimensions by duplicating the last value 
+    """
+    edge_pad_widths = [(0, data.shape[ax] % 2)
+                        for ax in range(data.ndim)]
+    data = jnp.pad(data, edge_pad_widths, mode='edge')
+    return data
+
 
 def pad(data, pad_widths, mode):
     """Pads a given 1D signal using a given boundary mode.
