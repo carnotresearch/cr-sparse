@@ -1,11 +1,6 @@
 from .setup import *
 
 
-rtol = 1e-8 if jax.config.jax_enable_x64 else 1e-6
-atol = 1e-7 if jax.config.jax_enable_x64 else 1e-5
-
-float_type = jnp.float64 if jax.config.jax_enable_x64 else jnp.float32
-complex_type = jnp.complex128 if jax.config.jax_enable_x64 else jnp.complex64
 
 def test_dwt_idwt_basic():
     x = jnp.array([3, 7, 1, 1, -2, 5, 4, 6])
@@ -40,15 +35,6 @@ def test_idwt_mixed_complex_dtype():
     assert_(x_roundtrip2.dtype == complex_type)
 
 
-# There are some changes in the way input and output types are related.
-# all our output is float32 or float64 depending on jax_enable_x64 configuration
-dtypes_in = [jnp.int8, jnp.float16, 
-    jnp.float32, jnp.float64, 
-    jnp.complex64, jnp.complex128]
-
-dtypes_out = [float_type, float_type, 
-    float_type, float_type, 
-    complex_type, complex_type]
 
 def test_dwt_idwt_dtypes():
     wavelet = wt.build_wavelet('haar')
