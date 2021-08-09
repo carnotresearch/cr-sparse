@@ -83,6 +83,7 @@ from cr.sparse._src.wt.multirate import (
 
 
 from cr.sparse._src.wt.multilevel import (
-    wavedec
+    wavedec,
+    waverec
 )
 
