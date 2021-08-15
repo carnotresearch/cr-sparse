@@ -35,12 +35,19 @@ class FAMILY(Enum):
     """"Discrete Meyer (FIR Approximation) Wavelets"""
     
     GAUS = 7
+    "Gaussian Wavelets"
     MEXH = 8
+    "Mexican Hat/Ricker Wavelets"
     MORL = 9
+    "Morlet Wavelets"
     CGAU = 10
+    "Complex Gaussian Wavelets"
     SHAN = 11
+    "Shannon Wavelets"
     FBSP = 12
+    "Frequency B-Spline Wavelets"
     CMOR = 13
+    "Complex Morlet Wavelets"
 
 def is_discrete_wavelet(name: FAMILY):
     """Returns if the wavelet family is a family of discrete wavelets

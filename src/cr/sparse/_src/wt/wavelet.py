@@ -21,6 +21,8 @@ import jax.numpy as jnp
 from .families import FAMILY, wname_to_family_order, is_discrete_wavelet
 from .coeffs import db, sym, coif, bior, dmey, sqrt2
 
+import re
+
 class SYMMETRY(Enum):
     """Describes the type of symmetry in a wavelet
     """
@@ -100,6 +102,51 @@ class DiscreteWavelet(NamedTuple):
             ]:
             s.append(x.rstrip())
         return u'\n'.join(s)
+
+
+
+class ContinuousWavelet(NamedTuple):
+    """Represents information about a continuous wavelet
+    """
+    support_width: int = -1
+    """Length of the support for finite support wavelets"""
+    symmetry: SYMMETRY = SYMMETRY.UNKNOWN
+    """Indicates the kind of symmetry inside the wavelet"""
+    orthogonal: bool = False
+    """Indicates if the wavelet is orthogonal"""
+    biorthogonal: bool = False
+    """Indicates if the wavelet is biorthogonal"""
+    compact_support: bool = False
+    """Indicates if the wavelet has compact support"""
+    name: str = ''
+    """Name of the wavelet"""
+    family_name: str = ''
+    """Name of the wavelet family"""
+    short_name: str = ''
+    """Short name of the wavelet family"""
+
+    # additinal parameters for continuous wavelets
+    lower_bound: float = 0
+    upper_bound: float = 0
+    complex_cwt: bool = False
+    center_frequency: float = -1.
+    bandwidth_frequency: float = -1.
+    fbsp_order: int = 0
+
+    def __str__(self):
+        s = []
+        for x in [
+            u"ContinuousWavelet  %s"           % self.name,
+            u"  Family name:    %s" % self.family_name,
+            u"  Short name:     %s" % self.short_name,
+            u"  Symmetry:       %s" % self.symmetry.name.lower(),
+            u"  DWT:            False",
+            u"  CWT:            True",
+            u"  Complex CWT:   %s" % self.complex_cwt,
+            ]:
+            s.append(x.rstrip())
+        return u'\n'.join(s)
+
 
 
 def qmf(h):
@@ -346,6 +393,156 @@ def build_discrete_wavelet(family: FAMILY, order: int):
         return w
     return None
 
+
+# regular expression for finding bandwidth-frequency and center-frequency 
+cwt_pattern = re.compile(r'\D+(\d+\.*\d*)+')
+
+
+def _get_bw_center_freqs(freqs, bandwidth_frequency, center_frequency):
+    if len(freqs) == 2:
+        bandwidth_frequency = float(freqs[0])
+        center_frequency = float(freqs[1])
+    return  bandwidth_frequency, center_frequency
+
+def _get_m_b_c(freqs, fbsp_order, bandwidth_frequency, center_frequency):
+    if len(freqs) == 3:
+        fbsp_order = int(freqs[0])
+        bandwidth_frequency = float(freqs[1])
+        center_frequency = float(freqs[2])
+    return fbsp_order, bandwidth_frequency, center_frequency
+
+def build_continuous_wavelet(name: str, family: FAMILY, order: int):
+    """Builds a continuous wavelet by its family and order
+    """
+    # wavelet base name
+    base_name = name[:4]
+    # indentify the B-C pattern if present
+    freqs = re.findall(cwt_pattern, name)
+    freqs = [float(freq) for freq in freqs]
+    nv = family.value
+    if nv == FAMILY.GAUS.value:
+        if order > 8:
+            return None
+        symmetry = SYMMETRY.SYMMETRIC if order % 2 == 0 else SYMMETRY.ANTI_SYMMETRIC
+        w = ContinuousWavelet(support_width=-1,
+            symmetry=symmetry,
+            orthogonal=False,
+            biorthogonal=False,
+            compact_support=False,
+            name=name,
+            family_name = "Gaussian",
+            short_name="gaus", 
+            complex_cwt=False,
+            lower_bound=-5.,
+            upper_bound=5.,
+            center_frequency=0.,
+            bandwidth_frequency=0.,
+            fbsp_order=0)
+        return w
+    elif nv == FAMILY.MEXH.value:
+        w = ContinuousWavelet(support_width=-1,
+            symmetry=SYMMETRY.SYMMETRIC,
+            orthogonal=False,
+            biorthogonal=False,
+            compact_support=False,
+            name=name,
+            family_name = "Mexican hat wavelet",
+            short_name="mexh", 
+            complex_cwt=False,
+            lower_bound=-8.,
+            upper_bound=8.,
+            center_frequency=0.,
+            bandwidth_frequency=0.,
+            fbsp_order=0)
+        return w
+    elif nv == FAMILY.MORL.value:
+        w = ContinuousWavelet(support_width=-1,
+            symmetry=SYMMETRY.SYMMETRIC,
+            orthogonal=False,
+            biorthogonal=False,
+            compact_support=False,
+            name=name,
+            family_name = "Morlet wavelet",
+            short_name="morl", 
+            complex_cwt=False,
+            lower_bound=-8.,
+            upper_bound=8.,
+            center_frequency=0.,
+            bandwidth_frequency=0.,
+            fbsp_order=0)
+        return w
+    elif nv == FAMILY.CGAU.value:
+        if order > 8:
+            return None
+        symmetry = SYMMETRY.SYMMETRIC if order % 2 == 0 else SYMMETRY.ANTI_SYMMETRIC
+        w = ContinuousWavelet(support_width=-1,
+            symmetry=symmetry,
+            orthogonal=False,
+            biorthogonal=False,
+            compact_support=False,
+            name=name,
+            family_name = "Complex Gaussian wavelets",
+            short_name="cgau", 
+            complex_cwt=True,
+            lower_bound=-5.,
+            upper_bound=5.,
+            center_frequency=0.,
+            bandwidth_frequency=0.,
+            fbsp_order=0)
+        return w
+    elif nv == FAMILY.SHAN.value:
+        bandwidth_frequency, center_frequency = _get_bw_center_freqs(freqs, 0.5, 1.)
+        w = ContinuousWavelet(support_width=-1,
+            symmetry=SYMMETRY.ASYMMETRIC,
+            orthogonal=False,
+            biorthogonal=False,
+            compact_support=False,
+            name=name,
+            family_name = "Shannon wavelets",
+            short_name="shan", 
+            complex_cwt=True,
+            lower_bound=-20.,
+            upper_bound=20.,
+            center_frequency=center_frequency,
+            bandwidth_frequency=bandwidth_frequency,
+            fbsp_order=0)
+        return w
+    elif nv == FAMILY.FBSP.value:
+        fbsp_order, bandwidth_frequency, center_frequency = _get_m_b_c(freqs, 2, 1., 0.5)
+        w = ContinuousWavelet(support_width=-1,
+            symmetry=SYMMETRY.ASYMMETRIC,
+            orthogonal=False,
+            biorthogonal=False,
+            compact_support=False,
+            name=name,
+            family_name = "Frequency B-Spline wavelets",
+            short_name="fbsp", 
+            complex_cwt=True,
+            lower_bound=-20.,
+            upper_bound=20.,
+            center_frequency=center_frequency,
+            bandwidth_frequency=bandwidth_frequency,
+            fbsp_order=fbsp_order)
+        return w
+    elif nv == FAMILY.CMOR.value:
+        bandwidth_frequency, center_frequency = _get_bw_center_freqs(freqs, 1., 0.5)
+        w = ContinuousWavelet(support_width=-1,
+            symmetry=SYMMETRY.ASYMMETRIC,
+            orthogonal=False,
+            biorthogonal=False,
+            compact_support=False,
+            name=name,
+            family_name = "Complex Morlet wavelets",
+            short_name="cmor", 
+            complex_cwt=True,
+            lower_bound=-20.,
+            upper_bound=20.,
+            center_frequency=center_frequency,
+            bandwidth_frequency=bandwidth_frequency,
+            fbsp_order=2)
+        return w
+    return None
+
 def build_wavelet(name):
     """Builds a wavelet object by its name
     """
@@ -354,6 +551,8 @@ def build_wavelet(name):
     wavelet = None
     if is_discrete_wavelet(family):
         wavelet = build_discrete_wavelet(family, order)
+    else:
+        wavelet = build_continuous_wavelet(name, family, order)
     # other wavelet types are not supported for now
     if wavelet is None:
         raise ValueError(f"Invalid wavelet name {name}")
