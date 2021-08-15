@@ -247,7 +247,7 @@ def upcoef_(coeffs, filter, mode):
         return sum[skip:-skip]
     return sum
 
-def upcoef(part, coeffs, wavelet, mode='symmetric', level=1):
+def upcoef(part, coeffs, wavelet, mode='symmetric', level=1, take=0):
     """Partial discrete wavelet reconstruction from one part of coefficients (multi-level)
     """
     if level < 1:
@@ -264,7 +264,15 @@ def upcoef(part, coeffs, wavelet, mode='symmetric', level=1):
     rec_lo = wavelet.rec_lo
     for i in range(level-1):
         coeffs = upcoef_(coeffs, rec_lo, mode)
-    return upcoef_(coeffs, filter, mode)
+    result = upcoef_(coeffs, filter, mode)
+    rec_len = wavelet.rec_len
+    if take > 0 and take < rec_len:
+        left_bound = right_bound = (rec_len-take) // 2
+        if (rec_len-take) % 2:
+            # right_bound must never be zero for indexing to work
+            right_bound = right_bound + 1
+        return result[left_bound:-right_bound]
+    return result
 
 
 ######################################################################################
