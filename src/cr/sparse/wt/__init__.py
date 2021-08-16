@@ -75,7 +75,19 @@ from cr.sparse._src.wt.transform import (
     idwt2,
 )
 
+from cr.sparse._src.wt.discrete import (
+    d_orth_wavefun
+)
 
+from cr.sparse._src.wt.continuous import (
+    ricker,
+    ricker_jit,
+    morlet,
+    morlet_jit,
+    cwt,
+    cwt_jit,
+    cwt_complex
+)
 
 from cr.sparse._src.wt.multirate import (
     up_sample,
