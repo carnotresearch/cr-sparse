@@ -115,7 +115,9 @@ from cr.sparse._src.vector import (
     vec_repeat_at_end,
     vec_repeat_at_end_jit,
     vec_repeat_at_start,
-    vec_repeat_at_start_jit
+    vec_repeat_at_start_jit,
+    vec_centered,
+    vec_centered_jit,
 )
 
 from cr.sparse._src.signal import (

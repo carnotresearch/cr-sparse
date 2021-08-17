@@ -98,3 +98,13 @@ def vec_repeat_at_start(x, p):
     return jnp.concatenate((padding, x))
 
 vec_repeat_at_start_jit = jit(vec_repeat_at_start, static_argnums=(1,))
+
+
+def vec_centered(x, length):
+    cur_len = len(x)
+    length = min(cur_len, length) 
+    start = (len(x) - length) // 2
+    end = start + length
+    return x[start:end]
+
+vec_centered_jit = jit(vec_centered, static_argnums=(1,))
