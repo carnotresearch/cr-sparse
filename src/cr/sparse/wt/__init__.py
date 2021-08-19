@@ -80,13 +80,20 @@ from cr.sparse._src.wt.discrete import (
 )
 
 from cr.sparse._src.wt.continuous import (
+    next_pow_of_2,
+    time_points,
+    frequency_points,
     ricker,
-    ricker_jit,
     morlet,
-    morlet_jit,
-    cwt,
-    cwt_jit,
-    cwt_complex
+    cwt_time_real,
+    cwt_time_real_jit,
+    cwt_time_complex,
+    cwt_time_complex_jit,
+    cwt_frequency,
+    cwt_frequency_jit,
+    find_s0,
+    find_optimal_scales,
+    analyze
 )
 
 from cr.sparse._src.wt.multirate import (
