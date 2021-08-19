@@ -146,6 +146,12 @@ from cr.sparse._src.signal import (
     take_along_cols,
     sparse_approximation_cw,
 
+    # energy of a signal
+    energy,
+
+    # statistical normalization of data
+    normalize,
+    normalize_jit
 )
 
 from cr.sparse._src.signal import (

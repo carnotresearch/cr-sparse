@@ -14,7 +14,8 @@
 
 import jax
 import jax.numpy as jnp
-from jax import random
+from jax import random, jit
+import jax.numpy.fft as jfft
 
 from .norm import sqr_norms_l2_cw, sqr_norms_l2_rw
 from .matrix import is_matrix
@@ -186,3 +187,36 @@ def nonzero_dynamic_range(x):
     """
     x = nonzero_values(x)
     return dynamic_range(x)
+
+
+def normalize(data, axis=-1):
+    """Normalizes a data vector (data - mu) / sigma 
+    """
+    mu = jnp.mean(data, axis)
+    data = data - mu
+    variance = jnp.var(data, axis)
+    data = data / jnp.sqrt(variance)
+    return data
+
+normalize_jit = jit(normalize, static_argnums=(1,))
+
+
+def frequency_spectrum(data):
+    """Power spectrum of 1D data using FFT
+    """
+    n = len(data)
+    n2 = (n+1) // 2
+    X = jfft.fft(data)
+    sxx = ((X * jnp.conj(X)) / (n))
+    f = -jfft.fftfreq(n)[n2:]
+    sxx = np.abs(sxx)
+    sxx = sxx[n2:]
+    return f, sxx
+
+
+def energy(data, axis=-1):
+    """
+    Computes the energy of the signal along the specified axis
+    """
+    power = jnp.abs(data) ** 2
+    return jnp.sum(power, axis)
