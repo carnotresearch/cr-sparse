@@ -38,3 +38,32 @@ def test_upcoef_complex():
 def test_upcoef_errs():
     # invalid part string (not 'a' or 'd')
     assert_raises(ValueError, wt.upcoef, 'f', jnp.ones(16), 'haar')
+
+
+def test_updown_periodization():
+    name = 'db4'
+    wavelet = wt.build_wavelet(name)
+    mode = 'periodization'
+    signal = jnp.ones(128)
+    ca, cd = wt.dwt(signal, wavelet, mode=mode)
+    a = wt.upcoef('a', ca, wavelet, mode=mode)
+    d = wt.upcoef('d', cd, wavelet, mode=mode)
+    assert_allclose(a + d, signal, atol=atol, rtol=rtol)
+
+
+def test_updown_symmetric():
+    mode = 'symmetric'
+    names = ['db4', 'db8', 'sym2', 'coif1']
+    for name in names:
+        wavelet = wt.build_wavelet(name)
+        p = wavelet.dec_len
+        skip = p -2
+        for i in range(10, 50, 10):
+            c = jnp.ones(i)
+            ca = wt.downcoef('a', c, wavelet, mode=mode)
+            cd = wt.downcoef('d', c, wavelet, mode=mode)
+            a = wt.upcoef('a', ca, wavelet, mode=mode)
+            d = wt.upcoef('d', cd, wavelet, mode=mode)
+            r = a + d
+            rec = r[skip:-skip]
+            assert_allclose(rec, c, atol=atol, rtol=rtol)
