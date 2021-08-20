@@ -18,6 +18,8 @@
       ~DiscreteWavelet.dec_len
       ~DiscreteWavelet.dec_lo
       ~DiscreteWavelet.family_name
+      ~DiscreteWavelet.filter_bank
+      ~DiscreteWavelet.inverse_filter_bank
       ~DiscreteWavelet.name
       ~DiscreteWavelet.orthogonal
       ~DiscreteWavelet.rec_hi

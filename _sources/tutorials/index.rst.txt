@@ -5,5 +5,5 @@ Tutorials
    :maxdepth: 3
    :caption: Contents:
 
-   dirac_dct_dictionaries
+   dirac_cosine_dictionaries
    admm_l1

@@ -343,21 +343,21 @@
         <span class="k">return</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">dec_lo</span>
     <span class="k">if</span> <span class="n">part</span> <span class="o">==</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">dec_hi</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Invalid part: </span><span class="si">{part}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Invalid part: </span><span class="si">{</span><span class="n">part</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">part_rec_filter_</span><span class="p">(</span><span class="n">part</span><span class="p">,</span> <span class="n">wavelet</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">part</span> <span class="o">==</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">rec_lo</span>
     <span class="k">if</span> <span class="n">part</span> <span class="o">==</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">rec_hi</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Invalid part: </span><span class="si">{part}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Invalid part: </span><span class="si">{</span><span class="n">part</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">check_axis_</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">ndim</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">axis</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">axis</span> <span class="o">=</span> <span class="n">ndim</span> <span class="o">+</span> <span class="n">axis</span>
     <span class="k">if</span> <span class="n">axis</span> <span class="o">&gt;=</span> <span class="n">ndim</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid axis: </span><span class="si">{axis}</span><span class="s2"> with ndim: </span><span class="si">{ndim}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid axis: </span><span class="si">{</span><span class="n">axis</span><span class="si">}</span><span class="s2"> with ndim: </span><span class="si">{</span><span class="n">ndim</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">axis</span>
 </pre></div>
 

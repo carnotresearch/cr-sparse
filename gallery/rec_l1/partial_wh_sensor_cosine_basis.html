@@ -271,7 +271,7 @@ the signal space.</p></li>
 </div>
 <img alt="partial wh sensor cosine basis" class="sphx-glr-single-img" src="../../_images/sphx_glr_partial_wh_sensor_cosine_basis_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fbed435c4f0&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7faa6864c460&gt;]
 </pre></div>
 </div>
 </div>
@@ -286,7 +286,7 @@ the signal space.</p></li>
 </div>
 <img alt="partial wh sensor cosine basis" class="sphx-glr-single-img" src="../../_images/sphx_glr_partial_wh_sensor_cosine_basis_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fbed449fac0&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7faa68856130&gt;]
 </pre></div>
 </div>
 </div>
@@ -297,11 +297,11 @@ the signal space.</p></li>
 <span class="n">picks</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.sort.html#jax.numpy.sort" title="jax.numpy.sort" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">sort</span></a><span class="p">(</span><span class="n">p</span><span class="p">[:</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">m</span></a><span class="p">])</span>
 <span class="c1"># Make sure that DC component is always picked up</span>
 <span class="n">picks</span> <span class="o">=</span> <span class="n">picks</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{picks=}&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">picks</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># a random permutation of input</span>
 <span class="n">perm</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.permutation.html#jax.random.permutation" title="jax.random.permutation" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><span class="n">random</span><span class="o">.</span><span class="n">permutation</span></a><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{perm=}&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">perm</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Walsh Hadamard Basis operator</span>
 <span class="n">Twh</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">walsh_hadamard_basis</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">)</span>
@@ -332,7 +332,7 @@ perm=DeviceArray([ 492, 5891, 6660, ..., 1416, 2648, 5917], dtype=int32)
 </div>
 <img alt="partial wh sensor cosine basis" class="sphx-glr-single-img" src="../../_images/sphx_glr_partial_wh_sensor_cosine_basis_003.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fbed41ee310&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7faa685b31c0&gt;]
 </pre></div>
 </div>
 </div>
@@ -346,10 +346,10 @@ perm=DeviceArray([ 492, 5891, 6660, ..., 1416, 2648, 5917], dtype=int32)
 <span class="n">sol</span> <span class="o">=</span> <span class="n">yall1</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Tpwh</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">rho</span></a><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">rho</span></a><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">tol</span></a><span class="p">,</span> <span class="n">W</span><span class="o">=</span><span class="n">Psi</span><span class="p">)</span>
 <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">iterations</span></a> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">iterations</span></a><span class="p">)</span>
 <span class="c1">#Number of iterations</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;{iterations=}&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">iterations</span></a><span class="si">=}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="c1"># Relative error</span>
 <span class="n">rel_error</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="o">-</span><span class="n">xs</span><span class="p">)</span><span class="o">/</span><span class="n">norm</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;{rel_error=:.4e}&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">rel_error</span><span class="si">=:</span><span class="s1">.4e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
@@ -368,10 +368,10 @@ rel_error=3.3896e-02
 </div>
 <img alt="partial wh sensor cosine basis" class="sphx-glr-single-img" src="../../_images/sphx_glr_partial_wh_sensor_cosine_basis_004.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7fbec4f6dbb0&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7faa6835dc10&gt;
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  5.625 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.745 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-rec-l1-partial-wh-sensor-cosine-basis-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/3fff648f3d105d1d7e15c781b5729ab0/partial_wh_sensor_cosine_basis.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">partial_wh_sensor_cosine_basis.py</span></code></a></p>

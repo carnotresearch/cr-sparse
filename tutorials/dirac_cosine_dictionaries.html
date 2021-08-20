@@ -47,14 +47,16 @@
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script src="../_static/js/custom.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Alternating direction algorithms for l1 problems in compressive sensing" href="admm_l1.html" />
+    <link rel="prev" title="Tutorials" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -100,9 +102,21 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Dirac Cosine Dictionaries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Cosine-basis-construction">Cosine basis construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Dirac-Cosine-dictionary-construction">Dirac-Cosine dictionary construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#A-mixture-signal-of-impulses-and-sinusoids">A mixture signal of impulses and sinusoids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Mixture-signal-representation-in-Cosine-basis">Mixture signal representation in Cosine basis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Building-a-sparse-representation-in-the-Dirac-Cosine-basis">Building a sparse representation in the Dirac Cosine basis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Sparse-representation-error">Sparse representation error</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="admm_l1.html">Alternating direction algorithms for l1 problems in compressive sensing</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../start.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../source/index.html">CR.Sparse API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
@@ -156,6 +170,8 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
         
       <li>Dirac Cosine Dictionaries</li>
     
@@ -448,7 +464,7 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="section" id="Dirac-Cosine-Dictionaries">
 <h1>Dirac Cosine Dictionaries<a class="headerlink" href="#Dirac-Cosine-Dictionaries" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://colab.research.google.com/github/carnotresearch/cr-sparse/blob/master/docs/tutorials/dirac_cosine_dictionaries.ipynb">Open in Colab</a></p>
+<p><a class="reference external" href="https://colab.research.google.com/github/carnotresearch/cr-sparse/blob/master/docs/tutorials/dirac_cosine_dictionaries.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <p>In this tutorial we will:</p>
 <ul class="simple">
 <li><p>Construct a Cosine basis</p></li>
@@ -956,6 +972,10 @@ DeviceArray(3.802608e-14, dtype=float32)
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="admm_l1.html" class="btn btn-neutral float-right" title="Alternating direction algorithms for l1 problems in compressive sensing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 

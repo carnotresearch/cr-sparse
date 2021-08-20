@@ -210,12 +210,19 @@
     <span class="sd">&quot;&quot;&quot;&quot;Discrete Meyer (FIR Approximation) Wavelets&quot;&quot;&quot;</span>
     
     <span class="n">GAUS</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="s2">&quot;Gaussian Wavelets&quot;</span>
     <span class="n">MEXH</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="s2">&quot;Mexican Hat/Ricker Wavelets&quot;</span>
     <span class="n">MORL</span> <span class="o">=</span> <span class="mi">9</span>
+    <span class="s2">&quot;Morlet Wavelets&quot;</span>
     <span class="n">CGAU</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="s2">&quot;Complex Gaussian Wavelets&quot;</span>
     <span class="n">SHAN</span> <span class="o">=</span> <span class="mi">11</span>
+    <span class="s2">&quot;Shannon Wavelets&quot;</span>
     <span class="n">FBSP</span> <span class="o">=</span> <span class="mi">12</span>
-    <span class="n">CMOR</span> <span class="o">=</span> <span class="mi">13</span></div>
+    <span class="s2">&quot;Frequency B-Spline Wavelets&quot;</span>
+    <span class="n">CMOR</span> <span class="o">=</span> <span class="mi">13</span>
+    <span class="s2">&quot;Complex Morlet Wavelets&quot;</span></div>
 
 <div class="viewcode-block" id="is_discrete_wavelet"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.wt.is_discrete_wavelet.html#cr.sparse.wt.is_discrete_wavelet">[docs]</a><span class="k">def</span> <span class="nf">is_discrete_wavelet</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">FAMILY</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns if the wavelet family is a family of discrete wavelets</span>
@@ -350,33 +357,33 @@
 
     <span class="s2">&quot;dmey&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">DMEY</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
 
-    <span class="s2">&quot;gaus1&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">GAUS</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s2">&quot;gaus2&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">GAUS</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="s2">&quot;gaus3&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">GAUS</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-    <span class="s2">&quot;gaus4&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">GAUS</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
-    <span class="s2">&quot;gaus5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">GAUS</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
-    <span class="s2">&quot;gaus6&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">GAUS</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
-    <span class="s2">&quot;gaus7&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">GAUS</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
-    <span class="s2">&quot;gaus8&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">GAUS</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="c1"># &quot;gaus1&quot;: (FAMILY.GAUS, 1),</span>
+    <span class="c1"># &quot;gaus2&quot;: (FAMILY.GAUS, 2),</span>
+    <span class="c1"># &quot;gaus3&quot;: (FAMILY.GAUS, 3),</span>
+    <span class="c1"># &quot;gaus4&quot;: (FAMILY.GAUS, 4),</span>
+    <span class="c1"># &quot;gaus5&quot;: (FAMILY.GAUS, 5),</span>
+    <span class="c1"># &quot;gaus6&quot;: (FAMILY.GAUS, 6),</span>
+    <span class="c1"># &quot;gaus7&quot;: (FAMILY.GAUS, 7),</span>
+    <span class="c1"># &quot;gaus8&quot;: (FAMILY.GAUS, 8),</span>
 
-    <span class="s2">&quot;mexh&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">MEXH</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="c1"># &quot;mexh&quot;: (FAMILY.MEXH, 0),</span>
 
-    <span class="s2">&quot;morl&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">MORL</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="c1"># &quot;morl&quot;: (FAMILY.MORL, 0),</span>
 
-    <span class="s2">&quot;cgau1&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CGAU</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s2">&quot;cgau2&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CGAU</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="s2">&quot;cgau3&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CGAU</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-    <span class="s2">&quot;cgau4&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CGAU</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
-    <span class="s2">&quot;cgau5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CGAU</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
-    <span class="s2">&quot;cgau6&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CGAU</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
-    <span class="s2">&quot;cgau7&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CGAU</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
-    <span class="s2">&quot;cgau8&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CGAU</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="c1"># &quot;cgau1&quot;: (FAMILY.CGAU, 1),</span>
+    <span class="c1"># &quot;cgau2&quot;: (FAMILY.CGAU, 2),</span>
+    <span class="c1"># &quot;cgau3&quot;: (FAMILY.CGAU, 3),</span>
+    <span class="c1"># &quot;cgau4&quot;: (FAMILY.CGAU, 4),</span>
+    <span class="c1"># &quot;cgau5&quot;: (FAMILY.CGAU, 5),</span>
+    <span class="c1"># &quot;cgau6&quot;: (FAMILY.CGAU, 6),</span>
+    <span class="c1"># &quot;cgau7&quot;: (FAMILY.CGAU, 7),</span>
+    <span class="c1"># &quot;cgau8&quot;: (FAMILY.CGAU, 8),</span>
 
-    <span class="s2">&quot;shan&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">SHAN</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="c1"># &quot;shan&quot;: (FAMILY.SHAN, 0),</span>
 
-    <span class="s2">&quot;fbsp&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">FBSP</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="c1"># &quot;fbsp&quot;: (FAMILY.FBSP, 0),</span>
 
-    <span class="s2">&quot;cmor&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">FAMILY</span><span class="o">.</span><span class="n">CMOR</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="c1"># &quot;cmor&quot;: (FAMILY.CMOR, 0),</span>
 <span class="p">}</span>
 
 <span class="n">_family_short_names</span> <span class="o">=</span> <span class="p">[</span>
@@ -402,7 +409,7 @@
         <span class="n">code</span> <span class="o">=</span> <span class="n">__wname_to_family_order</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">code</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown wavelet name &#39;</span><span class="si">{name}</span><span class="s2">&#39;, check wavelist() for the &quot;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown wavelet name &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;, check wavelist() for the &quot;</span>
                          <span class="s2">&quot;list of available builtin wavelets.&quot;</span><span class="p">)</span></div>
 
 
@@ -416,11 +423,16 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="n">is_discrete</span>
 
+<span class="k">def</span> <span class="nf">families</span><span class="p">(</span><span class="n">short</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">short</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_family_short_names</span>
+    <span class="k">return</span> <span class="n">_family_long_names</span>
+
 <div class="viewcode-block" id="wavelist"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.wt.wavelist.html#cr.sparse.wt.wavelist">[docs]</a><span class="k">def</span> <span class="nf">wavelist</span><span class="p">(</span><span class="n">family</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the list of wavelts supported by this library</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">kind</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;discrete&#39;</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unrecognized value for `kind`: </span><span class="si">{kind}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unrecognized value for `kind`: </span><span class="si">{</span><span class="n">kind</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="n">sorting_list</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># for natural sorting order</span>
     <span class="k">if</span> <span class="n">family</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -432,7 +444,7 @@
             <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">family</span><span class="p">):</span>
                 <span class="n">sorting_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">name</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="n">name</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid short family name &#39;</span><span class="si">{family}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid short family name &#39;</span><span class="si">{</span><span class="n">family</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
 
     <span class="n">sorting_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
     <span class="n">wavelets</span> <span class="o">=</span> <span class="p">[]</span>
