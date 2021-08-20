@@ -8,7 +8,7 @@ It is a set of tools to evaluate the performance of sparse recovery algorithms:
 
 .. currentmodule:: cr.sparse
 
-.. autosummary::
+.. commented_autosummary::
   :toctree: _autosummary
 
     ef.RecoveryPerformance
