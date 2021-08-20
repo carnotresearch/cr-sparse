@@ -242,7 +242,7 @@ def upcoef_(coeffs, filter, mode):
         coeffs = jnp.pad(coeffs, p//2, mode='wrap')
     sum = jnp.convolve(coeffs, filter, 'full')
     if mode == 'periodization':
-        return sum[p//2:-p//2]
+        return sum[p-1:-p]
     return sum[:-1]
 
 def upcoef(part, coeffs, wavelet, mode='symmetric', level=1, take=0):
@@ -260,17 +260,17 @@ def upcoef(part, coeffs, wavelet, mode='symmetric', level=1, take=0):
     filter = part_rec_filter_(part, wavelet)
     # We do averaging for all levels except the last one
     rec_lo = wavelet.rec_lo
+    coeffs = upcoef_(coeffs, filter, mode)
     for i in range(level-1):
         coeffs = upcoef_(coeffs, rec_lo, mode)
-    result = upcoef_(coeffs, filter, mode)
     rec_len = wavelet.rec_len
     if take > 0 and take < rec_len:
         left_bound = right_bound = (rec_len-take) // 2
         if (rec_len-take) % 2:
             # right_bound must never be zero for indexing to work
             right_bound = right_bound + 1
-        return result[left_bound:-right_bound]
-    return result
+        return coeffs[left_bound:-right_bound]
+    return coeffs
 
 
 ######################################################################################
