@@ -245,6 +245,19 @@ def upcoef_(coeffs, filter, mode):
         return sum[p-1:-p]
     return sum[:-1]
 
+@partial(jit, static_argnums=(2,3))
+def upcoef_a(coeffs, rec_lo, mode, level):
+    for i in range(level):
+        coeffs = upcoef_(coeffs, rec_lo, mode)
+    return coeffs
+
+@partial(jit, static_argnums=(3,4))
+def upcoef_d(coeffs, rec_hi, rec_lo, mode, level):
+    coeffs = upcoef_(coeffs, rec_hi, mode)
+    for i in range(level-1):
+        coeffs = upcoef_(coeffs, rec_lo, mode)
+    return coeffs
+
 def upcoef(part, coeffs, wavelet, mode='symmetric', level=1, take=0):
     """Partial discrete wavelet reconstruction from one part of coefficients (multi-level)
     """
