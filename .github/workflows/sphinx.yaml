@@ -7,7 +7,7 @@ on:
       - 'docs/**'
       - 'src/**'
       - 'examples/**'
-      - 'workflows/**'
+      - '.github/workflows/**'
   pull_request:
     branches:
       - master
