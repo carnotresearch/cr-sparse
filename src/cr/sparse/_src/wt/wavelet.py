@@ -23,6 +23,7 @@ from .coeffs import db, sym, coif, bior, dmey, sqrt2
 
 import re
 
+
 class SYMMETRY(Enum):
     """Describes the type of symmetry in a wavelet
     """
@@ -103,7 +104,28 @@ class DiscreteWavelet(NamedTuple):
             s.append(x.rstrip())
         return u'\n'.join(s)
 
+    def wavefun(self, level=8):
+        from .discrete import orth_wavefun, biorth_wavefun
+        if self.orthogonal:
+            return orth_wavefun(self, level=level)
+        if self.biorthogonal:
+            return biorth_wavefun(self, level=level)
+        raise NotImplemented
 
+    @property
+    def filter_bank(self):
+        """Returns the Quadratrure Mirror Filter Bank associated with the wavelet
+
+        (dec_lo, dec_hi, rec_lo, rec_hi)
+        """
+        return (self.dec_lo, self.dec_hi, self.rec_lo, self.rec_hi)
+
+    @property
+    def inverse_filter_bank(self):
+        """Returns the filter bank associated with the inverse wavelet
+        """
+        return (self.rec_lo[::-1], self.rec_hi[::-1], 
+            self.dec_lo[::-1], self.dec_hi[::-1])
 
 class ContinuousWavelet(NamedTuple):
     """Represents information about a continuous wavelet
