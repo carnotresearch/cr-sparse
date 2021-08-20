@@ -15,6 +15,7 @@
 from cr.sparse._src.wt.families import (
     FAMILY,
     is_discrete_wavelet,
+    families,
     wavelist,
     wname_to_family_order
 )
