@@ -237,15 +237,13 @@ def upcoef_(coeffs, filter, mode):
     """
     p = len(filter)
     coeffs = up_sample(coeffs, 2)
+    m = len(coeffs)
     if mode == 'periodization':
         coeffs = jnp.pad(coeffs, p//2, mode='wrap')
-    sum = jnp.convolve(coeffs, filter, 'same')
+    sum = jnp.convolve(coeffs, filter, 'full')
     if mode == 'periodization':
         return sum[p//2:-p//2]
-    skip = p//2 - 1
-    if skip > 0:
-        return sum[skip:-skip]
-    return sum
+    return sum[:-1]
 
 def upcoef(part, coeffs, wavelet, mode='symmetric', level=1, take=0):
     """Partial discrete wavelet reconstruction from one part of coefficients (multi-level)
