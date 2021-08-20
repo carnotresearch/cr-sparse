@@ -182,33 +182,33 @@ __wname_to_family_order = {
 
     "dmey": (FAMILY.DMEY, 0),
 
-    "gaus1": (FAMILY.GAUS, 1),
-    "gaus2": (FAMILY.GAUS, 2),
-    "gaus3": (FAMILY.GAUS, 3),
-    "gaus4": (FAMILY.GAUS, 4),
-    "gaus5": (FAMILY.GAUS, 5),
-    "gaus6": (FAMILY.GAUS, 6),
-    "gaus7": (FAMILY.GAUS, 7),
-    "gaus8": (FAMILY.GAUS, 8),
+    # "gaus1": (FAMILY.GAUS, 1),
+    # "gaus2": (FAMILY.GAUS, 2),
+    # "gaus3": (FAMILY.GAUS, 3),
+    # "gaus4": (FAMILY.GAUS, 4),
+    # "gaus5": (FAMILY.GAUS, 5),
+    # "gaus6": (FAMILY.GAUS, 6),
+    # "gaus7": (FAMILY.GAUS, 7),
+    # "gaus8": (FAMILY.GAUS, 8),
 
-    "mexh": (FAMILY.MEXH, 0),
+    # "mexh": (FAMILY.MEXH, 0),
 
-    "morl": (FAMILY.MORL, 0),
+    # "morl": (FAMILY.MORL, 0),
 
-    "cgau1": (FAMILY.CGAU, 1),
-    "cgau2": (FAMILY.CGAU, 2),
-    "cgau3": (FAMILY.CGAU, 3),
-    "cgau4": (FAMILY.CGAU, 4),
-    "cgau5": (FAMILY.CGAU, 5),
-    "cgau6": (FAMILY.CGAU, 6),
-    "cgau7": (FAMILY.CGAU, 7),
-    "cgau8": (FAMILY.CGAU, 8),
+    # "cgau1": (FAMILY.CGAU, 1),
+    # "cgau2": (FAMILY.CGAU, 2),
+    # "cgau3": (FAMILY.CGAU, 3),
+    # "cgau4": (FAMILY.CGAU, 4),
+    # "cgau5": (FAMILY.CGAU, 5),
+    # "cgau6": (FAMILY.CGAU, 6),
+    # "cgau7": (FAMILY.CGAU, 7),
+    # "cgau8": (FAMILY.CGAU, 8),
 
-    "shan": (FAMILY.SHAN, 0),
+    # "shan": (FAMILY.SHAN, 0),
 
-    "fbsp": (FAMILY.FBSP, 0),
+    # "fbsp": (FAMILY.FBSP, 0),
 
-    "cmor": (FAMILY.CMOR, 0),
+    # "cmor": (FAMILY.CMOR, 0),
 }
 
 _family_short_names = [
@@ -247,6 +247,11 @@ def _check_kind(name, kind):
         return is_discrete
     else:
         return not is_discrete
+
+def families(short=True):
+    if short:
+        return _family_short_names
+    return _family_long_names
 
 def wavelist(family=None, kind='all'):
     """Returns the list of wavelts supported by this library
