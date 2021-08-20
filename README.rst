@@ -1,5 +1,5 @@
-Accelerated sparse representations and compressive sensing
-====================================================================
+XLA Accelerated Functional Models and Algorithms for Sparse Representations based Signal Processing
+=========================================================================================================
 
 |docs| |unttests| |coverage|
 
@@ -77,9 +77,9 @@ To cite this repository:
 
     @software{crsparse2021github,
     author = {Shailesh Kumar},
-    title = {{CR.Sparse}: XLA accelerated functional algorithms for inverse problems},
-    url = {https://github.com/carnotresearch/cr-sparse},
-    version = {0.1.3},
+    title = {{CR.Sparse}: XLA Accelerated Functional Models and Algorithms for Sparse Representations based Signal Processing},
+    url = {https://cr-sparse.readthedocs.io/en/latest/},
+    version = {0.1.5},
     year = {2021},
     }
 
