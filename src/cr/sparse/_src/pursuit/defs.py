@@ -48,7 +48,7 @@ class RecoverySolution(NamedTuple):
 
         x_I : :estimate(s) of :math:`x_I`
         I : identified index set(s) :math:`I`
-        r : residual(s) :math:`r = y - \Phi_I x_I `
+        r : residual(s) :math:`r = y - \Phi_I x_I`
         r_norm_sqr: squared norm of residual :math:`\| r \|_2^2`
         iterations: Number of iterations required for the algorithm to converge
 
