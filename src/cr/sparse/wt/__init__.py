@@ -77,7 +77,8 @@ from cr.sparse._src.wt.transform import (
 )
 
 from cr.sparse._src.wt.discrete import (
-    d_orth_wavefun
+    get_keep_length,
+    orth_wavefun
 )
 
 from cr.sparse._src.wt.continuous import (
