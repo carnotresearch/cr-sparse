@@ -93,10 +93,10 @@ To cite this repository:
 `Sparse-Plex <https://sparse-plex.readthedocs.io>`_
 
 
-.. |docs| image:: https://github.com/carnotresearch/cr-sparse/actions/workflows/sphinx.yaml/badge.svg
+.. |docs| image:: https://readthedocs.org/projects/cr-sparse/badge/?version=latest
+    :target: https://cr-sparse.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
     :scale: 100%
-    :target: https://github.com/carnotresearch/cr-sparse/actions/workflows/sphinx.yaml
 
 .. |unttests| image:: https://github.com/carnotresearch/cr-sparse/actions/workflows/ci.yml/badge.svg
     :alt: Unit Tests
