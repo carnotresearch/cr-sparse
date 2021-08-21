@@ -30,10 +30,11 @@ def chirp(fs, T, f0, f1, initial_phase=0):
         T (float): Period of the signal in seconds.
         f0 (float): Start (lower) frequency of chirp in Hz.
         f1 (float): Stop (upper) frequency of chirp in Hz.
-        initial_phase (float): , phase at waveform start in radians, default is 0.
+        initial_phase (float): phase at t=0 in radians, default is 0.
 
     Returns:
-        jax.numpy.ndarray: Time domain chirp waveform.
+        t (jax.numpy.ndarray): Time values in seconds at which the signal is computed.
+        signal (jax.numpy.ndarray): Values of the signal at these time values.
 
     Adapted from https://udel.edu/~mm/gr/chirp.py
     """
@@ -62,10 +63,11 @@ def chirp_centered(fs, T, fc, bw, initial_phase=0):
         T (float): Period of the signal in seconds.
         fc (float): Central frequency of chirp in Hz.
         bw (float): Bandwidth (end frequency -  start frequency) of chirp in Hz.
-        initial_phase (float): , phase at waveform start in radians, default is 0.
+        initial_phase (float): phase at t=0 in radians, default is 0.
 
     Returns:
-        jax.numpy.ndarray: Time domain chirp waveform.
+        t (jax.numpy.ndarray): Time values in seconds at which the signal is computed.
+        signal (jax.numpy.ndarray): Values of the signal at these time values.
 
     Adapted from https://udel.edu/~mm/gr/chirp.py
     """
@@ -75,25 +77,99 @@ def chirp_centered(fs, T, fc, bw, initial_phase=0):
 
 
 
-def pulse(fs, T, box_start, box_end, initial_time=0):
+def pulse(fs, T, start_time, end_time, initial_time=0):
     """Generates a pulse signal which is 1 between start and end times and 0 everwhere else
 
     Args:
         fs (float): Sample rate of signal in Hz.
         T (float): Period of the signal in seconds.
-        box_start (float): Start time of the box signal in seconds
-        box_end (float): End time of the box signal in seconds
-        initial_time (float): , time at waveform start in seconds, default is 0.
+        start_time (float): Start time of the box signal in seconds
+        end_time (float): End time of the box signal in seconds
+        initial_time (float): time at waveform start in seconds, default is 0.
 
     Returns:
-        jax.numpy.ndarray: Time domain pulse waveform
+        t (jax.numpy.ndarray): Time values in seconds at which the signal is computed.
+        signal (jax.numpy.ndarray): Values of the signal at these time values.
     """
     t = time_values(fs, T, initial_time)
     signal = jnp.zeros_like(t)
-    index = jnp.logical_and(t >= box_start, t < box_end)
+    index = jnp.logical_and(t >= start_time, t < end_time)
     signal = signal.at[index].set(1)
     return t, signal
 
+def gaussian(fs, T, b, a=1.):
+    """Generates a Gaussian signal
+
+    Args:
+        fs (float): Sample rate of signal in Hz.
+        T (float): Period of the signal in seconds.
+        b (float): The location (in time) where the pulse is centered in seconds.
+        a (float): scale of Gaussian signal (in seconds).
+        initial_time (float): time at waveform start in seconds, default is 0.
+
+    Returns:
+        t (jax.numpy.ndarray): Time values in seconds at which the signal is computed.
+        signal (jax.numpy.ndarray): Values of the signal at these time values.
+
+    """
+    s = jnp.atleast_2d(jnp.asarray(s)).T
+    # The normalization term 2 / (sqrt(3 s) pi^{1/4})
+    A = 2 / (jnp.sqrt(3 * s) * (jnp.pi**0.25))
+    # square the scale s^2
+    wsq = s**2
+    # t^2
+    xsq = t**2
+    # the modulation term (1 - t^2/a^2)
+    mod = (1 - xsq / wsq)
+    # the gaussian term e^{-t^2/2a^2}
+    gauss = jnp.exp(-xsq / (2 * wsq))
+    total = A * mod * gauss
+    return jnp.squeeze(total)
+
+def decaying_sine_wave(fs, T, f, alpha, initial_phase=0, initial_time=0):
+    """Generates a decaying sinusoid
+    Args:
+        fs (float): Sample rate of signal in Hz.
+        T (float): Period of the signal in seconds.
+        f (float): Frequency of the sine wave in Hz.
+        alpha (float): Exponential decay factor in Hz.
+        initial_phase (float): phase at t=0 in radians, default is 0.
+        initial_time (float): time at waveform start in seconds, default is 0.
+
+    Returns:
+        t (jax.numpy.ndarray): Time values in seconds at which the signal is computed.
+        signal (jax.numpy.ndarray): Values of the signal at these time values.
+    """
+    t = time_values(fs, T, initial_time)
+    phase = 2*jnp.pi*f*t
+    phase += initial_phase
+    decay = jnp.exp(-alpha*t)
+    signal = decay * jnp.sin(phase) 
+    return t, signal
+
+def transient_sine_wave(fs, T, f, start_time, end_time, initial_phase=0, initial_time=0):
+    """Generates a transient sinusoid between start and end times
+
+    Args:
+        fs (float): Sample rate of signal in Hz.
+        T (float): Period of the signal in seconds.
+        f (float): Frequency of the sine wave in Hz.
+        start_time (float): Start time of the sine wave in seconds
+        end_time (float): End time of the sine wave in seconds
+        initial_phase (float): phase at t=0 in radians, default is 0.
+        initial_time (float): time at waveform start in seconds, default is 0.
+
+    Returns:
+        t (jax.numpy.ndarray): Time values in seconds at which the signal is computed.
+        signal (jax.numpy.ndarray): Values of the signal at these time values.
+    """
+    t = time_values(fs, T, initial_time)
+    phase = 2*jnp.pi*f*t
+    phase += initial_phase
+    signal = jnp.sin(phase)
+    mask = jnp.logical_or(t < start_time, t >= end_time)
+    signal = signal.at[mask].set(0)
+    return t, signal
 
 def gaussian_pulse(fs, T, b, fc=1000, bw=0.5, bwr=-6, retquad=False, retenv=False, initial_time=0):
     """Generates a Gaussian modulated sinusoid
@@ -107,7 +183,13 @@ def gaussian_pulse(fs, T, b, fc=1000, bw=0.5, bwr=-6, retquad=False, retenv=Fals
         bwr (float): Reference level at which fractional bandwidth is calculated (dB).
         retquad (bool): Include/exclude quadrature(imaginary) part of the signal in the result
         retenv (bool): Include/exclude the Gaussian envelope of the signal in the result
-        initial_time (float): , time at waveform start in seconds, default is 0.
+        initial_time (float): time at waveform start in seconds, default is 0.
+
+    Returns:
+        t (jax.numpy.ndarray): Time values in seconds at which the signal is computed.
+        real_part (jax.numpy.ndarray): Values of the real part of the signal at these time values.
+        imag_part (jax.numpy.ndarray): Values of the quadrature/imaginary part of the signal at these time values (if retquad is True).
+        envelope (jax.numpy.ndarray): Values of the Gaussian envelope of the signal at these time values (if retenv is True).
 
     Adapted from https://github.com/scipy/scipy/blob/v1.7.1/scipy/signal/waveforms.py#L161-L258
     """
@@ -129,3 +211,4 @@ def gaussian_pulse(fs, T, b, fc=1000, bw=0.5, bwr=-6, retquad=False, retenv=Fals
             return t, real_part, envelope
         else:
             return t, real_part
+
