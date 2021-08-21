@@ -14,5 +14,6 @@
 
 from cr.sparse._src.dsp.synthetic_signals import (
     chirp,
-    chirp_centered
+    chirp_centered,
+    boxcar
 )

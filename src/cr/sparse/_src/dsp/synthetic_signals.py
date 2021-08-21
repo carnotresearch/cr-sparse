@@ -14,14 +14,14 @@
 
 import jax.numpy as jnp
 
-def chirp(fs, f0, f1, T, initial_phase=0):
+def chirp(fs, T, f0, f1, initial_phase=0):
     """Generates a frequency sweep from low to high over time.
 
     Args:
         fs (float): Sample rate of chirp signal in Hz.
+        T (float): Period of the chirp in seconds.
         f0 (float): Start (lower) frequency of chirp in Hz.
         f1 (float): Stop (upper) frequency of chirp in Hz.
-        T (float): Period of the chirp in seconds.
         initial_phase (float): , phase at waveform start in radians, default is 0.
 
     Returns:
@@ -46,14 +46,14 @@ def chirp(fs, f0, f1, T, initial_phase=0):
     return t, signal
 
 
-def chirp_centered(fs, fc, bw, T, initial_phase=0):
+def chirp_centered(fs, T, fc, bw, initial_phase=0):
     """Generates a frequency sweep from low to high over time defined by central frequency and bandwidth.
 
     Args:
         fs (float): Sample rate of chirp signal in Hz.
+        T (float): Period of the chirp in seconds.
         fc (float): Central frequency of chirp in Hz.
         bw (float): Bandwidth (end frequency -  start frequency) of chirp in Hz.
-        T (float): Period of the chirp in seconds.
         initial_phase (float): , phase at waveform start in radians, default is 0.
 
     Returns:
@@ -63,4 +63,24 @@ def chirp_centered(fs, fc, bw, T, initial_phase=0):
     """
     f0 = fc - bw / 2.
     f1 = fc + bw / 2.
-    return chirp(fs, f0, f1, T, initial_phase)
+    return chirp(fs, T, f0, f1, initial_phase)
+
+
+def boxcar(fs, T, box_start, box_end, initial_time=0):
+    """Generates a boxcar signal which is 1 between start and end times and 0 everwhere else
+
+    Args:
+        fs (float): Sample rate of chirp signal in Hz.
+        T (float): Period of the chirp in seconds.
+        box_start (float): Start time of the box signal in seconds
+        box_end (float): End time of the box signal in seconds
+        initial_time (float): , time at waveform start in seconds, default is 0.
+    """
+    # Number of samples
+    n = int(fs * T)
+    # Points in time where the chirp will be computed.
+    t = jnp.linspace(initial_time, initial_time+T, n, endpoint=False)
+    signal = jnp.zeros_like(t)
+    index = jnp.logical_and(t >= box_start, t < box_end)
+    signal = signal.at[index].set(1)
+    return t, signal
