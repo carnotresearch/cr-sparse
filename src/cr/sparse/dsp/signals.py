@@ -13,5 +13,6 @@
 # limitations under the License.
 
 from cr.sparse._src.dsp.synthetic_signals import (
-    chirp
+    chirp,
+    chirp_centered
 )

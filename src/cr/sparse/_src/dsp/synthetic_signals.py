@@ -16,7 +16,7 @@ import jax.numpy as jnp
 
 def chirp(fs, f0, f1, T, initial_phase=0):
     """Generates a frequency sweep from low to high over time.
-    
+
     Args:
         fs (float): Sample rate of chirp signal in Hz.
         f0 (float): Start (lower) frequency of chirp in Hz.
@@ -44,3 +44,23 @@ def chirp(fs, f0, f1, T, initial_phase=0):
     # compute the chirp signal at the specified points in time
     signal = jnp.cos(phase_rad)
     return t, signal
+
+
+def chirp_centered(fs, fc, bw, T, initial_phase=0):
+    """Generates a frequency sweep from low to high over time defined by central frequency and bandwidth.
+
+    Args:
+        fs (float): Sample rate of chirp signal in Hz.
+        fc (float): Central frequency of chirp in Hz.
+        bw (float): Bandwidth (end frequency -  start frequency) of chirp in Hz.
+        T (float): Period of the chirp in seconds.
+        initial_phase (float): , phase at waveform start in radians, default is 0.
+
+    Returns:
+        jax.numpy.ndarray: Time domain chirp waveform.
+
+    Adapted from https://udel.edu/~mm/gr/chirp.py
+    """
+    f0 = fc - bw / 2.
+    f1 = fc + bw / 2.
+    return chirp(fs, f0, f1, T, initial_phase)
