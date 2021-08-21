@@ -66,8 +66,8 @@ def chirp_centered(fs, T, fc, bw, initial_phase=0):
     return chirp(fs, T, f0, f1, initial_phase)
 
 
-def boxcar(fs, T, box_start, box_end, initial_time=0):
-    """Generates a boxcar signal which is 1 between start and end times and 0 everwhere else
+def pulse(fs, T, box_start, box_end, initial_time=0):
+    """Generates a pulse signal which is 1 between start and end times and 0 everwhere else
 
     Args:
         fs (float): Sample rate of chirp signal in Hz.
