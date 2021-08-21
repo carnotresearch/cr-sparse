@@ -64,6 +64,7 @@ sparse representation and compressive sensing.
    intro
    tutorials/index
    start
+   fwsp/index
    source/index
    gallery/index
    benchmarks/index
