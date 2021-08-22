@@ -486,7 +486,7 @@ def solve(A, b, x0=None, z0=None, W=None, weights=None, nonneg=False, rho=0., de
         z0 = jnp.zeros(n)
 
     w = jnp.ones(n)
-    if weights:
+    if weights is not None:
         # make sure that the final weights are an array of size n
         w = w * weights
 
