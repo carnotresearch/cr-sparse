@@ -36,7 +36,9 @@ def test_zero():
     y = random.normal(keys[0], (n,))
     assert_allclose(Z.times(y), jnp.zeros((m,)))
     assert_allclose(Z.trans(x), jnp.zeros((n,)))
-
+    A = lop.to_matrix(Z)
+    A2 = lop.to_complex_matrix(Z)
+    assert_allclose(A, A2)
 
 def test_flipud():
     n = 4
