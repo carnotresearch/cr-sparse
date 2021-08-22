@@ -20,52 +20,6 @@ from jax import lax, jit
 import jax.numpy as jnp
 
 
-def fwht_ref(X):
-    """Computes the Fast Walsh Hadamard Transform over columns
-    """
-    n = X.shape[0]
-    # number of stages
-    s = (n-1).bit_length()
-
-    def init():
-        Y = jnp.empty(X.shape, dtype=X.dtype)
-        A  = X[0::2]
-        B = X[1::2]
-        Y = Y.at[0::2].set(A + B)
-        Y = Y.at[1::2].set(A - B)
-        return (Y, 1, 2, 4)
-
-    def body(state):
-        # gap between x entries
-        # number of x entries
-        X, count, gap, step = state
-        Y = jnp.empty(X.shape, dtype=X.dtype)
-        J = 0
-        k = 0
-        while k < n -1:
-            for j in range(J, J+gap-1, 2):
-                # compute the four parts
-                a = X[j]
-                b = X[j+gap]
-                c = X[j+1]
-                d = X[j+1+gap]
-                Y = Y.at[k].set(a+b)
-                Y = Y.at[k+1].set(a-b)
-                Y = Y.at[k+2].set(c-d)
-                Y = Y.at[k+3].set(c+d)
-                k += 4
-            J += step
-        return (Y, count+1, 2*gap, 2*step)
-
-    def cond(state):
-        count = state[1]
-        return count < s
-
-    state = init()
-    while cond(state):
-        state = body(state)
-    #state = lax.while_loop(cond, body, init())
-    return state[0]
 
 @jit
 def fwht(X):
