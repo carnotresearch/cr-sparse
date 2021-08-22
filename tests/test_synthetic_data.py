@@ -32,3 +32,13 @@ def test_sparse_vectors():
     assert len(support) == K*S
 
 
+def test_sparse_spikes():
+    key = random.PRNGKey(0)
+    N = 10
+    K = 4
+    x, omega = crdata.sparse_spikes(key, N, K)
+    assert len(omega) == K
+    assert x.shape == (N,)
+    support = crs.nonzero_indices(x)
+    assert len(support) == K
+
