@@ -81,7 +81,7 @@ from cr.sparse._src.lop.calculus import (
     second_derivative,
 )
 
-# Derivatives
+# Special matrices
 from cr.sparse._src.lop.special_matrices import (
     circulant,
 )
