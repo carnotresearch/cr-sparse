@@ -1,0 +1,6 @@
+﻿cr.sparse.dsp.dct
+=================
+
+.. currentmodule:: cr.sparse.dsp
+
+.. autofunction:: dct

@@ -5,9 +5,10 @@ CR.Sparse API Documentation
    :maxdepth: 1
    :caption: Contents:
 
+   dsp
+   wavelets
    dict
    lop
-   wavelets
    pursuit
    cvx_recovery
    data

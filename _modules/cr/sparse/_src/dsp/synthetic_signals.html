@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>cr.sparse._src.dsp.synthetic_signals &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../../../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../zzzreference.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>cr.sparse._src.dsp.synthetic_signals</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for cr.sparse._src.dsp.synthetic_signals</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2021 CR.Sparse Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+
+<span class="k">def</span> <span class="nf">time_values</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">initial_time</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="c1"># Number of samples</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fs</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span>
+    <span class="c1"># Points in time where the chirp will be computed.</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">initial_time</span><span class="p">,</span> <span class="n">initial_time</span><span class="o">+</span><span class="n">T</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t</span>
+
+<div class="viewcode-block" id="chirp"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dsp.signals.chirp.html#cr.sparse.dsp.signals.chirp">[docs]</a><span class="k">def</span> <span class="nf">chirp</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">f0</span><span class="p">,</span> <span class="n">f1</span><span class="p">,</span> <span class="n">initial_phase</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generates a frequency sweep from low to high over time.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fs (float): Sample rate of signal in Hz.</span>
+<span class="sd">        T (float): Period of the signal in seconds.</span>
+<span class="sd">        f0 (float): Start (lower) frequency of chirp in Hz.</span>
+<span class="sd">        f1 (float): Stop (upper) frequency of chirp in Hz.</span>
+<span class="sd">        initial_phase (float): phase at t=0 in radians, default is 0.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A tuple comprising (i) an array of time values in seconds and (ii) an array of signal values</span>
+
+<span class="sd">    Adapted from https://udel.edu/~mm/gr/chirp.py</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Chirp rate in Hz/s.</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">f1</span> <span class="o">-</span> <span class="n">f0</span><span class="p">)</span> <span class="o">/</span> <span class="n">T</span> 
+    <span class="c1"># Number of samples</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fs</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span>
+    <span class="c1"># Points in time where the chirp will be computed.</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># Instantaneous phase in Hz is integral of frequency, f(t) = ct + f0.</span>
+    <span class="n">phase_hz</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span> <span class="o">*</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">f0</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+    <span class="c1"># Convert to radians.</span>
+    <span class="n">phase_rad</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">phase_hz</span> 
+    <span class="c1"># Offset by user-specified initial phase</span>
+    <span class="n">phase_rad</span> <span class="o">+=</span> <span class="n">initial_phase</span>
+    <span class="c1"># compute the chirp signal at the specified points in time</span>
+    <span class="n">signal</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">phase_rad</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">signal</span></div>
+
+
+<div class="viewcode-block" id="chirp_centered"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dsp.signals.chirp_centered.html#cr.sparse.dsp.signals.chirp_centered">[docs]</a><span class="k">def</span> <span class="nf">chirp_centered</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">fc</span><span class="p">,</span> <span class="n">bw</span><span class="p">,</span> <span class="n">initial_phase</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generates a frequency sweep from low to high over time defined by central frequency and bandwidth.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fs (float): Sample rate of signal in Hz.</span>
+<span class="sd">        T (float): Period of the signal in seconds.</span>
+<span class="sd">        fc (float): Central frequency of chirp in Hz.</span>
+<span class="sd">        bw (float): Bandwidth (end frequency -  start frequency) of chirp in Hz.</span>
+<span class="sd">        initial_phase (float): phase at t=0 in radians, default is 0.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A tuple comprising (i) an array of time values in seconds and (ii) an array of signal values</span>
+
+<span class="sd">    Adapted from https://udel.edu/~mm/gr/chirp.py</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">f0</span> <span class="o">=</span> <span class="n">fc</span> <span class="o">-</span> <span class="n">bw</span> <span class="o">/</span> <span class="mf">2.</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="n">fc</span> <span class="o">+</span> <span class="n">bw</span> <span class="o">/</span> <span class="mf">2.</span>
+    <span class="k">return</span> <span class="n">chirp</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">f0</span><span class="p">,</span> <span class="n">f1</span><span class="p">,</span> <span class="n">initial_phase</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="pulse"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dsp.signals.pulse.html#cr.sparse.dsp.signals.pulse">[docs]</a><span class="k">def</span> <span class="nf">pulse</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">,</span> <span class="n">initial_time</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generates a pulse signal which is 1 between start and end times and 0 everwhere else</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fs (float): Sample rate of signal in Hz.</span>
+<span class="sd">        T (float): Period of the signal in seconds.</span>
+<span class="sd">        start_time (float): Start time of the box signal in seconds</span>
+<span class="sd">        end_time (float): End time of the box signal in seconds</span>
+<span class="sd">        initial_time (float): time at waveform start in seconds, default is 0.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A tuple comprising (i) an array of time values in seconds and (ii) an array of signal values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">time_values</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">initial_time</span><span class="p">)</span>
+    <span class="n">signal</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">t</span> <span class="o">&gt;=</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">end_time</span><span class="p">)</span>
+    <span class="n">signal</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">signal</span></div>
+
+<span class="k">def</span> <span class="nf">gaussian</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">initial_time</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generates a Gaussian signal</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fs (float): Sample rate of signal in Hz.</span>
+<span class="sd">        T (float): Period of the signal in seconds.</span>
+<span class="sd">        b (float): The location (in time) where the pulse is centered in seconds.</span>
+<span class="sd">        a (float): scale of Gaussian signal (in seconds).</span>
+<span class="sd">        initial_time (float): time at waveform start in seconds, default is 0.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A tuple comprising (i) an array of time values in seconds and (ii) an array of signal values</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">time_values</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">initial_time</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">tb</span> <span class="o">=</span> <span class="n">t</span> <span class="o">-</span> <span class="n">b</span>
+    <span class="c1"># square the scale s^2</span>
+    <span class="n">wsq</span> <span class="o">=</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span>
+    <span class="c1"># t^2</span>
+    <span class="n">xsq</span> <span class="o">=</span> <span class="n">tb</span><span class="o">**</span><span class="mi">2</span>
+    <span class="c1"># the gaussian term e^{-t^2/2a^2}</span>
+    <span class="n">gauss</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">xsq</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">wsq</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">gauss</span><span class="p">)</span>
+
+<div class="viewcode-block" id="decaying_sine_wave"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dsp.signals.decaying_sine_wave.html#cr.sparse.dsp.signals.decaying_sine_wave">[docs]</a><span class="k">def</span> <span class="nf">decaying_sine_wave</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">initial_phase</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">initial_time</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generates a decaying sinusoid</span>
+<span class="sd">    Args:</span>
+<span class="sd">        fs (float): Sample rate of signal in Hz.</span>
+<span class="sd">        T (float): Period of the signal in seconds.</span>
+<span class="sd">        f (float): Frequency of the sine wave in Hz.</span>
+<span class="sd">        alpha (float): Exponential decay factor in Hz.</span>
+<span class="sd">        initial_phase (float): phase at t=0 in radians, default is 0.</span>
+<span class="sd">        initial_time (float): time at waveform start in seconds, default is 0.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A tuple comprising (i) an array of time values in seconds and (ii) an array of signal values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">time_values</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">initial_time</span><span class="p">)</span>
+    <span class="n">phase</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">jnp</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">f</span><span class="o">*</span><span class="n">t</span>
+    <span class="n">phase</span> <span class="o">+=</span> <span class="n">initial_phase</span>
+    <span class="n">decay</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">alpha</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">signal</span> <span class="o">=</span> <span class="n">decay</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phase</span><span class="p">)</span> 
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">signal</span></div>
+
+<div class="viewcode-block" id="transient_sine_wave"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dsp.signals.transient_sine_wave.html#cr.sparse.dsp.signals.transient_sine_wave">[docs]</a><span class="k">def</span> <span class="nf">transient_sine_wave</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">,</span> <span class="n">initial_phase</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">initial_time</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generates a transient sinusoid between start and end times</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fs (float): Sample rate of signal in Hz.</span>
+<span class="sd">        T (float): Period of the signal in seconds.</span>
+<span class="sd">        f (float): Frequency of the sine wave in Hz.</span>
+<span class="sd">        start_time (float): Start time of the sine wave in seconds</span>
+<span class="sd">        end_time (float): End time of the sine wave in seconds</span>
+<span class="sd">        initial_phase (float): phase at t=0 in radians, default is 0.</span>
+<span class="sd">        initial_time (float): time at waveform start in seconds, default is 0.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A tuple comprising (i) an array of time values in seconds and (ii) an array of signal values</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            fs = 100</span>
+<span class="sd">            T = 16</span>
+<span class="sd">            f = 2</span>
+<span class="sd">            start_time = 2</span>
+<span class="sd">            end_time = 6</span>
+<span class="sd">            initial_time = -4</span>
+<span class="sd">            t, signal = transient_sine_wave(fs, T, f, start_time, end_time, initial_time=initial_time)        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">time_values</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">initial_time</span><span class="p">)</span>
+    <span class="n">phase</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">jnp</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">f</span><span class="o">*</span><span class="n">t</span>
+    <span class="n">phase</span> <span class="o">+=</span> <span class="n">initial_phase</span>
+    <span class="n">signal</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">phase</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">t</span> <span class="o">&lt;</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">t</span> <span class="o">&gt;=</span> <span class="n">end_time</span><span class="p">)</span>
+    <span class="n">signal</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">signal</span></div>
+
+<div class="viewcode-block" id="gaussian_pulse"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dsp.signals.gaussian_pulse.html#cr.sparse.dsp.signals.gaussian_pulse">[docs]</a><span class="k">def</span> <span class="nf">gaussian_pulse</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">bw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">bwr</span><span class="o">=-</span><span class="mi">6</span><span class="p">,</span> <span class="n">retquad</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">retenv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">initial_time</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generates a Gaussian modulated sinusoid</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fs (float): Sample rate of signal in Hz.</span>
+<span class="sd">        T (float): Period of the signal in seconds.</span>
+<span class="sd">        b (float): The location (in time) where the pulse is centered in seconds.</span>
+<span class="sd">        fc (float): Center frequency of the Gaussian Pulse in Hz.</span>
+<span class="sd">        bw (float): Fractional bandwidth in frequency domain of pulse.</span>
+<span class="sd">        bwr (float): Reference level at which fractional bandwidth is calculated (dB).</span>
+<span class="sd">        retquad (bool): Include/exclude quadrature(imaginary) part of the signal in the result</span>
+<span class="sd">        retenv (bool): Include/exclude the Gaussian envelope of the signal in the result</span>
+<span class="sd">        initial_time (float): time at waveform start in seconds, default is 0.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: A tuple comprising of </span>
+<span class="sd">        (i) t: time values in seconds at which the signal is computed.</span>
+<span class="sd">        (ii) real_part: values of the real part of the signal at these time values.</span>
+<span class="sd">        (iii) imag_part: values of the quadrature/imaginary part of the signal at these time values (if retquad is True).</span>
+<span class="sd">        (iv) envelope: values of the Gaussian envelope of the signal at these time values (if retenv is True).</span>
+
+<span class="sd">    Adapted from https://github.com/scipy/scipy/blob/v1.7.1/scipy/signal/waveforms.py#L161-L258</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">time_values</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">initial_time</span><span class="p">)</span>
+    <span class="n">ref</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">bwr</span> <span class="o">/</span> <span class="mf">20.0</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">fc</span> <span class="o">*</span> <span class="n">bw</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mf">4.0</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ref</span><span class="p">))</span>
+    <span class="n">tb</span> <span class="o">=</span> <span class="n">t</span> <span class="o">-</span> <span class="n">b</span>
+    <span class="n">envelope</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span> <span class="o">*</span> <span class="n">tb</span> <span class="o">*</span> <span class="n">tb</span><span class="p">)</span>
+    <span class="n">real_part</span> <span class="o">=</span> <span class="n">envelope</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">fc</span> <span class="o">*</span> <span class="n">tb</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">retquad</span><span class="p">:</span>
+        <span class="n">imag_part</span> <span class="o">=</span> <span class="n">envelope</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">fc</span> <span class="o">*</span> <span class="n">tb</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">retquad</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">retenv</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">real_part</span><span class="p">,</span> <span class="n">imag_part</span><span class="p">,</span> <span class="n">envelope</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">real_part</span><span class="p">,</span> <span class="n">imag_part</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">retenv</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">real_part</span><span class="p">,</span> <span class="n">envelope</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">real_part</span></div>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

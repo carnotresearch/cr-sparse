@@ -1,0 +1,6 @@
+﻿cr.sparse.dsp.fwht
+==================
+
+.. currentmodule:: cr.sparse.dsp
+
+.. autofunction:: fwht

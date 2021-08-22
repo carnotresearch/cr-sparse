@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Digital Signal Processing &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cr.sparse.dsp.signals.pulse" href="_autosummary/cr.sparse.dsp.signals.pulse.html" />
+    <link rel="prev" title="CR.Sparse API Documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CR.Sparse API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Digital Signal Processing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#synthetic-signals">Synthetic Signals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dsp.signals.pulse.html">cr.sparse.dsp.signals.pulse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dsp.signals.transient_sine_wave.html">cr.sparse.dsp.signals.transient_sine_wave</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dsp.signals.decaying_sine_wave.html">cr.sparse.dsp.signals.decaying_sine_wave</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dsp.signals.chirp.html">cr.sparse.dsp.signals.chirp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dsp.signals.chirp_centered.html">cr.sparse.dsp.signals.chirp_centered</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dsp.signals.gaussian_pulse.html">cr.sparse.dsp.signals.gaussian_pulse</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#discrete-cosine-transform">Discrete Cosine Transform</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dsp.dct.html">cr.sparse.dsp.dct</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dsp.idct.html">cr.sparse.dsp.idct</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dsp.orthonormal_dct.html">cr.sparse.dsp.orthonormal_dct</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dsp.orthonormal_idct.html">cr.sparse.dsp.orthonormal_idct</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#fast-walsh-hadamard-transform">Fast Walsh Hadamard Transform</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.dsp.fwht.html">cr.sparse.dsp.fwht</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="wavelets.html">Wavelets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lop.html">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">Utilities in cr.sparse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="la.html">Linear Algebra Subroutines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">CR.Sparse API Documentation</a> &raquo;</li>
+        
+      <li>Digital Signal Processing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/source/dsp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="digital-signal-processing">
+<h1>Digital Signal Processing<a class="headerlink" href="#digital-signal-processing" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#synthetic-signals" id="id1">Synthetic Signals</a></p></li>
+<li><p><a class="reference internal" href="#discrete-cosine-transform" id="id2">Discrete Cosine Transform</a></p></li>
+<li><p><a class="reference internal" href="#fast-walsh-hadamard-transform" id="id3">Fast Walsh Hadamard Transform</a></p></li>
+</ul>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">CR-Sparse</span></code> library has some handy digital signal processing routines
+implemented in JAX. They are available as part of the <code class="docutils literal notranslate"><span class="pre">cr.sparse.dsp</span></code>
+package.</p>
+<div class="section" id="synthetic-signals">
+<h2><a class="toc-backref" href="#id1">Synthetic Signals</a><a class="headerlink" href="#synthetic-signals" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dsp.signals.pulse.html#cr.sparse.dsp.signals.pulse" title="cr.sparse.dsp.signals.pulse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pulse</span></code></a></p></td>
+<td><p>Generates a pulse signal which is 1 between start and end times and 0 everwhere else</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dsp.signals.transient_sine_wave.html#cr.sparse.dsp.signals.transient_sine_wave" title="cr.sparse.dsp.signals.transient_sine_wave"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transient_sine_wave</span></code></a></p></td>
+<td><p>Generates a transient sinusoid between start and end times</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dsp.signals.decaying_sine_wave.html#cr.sparse.dsp.signals.decaying_sine_wave" title="cr.sparse.dsp.signals.decaying_sine_wave"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decaying_sine_wave</span></code></a></p></td>
+<td><p>Generates a decaying sinusoid :param fs: Sample rate of signal in Hz.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dsp.signals.chirp.html#cr.sparse.dsp.signals.chirp" title="cr.sparse.dsp.signals.chirp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chirp</span></code></a></p></td>
+<td><p>Generates a frequency sweep from low to high over time.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dsp.signals.chirp_centered.html#cr.sparse.dsp.signals.chirp_centered" title="cr.sparse.dsp.signals.chirp_centered"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chirp_centered</span></code></a></p></td>
+<td><p>Generates a frequency sweep from low to high over time defined by central frequency and bandwidth.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dsp.signals.gaussian_pulse.html#cr.sparse.dsp.signals.gaussian_pulse" title="cr.sparse.dsp.signals.gaussian_pulse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_pulse</span></code></a></p></td>
+<td><p>Generates a Gaussian modulated sinusoid</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="discrete-cosine-transform">
+<h2><a class="toc-backref" href="#id2">Discrete Cosine Transform</a><a class="headerlink" href="#discrete-cosine-transform" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dsp.dct.html#cr.sparse.dsp.dct" title="cr.sparse.dsp.dct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dct</span></code></a></p></td>
+<td><p>Computes the 1D Type-II DCT transform</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dsp.idct.html#cr.sparse.dsp.idct" title="cr.sparse.dsp.idct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idct</span></code></a></p></td>
+<td><p>Computes the 1D Type-II Inverse DCT transform</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dsp.orthonormal_dct.html#cr.sparse.dsp.orthonormal_dct" title="cr.sparse.dsp.orthonormal_dct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">orthonormal_dct</span></code></a></p></td>
+<td><p>Computes the 1D Type-II DCT transform such that the transform is orthonormal</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dsp.orthonormal_idct.html#cr.sparse.dsp.orthonormal_idct" title="cr.sparse.dsp.orthonormal_idct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">orthonormal_idct</span></code></a></p></td>
+<td><p>Computes the 1D Type-II IDCT transform such that the transform is orthonormal</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fast-walsh-hadamard-transform">
+<h2><a class="toc-backref" href="#id3">Fast Walsh Hadamard Transform</a><a class="headerlink" href="#fast-walsh-hadamard-transform" title="Permalink to this headline">¶</a></h2>
+<p>There is no separate Inverse Fast Walsh Hadamard Transform as FWHT is the inverse of
+itself except for a normalization factor.
+In other words,  <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">==</span> <span class="pre">fwht(fwht(x))</span> <span class="pre">/</span> <span class="pre">n</span></code> where n is the length of x.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dsp.fwht.html#cr.sparse.dsp.fwht" title="cr.sparse.dsp.fwht"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fwht</span></code></a></p></td>
+<td><p>Computes the Fast Walsh Hadamard Transform over columns</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="_autosummary/cr.sparse.dsp.signals.pulse.html" class="btn btn-neutral float-right" title="cr.sparse.dsp.signals.pulse" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="CR.Sparse API Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

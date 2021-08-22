@@ -1,0 +1,6 @@
+﻿cr.sparse.dsp.signals.decaying\_sine\_wave
+==========================================
+
+.. currentmodule:: cr.sparse.dsp.signals
+
+.. autofunction:: decaying_sine_wave

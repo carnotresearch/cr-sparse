@@ -1,0 +1,6 @@
+﻿cr.sparse.dsp.idct
+==================
+
+.. currentmodule:: cr.sparse.dsp
+
+.. autofunction:: idct

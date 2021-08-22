@@ -1,0 +1,6 @@
+﻿cr.sparse.dsp.signals.chirp
+===========================
+
+.. currentmodule:: cr.sparse.dsp.signals
+
+.. autofunction:: chirp
