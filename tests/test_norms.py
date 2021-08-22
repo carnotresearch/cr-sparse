@@ -65,3 +65,24 @@ def test_normalize_l2_cw():
 def test_normalize_l2_rw():
     Y = normalize_l2_rw(X2)
     check_approx_equal(norms_l2_rw(Y), jnp.array([1., 1.]))
+
+
+def test_norm_l1():
+    n = 32
+    x = jnp.arange(n)
+    assert jnp.sum(x) == norm_l1(x)
+
+def test_sqr_norm_l2():
+    n = 32
+    x = jnp.arange(n)
+    assert jnp.sum(x**2) == sqr_norm_l2(x)
+
+def test_norm_l2():
+    n = 32
+    x = jnp.arange(n)
+    assert jnp.sum(x**2) == norm_l2(x)**2
+
+def test_norm_inf():
+    n = 32
+    x = jnp.arange(n)
+    assert n-1 == norm_linf(x)
