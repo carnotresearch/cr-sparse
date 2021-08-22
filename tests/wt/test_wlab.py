@@ -80,3 +80,14 @@ def test_wavelet_function():
 
 def test_scaling_function():
     scaling_function(db4(), 0, 0, 16)
+
+
+def test_forward_periodized_orthogonal():
+    qmf = haar()
+    x  = random.normal(keys[0], (4,))
+    w = forward_periodized_orthogonal_jit(qmf, x)
+
+def test_inverse_periodized_orthogonal():
+    qmf = haar()
+    w  = random.normal(keys[0], (4,))
+    x = inverse_periodized_orthogonal_jit(qmf, w)
