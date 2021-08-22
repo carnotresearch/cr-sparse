@@ -94,7 +94,7 @@ def pulse(fs, T, start_time, end_time, initial_time=0):
     signal = signal.at[index].set(1)
     return t, signal
 
-def gaussian(fs, T, b, a=1.):
+def gaussian(fs, T, b, a=1., initial_time=0):
     """Generates a Gaussian signal
 
     Args:
@@ -108,19 +108,16 @@ def gaussian(fs, T, b, a=1.):
         A tuple comprising (i) an array of time values in seconds and (ii) an array of signal values
 
     """
-    s = jnp.atleast_2d(jnp.asarray(s)).T
-    # The normalization term 2 / (sqrt(3 s) pi^{1/4})
-    A = 2 / (jnp.sqrt(3 * s) * (jnp.pi**0.25))
+    t = time_values(fs, T, initial_time)
+    a = jnp.atleast_2d(jnp.asarray(a)).T
+    tb = t - b
     # square the scale s^2
-    wsq = s**2
+    wsq = a**2
     # t^2
-    xsq = t**2
-    # the modulation term (1 - t^2/a^2)
-    mod = (1 - xsq / wsq)
+    xsq = tb**2
     # the gaussian term e^{-t^2/2a^2}
     gauss = jnp.exp(-xsq / (2 * wsq))
-    total = A * mod * gauss
-    return jnp.squeeze(total)
+    return t, jnp.squeeze(gauss)
 
 def decaying_sine_wave(fs, T, f, alpha, initial_phase=0, initial_time=0):
     """Generates a decaying sinusoid

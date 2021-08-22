@@ -17,6 +17,7 @@ from cr.sparse._src.dsp.synthetic_signals import (
     chirp,
     chirp_centered,
     pulse,
+    gaussian,
     gaussian_pulse,
     decaying_sine_wave,
     transient_sine_wave
