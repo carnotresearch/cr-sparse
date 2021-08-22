@@ -5,6 +5,11 @@ from cr.sparse import *
 import jax.numpy as jnp
 from jax import random
 
+from numpy.testing import (assert_almost_equal, assert_allclose, assert_,
+                           assert_equal, assert_raises, assert_raises_regex,
+                           assert_array_equal, assert_warns)
+
+
 def test_find_first_signal_with_energy_le_rw():
     X = jnp.eye(10)
     X = X.at[5,5].set(.5)
@@ -168,3 +173,36 @@ def test_SignalsComparison():
     assert(len(snrs_cw(X, Y)) == s)
     assert(len(snrs_rw(X, Y)) == n)
     cmp = SignalsComparison(X[:,0], Y[:,0])
+
+def test_support():
+    x = jnp.concatenate((jnp.zeros(5), jnp.ones(5)))
+    i = support(x)
+    assert len(i) == 5
+
+def test_hard_threshold_by():
+    x = jnp.arange(10)
+    y = hard_threshold_by(x, 5)
+    i = support(y)
+    assert len(i) == 5
+
+def test_largest_indices_by():
+    x = jnp.arange(10)
+    y = largest_indices_by(x, 5)
+    assert len(y) == 5
+
+def test_normalize():
+    x = jnp.arange(10) * 1.
+    y = normalize(x)
+    assert_almost_equal(jnp.mean(y), 0)
+    assert_almost_equal(jnp.var(y), 1.)
+
+def test_frequency_spectrum():
+    t = jnp.linspace(0, 10, 1000)
+    f = 1
+    x = jnp.cos(2*jnp.pi*t)
+    n = len(x)
+    n2 = (n+1) // 2
+    f, sxx = frequency_spectrum(x)
+    assert len(f) == n2
+    assert len(sxx) == n2
+    assert jnp.all(sxx >= 0) 

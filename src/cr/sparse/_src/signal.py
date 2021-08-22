@@ -209,7 +209,7 @@ def frequency_spectrum(data):
     X = jfft.fft(data)
     sxx = ((X * jnp.conj(X)) / (n))
     f = -jfft.fftfreq(n)[n2:]
-    sxx = np.abs(sxx)
+    sxx = jnp.abs(sxx)
     sxx = sxx[n2:]
     return f, sxx
 

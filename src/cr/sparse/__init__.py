@@ -160,6 +160,10 @@ from cr.sparse._src.signal import (
     find_first_signal_with_energy_le_cw,
 )
 
+from cr.sparse._src.signal import (
+    frequency_spectrum
+)
+
 
 from cr.sparse._src.signalcomparison import (
     SignalsComparison,
