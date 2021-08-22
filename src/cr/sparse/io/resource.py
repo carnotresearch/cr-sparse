@@ -1,5 +1,8 @@
 
 
 from cr.sparse._src.io.resource import (
-    ensure_resource
+    is_valid_url,
+    CACHE_DIR,
+    ensure_resource,
+    get_uri
 )

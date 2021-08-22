@@ -52,10 +52,14 @@ def _initialize():
 _initialize()
 
 def ensure_resource(name, uri=None):
+    # technically this line is not required. But it helps in unit test coverage
+    _initialize()
     if is_valid_url(name):
         # it seems uri has been passed first
         name, uri = uri, name
     if name is None:
+        if uri is None:
+            return None
         # let's construct name from uri
         p = urlparse(uri)
         name = p.path.split('/')[-1]
@@ -65,7 +69,7 @@ def ensure_resource(name, uri=None):
         # It's already downloaded, nothing to do.
         return path
     if uri is None:
-        uri = _get_uri(name)
+        uri = get_uri(name)
     if uri is None:
         # We could not find the download URL
         return None
@@ -92,7 +96,7 @@ _KNOWN_RESOURCES = [
 ]
 
 
-def _get_uri(name):
+def get_uri(name):
     for res in _KNOWN_RESOURCES:
         if res.name == name:
             return res.uri
