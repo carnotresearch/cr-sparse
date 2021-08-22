@@ -49,7 +49,8 @@ Fast Walsh Hadamard Transform
 ------------------------------
 
 There is no separate Inverse Fast Walsh Hadamard Transform as FWHT is the inverse of
-itself. i.e. ``x == fwht(fwht(x))``.
+itself except for a normalization factor.
+In other words,  ``x == fwht(fwht(x)) / n`` where n is the length of x.
 
 .. autosummary::
     :nosignatures:
