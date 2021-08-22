@@ -86,6 +86,10 @@ class Operator(NamedTuple):
         """Returns the sum of this linear operator with another linear operator"""
         return add(self, other)
 
+    def __sub__(self, other):
+        """Returns the subtraction of this linear operator with another linear operator"""
+        return subtract(self, other)
+
     def __matmul__(self, other):
         """Returns the composition of this linear operator with another linear operator"""
         return compose(self, other)
