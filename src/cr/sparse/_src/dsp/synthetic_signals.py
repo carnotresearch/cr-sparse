@@ -33,8 +33,7 @@ def chirp(fs, T, f0, f1, initial_phase=0):
         initial_phase (float): phase at t=0 in radians, default is 0.
 
     Returns:
-        t (jax.numpy.ndarray): Time values in seconds at which the signal is computed.
-        signal (jax.numpy.ndarray): Values of the signal at these time values.
+        A tuple comprising (i) an array of time values in seconds and (ii) an array of signal values
 
     Adapted from https://udel.edu/~mm/gr/chirp.py
     """
@@ -66,8 +65,7 @@ def chirp_centered(fs, T, fc, bw, initial_phase=0):
         initial_phase (float): phase at t=0 in radians, default is 0.
 
     Returns:
-        t (jax.numpy.ndarray): Time values in seconds at which the signal is computed.
-        signal (jax.numpy.ndarray): Values of the signal at these time values.
+        A tuple comprising (i) an array of time values in seconds and (ii) an array of signal values
 
     Adapted from https://udel.edu/~mm/gr/chirp.py
     """
@@ -88,8 +86,7 @@ def pulse(fs, T, start_time, end_time, initial_time=0):
         initial_time (float): time at waveform start in seconds, default is 0.
 
     Returns:
-        t (jax.numpy.ndarray): Time values in seconds at which the signal is computed.
-        signal (jax.numpy.ndarray): Values of the signal at these time values.
+        A tuple comprising (i) an array of time values in seconds and (ii) an array of signal values
     """
     t = time_values(fs, T, initial_time)
     signal = jnp.zeros_like(t)
@@ -108,8 +105,7 @@ def gaussian(fs, T, b, a=1.):
         initial_time (float): time at waveform start in seconds, default is 0.
 
     Returns:
-        t (jax.numpy.ndarray): Time values in seconds at which the signal is computed.
-        signal (jax.numpy.ndarray): Values of the signal at these time values.
+        A tuple comprising (i) an array of time values in seconds and (ii) an array of signal values
 
     """
     s = jnp.atleast_2d(jnp.asarray(s)).T
@@ -137,8 +133,7 @@ def decaying_sine_wave(fs, T, f, alpha, initial_phase=0, initial_time=0):
         initial_time (float): time at waveform start in seconds, default is 0.
 
     Returns:
-        t (jax.numpy.ndarray): Time values in seconds at which the signal is computed.
-        signal (jax.numpy.ndarray): Values of the signal at these time values.
+        A tuple comprising (i) an array of time values in seconds and (ii) an array of signal values
     """
     t = time_values(fs, T, initial_time)
     phase = 2*jnp.pi*f*t
@@ -160,8 +155,18 @@ def transient_sine_wave(fs, T, f, start_time, end_time, initial_phase=0, initial
         initial_time (float): time at waveform start in seconds, default is 0.
 
     Returns:
-        t (jax.numpy.ndarray): Time values in seconds at which the signal is computed.
-        signal (jax.numpy.ndarray): Values of the signal at these time values.
+        A tuple comprising (i) an array of time values in seconds and (ii) an array of signal values
+
+    Example:
+        ::
+
+            fs = 100
+            T = 16
+            f = 2
+            start_time = 2
+            end_time = 6
+            initial_time = -4
+            t, signal = transient_sine_wave(fs, T, f, start_time, end_time, initial_time=initial_time)        
     """
     t = time_values(fs, T, initial_time)
     phase = 2*jnp.pi*f*t
@@ -186,10 +191,11 @@ def gaussian_pulse(fs, T, b, fc=1000, bw=0.5, bwr=-6, retquad=False, retenv=Fals
         initial_time (float): time at waveform start in seconds, default is 0.
 
     Returns:
-        t (jax.numpy.ndarray): Time values in seconds at which the signal is computed.
-        real_part (jax.numpy.ndarray): Values of the real part of the signal at these time values.
-        imag_part (jax.numpy.ndarray): Values of the quadrature/imaginary part of the signal at these time values (if retquad is True).
-        envelope (jax.numpy.ndarray): Values of the Gaussian envelope of the signal at these time values (if retenv is True).
+        tuple: A tuple comprising of 
+        (i) t: time values in seconds at which the signal is computed.
+        (ii) real_part: values of the real part of the signal at these time values.
+        (iii) imag_part: values of the quadrature/imaginary part of the signal at these time values (if retquad is True).
+        (iv) envelope: values of the Gaussian envelope of the signal at these time values (if retenv is True).
 
     Adapted from https://github.com/scipy/scipy/blob/v1.7.1/scipy/signal/waveforms.py#L161-L258
     """

@@ -21,7 +21,7 @@ import jax.numpy as jnp
 
 
 def fwht_ref(X):
-    """Computes the Fast Walsh Hadamard Transform over columns of :math:`X`
+    """Computes the Fast Walsh Hadamard Transform over columns
     """
     n = X.shape[0]
     # number of stages
@@ -69,7 +69,13 @@ def fwht_ref(X):
 
 @jit
 def fwht(X):
-    """Computes the Fast Walsh Hadamard Transform over columns of :math:`X`
+    """Computes the Fast Walsh Hadamard Transform over columns
+
+    Args:
+        X (jax.numpy.ndarray): The 1D real signal or 2D matrix where each column is a signal whose transform is to be computed
+
+    Returns:
+        jax.numpy.ndarray: The Fast Walsh Hadamard Transform coefficients of (columns of) X 
     """
     n = X.shape[0]
     # number of stages

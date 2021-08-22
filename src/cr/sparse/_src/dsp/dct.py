@@ -25,7 +25,13 @@ import jax.numpy as jnp
 import jax.numpy.fft as jfft
 
 def dct(y):
-    """Computes the 1D Type-II DCT transform of y
+    """Computes the 1D Type-II DCT transform
+
+    Args:
+        y (jax.numpy.ndarray): The 1D real signal
+
+    Returns:
+        jax.numpy.ndarray: The Type-II Discrete Cosine Transform coefficients of y
     """
     n = y.shape[0]
     y2 = jnp.concatenate( (y[:],  y[::-1]))
@@ -37,8 +43,14 @@ def dct(y):
 
 
 def idct(a):
-    """Computes the 1D Type-II IDCT transform of a
-    """
+    """Computes the 1D Type-II Inverse DCT transform
+
+    Args:
+        a (jax.numpy.ndarray): The Type-II DCT transform coefficients of a 1D real signal
+
+    Returns:
+        jax.numpy.ndarray: The 1D real signal y s.t. a = dct(y)
+     """
     n = a.shape[0]
     shape = (1,)+a.shape[1:]
     ks = jnp.arange(n)
@@ -50,7 +62,19 @@ def idct(a):
 
 
 def orthonormal_dct(y):
-    """Computes the 1D Type-II DCT transform of y such that the transform is orthonormal
+    """Computes the 1D Type-II DCT transform such that the transform is orthonormal
+
+    Args:
+        y (jax.numpy.ndarray): The 1D real signal
+
+    Returns:
+        jax.numpy.ndarray: The orthonormal Type-II Discrete Cosine Transform coefficients of y 
+
+    Orthonormality ensures that
+
+    .. math::
+
+        \langle a, a \\rangle = \langle y, y \\rangle
     """
     n = y.shape[0]
     factor = jnp.sqrt(1/(2*n))
@@ -67,7 +91,13 @@ def orthonormal_dct(y):
     return prod
 
 def orthonormal_idct(a):
-    """Computes the 1D Type-II IDCT transform of a such that the transform is orthonormal
+    """Computes the 1D Type-II IDCT transform such that the transform is orthonormal
+
+    Args:
+        a (jax.numpy.ndarray): The orthonormal Type-II DCT transform coefficients of a 1D real signal
+
+    Returns:
+        jax.numpy.ndarray: The 1D real signal y s.t. a = orthonormal_dct(y)
     """
     n = a.shape[0]
     factor = jnp.sqrt(2*n)
