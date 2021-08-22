@@ -7,3 +7,10 @@ It is a set of tools to evaluate the performance of sparse recovery algorithms:
 * Success rates across multiple sparsity levels
 
 .. currentmodule:: cr.sparse
+
+.. autosummary::
+    :toctree: _autosummary
+
+    ef.RecoveryPerformance
+    ef.RecoveryTrialsAtFixed_M_N
+

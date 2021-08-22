@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>cr.sparse._src.ef.performance &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../../../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../zzzreference.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>cr.sparse._src.ef.performance</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for cr.sparse._src.ef.performance</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2021 CR.Sparse Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+
+<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="p">(</span><span class="n">nonzero_indices</span><span class="p">,</span> 
+    <span class="n">largest_indices</span><span class="p">,</span> 
+    <span class="n">build_signal_from_indices_and_values</span><span class="p">,</span>
+    <span class="n">dynamic_range</span><span class="p">,</span>
+    <span class="n">nonzero_dynamic_range</span>
+<span class="p">)</span>
+
+<div class="viewcode-block" id="RecoveryPerformance"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.ef.RecoveryPerformance.html#cr.sparse.ef.RecoveryPerformance">[docs]</a><span class="k">class</span> <span class="nc">RecoveryPerformance</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Performance of a sparse signal recovery operation</span>
+<span class="sd"> </span>
+<span class="sd">    * Synthesis :math:`y = \\Phi x + e`</span>
+<span class="sd">    * Recovery: :math:`y = \\Phi \\hat{x} + r`</span>
+<span class="sd">    * Representation error: :math:`h = x - \\hat{x}`</span>
+<span class="sd">    * Residual: :math:`y - \\Phi \\hat{x}`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">M</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Signal/Measurement space dimension, number of rows in :math:`\\Phi`&quot;&quot;&quot;</span>
+    <span class="n">N</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Representation space dimension, number of atoms/columns in :math:`\\Phi`&quot;&quot;&quot;</span>
+    <span class="n">K</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Number of non-zero entries in :math:`x`&quot;&quot;&quot;</span>
+    <span class="n">T0</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&quot;&quot;&quot;The index set of K non-zero coefficients in :math:`x`&quot;&quot;&quot;</span>
+    <span class="n">x_norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;norm of representation :math:`x`&quot;&quot;&quot;</span>
+    <span class="n">y_norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;norm of measurement/signal :math:`y`&quot;&quot;&quot;</span>
+    <span class="n">x_hat_norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;norm of the reconstruction :math:`\\hat{x}`&quot;&quot;&quot;</span>
+    <span class="n">x_dr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot; Dynamic range of x &quot;&quot;&quot;</span>
+    <span class="n">y_dr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot; Dynamic range of y &quot;&quot;&quot;</span>
+    <span class="n">x_hat_dr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot; Dynamic range of x_hat &quot;&quot;&quot;</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&quot;&quot;&quot;Recovery/reconstruction error :math:`h = x - \\hat{x}`&quot;&quot;&quot;</span>
+    <span class="n">h_norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Norm of reconstruction error :math:`h`&quot;&quot;&quot;</span>
+    <span class="n">recovery_snr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Reconstruction/recovery SNR (dB) in representation space :math:`20 \\log (\\| x \\|_2 / \\| h \\|_2)`&quot;&quot;&quot;</span>
+    <span class="n">R0</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&quot;&quot;&quot;Index set of K largest (magnitude) entries in the reconstruction :math:`\\hat{x}`&quot;&quot;&quot;</span>
+    <span class="n">overlap</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&quot;&quot;&quot;Indices overlapping between T0 and R0  :math:`T_0 \\cap R_0`&quot;&quot;&quot;</span>
+    <span class="n">num_correct_atoms</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Number of entries in the overlap, i.e. number of indices of the support correctly recovered&quot;&quot;&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&quot;&quot;&quot;The residual :math:`r = y - \\Phi \\hat{x}`&quot;&quot;&quot;</span>
+    <span class="n">r_norm</span> <span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Norm of the residual&quot;&quot;&quot;</span>
+    <span class="n">measurement_snr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Measurement SNR (dB) in measurement/signal space :math:`20 \\log (\\| y \\|_2 / \\| r \\|_2)`&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="RecoveryPerformance.__init__"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.ef.RecoveryPerformance.html#cr.sparse.ef.RecoveryPerformance.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x_hat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sol</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Computes all parameters related to the quality of reconstruction</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Shape of the dictionary/sensing matrix</span>
+        <span class="n">M</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">if</span> <span class="n">sol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x_hat</span> <span class="o">=</span> <span class="n">build_signal_from_indices_and_values</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">x_I</span><span class="p">)</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">T0</span> <span class="o">=</span> <span class="n">nonzero_indices</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">K</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">T0</span><span class="o">.</span><span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">M</span> <span class="o">=</span> <span class="n">M</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">N</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">=</span> <span class="n">K</span>
+        <span class="c1"># Norm of representation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># Norm of measurement/signal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="c1"># Norm of the reconstructed representation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_hat_norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x_hat</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_dr</span> <span class="o">=</span> <span class="n">nonzero_dynamic_range</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_dr</span> <span class="o">=</span> <span class="n">dynamic_range</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_hat_dr</span> <span class="o">=</span> <span class="n">nonzero_dynamic_range</span><span class="p">(</span><span class="n">x_hat</span><span class="p">)</span>
+        <span class="c1"># recovery error vector. N length vector</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x_hat</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">h</span>
+        <span class="c1"># l_2 norm of representation error</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+        <span class="c1"># recovery SNR</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recovery_snr</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_norm</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">h_norm</span><span class="p">)</span>
+        <span class="c1"># The portion of recovery error over T0 K length vector</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_T0</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">T0</span><span class="p">]</span> 
+        <span class="c1"># Positions of other places (set of indices)</span>
+        <span class="n">index_set</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">T0C</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">index_set</span> <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">T0</span><span class="p">)</span>
+        <span class="c1"># Recovery error at T0C places N length vector</span>
+        <span class="n">hT0C</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">T0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_T0C</span> <span class="o">=</span> <span class="n">hT0C</span>
+        <span class="c1"># The K largest indices after T0 in recovery error (set of indices)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">T1</span> <span class="o">=</span> <span class="n">largest_indices</span><span class="p">(</span><span class="n">hT0C</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+        <span class="c1"># The recovery error component over T1. [K] length vector.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_T1</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">T1</span><span class="p">]</span>
+        <span class="c1"># Remaining indices [N - 2K] set of indices</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TRest</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T0C</span> <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">T1</span><span class="p">)</span>
+        <span class="c1"># Recovery error over remaining indices [N - 2K] length vector</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_TRest</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">TRest</span><span class="p">]</span>
+        <span class="c1"># largest indices of the recovered vector</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">R0</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">largest_indices</span><span class="p">(</span><span class="n">x_hat</span><span class="p">,</span> <span class="n">K</span><span class="p">))</span>
+        <span class="c1"># Support Overlap</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">overlap</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">intersect1d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">R0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_correct_atoms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">overlap</span><span class="o">.</span><span class="n">size</span>
+        <span class="c1"># measurement/signal residual vector [M] length vector</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="n">Phi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x_hat</span><span class="p">)</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="s1">&#39;times&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">Phi</span> <span class="o">@</span> <span class="n">x_hat</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="n">r</span>
+        <span class="c1"># Norm of measurement error.  This must be less than epsilon</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r_norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="c1"># Measurement SNR</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">measurement_snr</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y_norm</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">r_norm</span><span class="p">)</span>
+        <span class="c1"># Ratio between the norm of recovery error and measurement error</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_by_r_norms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">h_norm</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">r_norm</span></div>
+
+    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Prints metrics related to reconstruction quality&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;M: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="si">}</span><span class="s1">, N: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="si">}</span><span class="s1">, K: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x_norm: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x_norm</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">, y_norm: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">y_norm</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x_hat_norm: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x_hat_norm</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">, h_norm: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">h_norm</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">, r_norm: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">r_norm</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;recovery_snr: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">recovery_snr</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB, measurement_snr: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">measurement_snr</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x_dr: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x_dr</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB, y_dr: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">y_dr</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB, x_hat_dr: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x_hat_dr</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> dB&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;T0: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">T0</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;R0: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">R0</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Overlap: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">overlap</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Correct atoms: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">num_correct_atoms</span><span class="si">}</span><span class="s1">. Ratio: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">support_recovery_ratio</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">, perfect_support_recovery: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">perfect_support_recovery</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;success: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">support_recovery_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the ratio of correctly recovered atoms&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_correct_atoms</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">perfect_support_recovery</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns if the support has been recovered perfectly&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_correct_atoms</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns True if more than 75% indices are correctly identified and recovery SNR is high (&gt; 30 dB)&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">support_recovery_ratio</span> <span class="o">&gt;</span> <span class="mf">0.75</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">recovery_snr</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

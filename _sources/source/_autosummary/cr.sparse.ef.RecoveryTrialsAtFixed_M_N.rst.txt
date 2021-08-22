@@ -1,0 +1,24 @@
+﻿cr.sparse.ef.RecoveryTrialsAtFixed\_M\_N
+========================================
+
+.. currentmodule:: cr.sparse.ef
+
+.. autoclass:: RecoveryTrialsAtFixed_M_N
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~RecoveryTrialsAtFixed_M_N.__init__
+      ~RecoveryTrialsAtFixed_M_N.add_solver
+      ~RecoveryTrialsAtFixed_M_N.save
+   
+   
+
+   
+   
+   

@@ -5,8 +5,8 @@
 
 Computation times
 =================
-**00:00.080** total execution time for **gallery_lop** files:
+**00:00.083** total execution time for **gallery_lop** files:
 
 +-------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_lop_matrix_operator.py` (``matrix_operator.py``) | 00:00.080 | 0.0 MB |
+| :ref:`sphx_glr_gallery_lop_matrix_operator.py` (``matrix_operator.py``) | 00:00.083 | 0.0 MB |
 +-------------------------------------------------------------------------+-----------+--------+

@@ -1,0 +1,386 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>cr.sparse.ef.RecoveryPerformance &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script src="../../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="cr.sparse.ef.RecoveryTrialsAtFixed_M_N" href="cr.sparse.ef.RecoveryTrialsAtFixed_M_N.html" />
+    <link rel="prev" title="Evaluation Framework" href="../ef.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">CR.Sparse API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../dsp.html">Digital Signal Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wavelets.html">Wavelets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lop.html">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../ef.html">Evaluation Framework</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">cr.sparse.ef.RecoveryPerformance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cr.sparse.ef.RecoveryTrialsAtFixed_M_N.html">cr.sparse.ef.RecoveryTrialsAtFixed_M_N</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra Subroutines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../zzzreference.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">CR.Sparse API Documentation</a> &raquo;</li>
+        
+          <li><a href="../ef.html">Evaluation Framework</a> &raquo;</li>
+        
+      <li>cr.sparse.ef.RecoveryPerformance</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/source/_autosummary/cr.sparse.ef.RecoveryPerformance.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="cr-sparse-ef-recoveryperformance">
+<h1>cr.sparse.ef.RecoveryPerformance<a class="headerlink" href="#cr-sparse-ef-recoveryperformance" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="cr.sparse.ef.RecoveryPerformance">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cr.sparse.ef.</span></span><span class="sig-name descname"><span class="pre">RecoveryPerformance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_hat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/ef/performance.html#RecoveryPerformance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.ef.RecoveryPerformance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performance of a sparse signal recovery operation</p>
+<ul class="simple">
+<li><p>Synthesis <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span></p></li>
+<li><p>Recovery: <span class="math notranslate nohighlight">\(y = \Phi \hat{x} + r\)</span></p></li>
+<li><p>Representation error: <span class="math notranslate nohighlight">\(h = x - \hat{x}\)</span></p></li>
+<li><p>Residual: <span class="math notranslate nohighlight">\(y - \Phi \hat{x}\)</span></p></li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="cr.sparse.ef.RecoveryPerformance.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_hat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/ef/performance.html#RecoveryPerformance.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.ef.RecoveryPerformance.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes all parameters related to the quality of reconstruction</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cr.sparse.ef.RecoveryPerformance.__init__" title="cr.sparse.ef.RecoveryPerformance.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(Phi, y, x[, x_hat, sol])</p></td>
+<td><p>Computes all parameters related to the quality of reconstruction</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">print</span></code>()</p></td>
+<td><p>Prints metrics related to reconstruction quality</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">K</span></code></p></td>
+<td><p>Number of non-zero entries in <span class="math notranslate nohighlight">\(x\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">M</span></code></p></td>
+<td><p>Signal/Measurement space dimension, number of rows in <span class="math notranslate nohighlight">\(\Phi\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">N</span></code></p></td>
+<td><p>Representation space dimension, number of atoms/columns in <span class="math notranslate nohighlight">\(\Phi\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">R0</span></code></p></td>
+<td><p>Index set of K largest (magnitude) entries in the reconstruction <span class="math notranslate nohighlight">\(\hat{x}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">T0</span></code></p></td>
+<td><p>The index set of K non-zero coefficients in <span class="math notranslate nohighlight">\(x\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">h</span></code></p></td>
+<td><p>Recovery/reconstruction error <span class="math notranslate nohighlight">\(h = x - \hat{x}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">h_norm</span></code></p></td>
+<td><p>Norm of reconstruction error <span class="math notranslate nohighlight">\(h\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">measurement_snr</span></code></p></td>
+<td><p>Measurement SNR (dB) in measurement/signal space <span class="math notranslate nohighlight">\(20 \log (\| y \|_2 / \| r \|_2)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_correct_atoms</span></code></p></td>
+<td><p>Number of entries in the overlap, i.e. number of indices of the support correctly recovered.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">overlap</span></code></p></td>
+<td><p>Indices overlapping between T0 and R0  <span class="math notranslate nohighlight">\(T_0 \cap R_0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">perfect_support_recovery</span></code></p></td>
+<td><p>Returns if the support has been recovered perfectly</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">r</span></code></p></td>
+<td><p>The residual <span class="math notranslate nohighlight">\(r = y - \Phi \hat{x}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">r_norm</span></code></p></td>
+<td><p>Norm of the residual</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">recovery_snr</span></code></p></td>
+<td><p>Reconstruction/recovery SNR (dB) in representation space <span class="math notranslate nohighlight">\(20 \log (\| x \|_2 / \| h \|_2)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">success</span></code></p></td>
+<td><p>Returns True if more than 75% indices are correctly identified and recovery SNR is high (&gt; 30 dB)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">support_recovery_ratio</span></code></p></td>
+<td><p>Returns the ratio of correctly recovered atoms</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">x_dr</span></code></p></td>
+<td><p>Dynamic range of x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">x_hat_dr</span></code></p></td>
+<td><p>Dynamic range of x_hat</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">x_hat_norm</span></code></p></td>
+<td><p>norm of the reconstruction <span class="math notranslate nohighlight">\(\hat{x}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">x_norm</span></code></p></td>
+<td><p>norm of representation <span class="math notranslate nohighlight">\(x\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">y_dr</span></code></p></td>
+<td><p>Dynamic range of y</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">y_norm</span></code></p></td>
+<td><p>norm of measurement/signal <span class="math notranslate nohighlight">\(y\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="cr.sparse.ef.RecoveryTrialsAtFixed_M_N.html" class="btn btn-neutral float-right" title="cr.sparse.ef.RecoveryTrialsAtFixed_M_N" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../ef.html" class="btn btn-neutral float-left" title="Evaluation Framework" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

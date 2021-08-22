@@ -205,7 +205,7 @@
 
 
 <div class="viewcode-block" id="matrix_solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.htp.matrix_solve.html#cr.sparse.pursuit.htp.matrix_solve">[docs]</a><span class="k">def</span> <span class="nf">matrix_solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">res_norm_rtol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem :math:`y = \Phi x + e` using Hard Thresholding Pursuit for matrices</span>
+    <span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem :math:`y = \\Phi x + e` using Hard Thresholding Pursuit for matrices</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">## Initialize some constants for the algorithm</span>
     <span class="n">M</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">shape</span>
@@ -311,7 +311,7 @@
 
 
 <div class="viewcode-block" id="operator_solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.htp.operator_solve.html#cr.sparse.pursuit.htp.operator_solve">[docs]</a><span class="k">def</span> <span class="nf">operator_solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">res_norm_rtol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem :math:`y = \Phi x + e` using Hard Thresholding Pursuit for linear operators</span>
+    <span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem :math:`y = \\Phi x + e` using Hard Thresholding Pursuit for linear operators</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">## Initialize some constants for the algorithm</span>
     <span class="n">M</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">shape</span>

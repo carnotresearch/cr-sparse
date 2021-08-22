@@ -1,0 +1,408 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>cr.sparse._src.ef.trials_at_fixed_m_n &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../../../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../zzzreference.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>cr.sparse._src.ef.trials_at_fixed_m_n</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for cr.sparse._src.ef.trials_at_fixed_m_n</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2021 CR.Sparse Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+
+<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">pursuit</span>
+<span class="kn">import</span> <span class="nn">cr.sparse.data</span> <span class="k">as</span> <span class="nn">crdata</span>
+<span class="kn">import</span> <span class="nn">cr.sparse.dict</span> <span class="k">as</span> <span class="nn">crdict</span>
+
+<span class="kn">from</span> <span class="nn">.performance</span> <span class="kn">import</span> <span class="n">RecoveryPerformance</span>
+
+
+<span class="k">class</span> <span class="nc">Row</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">m</span> <span class="p">:</span> <span class="nb">int</span>
+    <span class="n">n</span> <span class="p">:</span> <span class="nb">int</span>
+    <span class="n">k</span> <span class="p">:</span> <span class="nb">int</span>
+    <span class="n">trials</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">successes</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">failures</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">success_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">min_iters</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">max_iters</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">mean_iters</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">runtime</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">mean_runtime</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<div class="viewcode-block" id="RecoveryTrialsAtFixed_M_N"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.ef.RecoveryTrialsAtFixed_M_N.html#cr.sparse.ef.RecoveryTrialsAtFixed_M_N">[docs]</a><span class="k">class</span> <span class="nc">RecoveryTrialsAtFixed_M_N</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Experiment of sparse recovery trials for multiple solvers at fixed dictionary size</span>
+
+<span class="sd">    Procedure</span>
+
+<span class="sd">    * Setup the experiment parameters</span>
+<span class="sd">    * Add the solvers to be evaluated under the experiment</span>
+<span class="sd">    * Run the experiment (specify the CSV file in which the results will be saved)</span>
+
+<span class="sd">    The results are saved automatically during the experiment.</span>
+
+<span class="sd">    Sample usage::</span>
+
+<span class="sd">        from functools import partial</span>
+<span class="sd">        import jax.numpy as jnp</span>
+<span class="sd">        from cr.sparse.pursuit.eval import RecoveryTrialsAtFixed_M_N</span>
+<span class="sd">        from cr.sparse.pursuit import htp</span>
+
+<span class="sd">        Ks = jnp.array(list(range(1, 4)) + list(range(4, 60, 8)))</span>
+<span class="sd">        evaluation = RecoveryTrialsAtFixed_M_N(</span>
+<span class="sd">            M = 200,</span>
+<span class="sd">            N = 1000,</span>
+<span class="sd">            Ks = Ks,</span>
+<span class="sd">            num_dict_trials = 1,</span>
+<span class="sd">            num_signal_trials = 20</span>
+<span class="sd">        )</span>
+<span class="sd">        # Add multiple solvers</span>
+<span class="sd">        htp_solve_jit = partial(htp.solve_jit, normalized=False)</span>
+<span class="sd">        nhtp_solve_jit = partial(htp.solve_jit, normalized=True)</span>
+<span class="sd">        evaluation.add_solver(&#39;HTP&#39;, htp_solve_jit)</span>
+<span class="sd">        evaluation.add_solver(&#39;NHTP&#39;, nhtp_solve_jit)</span>
+<span class="sd">        # Run evaluation</span>
+<span class="sd">        evaluation(&#39;record_combined_performance.csv&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="RecoveryTrialsAtFixed_M_N.__init__"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.ef.RecoveryTrialsAtFixed_M_N.html#cr.sparse.ef.RecoveryTrialsAtFixed_M_N.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">Ks</span><span class="p">,</span> <span class="n">num_dict_trials</span><span class="p">,</span> <span class="n">num_signal_trials</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initializes the experiment parameters.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            M: (fixed) signal/measurement space dimension</span>
+<span class="sd">            N: (fixed) number of atoms / representation space dimension</span>
+<span class="sd">            Ks: Different values of sparsity levels for which experiments will be run</span>
+<span class="sd">            num_dict_trials: Number of dictionaries sampled for each value of K</span>
+<span class="sd">            num_signal_trials: Number of sparse vectors sampled for each sampled dictionary for each K</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">M</span>  <span class="o">=</span> <span class="n">M</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">N</span>  <span class="o">=</span> <span class="n">N</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Ks</span> <span class="o">=</span> <span class="n">Ks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_dict_trials</span> <span class="o">=</span> <span class="n">num_dict_trials</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_signal_trials</span> <span class="o">=</span> <span class="n">num_signal_trials</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">Row</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">add_solver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">solver</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;name&quot;</span> <span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+            <span class="s2">&quot;solver&quot;</span> <span class="p">:</span> <span class="n">solver</span>
+        <span class="p">})</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Runs the smulation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">destination</span> <span class="o">=</span> <span class="n">destination</span>
+        <span class="k">for</span> <span class="n">solver</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">solvers</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_process</span><span class="p">(</span><span class="n">solver</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">solver</span><span class="p">[</span><span class="s1">&#39;solver&#39;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Saves the experiment results in the CSV file&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">destination</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">solver</span><span class="p">):</span>
+        <span class="c1"># Copy configuration</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">N</span>
+        <span class="n">Ks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ks</span>
+        <span class="n">num_dict_trials</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_dict_trials</span>
+        <span class="n">num_signal_trials</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_signal_trials</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span>
+        <span class="c1"># Seed the JAX random number generator</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">K</span> <span class="ow">in</span> <span class="n">Ks</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">K=</span><span class="si">{</span><span class="n">K</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+            <span class="c1"># Keys for tests</span>
+            <span class="n">key</span><span class="p">,</span> <span class="n">subkey</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">dict_keys</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">num_dict_trials</span><span class="p">)</span>
+            <span class="n">trials</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">successes</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">success_rate</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">iters</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1"># Iterate over number of trials (dictionaries * signals)</span>
+            <span class="k">for</span> <span class="n">ndt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_dict_trials</span><span class="p">):</span>
+                <span class="n">dict_key</span> <span class="o">=</span> <span class="n">dict_keys</span><span class="p">[</span><span class="n">ndt</span><span class="p">]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="c1"># Construct a dictionary</span>
+                <span class="n">Phi</span> <span class="o">=</span> <span class="n">crdict</span><span class="o">.</span><span class="n">gaussian_mtx</span><span class="p">(</span><span class="n">dict_key</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+                <span class="n">signal_keys</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">dict_key</span><span class="p">,</span> <span class="n">num_dict_trials</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">nst</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_signal_trials</span><span class="p">):</span>
+                    <span class="n">signal_key</span> <span class="o">=</span> <span class="n">signal_keys</span><span class="p">[</span><span class="n">nst</span><span class="p">]</span>
+                    <span class="c1"># Construct a signal</span>
+                    <span class="n">x</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">crdata</span><span class="o">.</span><span class="n">sparse_normal_representations</span><span class="p">(</span><span class="n">signal_key</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                    <span class="c1"># Compute the measurements</span>
+                    <span class="n">y</span> <span class="o">=</span> <span class="n">Phi</span> <span class="o">@</span> <span class="n">x</span>
+                    <span class="c1"># Run the solver</span>
+                    <span class="n">sol</span> <span class="o">=</span> <span class="n">solver</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+                    <span class="c1"># Measure recovery performance</span>
+                    <span class="n">rp</span> <span class="o">=</span> <span class="n">RecoveryPerformance</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">sol</span><span class="o">=</span><span class="n">sol</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">trials</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="c1"># first trial is for JIT compilation.</span>
+                        <span class="c1"># We start time measurement after that.</span>
+                        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+                    <span class="n">trials</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">success</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">rp</span><span class="o">.</span><span class="n">success</span><span class="p">)</span>
+                    <span class="n">successes</span> <span class="o">+=</span>  <span class="n">rp</span><span class="o">.</span><span class="n">success</span>
+                    <span class="n">iters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">iterations</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+&#39;</span> <span class="k">if</span> <span class="n">success</span> <span class="k">else</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+            <span class="c1"># number of failures</span>
+            <span class="n">failures</span> <span class="o">=</span> <span class="n">trials</span> <span class="o">-</span> <span class="n">successes</span>
+            <span class="c1"># success rate</span>
+            <span class="n">success_rate</span> <span class="o">=</span> <span class="n">successes</span> <span class="o">/</span> <span class="n">trials</span>
+            <span class="n">iters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">iters</span><span class="p">)</span>
+            <span class="n">runtime</span><span class="o">=</span><span class="n">end_time</span><span class="o">-</span><span class="n">start_time</span> <span class="c1"># in seconds</span>
+            <span class="n">mean_runtime</span><span class="o">=</span><span class="n">runtime</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="p">(</span><span class="n">trials</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># in milli seconds</span>
+            <span class="c1"># summarized information</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">Row</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="n">M</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> 
+                <span class="n">trials</span><span class="o">=</span><span class="n">trials</span><span class="p">,</span> <span class="n">successes</span><span class="o">=</span><span class="n">successes</span><span class="p">,</span> 
+                <span class="n">failures</span><span class="o">=</span><span class="n">failures</span><span class="p">,</span> <span class="n">success_rate</span><span class="o">=</span><span class="n">success_rate</span><span class="p">,</span>
+                <span class="n">min_iters</span><span class="o">=</span><span class="n">iters</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">max_iters</span><span class="o">=</span><span class="n">iters</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">mean_iters</span><span class="o">=</span><span class="n">iters</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+                <span class="n">runtime</span><span class="o">=</span><span class="n">end_time</span><span class="o">-</span><span class="n">start_time</span><span class="p">,</span> <span class="n">mean_runtime</span><span class="o">=</span><span class="n">mean_runtime</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)]</span> <span class="o">=</span> <span class="n">row</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
+   
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

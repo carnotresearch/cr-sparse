@@ -1,0 +1,50 @@
+﻿cr.sparse.ef.RecoveryPerformance
+================================
+
+.. currentmodule:: cr.sparse.ef
+
+.. autoclass:: RecoveryPerformance
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~RecoveryPerformance.__init__
+      ~RecoveryPerformance.print
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~RecoveryPerformance.K
+      ~RecoveryPerformance.M
+      ~RecoveryPerformance.N
+      ~RecoveryPerformance.R0
+      ~RecoveryPerformance.T0
+      ~RecoveryPerformance.h
+      ~RecoveryPerformance.h_norm
+      ~RecoveryPerformance.measurement_snr
+      ~RecoveryPerformance.num_correct_atoms
+      ~RecoveryPerformance.overlap
+      ~RecoveryPerformance.perfect_support_recovery
+      ~RecoveryPerformance.r
+      ~RecoveryPerformance.r_norm
+      ~RecoveryPerformance.recovery_snr
+      ~RecoveryPerformance.success
+      ~RecoveryPerformance.support_recovery_ratio
+      ~RecoveryPerformance.x_dr
+      ~RecoveryPerformance.x_hat_dr
+      ~RecoveryPerformance.x_hat_norm
+      ~RecoveryPerformance.x_norm
+      ~RecoveryPerformance.y_dr
+      ~RecoveryPerformance.y_norm
+   
+   
