@@ -25,16 +25,16 @@ from cr.sparse import (nonzero_indices,
 class RecoveryPerformance:
     """Performance of a sparse signal recovery operation
  
-    * Synthesis :math:`y = \Phi x + e`
-    * Recovery: :math:`y = \Phi \hat{x} + r`
-    * Representation error: :math:`h = x - \hat{x}`
-    * Residual: :math:`y - \Phi \hat{x}`
+    * Synthesis :math:`y = \\Phi x + e`
+    * Recovery: :math:`y = \\Phi \\hat{x} + r`
+    * Representation error: :math:`h = x - \\hat{x}`
+    * Residual: :math:`y - \\Phi \\hat{x}`
     """
 
     M : int = 0
-    """Signal/Measurement space dimension, number of rows in :math:`\Phi`"""
+    """Signal/Measurement space dimension, number of rows in :math:`\\Phi`"""
     N : int = 0
-    """Representation space dimension, number of atoms/columns in :math:`\Phi`"""
+    """Representation space dimension, number of atoms/columns in :math:`\\Phi`"""
     K: int = 0
     """Number of non-zero entries in :math:`x`"""
     T0 = []
@@ -44,7 +44,7 @@ class RecoveryPerformance:
     y_norm: float = 0
     """norm of measurement/signal :math:`y`"""
     x_hat_norm: float = 0
-    """norm of the reconstruction :math:`\hat{x}`"""
+    """norm of the reconstruction :math:`\\hat{x}`"""
     x_dr: float = 0
     """ Dynamic range of x """
     y_dr: float = 0
@@ -52,23 +52,23 @@ class RecoveryPerformance:
     x_hat_dr: float = 0
     """ Dynamic range of x_hat """
     h = []
-    """Recovery/reconstruction error :math:`h = x - \hat{x}`"""
+    """Recovery/reconstruction error :math:`h = x - \\hat{x}`"""
     h_norm: float = 0
     """Norm of reconstruction error :math:`h`"""
     recovery_snr: float = 0
-    """Reconstruction/recovery SNR (dB) in representation space :math:`20 \log (\| x \|_2 / \| h \|_2)`"""
+    """Reconstruction/recovery SNR (dB) in representation space :math:`20 \\log (\\| x \\|_2 / \\| h \\|_2)`"""
     R0 = []
-    """Index set of K largest (magnitude) entries in the reconstruction :math:`\hat{x}`"""
+    """Index set of K largest (magnitude) entries in the reconstruction :math:`\\hat{x}`"""
     overlap = []
-    """Indices overlapping between T0 and R0  :math:`T_0 \cap R_0`"""
+    """Indices overlapping between T0 and R0  :math:`T_0 \\cap R_0`"""
     num_correct_atoms : int = 0
     """Number of entries in the overlap, i.e. number of indices of the support correctly recovered"""
     r = []
-    """The residual :math:`r = y - \Phi \hat{x}`"""
+    """The residual :math:`r = y - \\Phi \\hat{x}`"""
     r_norm : float = 0
     """Norm of the residual"""
     measurement_snr: float = 0
-    """Measurement SNR (dB) in measurement/signal space :math:`20 \log (\| y \|_2 / \| r \|_2)`"""
+    """Measurement SNR (dB) in measurement/signal space :math:`20 \\log (\\| y \\|_2 / \\| r \\|_2)`"""
 
     def __init__(self, Phi, y, x, x_hat=None, sol=None):
         """Computes all parameters related to the quality of reconstruction

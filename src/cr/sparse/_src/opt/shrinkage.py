@@ -17,6 +17,6 @@ import jax.numpy as jnp
 
 
 def shrink(a, kappa):
-    """Shrinks a signal by $\kappa$
+    """Shrinks a signal by :math:`\\kappa`
     """
     return jnp.maximum(0, a - kappa) + jnp.minimum(0, a + kappa)

@@ -74,7 +74,7 @@ def orthonormal_dct(y):
 
     .. math::
 
-        \langle a, a \\rangle = \langle y, y \\rangle
+        \\langle a, a \\rangle = \\langle y, y \\rangle
     """
     n = y.shape[0]
     factor = jnp.sqrt(1/(2*n))

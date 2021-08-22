@@ -29,7 +29,7 @@ import cr.sparse.lop as lop
 
 
 def matrix_solve(Phi, y, K, normalized=False, step_size=None, max_iters=None, res_norm_rtol=1e-4):
-    """Solves the sparse recovery problem :math:`y = \Phi x + e` using Hard Thresholding Pursuit for matrices
+    """Solves the sparse recovery problem :math:`y = \\Phi x + e` using Hard Thresholding Pursuit for matrices
     """
     ## Initialize some constants for the algorithm
     M, N = Phi.shape
@@ -135,7 +135,7 @@ matrix_solve_jit  = jit(matrix_solve, static_argnums=(2),
 
 
 def operator_solve(Phi, y, K, normalized=False, step_size=None, max_iters=None, res_norm_rtol=1e-4):
-    """Solves the sparse recovery problem :math:`y = \Phi x + e` using Hard Thresholding Pursuit for linear operators
+    """Solves the sparse recovery problem :math:`y = \\Phi x + e` using Hard Thresholding Pursuit for linear operators
     """
     ## Initialize some constants for the algorithm
     M, N = Phi.shape

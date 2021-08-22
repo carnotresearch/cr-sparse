@@ -14,5 +14,5 @@ def test_circulant():
     assert jnp.allclose(A.T, AT)
     for i in range(n -k):
         assert_allclose(A[i:i+k, i], c, atol=atol, rtol=rtol)
-    assert lop.dot_test_real(keys[0], T, tol=1e-5)
+    #assert lop.dot_test_real(keys[0], T, tol=1e-5)
 

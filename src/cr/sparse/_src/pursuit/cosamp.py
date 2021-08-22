@@ -25,7 +25,7 @@ EXTRA_FACTOR = 2
 
 
 def matrix_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
-    """Solves the sparse recovery problem :math:`y = \Phi x + e` using Compressive Sampling Matching Pursuit for matrices
+    """Solves the sparse recovery problem :math:`y = \\Phi x + e` using Compressive Sampling Matching Pursuit for matrices
     """
     M = y.shape[0]
     ## Initialize some constants for the algorithm
@@ -122,7 +122,7 @@ def matrix_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
 matrix_solve_jit = jit(matrix_solve, static_argnums=(2,), static_argnames=("max_iters", "res_norm_rtol"))
 
 def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
-    """Solves the sparse recovery problem :math:`y = \Phi x + e` using Compressive Sampling Matching Pursuit for linear operators
+    """Solves the sparse recovery problem :math:`y = \\Phi x + e` using Compressive Sampling Matching Pursuit for linear operators
     """
     trans = Phi.trans
     M = y.shape[0]
