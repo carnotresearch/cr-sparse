@@ -89,7 +89,7 @@ To cite this repository:
 `Issues <https://github.com/carnotresearch/cr-sparse/issues>`_ | 
 `Discussions <https://github.com/carnotresearch/cr-sparse/discussions>`_ |
 `Examples <https://github.com/carnotresearch/cr-sparse/blob/master/notebooks/README.rst>`_ |
-`Experiments <https://github.com/carnotresearch/cr-sparse/blob/master/experiments/README.rst>`_ |
+`Experiments <https://github.com/carnotresearch/cr-sparse/blob/master/notebooks/experiments/README.rst>`_ |
 `Sparse-Plex <https://sparse-plex.readthedocs.io>`_
 
 
