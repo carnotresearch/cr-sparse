@@ -84,35 +84,35 @@ def up_sample_hi_pass(h, x):
         return aconv(g, x)
 
 
-def up_sample_cdjv(x, h, left_edge, right_edge):
-        """Performs upsampling with filtering and boundary correction"""
-        #TODO complete this one 
-        n = x.shape[0]
-        h_len = h.shape[0]
-        m = h_len // 2
-        # Create a padded version of y
-        y_padded = jnp.zeros(2*n + 3*m + 1, dtype=x.dtype)
-        # fill the middle part with data from x with zero filling
-        # copy n - 2 * m values.
-        start = m+1
-        end = m + 2 * (n  - 2* m)
-        y_padded = y_padded.at[start:end:2].set(x[m: n - m])        
-        # filter
-        y_padded = jnp.convolve(y_padded, h)
-        # Identify left and right edge values
-        left_data = x[:m]
-        right_data = x[n-1:(n - (m  - 1)):-1]
-        # Computed the left and right boundary corrected values
-        left_bc = jnp.vdot(left_edge, left_data)
-        right_bc = jnp.vdot(right_edge, right_data)
-        # final computation of y
-        y = jnp.zeros(2*n, dtype=x.dtype)
-        # copy left boundary corrected values
-        # y(1:3*m - 1) = left_bc(:)
-        # y(2*n:-1:(2*n - 3*m + 2)) = right_bc(:)
-        # add the middle values
-        # y = y + y_padded(1:2*n)
-        return y
+# def up_sample_cdjv(x, h, left_edge, right_edge):
+#         """Performs upsampling with filtering and boundary correction"""
+#         #TODO complete this one 
+#         n = x.shape[0]
+#         h_len = h.shape[0]
+#         m = h_len // 2
+#         # Create a padded version of y
+#         y_padded = jnp.zeros(2*n + 3*m + 1, dtype=x.dtype)
+#         # fill the middle part with data from x with zero filling
+#         # copy n - 2 * m values.
+#         start = m+1
+#         end = m + 2 * (n  - 2* m)
+#         y_padded = y_padded.at[start:end:2].set(x[m: n - m])        
+#         # filter
+#         y_padded = jnp.convolve(y_padded, h)
+#         # Identify left and right edge values
+#         left_data = x[:m]
+#         right_data = x[n-1:(n - (m  - 1)):-1]
+#         # Computed the left and right boundary corrected values
+#         left_bc = jnp.vdot(left_edge, left_data)
+#         right_bc = jnp.vdot(right_edge, right_data)
+#         # final computation of y
+#         y = jnp.zeros(2*n, dtype=x.dtype)
+#         # copy left boundary corrected values
+#         # y(1:3*m - 1) = left_bc(:)
+#         # y(2*n:-1:(2*n - 3*m + 2)) = right_bc(:)
+#         # add the middle values
+#         # y = y + y_padded(1:2*n)
+#         return y
 
 
 def downsampling_convolution_periodization(h, x):
