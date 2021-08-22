@@ -7,6 +7,7 @@ scipy
 matplotlib
 imageio
 click
+requests
 pillow
 PyWavelets
 sphinx==4.0.0
