@@ -110,6 +110,28 @@ def test_composition():
     assert_allclose(C.times(x), A.times(B.times(x)))
 
 
+def test_transpose():
+    m, n = 4,6
+    A = random.normal(keys[0], (m,n))
+    T = lop.matrix(A)
+    TT = lop.transpose(T)
+    F = lop.to_matrix(TT)
+    FT  = lop.to_adjoint_matrix(TT)
+    assert_allclose(F, A.T)
+    assert_allclose(FT, A)
+    assert_allclose(FT, F.T)
+
+def test_hermitian():
+    m, n = 4,6
+    A = random.normal(keys[0], (m,n))
+    T = lop.matrix(A)
+    TT = lop.hermitian(T)
+    F = lop.to_matrix(TT)
+    FT  = lop.to_adjoint_matrix(TT)
+    assert_allclose(F, A.T)
+    assert_allclose(FT, A)
+    assert_allclose(FT, F.T)
+
 def test_exponentiation():
     n = 4
     A = lop.matrix(random.normal(keys[0], (n,n)))
@@ -119,3 +141,12 @@ def test_exponentiation():
 
     x = random.normal(keys[5], (n,))
     assert_allclose(B.times(x), A.times(A.times(A.times(x))))
+
+
+def test_column():
+    m, n = 4, 8
+    A = random.normal(keys[0], (m,n))
+    T = lop.matrix(A)
+    assert_allclose(lop.column(T, 1), A[:,1])
+    indices = (1,2)
+    assert_allclose(lop.columns(T, indices), A[:,indices])
