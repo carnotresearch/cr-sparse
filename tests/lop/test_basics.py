@@ -52,8 +52,8 @@ def test_flipud():
     assert_allclose(F.trans(F.times(x)), x)
     assert_allclose(F.times(F.times(X)), X)
     assert_allclose(F.trans(F.times(X)), X)
-    lop.dot_test_real(keys[0], F)
-    lop.dot_test_complex(keys[0], F)
+    assert lop.dot_test_real(keys[0], F)
+    assert lop.dot_test_complex(keys[0], F)
 
 
 def test_sum():
@@ -67,5 +67,56 @@ def test_sum():
     s = jnp.sum(x)
     assert_allclose(T.times(x), s) 
     assert_allclose(T.trans(s), jnp.ones(n) * s) 
-    lop.dot_test_real(keys[0], T)
-    lop.dot_test_complex(keys[0], T)
+    assert lop.dot_test_real(keys[0], T)
+    assert lop.dot_test_complex(keys[0], T)
+
+
+def test_zero_padding():
+    n = 4
+    T = lop.jit(lop.pad_zeros(n, 2, 2))
+    assert not T.matrix_safe
+    x = jnp.arange(n) + 1.
+    y = T.times(x)
+    z = jnp.zeros(2)
+    yy = jnp.concatenate((z, x, z))
+    assert_allclose(y, yy) 
+    k = 8
+    X = jnp.reshape(jnp.arange(n*k), (n,k)) + 1.
+    Z = jnp.zeros((2, k))
+    Y  = jnp.vstack((Z, X, Z))
+    assert_allclose(T.times_2d(X), Y) 
+    assert lop.dot_test_real(keys[0], T)
+ 
+
+def test_real_part():
+    n = 4
+    T = lop.jit(lop.real(n))
+    x = jnp.arange(n) + 1.
+    xx = x + 4j
+    assert_allclose(T.times(xx), x)
+    assert_allclose(T.trans(T.times(xx)), x)
+    assert lop.dot_test_real(keys[0], T)
+    assert lop.dot_test_complex(keys[0], T)
+
+
+def test_symmetrize():
+    n = 4
+    T = lop.jit(lop.symmetrize(n))
+    x = random.normal(keys[0], (n,))
+    y = jnp.concatenate((x[::-1], x))
+    assert_allclose(T.times(x), y)
+    assert_allclose(T.trans(T.times(x)), 2*x)
+    assert lop.dot_test_real(keys[1], T)
+    assert lop.dot_test_complex(keys[1], T)
+
+
+def test_resriction():
+    n = 4
+    index = jnp.array([0, 2])
+    T = lop.jit(lop.restriction(n, index))
+    x = random.normal(keys[0], (n,))
+    assert_allclose(T.times(x), x[index])
+    y = jnp.zeros_like(x).at[index].set(x[index])
+    assert lop.dot_test_real(keys[0], T)
+    assert_allclose(T.trans(T.times(x)), y)
+    assert lop.dot_test_complex(keys[1], T)
