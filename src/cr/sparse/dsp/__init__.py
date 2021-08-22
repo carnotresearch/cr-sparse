@@ -21,6 +21,5 @@ from cr.sparse._src.dsp.dct import (
 
 
 from cr.sparse._src.dsp.wht import (
-    fwht_ref,
     fwht,
 )
