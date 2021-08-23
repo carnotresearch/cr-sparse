@@ -4,7 +4,7 @@ import jax.numpy as jnp
 from jax import jit
 from jax import random 
 
-def sparse_normal_representations(key, D, K, S):
+def sparse_normal_representations(key, D, K, S=1):
     """
     Generates a block of representation vectors where each vector is
     K-sparse, the non-zero basis indexes are randomly selected
