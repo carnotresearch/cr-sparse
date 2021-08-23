@@ -89,6 +89,8 @@ class DiscreteWavelet(NamedTuple):
     """Number of vanishing moments of the scaling function"""
 
     def __str__(self):
+        """Returns the string representation of the discrete wavelet object
+        """
         s = []
         for x in [
             u"Wavelet %s"           % self.name,
@@ -105,6 +107,13 @@ class DiscreteWavelet(NamedTuple):
         return u'\n'.join(s)
 
     def wavefun(self, level=8):
+        """Returns the scaling and wavelet functions for the wavelet
+
+        Args:
+            level (:obj:`int`, optional): Number of levels of reconstruction 
+                to get the approximation of scaling and wavelet functions. 
+                Default 8.
+        """
         from .discrete import orth_wavefun, biorth_wavefun
         if self.orthogonal:
             return orth_wavefun(self, level=level)
@@ -114,9 +123,7 @@ class DiscreteWavelet(NamedTuple):
 
     @property
     def filter_bank(self):
-        """Returns the Quadratrure Mirror Filter Bank associated with the wavelet
-
-        (dec_lo, dec_hi, rec_lo, rec_hi)
+        """Returns the Quadratrure Mirror Filter Bank associated with the wavelet (dec_lo, dec_hi, rec_lo, rec_hi)
         """
         return (self.dec_lo, self.dec_hi, self.rec_lo, self.rec_hi)
 
@@ -566,7 +573,38 @@ def build_continuous_wavelet(name: str, family: FAMILY, order: int):
     return None
 
 def build_wavelet(name):
-    """Builds a wavelet object by its name
+    """Builds a wavelet object by the name of the wavelet
+
+    Args:
+        name (str): Name of the wavelet
+
+    Returns:
+        cr.sparse.wt.DiscreteWavelet: a discrete wavelet object
+
+    Example:
+        ::
+
+            >>> wavelet = wt.build_wavelet('db1')
+            >>> print(wavelet)
+            Wavelet db1
+                Family name:    Daubechies
+                Short name:     db
+                Filters length: 2
+                Orthogonal:     True
+                Biorthogonal:   True
+                Symmetry:       asymmetric
+                DWT:            True
+                CWT:            False
+            >>> dec_lo, dec_hi, rec_lo, rec_hi = wavelet.filter_bank
+            >>> print(dec_lo)
+            >>> print(dec_hi)
+            >>> print(rec_lo)
+            >>> print(rec_hi)
+            [0.70710678 0.70710678]
+            [-0.70710678  0.70710678]
+            [0.70710678 0.70710678]
+            [ 0.70710678 -0.70710678]
+            >>> phi, psi, x = wavelet.wavefun()
     """
     name = name.lower()
     family, order = wname_to_family_order(name)

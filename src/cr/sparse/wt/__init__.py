@@ -49,6 +49,7 @@ from cr.sparse._src.wt.util import (
 )
 
 from cr.sparse._src.wt.transform import (
+    pad_,
     # Single level transforms
     # 1D
     dwt_,

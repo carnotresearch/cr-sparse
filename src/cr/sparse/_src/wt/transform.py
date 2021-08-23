@@ -98,6 +98,25 @@ def dwt_(data, dec_lo, dec_hi, mode):
 
 def dwt(data, wavelet, mode="symmetric", axis=-1):
     """Computes single level discrete wavelet decomposition
+
+    Args:
+        data (jax.numpy.ndarray): Input signal array whose DWT is to be computed 
+        wavelet (str or cr.sparse.wt.DiscreteWavelet): The wavelet to be used to compute DWT (by name or object) 
+        mode (:obj:`str`, optional): Signal extension mode to be used during DWT computation. Default 'symmetric'. 
+            See :ref:`Modes <ref-wt-modes>` for available modes.
+        axis (int, optional): The axis along which the vectors from data will be picked for computing DWT. Default -1 (last axis).    
+
+    Returns:
+        (jax.numpy.ndarray, jax.numpy.ndarray): A tuple (cA, cD) containing the approximation and detail coefficients for the data.
+
+    Example:
+        Computing the haar/db1 wavelet decomposition::
+
+            >>> ca, cd = wt.dwt([1,2,3,4,4,3,2,1], 'db1')
+            >>> print(ca)
+            >>> print(cd)
+            [2.12132034 4.94974747 4.94974747 2.12132034]
+            [-0.70710678 -0.70710678  0.70710678  0.70710678]
     """
     wavelet = ensure_wavelet_(wavelet)
     data = jnp.asarray(data)

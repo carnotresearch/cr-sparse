@@ -249,12 +249,48 @@ def _check_kind(name, kind):
         return not is_discrete
 
 def families(short=True):
+    """Returns the list of (discrete) wavelet families supported by this package.
+
+    Args:
+        short (:obj:`bool`, optional): Use short names for the wavelet families. Default True.
+
+    Returns:
+        :obj:`list` of :obj:`str`: A list of family names
+
+
+    For the Daubechies wavelet family, the short name is *db* 
+    and the long name is *Daubechies*.
+
+    Example:
+        Current support is limited to following families::
+
+            >>> wt.families()
+            ['haar', 'db', 'sym', 'coif', 'bior', 'rbio', 'dmey']
+    """
     if short:
         return _family_short_names
     return _family_long_names
 
 def wavelist(family=None, kind='all'):
-    """Returns the list of wavelts supported by this library
+    """Returns the list of wavelts supported by this library for a specific wavelet family.
+
+
+    Args:
+        family (:obj:`str`, optional): The short name of wavelet family. If unspecified the list of 
+            wavelets for all families will be returned. Default None.
+        kind (:obj:`{'all', 'continuous', 'discrete'}`, optional): Specifies what type of wavelet 
+            families to cover. Default "all". 
+
+    Returns:
+        :obj:`list` of :obj:`str`: A list of wavelet names (for the specified family)
+
+    At the moment, no continuous wavelets are listed here.
+
+    Example:
+        ::
+
+            >>> wt.wavelist('haar')
+            ['haar']
     """
     if kind not in ('all', 'continuous', 'discrete'):
         raise ValueError(f"Unrecognized value for `kind`: {kind}")
