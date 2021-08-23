@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.pcg.solve
+=======================
+
+.. currentmodule:: cr.sparse.opt.pcg
+
+.. autofunction:: solve

@@ -5,6 +5,20 @@
 
 .. autoclass:: DiscreteWavelet
 
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DiscreteWavelet.__init__
+      ~DiscreteWavelet.count
+      ~DiscreteWavelet.index
+      ~DiscreteWavelet.wavefun
+   
+   
 
    
    

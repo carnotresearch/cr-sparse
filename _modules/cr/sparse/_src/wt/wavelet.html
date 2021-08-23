@@ -265,6 +265,8 @@
     <span class="sd">&quot;&quot;&quot;Number of vanishing moments of the scaling function&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the string representation of the discrete wavelet object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span>
             <span class="sa">u</span><span class="s2">&quot;Wavelet </span><span class="si">%s</span><span class="s2">&quot;</span>           <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
@@ -281,6 +283,13 @@
         <span class="k">return</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">wavefun</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the scaling and wavelet functions for the wavelet</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            level (:obj:`int`, optional): Number of levels of reconstruction </span>
+<span class="sd">                to get the approximation of scaling and wavelet functions. </span>
+<span class="sd">                Default 8.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.discrete</span> <span class="kn">import</span> <span class="n">orth_wavefun</span><span class="p">,</span> <span class="n">biorth_wavefun</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">orthogonal</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">orth_wavefun</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
@@ -290,9 +299,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">filter_bank</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the Quadratrure Mirror Filter Bank associated with the wavelet</span>
-
-<span class="sd">        (dec_lo, dec_hi, rec_lo, rec_hi)</span>
+        <span class="sd">&quot;&quot;&quot;Returns the Quadratrure Mirror Filter Bank associated with the wavelet (dec_lo, dec_hi, rec_lo, rec_hi)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dec_lo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dec_hi</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rec_lo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rec_hi</span><span class="p">)</span>
 
@@ -742,7 +749,38 @@
     <span class="k">return</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="build_wavelet"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.wt.build_wavelet.html#cr.sparse.wt.build_wavelet">[docs]</a><span class="k">def</span> <span class="nf">build_wavelet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Builds a wavelet object by its name</span>
+    <span class="sd">&quot;&quot;&quot;Builds a wavelet object by the name of the wavelet</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (str): Name of the wavelet</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        cr.sparse.wt.DiscreteWavelet: a discrete wavelet object</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; wavelet = wt.build_wavelet(&#39;db1&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; print(wavelet)</span>
+<span class="sd">            Wavelet db1</span>
+<span class="sd">                Family name:    Daubechies</span>
+<span class="sd">                Short name:     db</span>
+<span class="sd">                Filters length: 2</span>
+<span class="sd">                Orthogonal:     True</span>
+<span class="sd">                Biorthogonal:   True</span>
+<span class="sd">                Symmetry:       asymmetric</span>
+<span class="sd">                DWT:            True</span>
+<span class="sd">                CWT:            False</span>
+<span class="sd">            &gt;&gt;&gt; dec_lo, dec_hi, rec_lo, rec_hi = wavelet.filter_bank</span>
+<span class="sd">            &gt;&gt;&gt; print(dec_lo)</span>
+<span class="sd">            &gt;&gt;&gt; print(dec_hi)</span>
+<span class="sd">            &gt;&gt;&gt; print(rec_lo)</span>
+<span class="sd">            &gt;&gt;&gt; print(rec_hi)</span>
+<span class="sd">            [0.70710678 0.70710678]</span>
+<span class="sd">            [-0.70710678  0.70710678]</span>
+<span class="sd">            [0.70710678 0.70710678]</span>
+<span class="sd">            [ 0.70710678 -0.70710678]</span>
+<span class="sd">            &gt;&gt;&gt; phi, psi, x = wavelet.wavefun()</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
     <span class="n">family</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="n">wname_to_family_order</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>

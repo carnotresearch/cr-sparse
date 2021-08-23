@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.project\_to\_ball
+===============================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: project_to_ball

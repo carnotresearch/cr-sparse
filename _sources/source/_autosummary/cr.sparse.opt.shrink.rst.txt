@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.shrink
+====================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: shrink

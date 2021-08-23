@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.cg.solve\_from\_jit
+=================================
+
+.. currentmodule:: cr.sparse.opt.cg
+
+.. autofunction:: solve_from_jit

@@ -274,6 +274,25 @@
 
 <div class="viewcode-block" id="dwt"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.wt.dwt.html#cr.sparse.wt.dwt">[docs]</a><span class="k">def</span> <span class="nf">dwt</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">wavelet</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;symmetric&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Computes single level discrete wavelet decomposition</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (jax.numpy.ndarray): Input signal array whose DWT is to be computed </span>
+<span class="sd">        wavelet (str or cr.sparse.wt.DiscreteWavelet): The wavelet to be used to compute DWT (by name or object) </span>
+<span class="sd">        mode (:obj:`str`, optional): Signal extension mode to be used during DWT computation. Default &#39;symmetric&#39;. </span>
+<span class="sd">            See :ref:`Modes &lt;ref-wt-modes&gt;` for available modes.</span>
+<span class="sd">        axis (int, optional): The axis along which the vectors from data will be picked for computing DWT. Default -1 (last axis).    </span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray, jax.numpy.ndarray): A tuple (cA, cD) containing the approximation and detail coefficients for the data.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        Computing the haar/db1 wavelet decomposition::</span>
+
+<span class="sd">            &gt;&gt;&gt; ca, cd = wt.dwt([1,2,3,4,4,3,2,1], &#39;db1&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; print(ca)</span>
+<span class="sd">            &gt;&gt;&gt; print(cd)</span>
+<span class="sd">            [2.12132034 4.94974747 4.94974747 2.12132034]</span>
+<span class="sd">            [-0.70710678 -0.70710678  0.70710678  0.70710678]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">wavelet</span> <span class="o">=</span> <span class="n">ensure_wavelet_</span><span class="p">(</span><span class="n">wavelet</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>

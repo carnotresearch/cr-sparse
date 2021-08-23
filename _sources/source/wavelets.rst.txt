@@ -1,18 +1,37 @@
 Wavelets
 =====================
 
-
 .. contents::
     :depth: 2
     :local:
 
-This is a partial port of wavelets functionality from the `PyWavelets <https://pywavelets.readthedocs.io/en/latest/>`_ project. 
+
+``CR-Sparse`` provides support for both DWT (Discrete Wavelet Transform)
+and CWT (Continuous Wavelet Transform).
+
+
+The support for discrete wavelets is a partial port of 
+wavelets functionality from the `PyWavelets <https://pywavelets.readthedocs.io/en/latest/>`_ project. 
 The functionality has been written on top of JAX. While PyWavelets gets its performance from the C extensions in its 
 implementation, we have built the functionality on top of JAX API. 
 
 - API and implementation are both based on functional programming paradigm.
 - There are no C extensions. All implementation is pure Python.
 - The implementation takes advantage of XLA and can run easily on GPUs and TPUs.
+
+Continuous Wavelet Transform have been implemented following :cite:`torrence1998practical`.
+A reference implementation using NumPy is 
+`here <https://github.com/aaren/wavelets>`_. 
+
+
+The code examples in this section will assume following imports::
+
+  import cr.sparse as crs
+  import cr.sparse.wt as wt
+
+
+Discrete Wavelets
+--------------------------------------
 
 
 API is available at two levels
@@ -37,7 +56,7 @@ Following wavelets are supported.
 
 
 High-level API
-----------------------
+'''''''''''''''''''''''''''''''
 
 .. rubric:: Data types
 
@@ -48,6 +67,11 @@ High-level API
 
     FAMILY
     SYMMETRY
+
+.. autosummary::
+  :nosignatures:
+  :toctree: _autosummary
+
     DiscreteWavelet
 
 .. rubric:: Wavelets
@@ -55,6 +79,7 @@ High-level API
 .. autosummary::
   :toctree: _autosummary
 
+  families
   build_wavelet
   wavelist
   is_discrete_wavelet
@@ -97,7 +122,7 @@ High-level API
     up_sample
 
 Lower-level API
-----------------------
+'''''''''''''''''''''''''''''
 
 
 .. autosummary::
@@ -109,3 +134,77 @@ Lower-level API
   upcoef_
   dwt_axis_
   idwt_axis_
+
+
+.. _ref-wt-modes:
+
+Signal Extension Modes
+''''''''''''''''''''''''''''''''
+
+Real world signals are finite. They are typically stored in 
+finite size arrays in computers. Computing the wavelet transform
+of signal values around the boundary of the signal inevitably involves
+assuming some form of signal extrapolation. A simple extrapolation
+method is to extend the signal with zeros at the boundary. 
+Reconstruction of the signal from its wavelet coefficients may introduce
+boundary artifacts based on how the signal was extrapolated. A careful
+choice of signal extension method is necessary based on actual 
+application. 
+
+We provide following signal extension modes at the moment.
+
+zero
+  Signal is extended by adding zeros::
+
+    >>> wt.pad(jnp.array([1,2,4,-1,2,-1]), 2, 'zero')
+    DeviceArray([ 0,  0,  1,  2,  4, -1,  2, -1,  0,  0], dtype=int64)
+
+
+constant
+  Border values of the signal are replicated::
+
+    >>> wt.pad(jnp.array([1,2,4,-1,2,-1]), 2, 'constant')
+    DeviceArray([ 1,  1,  1,  2,  4, -1,  2, -1, -1, -1], dtype=int64)
+
+
+symmetric
+  Signal is extended by mirroring the samples at the border in mirror form. 
+  The border sample is also mirrored.::
+
+    >>> wt.pad(jnp.array([1,2,4,-1,2,-1]), 2, 'symmetric')
+    DeviceArray([ 2,  1,  1,  2,  4, -1,  2, -1, -1,  2], dtype=int64)
+
+
+reflect
+  Signal is extended by reflecting the samples around the border sample.
+  Border sample is not copied in the extension.:: 
+
+    >>> wt.pad(jnp.array([1,2,4,-1,2,-1]), 2, 'reflect')
+    DeviceArray([ 4,  2,  1,  2,  4, -1,  2, -1,  2, -1], dtype=int64)
+
+periodic
+  Signal is extended periodically. The samples at the end repeat at the extension
+  at the beginning. The samples at the beginning repeat at the extension at the end.::
+
+    >>> wt.pad(jnp.array([1,2,4,-1,2,-1]), 2, 'periodic')
+    DeviceArray([ 2, -1,  1,  2,  4, -1,  2, -1,  1,  2], dtype=int64)
+
+periodization
+  The signal is extended the same way as the periodic extension. The major difference is that
+  the number of wavelet coefficients is identical to the length of the signal. All extra values
+  are trimmed.
+
+Many of the signal extension modes are similar to the padding modes supported by the
+``jax.numpy.pad`` function. However, the naming convention is different and follows 
+PyWavelets.
+
+
+Continuous Wavelets
+-----------------------------------
+
+
+Further Reading
+------------------
+
+.. bibliography::
+   :filter: docname in docnames

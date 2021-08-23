@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Numerical Optimization Routines &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script src="../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cr.sparse.opt.project_to_ball" href="_autosummary/cr.sparse.opt.project_to_ball.html" />
+    <link rel="prev" title="cr.sparse.la.solve_spd_chol" href="_autosummary/cr.sparse.la.solve_spd_chol.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CR.Sparse API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dsp.html">Digital Signal Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wavelets.html">Wavelets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lop.html">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">Utilities in cr.sparse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="la.html">Linear Algebra Subroutines</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Numerical Optimization Routines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#projections">Projections</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.opt.project_to_ball.html">cr.sparse.opt.project_to_ball</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.opt.project_to_box.html">cr.sparse.opt.project_to_box</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.opt.project_to_real_upper_limit.html">cr.sparse.opt.project_to_real_upper_limit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#shrinkage">Shrinkage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.opt.shrink.html">cr.sparse.opt.shrink</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conjugate-gradient-methods">Conjugate Gradient Methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.opt.cg.solve_from.html">cr.sparse.opt.cg.solve_from</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.opt.cg.solve_from_jit.html">cr.sparse.opt.cg.solve_from_jit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.opt.cg.solve.html">cr.sparse.opt.cg.solve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.opt.cg.solve_jit.html">cr.sparse.opt.cg.solve_jit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.opt.pcg.solve_from.html">cr.sparse.opt.pcg.solve_from</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.opt.pcg.solve_from_jit.html">cr.sparse.opt.pcg.solve_from_jit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.opt.pcg.solve.html">cr.sparse.opt.pcg.solve</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.opt.pcg.solve_jit.html">cr.sparse.opt.pcg.solve_jit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">CR.Sparse API Documentation</a> &raquo;</li>
+        
+      <li>Numerical Optimization Routines</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/source/opt.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="numerical-optimization-routines">
+<h1>Numerical Optimization Routines<a class="headerlink" href="#numerical-optimization-routines" title="Permalink to this headline">¶</a></h1>
+<p>This section includes several routines which
+form basic building blocks for other higher level
+solvers.</p>
+<div class="section" id="projections">
+<h2>Projections<a class="headerlink" href="#projections" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.project_to_ball.html#cr.sparse.opt.project_to_ball" title="cr.sparse.opt.project_to_ball"><code class="xref py py-obj docutils literal notranslate"><span class="pre">project_to_ball</span></code></a>(x[, radius])</p></td>
+<td><p>Projects a vector to the <span class="math notranslate nohighlight">\(\ell_2\)</span> ball of a specified radius.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.project_to_box.html#cr.sparse.opt.project_to_box" title="cr.sparse.opt.project_to_box"><code class="xref py py-obj docutils literal notranslate"><span class="pre">project_to_box</span></code></a>(x[, radius])</p></td>
+<td><p>Projects a vector to the box (<span class="math notranslate nohighlight">\(\ell_{\infty}\)</span> ball) of a specified radius.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.project_to_real_upper_limit.html#cr.sparse.opt.project_to_real_upper_limit" title="cr.sparse.opt.project_to_real_upper_limit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">project_to_real_upper_limit</span></code></a>(x[, limit])</p></td>
+<td><p>Projects a (possibly complex) vector to its real part with an upper limit on each entry.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="shrinkage">
+<h2>Shrinkage<a class="headerlink" href="#shrinkage" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.shrink.html#cr.sparse.opt.shrink" title="cr.sparse.opt.shrink"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shrink</span></code></a>(a, kappa)</p></td>
+<td><p>Shrinks each entry of a vector by <span class="math notranslate nohighlight">\(\kappa\)</span>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="conjugate-gradient-methods">
+<h2>Conjugate Gradient Methods<a class="headerlink" href="#conjugate-gradient-methods" title="Permalink to this headline">¶</a></h2>
+<p class="rubric">Normal Conjugate Gradients on Matrices</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.cg.solve_from.html#cr.sparse.opt.cg.solve_from" title="cr.sparse.opt.cg.solve_from"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cg.solve_from</span></code></a>(A, b, x_0[, max_iters, …])</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(Ax  = b\)</span> for a symmetric positive definite <span class="math notranslate nohighlight">\(A\)</span> via conjugate gradients iterations with an initial guess.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.cg.solve_from_jit.html#cr.sparse.opt.cg.solve_from_jit" title="cr.sparse.opt.cg.solve_from_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cg.solve_from_jit</span></code></a>(A, b, x_0[, max_iters, …])</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(Ax  = b\)</span> for a symmetric positive definite <span class="math notranslate nohighlight">\(A\)</span> via conjugate gradients iterations with an initial guess.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.cg.solve.html#cr.sparse.opt.cg.solve" title="cr.sparse.opt.cg.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cg.solve</span></code></a>(A, b[, max_iters, res_norm_rtol])</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(Ax  = b\)</span> for a symmetric positive definite <span class="math notranslate nohighlight">\(A\)</span> via conjugate gradients iterations.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.cg.solve_jit.html#cr.sparse.opt.cg.solve_jit" title="cr.sparse.opt.cg.solve_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cg.solve_jit</span></code></a>(A, b[, max_iters, res_norm_rtol])</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(Ax  = b\)</span> for a symmetric positive definite <span class="math notranslate nohighlight">\(A\)</span> via conjugate gradients iterations.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Preconditioned Normal Conjugate Gradients on Linear Operators</p>
+<p>These are more general purpose.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.pcg.solve_from.html#cr.sparse.opt.pcg.solve_from" title="cr.sparse.opt.pcg.solve_from"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pcg.solve_from</span></code></a>(A, b, x0[, max_iters, tol, …])</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(Ax  = b\)</span> for a symmetric positive definite <span class="math notranslate nohighlight">\(A\)</span> via preconditioned conjugate gradients iterations with an initial guess and a preconditioner.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.pcg.solve_from_jit.html#cr.sparse.opt.pcg.solve_from_jit" title="cr.sparse.opt.pcg.solve_from_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pcg.solve_from_jit</span></code></a>(A, b, x0[, max_iters, …])</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(Ax  = b\)</span> for a symmetric positive definite <span class="math notranslate nohighlight">\(A\)</span> via preconditioned conjugate gradients iterations with an initial guess and a preconditioner.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.pcg.solve.html#cr.sparse.opt.pcg.solve" title="cr.sparse.opt.pcg.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pcg.solve</span></code></a>(A, b[, max_iters, tol, atol, M])</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(Ax  = b\)</span> for a symmetric positive definite <span class="math notranslate nohighlight">\(A\)</span> via preconditioned conjugate gradients iterations with a preconditioner.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.pcg.solve_jit.html#cr.sparse.opt.pcg.solve_jit" title="cr.sparse.opt.pcg.solve_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pcg.solve_jit</span></code></a>(A, b[, max_iters, tol, atol, M])</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(Ax  = b\)</span> for a symmetric positive definite <span class="math notranslate nohighlight">\(A\)</span> via preconditioned conjugate gradients iterations with a preconditioner.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="_autosummary/cr.sparse.opt.project_to_ball.html" class="btn btn-neutral float-right" title="cr.sparse.opt.project_to_ball" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="_autosummary/cr.sparse.la.solve_spd_chol.html" class="btn btn-neutral float-left" title="cr.sparse.la.solve_spd_chol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.project\_to\_real\_upper\_limit
+=============================================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: project_to_real_upper_limit

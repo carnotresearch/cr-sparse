@@ -424,13 +424,49 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="n">is_discrete</span>
 
-<span class="k">def</span> <span class="nf">families</span><span class="p">(</span><span class="n">short</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="families"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.wt.families.html#cr.sparse.wt.families">[docs]</a><span class="k">def</span> <span class="nf">families</span><span class="p">(</span><span class="n">short</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the list of (discrete) wavelet families supported by this package.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        short (:obj:`bool`, optional): Use short names for the wavelet families. Default True.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        :obj:`list` of :obj:`str`: A list of family names</span>
+
+
+<span class="sd">    For the Daubechies wavelet family, the short name is *db* </span>
+<span class="sd">    and the long name is *Daubechies*.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        Current support is limited to following families::</span>
+
+<span class="sd">            &gt;&gt;&gt; wt.families()</span>
+<span class="sd">            [&#39;haar&#39;, &#39;db&#39;, &#39;sym&#39;, &#39;coif&#39;, &#39;bior&#39;, &#39;rbio&#39;, &#39;dmey&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">short</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">_family_short_names</span>
-    <span class="k">return</span> <span class="n">_family_long_names</span>
+    <span class="k">return</span> <span class="n">_family_long_names</span></div>
 
 <div class="viewcode-block" id="wavelist"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.wt.wavelist.html#cr.sparse.wt.wavelist">[docs]</a><span class="k">def</span> <span class="nf">wavelist</span><span class="p">(</span><span class="n">family</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the list of wavelts supported by this library</span>
+    <span class="sd">&quot;&quot;&quot;Returns the list of wavelts supported by this library for a specific wavelet family.</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        family (:obj:`str`, optional): The short name of wavelet family. If unspecified the list of </span>
+<span class="sd">            wavelets for all families will be returned. Default None.</span>
+<span class="sd">        kind (:obj:`{&#39;all&#39;, &#39;continuous&#39;, &#39;discrete&#39;}`, optional): Specifies what type of wavelet </span>
+<span class="sd">            families to cover. Default &quot;all&quot;. </span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        :obj:`list` of :obj:`str`: A list of wavelet names (for the specified family)</span>
+
+<span class="sd">    At the moment, no continuous wavelets are listed here.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; wt.wavelist(&#39;haar&#39;)</span>
+<span class="sd">            [&#39;haar&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">kind</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;discrete&#39;</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unrecognized value for `kind`: </span><span class="si">{</span><span class="n">kind</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
