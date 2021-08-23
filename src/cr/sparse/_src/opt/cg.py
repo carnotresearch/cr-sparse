@@ -31,7 +31,7 @@ class CGState(NamedTuple):
     """The number of iterations it took to complete"""
 
 def solve_from(A, b, x_0, max_iters=None, res_norm_rtol=1e-4):
-    """Solves the problem :math:`Ax  = b` for a symmetric positive definite :math:`A` via conjugate gradients iterations
+    """Solves the problem :math:`Ax  = b` for a symmetric positive definite :math:`A` via conjugate gradients iterations with an initial guess.
     """
     # Boyd Conjugate Gradients slide 22
     m, n = A.shape
@@ -92,6 +92,8 @@ solve_from_jit  = jit(solve_from,
 
 
 def solve(A, b, max_iters=None, res_norm_rtol=1e-4):
+    """Solves the problem :math:`Ax  = b` for a symmetric positive definite :math:`A` via conjugate gradients iterations.
+    """
     x_0 = jnp.zeros(A.shape[0])
     return solve_from_jit(A, b, x_0, max_iters=max_iters, res_norm_rtol=res_norm_rtol)
 

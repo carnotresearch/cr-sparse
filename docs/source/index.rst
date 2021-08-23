@@ -13,8 +13,9 @@ CR.Sparse API Documentation
    cvx_recovery
    data
    util
-   ef
    la
+   opt
+   ef
 
 
 

@@ -35,7 +35,7 @@ class PCGState(NamedTuple):
     """The number of iterations it took to complete"""
 
 def solve_from(A, b, x0, max_iters=20, tol=1e-4, atol=0.0, M=_identity):
-    """Solves the problem :math:`Ax  = b` for a symmetric positive definite :math:`A` via preconditioned conjugate gradients iterations
+    """Solves the problem :math:`Ax  = b` for a symmetric positive definite :math:`A` via preconditioned conjugate gradients iterations with an initial guess and a preconditioner.
     """
     # Boyd Conjugate Gradients slide 22
 
@@ -98,6 +98,8 @@ solve_from_jit  = jit(solve_from,
     static_argnames=("A", "max_iters", "tol", "atol", "M"))
 
 def solve(A, b, max_iters=20, tol=1e-4, atol=0.0, M=_identity):
+    """Solves the problem :math:`Ax  = b` for a symmetric positive definite :math:`A` via preconditioned conjugate gradients iterations with a preconditioner.
+    """
     x0 = jnp.zeros_like(b)
     return solve_from_jit(A, b, x0, max_iters, tol, atol, M)
 
