@@ -1,0 +1,758 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>CoSaMP step by step &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery" href="../rec_l1/partial_wh_sensor_cosine_basis.html" />
+    <link rel="prev" title="A matrix backed linear operator" href="../lop/matrix_operator.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples Gallery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sparse_vector_normals.html">A sparse model vector generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#linear-operators">Linear Operators</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#greedy-pursuit-algorithms-for-sparse-recovery">Greedy Pursuit Algorithms for Sparse Recovery</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">CoSaMP step by step</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#problem-setup">Problem Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#development-of-cosamp-algorithm">Development of CoSaMP algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cr-sparse-official-implementation">CR-Sparse official implementation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sparse-recovery-via-l1-minimization">Sparse Recovery via L1 minimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../zzzreference.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Examples Gallery</a> &raquo;</li>
+        
+      <li>CoSaMP step by step</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/gallery/pursuit/cosamp_step_by_step.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-gallery-pursuit-cosamp-step-by-step-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="cosamp-step-by-step">
+<span id="sphx-glr-gallery-pursuit-cosamp-step-by-step-py"></span><h1>CoSaMP step by step<a class="headerlink" href="#cosamp-step-by-step" title="Permalink to this headline">¶</a></h1>
+<p>This example explains the step by step development of
+CoSaMP (Compressive Sensing Matching Pursuit) algorithm
+for sparse recovery. It then shows how to use the
+official implementation of CoSaMP in <code class="docutils literal notranslate"><span class="pre">CR-Sparse</span></code>.</p>
+<p>The CoSaMP algorithm has following inputs:</p>
+<ul class="simple">
+<li><p>A sensing matrix or dictionary <code class="docutils literal notranslate"><span class="pre">Phi</span></code> which has been used for data measurements.</p></li>
+<li><p>A measurement vector <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+<li><p>The sparsity level <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p></li>
+</ul>
+<p>The objective of the algorithm is to estimate a K-sparse solution <code class="docutils literal notranslate"><span class="pre">x</span></code>
+such that <code class="docutils literal notranslate"><span class="pre">y</span></code> is approximately equal to <code class="docutils literal notranslate"><span class="pre">Phi</span> <span class="pre">x</span></code>.</p>
+<p>A key quantity in the algorithm is the residual <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">=</span> <span class="pre">y</span> <span class="pre">-</span> <span class="pre">Phi</span> <span class="pre">x</span></code>. Each
+iteration of the algorithm successively improves the estimate <code class="docutils literal notranslate"><span class="pre">x</span></code> so
+that the energy of the residual <code class="docutils literal notranslate"><span class="pre">r</span></code> reduces.</p>
+<p>The algorithm proceeds as follows:</p>
+<ul class="simple">
+<li><p>Initialize the solution <code class="docutils literal notranslate"><span class="pre">x</span></code> with zero.</p></li>
+<li><p>Maintain an index set <code class="docutils literal notranslate"><span class="pre">I</span></code> (initially empty) of atoms selected as part of the solution.</p></li>
+<li><p>While the residual energy is above a threshold:</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Match</strong>: Compute the inner product of each atom in <code class="docutils literal notranslate"><span class="pre">Phi</span></code> with the current residual <code class="docutils literal notranslate"><span class="pre">r</span></code>.</p></li>
+<li><p><strong>Identify</strong>: Select the indices of 2K atoms from <code class="docutils literal notranslate"><span class="pre">Phi</span></code> with the largest correlation with the residual.</p></li>
+<li><p><strong>Merge</strong>: merge these 2K indices with currently selected indices in <code class="docutils literal notranslate"><span class="pre">I</span></code> to form <code class="docutils literal notranslate"><span class="pre">I_sub</span></code>.</p></li>
+<li><p><strong>LS</strong>: Compute the least squares solution of <code class="docutils literal notranslate"><span class="pre">Phi[:,</span> <span class="pre">I_sub]</span> <span class="pre">z</span> <span class="pre">=</span> <span class="pre">y</span></code></p></li>
+<li><p><strong>Prune</strong>: Pick the largest K entries from this least square solution and keep them in <code class="docutils literal notranslate"><span class="pre">I</span></code>.</p></li>
+<li><p><strong>Update residual</strong>: Compute <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">=</span> <span class="pre">y</span> <span class="pre">-</span> <span class="pre">Phi_I</span> <span class="pre">x_I</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<p>It is time to see the algorithm in action.</p>
+<p>Let’s import necessary libraries</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="c1"># Some keys for generating random numbers</span>
+<span class="n">key</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.PRNGKey.html#jax.random.PRNGKey" title="jax.random.PRNGKey" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">keys</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.split.html#jax.random.split" title="jax.random.split" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><span class="n">random</span><span class="o">.</span><span class="n">split</span></a><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># For plotting diagrams</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1"># CR-Sparse modules</span>
+<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="kn">import</span> <span class="nn">cr.sparse.dict</span> <span class="k">as</span> <span class="nn">crdict</span>
+<span class="kn">import</span> <span class="nn">cr.sparse.data</span> <span class="k">as</span> <span class="nn">crdata</span>
+</pre></div>
+</div>
+<div class="section" id="problem-setup">
+<h2>Problem Setup<a class="headerlink" href="#problem-setup" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of measurements</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">M</span></a> <span class="o">=</span> <span class="mi">128</span>
+<span class="c1"># Ambient dimension</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">N</span></a> <span class="o">=</span> <span class="mi">256</span>
+<span class="c1"># Sparsity level</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K</span></a> <span class="o">=</span> <span class="mi">8</span>
+</pre></div>
+</div>
+<div class="section" id="the-sparsifying-basis">
+<h3>The Sparsifying Basis<a class="headerlink" href="#the-sparsifying-basis" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi</span> <span class="o">=</span> <span class="n">crdict</span><span class="o">.</span><span class="n">gaussian_mtx</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">M</span></a><span class="p">,</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">N</span></a><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Phi</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(128, 256)
+</pre></div>
+</div>
+<p>Coherence of atoms in the sensing matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">crdict</span><span class="o">.</span><span class="n">coherence</span><span class="p">(</span><span class="n">Phi</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>0.33975708
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-sparse-model-vector">
+<h3>A sparse model vector<a class="headerlink" href="#a-sparse-model-vector" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">crdata</span><span class="o">.</span><span class="n">sparse_normal_representations</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">N</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K</span></a><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure" title="matplotlib.pyplot.figure" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="cosamp step by step" class="sphx-glr-single-img" src="../../_images/sphx_glr_cosamp_step_by_step_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7f20b4b6ba00&gt;]
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">omega</span></code> contains the set of indices at which x is nonzero (support of <code class="docutils literal notranslate"><span class="pre">x</span></code>)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">omega</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[ 41  60  68  89  99 198 232 244]
+</pre></div>
+</div>
+</div>
+<div class="section" id="compressive-measurements">
+<h3>Compressive measurements<a class="headerlink" href="#compressive-measurements" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">Phi</span> <span class="o">@</span> <span class="n">x0</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure" title="matplotlib.pyplot.figure" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="cosamp step by step" class="sphx-glr-single-img" src="../../_images/sphx_glr_cosamp_step_by_step_002.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7f20b4550310&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="development-of-cosamp-algorithm">
+<h2>Development of CoSaMP algorithm<a class="headerlink" href="#development-of-cosamp-algorithm" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># In the following, we walk through the steps of CoSaMP algorithm.</span>
+<span class="c1"># Since we have access to ``x0`` and ``omega``, we can measure the</span>
+<span class="c1"># progress made by the algorithm steps by comparing the estimates</span>
+<span class="c1"># with actual ``x0`` and ``omega``. However, note that in the</span>
+<span class="c1"># real implementation of the algorithm, no access to original model</span>
+<span class="c1"># vector is there.</span>
+<span class="c1">#</span>
+<span class="c1"># Initialization</span>
+<span class="c1"># &#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+<p>We assume the initial solution to be zero and
+the residual <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">=</span> <span class="pre">y</span> <span class="pre">-</span> <span class="pre">Phi</span> <span class="pre">x</span></code> to equal the measurements <code class="docutils literal notranslate"><span class="pre">y</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">y</span>
+</pre></div>
+</div>
+<p>Squared norm/energy of the residual</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">y_norm_sqr</span></a> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span><span class="p">)</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">r_norm_sqr</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">y_norm_sqr</span></a>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">r_norm_sqr</span></a><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>r_norm_sqr=11.47407054901123
+</pre></div>
+</div>
+<p>A boolean array to track the indices selected for least squares steps</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">flags</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.zeros.html#jax.numpy.zeros" title="jax.numpy.zeros" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">N</span></a><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>During the matching steps, 2K atoms will be picked.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K2</span></a> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K</span></a>
+</pre></div>
+</div>
+<p>At any time, up to 3K atoms may be selected (after the merge step).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K3</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K</span></a> <span class="o">+</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K2</span></a>
+</pre></div>
+</div>
+<p>Number of iterations completed so far</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">iterations</span></a> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>A limit on the maximum tolerance for residual norm</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">res_norm_rtol</span></a> <span class="o">=</span> <span class="mf">1e-3</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">max_r_norm_sqr</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">y_norm_sqr</span></a> <span class="o">*</span> <span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">res_norm_rtol</span></a> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">max_r_norm_sqr</span></a><span class="si">=:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>max_r_norm_sqr=1.15e-05
+</pre></div>
+</div>
+<div class="section" id="first-iteration">
+<h3>First iteration<a class="headerlink" href="#first-iteration" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First iteration:&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>First iteration:
+</pre></div>
+</div>
+<p>Match the current residual with the atoms in <code class="docutils literal notranslate"><span class="pre">Phi</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">r</span>
+</pre></div>
+</div>
+<p>Pick the indices of 3K atoms with largest matches with the residual</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">I_sub</span> <span class="o">=</span>  <span class="n">crs</span><span class="o">.</span><span class="n">largest_indices</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K3</span></a><span class="p">)</span>
+<span class="c1"># Update the flags array</span>
+<span class="n">flags</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">I_sub</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Sort the ``I_sub`` array with the help of flags array</span>
+<span class="n">I_sub</span><span class="p">,</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.where.html#jax.numpy.where" title="jax.numpy.where" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">where</span></a><span class="p">(</span><span class="n">flags</span><span class="p">)</span>
+<span class="c1"># Since no atoms have been selected so far, we can be more aggressive</span>
+<span class="c1"># and pick 3K atoms in first iteration.</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">I_sub</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>I_sub=DeviceArray([  5,   9,  19,  41,  44,  67,  86,  89,  99, 100, 109, 116,
+             142, 151, 159, 198, 201, 217, 226, 232, 239, 241, 244, 255],            dtype=int32)
+</pre></div>
+</div>
+<p>Check which indices from <code class="docutils literal notranslate"><span class="pre">omega</span></code> are there in <code class="docutils literal notranslate"><span class="pre">I_sub</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.intersect1d.html#jax.numpy.intersect1d" title="jax.numpy.intersect1d" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">intersect1d</span></a><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">I_sub</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[ 41  89  99 198 232 244]
+</pre></div>
+</div>
+<p>Select the subdictionary of <code class="docutils literal notranslate"><span class="pre">Phi</span></code> consisting of atoms indexed by I_sub</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi_sub</span> <span class="o">=</span> <span class="n">Phi</span><span class="p">[:,</span> <span class="n">flags</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Compute the least squares solution of <code class="docutils literal notranslate"><span class="pre">y</span></code> over this subdictionary</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_sub</span><span class="p">,</span> <span class="n">r_sub_norms</span><span class="p">,</span> <span class="n">rank_sub</span><span class="p">,</span> <span class="n">s_sub</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.linalg.lstsq.html#jax.numpy.linalg.lstsq" title="jax.numpy.linalg.lstsq" class="sphx-glr-backref-module-jax-numpy-linalg sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span></a><span class="p">(</span><span class="n">Phi_sub</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="c1"># Pick the indices of K largest entries in in ``x_sub``</span>
+<span class="n">Ia</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">largest_indices</span><span class="p">(</span><span class="n">x_sub</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K</span></a><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">Ia</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Ia=DeviceArray([15,  7,  8, 22, 19, 11,  3, 20], dtype=int32)
+</pre></div>
+</div>
+<p>We need to map the indices in <code class="docutils literal notranslate"><span class="pre">Ia</span></code> to the actual indices of atoms in <code class="docutils literal notranslate"><span class="pre">Phi</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">I</span> <span class="o">=</span> <span class="n">I_sub</span><span class="p">[</span><span class="n">Ia</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">I</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>I=DeviceArray([198,  89,  99, 244, 232, 116,  41, 239], dtype=int32)
+</pre></div>
+</div>
+<p>Select the corresponding values from the LS solution</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_I</span> <span class="o">=</span> <span class="n">x_sub</span><span class="p">[</span><span class="n">Ia</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We now have our first estimate of the solution</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.zeros.html#jax.numpy.zeros" title="jax.numpy.zeros" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">N</span></a><span class="p">)</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">x_I</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure" title="matplotlib.pyplot.figure" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Original vector&quot;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Estimated solution&quot;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.legend.html#matplotlib.pyplot.legend" title="matplotlib.pyplot.legend" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="cosamp step by step" class="sphx-glr-single-img" src="../../_images/sphx_glr_cosamp_step_by_step_003.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7f20b43df820&gt;
+</pre></div>
+</div>
+<p>We can check how good we were in picking the correct indices from the actual support of the signal</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">found</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.intersect1d.html#jax.numpy.intersect1d" title="jax.numpy.intersect1d" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">intersect1d</span></a><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Found indices: &quot;</span><span class="p">,</span> <span class="n">found</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Found indices:  [ 41  89  99 198 232 244]
+</pre></div>
+</div>
+<p>We found 6 out of 8 indices in the support. Here are the remaining.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">missing</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.setdiff1d.html#jax.numpy.setdiff1d" title="jax.numpy.setdiff1d" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">setdiff1d</span></a><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Missing indices: &quot;</span><span class="p">,</span> <span class="n">missing</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Missing indices:  [60 68]
+</pre></div>
+</div>
+<p>It is time to compute the residual after the first iteration</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi_I</span> <span class="o">=</span> <span class="n">Phi</span><span class="p">[:,</span> <span class="n">I</span><span class="p">]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">Phi_I</span> <span class="o">@</span> <span class="n">x_I</span>
+</pre></div>
+</div>
+<p>Compute the residual and verify that it is still larger than the allowed tolerance</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">r_norm_sqr</span></a> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">r_norm_sqr</span></a><span class="si">=:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">max_r_norm_sqr</span></a><span class="si">=:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>r_norm_sqr=2.51e-01 &gt; max_r_norm_sqr=1.15e-05
+</pre></div>
+</div>
+<p>Store the selected K indices in the flags array</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">flags</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">at</span><span class="p">[:]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">flags</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.where.html#jax.numpy.where" title="jax.numpy.where" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">where</span></a><span class="p">(</span><span class="n">flags</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(DeviceArray([ 41,  89,  99, 116, 198, 232, 239, 244], dtype=int32),)
+</pre></div>
+</div>
+<p>Mark the completion of the iteration</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">iterations</span></a> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="second-iteration">
+<h3>Second iteration<a class="headerlink" href="#second-iteration" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Second iteration:&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Second iteration:
+</pre></div>
+</div>
+<p>Match the current residual with the atoms in <code class="docutils literal notranslate"><span class="pre">Phi</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">r</span>
+</pre></div>
+</div>
+<p>Pick the indices of 2K atoms with largest matches with the residual</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">I_2k</span> <span class="o">=</span>  <span class="n">crs</span><span class="o">.</span><span class="n">largest_indices</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K2</span></a> <span class="k">if</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">iterations</span></a> <span class="k">else</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K3</span></a><span class="p">)</span>
+<span class="c1"># We can check if these include the atoms missed out in first iteration.</span>
+<span class="nb">print</span><span class="p">(</span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.intersect1d.html#jax.numpy.intersect1d" title="jax.numpy.intersect1d" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">intersect1d</span></a><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">I_2k</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[60 68]
+</pre></div>
+</div>
+<p>Merge (union) the set of previous K indices with the new 2K indices</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">flags</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">I_2k</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">I_sub</span><span class="p">,</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.where.html#jax.numpy.where" title="jax.numpy.where" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">where</span></a><span class="p">(</span><span class="n">flags</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">I_sub</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>I_sub=DeviceArray([  4,  34,  41,  56,  59,  60,  68,  73,  89,  99, 103, 105,
+             116, 137, 155, 160, 178, 198, 209, 232, 233, 239, 244, 245],            dtype=int32)
+</pre></div>
+</div>
+<p>We can check if we found all the actual atoms</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Found in I_sub: &quot;</span><span class="p">,</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.intersect1d.html#jax.numpy.intersect1d" title="jax.numpy.intersect1d" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">intersect1d</span></a><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">I_sub</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Found in I_sub:  [ 41  60  68  89  99 198 232 244]
+</pre></div>
+</div>
+<p>Indeed we did. The set difference is empty.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Missing in I_sub: &quot;</span><span class="p">,</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.setdiff1d.html#jax.numpy.setdiff1d" title="jax.numpy.setdiff1d" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">setdiff1d</span></a><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">I_sub</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Missing in I_sub:  []
+</pre></div>
+</div>
+<p>Select the subdictionary of <code class="docutils literal notranslate"><span class="pre">Phi</span></code> consisting of atoms indexed by <code class="docutils literal notranslate"><span class="pre">I_sub</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi_sub</span> <span class="o">=</span> <span class="n">Phi</span><span class="p">[:,</span> <span class="n">flags</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Compute the least squares solution of <code class="docutils literal notranslate"><span class="pre">y</span></code> over this subdictionary</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_sub</span><span class="p">,</span> <span class="n">r_sub_norms</span><span class="p">,</span> <span class="n">rank_sub</span><span class="p">,</span> <span class="n">s_sub</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.linalg.lstsq.html#jax.numpy.linalg.lstsq" title="jax.numpy.linalg.lstsq" class="sphx-glr-backref-module-jax-numpy-linalg sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span></a><span class="p">(</span><span class="n">Phi_sub</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="c1"># Pick the indices of K largest entries in in ``x_sub``</span>
+<span class="n">Ia</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">largest_indices</span><span class="p">(</span><span class="n">x_sub</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K</span></a><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Ia</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[17  8  9 22 19  5  6  2]
+</pre></div>
+</div>
+<p>We need to map the indices in <code class="docutils literal notranslate"><span class="pre">Ia</span></code> to the actual indices of atoms in <code class="docutils literal notranslate"><span class="pre">Phi</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">I</span> <span class="o">=</span> <span class="n">I_sub</span><span class="p">[</span><span class="n">Ia</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[198  89  99 244 232  60  68  41]
+</pre></div>
+</div>
+<p>Check if the final K indices in <code class="docutils literal notranslate"><span class="pre">I</span></code> include all the indices in <code class="docutils literal notranslate"><span class="pre">omega</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.setdiff1d.html#jax.numpy.setdiff1d" title="jax.numpy.setdiff1d" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">setdiff1d</span></a><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>DeviceArray([], dtype=int32)
+</pre></div>
+</div>
+<p>Select the corresponding values from the LS solution</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_I</span> <span class="o">=</span> <span class="n">x_sub</span><span class="p">[</span><span class="n">Ia</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Here is our updated estimate of the solution</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.zeros.html#jax.numpy.zeros" title="jax.numpy.zeros" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">N</span></a><span class="p">)</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">x_I</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure" title="matplotlib.pyplot.figure" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Original vector&quot;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Estimated solution&quot;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.legend.html#matplotlib.pyplot.legend" title="matplotlib.pyplot.legend" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="cosamp step by step" class="sphx-glr-single-img" src="../../_images/sphx_glr_cosamp_step_by_step_004.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7f20b42af460&gt;
+</pre></div>
+</div>
+<p>The algorithm has no direct way of knowing that it indeed found the solution
+It is time to compute the residual after the second iteration</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi_I</span> <span class="o">=</span> <span class="n">Phi</span><span class="p">[:,</span> <span class="n">I</span><span class="p">]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">Phi_I</span> <span class="o">@</span> <span class="n">x_I</span>
+</pre></div>
+</div>
+<p>Compute the residual and verify that it is now below the allowed tolerance</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">r_norm_sqr</span></a> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">r</span><span class="p">)</span>
+<span class="c1"># It turns out that it is now below the tolerance threshold</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">r_norm_sqr</span></a><span class="si">=:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2"> &lt; </span><span class="si">{</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">max_r_norm_sqr</span></a><span class="si">=:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>r_norm_sqr=1.82e-12 &lt; max_r_norm_sqr=1.15e-05
+</pre></div>
+</div>
+<p>We have completed the signal recovery. We can stop iterating now.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">iterations</span></a> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="cr-sparse-official-implementation">
+<h2>CR-Sparse official implementation<a class="headerlink" href="#cr-sparse-official-implementation" title="Permalink to this headline">¶</a></h2>
+<p>The JIT compiled version of this algorithm is available in
+<code class="docutils literal notranslate"><span class="pre">cr.sparse.pursuit.cosamp</span></code> module.</p>
+<p>Import the module</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cr.sparse.pursuit</span> <span class="kn">import</span> <span class="n">cosamp</span>
+</pre></div>
+</div>
+<p>Run the solver</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span> <span class="o">=</span>  <span class="n">cosamp</span><span class="o">.</span><span class="n">matrix_solve_jit</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K</span></a><span class="p">)</span>
+<span class="c1"># The support for the sparse solution</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">solution</span><span class="o">.</span><span class="n">I</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[198  89  99 244 232  60  68  41]
+</pre></div>
+</div>
+<p>The non-zero values on the support</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_I</span> <span class="o">=</span> <span class="n">solution</span><span class="o">.</span><span class="n">x_I</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_I</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[ 2.1191995   1.6689736  -1.2758205   1.1305926  -0.85821193 -0.38624653
+ -0.37565616  0.08086799]
+</pre></div>
+</div>
+<p>Verify that we successfully recovered the support</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.setdiff1d.html#jax.numpy.setdiff1d" title="jax.numpy.setdiff1d" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">setdiff1d</span></a><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">I</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+<p>Print the residual energy and the number of iterations when the algorithm converged.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">solution</span><span class="o">.</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">r_norm_sqr</span></a><span class="p">,</span> <span class="n">solution</span><span class="o">.</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">iterations</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>1.5298596e-12 3
+</pre></div>
+</div>
+<p>Let’s plot the solution</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.zeros.html#jax.numpy.zeros" title="jax.numpy.zeros" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">N</span></a><span class="p">)</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">x_I</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure" title="matplotlib.pyplot.figure" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Original vector&quot;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Estimated solution&quot;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.legend.html#matplotlib.pyplot.legend" title="matplotlib.pyplot.legend" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="cosamp step by step" class="sphx-glr-single-img" src="../../_images/sphx_glr_cosamp_step_by_step_005.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7f20b41e3a90&gt;
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  4.455 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-pursuit-cosamp-step-by-step-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/7cece7d024bda50295b7a347f4f2a669/cosamp_step_by_step.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">cosamp_step_by_step.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/677de65c1d161880495e21392fdb4914/cosamp_step_by_step.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">cosamp_step_by_step.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../rec_l1/partial_wh_sensor_cosine_basis.html" class="btn btn-neutral float-right" title="Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../lop/matrix_operator.html" class="btn btn-neutral float-left" title="A matrix backed linear operator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

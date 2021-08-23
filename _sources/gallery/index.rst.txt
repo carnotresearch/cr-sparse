@@ -73,6 +73,41 @@ Linear Operators
 
 
 
+.. _sphx_glr_gallery_pursuit:
+
+.. _lop_gallery:
+
+Greedy Pursuit Algorithms for Sparse Recovery
+-----------------------------------------------
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example explains the step by step development of  CoSaMP (Compressive Sensing Matching Pur...">
+
+.. only:: html
+
+ .. figure:: /gallery/pursuit/images/thumb/sphx_glr_cosamp_step_by_step_thumb.png
+     :alt: CoSaMP step by step
+
+     :ref:`sphx_glr_gallery_pursuit_cosamp_step_by_step.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/pursuit/cosamp_step_by_step
+.. raw:: html
+
+    <div class="sphx-glr-clear"></div>
+
+
+
 .. _sphx_glr_gallery_rec_l1:
 
 .. _recovery_l1_gallery:

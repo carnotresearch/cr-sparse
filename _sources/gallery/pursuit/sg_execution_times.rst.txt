@@ -1,0 +1,12 @@
+
+:orphan:
+
+.. _sphx_glr_gallery_pursuit_sg_execution_times:
+
+Computation times
+=================
+**00:04.455** total execution time for **gallery_pursuit** files:
+
++-------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_gallery_pursuit_cosamp_step_by_step.py` (``cosamp_step_by_step.py``) | 00:04.455 | 0.0 MB |
++-------------------------------------------------------------------------------------+-----------+--------+
