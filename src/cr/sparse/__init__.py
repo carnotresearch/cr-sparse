@@ -155,7 +155,10 @@ from cr.sparse._src.signal import (
 
     # statistical normalization of data
     normalize,
-    normalize_jit
+    normalize_jit,
+
+    # interpolate via fourier transform
+    interpft
 )
 
 from cr.sparse._src.signal import (

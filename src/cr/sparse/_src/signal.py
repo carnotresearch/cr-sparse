@@ -220,3 +220,25 @@ def energy(data, axis=-1):
     """
     power = jnp.abs(data) ** 2
     return jnp.sum(power, axis)
+
+
+def interpft(x, N):
+    """Interpolates x to n points in Fourier Transform domain
+    """
+    n = len(x)
+    assert n < N
+    a = jfft.fft(x)
+    nyqst = (n + 1) // 2
+    z = jnp.zeros(N -n)
+    a1 = a[:nyqst+1]
+    a2 = a[nyqst+1:]
+    b = jnp.concatenate((a1, z, a2))
+    if n % 2 == 0:
+        b = b.at[nyqst].set(b[nyqst] /2 )
+        b = b.at[nyqst + N -n].set(b[nyqst])
+    y = jfft.ifft(b)
+    if jnp.isrealobj(x):
+        y = jnp.real(y)
+    # scale it up
+    y = y * (N / n)
+    return y
