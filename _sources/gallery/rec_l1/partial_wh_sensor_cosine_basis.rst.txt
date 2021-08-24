@@ -18,7 +18,7 @@
 .. _sphx_glr_gallery_rec_l1_partial_wh_sensor_cosine_basis.py:
 
 
-Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery
+Random Orthogonal Measurements, Cosine Basis, ADMM
 ==============================================================================
 
 This example has following features:
@@ -112,7 +112,7 @@ Non-sparse signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fb994062ac0>]
+    [<matplotlib.lines.Line2D object at 0x7ffa48efec40>]
 
 
 
@@ -147,7 +147,7 @@ The Sparsifying Basis
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fb994270ca0>]
+    [<matplotlib.lines.Line2D object at 0x7ffa60128c10>]
 
 
 
@@ -231,7 +231,7 @@ Measurement process
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fb9949dcb20>]
+    [<matplotlib.lines.Line2D object at 0x7ffa60883730>]
 
 
 
@@ -303,14 +303,14 @@ Solution
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x7fb96dd35f10>
+    <matplotlib.legend.Legend object at 0x7ffa48c0ca60>
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  6.996 seconds)
+   **Total running time of the script:** ( 0 minutes  7.142 seconds)
 
 
 .. _sphx_glr_download_gallery_rec_l1_partial_wh_sensor_cosine_basis.py:

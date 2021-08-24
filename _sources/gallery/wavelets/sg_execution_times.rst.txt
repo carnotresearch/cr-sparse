@@ -1,0 +1,12 @@
+
+:orphan:
+
+.. _sphx_glr_gallery_wavelets_sg_execution_times:
+
+Computation times
+=================
+**00:00.964** total execution time for **gallery_wavelets** files:
+
++----------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_gallery_wavelets_cameraman_decomposition.py` (``cameraman_decomposition.py``) | 00:00.964 | 0.0 MB |
++----------------------------------------------------------------------------------------------+-----------+--------+

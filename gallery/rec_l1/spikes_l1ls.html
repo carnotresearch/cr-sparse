@@ -53,8 +53,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Benchmarks" href="../../benchmarks/index.html" />
-    <link rel="prev" title="Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery" href="partial_wh_sensor_cosine_basis.html" /> 
+    <link rel="next" title="Wavelet Decomposition of an Image" href="../wavelets/cameraman_decomposition.html" />
+    <link rel="prev" title="Random Orthogonal Measurements, Cosine Basis, ADMM" href="partial_wh_sensor_cosine_basis.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -111,7 +111,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../index.html#linear-operators">Linear Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#greedy-pursuit-algorithms-for-sparse-recovery">Greedy Pursuit Algorithms for Sparse Recovery</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#sparse-recovery-via-l1-minimization">Sparse Recovery via L1 minimization</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="partial_wh_sensor_cosine_basis.html">Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partial_wh_sensor_cosine_basis.html">Random Orthogonal Measurements, Cosine Basis, ADMM</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Recovering spikes via TNIPM</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#the-spikes">The Spikes</a></li>
@@ -124,6 +124,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#wavelets">Wavelets</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../benchmarks/index.html">Benchmarks</a></li>
@@ -281,7 +282,7 @@ algorithm is being used for recovery.</p></li>
 </div>
 <img alt="spikes l1ls" class="sphx-glr-single-img" src="../../_images/sphx_glr_spikes_l1ls_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fb9b4f443a0&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa60185520&gt;]
 </pre></div>
 </div>
 </div>
@@ -306,7 +307,7 @@ algorithm is being used for recovery.</p></li>
 </div>
 <img alt="spikes l1ls" class="sphx-glr-single-img" src="../../_images/sphx_glr_spikes_l1ls_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fb994236280&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa48f0d550&gt;]
 </pre></div>
 </div>
 </div>
@@ -355,7 +356,7 @@ rel_error=1.277e-01
 </div>
 <img alt="spikes l1ls" class="sphx-glr-single-img" src="../../_images/sphx_glr_spikes_l1ls_003.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fb96db898b0&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa48a5e430&gt;]
 </pre></div>
 </div>
 <div class="section" id="the-magnitudes-of-non-zero-values">
@@ -366,7 +367,7 @@ rel_error=1.277e-01
 </div>
 <img alt="spikes l1ls" class="sphx-glr-single-img" src="../../_images/sphx_glr_spikes_l1ls_004.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fb96daec370&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa48a37eb0&gt;]
 </pre></div>
 </div>
 </div>
@@ -382,7 +383,7 @@ rel_error=1.277e-01
 </div>
 <img alt="spikes l1ls" class="sphx-glr-single-img" src="../../_images/sphx_glr_spikes_l1ls_005.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fb96da7bc40&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa489517c0&gt;]
 </pre></div>
 </div>
 </div>
@@ -428,10 +429,10 @@ rel_error=1.277e-01
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(1024, 160)
 ls_rel_error=1.947e-02
 
-[&lt;matplotlib.lines.Line2D object at 0x7fb96d9012e0&gt;]
+[&lt;matplotlib.lines.Line2D object at 0x7ffa48846e20&gt;]
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  7.504 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  7.668 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-rec-l1-spikes-l1ls-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/e35c0757eb69bd6c3607c1d55fa6f124/spikes_l1ls.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">spikes_l1ls.py</span></code></a></p>
@@ -450,8 +451,8 @@ ls_rel_error=1.947e-02
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../../benchmarks/index.html" class="btn btn-neutral float-right" title="Benchmarks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="partial_wh_sensor_cosine_basis.html" class="btn btn-neutral float-left" title="Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../wavelets/cameraman_decomposition.html" class="btn btn-neutral float-right" title="Wavelet Decomposition of an Image" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="partial_wh_sensor_cosine_basis.html" class="btn btn-neutral float-left" title="Random Orthogonal Measurements, Cosine Basis, ADMM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

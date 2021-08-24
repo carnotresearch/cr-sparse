@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery &mdash; CR.Sparse  documentation</title>
+  <title>Random Orthogonal Measurements, Cosine Basis, ADMM &mdash; CR.Sparse  documentation</title>
   
 
   
@@ -111,7 +111,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../index.html#linear-operators">Linear Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#greedy-pursuit-algorithms-for-sparse-recovery">Greedy Pursuit Algorithms for Sparse Recovery</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#sparse-recovery-via-l1-minimization">Sparse Recovery via L1 minimization</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Random Orthogonal Measurements, Cosine Basis, ADMM</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#non-sparse-signal">Non-sparse signal</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#the-sparsifying-basis">The Sparsifying Basis</a></li>
@@ -124,6 +124,7 @@
 <li class="toctree-l3"><a class="reference internal" href="spikes_l1ls.html">Recovering spikes via TNIPM</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#wavelets">Wavelets</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../benchmarks/index.html">Benchmarks</a></li>
@@ -179,7 +180,7 @@
         
           <li><a href="../index.html">Examples Gallery</a> &raquo;</li>
         
-      <li>Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery</li>
+      <li>Random Orthogonal Measurements, Cosine Basis, ADMM</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -227,8 +228,8 @@
 <p>Click <a class="reference internal" href="#sphx-glr-download-gallery-rec-l1-partial-wh-sensor-cosine-basis-py"><span class="std std-ref">here</span></a>
 to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="partial-walsh-hadamard-measurements-cosine-sparsifying-basis-admm-recovery">
-<span id="sphx-glr-gallery-rec-l1-partial-wh-sensor-cosine-basis-py"></span><h1>Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery<a class="headerlink" href="#partial-walsh-hadamard-measurements-cosine-sparsifying-basis-admm-recovery" title="Permalink to this headline">¶</a></h1>
+<div class="sphx-glr-example-title section" id="random-orthogonal-measurements-cosine-basis-admm">
+<span id="sphx-glr-gallery-rec-l1-partial-wh-sensor-cosine-basis-py"></span><h1>Random Orthogonal Measurements, Cosine Basis, ADMM<a class="headerlink" href="#random-orthogonal-measurements-cosine-basis-admm" title="Permalink to this headline">¶</a></h1>
 <p>This example has following features:</p>
 <ul class="simple">
 <li><p>The signal being measured is not sparse by itself.</p></li>
@@ -273,7 +274,7 @@ the signal space.</p></li>
 </div>
 <img alt="partial wh sensor cosine basis" class="sphx-glr-single-img" src="../../_images/sphx_glr_partial_wh_sensor_cosine_basis_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fb994062ac0&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa48efec40&gt;]
 </pre></div>
 </div>
 </div>
@@ -288,7 +289,7 @@ the signal space.</p></li>
 </div>
 <img alt="partial wh sensor cosine basis" class="sphx-glr-single-img" src="../../_images/sphx_glr_partial_wh_sensor_cosine_basis_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fb994270ca0&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa60128c10&gt;]
 </pre></div>
 </div>
 </div>
@@ -334,7 +335,7 @@ perm=DeviceArray([ 492, 5891, 6660, ..., 1416, 2648, 5917], dtype=int32)
 </div>
 <img alt="partial wh sensor cosine basis" class="sphx-glr-single-img" src="../../_images/sphx_glr_partial_wh_sensor_cosine_basis_003.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fb9949dcb20&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa60883730&gt;]
 </pre></div>
 </div>
 </div>
@@ -370,10 +371,10 @@ rel_error=3.3896e-02
 </div>
 <img alt="partial wh sensor cosine basis" class="sphx-glr-single-img" src="../../_images/sphx_glr_partial_wh_sensor_cosine_basis_004.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7fb96dd35f10&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7ffa48c0ca60&gt;
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.996 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  7.142 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-rec-l1-partial-wh-sensor-cosine-basis-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/3fff648f3d105d1d7e15c781b5729ab0/partial_wh_sensor_cosine_basis.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">partial_wh_sensor_cosine_basis.py</span></code></a></p>

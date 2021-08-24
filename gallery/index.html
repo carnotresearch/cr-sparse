@@ -117,8 +117,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#sparse-recovery-via-l1-minimization">Sparse Recovery via L1 minimization</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rec_l1/partial_wh_sensor_cosine_basis.html">Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rec_l1/partial_wh_sensor_cosine_basis.html">Random Orthogonal Measurements, Cosine Basis, ADMM</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rec_l1/spikes_l1ls.html">Recovering spikes via TNIPM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#wavelets">Wavelets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="wavelets/cameraman_decomposition.html">Wavelet Decomposition of an Image</a></li>
 </ul>
 </li>
 </ul>
@@ -219,41 +223,50 @@
 </style>
 <div class="section" id="examples-gallery">
 <span id="gallery"></span><span id="sphx-glr-gallery"></span><h1>Examples Gallery<a class="headerlink" href="#examples-gallery" title="Permalink to this headline">¶</a></h1>
-<div class="sphx-glr-thumbcontainer" tooltip=" Demonstrates how to create sparse model vectors with small number of non-zero entries sampled ..."><div class="figure align-default" id="id2">
+<div class="sphx-glr-thumbcontainer" tooltip=" Demonstrates how to create sparse model vectors with small number of non-zero entries sampled ..."><div class="figure align-default" id="id1">
 <img alt="A sparse model vector generator" src="../_images/sphx_glr_sparse_vector_normals_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="sparse_vector_normals.html#sphx-glr-gallery-sparse-vector-normals-py"><span class="std std-ref">A sparse model vector generator</span></a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="sparse_vector_normals.html#sphx-glr-gallery-sparse-vector-normals-py"><span class="std std-ref">A sparse model vector generator</span></a></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-clear"></div><div class="section" id="linear-operators">
 <span id="lop-gallery"></span><span id="sphx-glr-gallery-lop"></span><h2>Linear Operators<a class="headerlink" href="#linear-operators" title="Permalink to this headline">¶</a></h2>
-<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to construct a linear operator from an ordinary matrix."><div class="figure align-default" id="id3">
+<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to construct a linear operator from an ordinary matrix."><div class="figure align-default" id="id2">
 <img alt="A matrix backed linear operator" src="../_images/sphx_glr_matrix_operator_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="lop/matrix_operator.html#sphx-glr-gallery-lop-matrix-operator-py"><span class="std std-ref">A matrix backed linear operator</span></a></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="lop/matrix_operator.html#sphx-glr-gallery-lop-matrix-operator-py"><span class="std std-ref">A matrix backed linear operator</span></a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-clear"></div></div>
 <div class="section" id="greedy-pursuit-algorithms-for-sparse-recovery">
-<span id="id1"></span><h2>Greedy Pursuit Algorithms for Sparse Recovery<a class="headerlink" href="#greedy-pursuit-algorithms-for-sparse-recovery" title="Permalink to this headline">¶</a></h2>
-<div class="sphx-glr-thumbcontainer" tooltip="This example explains the step by step development of  CoSaMP (Compressive Sensing Matching Pur..."><div class="figure align-default" id="id4">
+<span id="greedy-pursuit-gallery"></span><span id="sphx-glr-gallery-pursuit"></span><h2>Greedy Pursuit Algorithms for Sparse Recovery<a class="headerlink" href="#greedy-pursuit-algorithms-for-sparse-recovery" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="This example explains the step by step development of  CoSaMP (Compressive Sensing Matching Pur..."><div class="figure align-default" id="id3">
 <img alt="CoSaMP step by step" src="../_images/sphx_glr_cosamp_step_by_step_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="pursuit/cosamp_step_by_step.html#sphx-glr-gallery-pursuit-cosamp-step-by-step-py"><span class="std std-ref">CoSaMP step by step</span></a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="pursuit/cosamp_step_by_step.html#sphx-glr-gallery-pursuit-cosamp-step-by-step-py"><span class="std std-ref">CoSaMP step by step</span></a></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-clear"></div></div>
 <div class="section" id="sparse-recovery-via-l1-minimization">
 <span id="recovery-l1-gallery"></span><span id="sphx-glr-gallery-rec-l1"></span><h2>Sparse Recovery via L1 minimization<a class="headerlink" href="#sparse-recovery-via-l1-minimization" title="Permalink to this headline">¶</a></h2>
-<div class="sphx-glr-thumbcontainer" tooltip="This example has following features:"><div class="figure align-default" id="id5">
-<img alt="Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery" src="../_images/sphx_glr_partial_wh_sensor_cosine_basis_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="rec_l1/partial_wh_sensor_cosine_basis.html#sphx-glr-gallery-rec-l1-partial-wh-sensor-cosine-basis-py"><span class="std std-ref">Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery</span></a></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="This example has following features:"><div class="figure align-default" id="id4">
+<img alt="Random Orthogonal Measurements, Cosine Basis, ADMM" src="../_images/sphx_glr_partial_wh_sensor_cosine_basis_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="rec_l1/partial_wh_sensor_cosine_basis.html#sphx-glr-gallery-rec-l1-partial-wh-sensor-cosine-basis-py"><span class="std std-ref">Random Orthogonal Measurements, Cosine Basis, ADMM</span></a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This example has following features:"><div class="figure align-default" id="id6">
+<div class="sphx-glr-thumbcontainer" tooltip="This example has following features:"><div class="figure align-default" id="id5">
 <img alt="Recovering spikes via TNIPM" src="../_images/sphx_glr_spikes_l1ls_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="rec_l1/spikes_l1ls.html#sphx-glr-gallery-rec-l1-spikes-l1ls-py"><span class="std std-ref">Recovering spikes via TNIPM</span></a></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="rec_l1/spikes_l1ls.html#sphx-glr-gallery-rec-l1-spikes-l1ls-py"><span class="std std-ref">Recovering spikes via TNIPM</span></a></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div></div>
+<div class="section" id="wavelets">
+<span id="wavelets-gallery"></span><span id="sphx-glr-gallery-wavelets"></span><h2>Wavelets<a class="headerlink" href="#wavelets" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="This is a simple example which demonstrates how  cr.sparse.wt.dwt2 function can be used to  per..."><div class="figure align-default" id="id6">
+<img alt="Wavelet Decomposition of an Image" src="../_images/sphx_glr_cameraman_decomposition_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="wavelets/cameraman_decomposition.html#sphx-glr-gallery-wavelets-cameraman-decomposition-py"><span class="std std-ref">Wavelet Decomposition of an Image</span></a></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>

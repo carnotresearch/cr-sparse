@@ -1,5 +1,5 @@
 """
-Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery
+Random Orthogonal Measurements, Cosine Basis, ADMM
 ==============================================================================
 
 This example has following features:

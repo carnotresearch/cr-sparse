@@ -53,7 +53,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery" href="../rec_l1/partial_wh_sensor_cosine_basis.html" />
+    <link rel="next" title="Random Orthogonal Measurements, Cosine Basis, ADMM" href="../rec_l1/partial_wh_sensor_cosine_basis.html" />
     <link rel="prev" title="A matrix backed linear operator" href="../lop/matrix_operator.html" /> 
 </head>
 
@@ -119,6 +119,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#sparse-recovery-via-l1-minimization">Sparse Recovery via L1 minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#wavelets">Wavelets</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../benchmarks/index.html">Benchmarks</a></li>
@@ -310,7 +311,7 @@ that the energy of the residual <code class="docutils literal notranslate"><span
 </div>
 <img alt="cosamp step by step" class="sphx-glr-single-img" src="../../_images/sphx_glr_cosamp_step_by_step_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fb9949df580&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa607aeb20&gt;]
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">omega</span></code> contains the set of indices at which x is nonzero (support of <code class="docutils literal notranslate"><span class="pre">x</span></code>)</p>
@@ -331,7 +332,7 @@ that the energy of the residual <code class="docutils literal notranslate"><span
 </div>
 <img alt="cosamp step by step" class="sphx-glr-single-img" src="../../_images/sphx_glr_cosamp_step_by_step_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fb9942d6be0&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa6019f430&gt;]
 </pre></div>
 </div>
 </div>
@@ -465,7 +466,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </div>
 <img alt="cosamp step by step" class="sphx-glr-single-img" src="../../_images/sphx_glr_cosamp_step_by_step_003.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7fb994178e50&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7ffa6003d940&gt;
 </pre></div>
 </div>
 <p>We can check how good we were in picking the correct indices from the actual support of the signal</p>
@@ -611,7 +612,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </div>
 <img alt="cosamp step by step" class="sphx-glr-single-img" src="../../_images/sphx_glr_cosamp_step_by_step_004.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7fb99404b850&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7ffa48f0d580&gt;
 </pre></div>
 </div>
 <p>The algorithm has no direct way of knowing that it indeed found the solution
@@ -691,10 +692,10 @@ It is time to compute the residual after the second iteration</p>
 </div>
 <img alt="cosamp step by step" class="sphx-glr-single-img" src="../../_images/sphx_glr_cosamp_step_by_step_005.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7fb96df38e80&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7ffa48e45bb0&gt;
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  5.743 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  5.963 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-pursuit-cosamp-step-by-step-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/7cece7d024bda50295b7a347f4f2a669/cosamp_step_by_step.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">cosamp_step_by_step.py</span></code></a></p>
@@ -713,7 +714,7 @@ It is time to compute the residual after the second iteration</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../rec_l1/partial_wh_sensor_cosine_basis.html" class="btn btn-neutral float-right" title="Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../rec_l1/partial_wh_sensor_cosine_basis.html" class="btn btn-neutral float-right" title="Random Orthogonal Measurements, Cosine Basis, ADMM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="../lop/matrix_operator.html" class="btn btn-neutral float-left" title="A matrix backed linear operator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

@@ -75,7 +75,7 @@ Linear Operators
 
 .. _sphx_glr_gallery_pursuit:
 
-.. _lop_gallery:
+.. _greedy_pursuit_gallery:
 
 Greedy Pursuit Algorithms for Sparse Recovery
 -----------------------------------------------
@@ -125,7 +125,7 @@ Sparse Recovery via L1 minimization
 .. only:: html
 
  .. figure:: /gallery/rec_l1/images/thumb/sphx_glr_partial_wh_sensor_cosine_basis_thumb.png
-     :alt: Partial Walsh Hadamard Measurements, Cosine Sparsifying Basis, ADMM recovery
+     :alt: Random Orthogonal Measurements, Cosine Basis, ADMM
 
      :ref:`sphx_glr_gallery_rec_l1_partial_wh_sensor_cosine_basis.py`
 
@@ -159,6 +159,41 @@ Sparse Recovery via L1 minimization
    :hidden:
 
    /gallery/rec_l1/spikes_l1ls
+.. raw:: html
+
+    <div class="sphx-glr-clear"></div>
+
+
+
+.. _sphx_glr_gallery_wavelets:
+
+.. _wavelets_gallery:
+
+Wavelets
+------------------------
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This is a simple example which demonstrates how  cr.sparse.wt.dwt2 function can be used to  per...">
+
+.. only:: html
+
+ .. figure:: /gallery/wavelets/images/thumb/sphx_glr_cameraman_decomposition_thumb.png
+     :alt: Wavelet Decomposition of an Image
+
+     :ref:`sphx_glr_gallery_wavelets_cameraman_decomposition.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/wavelets/cameraman_decomposition
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>
