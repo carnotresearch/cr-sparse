@@ -20,7 +20,11 @@ from .version import __version__
 
 from cr.sparse._src.util import (
     promote_arg_dtypes,
-    canonicalize_dtype
+    canonicalize_dtype,
+    check_shapes_are_equal,
+    integer_types,
+    integer_ranges,
+    dtype_ranges
 )
 
 from cr.sparse._src.matrix import (
@@ -180,3 +184,5 @@ from cr.sparse._src.special import (
 from cr.sparse._src.types import (
     RecoveryFullSolution
 )
+
+
