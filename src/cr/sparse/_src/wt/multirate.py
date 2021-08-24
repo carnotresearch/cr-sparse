@@ -20,6 +20,20 @@ import cr.sparse as crs
 from .conv import iconv, aconv, mirror_filter
 
 
+def dyadup_in(x):
+    """Dyadic upsample by inserting zeros between samples
+    """
+    n = len(x)
+    y = jnp.zeros(2*n - 1, dtype=x.dtype)
+    return y.at[::2].set(x)
+
+def dyadup_out(x):
+    """Dyadic upsample by inserting samples between zeros
+    """
+    n = len(x)
+    y = jnp.zeros(2*n + 1, dtype=x.dtype)
+    return y.at[1::2].set(x)
+
 def up_sample(x, s):
     """Upsample x by a factor s by introducing zeros in between
     """
