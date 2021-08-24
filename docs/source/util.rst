@@ -5,9 +5,38 @@ Utilities in cr.sparse module
 
 .. currentmodule:: cr.sparse
 
+Array data type utilities
+-----------------------------------
+
+.. autosummary::
+  :toctree: _autosummary
+
+  promote_arg_dtypes
+  check_shapes_are_equal
+
+
+Metrics for measuring signal and error levels
+---------------------------------------------------------
+
+These functions are available under ``cr.sparse.metrics``.
+
+.. currentmodule:: cr.sparse.metrics
+
+.. autosummary::
+    :toctree: _autosummary
+
+    mean_squared
+    mean_squared_error
+    root_mean_squared
+    root_mse
+    normalized_root_mse
+    peak_signal_noise_ratio
+
+
 Some checks and utilities for matrices (2D arrays)
 ----------------------------------------------------------
 
+.. currentmodule:: cr.sparse
 
 .. autosummary::
   :toctree: _autosummary
