@@ -80,12 +80,6 @@ Documentation: https://cr-sparse.readthedocs.io/en/v0.1.4/
 
 Initial release
 
-### Added
-### Changed
-### Removed
-### Fixed
-### Deprecated
-
 [Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.5...HEAD
 [0.1.5]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/carnotresearch/cr-sparse/compare/0.1.3...v0.1.4
