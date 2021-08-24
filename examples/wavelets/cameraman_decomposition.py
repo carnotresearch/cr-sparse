@@ -8,6 +8,9 @@ perform 2D wavelet decomposition.
 
 Its interface is identical to the corresponding function
 in PyWavelets library.
+
+This example is adapted from 
+`PyWavelets documentation <https://pywavelets.readthedocs.io/en/latest/>`_.
 """
 
 # %% 
