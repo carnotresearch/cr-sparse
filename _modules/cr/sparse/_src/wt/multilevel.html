@@ -224,8 +224,23 @@
 
 
 <div class="viewcode-block" id="wavedec"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.wt.wavedec.html#cr.sparse.wt.wavedec">[docs]</a><span class="k">def</span> <span class="nf">wavedec</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">wavelet</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;symmetric&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Multilevel 1D discrete wavelet transform</span>
+    <span class="sd">&quot;&quot;&quot;Computes multilevel 1D discrete wavelet transform</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (jax.numpy.ndarray): Input signal array whose DWT is to be computed </span>
+<span class="sd">        wavelet (str or cr.sparse.wt.DiscreteWavelet): The wavelet to be used to compute DWT (by name or object) </span>
+<span class="sd">        mode (:obj:`str`, optional): Signal extension mode to be used during DWT computation. Default &#39;symmetric&#39;. </span>
+<span class="sd">            See :ref:`Modes &lt;ref-wt-modes&gt;` for available modes.</span>
+<span class="sd">        axis (int, optional): The axis along which the vectors from data will be picked for computing DWT. Default -1 (last axis).</span>
+<span class="sd">        level (int, optional): The number of decomposition levels for which DWT will be computed. If the level is </span>
+<span class="sd">            unspecified, then it will be computed automatically based on data length and wavelet decomposition filter length.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        :obj:`list` of :obj:`jax.numpy.ndarray`: [cA_n, cD_n, cD_{n-1}, ..., cD_1] A list of wavelet decomposition coefficients of the data. </span>
+<span class="sd">            First entry in the tuple is the approximation coefficients</span>
+<span class="sd">            array at decomposition level n. Second is the detail coefficients array at level n. Third is the </span>
+<span class="sd">            detail coefficients array at level n-1. And so on. The last entry in the tuple is the detail </span>
+<span class="sd">            coefficients array at level 1 of the wavelet decomposition.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">wavelet</span> <span class="o">=</span> <span class="n">ensure_wavelet_</span><span class="p">(</span><span class="n">wavelet</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>

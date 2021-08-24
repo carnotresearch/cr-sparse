@@ -233,7 +233,33 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="cr.sparse.wt.wavedec">
 <span class="sig-prename descclassname"><span class="pre">cr.sparse.wt.</span></span><span class="sig-name descname"><span class="pre">wavedec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'symmetric'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/wt/multilevel.html#wavedec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.wt.wavedec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Multilevel 1D discrete wavelet transform</p>
+<dd><p>Computes multilevel 1D discrete wavelet transform</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Input signal array whose DWT is to be computed</p></li>
+<li><p><strong>wavelet</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em> or </em><a class="reference internal" href="cr.sparse.wt.DiscreteWavelet.html#cr.sparse.wt.DiscreteWavelet" title="cr.sparse.wt.DiscreteWavelet"><em>cr.sparse.wt.DiscreteWavelet</em></a>) – The wavelet to be used to compute DWT (by name or object)</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Signal extension mode to be used during DWT computation. Default ‘symmetric’.
+See <a class="reference internal" href="../wavelets.html#ref-wt-modes"><span class="std std-ref">Modes</span></a> for available modes.</p></li>
+<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>optional</em>) – The axis along which the vectors from data will be picked for computing DWT. Default -1 (last axis).</p></li>
+<li><p><strong>level</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>optional</em>) – The number of decomposition levels for which DWT will be computed. If the level is
+unspecified, then it will be computed automatically based on data length and wavelet decomposition filter length.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>[cA_n, cD_n, cD_{n-1}, …, cD_1] A list of wavelet decomposition coefficients of the data.</dt><dd><p>First entry in the tuple is the approximation coefficients
+array at decomposition level n. Second is the detail coefficients array at level n. Third is the
+detail coefficients array at level n-1. And so on. The last entry in the tuple is the detail
+coefficients array at level 1 of the wavelet decomposition.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jax.numpy.ndarray</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

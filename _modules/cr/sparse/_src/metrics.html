@@ -255,11 +255,15 @@
     <span class="n">denom</span> <span class="o">=</span> <span class="n">normalization_factor</span><span class="p">(</span><span class="n">reference_arr</span><span class="p">,</span> <span class="n">normalization</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">rmse</span> <span class="o">/</span> <span class="n">denom</span></div>
 
-
-<div class="viewcode-block" id="peak_signal_noise_ratio"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.metrics.peak_signal_noise_ratio.html#cr.sparse.metrics.peak_signal_noise_ratio">[docs]</a><span class="k">def</span> <span class="nf">peak_signal_noise_ratio</span><span class="p">(</span><span class="n">reference_arr</span><span class="p">,</span> <span class="n">test_arr</span><span class="p">):</span>
+<div class="viewcode-block" id="peak_signal_noise_ratio"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.metrics.peak_signal_noise_ratio.html#cr.sparse.metrics.peak_signal_noise_ratio">[docs]</a><span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">peak_signal_noise_ratio</span><span class="p">(</span><span class="n">reference_arr</span><span class="p">,</span> <span class="n">test_arr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the Peak Signal to Noie Ratio between two arrays </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span> <span class="o">=</span> <span class="n">dtype_ranges</span><span class="p">[</span><span class="n">reference_arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">]</span>
+    <span class="n">data_min</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">reference_arr</span><span class="p">)</span>
+    <span class="n">zero</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">min_val</span><span class="p">)</span>
+    <span class="c1"># min_val below 0 is considered only if the data really has negative values</span>
+    <span class="n">min_val</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data_min</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">min_val</span><span class="p">)</span>
     <span class="n">drange</span> <span class="o">=</span> <span class="n">max_val</span> <span class="o">-</span> <span class="n">min_val</span>
     <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">reference_arr</span><span class="p">,</span> <span class="n">test_arr</span><span class="p">)</span>
     <span class="k">return</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="n">drange</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">mse</span><span class="p">)</span></div>

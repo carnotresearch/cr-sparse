@@ -176,6 +176,27 @@ Wavelets
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="This example considers a signal which is a sinusoid whose frequency changes abruptly at a speci...">
+
+.. only:: html
+
+ .. figure:: /gallery/wavelets/images/thumb/sphx_glr_frequency_change_detection_thumb.png
+     :alt: Frequency Change Detection
+
+     :ref:`sphx_glr_gallery_wavelets_frequency_change_detection.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/wavelets/frequency_change_detection
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="This is a simple example which demonstrates how  cr.sparse.wt.dwt2 function can be used to  per...">
 
 .. only:: html
