@@ -79,11 +79,15 @@ def normalized_root_mse(reference_arr, test_arr, normalization='euclidean'):
     denom = normalization_factor(reference_arr, normalization)
     return rmse / denom
 
-
+@jit
 def peak_signal_noise_ratio(reference_arr, test_arr):
     """Returns the Peak Signal to Noie Ratio between two arrays 
     """
     min_val, max_val = dtype_ranges[reference_arr.dtype]
+    data_min = jnp.min(reference_arr)
+    zero = jnp.zeros_like(min_val)
+    # min_val below 0 is considered only if the data really has negative values
+    min_val = jnp.where(data_min >= 0, zero, min_val)
     drange = max_val - min_val
     mse = mean_squared_error(reference_arr, test_arr)
     return 10 * jnp.log10((drange ** 2) / mse)
