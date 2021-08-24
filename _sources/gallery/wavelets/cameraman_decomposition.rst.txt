@@ -28,11 +28,14 @@ perform 2D wavelet decomposition.
 Its interface is identical to the corresponding function
 in PyWavelets library.
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-15
+This example is adapted from 
+`PyWavelets documentation <https://pywavelets.readthedocs.io/en/latest/>`_.
+
+.. GENERATED FROM PYTHON SOURCE LINES 17-18
 
 Configure JAX to work with 64-bit floating point precision. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-17
+.. GENERATED FROM PYTHON SOURCE LINES 18-20
 
 .. code-block:: default
 
@@ -45,11 +48,11 @@ Configure JAX to work with 64-bit floating point precision.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 18-19
+.. GENERATED FROM PYTHON SOURCE LINES 21-22
 
 Let's import necessary libraries 
 
-.. GENERATED FROM PYTHON SOURCE LINES 19-27
+.. GENERATED FROM PYTHON SOURCE LINES 22-30
 
 .. code-block:: default
 
@@ -68,11 +71,11 @@ Let's import necessary libraries
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 28-29
+.. GENERATED FROM PYTHON SOURCE LINES 31-32
 
 Load the Cameraman image
 
-.. GENERATED FROM PYTHON SOURCE LINES 29-30
+.. GENERATED FROM PYTHON SOURCE LINES 32-33
 
 .. code-block:: default
 
@@ -84,11 +87,11 @@ Load the Cameraman image
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 31-32
+.. GENERATED FROM PYTHON SOURCE LINES 34-35
 
 Perform wavelet decomposition 
 
-.. GENERATED FROM PYTHON SOURCE LINES 32-33
+.. GENERATED FROM PYTHON SOURCE LINES 35-36
 
 .. code-block:: default
 
@@ -100,11 +103,11 @@ Perform wavelet decomposition
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 34-35
+.. GENERATED FROM PYTHON SOURCE LINES 37-38
 
 Split the coefficients tuple into individual parts
 
-.. GENERATED FROM PYTHON SOURCE LINES 35-36
+.. GENERATED FROM PYTHON SOURCE LINES 38-39
 
 .. code-block:: default
 
@@ -116,11 +119,11 @@ Split the coefficients tuple into individual parts
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 37-38
+.. GENERATED FROM PYTHON SOURCE LINES 40-41
 
 Plot the decomposition
 
-.. GENERATED FROM PYTHON SOURCE LINES 38-49
+.. GENERATED FROM PYTHON SOURCE LINES 41-52
 
 .. code-block:: default
 
@@ -149,7 +152,7 @@ Plot the decomposition
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.964 seconds)
+   **Total running time of the script:** ( 0 minutes  0.921 seconds)
 
 
 .. _sphx_glr_download_gallery_wavelets_cameraman_decomposition.py:

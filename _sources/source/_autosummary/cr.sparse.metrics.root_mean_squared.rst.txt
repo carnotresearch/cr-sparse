@@ -1,0 +1,6 @@
+﻿cr.sparse.metrics.root\_mean\_squared
+=====================================
+
+.. currentmodule:: cr.sparse.metrics
+
+.. autofunction:: root_mean_squared

@@ -1,0 +1,6 @@
+﻿cr.sparse.metrics.mean\_squared\_error
+======================================
+
+.. currentmodule:: cr.sparse.metrics
+
+.. autofunction:: mean_squared_error
