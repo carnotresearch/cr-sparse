@@ -48,8 +48,23 @@ def check_level_(sizes, dec_lens, level):
 
 
 def wavedec(data, wavelet, mode='symmetric', level=None, axis=-1):
-    """
-    Multilevel 1D discrete wavelet transform
+    """Computes multilevel 1D discrete wavelet transform
+
+    Args:
+        data (jax.numpy.ndarray): Input signal array whose DWT is to be computed 
+        wavelet (str or cr.sparse.wt.DiscreteWavelet): The wavelet to be used to compute DWT (by name or object) 
+        mode (:obj:`str`, optional): Signal extension mode to be used during DWT computation. Default 'symmetric'. 
+            See :ref:`Modes <ref-wt-modes>` for available modes.
+        axis (int, optional): The axis along which the vectors from data will be picked for computing DWT. Default -1 (last axis).
+        level (int, optional): The number of decomposition levels for which DWT will be computed. If the level is 
+            unspecified, then it will be computed automatically based on data length and wavelet decomposition filter length.
+
+    Returns:
+        :obj:`list` of :obj:`jax.numpy.ndarray`: [cA_n, cD_n, cD_{n-1}, ..., cD_1] A list of wavelet decomposition coefficients of the data. 
+            First entry in the tuple is the approximation coefficients
+            array at decomposition level n. Second is the detail coefficients array at level n. Third is the 
+            detail coefficients array at level n-1. And so on. The last entry in the tuple is the detail 
+            coefficients array at level 1 of the wavelet decomposition.
     """
     wavelet = ensure_wavelet_(wavelet)
     data = jnp.asarray(data)
