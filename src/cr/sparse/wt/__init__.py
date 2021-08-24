@@ -79,7 +79,9 @@ from cr.sparse._src.wt.transform import (
 
 from cr.sparse._src.wt.discrete import (
     get_keep_length,
-    orth_wavefun
+    orth_wavefun,
+    dwt_coeff_to_arr,
+    dwt2_coeff_to_arr
 )
 
 from cr.sparse._src.wt.continuous import (
@@ -100,6 +102,8 @@ from cr.sparse._src.wt.continuous import (
 )
 
 from cr.sparse._src.wt.multirate import (
+    dyadup_in,
+    dyadup_out,
     up_sample,
     downsampling_convolution_periodization,
 )
