@@ -16,6 +16,13 @@ import math
 import jax.numpy as jnp
 from sympy.ntheory import factorint
 
+
+def next_pow_of_2(n):
+    """
+    Returns the smallest integer greater than or equal to n which is a power of 2
+    """
+    return 2**int(math.ceil(math.log2(n)))
+
 def is_integer(x):
     return jnp.mod(x, 1) == 0
 
