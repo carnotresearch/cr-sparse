@@ -480,8 +480,8 @@ def build_continuous_wavelet(name: str, family: FAMILY, order: int):
     base_name = name[:4]
     subname = name[4:]
     # indentify the B-C pattern if present
-    freqs = re.findall(cwt_pattern, subname)
-    if len(subname) > 0 and len(freqs) == 0:
+    freqs = re.findall(cwt_pattern, name)
+    if subname and len(freqs) == 0:
         raise ValueError("No frequencies have been specified.")
     freqs = [float(freq) for freq in freqs]
     nv = family.value
