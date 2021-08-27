@@ -191,7 +191,7 @@ __wname_to_family_order = {
     # "gaus7": (FAMILY.GAUS, 7),
     # "gaus8": (FAMILY.GAUS, 8),
 
-    # "mexh": (FAMILY.MEXH, 0),
+    "mexh": (FAMILY.MEXH, 0),
 
     # "morl": (FAMILY.MORL, 0),
 
@@ -208,7 +208,7 @@ __wname_to_family_order = {
 
     # "fbsp": (FAMILY.FBSP, 0),
 
-    # "cmor": (FAMILY.CMOR, 0),
+    "cmor": (FAMILY.CMOR, 0),
 }
 
 _family_short_names = [
