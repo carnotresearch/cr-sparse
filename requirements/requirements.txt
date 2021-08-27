@@ -6,6 +6,6 @@ sympy>=1.6
 scipy
 matplotlib
 pandas>=1.0.0
-requests>=2.25.0
+requests>=2.20.0
 imageio
 click
