@@ -14,7 +14,7 @@ def test_dwt_max_level():
     assert_(wt.dwt_max_level(32, 'sym5') == 1)
 
     # string input that is not a discrete wavelet
-    assert_raises(ValueError, wt.dwt_max_level, 16, 'mexh')
+    assert_raises(TypeError, wt.dwt_max_level, 16, 'mexh')
 
     # filter_len must be an integer >= 2
     assert_raises(ValueError, wt.dwt_max_level, 16, 1)

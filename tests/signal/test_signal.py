@@ -196,13 +196,13 @@ def test_normalize():
     assert_almost_equal(jnp.mean(y), 0)
     assert_almost_equal(jnp.var(y), 1.)
 
-def test_frequency_spectrum():
-    t = jnp.linspace(0, 10, 1000)
+def test_power_spectrum():
+    t = jnp.linspace(0, 10, 1024)
     f = 1
     x = jnp.cos(2*jnp.pi*t)
     n = len(x)
-    n2 = (n+1) // 2
-    f, sxx = frequency_spectrum(x)
+    n2 = n // 2
+    f, sxx = power_spectrum(x)
     assert len(f) == n2
     assert len(sxx) == n2
     assert jnp.all(sxx >= 0) 
