@@ -86,6 +86,7 @@ from cr.sparse._src.distance import (
 )
 
 from cr.sparse._src.discrete.number import (
+    next_pow_of_2,
     is_integer,
     is_positive_integer,
     is_negative_integer,
@@ -168,7 +169,8 @@ from cr.sparse._src.signal import (
 )
 
 from cr.sparse._src.signal import (
-    frequency_spectrum
+    frequency_spectrum,
+    power_spectrum
 )
 
 
