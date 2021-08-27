@@ -90,6 +90,7 @@ from cr.sparse._src.wt.continuous import (
     frequency_points,
     ricker,
     morlet,
+    cmor,
     cwt_time_real,
     cwt_time_real_jit,
     cwt_time_complex,
