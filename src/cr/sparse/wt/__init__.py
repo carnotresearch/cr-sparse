@@ -107,8 +107,15 @@ from cr.sparse._src.wt.continuous import (
 )
 
 from cr.sparse._src.wt.cwt_int_diff import (
-    cwt_time_int_diff,
-    cwt
+    cont_wave_fun,
+    cont_wave_fun_jit,
+    int_wave_fun,
+    int_wave_fun_jit,
+    psi_resample,
+    psi_resample_jit,
+    cwt,
+    cwt_id_time,
+    cwt_id_time_jit,
 )
 
 

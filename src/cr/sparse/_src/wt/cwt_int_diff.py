@@ -29,7 +29,39 @@ import cr.sparse as crs
 
 from .wavelet import to_wavelet, integrate_wavelet, scale2frequency
 
-def cwt_time_int_diff(data, int_psi, t, scales, axis=-1):
+
+def cont_wave_fun(wavelet, precision):
+    """Computes the wavelet function for a Continuous Wavelet
+    """
+    func = wavelet.functions.time
+    lb = wavelet.lower_bound
+    ub = wavelet.upper_bound
+    n = 2**precision
+    t = jnp.linspace(lb, ub, n)
+    psi = func(t)
+    return psi, t
+
+cont_wave_fun_jit = jit(cont_wave_fun, static_argnums=(0,1))
+
+def int_wave_fun(wavelet, precision):
+    """Computes the integral of the wavelet function for a Continuous Wavelet
+    """
+    psi, t = cont_wave_fun(wavelet, precision)
+    dt = t[1] - t[0]
+    int_psi = jnp.cumsum(psi) * dt
+    return int_psi, t
+
+int_wave_fun_jit = jit(int_wave_fun, static_argnums=(0,1, 2))
+
+def psi_resample(int_psi, dt, domain, scale):
+    j = jnp.arange(scale*domain + 1) / (scale * dt)
+    j = j.astype(int)  # floor
+    int_psi_scale = int_psi[j][::-1]
+    return int_psi_scale
+
+psi_resample_jit = jit(psi_resample, static_argnums=(2,3,4))
+
+def cwt_id_time(data, scales, wavelet, precision, axis):
     """Computes the CWT using time domain convolution
 
     It uses the following method
@@ -43,6 +75,11 @@ def cwt_time_int_diff(data, int_psi, t, scales, axis=-1):
     This method is what is followed in PyWavelets.
     """
     data = jnp.asarray(data)
+    int_psi, t = int_wave_fun(wavelet, precision)
+    if not jnp.isrealobj(int_psi):
+        int_psi = jnp.conj(int_psi)
+    domain = wavelet.domain
+    dt = domain / (len(t) - 1)
     a = len(scales)
     n = data.shape[axis]
     out_shape = (a,) + data.shape
@@ -51,32 +88,32 @@ def cwt_time_int_diff(data, int_psi, t, scales, axis=-1):
     in_slices = [None for _ in data.shape]
     in_slices[axis] = slice(None)
     in_slices = tuple(in_slices)
-    dt = t[1] - t[0]
-    domain = t[-1] - t[0]
     for index, scale in enumerate(scales):
-        j = jnp.arange(scale*domain + 1) / (scale * dt)
-        j = j.astype(int)  # floor
-        int_psi_scale = int_psi[j][::-1]
+        int_psi_scale = psi_resample(int_psi, dt, domain, scale)
         psi_len = len(int_psi_scale)
-        conv = jnp.convolve(data, int_psi_scale[in_slices])
+        filter = int_psi_scale[in_slices]
+        if jnp.isrealobj(int_psi):
+            conv = jnp.convolve(data, filter)
+        else:
+            conv_real = jnp.convolve(data, filter.real)
+            conv_imag = jnp.convolve(data, filter.imag)
+            conv = lax.complex(conv_real, conv_imag)
         coeffs = - jnp.sqrt(scale) * jnp.diff(conv, axis=axis)
         start = psi_len // 2 -1 
         coeffs = jnp.take(coeffs, indices=range(start, start+n), axis=axis)
         output = output.at[index].set(coeffs)
     return output
 
-# cwt_time_int_diff = jit(cwt_time_int_diff, static_argnums=(3,), static_argnames=(4,))
+cwt_id_time_jit = jit(cwt_id_time, static_argnums=(1, 2,3,4))
 
-def cwt(data, scales, wavelet, sampling_period=1., axis=-1, precision=10, method='conv'):
+def cwt(data, scales, wavelet, axis=-1, precision=10, method='conv'):
     """Computes the CWT of data along a specified axis with a specified wavelet
     """
     wavelet = to_wavelet(wavelet)
     if method == 'conv':
-        int_psi, t = integrate_wavelet(wavelet, precision=precision)
-        int_psi = jnp.conj(int_psi)
-        output = cwt_time_int_diff(data, int_psi, t, scales, axis=axis)
+        output = cwt_id_time_jit(data, scales, wavelet, precision, axis=axis)
     else:
         raise NotImplementedError("The specified method is not supported yet")
-    frequencies = scale2frequency(wavelet, scales, precision)
-    frequencies /= sampling_period
-    return output, frequencies
+    return output
+    # frequencies = ( wavelet.center_frequency / sampling_period )/ jnp.asarray(scales)
+    # return output, frequencies

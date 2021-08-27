@@ -204,6 +204,13 @@ class ContinuousWavelet(NamedTuple):
         psi = func(t)
         return psi, t
 
+    @property
+    def domain(self):
+        """Returns the time domain of the wavelet
+        """
+        return self.upper_bound - self.lower_bound
+
+
 def qmf(h):
     """Returns the quadrature mirror filter of a given filter"""
     g = h[::-1]
@@ -510,7 +517,7 @@ def build_continuous_wavelet(name: str, family: FAMILY, order: int):
             complex_cwt=False,
             lower_bound=-8.,
             upper_bound=8.,
-            center_frequency=0.,
+            center_frequency=0.25,
             bandwidth_frequency=0.,
             fbsp_order=0,
             functions=functions)
@@ -690,8 +697,8 @@ def central_frequency(wavelet, precision=8):
     """
     wavelet = to_wavelet(wavelet)
     # Let's see if the central frequency is defined for the wavelet
-    # if wavelet.center_frequency:
-    #     return wavelet.center_frequency
+    if wavelet.center_frequency:
+        return wavelet.center_frequency
     # get the wavelet functions
     approximations = wavelet.wavefun(precision)
     if len(approximations) == 2:
