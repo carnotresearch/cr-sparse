@@ -23,6 +23,7 @@ import scipy
 import numpy as np
 import matplotlib.pyplot as plt
 
+from .cont_wavelets import *
 
 def next_pow_of_2(n):
     """
@@ -49,142 +50,6 @@ def frequency_points(n, dt=1.):
     wk = 2*jnp.pi*fk / dt
     return wk
 
-########################################################################################################
-# Tuple Describing a Continuous Wavelet
-########################################################################################################
-
-class WaveletWrapper(NamedTuple):
-    is_complex: bool
-    """Indicates if the wavelet is complex"""
-    time : Callable[[jnp.ndarray, float], jnp.ndarray]
-    """Returns the wavelet function in time domain at specified time points"""
-    frequency : Callable[[jnp.ndarray, float], jnp.ndarray]
-    """Returns the wavelet function in frequency domain at specified angular frequencies"""
-    fourier_period: Callable[[float], float]
-    """Returns the equivalent Fourier period of the wavelet at a particular scale"""
-    scale_from_period: Callable[[float], float]
-    """Returns the equivalent scale of the wavelet at a particular Fourier period"""
-    coi: Callable[[float], float]
-    """Returns the cone of influence for the CWT at a particular scale"""
-
-    def fourier_frequency(self, scale):
-        """
-        Return the equivalent frequencies .
-        This is equivalent to 1.0 / self.fourier_period
-        """
-        period = self.fourier_period(scale)
-        return jnp.reciprocal(period)
-
-    def s0(self, dt):
-        """Returns the smallest scale at which wavelet resolution is good"""
-        return find_s0(self, dt)
-
-    def optimal_scales(self, dt, dj, n):
-        """Returns the wavelet scales at which the time and frequency resolutions are good
-        """
-        s0 = find_s0(self, dt)
-        return find_optimal_scales(s0, dt, dj, n)
-
-########################################################################################################
-# Complex Morlet Wavelet
-########################################################################################################
-
-def morlet(w0=6, complete=False):
-    """
-    Returns the n-point continuous Morlet wavelet
-
-    See the definition at https://en.wikipedia.org/wiki/Morlet_wavelet
-
-    w is the center frequency parameter
-    a is the scale parameter
-    """
-    def time(t, s=1.):
-        s = jnp.atleast_2d(jnp.asarray(s)).T
-        t = t / s
-        # wavelet 1 / (pi)^{1/4} e^{j w t / a} e^{-t^2/ a^2}
-        output = jnp.exp(1j * w0 * t)
-        if complete:
-            output = output - jnp.exp(-0.5 * (w0 ** 2))
-        output = output * jnp.exp(-0.5 * t**2) * jnp.pi**(-0.25)
-        # energy conservation
-        output = jnp.sqrt(1/s) * output
-        return jnp.squeeze(output)
-
-    def frequency(w, s=1.0):
-        s = jnp.atleast_2d(jnp.asarray(s)).T
-        x = w * s
-        # Heaviside mock
-        Hw = (w > 0).astype(float)
-        points = (jnp.pi ** -.25) * Hw * jnp.exp((-(x - w0) ** 2) / 2)
-        # normalize for scale
-        points = (s ** 0.5) * ((2*jnp.pi) ** 0.5) * points
-        return jnp.squeeze(points)
-
-    def fourier_period(s):
-        s = jnp.asarray(s)
-        return 4 * jnp.pi * s / (w0 + (2 + w0 ** 2) ** .5)
-
-    def scale_from_period(period):
-        coeff = jnp.sqrt(w0 * w0 + 2)
-        return (period * (coeff + w0)) / (4. * jnp.pi)
-
-    def coi(s):
-        return 2 ** .5 * s
-
-    return WaveletWrapper(is_complex=True, 
-        time=time, frequency=frequency, fourier_period=fourier_period,
-        scale_from_period=scale_from_period, coi=coi)
-
-
-########################################################################################################
-# Ricker Wavelet
-########################################################################################################
-
-def ricker():
-    """
-    Returns the n-point continuous Ricker/Mexican Hat wavelet function
-
-    See the definition at https://en.wikipedia.org/wiki/Ricker_wavelet
-    """
-    def time(t, s=1.):
-        s = jnp.atleast_2d(jnp.asarray(s)).T
-        # The normalization term 2 / (sqrt(3 s) pi^{1/4})
-        A = 2 / (jnp.sqrt(3 * s) * (jnp.pi**0.25))
-        # square the scale s^2
-        wsq = s**2
-        # t^2
-        xsq = t**2
-        # the modulation term (1 - t^2/a^2)
-        mod = (1 - xsq / wsq)
-        # the gaussian term e^{-t^2/2a^2}
-        gauss = jnp.exp(-xsq / (2 * wsq))
-        total = A * mod * gauss
-        return jnp.squeeze(total)
-
-    def frequency(w, s=1.0):
-        s = jnp.atleast_2d(jnp.asarray(s)).T
-        x = w * s
-        function = x ** 2 * np.exp(-x ** 2 / 2)
-        # The normalization term 2 / (sqrt(3 s) pi^{1/4})
-        A = 2 / (jnp.sqrt(3) * (jnp.pi**0.25))
-        result = A * function
-        # normalize for scale
-        result = (s ** 0.5) * ((2*jnp.pi) ** 0.5) * result
-        return jnp.squeeze(result)
-
-    def fourier_period(s):
-        s = jnp.asarray(s)
-        return 2 * jnp.pi * s / (2.5) ** .5
-
-    def scale_from_period(period):
-        raise NotImplementedError()
-
-    def coi(s):
-        return 2 ** .5 * s
-
-    return WaveletWrapper(is_complex=False, 
-        time=time, frequency=frequency, fourier_period=fourier_period,
-        scale_from_period=scale_from_period, coi=coi)
 
 
 ########################################################################################################
@@ -307,9 +172,11 @@ cwt_frequency_jit = jit(cwt_frequency, static_argnums=(1,3, 4))
 
 
 class WaveletAnalysis(NamedTuple):
+    """Continuous Wavelet Analysis of a 1D data signal
+    """
     data : jnp.ndarray
     """ data on which analysis is being performed"""
-    wavelet: WaveletWrapper
+    wavelet: WaveletFunctions
     """ The wavelet being used for analysis"""
     dt: float
     """ sample spacing / period"""
@@ -496,6 +363,11 @@ def find_optimal_scales(s0, dt, dj, n):
         sj = s0 * 2 ** (dj * jnp.arange(0, J + 1))
         return sj
 
+
+def scales_from_voices_per_octave(nu, range):
+    """Returns the list of scales based on the voices per octave parameter
+    """
+    return 2 ** (range / nu)
 
 DEFAULT_WAVELET = morlet(w0=6)
 
