@@ -106,6 +106,12 @@ from cr.sparse._src.wt.continuous import (
     analyze
 )
 
+from cr.sparse._src.wt.cwt_int_diff import (
+    cwt_time_int_diff,
+    cwt
+)
+
+
 from cr.sparse._src.wt.multirate import (
     dyadup_in,
     dyadup_out,
