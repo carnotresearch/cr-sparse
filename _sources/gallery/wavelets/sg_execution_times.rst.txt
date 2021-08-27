@@ -5,10 +5,10 @@
 
 Computation times
 =================
-**00:03.658** total execution time for **gallery_wavelets** files:
+**00:03.090** total execution time for **gallery_wavelets** files:
 
 +----------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_wavelets_frequency_change_detection.py` (``frequency_change_detection.py``) | 00:02.747 | 0.0 MB |
+| :ref:`sphx_glr_gallery_wavelets_frequency_change_detection.py` (``frequency_change_detection.py``) | 00:02.280 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_wavelets_cameraman_decomposition.py` (``cameraman_decomposition.py``)       | 00:00.911 | 0.0 MB |
+| :ref:`sphx_glr_gallery_wavelets_cameraman_decomposition.py` (``cameraman_decomposition.py``)       | 00:00.810 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------+-----------+--------+

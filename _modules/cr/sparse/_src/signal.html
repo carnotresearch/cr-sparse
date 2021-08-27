@@ -195,6 +195,7 @@
 
 <span class="kn">from</span> <span class="nn">.norm</span> <span class="kn">import</span> <span class="n">sqr_norms_l2_cw</span><span class="p">,</span> <span class="n">sqr_norms_l2_rw</span>
 <span class="kn">from</span> <span class="nn">.matrix</span> <span class="kn">import</span> <span class="n">is_matrix</span>
+<span class="kn">from</span> <span class="nn">.discrete.number</span> <span class="kn">import</span> <span class="n">next_pow_of_2</span>
 
 <span class="k">def</span> <span class="nf">find_first_signal_with_energy_le_rw</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">energy</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the index of the first row which has energy less than the specified threshold</span>
@@ -377,18 +378,30 @@
 <span class="n">normalize_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">normalize</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
 
 
-<span class="k">def</span> <span class="nf">frequency_spectrum</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">frequency_spectrum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Frequency spectrum of 1D data using FFT</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">nn</span> <span class="o">=</span> <span class="n">next_pow_of_2</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">jfft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">nn</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">jfft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">dt</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">jfft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">jfft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">X</span>
+
+<span class="k">def</span> <span class="nf">power_spectrum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Power spectrum of 1D data using FFT</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">n2</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">jfft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">sxx</span> <span class="o">=</span> <span class="p">((</span><span class="n">X</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">X</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span><span class="p">))</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="n">jfft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">n</span><span class="p">)[</span><span class="n">n2</span><span class="p">:]</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">n</span>
+    <span class="n">f</span><span class="p">,</span> <span class="n">X</span> <span class="o">=</span> <span class="n">frequency_spectrum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+    <span class="n">nn</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">n2</span> <span class="o">=</span> <span class="n">nn</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">n2</span><span class="p">:]</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">n2</span><span class="p">:]</span>
+    <span class="n">sxx</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">X</span><span class="p">))</span> <span class="o">/</span> <span class="n">T</span>
     <span class="n">sxx</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sxx</span><span class="p">)</span>
-    <span class="n">sxx</span> <span class="o">=</span> <span class="n">sxx</span><span class="p">[</span><span class="n">n2</span><span class="p">:]</span>
     <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">sxx</span>
-
 
 <span class="k">def</span> <span class="nf">energy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
