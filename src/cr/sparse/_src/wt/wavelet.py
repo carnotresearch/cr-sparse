@@ -21,6 +21,8 @@ import jax.numpy as jnp
 from .families import FAMILY, wname_to_family_order, is_discrete_wavelet
 from .coeffs import db, sym, coif, bior, dmey, sqrt2
 
+from .cont_wavelets import WaveletFunctions, cmor, ricker
+
 import re
 
 
@@ -156,11 +158,19 @@ class ContinuousWavelet(NamedTuple):
 
     # additinal parameters for continuous wavelets
     lower_bound: float = 0
+    """time window lower bound for computing the wavelet function"""
     upper_bound: float = 0
+    """time window upper bound for computing the wavelet function"""
     complex_cwt: bool = False
+    """flag indicating if the wavelet is complex or real"""
     center_frequency: float = -1.
+    """center frequency of the wavelet"""
     bandwidth_frequency: float = -1.
+    """bandwidth of the wavelet"""
     fbsp_order: int = 0
+    functions: WaveletFunctions = None
+    """Functions associated with the wavelet"""
+
 
     def __str__(self):
         s = []
@@ -176,7 +186,22 @@ class ContinuousWavelet(NamedTuple):
             s.append(x.rstrip())
         return u'\n'.join(s)
 
+    def wavefun(self, level=8, length=None):
+        """Returns the wavelet function for the wavelet
 
+        Args:
+            level (:obj:`int`, optional): Number of levels of reconstruction 
+                to get the approximation of the wavelet function. 
+                Default 8.
+        """
+        if self.functions is None:
+            raise NotImplementedError(f"No implementation available for {self.name}")
+        func = self.functions.time
+        p = 2**level
+        output_length = p if length is None else length
+        t = jnp.linspace(self.lower_bound, self.upper_bound, output_length)
+        psi = func(t)
+        return psi, t
 
 def qmf(h):
     """Returns the quadrature mirror filter of a given filter"""
@@ -445,8 +470,11 @@ def build_continuous_wavelet(name: str, family: FAMILY, order: int):
     """
     # wavelet base name
     base_name = name[:4]
+    subname = name[4:]
     # indentify the B-C pattern if present
-    freqs = re.findall(cwt_pattern, name)
+    freqs = re.findall(cwt_pattern, subname)
+    if len(subname) > 0 and len(freqs) == 0:
+        raise ValueError("No frequencies have been specified.")
     freqs = [float(freq) for freq in freqs]
     nv = family.value
     if nv == FAMILY.GAUS.value:
@@ -469,6 +497,7 @@ def build_continuous_wavelet(name: str, family: FAMILY, order: int):
             fbsp_order=0)
         return w
     elif nv == FAMILY.MEXH.value:
+        functions = ricker()
         w = ContinuousWavelet(support_width=-1,
             symmetry=SYMMETRY.SYMMETRIC,
             orthogonal=False,
@@ -482,7 +511,8 @@ def build_continuous_wavelet(name: str, family: FAMILY, order: int):
             upper_bound=8.,
             center_frequency=0.,
             bandwidth_frequency=0.,
-            fbsp_order=0)
+            fbsp_order=0,
+            functions=functions)
         return w
     elif nv == FAMILY.MORL.value:
         w = ContinuousWavelet(support_width=-1,
@@ -555,6 +585,7 @@ def build_continuous_wavelet(name: str, family: FAMILY, order: int):
         return w
     elif nv == FAMILY.CMOR.value:
         bandwidth_frequency, center_frequency = _get_bw_center_freqs(freqs, 1., 0.5)
+        functions = cmor(bandwidth_frequency, center_frequency)
         w = ContinuousWavelet(support_width=-1,
             symmetry=SYMMETRY.ASYMMETRIC,
             orthogonal=False,
@@ -564,11 +595,12 @@ def build_continuous_wavelet(name: str, family: FAMILY, order: int):
             family_name = "Complex Morlet wavelets",
             short_name="cmor", 
             complex_cwt=True,
-            lower_bound=-20.,
-            upper_bound=20.,
+            lower_bound=-8.,
+            upper_bound=8.,
             center_frequency=center_frequency,
             bandwidth_frequency=bandwidth_frequency,
-            fbsp_order=2)
+            fbsp_order=2,
+            functions=functions)
         return w
     return None
 
