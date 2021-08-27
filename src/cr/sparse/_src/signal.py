@@ -19,6 +19,7 @@ import jax.numpy.fft as jfft
 
 from .norm import sqr_norms_l2_cw, sqr_norms_l2_rw
 from .matrix import is_matrix
+from .discrete.number import next_pow_of_2
 
 def find_first_signal_with_energy_le_rw(X, energy):
     """Returns the index of the first row which has energy less than the specified threshold
@@ -201,18 +202,30 @@ def normalize(data, axis=-1):
 normalize_jit = jit(normalize, static_argnums=(1,))
 
 
-def frequency_spectrum(data):
+def frequency_spectrum(x, dt=1.):
+    """Frequency spectrum of 1D data using FFT
+    """
+    n = len(x)
+    nn = next_pow_of_2(n)
+    X = jfft.fft(x, nn)
+    f = jfft.fftfreq(nn, d=dt)
+    X = jfft.fftshift(X)
+    f = jfft.fftshift(f)
+    return f, X
+
+def power_spectrum(x, dt=1.):
     """Power spectrum of 1D data using FFT
     """
-    n = len(data)
-    n2 = (n+1) // 2
-    X = jfft.fft(data)
-    sxx = ((X * jnp.conj(X)) / (n))
-    f = -jfft.fftfreq(n)[n2:]
+    n = len(x)
+    T = dt * n
+    f, X = frequency_spectrum(x, dt)
+    nn = len(f)
+    n2 = nn // 2
+    f = f[n2:]
+    X = X[n2:]
+    sxx = (X * jnp.conj(X)) / T
     sxx = jnp.abs(sxx)
-    sxx = sxx[n2:]
     return f, sxx
-
 
 def energy(data, axis=-1):
     """
