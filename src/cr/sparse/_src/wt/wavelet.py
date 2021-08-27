@@ -709,8 +709,9 @@ def central_frequency(wavelet, precision=8):
     return 1.0 / (domain / (index - 1))
     
     
-def scale2frequency(wavelet, scale, precision=8):
+def scale2frequency(wavelet, scales, precision=8):
     """Converts scales to frequencies for a wavelet
     """
+    scales = jnp.asarray(scales)
     cf  = central_frequency(wavelet, precision=precision)
-    return cf / scale
+    return cf / scales
