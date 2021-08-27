@@ -17,6 +17,7 @@ from enum import Enum, auto
 from typing import NamedTuple, List, Dict, Tuple
 
 import jax.numpy as jnp
+import jax.numpy.fft as jfft
 
 from .families import FAMILY, wname_to_family_order, is_discrete_wavelet
 from .coeffs import db, sym, coif, bior, dmey, sqrt2
@@ -649,3 +650,67 @@ def build_wavelet(name):
     if wavelet is None:
         raise ValueError(f"Invalid wavelet name {name}")
     return wavelet
+
+def rec_integrate(function, dt):
+    """Integrate a function using the rectangle integration method
+    """
+    integral = jnp.cumsum(function)
+    integral *= dt
+    return integral
+
+
+def to_wavelet(wavelet):
+    if isinstance(wavelet, str):
+        wavelet = build_wavelet(wavelet)
+    if wavelet is None:
+        raise ValueError("Invalid wavelet")
+    return wavelet
+
+def integrate_wavelet(wavelet, precision=8):
+    """Integrate wavelet function using the rectangle integration method
+    """
+    wavelet = to_wavelet(wavelet)
+    approximations = wavelet.wavefun(precision)
+    if len(approximations) == 2:
+        psi, t = approximations
+        dt = t[1] - t[0]
+        return rec_integrate(psi, dt), t
+    elif len(approximations) == 3:
+        phi, psi, t = approximations
+        dt = t[1] - t[0]
+        return rec_integrate(psi, dt), t
+    elif len(approximations) == 5:
+        phi_d, psi_d, phi_r, psi_r, t = functions_approximations
+        dt = t[1] - t[0]
+        return rec_integrate(psi_d, dt), rec_integrate(psi_r, dt), t
+
+
+def central_frequency(wavelet, precision=8):
+    """Computes the central frequency of the wavelet function
+    """
+    wavelet = to_wavelet(wavelet)
+    # Let's see if the central frequency is defined for the wavelet
+    # if wavelet.center_frequency:
+    #     return wavelet.center_frequency
+    # get the wavelet functions
+    approximations = wavelet.wavefun(precision)
+    if len(approximations) == 2:
+        psi, t = approximations
+    elif len(approximations) == 3:
+        phi, psi, t = approximations
+    elif len(approximations) == 5:
+        phi_d, psi, phi_r, psi_r, t = functions_approximations
+    domain = t[-1] - t[0]
+    # identify the peak frequency [skip the DC]
+    index = jnp.argmax(jnp.abs(jfft.fft(psi)[1:])) + 2
+    if index > len(psi) / 2:
+        index = len(psi) - index + 2
+    # convert to Hz
+    return 1.0 / (domain / (index - 1))
+    
+    
+def scale2frequency(wavelet, scale, precision=8):
+    """Converts scales to frequencies for a wavelet
+    """
+    cf  = central_frequency(wavelet, precision=precision)
+    return cf / scale

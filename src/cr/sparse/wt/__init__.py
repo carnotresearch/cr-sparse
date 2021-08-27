@@ -26,6 +26,10 @@ from cr.sparse._src.wt.wavelet import (
     DiscreteWavelet,
     build_discrete_wavelet,
     build_wavelet,
+    to_wavelet,
+    integrate_wavelet,
+    central_frequency,
+    scale2frequency,
 )
 
 
