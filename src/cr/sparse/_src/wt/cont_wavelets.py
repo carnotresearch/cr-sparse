@@ -192,7 +192,7 @@ def ricker():
     def frequency(w, s=1.0):
         s = jnp.atleast_2d(jnp.asarray(s)).T
         x = w * s
-        function = x ** 2 * np.exp(-x ** 2 / 2)
+        function = x ** 2 * jnp.exp(-x ** 2 / 2)
         # The normalization term 2 / (sqrt(3 s) pi^{1/4})
         A = 2 / (jnp.sqrt(3) * (jnp.pi**0.25))
         result = A * function

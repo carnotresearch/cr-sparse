@@ -12,27 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from cr.sparse._src.wt.families import (
-    FAMILY,
-    is_discrete_wavelet,
-    families,
-    wavelist,
-    wname_to_family_order
-)
 
-from cr.sparse._src.wt.wavelet import (
-    SYMMETRY,
-    BaseWavelet,
-    DiscreteWavelet,
-    build_discrete_wavelet,
-    build_wavelet,
-    to_wavelet,
-    integrate_wavelet,
-    central_frequency,
-    scale2frequency,
+######################################################################################
+# Common Support for Wavelets
+######################################################################################
+
+# Common Utilities 
+from cr.sparse._src.wt.util import (
+    # Utility functions
+    next_pow_of_2,
 )
 
 
+# Dyadic signal processing
 from cr.sparse._src.wt.dyad import (
     dyad,
     is_dyadic,
@@ -42,14 +34,41 @@ from cr.sparse._src.wt.dyad import (
     cut_dyadic,
 )
 
-from cr.sparse._src.wt.util import (
-    # utility definitions
-    modes,
-    # Utility functions
-    make_even_shape,
-    pad,
-    dwt_max_level,
-    dwt_coeff_len,
+from cr.sparse._src.wt.multirate import (
+    dyadup_in,
+    dyadup_out,
+    up_sample,
+    downsampling_convolution_periodization,
+)
+
+######################################################################################
+# All Wavelets
+######################################################################################
+
+from cr.sparse._src.wt.families import (
+    FAMILY,
+    is_discrete_wavelet,
+    families,
+    wavelist,
+    wname_to_family_order
+)
+
+# Functions/Types for both continuous and discrete wavelets
+from cr.sparse._src.wt.wavelet import (
+    SYMMETRY,
+    BaseWavelet,
+    build_wavelet,
+    to_wavelet,
+)
+
+######################################################################################
+# Discrete Wavelets
+######################################################################################
+
+# Functions/Types for discrete wavelets
+from cr.sparse._src.wt.wavelet import (
+    DiscreteWavelet,
+    build_discrete_wavelet,
 )
 
 from cr.sparse._src.wt.transform import (
@@ -88,24 +107,63 @@ from cr.sparse._src.wt.discrete import (
     dwt2_coeff_to_arr
 )
 
-from cr.sparse._src.wt.continuous import (
-    next_pow_of_2,
+from cr.sparse._src.wt.multilevel import (
+    wavedec,
+    waverec
+)
+
+
+######################################################################################
+# Continuous Wavelets
+######################################################################################
+
+
+# Functions/Types for continuous wavelets
+from cr.sparse._src.wt.wavelet import (
+    ContinuousWavelet,
+    integrate_wavelet,
+    central_frequency,
+    scale2frequency,
+)
+
+# Utilities for discrete wavelets
+from cr.sparse._src.wt.util import (
+    # definitions
+    modes,
+    # functions
+    make_even_shape,
+    pad,
+    dwt_max_level,
+    dwt_coeff_len,
+)
+
+# Utilities for continuous wavelets
+from cr.sparse._src.wt.util import (
     time_points,
     frequency_points,
+    scales_from_voices_per_octave,
+)
+
+# Wavelet functions in time and frequency domains
+from cr.sparse._src.wt.cont_wavelets import (
     ricker,
     morlet,
     cmor,
-    cwt_time_real,
-    cwt_time_real_jit,
-    cwt_time_complex,
-    cwt_time_complex_jit,
-    cwt_frequency,
-    cwt_frequency_jit,
+)
+
+# CWT implementation using Torrence and Compo algorithm
+from cr.sparse._src.wt.cwt_tc import (
+    cwt_tc_time,
+    cwt_tc_time_jit,
+    cwt_tc_frequency,
+    cwt_tc_frequency_jit,
+    cwt_tc,
     find_s0,
     find_optimal_scales,
     analyze
 )
 
+# CWT implementation using PYWT algorithm
 from cr.sparse._src.wt.cwt_int_diff import (
     cont_wave_fun,
     cont_wave_fun_jit,
@@ -113,22 +171,12 @@ from cr.sparse._src.wt.cwt_int_diff import (
     int_wave_fun_jit,
     psi_resample,
     psi_resample_jit,
-    cwt,
     cwt_id_time,
     cwt_id_time_jit,
+    cwt_id,
 )
 
-
-from cr.sparse._src.wt.multirate import (
-    dyadup_in,
-    dyadup_out,
-    up_sample,
-    downsampling_convolution_periodization,
+# Overall CWT interface
+from cr.sparse._src.wt.cwt import (
+    cwt
 )
-
-
-from cr.sparse._src.wt.multilevel import (
-    wavedec,
-    waverec
-)
-

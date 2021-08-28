@@ -106,7 +106,7 @@ def cwt_id_time(data, scales, wavelet, precision, axis):
 
 cwt_id_time_jit = jit(cwt_id_time, static_argnums=(1, 2,3,4))
 
-def cwt(data, scales, wavelet, axis=-1, precision=10, method='conv'):
+def cwt_id(data, scales, wavelet, method='conv', axis=-1, precision=10):
     """Computes the CWT of data along a specified axis with a specified wavelet
     """
     wavelet = to_wavelet(wavelet)

@@ -25,73 +25,14 @@ import matplotlib.pyplot as plt
 
 from .cont_wavelets import *
 
-def next_pow_of_2(n):
-    """
-    Returns the smallest integer greater than or equal to n which is a power of 2
-    """
-    return 2**int(math.ceil(math.log2(n)))
-
-def time_points(n, dt=1):
-    """
-    Returns n evenly distributed  points in time domain
-    """
-    # n = 3, vec = [-1, 0, 1], n=4 vec=[-1.5, -0.5, 0.5, 1.5]
-    # in general [ - (n-1)/2 : (n-1)/2]
-    t = jnp.arange(0, n) - (n - 1.0) / 2
-    # scale t
-    t = t * dt
-    return t
-
-def frequency_points(n, dt=1.):
-    """Returns n evenly distributed points in frequency domain
-    """
-    fk = jnp.fft.fftfreq(n)
-    fk = jnp.fft.fftshift(fk)
-    wk = 2*jnp.pi*fk / dt
-    return wk
-
-
+from .util import next_pow_of_2, time_points, frequency_points
+from .wavelet import to_wavelet
 
 ########################################################################################################
 # CWT in time and frequency domains
 ########################################################################################################
 
-def cwt_time_complex(data, wavelet_func, scales, dt=1., axis=-1):
-    """Computes the continuous wavelet transform
-    """
-    sample = wavelet_func(1, 1.)
-    a = len(scales)
-    n = data.shape[axis]
-    out_shape = (a,) + data.shape
-    output = jnp.empty(out_shape, dtype=sample.dtype)
-    # compute in time
-    slices = [None for _ in data.shape]
-    slices[axis] = slice(None)
-    slices = tuple(slices)
-    for index, scale in enumerate(scales):
-        # m = min(10*scale, n)
-        t = time_points(n, dt)
-        # sample wavelet and normalise
-        norm = (dt) ** .5
-        # compute the wavelet
-        wavelet_seq = norm * wavelet_func(t, scale)
-        # keep a max of 10:scale values
-        # # wavelet = wavelet[:10*scale]
-        # # conjugate it
-        # wavelet = jnp.conj(wavelet)
-        # # reverse it
-        # wavelet = wavelet[::-1]
-        # convolve with data
-        coeffs_real = jnp.convolve(data, wavelet_seq.real[slices], mode='same')
-        coeffs_imag = jnp.convolve(data, wavelet_seq.imag[slices], mode='same')
-        coeffs = lax.complex(coeffs_real, coeffs_imag)
-        output = output.at[index].set(coeffs)
-    return output
-
-cwt_time_complex_jit = jit(cwt_time_complex, static_argnums=(1,2,3,4))
-
-
-def cwt_time_real(data, wavelet_func, scales, dt=1., axis=-1):
+def cwt_tc_time(data, wavelet_func, scales, dt=1., axis=-1):
     """Computes the continuous wavelet transform
     """
     sample = wavelet_func(1, 1.)
@@ -113,20 +54,27 @@ def cwt_time_real(data, wavelet_func, scales, dt=1., axis=-1):
         # keep a max of 10:scale values
         # wavelet = wavelet[:10*scale]
         # conjugate it
-        # wavelet = jnp.conj(wavelet)
+        wavelet_seq = jnp.conj(wavelet_seq)
         # reverse it
         wavelet_seq = wavelet_seq[::-1]
-        # convolve with data
-        coeffs = jnp.convolve(data, wavelet_seq[slices], mode='same')
+        filter = wavelet_seq[slices]
+        if jnp.isrealobj(filter):
+            # convolve with data
+            coeffs = jnp.convolve(data, filter, mode='same')
+        else:
+            # convolve with data
+            coeffs_real = jnp.convolve(data, filter.real, mode='same')
+            coeffs_imag = jnp.convolve(data, filter.imag, mode='same')
+            coeffs = lax.complex(coeffs_real, coeffs_imag)
         output = output.at[index].set(coeffs)
     return output
 
 
-cwt_time_real_jit = jit(cwt_time_real, static_argnums=(1,2,3,4))
+cwt_tc_time_jit = jit(cwt_tc_time, static_argnums=(1,2,3,4))
 
 
 
-def cwt_frequency(data, wavelet_func, scales, dt=1., axis=-1):
+def cwt_tc_frequency(data, wavelet_func, scales, dt=1., axis=-1):
     """
     Computes the CWT of data [along axis] for a given wavelet (in frequency domain)
     """
@@ -163,13 +111,26 @@ def cwt_frequency(data, wavelet_func, scales, dt=1., axis=-1):
     else:
         return out[slices]
 
-cwt_frequency_jit = jit(cwt_frequency, static_argnums=(1,3, 4))
+cwt_tc_frequency_jit = jit(cwt_tc_frequency, static_argnums=(1,3, 4))
+
+def cwt_tc(data, scales, wavelet, sampling_period=1., method='conv', axis=-1):
+    """Computes the CWT of data along a specified axis with a specified wavelet
+    """
+    wavelet = to_wavelet(wavelet)
+    if method == 'conv':
+        wavelet_func = wavelet.functions.time
+        output = cwt_tc_time_jit(data, wavelet_func, scales, dt=sampling_period, axis=axis)
+    elif method == 'fft':
+        wavelet_func = wavelet.functions.frequency
+        output = cwt_tc_frequency_jit(data, wavelet_func, scales, dt=sampling_period, axis=axis)
+    else:
+        raise NotImplementedError("The specified method is not supported yet")
+    return output
+
 
 ########################################################################################################
 # Tuple Describing a Continuous Wavelet Analysis Result
 ########################################################################################################
-
-
 
 class WaveletAnalysis(NamedTuple):
     """Continuous Wavelet Analysis of a 1D data signal
@@ -364,10 +325,6 @@ def find_optimal_scales(s0, dt, dj, n):
         return sj
 
 
-def scales_from_voices_per_octave(nu, range):
-    """Returns the list of scales based on the voices per octave parameter
-    """
-    return 2 ** (range / nu)
 
 DEFAULT_WAVELET = morlet(w0=6)
 
@@ -379,12 +336,9 @@ def analyze(data, wavelet=DEFAULT_WAVELET, scales=None, dt=1., dj=0.125,
         s0 = find_s0(wavelet, dt)
         scales = find_optimal_scales(s0, dt, dj, n)
     if frequency:
-        scalogram = cwt_frequency_jit(data, wavelet.frequency, scales, dt, axis)
+        scalogram = cwt_tc_frequency_jit(data, wavelet.frequency, scales, dt, axis)
     else:
-        if wavelet.is_complex:
-            scalogram = cwt_time_complex_jit(data, wavelet.time, tuple(scales), dt, axis)
-        else:
-            scalogram = cwt_time_real_jit(data, wavelet.time, tuple(scales), dt, axis)
+        scalogram = cwt_tc_time_jit(data, wavelet.time, tuple(scales), dt, axis)
     scales = jnp.asarray(scales)
     return WaveletAnalysis(data=data, wavelet=wavelet, 
         dt=dt, dj=dj, mask_coi=mask_coi,

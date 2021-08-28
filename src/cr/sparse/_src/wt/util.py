@@ -151,6 +151,40 @@ def pad(data, pad_widths, mode):
         raise ValueError("mode must be one of ['symmetric', 'constant', 'reflect', 'antireflect', 'zero', 'smooth', 'periodic',  'periodization']")
 
 
+def next_pow_of_2(n):
+    """
+    Returns the smallest integer greater than or equal to n which is a power of 2
+    """
+    return 2**int(math.ceil(math.log2(n)))
+
+######################################################################################
+# Utility functions for continuous wavelets
+######################################################################################
+
+def time_points(n, dt=1):
+    """
+    Returns n evenly distributed  points in time domain
+    """
+    # n = 3, vec = [-1, 0, 1], n=4 vec=[-1.5, -0.5, 0.5, 1.5]
+    # in general [ - (n-1)/2 : (n-1)/2]
+    t = jnp.arange(0, n) - (n - 1.0) / 2
+    # scale t
+    t = t * dt
+    return t
+
+def frequency_points(n, dt=1.):
+    """Returns n evenly distributed points in frequency domain
+    """
+    fk = jnp.fft.fftfreq(n)
+    fk = jnp.fft.fftshift(fk)
+    wk = 2*jnp.pi*fk / dt
+    return wk
+
+def scales_from_voices_per_octave(nu, range):
+    """Returns the list of scales based on the voices per octave parameter
+    """
+    return 2 ** (range / nu)
+
 ######################################################################################
 # Local utility functions
 ######################################################################################
