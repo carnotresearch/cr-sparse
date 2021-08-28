@@ -176,6 +176,27 @@ Wavelets
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we analyze a chirp signal with a Ricker (a.k.a. Mexican Hat wavelet)">
+
+.. only:: html
+
+ .. figure:: /gallery/wavelets/images/thumb/sphx_glr_chirp_cwt_mexh_thumb.png
+     :alt: Chirp CWT with Ricker
+
+     :ref:`sphx_glr_gallery_wavelets_chirp_cwt_mexh.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/wavelets/chirp_cwt_mexh
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="This example considers a signal which is a sinusoid whose frequency changes abruptly at a speci...">
 
 .. only:: html
