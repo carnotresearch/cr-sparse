@@ -111,7 +111,7 @@ def cwt_id(data, scales, wavelet, method='conv', axis=-1, precision=10):
     """
     wavelet = to_wavelet(wavelet)
     if method == 'conv':
-        output = cwt_id_time_jit(data, scales, wavelet, precision, axis=axis)
+        output = cwt_id_time_jit(data, tuple(scales), wavelet, precision, axis=axis)
     else:
         raise NotImplementedError("The specified method is not supported yet")
     return output
