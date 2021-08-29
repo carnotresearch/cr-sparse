@@ -130,6 +130,47 @@ Installation from GitHub::
     python -m pip install git+https://github.com/carnotresearch/cr-sparse.git
 
 
+Open Source Credits
+-----------------------------
+
+Major parts of this library are directly influenced by existing projects.
+While the implementation in CR-Sparse is fresh (based on JAX), it has been
+possible thanks to the extensive study of existing implementations. We list
+here some of the major existing projects which have influenced the implementation
+in CR-Sparse. Let us know if we missed anything. 
+
+* `JAX <https://github.com/google/jax>`_ The overall project structure is heavily
+  influenced by the conventions followed in JAX. We learned the functional programming
+  techniques as applicable for linear algebra work by reading the source code of JAX.
+* `SciPy <https://github.com/scipy/scipy>`_ JAX doesn't have all parts of SciPy ported
+  yet. Some parts of SciPy have been adapted and re-written (in functional manner) 
+  as per the needs of CR-Sparse. E.g. ``cr.sparse.dsp.signals``. The :cite:`torrence1998practical` version
+  of CWT in ``cr.sparse.wt``.
+* `OpTax <https://github.com/deepmind/optax>`_  This helped in understanding how to 
+  use Named Tuples as states for iterative algorithms.  This was also useful 
+  in conceptualizing the structure for ``cr.sparse.lop``. 
+* `PyLops <https://github.com/PyLops/pylops>`_: The ``cr.sparse.lop`` library is 
+  heavily influenced by it.
+* `PyWavelets <https://github.com/PyWavelets/pywt>`_: The DWT and CWT implementations
+  in ``cr.sparse.wt`` are largely derived from it. The filter coefficients for discrete
+  wavelets have been ported from C to Python from here.
+* `HTP <https://github.com/foucart/HTP>`_ Original implementation of Hard Thresholding
+  Pursuit in MATLAB.
+* `WaveLab <https://github.com/gregfreeman/wavelab850>`_ This MATLAB package helped a lot in
+  initial understanding of DWT implementation.
+* `YALL1 <http://yall1.blogs.rice.edu/>`_: This is the original MATLAB implementaiton of the
+  ADMM based sparse recovery algorithm.
+* `L1-LS <https://web.stanford.edu/~boyd/l1_ls/>`_ is the original MATLAB implementation of the
+  Truncated Newton Interior Points Method for solving the l1-minimization problem.
+* `Sparsify <https://www.southampton.ac.uk/engineering/about/staff/tb1m08.page#software>`_ provides
+  the MATLAB implementations of IHT, NIHT, AIHT algorithms.
+* `Sparse and Redundant Representations: <https://elad.cs.technion.ac.il/wp-content/uploads/2018/02/Matlab-Package-Book-1.zip>`_ 
+  From Theory to Applications in Signal and Image Processing book code helped a lot in basic understanding
+  of sparse representations.
+* `aaren/wavelets <https://github.com/aaren/wavelets>`_ is a decent CWT implementaiton following
+  :cite:`torrence1998practical`. Influenced: ``cr.sparse.wt``.
+  
+
 Further Reading
 ------------------
 * `Functional programming <https://en.wikipedia.org/wiki/Functional_programming>`_
