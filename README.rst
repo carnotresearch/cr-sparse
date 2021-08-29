@@ -77,10 +77,11 @@ To cite this repository:
 
     @software{crsparse2021github,
     author = {Shailesh Kumar},
-    title = {{CR.Sparse}: XLA Accelerated Functional Models and Algorithms for Sparse Representations based Signal Processing},
+    title = {{CR.Sparse}: Functional Models and Algorithms for Sparse Representations based Signal Processing},
     url = {https://cr-sparse.readthedocs.io/en/latest/},
-    version = {0.1.5},
+    version = {0.1.6},
     year = {2021},
+    doi={10.5281/zenodo.5322044},
     }
 
 
