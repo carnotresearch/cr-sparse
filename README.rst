@@ -1,7 +1,7 @@
 XLA Accelerated Functional Models and Algorithms for Sparse Representations based Signal Processing
 =========================================================================================================
 
-|docs| |unttests| |coverage|
+|pypi| |license| |docs| |unttests| |coverage| |codacy|
 
 An `overview <https://carnotresearch.github.io/cr-sparse/intro.html>`_ of the library.
 
@@ -104,9 +104,26 @@ To cite this repository:
     :target: https://github.com/carnotresearch/cr-sparse/actions/workflows/ci.yml
 
 
+.. |pypi| image:: https://badge.fury.io/py/cr-sparse.svg
+    :alt: PyPI CR-Sparse
+    :scale: 100%
+    :target: https://badge.fury.io/py/cr-sparse
 
 .. |coverage| image:: https://codecov.io/gh/carnotresearch/cr-sparse/branch/master/graph/badge.svg?token=JZQW6QU3S4
     :alt: Coverage
     :scale: 100%
     :target: https://codecov.io/gh/carnotresearch/cr-sparse
-    
+
+
+.. |license| image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
+    :alt: License
+    :scale: 100%
+    :target: https://opensource.org/licenses/Apache-2.0
+
+.. |codacy| image:: https://app.codacy.com/project/badge/Grade/36905009377e4a968124dabb6cd24aae
+    :alt: Codacy Badge
+    :scale: 100%
+    :target: https://www.codacy.com/gh/carnotresearch/cr-sparse/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=carnotresearch/cr-sparse&amp;utm_campaign=Badge_Grade
+
+
+[![Codacy Badge]()]()
