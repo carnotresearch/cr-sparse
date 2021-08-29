@@ -8,15 +8,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Documentation: https://cr-sparse.readthedocs.io/en/latest/
 
+## [0.1.6] - 2021-08-29
+
+Documentation: https://cr-sparse.readthedocs.io/en/v0.1.6/
+
 ### Added
+
+Wavelets
+- CWT implementation based on PyWavelets: CMOR and MEXH
+- integrate_wavelet, central_frequency, scale2frequency
 
 Examples
 - CoSaMP step by step
+- Chirp CWT with Mexican Hat Wavelet
+- Frequency Change Detection using DWT
+- Cameraman Wavelet Decomposition
+
+
+### Changed
+
+Wavelets
+- CWT API has been revised a bit.
 
 ### Updated
 
 Examples
 - Sparse recovery via ADMM
+
+Signal Processing
+- frequency_spectrum, power_spectrum
 
 ## [0.1.5] - 2021-08-22
 
@@ -80,7 +100,8 @@ Documentation: https://cr-sparse.readthedocs.io/en/v0.1.4/
 
 Initial release
 
-[Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.5...HEAD
+[Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.6...HEAD
+[0.1.6]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/carnotresearch/cr-sparse/compare/0.1.3...v0.1.4
 [0.1.3]: https://github.com/carnotresearch/cr-sparse/compare/v0.1...0.1.3
