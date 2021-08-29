@@ -1,7 +1,7 @@
 XLA Accelerated Functional Models and Algorithms for Sparse Representations based Signal Processing
 =========================================================================================================
 
-|pypi| |license| |docs| |unttests| |coverage| |codacy|
+|pypi| |license| |zonodo| |docs| |unttests| |coverage| |codacy|
 
 An `overview <https://carnotresearch.github.io/cr-sparse/intro.html>`_ of the library.
 
@@ -125,5 +125,7 @@ To cite this repository:
     :scale: 100%
     :target: https://www.codacy.com/gh/carnotresearch/cr-sparse/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=carnotresearch/cr-sparse&amp;utm_campaign=Badge_Grade
 
-
-[![Codacy Badge]()]()
+.. |zonodo| image:: https://zenodo.org/badge/323566858.svg
+    :alt: DOI
+    :scale: 100%
+   :target: https://zenodo.org/badge/latestdoi/323566858
