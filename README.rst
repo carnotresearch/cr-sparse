@@ -128,4 +128,4 @@ To cite this repository:
 .. |zonodo| image:: https://zenodo.org/badge/323566858.svg
     :alt: DOI
     :scale: 100%
-   :target: https://zenodo.org/badge/latestdoi/323566858
+    :target: https://zenodo.org/badge/latestdoi/323566858
