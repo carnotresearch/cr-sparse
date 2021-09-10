@@ -16,6 +16,7 @@ CR.Sparse API Documentation
    la
    opt
    ef
+   modules
 
 
 
