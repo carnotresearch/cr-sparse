@@ -17,6 +17,11 @@
 # Common Support for Wavelets
 ######################################################################################
 
+"""
+Wavelet Transforms
+"""
+
+
 # Common Utilities 
 from cr.sparse._src.wt.util import (
     # Utility functions
