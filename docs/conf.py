@@ -71,6 +71,7 @@ intersphinx_mapping = {
     "matplotlib": ("https://matplotlib.org/", None),
     "pyfftw": ("https://pyfftw.readthedocs.io/en/latest/", None),
     "spgl1": ("https://spgl1.readthedocs.io/en/latest/", None),
+    "cr.sparse": ("https://cr-sparse.readthedocs.io/en/latest/", None),
 }
 
 suppress_warnings = [
@@ -184,5 +185,13 @@ sphinx_gallery_conf = {
     # Sort gallery example by file name instead of number of lines (default)
     'within_subsection_order': ExampleTitleSortKey,
     # Modules for which function level galleries are created.
-    'doc_module': 'cr.sparse',
+    'doc_module': ('cr.sparse', 'cr.sparse.data', 'cr.sparse.dict', 'cr.sparse.lop', 'cr.sparse.wt'),
+    'reference_url' : {
+        # The module you locally document uses None
+        'cr.sparse': None,
+        'cr.sparse.data': None,
+        'cr.sparse.dict': None,
+        'cr.sparse.lop': None,
+        'cr.sparse.wt': None,
+    }
 }
