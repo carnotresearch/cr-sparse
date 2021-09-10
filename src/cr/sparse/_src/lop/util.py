@@ -76,3 +76,19 @@ def dot_test_complex(key, A, tol=1e-6):
     real_flag = jnp.abs(yyr - xxr) / ((yyr + xxr + 1e-15) / 2) < tol 
     imag_flag = jnp.abs(yyi - xxi) / ((yyi + xxi + 1e-15) / 2) < tol 
     return real_flag & imag_flag
+
+
+def apply_along_axis(times1d, trans1d, axis):
+    """
+    Converts the definitions of operator times and trans functions 
+    so that they can apply along a specific axis of an n-dim array
+    """
+    def times(x):
+        if x.ndim == 1:
+            return times1d(x)
+        return jnp.apply_along_axis(times1d, axis, x)
+    def trans(x):
+        if x.ndim == 1:
+            return trans1d(x)
+        return jnp.apply_along_axis(trans1d, axis, x)
+    return times, trans
