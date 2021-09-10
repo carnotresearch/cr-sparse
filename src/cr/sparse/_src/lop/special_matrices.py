@@ -16,10 +16,13 @@ import jax.numpy as jnp
 
 from .impl import _hermitian
 from .lop import Operator
+from .util import apply_along_axis
 
 
 
-def circulant(n, c):
+def circulant(n, c, axis=0):
+    """Circulant matrix operator
+    """
     r = len(c)
     assert n >= r
     c_padded = jnp.pad(c, (0, n-r))
@@ -28,4 +31,5 @@ def circulant(n, c):
     cjf = jnp.fft.rfft(c_j)
     times = lambda x : jnp.fft.irfft(jnp.fft.rfft(x) * cf)
     trans = lambda x : jnp.fft.irfft(jnp.fft.rfft(x) * cjf)
+    times, trans = apply_along_axis(times, trans, axis)
     return Operator(times=times, trans=trans, shape=(n,n))

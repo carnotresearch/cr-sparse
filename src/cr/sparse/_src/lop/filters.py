@@ -16,25 +16,27 @@ import jax.numpy as jnp
 
 from .impl import _hermitian
 from .lop import Operator
+from .util import apply_along_axis
 
-
-def running_average(n, length):
+def running_average(n, length, axis=0):
     """Computes a running average of entries in x
     """
     start = length // 2
     filter = jnp.ones(length) / length
-    times = lambda x : jnp.convolve(x, filter, 'same')
-    trans = lambda x : jnp.convolve(x, filter, 'full')[start:start+n]
+    times1d = lambda x : jnp.convolve(x, filter, 'same')
+    trans1d = lambda x : jnp.convolve(x, filter, 'full')[start:start+n]
+    times, trans = apply_along_axis(times1d, trans1d, axis)
     return Operator(times=times, trans=trans, shape=(n,n))
 
 
-def fir_filter(n, h):
+def fir_filter(n, h, axis=0):
     """Implements an FIR filter defined by coeffs
     """
     h_conj = _hermitian(h[::-1])
     m = len(h)
     start = m // 2
-    times = lambda x : jnp.convolve(x, h, 'same')
-    trans = lambda x : jnp.convolve(x, h_conj, 'full')[start:start+n]
+    times1d = lambda x : jnp.convolve(x, h, 'same')
+    trans1d = lambda x : jnp.convolve(x, h_conj, 'full')[start:start+n]
+    times, trans = apply_along_axis(times1d, trans1d, axis)
     return Operator(times=times, trans=trans, shape=(n,n))
 
