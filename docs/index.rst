@@ -1,7 +1,7 @@
 CR.Sparse
 =====================================
 
-A JAX/XLA based library of accelerated algorithms for inverse problems in 
+A JAX/XLA based library of accelerated models and algorithms for inverse problems in 
 sparse representation and compressive sensing. 
 `GITHUB <https://github.com/carnotresearch/cr-sparse>`_.
 

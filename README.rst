@@ -1,7 +1,7 @@
 Functional Models and Algorithms for Sparse Signal Processing
 =========================================================================================================
 
-|pypi| |license| |zonodo| |docs| |unttests| |coverage| |codacy|
+|pypi| |license| |zenodo| |docs| |unit_tests| |coverage| |codacy|
 
 An `overview <https://carnotresearch.github.io/cr-sparse/intro.html>`_ of the library.
 
@@ -108,7 +108,7 @@ To cite this repository:
     :alt: Documentation Status
     :scale: 100%
 
-.. |unttests| image:: https://github.com/carnotresearch/cr-sparse/actions/workflows/ci.yml/badge.svg
+.. |unit_tests| image:: https://github.com/carnotresearch/cr-sparse/actions/workflows/ci.yml/badge.svg
     :alt: Unit Tests
     :scale: 100%
     :target: https://github.com/carnotresearch/cr-sparse/actions/workflows/ci.yml
@@ -135,7 +135,7 @@ To cite this repository:
     :scale: 100%
     :target: https://www.codacy.com/gh/carnotresearch/cr-sparse/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=carnotresearch/cr-sparse&amp;utm_campaign=Badge_Grade
 
-.. |zonodo| image:: https://zenodo.org/badge/323566858.svg
+.. |zenodo| image:: https://zenodo.org/badge/323566858.svg
     :alt: DOI
     :scale: 100%
     :target: https://zenodo.org/badge/latestdoi/323566858

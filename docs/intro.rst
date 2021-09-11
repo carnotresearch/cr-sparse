@@ -64,7 +64,7 @@ provided in ``cr.sparse.lop``. Functionality includes:
 * Signal processing: fourier_basis_1d, dirac_fourier_basis_1d, etc.
 * Random dictionaries: gaussian_dict, rademacher_dict, random_onb_dict, random_orthonormal_rows_dict, etc.
 * Operator algebra: neg, scale, add, subtract, compose, transpose, hermitian, hcat, etc.
-* Additional utilites
+* Additional utilities
 
 
 
@@ -111,7 +111,7 @@ The library also provides
 
 .. highlight:: shell
 
-Platform Suppport
+Platform Support
 ----------------------
 
 ``CR-Sparse`` can run on any platform supported by ``JAX``. ``JAX`` doesn't run natively on Windows platforms at the moment. 
@@ -158,7 +158,7 @@ in CR-Sparse. Let us know if we missed anything.
   Pursuit in MATLAB.
 * `WaveLab <https://github.com/gregfreeman/wavelab850>`_ This MATLAB package helped a lot in
   initial understanding of DWT implementation.
-* `YALL1 <http://yall1.blogs.rice.edu/>`_: This is the original MATLAB implementaiton of the
+* `YALL1 <http://yall1.blogs.rice.edu/>`_: This is the original MATLAB implementation of the
   ADMM based sparse recovery algorithm.
 * `L1-LS <https://web.stanford.edu/~boyd/l1_ls/>`_ is the original MATLAB implementation of the
   Truncated Newton Interior Points Method for solving the l1-minimization problem.
@@ -167,7 +167,7 @@ in CR-Sparse. Let us know if we missed anything.
 * `Sparse and Redundant Representations: <https://elad.cs.technion.ac.il/wp-content/uploads/2018/02/Matlab-Package-Book-1.zip>`_ 
   From Theory to Applications in Signal and Image Processing book code helped a lot in basic understanding
   of sparse representations.
-* `aaren/wavelets <https://github.com/aaren/wavelets>`_ is a decent CWT implementaiton following
+* `aaren/wavelets <https://github.com/aaren/wavelets>`_ is a decent CWT implementation following
   :cite:`torrence1998practical`. Influenced: ``cr.sparse.wt``.
   
 
