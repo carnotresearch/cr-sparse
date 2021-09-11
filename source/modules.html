@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Available Modules in CR-Sparse &mdash; CR.Sparse  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../_static/js/custom.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Examples Gallery" href="../gallery/index.html" />
+    <link rel="prev" title="cr.sparse.ef.RecoveryTrialsAtFixed_M_N" href="_autosummary/cr.sparse.ef.RecoveryTrialsAtFixed_M_N.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CR.Sparse
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CR.Sparse API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dsp.html">Digital Signal Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wavelets.html">Wavelets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lop.html">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">Utilities in cr.sparse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="la.html">Linear Algebra Subroutines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opt.html">Numerical Optimization Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Available Modules in CR-Sparse</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.sparse">cr.sparse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.sparse.dict">cr.sparse.dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.sparse.data">cr.sparse.data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.sparse.lop">cr.sparse.lop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.sparse.wt">cr.sparse.wt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cr.sparse.pursuit">cr.sparse.pursuit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CR.Sparse</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">CR.Sparse API Documentation</a> &raquo;</li>
+        
+      <li>Available Modules in CR-Sparse</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/source/modules.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="available-modules-in-cr-sparse">
+<h1>Available Modules in CR-Sparse<a class="headerlink" href="#available-modules-in-cr-sparse" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#module-cr.sparse" id="id1">cr.sparse</a></p></li>
+<li><p><a class="reference internal" href="#module-cr.sparse.dict" id="id2">cr.sparse.dict</a></p></li>
+<li><p><a class="reference internal" href="#module-cr.sparse.data" id="id3">cr.sparse.data</a></p></li>
+<li><p><a class="reference internal" href="#module-cr.sparse.lop" id="id4">cr.sparse.lop</a></p></li>
+<li><p><a class="reference internal" href="#module-cr.sparse.wt" id="id5">cr.sparse.wt</a></p></li>
+<li><p><a class="reference internal" href="#module-cr.sparse.pursuit" id="id6">cr.sparse.pursuit</a></p></li>
+</ul>
+</div>
+<div class="section" id="module-cr.sparse">
+<span id="cr-sparse"></span><h2><a class="toc-backref" href="#id1">cr.sparse</a><a class="headerlink" href="#module-cr.sparse" title="Permalink to this headline">¶</a></h2>
+<p>CR.Sparse</p>
+</div>
+<div class="section" id="module-cr.sparse.dict">
+<span id="cr-sparse-dict"></span><h2><a class="toc-backref" href="#id2">cr.sparse.dict</a><a class="headerlink" href="#module-cr.sparse.dict" title="Permalink to this headline">¶</a></h2>
+<p>Sparsifying dictionaries</p>
+</div>
+<div class="section" id="module-cr.sparse.data">
+<span id="cr-sparse-data"></span><h2><a class="toc-backref" href="#id3">cr.sparse.data</a><a class="headerlink" href="#module-cr.sparse.data" title="Permalink to this headline">¶</a></h2>
+<p>Utilities for generating test data</p>
+</div>
+<div class="section" id="module-cr.sparse.lop">
+<span id="cr-sparse-lop"></span><h2><a class="toc-backref" href="#id4">cr.sparse.lop</a><a class="headerlink" href="#module-cr.sparse.lop" title="Permalink to this headline">¶</a></h2>
+<p>Linear Operators</p>
+</div>
+<div class="section" id="module-cr.sparse.wt">
+<span id="cr-sparse-wt"></span><h2><a class="toc-backref" href="#id5">cr.sparse.wt</a><a class="headerlink" href="#module-cr.sparse.wt" title="Permalink to this headline">¶</a></h2>
+<p>Wavelet Transforms</p>
+</div>
+<div class="section" id="module-cr.sparse.pursuit">
+<span id="cr-sparse-pursuit"></span><h2><a class="toc-backref" href="#id6">cr.sparse.pursuit</a><a class="headerlink" href="#module-cr.sparse.pursuit" title="Permalink to this headline">¶</a></h2>
+<p>Sparse recovery algorithms</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../gallery/index.html" class="btn btn-neutral float-right" title="Examples Gallery" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="_autosummary/cr.sparse.ef.RecoveryTrialsAtFixed_M_N.html" class="btn btn-neutral float-left" title="cr.sparse.ef.RecoveryTrialsAtFixed_M_N" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CR.Sparse Development Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

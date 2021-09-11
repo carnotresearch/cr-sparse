@@ -1,0 +1,6 @@
+﻿cr.sparse.is\_line\_vec
+=======================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: is_line_vec

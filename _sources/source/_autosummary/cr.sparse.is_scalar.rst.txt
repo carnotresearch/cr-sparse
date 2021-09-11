@@ -1,0 +1,6 @@
+﻿cr.sparse.is\_scalar
+====================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: is_scalar

@@ -21,8 +21,8 @@
   <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
   <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
   <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
@@ -119,6 +119,32 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.check_shapes_are_equal.html">cr.sparse.check_shapes_are_equal</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#utilities-for-vectors">Utilities for vectors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.is_scalar.html">cr.sparse.is_scalar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.is_vec.html">cr.sparse.is_vec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.is_line_vec.html">cr.sparse.is_line_vec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.is_row_vec.html">cr.sparse.is_row_vec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.is_col_vec.html">cr.sparse.is_col_vec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.to_row_vec.html">cr.sparse.to_row_vec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.to_col_vec.html">cr.sparse.to_col_vec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.vec_unit.html">cr.sparse.vec_unit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.vec_shift_right.html">cr.sparse.vec_shift_right</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.vec_rotate_right.html">cr.sparse.vec_rotate_right</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.vec_shift_left.html">cr.sparse.vec_shift_left</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.vec_rotate_left.html">cr.sparse.vec_rotate_left</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.vec_shift_right_n.html">cr.sparse.vec_shift_right_n</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.vec_rotate_right_n.html">cr.sparse.vec_rotate_right_n</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.vec_shift_left_n.html">cr.sparse.vec_shift_left_n</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.vec_rotate_left_n.html">cr.sparse.vec_rotate_left_n</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.vec_repeat_at_end.html">cr.sparse.vec_repeat_at_end</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.vec_repeat_at_start.html">cr.sparse.vec_repeat_at_start</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.vec_centered.html">cr.sparse.vec_centered</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.vec_unit_jit.html">cr.sparse.vec_unit_jit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.vec_repeat_at_end_jit.html">cr.sparse.vec_repeat_at_end_jit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.vec_repeat_at_start_jit.html">cr.sparse.vec_repeat_at_start_jit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.vec_centered_jit.html">cr.sparse.vec_centered_jit</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#metrics-for-measuring-signal-and-error-levels">Metrics for measuring signal and error levels</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.metrics.mean_squared.html">cr.sparse.metrics.mean_squared</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.metrics.mean_squared_error.html">cr.sparse.metrics.mean_squared_error</a></li>
@@ -177,11 +203,16 @@
 <li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.sparse_approximation_cw.html">cr.sparse.sparse_approximation_cw</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#utilities-for-nd-arrays">Utilities for ND-Arrays</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.arr_largest_index.html">cr.sparse.arr_largest_index</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="la.html">Linear Algebra Subroutines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="opt.html">Numerical Optimization Routines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html">Available Modules in CR-Sparse</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
@@ -283,8 +314,19 @@
 </style>
 <div class="section" id="utilities-in-cr-sparse-module">
 <h1>Utilities in cr.sparse module<a class="headerlink" href="#utilities-in-cr-sparse-module" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#array-data-type-utilities" id="id1">Array data type utilities</a></p></li>
+<li><p><a class="reference internal" href="#utilities-for-vectors" id="id2">Utilities for vectors</a></p></li>
+<li><p><a class="reference internal" href="#metrics-for-measuring-signal-and-error-levels" id="id3">Metrics for measuring signal and error levels</a></p></li>
+<li><p><a class="reference internal" href="#some-checks-and-utilities-for-matrices-2d-arrays" id="id4">Some checks and utilities for matrices (2D arrays)</a></p></li>
+<li><p><a class="reference internal" href="#row-wise-and-column-wise-norms-for-signal-representation-matrices" id="id5">Row wise and column wise norms for signal/representation matrices</a></p></li>
+<li><p><a class="reference internal" href="#sparse-representations" id="id6">Sparse representations</a></p></li>
+<li><p><a class="reference internal" href="#utilities-for-nd-arrays" id="id7">Utilities for ND-Arrays</a></p></li>
+</ul>
+</div>
 <div class="section" id="array-data-type-utilities">
-<h2>Array data type utilities<a class="headerlink" href="#array-data-type-utilities" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">Array data type utilities</a><a class="headerlink" href="#array-data-type-utilities" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -300,8 +342,88 @@
 </tbody>
 </table>
 </div>
+<div class="section" id="utilities-for-vectors">
+<h2><a class="toc-backref" href="#id2">Utilities for vectors</a><a class="headerlink" href="#utilities-for-vectors" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.is_scalar.html#cr.sparse.is_scalar" title="cr.sparse.is_scalar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_scalar</span></code></a>(x)</p></td>
+<td><p>Returns if x is a scalar</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.is_vec.html#cr.sparse.is_vec" title="cr.sparse.is_vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_vec</span></code></a>(x)</p></td>
+<td><p>Returns if x is a line vector or row vector or column vector</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.is_line_vec.html#cr.sparse.is_line_vec" title="cr.sparse.is_line_vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_line_vec</span></code></a>(x)</p></td>
+<td><p>Returns if x is a line vector</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.is_row_vec.html#cr.sparse.is_row_vec" title="cr.sparse.is_row_vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_row_vec</span></code></a>(x)</p></td>
+<td><p>Returns if x is a row vector</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.is_col_vec.html#cr.sparse.is_col_vec" title="cr.sparse.is_col_vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_col_vec</span></code></a>(x)</p></td>
+<td><p>Returns if x is a column vector</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.to_row_vec.html#cr.sparse.to_row_vec" title="cr.sparse.to_row_vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_row_vec</span></code></a>(x)</p></td>
+<td><p>Converts a line vector to a row vector</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.to_col_vec.html#cr.sparse.to_col_vec" title="cr.sparse.to_col_vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_col_vec</span></code></a>(x)</p></td>
+<td><p>Converts a line vector to a column vector</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.vec_unit.html#cr.sparse.vec_unit" title="cr.sparse.vec_unit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vec_unit</span></code></a>(n, i)</p></td>
+<td><p>Returns a unit vector in i-th dimension for the standard coordinate system</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.vec_shift_right.html#cr.sparse.vec_shift_right" title="cr.sparse.vec_shift_right"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vec_shift_right</span></code></a>(x)</p></td>
+<td><p>Right shift the contents of the vector</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.vec_rotate_right.html#cr.sparse.vec_rotate_right" title="cr.sparse.vec_rotate_right"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vec_rotate_right</span></code></a>(x)</p></td>
+<td><p>Circular right shift the contents of the vector</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.vec_shift_left.html#cr.sparse.vec_shift_left" title="cr.sparse.vec_shift_left"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vec_shift_left</span></code></a>(x)</p></td>
+<td><p>Left shift the contents of the vector</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.vec_rotate_left.html#cr.sparse.vec_rotate_left" title="cr.sparse.vec_rotate_left"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vec_rotate_left</span></code></a>(x)</p></td>
+<td><p>Circular left shift the contents of the vector</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.vec_shift_right_n.html#cr.sparse.vec_shift_right_n" title="cr.sparse.vec_shift_right_n"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vec_shift_right_n</span></code></a>(x, n)</p></td>
+<td><p>Right shift the contents of the vector by n places</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.vec_rotate_right_n.html#cr.sparse.vec_rotate_right_n" title="cr.sparse.vec_rotate_right_n"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vec_rotate_right_n</span></code></a>(x, n)</p></td>
+<td><p>Circular right shift the contents of the vector by n places</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.vec_shift_left_n.html#cr.sparse.vec_shift_left_n" title="cr.sparse.vec_shift_left_n"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vec_shift_left_n</span></code></a>(x, n)</p></td>
+<td><p>Left shift the contents of the vector by n places</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.vec_rotate_left_n.html#cr.sparse.vec_rotate_left_n" title="cr.sparse.vec_rotate_left_n"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vec_rotate_left_n</span></code></a>(x, n)</p></td>
+<td><p>Circular left shift the contents of the vector by n places</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.vec_repeat_at_end.html#cr.sparse.vec_repeat_at_end" title="cr.sparse.vec_repeat_at_end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vec_repeat_at_end</span></code></a>(x, p)</p></td>
+<td><p>Extends a vector by repeating it at the end (periodic extension)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.vec_repeat_at_start.html#cr.sparse.vec_repeat_at_start" title="cr.sparse.vec_repeat_at_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vec_repeat_at_start</span></code></a>(x, p)</p></td>
+<td><p>Extends a vector by repeating it at the start (periodic extension)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.vec_centered.html#cr.sparse.vec_centered" title="cr.sparse.vec_centered"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vec_centered</span></code></a>(x, length)</p></td>
+<td><p>Returns the central part of a vector of a specified length</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.vec_unit_jit.html#cr.sparse.vec_unit_jit" title="cr.sparse.vec_unit_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vec_unit_jit</span></code></a>(n, i)</p></td>
+<td><p>Returns a unit vector in i-th dimension for the standard coordinate system</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.vec_repeat_at_end_jit.html#cr.sparse.vec_repeat_at_end_jit" title="cr.sparse.vec_repeat_at_end_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vec_repeat_at_end_jit</span></code></a>(x, p)</p></td>
+<td><p>Extends a vector by repeating it at the end (periodic extension)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.vec_repeat_at_start_jit.html#cr.sparse.vec_repeat_at_start_jit" title="cr.sparse.vec_repeat_at_start_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vec_repeat_at_start_jit</span></code></a>(x, p)</p></td>
+<td><p>Extends a vector by repeating it at the start (periodic extension)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.vec_centered_jit.html#cr.sparse.vec_centered_jit" title="cr.sparse.vec_centered_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vec_centered_jit</span></code></a>(x, length)</p></td>
+<td><p>Returns the central part of a vector of a specified length</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="section" id="metrics-for-measuring-signal-and-error-levels">
-<h2>Metrics for measuring signal and error levels<a class="headerlink" href="#metrics-for-measuring-signal-and-error-levels" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">Metrics for measuring signal and error levels</a><a class="headerlink" href="#metrics-for-measuring-signal-and-error-levels" title="Permalink to this headline">¶</a></h2>
 <p>These functions are available under <code class="docutils literal notranslate"><span class="pre">cr.sparse.metrics</span></code>.</p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -331,7 +453,7 @@
 </table>
 </div>
 <div class="section" id="some-checks-and-utilities-for-matrices-2d-arrays">
-<h2>Some checks and utilities for matrices (2D arrays)<a class="headerlink" href="#some-checks-and-utilities-for-matrices-2d-arrays" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">Some checks and utilities for matrices (2D arrays)</a><a class="headerlink" href="#some-checks-and-utilities-for-matrices-2d-arrays" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -375,7 +497,7 @@
 </table>
 </div>
 <div class="section" id="row-wise-and-column-wise-norms-for-signal-representation-matrices">
-<h2>Row wise and column wise norms for signal/representation matrices<a class="headerlink" href="#row-wise-and-column-wise-norms-for-signal-representation-matrices" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">Row wise and column wise norms for signal/representation matrices</a><a class="headerlink" href="#row-wise-and-column-wise-norms-for-signal-representation-matrices" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -422,7 +544,7 @@
 </table>
 </div>
 <div class="section" id="sparse-representations">
-<h2>Sparse representations<a class="headerlink" href="#sparse-representations" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">Sparse representations</a><a class="headerlink" href="#sparse-representations" title="Permalink to this headline">¶</a></h2>
 <p>Following functions analyze or construct representation vectors which are known to be sparse.</p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -498,6 +620,20 @@
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sparse_approximation_cw.html#cr.sparse.sparse_approximation_cw" title="cr.sparse.sparse_approximation_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_approximation_cw</span></code></a>(X, K)</p></td>
 <td><p>Keeps only largest K non-zero entries by magnitude in each column of X</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="utilities-for-nd-arrays">
+<h2><a class="toc-backref" href="#id7">Utilities for ND-Arrays</a><a class="headerlink" href="#utilities-for-nd-arrays" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.arr_largest_index.html#cr.sparse.arr_largest_index" title="cr.sparse.arr_largest_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arr_largest_index</span></code></a>(x)</p></td>
+<td><p>Returns the unraveled index of the largest entry (by magnitude) in an n-d array</p></td>
 </tr>
 </tbody>
 </table>

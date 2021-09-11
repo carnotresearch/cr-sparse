@@ -10,6 +10,17 @@ implemented in JAX. They are available as part of the ``cr.sparse.dsp``
 package.
 
 
+Utilities
+-----------------------
+
+.. currentmodule:: cr.sparse.dsp
+
+.. autosummary::
+    :nosignatures:
+    :toctree: _autosummary
+
+    time_values
+
 Synthetic Signals
 -----------------------
 

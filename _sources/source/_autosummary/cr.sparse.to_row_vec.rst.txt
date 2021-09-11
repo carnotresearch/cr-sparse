@@ -1,0 +1,6 @@
+﻿cr.sparse.to\_row\_vec
+======================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: to_row_vec

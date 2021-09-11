@@ -1,0 +1,6 @@
+﻿cr.sparse.vec\_repeat\_at\_start\_jit
+=====================================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: vec_repeat_at_start_jit

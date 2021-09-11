@@ -21,8 +21,8 @@
   <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
   <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
   <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
@@ -197,6 +197,7 @@
 <li class="toctree-l2"><a class="reference internal" href="la.html">Linear Algebra Subroutines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="opt.html">Numerical Optimization Routines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html">Available Modules in CR-Sparse</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
@@ -391,10 +392,10 @@ function implements the adjoint operation.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.running_average.html#cr.sparse.lop.running_average" title="cr.sparse.lop.running_average"><code class="xref py py-obj docutils literal notranslate"><span class="pre">running_average</span></code></a>(n, length)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.running_average.html#cr.sparse.lop.running_average" title="cr.sparse.lop.running_average"><code class="xref py py-obj docutils literal notranslate"><span class="pre">running_average</span></code></a>(n, length[, axis])</p></td>
 <td><p>Computes a running average of entries in x</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.fir_filter.html#cr.sparse.lop.fir_filter" title="cr.sparse.lop.fir_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fir_filter</span></code></a>(n, h)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.fir_filter.html#cr.sparse.lop.fir_filter" title="cr.sparse.lop.fir_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fir_filter</span></code></a>(n, h[, axis])</p></td>
 <td><p>Implements an FIR filter defined by coeffs</p></td>
 </tr>
 </tbody>
@@ -454,8 +455,8 @@ function implements the adjoint operation.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.circulant.html#cr.sparse.lop.circulant" title="cr.sparse.lop.circulant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">circulant</span></code></a>(n, c)</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.circulant.html#cr.sparse.lop.circulant" title="cr.sparse.lop.circulant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">circulant</span></code></a>(n, c[, axis])</p></td>
+<td><p>Circulant matrix operator</p></td>
 </tr>
 </tbody>
 </table>

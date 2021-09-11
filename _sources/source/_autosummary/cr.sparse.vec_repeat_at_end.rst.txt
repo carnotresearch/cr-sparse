@@ -1,0 +1,6 @@
+﻿cr.sparse.vec\_repeat\_at\_end
+==============================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: vec_repeat_at_end
