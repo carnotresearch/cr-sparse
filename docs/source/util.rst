@@ -153,3 +153,13 @@ Following functions analyze or construct representation vectors which are known 
     largest_indices_cw
     take_along_cols
     sparse_approximation_cw
+
+
+Utilities for ND-Arrays
+------------------------------------------
+
+.. autosummary::
+  :toctree: _autosummary
+
+    arr_largest_index
+

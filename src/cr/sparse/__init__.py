@@ -191,3 +191,6 @@ from cr.sparse._src.types import (
 )
 
 
+from cr.sparse._src.ndarray import (
+    arr_largest_index
+)
