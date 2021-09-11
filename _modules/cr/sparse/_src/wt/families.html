@@ -417,7 +417,7 @@
 <span class="k">def</span> <span class="nf">_check_kind</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">kind</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">True</span>
-    <span class="n">family</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="n">wname_to_family_order</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">family</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">wname_to_family_order</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="n">is_discrete</span> <span class="o">=</span> <span class="n">is_discrete_wavelet</span><span class="p">(</span><span class="n">family</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;discrete&#39;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">is_discrete</span>

@@ -229,7 +229,7 @@
         <span class="c1"># Pick corresponding atoms to form the 3K wide subdictionary</span>
         <span class="n">Phi_3I</span> <span class="o">=</span> <span class="n">Phi</span><span class="p">[:,</span><span class="n">I_3k</span><span class="p">]</span>
         <span class="c1"># Solve least squares over the selected indices</span>
-        <span class="n">x_3I</span><span class="p">,</span> <span class="n">r_3I_norms</span><span class="p">,</span> <span class="n">rank_3I</span><span class="p">,</span> <span class="n">s_3I</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">Phi_3I</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">x_3I</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">Phi_3I</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="c1"># pick the K largest indices</span>
         <span class="n">Ia</span> <span class="o">=</span> <span class="n">largest_indices</span><span class="p">(</span><span class="n">x_3I</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
         <span class="c1"># Identify indices for corresponding atoms</span>

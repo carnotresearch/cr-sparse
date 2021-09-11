@@ -188,8 +188,6 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span>
-
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">vmap</span><span class="p">,</span> <span class="n">jit</span><span class="p">,</span> <span class="n">lax</span>
 
@@ -274,7 +272,7 @@
         <span class="c1"># Form the subdictionary of corresponding atoms</span>
         <span class="n">Phi_I</span> <span class="o">=</span> <span class="n">Phi</span><span class="p">[:,</span> <span class="n">I</span><span class="p">]</span>
         <span class="c1"># Solve least squares over the selected K indices</span>
-        <span class="n">x_I</span><span class="p">,</span> <span class="n">r_I_norms</span><span class="p">,</span> <span class="n">rank_I</span><span class="p">,</span> <span class="n">s_I</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">Phi_I</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">x_I</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">Phi_I</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="c1"># Compute new residual</span>
         <span class="n">y_hat</span> <span class="o">=</span> <span class="n">Phi_I</span> <span class="o">@</span> <span class="n">x_I</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">y_hat</span>

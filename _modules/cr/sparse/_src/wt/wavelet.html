@@ -298,7 +298,7 @@
             <span class="k">return</span> <span class="n">orth_wavefun</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">biorthogonal</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">biorth_wavefun</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="bp">NotImplemented</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">filter_bank</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -880,9 +880,9 @@
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">approximations</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
         <span class="n">psi</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">approximations</span>
     <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">approximations</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="n">phi</span><span class="p">,</span> <span class="n">psi</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">approximations</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">psi</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">approximations</span>
     <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">approximations</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
-        <span class="n">phi_d</span><span class="p">,</span> <span class="n">psi</span><span class="p">,</span> <span class="n">phi_r</span><span class="p">,</span> <span class="n">psi_r</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">functions_approximations</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">psi</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">functions_approximations</span>
     <span class="n">domain</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="c1"># identify the peak frequency [skip the DC]</span>
     <span class="n">index</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">jfft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">psi</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]))</span> <span class="o">+</span> <span class="mi">2</span>
