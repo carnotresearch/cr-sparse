@@ -69,6 +69,12 @@ from cr.sparse._src.lop.filters import (
     fir_filter,
 )
 
+# convolutions
+from cr.sparse._src.lop.conv import (
+    convolve,
+)
+
+
 # Orthogonal bases
 from cr.sparse._src.lop.onb import (
     fourier_basis,
