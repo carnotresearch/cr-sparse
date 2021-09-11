@@ -15,11 +15,19 @@
 import math
 import jax.numpy as jnp
 
-def time_values(fs, T, initial_time=0):
+def time_values(fs, T, initial_time=0, endpoint=False):
+    """Returns a sequence of time values sampled at a specific frequency for a specific duration 
+
+    Args:
+        fs (float): Sample rate of signal in Hz.
+        T (float): Period of the signal in seconds.
+        initial_time (float): time at waveform start in seconds, default is 0.
+        endpoint (bool): Whether to include last end point in the sequence or not, default is False.
+    """
     # Number of samples
-    n = int(fs * T)
+    n = int(fs * T) + int(endpoint)
     # Points in time where the chirp will be computed.
-    t = jnp.linspace(initial_time, initial_time+T, n, endpoint=False)
+    t = jnp.linspace(initial_time, initial_time+T, n, endpoint=endpoint)
     return t
 
 def chirp(fs, T, f0, f1, initial_phase=0):

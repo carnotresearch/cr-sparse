@@ -23,3 +23,7 @@ from cr.sparse._src.dsp.dct import (
 from cr.sparse._src.dsp.wht import (
     fwht,
 )
+
+from cr.sparse._src.dsp.synthetic_signals import (
+    time_values,
+)

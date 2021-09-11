@@ -13,7 +13,6 @@
 # limitations under the License.
 
 from cr.sparse._src.dsp.synthetic_signals import (
-    time_values,
     chirp,
     chirp_centered,
     pulse,
