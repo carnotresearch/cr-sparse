@@ -153,7 +153,7 @@ def cmor(B, C):
         return s / C
 
     def scale_from_period(period):
-        s = jnp.asarray(s)
+        period = jnp.asarray(period)
         return period * C
 
     def coi(s):
