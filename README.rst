@@ -1,4 +1,4 @@
-XLA Accelerated Functional Models and Algorithms for Sparse Representations based Signal Processing
+Functional Models and Algorithms for Sparse Signal Processing
 =========================================================================================================
 
 |pypi| |license| |zonodo| |docs| |unttests| |coverage| |codacy|
@@ -6,11 +6,20 @@ XLA Accelerated Functional Models and Algorithms for Sparse Representations base
 An `overview <https://carnotresearch.github.io/cr-sparse/intro.html>`_ of the library.
 
 This library aims to provide XLA/JAX based Python implementations for
-various algorithms related to:
+various models and algorithms related to:
 
-* Sparse approximation
-* Compressive sensing
-* Dictionary learning
+* Wavelet transforms
+* Efficient linear operators
+* Iterative methods for sparse linear systems
+* Redundant dictionaries
+* Sparse approximations on redundant dictionaries
+  * Greedy methods
+  * Convex optimization based methods
+
+* Sparse recovery from compressive sensing based measurements
+  * Greedy methods
+  * Convex optimization based methods
+
 
 The library also provides
 
@@ -77,7 +86,7 @@ To cite this repository:
 
     @software{crsparse2021github,
     author = {Shailesh Kumar},
-    title = {{CR.Sparse}: Functional Models and Algorithms for Sparse Representations based Signal Processing},
+    title = {{CR.Sparse}: Functional Models and Algorithms for Sparse Signal Processing},
     url = {https://cr-sparse.readthedocs.io/en/latest/},
     version = {0.1.6},
     year = {2021},
