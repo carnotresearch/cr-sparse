@@ -12,6 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Synthetic Signals
+"""
+# pylint: disable=W0611
+
 from cr.sparse._src.dsp.synthetic_signals import (
     chirp,
     chirp_centered,

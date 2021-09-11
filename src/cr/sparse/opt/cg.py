@@ -16,6 +16,8 @@
 Functions for solving linear problems using Conjugate gradient method
 """
 
+# pylint: disable=W0611
+
 from cr.sparse._src.opt.cg import (
     solve_from,
     solve_from_jit,

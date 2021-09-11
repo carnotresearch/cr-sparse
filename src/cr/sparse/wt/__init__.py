@@ -20,6 +20,7 @@
 """
 Wavelet Transforms
 """
+# pylint: disable=W0611
 
 
 # Common Utilities 

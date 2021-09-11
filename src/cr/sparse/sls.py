@@ -15,3 +15,4 @@
 """
 Iterative Methods for solving Sparse Linear Systems
 """
+# pylint: disable=W0611

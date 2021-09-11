@@ -704,9 +704,9 @@ def central_frequency(wavelet, precision=8):
     if len(approximations) == 2:
         psi, t = approximations
     elif len(approximations) == 3:
-        phi, psi, t = approximations
+        _, psi, t = approximations
     elif len(approximations) == 5:
-        phi_d, psi, phi_r, psi_r, t = functions_approximations
+        _, psi, _, _, t = functions_approximations
     domain = t[-1] - t[0]
     # identify the peak frequency [skip the DC]
     index = jnp.argmax(jnp.abs(jfft.fft(psi)[1:])) + 2

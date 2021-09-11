@@ -15,6 +15,7 @@
 """
 Evaluation Framework
 """
+# pylint: disable=W0611
 
 
 from cr.sparse._src.ef.performance import (

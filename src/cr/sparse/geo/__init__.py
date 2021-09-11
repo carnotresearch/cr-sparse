@@ -16,6 +16,8 @@
 Software for Processing of Geophysical Signals
 """
 
+# pylint: disable=W0611
+
 from cr.sparse._src.geo.wavelets import (
     ricker
 )

@@ -70,7 +70,7 @@ def hadamard(n, dtype=int):
     lg2 = int(math.log(n, 2))
     assert 2**lg2 == n, "n must be positive integer and a power of 2"
     H = jnp.array([[1]], dtype=dtype)
-    for i in range(0, lg2):
+    for _ in range(0, lg2):
         H = jnp.vstack((jnp.hstack((H, H)), jnp.hstack((H, -H))))
     return H
 

@@ -14,6 +14,7 @@
 """
 Linear Operators
 """
+# pylint: disable=W0611
 
 from cr.sparse._src.lop.lop import (
     # Data type

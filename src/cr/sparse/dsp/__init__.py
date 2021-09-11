@@ -12,6 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Signal Processing Utilities
+"""
+
+# pylint: disable=W0611
+
+
 from cr.sparse._src.dsp.dct import (
     dct,
     idct,

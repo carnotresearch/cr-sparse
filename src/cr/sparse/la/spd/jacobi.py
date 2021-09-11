@@ -12,6 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Jacoby Iterations
+"""
+
+# pylint: disable=W0611
+
 
 from cr.sparse._src.la.spd.jacobi import (
     solve,

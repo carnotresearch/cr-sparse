@@ -15,3 +15,6 @@
 """
 Software for Processing of Biological Signals
 """
+
+# pylint: disable=W0611
+

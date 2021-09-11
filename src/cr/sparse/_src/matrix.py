@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Utility functions for 2D matrices
+"""
+
 import jax.numpy as jnp
 
 from .util import promote_arg_dtypes
@@ -74,7 +78,6 @@ def is_symmetric(A):
     Returns:
         bool: True if the array is a symmetric matrix, False otherwise.
     """
-    shape = A.shape
     if A.ndim != 2: 
         return False
     return jnp.array_equal(A, A.T)

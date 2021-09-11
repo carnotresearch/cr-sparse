@@ -241,7 +241,7 @@ def wname_to_family_order(name):
 def _check_kind(name, kind):
     if kind == 'all':
         return True
-    family, order = wname_to_family_order(name)
+    family, _ = wname_to_family_order(name)
     is_discrete = is_discrete_wavelet(family)
     if kind == 'discrete':
         return is_discrete

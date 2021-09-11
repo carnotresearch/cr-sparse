@@ -15,6 +15,7 @@
 """
 Sparse recovery algorithms
 """
+# pylint: disable=W0611
 
 from cr.sparse._src.pursuit.util import (
     abs_max_idx,

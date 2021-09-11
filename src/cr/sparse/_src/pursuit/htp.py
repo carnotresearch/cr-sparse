@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import NamedTuple
-
 import jax.numpy as jnp
 from jax import vmap, jit, lax
 
@@ -98,7 +96,7 @@ def matrix_solve(Phi, y, K, normalized=False, step_size=None, max_iters=None, re
         # Form the subdictionary of corresponding atoms
         Phi_I = Phi[:, I]
         # Solve least squares over the selected K indices
-        x_I, r_I_norms, rank_I, s_I = jnp.linalg.lstsq(Phi_I, y)
+        x_I, _, _, _ = jnp.linalg.lstsq(Phi_I, y)
         # Compute new residual
         y_hat = Phi_I @ x_I
         r = y - y_hat

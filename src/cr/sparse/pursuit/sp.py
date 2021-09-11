@@ -12,6 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Subspace Pursuit
+"""
+
+# pylint: disable=W0611
+
+
 from cr.sparse._src.pursuit.sp import (
     solve,
     matrix_solve,

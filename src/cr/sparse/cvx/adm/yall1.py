@@ -12,6 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Port of Your Algorithms for L1
+"""
+# pylint: disable=W0611
+
 from cr.sparse._src.cvx.adm.yall1 import (
     solve,
     solve_bp,

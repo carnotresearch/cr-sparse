@@ -16,6 +16,9 @@
 Sparsifying dictionaries
 """
 
+# pylint: disable=W0611
+
+
 from cr.sparse._src.dict.simple import (
     gaussian_mtx,
     rademacher_mtx,

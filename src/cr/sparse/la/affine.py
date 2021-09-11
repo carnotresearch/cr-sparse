@@ -15,6 +15,7 @@
 """
 Utility functions for working with Affine spaces
 """
+# pylint: disable=W0611
 
 from cr.sparse._src.la.affine import (
     homogenize,

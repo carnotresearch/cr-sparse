@@ -15,6 +15,8 @@
 """
 CR.Sparse
 """
+# pylint: disable=W0611
+
 
 from .version import __version__
 

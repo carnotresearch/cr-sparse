@@ -12,6 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Optimization Utilities
+"""
+# pylint: disable=W0611
+
 
 from cr.sparse._src.opt.projections import (
     project_to_ball,

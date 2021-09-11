@@ -12,6 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Iterative Hard Thresholding
+"""
+# pylint: disable=W0611
+
+
 from cr.sparse._src.pursuit.iht import (
     solve,
     matrix_solve,

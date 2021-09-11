@@ -53,7 +53,7 @@ def matrix_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
         # Pick corresponding atoms to form the 3K wide subdictionary
         Phi_3I = Phi[:,I_3k]
         # Solve least squares over the selected indices
-        x_3I, r_3I_norms, rank_3I, s_3I = jnp.linalg.lstsq(Phi_3I, y)
+        x_3I, _, _, _ = jnp.linalg.lstsq(Phi_3I, y)
         # pick the K largest indices
         Ia = largest_indices(x_3I, K)
         # Identify indices for corresponding atoms

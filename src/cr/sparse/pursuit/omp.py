@@ -12,6 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+Orthogonal Matching Pursuit
+"""
+# pylint: disable=W0611
+
+
 from cr.sparse._src.pursuit.omp import (
     solve,
     matrix_solve,
