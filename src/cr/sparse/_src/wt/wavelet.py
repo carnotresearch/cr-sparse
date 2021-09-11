@@ -122,7 +122,7 @@ class DiscreteWavelet(NamedTuple):
             return orth_wavefun(self, level=level)
         if self.biorthogonal:
             return biorth_wavefun(self, level=level)
-        raise NotImplemented
+        raise NotImplementedError()
 
     @property
     def filter_bank(self):

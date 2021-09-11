@@ -64,7 +64,7 @@ def first_derivative(n, dx=1., kind='centered'):
         times = partial(_derivative_centered, dx=dx)
         trans = partial(_derivative_centered_adj, dx=dx)
     else:
-        raise NotImplemented
+        raise NotImplementedError()
     return Operator(times=times, trans=trans, shape=(n,n))
 
 
