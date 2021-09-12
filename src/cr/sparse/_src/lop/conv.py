@@ -22,27 +22,26 @@ from .impl import _hermitian
 from .lop import Operator
 from .util import apply_along_axis
 
+
 def convolve(n, h, offset=0, axis=0):
     """Implements a convolution operator with the filter h
 
     Note:
 
-        The filter coefficients h are padded with zeros based on the
-        offset to ensure that the impulse response of the convolution
-        starts from index 0 after SAME convolution.
+        We don't use padding of coefficients of h. It turns out,
+        it is faster to perform a full convolution and then 
+
     """
+    assert n > 0
     m = len(h)
-    start = m // 2
-    offset = 2 * (start  - int(offset))
-    if m % 2 == 0:
-        # we need less offset for even length filters
-        offset -= 1
-    left_pad = offset if offset > 0 else 0
-    right_pad = -offset if offset < 0 else 0
-    h = jnp.pad(h, (left_pad, right_pad), mode='constant')
+    # The location of center of the filter response should be within it.
+    assert offset >= 0
+    assert offset < m
+    forward = offset
+    adjoint = m  - 1 - offset
     h_conj = _hermitian(h[::-1])
-    times1d = lambda x : jnp.convolve(x, h, 'same')
-    trans1d = lambda x : jnp.convolve(x, h_conj, 'same')
+    times1d = lambda x : jnp.convolve(x, h, 'full')[forward:forward+n]
+    trans1d = lambda x : jnp.convolve(x, h_conj, 'full')[adjoint:adjoint+n]
     times, trans = apply_along_axis(times1d, trans1d, axis)
     return Operator(times=times, trans=trans, shape=(n,n))
 
