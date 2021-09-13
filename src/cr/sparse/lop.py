@@ -73,6 +73,8 @@ from cr.sparse._src.lop.filters import (
 # convolutions
 from cr.sparse._src.lop.conv import (
     convolve,
+    convolve2D,
+    convolveND
 )
 
 
