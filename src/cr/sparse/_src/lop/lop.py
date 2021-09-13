@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from functools import reduce
 from typing import NamedTuple, Callable, Tuple
 import jax
 import jax.numpy as jnp
@@ -111,6 +112,46 @@ class Operator(NamedTuple):
         xr = jnp.zeros(x.shape, x.dtype)
         xr = xr.at[I].set(x[I])
         return self.times(xr)
+
+    @property
+    def input_ndim(self):
+        """Returns the number of dimensions of input to the operator
+        """
+        shape = self.shape[1]
+        if isinstance(shape, int):
+            # it appears to be a 1D operator
+            return 1
+        return  len(shape)
+
+    @property
+    def output_ndim(self):
+        """Returns the number of dimensions of output of the operator
+        """
+        shape = self.shape[0]
+        if isinstance(shape, int):
+            # it appears to be a 1D operator
+            return 1
+        return  len(shape)
+
+    @property
+    def input_size(self):
+        """Returns the size of input to the operator
+        """
+        shape = self.shape[1]
+        if isinstance(shape, int):
+            # it appears to be a 1D operator
+            return shape
+        return  reduce(lambda x, y : x * y, shape)
+
+    @property
+    def output_size(self):
+        """Returns the size of output of the operator
+        """
+        shape = self.shape[0]
+        if isinstance(shape, int):
+            # it appears to be a 1D operator
+            return shape
+        return  reduce(lambda x, y : x * y, shape)
 
 
 def jit(operator):
