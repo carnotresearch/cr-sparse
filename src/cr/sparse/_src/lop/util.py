@@ -19,19 +19,25 @@ import jax.numpy as jnp
 
 def to_matrix(A):
     """Converts a linear operator to a matrix"""
-    n = A.shape[1]
+    n = A.input_size
     if not A.linear:
         raise Exception("This operator is not linear.")
     I = jnp.eye(n)
-    return jax.vmap(A.times, (1), (1))(I)
+    times = A.times
+    if A.input_ndim > 1:
+        times = lambda x: A.times(x).flatten()
+    return jax.vmap(times, (1), (1))(I)
 
 def to_adjoint_matrix(A):
     """Converts the adjoint of a linear operator to a matrix"""
     if not A.linear:
         raise Exception("This operator is not linear.")
-    m = A.shape[0]
+    m = A.output_size
     I = jnp.eye(m)
-    return jax.vmap(A.trans, (1), (1))(I)
+    trans =  A.trans
+    if A.output_ndim > 1:
+        trans = lambda x: A.trans(x).flatten()
+    return jax.vmap(trans, (1), (1))(I)
 
 
 def to_complex_matrix(A):
