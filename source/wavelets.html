@@ -1,85 +1,46 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Wavelets &mdash; CR.Sparse  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script src="../_static/js/custom.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="cr.sparse.wt.FAMILY" href="_autosummary/cr.sparse.wt.FAMILY.html" />
     <link rel="prev" title="cr.sparse.dsp.fwht" href="_autosummary/cr.sparse.dsp.fwht.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> CR.Sparse
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -87,18 +48,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
@@ -115,19 +65,19 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#continuous-wavelets">Continuous Wavelets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#further-reading">Further Reading</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lop.html">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sls.html">Sparse Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="la.html">Linear Algebra Subroutines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="opt.html">Numerical Optimization Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules.html">Available Modules in CR-Sparse</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
@@ -136,73 +86,31 @@
 <li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">CR.Sparse</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="index.html">CR.Sparse API Documentation</a> &raquo;</li>
-        
       <li>Wavelets</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/source/wavelets.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   
 <style>
 /* CSS overrides for sphinx_rtd_theme */
@@ -227,8 +135,8 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="wavelets">
-<h1>Wavelets<a class="headerlink" href="#wavelets" title="Permalink to this headline">¶</a></h1>
+<section id="wavelets">
+<h1>Wavelets<a class="headerlink" href="#wavelets" title="Permalink to this headline"></a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#discrete-wavelets" id="id337">Discrete Wavelets</a></p>
@@ -239,7 +147,6 @@
 </ul>
 </li>
 <li><p><a class="reference internal" href="#continuous-wavelets" id="id341">Continuous Wavelets</a></p></li>
-<li><p><a class="reference internal" href="#further-reading" id="id342">Further Reading</a></p></li>
 </ul>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">CR-Sparse</span></code> provides support for both DWT (Discrete Wavelet Transform)
@@ -261,8 +168,8 @@ A reference implementation using NumPy is
 <span class="kn">import</span> <span class="nn">cr.sparse.wt</span> <span class="k">as</span> <span class="nn">wt</span>
 </pre></div>
 </div>
-<div class="section" id="discrete-wavelets">
-<h2><a class="toc-backref" href="#id337">Discrete Wavelets</a><a class="headerlink" href="#discrete-wavelets" title="Permalink to this headline">¶</a></h2>
+<section id="discrete-wavelets">
+<h2><a class="toc-backref" href="#id337">Discrete Wavelets</a><a class="headerlink" href="#discrete-wavelets" title="Permalink to this headline"></a></h2>
 <p>API is available at two levels</p>
 <ul class="simple">
 <li><p>Functions which directly correspond to the high level API of PyWavelets.</p></li>
@@ -279,8 +186,8 @@ Following wavelets are supported.</p>
 <blockquote>
 <div><p>bior1.1 bior1.3 bior1.5 bior2.2 bior2.4 bior2.6 bior2.8 bior3.1 bior3.3 bior3.5 bior3.7 bior3.9 bior4.4 bior5.5 bior6.8 coif1 coif2 coif3 coif4 coif5 coif6 coif7 coif8 coif9 coif10 coif11 coif12 coif13 coif14 coif15 coif16 coif17 db1 db2 db3 db4 db5 db6 db7 db8 db9 db10 db11 db12 db13 db14 db15 db16 db17 db18 db19 db20 db21 db22 db23 db24 db25 db26 db27 db28 db29 db30 db31 db32 db33 db34 db35 db36 db37 db38 dmey haar rbio1.1 rbio1.3 rbio1.5 rbio2.2 rbio2.4 rbio2.6 rbio2.8 rbio3.1 rbio3.3 rbio3.5 rbio3.7 rbio3.9 rbio4.4 rbio5.5 rbio6.8 sym2 sym3 sym4 sym5 sym6 sym7 sym8 sym9 sym10 sym11 sym12 sym13 sym14 sym15 sym16 sym17 sym18 sym19 sym20</p>
 </div></blockquote>
-<div class="section" id="high-level-api">
-<h3><a class="toc-backref" href="#id338">High-level API</a><a class="headerlink" href="#high-level-api" title="Permalink to this headline">¶</a></h3>
+<section id="high-level-api">
+<h3><a class="toc-backref" href="#id338">High-level API</a><a class="headerlink" href="#high-level-api" title="Permalink to this headline"></a></h3>
 <p class="rubric">Data types</p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -415,9 +322,9 @@ Following wavelets are supported.</p>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="lower-level-api">
-<h3><a class="toc-backref" href="#id339">Lower-level API</a><a class="headerlink" href="#lower-level-api" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="lower-level-api">
+<h3><a class="toc-backref" href="#id339">Lower-level API</a><a class="headerlink" href="#lower-level-api" title="Permalink to this headline"></a></h3>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -444,9 +351,9 @@ Following wavelets are supported.</p>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="signal-extension-modes">
-<span id="ref-wt-modes"></span><h3><a class="toc-backref" href="#id340">Signal Extension Modes</a><a class="headerlink" href="#signal-extension-modes" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="signal-extension-modes">
+<span id="ref-wt-modes"></span><h3><a class="toc-backref" href="#id340">Signal Extension Modes</a><a class="headerlink" href="#signal-extension-modes" title="Permalink to this headline"></a></h3>
 <p>Real world signals are finite. They are typically stored in
 finite size arrays in computers. Computing the wavelet transform
 of signal values around the boundary of the signal inevitably involves
@@ -499,68 +406,49 @@ are trimmed.</p>
 <p>Many of the signal extension modes are similar to the padding modes supported by the
 <code class="docutils literal notranslate"><span class="pre">jax.numpy.pad</span></code> function. However, the naming convention is different and follows
 PyWavelets.</p>
-</div>
-</div>
-<div class="section" id="continuous-wavelets">
-<h2><a class="toc-backref" href="#id341">Continuous Wavelets</a><a class="headerlink" href="#continuous-wavelets" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="further-reading">
-<h2><a class="toc-backref" href="#id342">Further Reading</a><a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="continuous-wavelets">
+<h2><a class="toc-backref" href="#id341">Continuous Wavelets</a><a class="headerlink" href="#continuous-wavelets" title="Permalink to this headline"></a></h2>
+<p class="rubric">Further Reading</p>
 <p id="id2"><dl class="citation">
 <dt class="label" id="id285"><span class="brackets"><a class="fn-backref" href="#id1">TC98</a></span></dt>
 <dd><p>Christopher Torrence and Gilbert P Compo. A practical guide to wavelet analysis. <em>Bulletin of the American Meteorological society</em>, 79(1):61–78, 1998.</p>
 </dd>
 </dl>
 </p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="_autosummary/cr.sparse.wt.FAMILY.html" class="btn btn-neutral float-right" title="cr.sparse.wt.FAMILY" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="_autosummary/cr.sparse.dsp.fwht.html" class="btn btn-neutral float-left" title="cr.sparse.dsp.fwht" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_autosummary/cr.sparse.wt.FAMILY.html" class="btn btn-neutral float-right" title="cr.sparse.wt.FAMILY" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, CR.Sparse Development Team.
-
-    </p>
+    <p>&#169; Copyright 2021, CR.Sparse Development Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

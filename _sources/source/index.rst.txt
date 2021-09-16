@@ -2,20 +2,25 @@ CR.Sparse API Documentation
 =============================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Contents:
 
    dsp
    wavelets
-   dict
    lop
+   sls
+   dict
    pursuit
    cvx_recovery
    data
    util
    la
    opt
+   geo
    ef
+
+.. ::
+
    modules
 
 

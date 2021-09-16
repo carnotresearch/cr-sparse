@@ -97,6 +97,9 @@ Signal processing operators
 
     running_average
     fir_filter
+    convolve
+    convolve2D
+    convolveND
 
 Orthonormal bases and multi-base dictionaries
 ------------------------------------------------

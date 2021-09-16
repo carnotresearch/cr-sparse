@@ -1,85 +1,46 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Frequency Change Detection &mdash; CR.Sparse  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script src="../../_static/js/custom.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Wavelet Decomposition of an Image" href="cameraman_decomposition.html" />
     <link rel="prev" title="Chirp CWT with Ricker" href="chirp_cwt_mexh.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> CR.Sparse
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -87,18 +48,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
@@ -129,73 +79,31 @@
 <li class="toctree-l1"><a class="reference internal" href="../../zzzreference.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">CR.Sparse</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">Examples Gallery</a> &raquo;</li>
-        
       <li>Frequency Change Detection</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../../_sources/gallery/wavelets/frequency_change_detection.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   
 <style>
 /* CSS overrides for sphinx_rtd_theme */
@@ -225,8 +133,8 @@
 <p>Click <a class="reference internal" href="#sphx-glr-download-gallery-wavelets-frequency-change-detection-py"><span class="std std-ref">here</span></a>
 to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="frequency-change-detection">
-<span id="sphx-glr-gallery-wavelets-frequency-change-detection-py"></span><h1>Frequency Change Detection<a class="headerlink" href="#frequency-change-detection" title="Permalink to this headline">¶</a></h1>
+<section class="sphx-glr-example-title" id="frequency-change-detection">
+<span id="sphx-glr-gallery-wavelets-frequency-change-detection-py"></span><h1>Frequency Change Detection<a class="headerlink" href="#frequency-change-detection" title="Permalink to this headline"></a></h1>
 <p>This example considers a signal which is a sinusoid whose
 frequency changes abruptly at a specific point in time.
 Looking at the waveform of the signal, it is very difficult
@@ -261,8 +169,8 @@ coefficients.</p></li>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
-<div class="section" id="test-signal-generation">
-<h2>Test signal generation<a class="headerlink" href="#test-signal-generation" title="Permalink to this headline">¶</a></h2>
+<section id="test-signal-generation">
+<h2>Test signal generation<a class="headerlink" href="#test-signal-generation" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sampling frequency in Hz</span>
 <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fs</span></a> <span class="o">=</span> <span class="mi">100</span>
 <span class="c1"># Signal duration in seconds</span>
@@ -296,15 +204,15 @@ coefficients.</p></li>
 </div>
 <img alt="frequency change detection" class="sphx-glr-single-img" src="../../_images/sphx_glr_frequency_change_detection_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fac983813a0&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa24cab8e0&gt;]
 </pre></div>
 </div>
 <p>The last plot shows the combined signal with discontinuity at t=12 sec when
 the frequency changes from 1/8 Hz to 1/6 Hz.
 The change is very difficult to notice as well as locate in the time domain plot of the signal.</p>
-</div>
-<div class="section" id="frequency-spectrum">
-<h2>Frequency spectrum<a class="headerlink" href="#frequency-spectrum" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="frequency-spectrum">
+<h2>Frequency spectrum<a class="headerlink" href="#frequency-spectrum" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute the FFT</span>
 <span class="n">f</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.fft.fftshift.html#jax.numpy.fft.fftshift" title="jax.numpy.fft.fftshift" class="sphx-glr-backref-module-jax-numpy-fft sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span></a><span class="p">(</span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.fft.fft.html#jax.numpy.fft.fft" title="jax.numpy.fft.fft" class="sphx-glr-backref-module-jax-numpy-fft sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span></a><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="c1"># Plot the magnitude</span>
@@ -314,15 +222,15 @@ The change is very difficult to notice as well as locate in the time domain plot
 </div>
 <img alt="frequency change detection" class="sphx-glr-single-img" src="../../_images/sphx_glr_frequency_change_detection_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fac98110520&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa24fa7b50&gt;]
 </pre></div>
 </div>
 <p>The frequencies 1/6 and 1/8 Hz are so close that it is difficult to distinguish them
 in the frequency spectrum. Of course, location of the discontinuity cannot be
 identified in the frequency spectrum.</p>
-</div>
-<div class="section" id="multilevel-wavelet-decomposition">
-<h2>Multilevel wavelet decomposition<a class="headerlink" href="#multilevel-wavelet-decomposition" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="multilevel-wavelet-decomposition">
+<h2>Multilevel wavelet decomposition<a class="headerlink" href="#multilevel-wavelet-decomposition" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute the multilevel wavelet decomposition</span>
 <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">coeffs</span></a> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">wavedec</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;db4&#39;</span><span class="p">)</span>
 <span class="c1"># Total number of decomposition levels</span>
@@ -352,7 +260,7 @@ identified in the frequency spectrum.</p>
 </div>
 <img alt="frequency change detection" class="sphx-glr-single-img" src="../../_images/sphx_glr_frequency_change_detection_003.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fac88877160&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa247f37c0&gt;]
 </pre></div>
 </div>
 <p>The discontinuities are clearly visible in the plots of detail coefficients
@@ -374,7 +282,7 @@ coefficients at first level</p>
 at the beginning of the data, we can see that the discontinuity
 has been correctly identified at sample 1200 which happens to
 correspond to t=12 sec.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.065 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.132 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-wavelets-frequency-change-detection-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/4aecaba6936672f1cacbc77dac63fee9/frequency_change_detection.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">frequency_change_detection.py</span></code></a></p>
@@ -384,55 +292,38 @@ correspond to t=12 sec.</p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="cameraman_decomposition.html" class="btn btn-neutral float-right" title="Wavelet Decomposition of an Image" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="chirp_cwt_mexh.html" class="btn btn-neutral float-left" title="Chirp CWT with Ricker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cameraman_decomposition.html" class="btn btn-neutral float-right" title="Wavelet Decomposition of an Image" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, CR.Sparse Development Team.
-
-    </p>
+    <p>&#169; Copyright 2021, CR.Sparse Development Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

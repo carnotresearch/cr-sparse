@@ -1,0 +1,6 @@
+﻿cr.sparse.sls.lsqr\_jit
+=======================
+
+.. currentmodule:: cr.sparse.sls
+
+.. autofunction:: lsqr_jit

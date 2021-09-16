@@ -2,6 +2,11 @@ Linear Algebra Subroutines
 ==================================
 
 
+
+Triangular systems
+------------------------
+
+
 .. currentmodule:: cr.sparse.la
 
 .. autosummary::

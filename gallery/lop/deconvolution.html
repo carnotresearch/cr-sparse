@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deconvolution &mdash; CR.Sparse  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script src="../../_static/js/custom.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CoSaMP step by step" href="../pursuit/cosamp_step_by_step.html" />
+    <link rel="prev" title="A matrix backed linear operator" href="matrix_operator.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> CR.Sparse
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples Gallery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sparse_vector_normals.html">A sparse model vector generator</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#linear-operators">Linear Operators</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="matrix_operator.html">A matrix backed linear operator</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Deconvolution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#problem-setup">Problem Setup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#greedy-pursuit-algorithms-for-sparse-recovery">Greedy Pursuit Algorithms for Sparse Recovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sparse-recovery-via-l1-minimization">Sparse Recovery via L1 minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#wavelets">Wavelets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../zzzreference.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CR.Sparse</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Examples Gallery</a> &raquo;</li>
+      <li>Deconvolution</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/gallery/lop/deconvolution.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-gallery-lop-deconvolution-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="deconvolution">
+<span id="sphx-glr-gallery-lop-deconvolution-py"></span><h1>Deconvolution<a class="headerlink" href="#deconvolution" title="Permalink to this headline"></a></h1>
+<p>This example demonstrates following features:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cr.sparse.lop.convolve</span></code> A 1D convolution linear operator</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cr.sparse.geo.ricker</span></code> Ricker wavelet</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cr.sparse.sls.lsqr</span></code> LSQR algorithm for solving a least square problem</p></li>
+</ul>
+<p>Doconvolution is an inverse operation to the convolution operation.
+Convolving a signal with some filter may introduce some artifacts.
+A successful deconvolution can remove those artificats.</p>
+<p>When a signal is observed through an instrument, an instrument usually
+has its own impulse response which may be spread over time. Thus, the
+output of the instrument will not be the original signal but a filtered
+version of it.</p>
+<p>Let <span class="math notranslate nohighlight">\(h\)</span> denote the filter response of an instrument and <span class="math notranslate nohighlight">\(x\)</span>
+denote the signal being observed. Then the actual observation is</p>
+<div class="math notranslate nohighlight">
+\[y = h \star x\]</div>
+<p>where <span class="math notranslate nohighlight">\(\star\)</span> is the convolution operation.</p>
+<p>It is possible to model the convolution operation as a matrix multiplication.</p>
+<div class="math notranslate nohighlight">
+\[y = H x\]</div>
+<p>where <span class="math notranslate nohighlight">\(H\)</span> is a sparse and structured matrix with non-zero entries from the
+impulse response <span class="math notranslate nohighlight">\(h\)</span>.</p>
+<p>Under this model, recovering the original signal <span class="math notranslate nohighlight">\(x\)</span> from the measurements
+<span class="math notranslate nohighlight">\(y\)</span> reduces to the problem of solving a <strong>sparse linear system</strong></p>
+<div class="math notranslate nohighlight">
+\[H x = y\]</div>
+<p>We can use the LSQR algorithm (available in <code class="docutils literal notranslate"><span class="pre">cr.sparse.sls.lsqr</span></code>) to solve this
+system efficiently. LSQR algorithm doesn’t need to know the matrix <span class="math notranslate nohighlight">\(H\)</span>
+explicitly. All it needs are two functions to compute the matrix multiplication
+<span class="math notranslate nohighlight">\(H v\)</span> and the adjoint multiplication <span class="math notranslate nohighlight">\(H^T u\)</span>.</p>
+<p>We model <span class="math notranslate nohighlight">\(H\)</span> using the <code class="docutils literal notranslate"><span class="pre">cr.sparse.lop.convolve</span></code> operator.</p>
+<p>Let’s import necessary libraries</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="c1"># For plotting diagrams</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1">## CR-Sparse modules</span>
+<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="c1"># Linear operators</span>
+<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">lop</span>
+<span class="c1"># Geophysics stuff [Ricker wavelet]</span>
+<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">geo</span>
+<span class="c1"># DSP utilities</span>
+<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">dsp</span>
+<span class="c1"># Solvers for sparse linear systems</span>
+<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">sls</span>
+<span class="c1"># Configure JAX for 64-bit computing</span>
+<span class="kn">from</span> <span class="nn">jax.config</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;jax_enable_x64&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="problem-setup">
+<h2>Problem Setup<a class="headerlink" href="#problem-setup" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fs</span></a> <span class="o">=</span> <span class="mi">250</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span></a> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fs</span></a>
+</pre></div>
+</div>
+<section id="the-ricker-wavelet-response-of-the-instrument">
+<h3>The Ricker wavelet response of the instrument<a class="headerlink" href="#the-ricker-wavelet-response-of-the-instrument" title="Permalink to this headline"></a></h3>
+<p>The time duration of the instrument response</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">T_h</span></a> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="c1"># Wavelet peak frequency</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f0</span></a> <span class="o">=</span> <span class="mi">30</span>
+<span class="c1"># Time values at which the wavelet will be evaluated</span>
+<span class="n">t_h</span> <span class="o">=</span> <span class="n">dsp</span><span class="o">.</span><span class="n">time_values</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fs</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">T_h</span></a><span class="p">,</span> <span class="n">initial_time</span><span class="o">=-</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">T_h</span></a><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Values of the Ricker wavelet</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">ricker</span><span class="p">(</span><span class="n">t_h</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">f0</span></a><span class="p">)</span>
+<span class="c1"># Plot the wavelet</span>
+<a href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.plot.html#matplotlib.axes.Axes.plot" title="matplotlib.axes.Axes.plot" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">t_h</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="c1"># Zoom in to the central part of interest</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_xlim.html#matplotlib.axes.Axes.set_xlim" title="matplotlib.axes.Axes.set_xlim" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span></a><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="deconvolution" class="sphx-glr-single-img" src="../../_images/sphx_glr_deconvolution_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(-0.2, 0.2)
+</pre></div>
+</div>
+</section>
+<section id="the-impulse-signal-to-be-observed">
+<h3>The impulse signal to be observed<a class="headerlink" href="#the-impulse-signal-to-be-observed" title="Permalink to this headline"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">T</span></a> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">dsp</span><span class="o">.</span><span class="n">time_values</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fs</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">T</span></a><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># The length of the signal</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mid</span></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a> <span class="o">//</span> <span class="mi">2</span>
+<span class="c1"># A unit vector with one at mid position and zero everywhere else</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">vec_unit</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">mid</span></a><span class="p">)</span>
+<a href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.plot.html#matplotlib.axes.Axes.plot" title="matplotlib.axes.Axes.plot" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="c1"># Let&#39;s focus on the middle part of the signal</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_xlim.html#matplotlib.axes.Axes.set_xlim" title="matplotlib.axes.Axes.set_xlim" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span></a><span class="p">(</span><span class="mf">1.9</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="deconvolution" class="sphx-glr-single-img" src="../../_images/sphx_glr_deconvolution_002.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(1.9, 2.1)
+</pre></div>
+</div>
+</section>
+<section id="the-linear-operator-representing-the-instrument">
+<h3>The linear operator representing the instrument<a class="headerlink" href="#the-linear-operator-representing-the-instrument" title="Permalink to this headline"></a></h3>
+<p>Identify the peak of the impulse response</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">idx</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.argmax.html#jax.numpy.argmax" title="jax.numpy.argmax" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">argmax</span></a><span class="p">(</span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.abs.html#jax.numpy.abs" title="jax.numpy.abs" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span></a><span class="p">(</span><span class="n">h</span><span class="p">))</span>
+<span class="c1"># Construct a convolution operator based on the wavelet response</span>
+<span class="c1"># centered at the peak of the wavelet</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span>
+<span class="c1"># JIT compile the convolution operator for efficiency</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="the-measurement-process">
+<h3>The measurement process<a class="headerlink" href="#the-measurement-process" title="Permalink to this headline"></a></h3>
+<p>Compute the measured signal via convolution</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">H</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="c1"># plot the original signal vs. the observed signal</span>
+<a href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.plot.html#matplotlib.axes.Axes.plot" title="matplotlib.axes.Axes.plot" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.plot.html#matplotlib.axes.Axes.plot" title="matplotlib.axes.Axes.plot" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$y=A x$&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_title.html#matplotlib.axes.Axes.set_title" title="matplotlib.axes.Axes.set_title" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span></a><span class="p">(</span><span class="s1">&#39;Signal vs Measurements&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.legend.html#matplotlib.axes.Axes.legend" title="matplotlib.axes.Axes.legend" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">legend</span></a><span class="p">()</span>
+<span class="c1"># Focus on the middle part</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_xlim.html#matplotlib.axes.Axes.set_xlim" title="matplotlib.axes.Axes.set_xlim" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span></a><span class="p">(</span><span class="mf">1.9</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="Signal vs Measurements" class="sphx-glr-single-img" src="../../_images/sphx_glr_deconvolution_003.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(1.9, 2.1)
+</pre></div>
+</div>
+</section>
+<section id="deconvolution-to-clean-the-signal-using-lsqr">
+<h3>Deconvolution to clean the signal using LSQR<a class="headerlink" href="#deconvolution-to-clean-the-signal-using-lsqr" title="Permalink to this headline"></a></h3>
+<p>An initial guess of the actual signal is all zeros</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.zeros.html#jax.numpy.zeros" title="jax.numpy.zeros" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span></a><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">)</span>
+<span class="c1"># We run LSQR algorithm to clean the signal contents for 25 iterations</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">sls</span><span class="o">.</span><span class="n">lsqr</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="c1"># Plot the recovered signal against the measured signal</span>
+<a href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.plot.html#matplotlib.axes.Axes.plot" title="matplotlib.axes.Axes.plot" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$y=Ax$ measurements&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.plot.html#matplotlib.axes.Axes.plot" title="matplotlib.axes.Axes.plot" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;--g&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\overline</span><span class="si">{x}</span><span class="s1">$ deconvolved signal&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_title.html#matplotlib.axes.Axes.set_title" title="matplotlib.axes.Axes.set_title" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span></a><span class="p">(</span><span class="s1">&#39;Deconvolution&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.legend.html#matplotlib.axes.Axes.legend" title="matplotlib.axes.Axes.legend" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">legend</span></a><span class="p">()</span>
+<span class="c1"># Focus on the middle part</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_xlim.html#matplotlib.axes.Axes.set_xlim" title="matplotlib.axes.Axes.set_xlim" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span></a><span class="p">(</span><span class="mf">1.9</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">)</span>
+
+<span class="c1"># Estimated values from the algorithm</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A norm: &quot;</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">A_norm</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A condition number: &quot;</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">A_cond</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;r_norm: &quot;</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">r_norm</span><span class="p">,</span> <span class="s2">&quot;x_norm: &quot;</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">x_norm</span><span class="p">,</span> <span class="s2">&quot;atr_norm: &quot;</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">atr_norm</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Iterations: &quot;</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">iterations</span><span class="p">,</span> <span class="s2">&quot; H x calls: &quot;</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">n_times</span><span class="p">,</span> <span class="s2">&quot;H^T x calls: &quot;</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">n_trans</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="Deconvolution" class="sphx-glr-single-img" src="../../_images/sphx_glr_deconvolution_004.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>A norm:  12.192408487474447
+A condition number:  59.63129718252189
+r_norm:  0.027126481687630526 x_norm:  0.7360252062150447 atr_norm:  0.014044078613519372
+Iterations:  25  H x calls:  25 H^T x calls:  25
+</pre></div>
+</div>
+</section>
+<section id="stronger-deconvolution">
+<h3>Stronger deconvolution<a class="headerlink" href="#stronger-deconvolution" title="Permalink to this headline"></a></h3>
+<p>We run LSQR algorithm to clean the signal contents for 100 iterations</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sol2</span> <span class="o">=</span> <span class="n">sls</span><span class="o">.</span><span class="n">lsqr</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1"># Plot the recovered signal against the measured signal</span>
+<a href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.plot.html#matplotlib.axes.Axes.plot" title="matplotlib.axes.Axes.plot" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;25 iterations&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.plot.html#matplotlib.axes.Axes.plot" title="matplotlib.axes.Axes.plot" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sol2</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;--g&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;100 iterations&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_title.html#matplotlib.axes.Axes.set_title" title="matplotlib.axes.Axes.set_title" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span></a><span class="p">(</span><span class="s1">&#39;Deconvolution&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.legend.html#matplotlib.axes.Axes.legend" title="matplotlib.axes.Axes.legend" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">legend</span></a><span class="p">()</span>
+<span class="c1"># Focus on the middle part</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_xlim.html#matplotlib.axes.Axes.set_xlim" title="matplotlib.axes.Axes.set_xlim" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span></a><span class="p">(</span><span class="mf">1.9</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A norm: &quot;</span><span class="p">,</span> <span class="n">sol2</span><span class="o">.</span><span class="n">A_norm</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A condition number: &quot;</span><span class="p">,</span> <span class="n">sol2</span><span class="o">.</span><span class="n">A_cond</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;r_norm: &quot;</span><span class="p">,</span> <span class="n">sol2</span><span class="o">.</span><span class="n">r_norm</span><span class="p">,</span> <span class="s2">&quot;x_norm: &quot;</span><span class="p">,</span> <span class="n">sol2</span><span class="o">.</span><span class="n">x_norm</span><span class="p">,</span> <span class="s2">&quot;atr_norm: &quot;</span><span class="p">,</span> <span class="n">sol2</span><span class="o">.</span><span class="n">atr_norm</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Iterations: &quot;</span><span class="p">,</span> <span class="n">sol2</span><span class="o">.</span><span class="n">iterations</span><span class="p">,</span> <span class="s2">&quot; H x calls: &quot;</span><span class="p">,</span> <span class="n">sol2</span><span class="o">.</span><span class="n">n_times</span><span class="p">,</span> <span class="s2">&quot;H^T x calls: &quot;</span><span class="p">,</span> <span class="n">sol2</span><span class="o">.</span><span class="n">n_trans</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="Deconvolution" class="sphx-glr-single-img" src="../../_images/sphx_glr_deconvolution_005.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>A norm:  24.348380483410278
+A condition number:  485.89437292086274
+r_norm:  0.00589397127035775 x_norm:  0.7979078081486051 atr_norm:  0.0015629080522622293
+Iterations:  100  H x calls:  100 H^T x calls:  100
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.410 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-lop-deconvolution-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/b00f228c2f58311e9d8e186ea7bd85bc/deconvolution.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">deconvolution.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/c9fa7baef3a74a6d5a202b61ac10e6a4/deconvolution.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">deconvolution.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="matrix_operator.html" class="btn btn-neutral float-left" title="A matrix backed linear operator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../pursuit/cosamp_step_by_step.html" class="btn btn-neutral float-right" title="CoSaMP step by step" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, CR.Sparse Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

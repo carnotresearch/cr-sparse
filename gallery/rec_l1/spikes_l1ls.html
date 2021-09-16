@@ -1,85 +1,46 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Recovering spikes via TNIPM &mdash; CR.Sparse  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script src="../../_static/js/custom.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Chirp CWT with Ricker" href="../wavelets/chirp_cwt_mexh.html" />
     <link rel="prev" title="Random Orthogonal Measurements, Cosine Basis, ADMM" href="partial_wh_sensor_cosine_basis.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> CR.Sparse
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -87,18 +48,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
@@ -132,73 +82,31 @@
 <li class="toctree-l1"><a class="reference internal" href="../../zzzreference.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">CR.Sparse</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">Examples Gallery</a> &raquo;</li>
-        
       <li>Recovering spikes via TNIPM</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../../_sources/gallery/rec_l1/spikes_l1ls.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   
 <style>
 /* CSS overrides for sphinx_rtd_theme */
@@ -228,8 +136,8 @@
 <p>Click <a class="reference internal" href="#sphx-glr-download-gallery-rec-l1-spikes-l1ls-py"><span class="std std-ref">here</span></a>
 to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="recovering-spikes-via-tnipm">
-<span id="sphx-glr-gallery-rec-l1-spikes-l1ls-py"></span><h1>Recovering spikes via TNIPM<a class="headerlink" href="#recovering-spikes-via-tnipm" title="Permalink to this headline">¶</a></h1>
+<section class="sphx-glr-example-title" id="recovering-spikes-via-tnipm">
+<span id="sphx-glr-gallery-rec-l1-spikes-l1ls-py"></span><h1>Recovering spikes via TNIPM<a class="headerlink" href="#recovering-spikes-via-tnipm" title="Permalink to this headline"></a></h1>
 <p>This example has following features:</p>
 <ul class="simple">
 <li><p>A sparse signal consists of a small number of spikes.</p></li>
@@ -254,8 +162,8 @@ algorithm is being used for recovery.</p></li>
 <span class="kn">import</span> <span class="nn">cr.sparse.cvx.l1ls</span> <span class="k">as</span> <span class="nn">l1ls</span>
 </pre></div>
 </div>
-<div class="section" id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of measurements</span>
 <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">m</span></a> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">10</span>
 <span class="c1"># Ambient dimension</span>
@@ -272,9 +180,9 @@ algorithm is being used for recovery.</p></li>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>m=1024, n=4096
 </pre></div>
 </div>
-</div>
-<div class="section" id="the-spikes">
-<h2>The Spikes<a class="headerlink" href="#the-spikes" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="the-spikes">
+<h2>The Spikes<a class="headerlink" href="#the-spikes" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xs</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">crdata</span><span class="o">.</span><span class="n">sparse_spikes</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a><span class="p">)</span>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure" title="matplotlib.pyplot.figure" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
@@ -282,18 +190,18 @@ algorithm is being used for recovery.</p></li>
 </div>
 <img alt="spikes l1ls" class="sphx-glr-single-img" src="../../_images/sphx_glr_spikes_l1ls_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fac98a6bb80&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa2c4c31f0&gt;]
 </pre></div>
 </div>
-</div>
-<div class="section" id="the-sparsifying-basis">
-<h2>The Sparsifying Basis<a class="headerlink" href="#the-sparsifying-basis" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="the-sparsifying-basis">
+<h2>The Sparsifying Basis<a class="headerlink" href="#the-sparsifying-basis" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">random_orthonormal_rows_dict</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">m</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="measurement-process">
-<h2>Measurement process<a class="headerlink" href="#measurement-process" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="measurement-process">
+<h2>Measurement process<a class="headerlink" href="#measurement-process" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clean measurements</span>
 <span class="n">bs</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
 <span class="c1"># Noise</span>
@@ -307,12 +215,12 @@ algorithm is being used for recovery.</p></li>
 </div>
 <img alt="spikes l1ls" class="sphx-glr-single-img" src="../../_images/sphx_glr_spikes_l1ls_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fac98101f40&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa24fe1550&gt;]
 </pre></div>
 </div>
-</div>
-<div class="section" id="recovery-using-tnipm">
-<h2>Recovery using TNIPM<a class="headerlink" href="#recovery-using-tnipm" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="recovery-using-tnipm">
+<h2>Recovery using TNIPM<a class="headerlink" href="#recovery-using-tnipm" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># We need to estimate the regularization paramter</span>
 <span class="n">Atb</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">tau</span></a> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">*</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.max.html#jax.numpy.max" title="jax.numpy.max" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">max</span></a><span class="p">(</span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.abs.html#jax.numpy.abs" title="jax.numpy.abs" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span></a><span class="p">(</span><span class="n">Atb</span><span class="p">)))</span>
@@ -338,15 +246,15 @@ algorithm is being used for recovery.</p></li>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>tau=0.04895281419157982
-iterations=17 n_times=194 n_trans=195
-r_norm=1.119e+01
-rel_error=1.277e-01
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>tau=0.05186887070612714
+iterations=17 n_times=172 n_trans=173
+r_norm=1.120e+01
+rel_error=1.246e-01
 </pre></div>
 </div>
-</div>
-<div class="section" id="solution">
-<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure" title="matplotlib.pyplot.figure" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplot.html#matplotlib.pyplot.subplot" title="matplotlib.pyplot.subplot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
@@ -356,23 +264,23 @@ rel_error=1.277e-01
 </div>
 <img alt="spikes l1ls" class="sphx-glr-single-img" src="../../_images/sphx_glr_spikes_l1ls_003.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fac88c65f40&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa24ba3130&gt;]
 </pre></div>
 </div>
-<div class="section" id="the-magnitudes-of-non-zero-values">
-<h3>The magnitudes of non-zero values<a class="headerlink" href="#the-magnitudes-of-non-zero-values" title="Permalink to this headline">¶</a></h3>
+<section id="the-magnitudes-of-non-zero-values">
+<h3>The magnitudes of non-zero values<a class="headerlink" href="#the-magnitudes-of-non-zero-values" title="Permalink to this headline"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure" title="matplotlib.pyplot.figure" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.sort.html#jax.numpy.sort" title="jax.numpy.sort" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">sort</span></a><span class="p">(</span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.abs.html#jax.numpy.abs" title="jax.numpy.abs" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span></a><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">)))</span>
 </pre></div>
 </div>
 <img alt="spikes l1ls" class="sphx-glr-single-img" src="../../_images/sphx_glr_spikes_l1ls_004.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fac88c47ac0&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa24b75be0&gt;]
 </pre></div>
 </div>
-</div>
-<div class="section" id="thresholding-for-large-values">
-<h3>Thresholding for large values<a class="headerlink" href="#thresholding-for-large-values" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="thresholding-for-large-values">
+<h3>Thresholding for large values<a class="headerlink" href="#thresholding-for-large-values" title="Permalink to this headline"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">hard_threshold_by</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure" title="matplotlib.pyplot.figure" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplot.html#matplotlib.pyplot.subplot" title="matplotlib.pyplot.subplot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
@@ -383,12 +291,12 @@ rel_error=1.277e-01
 </div>
 <img alt="spikes l1ls" class="sphx-glr-single-img" src="../../_images/sphx_glr_spikes_l1ls_005.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fac88b67340&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ffa24a97490&gt;]
 </pre></div>
 </div>
-</div>
-<div class="section" id="verifying-the-support-recovery">
-<h3>Verifying the support recovery<a class="headerlink" href="#verifying-the-support-recovery" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="verifying-the-support-recovery">
+<h3>Verifying the support recovery<a class="headerlink" href="#verifying-the-support-recovery" title="Permalink to this headline"></a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">support_xs</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">support</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
 <span class="n">support_x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">support</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.all.html#jax.numpy.all" title="jax.numpy.all" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">all</span></a><span class="p">(</span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.equal.html#jax.numpy.equal" title="jax.numpy.equal" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">equal</span></a><span class="p">(</span><span class="n">support_xs</span><span class="p">,</span> <span class="n">support_x</span><span class="p">))</span>
@@ -398,10 +306,10 @@ rel_error=1.277e-01
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>DeviceArray(True, dtype=bool)
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="improvement-using-least-squares-over-support">
-<h2>Improvement using least squares over support<a class="headerlink" href="#improvement-using-least-squares-over-support" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="improvement-using-least-squares-over-support">
+<h2>Improvement using least squares over support<a class="headerlink" href="#improvement-using-least-squares-over-support" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identify the sub-matrix of columns for the support of recovered solution&#39;s large entries</span>
 <span class="n">support_x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">largest_indices_by</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
 <span class="n">AI</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">columns</span><span class="p">(</span><span class="n">support_x</span><span class="p">)</span>
@@ -427,12 +335,12 @@ rel_error=1.277e-01
 <img alt="spikes l1ls" class="sphx-glr-single-img" src="../../_images/sphx_glr_spikes_l1ls_006.png" />
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(1024, 160)
-ls_rel_error=1.947e-02
+ls_rel_error=2.057e-02
 
-[&lt;matplotlib.lines.Line2D object at 0x7fac88a47c70&gt;]
+[&lt;matplotlib.lines.Line2D object at 0x7ffa2499cc10&gt;]
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  5.990 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  7.498 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-rec-l1-spikes-l1ls-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/e35c0757eb69bd6c3607c1d55fa6f124/spikes_l1ls.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">spikes_l1ls.py</span></code></a></p>
@@ -442,55 +350,38 @@ ls_rel_error=1.947e-02
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../wavelets/chirp_cwt_mexh.html" class="btn btn-neutral float-right" title="Chirp CWT with Ricker" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="partial_wh_sensor_cosine_basis.html" class="btn btn-neutral float-left" title="Random Orthogonal Measurements, Cosine Basis, ADMM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../wavelets/chirp_cwt_mexh.html" class="btn btn-neutral float-right" title="Chirp CWT with Ricker" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, CR.Sparse Development Team.
-
-    </p>
+    <p>&#169; Copyright 2021, CR.Sparse Development Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

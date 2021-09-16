@@ -1,46 +1,26 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>cr.sparse.pursuit.htp.matrix_solve &mdash; CR.Sparse  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
@@ -49,39 +29,20 @@
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script src="../../_static/js/custom.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="cr.sparse.pursuit.htp.matrix_solve_jit" href="cr.sparse.pursuit.htp.matrix_solve_jit.html" />
     <link rel="prev" title="cr.sparse.pursuit.htp.solve" href="cr.sparse.pursuit.htp.solve.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> CR.Sparse
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -89,18 +50,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
@@ -110,8 +60,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">CR.Sparse API Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../dsp.html">Digital Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../wavelets.html">Wavelets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../lop.html">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sls.html">Sparse Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../pursuit.html#basic-matching-pursuit-based-algorithms">Basic Matching Pursuit Based Algorithms</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../pursuit.html#hard-thresholding-based-algorithms">Hard Thresholding Based Algorithms</a><ul class="current">
@@ -137,8 +88,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra Subroutines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../opt.html">Numerical Optimization Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../modules.html">Available Modules in CR-Sparse</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../gallery/index.html">Examples Gallery</a></li>
@@ -147,75 +98,32 @@
 <li class="toctree-l1"><a class="reference internal" href="../../zzzreference.html">References</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">CR.Sparse</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">CR.Sparse API Documentation</a> &raquo;</li>
-        
           <li><a href="../pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a> &raquo;</li>
-        
       <li>cr.sparse.pursuit.htp.matrix_solve</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../../_sources/source/_autosummary/cr.sparse.pursuit.htp.matrix_solve.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   
 <style>
 /* CSS overrides for sphinx_rtd_theme */
@@ -240,62 +148,45 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="cr-sparse-pursuit-htp-matrix-solve">
-<h1>cr.sparse.pursuit.htp.matrix_solve<a class="headerlink" href="#cr-sparse-pursuit-htp-matrix-solve" title="Permalink to this headline">¶</a></h1>
+<section id="cr-sparse-pursuit-htp-matrix-solve">
+<h1>cr.sparse.pursuit.htp.matrix_solve<a class="headerlink" href="#cr-sparse-pursuit-htp-matrix-solve" title="Permalink to this headline"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="cr.sparse.pursuit.htp.matrix_solve">
-<span class="sig-prename descclassname"><span class="pre">cr.sparse.pursuit.htp.</span></span><span class="sig-name descname"><span class="pre">matrix_solve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_norm_rtol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/pursuit/htp.html#matrix_solve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.pursuit.htp.matrix_solve" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">cr.sparse.pursuit.htp.</span></span><span class="sig-name descname"><span class="pre">matrix_solve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_norm_rtol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/pursuit/htp.html#matrix_solve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.pursuit.htp.matrix_solve" title="Permalink to this definition"></a></dt>
 <dd><p>Solves the sparse recovery problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Hard Thresholding Pursuit for matrices</p>
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="cr.sparse.pursuit.htp.matrix_solve_jit.html" class="btn btn-neutral float-right" title="cr.sparse.pursuit.htp.matrix_solve_jit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="cr.sparse.pursuit.htp.solve.html" class="btn btn-neutral float-left" title="cr.sparse.pursuit.htp.solve" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cr.sparse.pursuit.htp.matrix_solve_jit.html" class="btn btn-neutral float-right" title="cr.sparse.pursuit.htp.matrix_solve_jit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, CR.Sparse Development Team.
-
-    </p>
+    <p>&#169; Copyright 2021, CR.Sparse Development Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

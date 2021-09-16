@@ -1,0 +1,6 @@
+﻿cr.sparse.geo.ricker
+====================
+
+.. currentmodule:: cr.sparse.geo
+
+.. autofunction:: ricker

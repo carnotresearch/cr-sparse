@@ -1,0 +1,25 @@
+﻿cr.sparse.sls.LSQRSolution
+==========================
+
+.. currentmodule:: cr.sparse.sls
+
+.. autoclass:: LSQRSolution
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LSQRSolution.A_cond
+      ~LSQRSolution.A_norm
+      ~LSQRSolution.atr_norm
+      ~LSQRSolution.iterations
+      ~LSQRSolution.n_times
+      ~LSQRSolution.n_trans
+      ~LSQRSolution.r_norm
+      ~LSQRSolution.x
+      ~LSQRSolution.x_norm
+   
+   

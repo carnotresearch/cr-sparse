@@ -112,7 +112,7 @@ Non-sparse signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fac980790a0>]
+    [<matplotlib.lines.Line2D object at 0x7ffa2c2ac040>]
 
 
 
@@ -147,7 +147,7 @@ The Sparsifying Basis
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fac9838aa60>]
+    [<matplotlib.lines.Line2D object at 0x7ffa2c7e91f0>]
 
 
 
@@ -189,8 +189,8 @@ Partial Walsh Hadamard Measurements Operator
 
  .. code-block:: none
 
-    picks=DeviceArray([   0,   16,   17, ..., 8181, 8189, 8191], dtype=int32)
-    perm=DeviceArray([ 492, 5891, 6660, ..., 1416, 2648, 5917], dtype=int32)
+    picks=DeviceArray([   0,   16,   17, ..., 8181, 8189, 8191], dtype=int64)
+    perm=DeviceArray([ 492, 5891, 6660, ..., 1416, 2648, 5917], dtype=int64)
 
 
 
@@ -231,7 +231,7 @@ Measurement process
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fac98ae9040>]
+    [<matplotlib.lines.Line2D object at 0x7ffa2c2876a0>]
 
 
 
@@ -268,8 +268,8 @@ Recovery using ADMM
 
  .. code-block:: none
 
-    iterations=150
-    rel_error=3.3896e-02
+    iterations=192
+    rel_error=7.8711e-02
 
 
 
@@ -303,14 +303,14 @@ Solution
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x7fac88d6f0a0>
+    <matplotlib.legend.Legend object at 0x7ffa24ca8430>
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  5.477 seconds)
+   **Total running time of the script:** ( 0 minutes  5.918 seconds)
 
 
 .. _sphx_glr_download_gallery_rec_l1_partial_wh_sensor_cosine_basis.py:

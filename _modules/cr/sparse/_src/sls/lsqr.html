@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cr.sparse._src.sls.lsqr &mdash; CR.Sparse  documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../../../_static/js/custom.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html" class="icon icon-home"> CR.Sparse
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../zzzreference.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">CR.Sparse</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+      <li>cr.sparse._src.sls.lsqr</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for cr.sparse._src.sls.lsqr</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2021 CR.Sparse Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">LSQR algorithm for linear operators as defined by CR-Sparse</span>
+
+<span class="sd">This implementation is adapted from PYLOPS.</span>
+
+<span class="sd">* A is the operator for which we are solving A x = b</span>
+<span class="sd">* alpha and beta are the terms emerging from lower bidiagonalization of A</span>
+<span class="sd">* alpha is on the main diagonal.</span>
+<span class="sd">* beta is on the lower diagonal.</span>
+<span class="sd">* A V_k = U_{k+1} B</span>
+<span class="sd">* rho and theta are the terms emerging from the upper bidiagonalization of A</span>
+<span class="sd">* rho is on the main diagonal.</span>
+<span class="sd">* theta is on the upper diagonal.</span>
+<span class="sd">* A V_k = P_k R_k </span>
+
+
+<span class="sd">Relevant quantities for stopping criteria</span>
+
+<span class="sd">- residual norm relative to norm of b</span>
+<span class="sd">- A^H r norm relative to A^T b norm</span>
+<span class="sd">- Condition number of A</span>
+<span class="sd">- Norm of x</span>
+<span class="sd">- Frobenius norm of A</span>
+
+
+<span class="sd">Reference:</span>
+
+<span class="sd">1982, Paige and Sauders,  LSQR: An algorithm for sparse linear </span>
+<span class="sd">equations and sparse least squares</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span>
+
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">lax</span><span class="p">,</span> <span class="n">jit</span>
+
+<span class="n">norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span>
+
+<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">promote_arg_dtypes</span>
+<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">RecoveryFullSolution</span>
+
+<span class="k">class</span> <span class="nc">LSQRState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;State for LSQR algorithm</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">w</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;The solution&quot;&quot;&quot;</span>
+    <span class="n">u</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">v</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="c1"># various scalars to be retained. but they are stored as ndarray</span>
+    <span class="n">alpha</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Main diagonal term for lower bidiagonalization&quot;&quot;&quot;</span>
+    <span class="n">beta</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Lower diagonal term for lower bidiagonalization&quot;&quot;&quot;</span>
+    <span class="c1"># recurrence relation 4.12</span>
+    <span class="n">rho_bar</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">phi_bar</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="c1"># Rotation terms for upper to lower bidiagonalization of R</span>
+    <span class="c1"># Section 5.2</span>
+    <span class="n">z</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">cs2</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">sn2</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="c1"># Variables for tracking the norms</span>
+    <span class="n">D_norm_sqr</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Squared norm of D_k&quot;&quot;&quot;</span>
+    <span class="n">cum_z_sqr</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">cum_psi_sqr</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="c1"># Stopping criteria related norm estimates</span>
+    <span class="n">A_norm</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Lower estimate of norm of A&quot;&quot;&quot;</span>
+    <span class="n">A_cond</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Lower estimate on the condition number of A&quot;&quot;&quot;</span>
+    <span class="n">x_norm</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Estimate on the norm of the solution vector x&quot;&quot;&quot;</span>
+    <span class="n">r_norm</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Estimate on the norm of the residual&quot;&quot;&quot;</span>
+    <span class="n">atr_norm</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Estimate on the norm of the proxy residual A^H r&quot;&quot;&quot;</span>
+    <span class="c1"># Computation amount</span>
+    <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span>
+    <span class="n">n_times</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Number of times A x computed &quot;&quot;&quot;</span>
+    <span class="n">n_trans</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Number of times A.T b computed &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LSQRSolution"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.sls.LSQRSolution.html#cr.sparse.sls.LSQRSolution">[docs]</a><span class="k">class</span> <span class="nc">LSQRSolution</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Solution for LSQR algorithm</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot; Solution vector &quot;&quot;&quot;</span>
+    <span class="n">A_norm</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Lower estimate of norm of A&quot;&quot;&quot;</span>
+    <span class="n">A_cond</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Lower estimate on the condition number of A&quot;&quot;&quot;</span>
+    <span class="n">x_norm</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Estimate on the norm of the solution vector x&quot;&quot;&quot;</span>
+    <span class="n">r_norm</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Estimate on the norm of the residual&quot;&quot;&quot;</span>
+    <span class="n">atr_norm</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Estimate on the norm of the proxy residual A^H r&quot;&quot;&quot;</span>
+    <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span>
+    <span class="n">n_times</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Number of times A x computed &quot;&quot;&quot;</span>
+    <span class="n">n_trans</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Number of times A.T b computed &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="lsqr"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.sls.lsqr.html#cr.sparse.sls.lsqr">[docs]</a><span class="k">def</span> <span class="nf">lsqr</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">damp</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">btol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">conlim</span><span class="o">=</span><span class="mf">100000000.</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Solves the overdetermined system :math:`A x = b` in least square sense using LSQR algorithm.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (cr.sparse.lop.Operator): A linear operator</span>
+<span class="sd">        b (jax.numpy.ndarray): The target values</span>
+<span class="sd">        x0 (jax.numpy.ndarray): Initial estimate</span>
+<span class="sd">        damp (float): Paramter for damped least square problem</span>
+<span class="sd">        atol (float): Tolerance for stopping criteria S1 and S2</span>
+<span class="sd">        btol (float): Tolerance for stopping criteria S1</span>
+<span class="sd">        conlim (float): Maximum allowed limit for condition number</span>
+<span class="sd">        max_iters (int): maximum number of LSQR iterations</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        LSQRSolution: A named tuple consisting of LSQR solution</span>
+
+<span class="sd">    Adapted from Pylops</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Make sure that everything is in floating point</span>
+    <span class="n">b</span><span class="p">,</span> <span class="n">x0</span> <span class="o">=</span> <span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+    <span class="c1"># tolerance on condition number</span>
+    <span class="n">ctol</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">conlim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">conlim</span>
+    <span class="c1"># square the value of damping parameter to be used later</span>
+    <span class="n">damp_sqr</span> <span class="o">=</span> <span class="n">damp</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="c1"># initial residual after compenstating for x0</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+    <span class="c1"># norm of the initial residual</span>
+    <span class="n">b_norm</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="c1"># Eq 3.1 Step 1</span>
+    <span class="c1"># first u vector is based on the initial residual</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">r</span>
+    <span class="c1"># beta_1 is same as norm of the initial residual</span>
+    <span class="n">beta</span> <span class="o">=</span> <span class="n">b_norm</span>
+    <span class="c1"># normalize u</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">beta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> 
+            <span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="n">u</span> <span class="o">/</span> <span class="n">beta</span><span class="p">,</span> 
+            <span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="n">u</span><span class="p">,</span> <span class="n">operand</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># compute first v Eq 3.1 Step 1</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    <span class="c1"># compute alpha_1 by normalizing v</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="c1"># normalize v</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">alpha</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> 
+            <span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="n">v</span> <span class="o">/</span> <span class="n">alpha</span><span class="p">,</span> 
+            <span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="n">v</span><span class="p">,</span> <span class="n">operand</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># theta_1 is norm of A^T r Eq 3.12</span>
+    <span class="n">atr_norm0</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">beta</span>
+
+    <span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the state for the LSQR algorithm</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># initialize other variables</span>
+        <span class="c1"># Step 1 Eq 4.10 d = v/rho. w = rho d = v.</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="c1"># Step 1 Eq 4.12 see initial value for recurrence</span>
+        <span class="n">rho_bar</span> <span class="o">=</span> <span class="n">alpha</span>
+        <span class="c1"># Step 1 Eq 4.12 see initial value for recurrence</span>
+        <span class="n">phi_bar</span> <span class="o">=</span> <span class="n">beta</span>
+        <span class="c1"># initialize the algorithm state</span>
+        <span class="c1"># note that while we are keeping x_0 in the state</span>
+        <span class="c1"># we are keeping w_1 (corresponding to d_1)</span>
+        <span class="c1"># in the state</span>
+        <span class="c1"># The state contains</span>
+        <span class="c1"># x_0, w_1, u_1, v_1, alpha_1, beta_1,</span>
+        <span class="c1"># rho_bar_1, phi_bar_1 </span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">LSQRState</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span> 
+            <span class="n">rho_bar</span><span class="o">=</span><span class="n">rho_bar</span><span class="p">,</span> <span class="n">phi_bar</span><span class="o">=</span><span class="n">phi_bar</span><span class="p">,</span>
+            <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cs2</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">sn2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">D_norm_sqr</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">cum_z_sqr</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">cum_psi_sqr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="n">A_norm</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">A_cond</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> 
+            <span class="n">x_norm</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">x0</span><span class="p">),</span> <span class="n">r_norm</span><span class="o">=</span><span class="n">b_norm</span><span class="p">,</span> <span class="n">atr_norm</span><span class="o">=</span><span class="n">atr_norm0</span><span class="p">,</span>
+            <span class="n">iterations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_trans</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">state</span>
+
+    <span class="k">def</span> <span class="nf">cond</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Checks the halting criteria. </span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if algorithm should continue, False otherwise</span>
+
+<span class="sd">        We use the norms estimated in the body of the algorithm to compute</span>
+<span class="sd">        quantities which can be checked for convergence.</span>
+
+<span class="sd">        Refer to the stopping criteria S1,S2,S3 in the original paper.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># limit on number of iterations</span>
+        <span class="n">more_iters</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">max_iters</span>
+        <span class="c1"># Compute the current residual norm relative to original residual normm S1</span>
+        <span class="n">rel_r_norm</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">r_norm</span> <span class="o">/</span> <span class="n">b_norm</span>
+        <span class="c1"># Compute the current A^H r norm relative to original A^H r norm</span>
+        <span class="n">rel_atr_norm</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">atr_norm</span> <span class="o">/</span> <span class="n">atr_norm0</span>
+        <span class="c1"># Compute the inverse of the condition number S3</span>
+        <span class="n">inv_cond_num</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">state</span><span class="o">.</span><span class="n">A_cond</span>
+        <span class="c1"># combined tolerance for relative residual norm S1</span>
+        <span class="n">rtol</span> <span class="o">=</span> <span class="n">btol</span> <span class="o">+</span> <span class="n">atol</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">A_norm</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">x_norm</span> <span class="o">/</span> <span class="n">b_norm</span>
+        <span class="c1"># A measure on the whether residual norm is below machine precision</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">rel_r_norm</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">state</span><span class="o">.</span><span class="n">A_norm</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">x_norm</span> <span class="o">/</span> <span class="n">b_norm</span><span class="p">)</span>
+
+        <span class="c1"># all the required stopping criteria</span>
+
+        <span class="c1"># S3 inverse of condition number must be greater than the tolerance</span>
+        <span class="n">valid_inv_cond_num</span> <span class="o">=</span> <span class="n">inv_cond_num</span> <span class="o">&gt;</span> <span class="n">ctol</span>
+        <span class="c1"># Relative ATR norm must be above a threshold to continue</span>
+        <span class="n">rel_atr_high</span> <span class="o">=</span> <span class="n">rel_atr_norm</span> <span class="o">&gt;</span> <span class="n">atol</span>
+        <span class="c1"># Relative residual norm must be above a threshold to continue</span>
+        <span class="n">rel_r_norm_high</span> <span class="o">=</span> <span class="n">rel_r_norm</span> <span class="o">&gt;</span> <span class="n">rtol</span>
+        <span class="c1"># build up the combined condition</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">more_iters</span>
+        <span class="c1"># check that none of the thresholds are too small</span>
+        <span class="c1"># These guard against extremely small values [below machine precision]</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">inv_cond_num</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">rel_atr_norm</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">t1</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># user defined thresholds</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">valid_inv_cond_num</span><span class="p">)</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">rel_atr_high</span><span class="p">)</span>
+        <span class="n">condition</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">rel_r_norm_high</span><span class="p">)</span>
+        <span class="c1"># Return th combined condition</span>
+        <span class="k">return</span> <span class="n">condition</span>
+
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Main body of each iteration of LSQR algorithm</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">## next round of biorthogonalization</span>
+        <span class="c1"># update u step 3.a</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">v</span><span class="p">)</span> <span class="o">-</span> <span class="n">state</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">u</span>
+        <span class="n">n_times</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">n_times</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="c1"># update beta step 3.a </span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="c1"># normalize u step 3.a</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">beta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> 
+                <span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="n">u</span> <span class="o">/</span> <span class="n">beta</span><span class="p">,</span> 
+                <span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="n">u</span><span class="p">,</span> <span class="n">operand</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="c1"># update A_norm Near eq 5.10, expression for B_k Frobenius norm update</span>
+        <span class="n">A_norm</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">state</span><span class="o">.</span><span class="n">A_norm</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">damp</span><span class="p">]))</span>
+        <span class="c1"># update v</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="o">-</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">v</span>
+        <span class="n">n_trans</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">n_trans</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="c1"># compute alpha_1 by normalizing v</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="c1"># normalize v</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">alpha</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> 
+                <span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="n">v</span> <span class="o">/</span> <span class="n">alpha</span><span class="p">,</span> 
+                <span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="n">v</span><span class="p">,</span> <span class="n">operand</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        
+        <span class="c1">## plane rotation to eliminate the damping parameter</span>
+        <span class="c1"># This code is a no-op if damp = 0</span>
+        <span class="n">rho_bar</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">state</span><span class="o">.</span><span class="n">rho_bar</span><span class="p">,</span> <span class="n">damp</span><span class="p">]))</span>
+        <span class="n">cs1</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">rho_bar</span> <span class="o">/</span> <span class="n">rho_bar</span>
+        <span class="n">sn1</span> <span class="o">=</span> <span class="n">damp</span> <span class="o">/</span> <span class="n">rho_bar</span>
+        <span class="n">psi</span> <span class="o">=</span> <span class="n">sn1</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">phi_bar</span>
+        <span class="n">phi_bar</span> <span class="o">=</span> <span class="n">cs1</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">phi_bar</span>
+
+        <span class="c1">## plane rotation to eliminate the subdiagonal element beta</span>
+        <span class="c1"># recurrence relation Eq 4.12</span>
+        <span class="c1"># step 4.a (solution of eq 4.12 cell 1,1 and cell 2,1 of R.H.S.)</span>
+        <span class="c1"># rho(k) from rho_bar(k) and beta(k+1)</span>
+        <span class="n">rho</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">rho_bar</span><span class="p">,</span> <span class="n">beta</span><span class="p">]))</span>
+        <span class="c1"># step 4.b</span>
+        <span class="c1"># c(k) from rho_bar(k) and rho(k)</span>
+        <span class="n">cs</span> <span class="o">=</span> <span class="n">rho_bar</span> <span class="o">/</span> <span class="n">rho</span>
+        <span class="c1"># step 4.c</span>
+        <span class="c1"># s(k) from beta(k+1) and rho(k)</span>
+        <span class="n">sn</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">/</span> <span class="n">rho</span>
+        <span class="c1"># step 4.d (eq 4.12 cell 1,2 of RHS)</span>
+        <span class="c1"># theta(k+1) from s(k) and alpha(k+1)</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">sn</span> <span class="o">*</span> <span class="n">alpha</span>
+        <span class="c1"># step 4.e (eq 4.12 cell 2,2 of RHS)</span>
+        <span class="c1"># rho_bar(k+1) from c(k) and alpha(k+1)</span>
+        <span class="n">rho_bar</span> <span class="o">=</span> <span class="o">-</span><span class="n">cs</span> <span class="o">*</span> <span class="n">alpha</span>
+        <span class="c1"># step 4.f (eq 4.12 cell 1,3 of RHS)</span>
+        <span class="c1"># phi(k) from c(k) and phi_bar(k)</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="n">cs</span> <span class="o">*</span> <span class="n">phi_bar</span>
+        <span class="c1"># step 4.g (eq 4.12 cell 2,3 of RHS)</span>
+        <span class="c1"># phi_bar(k+1) from s(k) and phi_bar(k)</span>
+        <span class="n">phi_bar</span> <span class="o">=</span> <span class="n">sn</span> <span class="o">*</span> <span class="n">phi_bar</span>
+
+        <span class="c1">## update x and w.</span>
+        <span class="c1"># w = rho d   =&gt; d  = w/rho</span>
+        <span class="c1"># step sizes have to be scaled accordingly by rho</span>
+        <span class="c1"># step size for step 5.a  Eq 4.11</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">phi</span> <span class="o">/</span> <span class="n">rho</span>
+        <span class="c1"># step size for step 5.b Eq 4.10</span>
+        <span class="n">t2</span> <span class="o">=</span> <span class="o">-</span><span class="n">theta</span> <span class="o">/</span> <span class="n">rho</span>
+        <span class="c1"># Note: we need to update w first as per the paper</span>
+        <span class="c1"># But it seems that the algorithm works correctly only if </span>
+        <span class="c1"># x is updated according to previous w</span>
+        <span class="c1"># update x , step 5.a Eq 4.11</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">t1</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">w</span>
+        <span class="c1"># update w, step 5.b Eq 4.10</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">v</span> <span class="o">+</span> <span class="n">t2</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">w</span>
+        <span class="c1"># The column d_k for the matrix D_k</span>
+        <span class="n">dk</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">w</span> <span class="o">/</span> <span class="n">rho</span>
+        <span class="c1"># Frobenius norm squared for the matrix D_k</span>
+        <span class="n">D_norm_sqr</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">D_norm_sqr</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dk</span><span class="p">,</span> <span class="n">dk</span><span class="p">)</span>
+
+        <span class="c1"># use a plane rotation on the right to eliminate the</span>
+        <span class="c1"># super-diagonal element (theta) of the upper-bidiagonal matrix.</span>
+        <span class="c1"># Then use the result to estimate norm(x).</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">sn2</span> <span class="o">*</span> <span class="n">rho</span>
+        <span class="n">gamma_bar</span> <span class="o">=</span> <span class="o">-</span> <span class="n">state</span><span class="o">.</span><span class="n">cs2</span> <span class="o">*</span> <span class="n">rho</span>
+        <span class="n">rhs</span> <span class="o">=</span> <span class="n">phi</span> <span class="o">-</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">z</span>
+        <span class="n">z_bar</span> <span class="o">=</span> <span class="n">rhs</span> <span class="o">/</span> <span class="n">gamma_bar</span>
+        <span class="c1"># Estimate of | x | </span>
+        <span class="n">x_norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">cum_z_sqr</span> <span class="o">+</span> <span class="n">z_bar</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">gamma</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">gamma_bar</span><span class="p">,</span> <span class="n">theta</span><span class="p">]))</span>
+        <span class="n">cs2</span> <span class="o">=</span> <span class="n">gamma_bar</span> <span class="o">/</span> <span class="n">gamma</span>
+        <span class="n">sn2</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">/</span> <span class="n">gamma</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">rhs</span> <span class="o">/</span> <span class="n">gamma</span>
+        <span class="n">cum_z_sqr</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">cum_z_sqr</span> <span class="o">+</span> <span class="n">z</span> <span class="o">**</span> <span class="mf">2.</span>
+
+        <span class="c1"># test for convergence. First, estimate the condition of the matrix</span>
+        <span class="c1"># Opbar, and the norms of rbar and Opbar&#39;rbar</span>
+        <span class="c1"># Lower estimate of condition number of A Eq 5.10</span>
+        <span class="n">A_cond</span> <span class="o">=</span> <span class="n">A_norm</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D_norm_sqr</span><span class="p">)</span>
+        <span class="c1"># Estimate of residual norm squared Eq 5.2 |r_k|^2</span>
+        <span class="n">res1</span> <span class="o">=</span> <span class="n">phi_bar</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">cum_psi_sqr</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">cum_psi_sqr</span> <span class="o">+</span> <span class="n">psi</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">r_norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">res1</span> <span class="o">+</span> <span class="n">cum_psi_sqr</span><span class="p">)</span>
+        <span class="c1"># Estimated norm of A^T r Eq 5.4 (with some change of variables)</span>
+        <span class="n">atr_norm</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sn</span> <span class="o">*</span> <span class="n">phi</span><span class="p">)</span>
+
+        <span class="c1"># distinguish between r1norm = ||b - Ax|| and</span>
+        <span class="c1"># r2norm = sqrt(r1norm^2 + damp^2*||x||^2).</span>
+        <span class="c1"># Estimate r1norm = sqrt(r2norm^2 - damp^2*||x||^2).</span>
+        <span class="c1"># Although there is cancellation, it might be accurate enough.</span>
+        <span class="n">r1sq</span> <span class="o">=</span> <span class="n">r_norm</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">damp_sqr</span> <span class="o">*</span> <span class="n">cum_z_sqr</span>
+        <span class="n">r1norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">r1sq</span><span class="p">)</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">r1sq</span><span class="p">))</span>
+        <span class="n">r2norm</span> <span class="o">=</span> <span class="n">r_norm</span>
+
+        <span class="c1"># update state</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">LSQRState</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="n">v</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span>
+            <span class="n">rho_bar</span><span class="o">=</span><span class="n">rho_bar</span><span class="p">,</span> <span class="n">phi_bar</span><span class="o">=</span><span class="n">phi_bar</span><span class="p">,</span>
+            <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">cs2</span><span class="o">=</span><span class="n">cs2</span><span class="p">,</span> <span class="n">sn2</span><span class="o">=</span><span class="n">sn2</span><span class="p">,</span>
+            <span class="n">D_norm_sqr</span><span class="o">=</span><span class="n">D_norm_sqr</span><span class="p">,</span> <span class="n">cum_z_sqr</span><span class="o">=</span><span class="n">cum_z_sqr</span><span class="p">,</span> <span class="n">cum_psi_sqr</span><span class="o">=</span><span class="n">cum_psi_sqr</span><span class="p">,</span>
+            <span class="n">A_norm</span><span class="o">=</span><span class="n">A_norm</span><span class="p">,</span> <span class="n">A_cond</span><span class="o">=</span><span class="n">A_cond</span><span class="p">,</span> 
+            <span class="n">x_norm</span><span class="o">=</span><span class="n">x_norm</span><span class="p">,</span> <span class="n">r_norm</span><span class="o">=</span><span class="n">r_norm</span><span class="p">,</span> <span class="n">atr_norm</span><span class="o">=</span><span class="n">atr_norm</span><span class="p">,</span>
+            <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="n">n_times</span><span class="p">,</span> <span class="n">n_trans</span><span class="o">=</span><span class="n">n_trans</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">state</span>
+
+    <span class="c1"># state = init()</span>
+    <span class="c1"># while cond(state):</span>
+    <span class="c1">#     state = body(state)</span>
+
+    <span class="n">state</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">init</span><span class="p">())</span>
+
+    <span class="c1"># Solution</span>
+    <span class="k">return</span> <span class="n">LSQRSolution</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> 
+        <span class="n">A_norm</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">A_norm</span><span class="p">,</span> <span class="n">A_cond</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">A_cond</span><span class="p">,</span> 
+        <span class="n">x_norm</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">x_norm</span><span class="p">,</span> <span class="n">r_norm</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">r_norm</span><span class="p">,</span> <span class="n">atr_norm</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">atr_norm</span><span class="p">,</span>
+        <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">n_times</span><span class="p">,</span> <span class="n">n_trans</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">n_trans</span><span class="p">)</span></div>
+
+
+<span class="n">lsqr_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">lsqr</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, CR.Sparse Development Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
