@@ -42,8 +42,10 @@ def convolve(n, h, offset=0, axis=0):
     forward = offset
     adjoint = m  - 1 - offset
     h_conj = _hermitian(h[::-1])
-    times1d = lambda x : jnp.convolve(x, h, 'full')[forward:forward+n]
-    trans1d = lambda x : jnp.convolve(x, h_conj, 'full')[adjoint:adjoint+n]
+    f_slice = slice(forward, forward+n, None)
+    b_slice = slice(adjoint, adjoint+n, None)
+    times1d = lambda x : jnp.convolve(x, h, 'full')[f_slice]
+    trans1d = lambda x : jnp.convolve(x, h_conj, 'full')[b_slice]
     times, trans = apply_along_axis(times1d, trans1d, axis)
     return Operator(times=times, trans=trans, shape=(n,n))
 
