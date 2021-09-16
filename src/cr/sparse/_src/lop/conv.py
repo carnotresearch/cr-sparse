@@ -89,7 +89,6 @@ def convolveND(shape, h, offset=None, axes=None):
         n_ax = shape[ax]
         # the offset for the adjoint operator for i-th axis
         adj_ax = h_ax - 1 - off_ax
-        print(off_ax, h_ax, n_ax, adj_ax)
         # the forward slice for the i-th axis
         f_slices[ax] = slice(off_ax, off_ax + n_ax)
         # the adjoint slice for the i-th axis
