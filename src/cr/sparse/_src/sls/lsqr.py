@@ -47,7 +47,19 @@ from typing import NamedTuple
 import jax.numpy as jnp
 from jax import lax, jit
 
-norm = jnp.linalg.norm
+#norm = jnp.linalg.norm
+
+def l2norm(x):
+    xh = jnp.conjugate(x)
+    x_sqr = xh * x
+    sum_sqr = jnp.sum(x_sqr)
+    return jnp.sqrt(jnp.abs(sum_sqr))
+
+def l2norm_sqr(x):
+    xh = jnp.conjugate(x)
+    x_sqr = xh * x
+    return jnp.sum(x_sqr)
+
 
 from cr.sparse import promote_arg_dtypes
 from cr.sparse import RecoveryFullSolution
@@ -97,6 +109,37 @@ class LSQRState(NamedTuple):
     n_trans : int = 0
     """Number of times A.T b computed """
 
+    def __str__(self):
+        """Returns the string representation of the algorithm state
+        """
+        s = []
+        for x in [
+            f'x: {self.x.shape}',
+            f'w: {self.w.shape}',
+            f'u: {self.u.shape}',
+            f'v: {self.v.shape}',
+            f'alpha: {self.alpha}',
+            f'beta: {self.beta}',
+            f'rho_bar: {self.rho_bar}',
+            f'phi_bar: {self.phi_bar}',
+            f'z: {self.z}',
+            f'cs2: {self.cs2}',
+            f'sn2: {self.sn2}',
+            f'D_norm_sqr: {self.D_norm_sqr}',
+            f'cum_z_sqr: {self.cum_z_sqr}',
+            f'cum_psi_sqr: {self.cum_psi_sqr}',
+            f'A_norm: {self.A_norm}',
+            f'A_cond: {self.A_cond}',
+            f'x_norm: {self.x_norm}',
+            f'r_norm: {self.r_norm}',
+            f'atr_norm: {self.atr_norm}',
+            f'iterations: {self.iterations}',
+            f'n_times: {self.n_times}',
+            f'n_trans: {self.n_trans}',
+            ]:
+            s.append(x.rstrip())
+        return u'\n'.join(s)
+
 class LSQRSolution(NamedTuple):
     """Solution for LSQR algorithm
     """
@@ -118,6 +161,24 @@ class LSQRSolution(NamedTuple):
     """Number of times A x computed """
     n_trans : int = 0
     """Number of times A.T b computed """
+
+    def __str__(self):
+        """Returns the string representation of the algorithm solution
+        """
+        s = []
+        for x in [
+            f'x: {self.x.shape}',
+            f'A_norm: {self.A_norm}',
+            f'A_cond: {self.A_cond}',
+            f'x_norm: {self.x_norm}',
+            f'r_norm: {self.r_norm}',
+            f'atr_norm: {self.atr_norm}',
+            f'iterations: {self.iterations}',
+            f'n_times: {self.n_times}',
+            f'n_trans: {self.n_trans}',
+            ]:
+            s.append(x.rstrip())
+        return u'\n'.join(s)
 
 def lsqr(A, b, x0, damp=0, atol=1e-8, btol=1e-8, conlim=100000000., max_iters=10):
     """Solves the overdetermined system :math:`A x = b` in least square sense using LSQR algorithm.
@@ -146,7 +207,7 @@ def lsqr(A, b, x0, damp=0, atol=1e-8, btol=1e-8, conlim=100000000., max_iters=10
     # initial residual after compenstating for x0
     r = b - A.times(x0)
     # norm of the initial residual
-    b_norm = norm(r)
+    b_norm = l2norm(r)
     # Eq 3.1 Step 1
     # first u vector is based on the initial residual
     u = r
@@ -159,7 +220,7 @@ def lsqr(A, b, x0, damp=0, atol=1e-8, btol=1e-8, conlim=100000000., max_iters=10
     # compute first v Eq 3.1 Step 1
     v = A.trans(u)
     # compute alpha_1 by normalizing v
-    alpha = norm(v)
+    alpha = l2norm(v)
     # normalize v
     v = lax.cond(alpha > 0, 
             lambda _: v / alpha, 
@@ -190,7 +251,7 @@ def lsqr(A, b, x0, damp=0, atol=1e-8, btol=1e-8, conlim=100000000., max_iters=10
             z=0, cs2=-1, sn2=0,
             D_norm_sqr=0., cum_z_sqr=0., cum_psi_sqr = 0,
             A_norm=0., A_cond=1., 
-            x_norm = norm(x0), r_norm=b_norm, atr_norm=atr_norm0,
+            x_norm = l2norm(x0), r_norm=b_norm, atr_norm=atr_norm0,
             iterations=1, n_times=1, n_trans=1)
         return state
 
@@ -248,18 +309,18 @@ def lsqr(A, b, x0, damp=0, atol=1e-8, btol=1e-8, conlim=100000000., max_iters=10
         u = A.times(state.v) - state.alpha * state.u
         n_times = state.n_times + 1
         # update beta step 3.a 
-        beta = norm(u)
+        beta = l2norm(u)
         # normalize u step 3.a
         u = lax.cond(beta > 0, 
                 lambda _: u / beta, 
                 lambda _: u, operand=None)
         # update A_norm Near eq 5.10, expression for B_k Frobenius norm update
-        A_norm = norm(jnp.array([state.A_norm, state.alpha, beta, damp]))
+        A_norm = l2norm(jnp.array([state.A_norm, state.alpha, beta, damp]))
         # update v
         v = A.trans(u) - beta * state.v
         n_trans = state.n_trans + 1
         # compute alpha_1 by normalizing v
-        alpha = norm(v)
+        alpha = l2norm(v)
         # normalize v
         v = lax.cond(alpha > 0, 
                 lambda _: v / alpha, 
@@ -267,7 +328,7 @@ def lsqr(A, b, x0, damp=0, atol=1e-8, btol=1e-8, conlim=100000000., max_iters=10
         
         ## plane rotation to eliminate the damping parameter
         # This code is a no-op if damp = 0
-        rho_bar = norm(jnp.array([state.rho_bar, damp]))
+        rho_bar = l2norm(jnp.array([state.rho_bar, damp]))
         cs1 = state.rho_bar / rho_bar
         sn1 = damp / rho_bar
         psi = sn1 * state.phi_bar
@@ -277,7 +338,7 @@ def lsqr(A, b, x0, damp=0, atol=1e-8, btol=1e-8, conlim=100000000., max_iters=10
         # recurrence relation Eq 4.12
         # step 4.a (solution of eq 4.12 cell 1,1 and cell 2,1 of R.H.S.)
         # rho(k) from rho_bar(k) and beta(k+1)
-        rho = norm(jnp.array([rho_bar, beta]))
+        rho = l2norm(jnp.array([rho_bar, beta]))
         # step 4.b
         # c(k) from rho_bar(k) and rho(k)
         cs = rho_bar / rho
@@ -314,7 +375,7 @@ def lsqr(A, b, x0, damp=0, atol=1e-8, btol=1e-8, conlim=100000000., max_iters=10
         # The column d_k for the matrix D_k
         dk = state.w / rho
         # Frobenius norm squared for the matrix D_k
-        D_norm_sqr = state.D_norm_sqr + jnp.dot(dk, dk)
+        D_norm_sqr = state.D_norm_sqr + l2norm_sqr(dk)
 
         # use a plane rotation on the right to eliminate the
         # super-diagonal element (theta) of the upper-bidiagonal matrix.
@@ -325,7 +386,7 @@ def lsqr(A, b, x0, damp=0, atol=1e-8, btol=1e-8, conlim=100000000., max_iters=10
         z_bar = rhs / gamma_bar
         # Estimate of | x | 
         x_norm = jnp.sqrt(state.cum_z_sqr + z_bar**2)
-        gamma = norm(jnp.array([gamma_bar, theta]))
+        gamma = l2norm(jnp.array([gamma_bar, theta]))
         cs2 = gamma_bar / gamma
         sn2 = theta / gamma
         z = rhs / gamma
@@ -362,8 +423,10 @@ def lsqr(A, b, x0, damp=0, atol=1e-8, btol=1e-8, conlim=100000000., max_iters=10
         return state
 
     # state = init()
+    # # print(state)
     # while cond(state):
     #     state = body(state)
+    #     # print(state)
 
     state = lax.while_loop(cond, body, init())
 
