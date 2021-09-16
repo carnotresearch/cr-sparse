@@ -203,8 +203,7 @@ Continuous Wavelets
 -----------------------------------
 
 
-Further Reading
-------------------
+.. rubric:: Further Reading
 
 .. bibliography::
    :filter: docname in docnames

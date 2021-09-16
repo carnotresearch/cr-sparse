@@ -53,7 +53,7 @@ from cr.sparse import promote_arg_dtypes
 from cr.sparse import RecoveryFullSolution
 
 class LSQRState(NamedTuple):
-    """State management for LSQR algorithm
+    """State for LSQR algorithm
     """
     x: jnp.ndarray
     w: jnp.ndarray

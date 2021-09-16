@@ -19,6 +19,8 @@ Algorithms for solving sparse linear systems
 # pylint: disable=W0611
 
 from cr.sparse._src.sls.lsqr import (
+    LSQRSolution,
+    LSQRState,
     lsqr,
     lsqr_jit
 )
