@@ -8,6 +8,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Documentation: https://cr-sparse.readthedocs.io/en/latest/
 
+### Added
+
+Linear Operators
+- Convolution 1D, 2D, ND
+
+Sparse Linear Systems
+- LSQR solver for least squares problems
+
+Geophysics
+- Ricker wavelet
+
+### Improved
+
+Linear Operators
+- Ability to apply a 1D linear operator along a specific axis of input data
+
+
+
 ## [0.1.6] - 2021-08-29
 
 Documentation: https://cr-sparse.readthedocs.io/en/v0.1.6/
