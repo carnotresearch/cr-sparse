@@ -14,10 +14,16 @@ Linear Operators
 - Convolution 1D, 2D, ND
 
 Sparse Linear Systems
-- LSQR solver for least squares problems
+- LSQR solver for least squares problems with support for N-D data
 
 Geophysics
 - Ricker wavelet
+
+Image Processing
+- Gaussian kernels
+
+Examples
+- Deconvolution
 
 ### Improved
 
