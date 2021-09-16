@@ -1,0 +1,6 @@
+﻿cr.sparse.vision.KERNEL\_SOBEL\_X
+=================================
+
+.. currentmodule:: cr.sparse.vision
+
+.. autodata:: KERNEL_SOBEL_X

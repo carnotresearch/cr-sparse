@@ -1,0 +1,6 @@
+﻿cr.sparse.vision.KERNEL\_BOX\_7X7
+=================================
+
+.. currentmodule:: cr.sparse.vision
+
+.. autodata:: KERNEL_BOX_7X7

@@ -1,0 +1,6 @@
+﻿cr.sparse.vision.KERNEL\_BOX\_5X5
+=================================
+
+.. currentmodule:: cr.sparse.vision
+
+.. autodata:: KERNEL_BOX_5X5

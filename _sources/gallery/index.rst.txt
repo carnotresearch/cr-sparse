@@ -88,6 +88,27 @@ Linear Operators
    :hidden:
 
    /gallery/lop/deconvolution
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates following features:">
+
+.. only:: html
+
+ .. figure:: /gallery/lop/images/thumb/sphx_glr_deblurring_thumb.png
+     :alt: Image Deblurring
+
+     :ref:`sphx_glr_gallery_lop_deblurring.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/lop/deblurring
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

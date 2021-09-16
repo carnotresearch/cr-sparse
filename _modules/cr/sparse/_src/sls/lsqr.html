@@ -133,7 +133,19 @@
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">lax</span><span class="p">,</span> <span class="n">jit</span>
 
-<span class="n">norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span>
+<span class="c1">#norm = jnp.linalg.norm</span>
+
+<span class="k">def</span> <span class="nf">l2norm</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">xh</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x_sqr</span> <span class="o">=</span> <span class="n">xh</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="n">sum_sqr</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x_sqr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sum_sqr</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">l2norm_sqr</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">xh</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x_sqr</span> <span class="o">=</span> <span class="n">xh</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x_sqr</span><span class="p">)</span>
+
 
 <span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">promote_arg_dtypes</span>
 <span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">RecoveryFullSolution</span>
@@ -183,6 +195,37 @@
     <span class="n">n_trans</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="sd">&quot;&quot;&quot;Number of times A.T b computed &quot;&quot;&quot;</span>
 
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the string representation of the algorithm state</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s1">&#39;x: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;w: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;u: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;v: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;alpha: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;beta: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;rho_bar: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">rho_bar</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;phi_bar: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">phi_bar</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;z: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;cs2: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cs2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;sn2: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sn2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;D_norm_sqr: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">D_norm_sqr</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;cum_z_sqr: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cum_z_sqr</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;cum_psi_sqr: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cum_psi_sqr</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;A_norm: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">A_norm</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;A_cond: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">A_cond</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;x_norm: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x_norm</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;r_norm: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">r_norm</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;atr_norm: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">atr_norm</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;iterations: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">iterations</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;n_times: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_times</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;n_trans: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_trans</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="p">]:</span>
+            <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+        <span class="k">return</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
 <div class="viewcode-block" id="LSQRSolution"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.sls.LSQRSolution.html#cr.sparse.sls.LSQRSolution">[docs]</a><span class="k">class</span> <span class="nc">LSQRSolution</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Solution for LSQR algorithm</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -203,7 +246,25 @@
     <span class="n">n_times</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="sd">&quot;&quot;&quot;Number of times A x computed &quot;&quot;&quot;</span>
     <span class="n">n_trans</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="sd">&quot;&quot;&quot;Number of times A.T b computed &quot;&quot;&quot;</span></div>
+    <span class="sd">&quot;&quot;&quot;Number of times A.T b computed &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the string representation of the algorithm solution</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s1">&#39;x: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;A_norm: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">A_norm</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;A_cond: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">A_cond</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;x_norm: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x_norm</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;r_norm: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">r_norm</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;atr_norm: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">atr_norm</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;iterations: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">iterations</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;n_times: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_times</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;n_trans: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_trans</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="p">]:</span>
+            <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+        <span class="k">return</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="lsqr"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.sls.lsqr.html#cr.sparse.sls.lsqr">[docs]</a><span class="k">def</span> <span class="nf">lsqr</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">damp</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">btol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">conlim</span><span class="o">=</span><span class="mf">100000000.</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Solves the overdetermined system :math:`A x = b` in least square sense using LSQR algorithm.</span>
@@ -232,7 +293,7 @@
     <span class="c1"># initial residual after compenstating for x0</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
     <span class="c1"># norm of the initial residual</span>
-    <span class="n">b_norm</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="n">b_norm</span> <span class="o">=</span> <span class="n">l2norm</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
     <span class="c1"># Eq 3.1 Step 1</span>
     <span class="c1"># first u vector is based on the initial residual</span>
     <span class="n">u</span> <span class="o">=</span> <span class="n">r</span>
@@ -245,7 +306,7 @@
     <span class="c1"># compute first v Eq 3.1 Step 1</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
     <span class="c1"># compute alpha_1 by normalizing v</span>
-    <span class="n">alpha</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">l2norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
     <span class="c1"># normalize v</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">alpha</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> 
             <span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="n">v</span> <span class="o">/</span> <span class="n">alpha</span><span class="p">,</span> 
@@ -276,7 +337,7 @@
             <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cs2</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">sn2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
             <span class="n">D_norm_sqr</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">cum_z_sqr</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">cum_psi_sqr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
             <span class="n">A_norm</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">A_cond</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> 
-            <span class="n">x_norm</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">x0</span><span class="p">),</span> <span class="n">r_norm</span><span class="o">=</span><span class="n">b_norm</span><span class="p">,</span> <span class="n">atr_norm</span><span class="o">=</span><span class="n">atr_norm0</span><span class="p">,</span>
+            <span class="n">x_norm</span> <span class="o">=</span> <span class="n">l2norm</span><span class="p">(</span><span class="n">x0</span><span class="p">),</span> <span class="n">r_norm</span><span class="o">=</span><span class="n">b_norm</span><span class="p">,</span> <span class="n">atr_norm</span><span class="o">=</span><span class="n">atr_norm0</span><span class="p">,</span>
             <span class="n">iterations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_trans</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">state</span>
 
@@ -334,18 +395,18 @@
         <span class="n">u</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">v</span><span class="p">)</span> <span class="o">-</span> <span class="n">state</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">u</span>
         <span class="n">n_times</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">n_times</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="c1"># update beta step 3.a </span>
-        <span class="n">beta</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">l2norm</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
         <span class="c1"># normalize u step 3.a</span>
         <span class="n">u</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">beta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> 
                 <span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="n">u</span> <span class="o">/</span> <span class="n">beta</span><span class="p">,</span> 
                 <span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="n">u</span><span class="p">,</span> <span class="n">operand</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
         <span class="c1"># update A_norm Near eq 5.10, expression for B_k Frobenius norm update</span>
-        <span class="n">A_norm</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">state</span><span class="o">.</span><span class="n">A_norm</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">damp</span><span class="p">]))</span>
+        <span class="n">A_norm</span> <span class="o">=</span> <span class="n">l2norm</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">state</span><span class="o">.</span><span class="n">A_norm</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">damp</span><span class="p">]))</span>
         <span class="c1"># update v</span>
         <span class="n">v</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="o">-</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">v</span>
         <span class="n">n_trans</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">n_trans</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="c1"># compute alpha_1 by normalizing v</span>
-        <span class="n">alpha</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">l2norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
         <span class="c1"># normalize v</span>
         <span class="n">v</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">alpha</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> 
                 <span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="n">v</span> <span class="o">/</span> <span class="n">alpha</span><span class="p">,</span> 
@@ -353,7 +414,7 @@
         
         <span class="c1">## plane rotation to eliminate the damping parameter</span>
         <span class="c1"># This code is a no-op if damp = 0</span>
-        <span class="n">rho_bar</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">state</span><span class="o">.</span><span class="n">rho_bar</span><span class="p">,</span> <span class="n">damp</span><span class="p">]))</span>
+        <span class="n">rho_bar</span> <span class="o">=</span> <span class="n">l2norm</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">state</span><span class="o">.</span><span class="n">rho_bar</span><span class="p">,</span> <span class="n">damp</span><span class="p">]))</span>
         <span class="n">cs1</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">rho_bar</span> <span class="o">/</span> <span class="n">rho_bar</span>
         <span class="n">sn1</span> <span class="o">=</span> <span class="n">damp</span> <span class="o">/</span> <span class="n">rho_bar</span>
         <span class="n">psi</span> <span class="o">=</span> <span class="n">sn1</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">phi_bar</span>
@@ -363,7 +424,7 @@
         <span class="c1"># recurrence relation Eq 4.12</span>
         <span class="c1"># step 4.a (solution of eq 4.12 cell 1,1 and cell 2,1 of R.H.S.)</span>
         <span class="c1"># rho(k) from rho_bar(k) and beta(k+1)</span>
-        <span class="n">rho</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">rho_bar</span><span class="p">,</span> <span class="n">beta</span><span class="p">]))</span>
+        <span class="n">rho</span> <span class="o">=</span> <span class="n">l2norm</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">rho_bar</span><span class="p">,</span> <span class="n">beta</span><span class="p">]))</span>
         <span class="c1"># step 4.b</span>
         <span class="c1"># c(k) from rho_bar(k) and rho(k)</span>
         <span class="n">cs</span> <span class="o">=</span> <span class="n">rho_bar</span> <span class="o">/</span> <span class="n">rho</span>
@@ -400,7 +461,7 @@
         <span class="c1"># The column d_k for the matrix D_k</span>
         <span class="n">dk</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">w</span> <span class="o">/</span> <span class="n">rho</span>
         <span class="c1"># Frobenius norm squared for the matrix D_k</span>
-        <span class="n">D_norm_sqr</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">D_norm_sqr</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dk</span><span class="p">,</span> <span class="n">dk</span><span class="p">)</span>
+        <span class="n">D_norm_sqr</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">D_norm_sqr</span> <span class="o">+</span> <span class="n">l2norm_sqr</span><span class="p">(</span><span class="n">dk</span><span class="p">)</span>
 
         <span class="c1"># use a plane rotation on the right to eliminate the</span>
         <span class="c1"># super-diagonal element (theta) of the upper-bidiagonal matrix.</span>
@@ -411,7 +472,7 @@
         <span class="n">z_bar</span> <span class="o">=</span> <span class="n">rhs</span> <span class="o">/</span> <span class="n">gamma_bar</span>
         <span class="c1"># Estimate of | x | </span>
         <span class="n">x_norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">cum_z_sqr</span> <span class="o">+</span> <span class="n">z_bar</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">gamma</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">gamma_bar</span><span class="p">,</span> <span class="n">theta</span><span class="p">]))</span>
+        <span class="n">gamma</span> <span class="o">=</span> <span class="n">l2norm</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">gamma_bar</span><span class="p">,</span> <span class="n">theta</span><span class="p">]))</span>
         <span class="n">cs2</span> <span class="o">=</span> <span class="n">gamma_bar</span> <span class="o">/</span> <span class="n">gamma</span>
         <span class="n">sn2</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">/</span> <span class="n">gamma</span>
         <span class="n">z</span> <span class="o">=</span> <span class="n">rhs</span> <span class="o">/</span> <span class="n">gamma</span>
@@ -448,8 +509,10 @@
         <span class="k">return</span> <span class="n">state</span>
 
     <span class="c1"># state = init()</span>
+    <span class="c1"># # print(state)</span>
     <span class="c1"># while cond(state):</span>
     <span class="c1">#     state = body(state)</span>
+    <span class="c1">#     # print(state)</span>
 
     <span class="n">state</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">init</span><span class="p">())</span>
 

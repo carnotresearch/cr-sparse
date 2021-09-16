@@ -1,0 +1,6 @@
+﻿cr.sparse.vision.KERNEL\_BOX\_21X21
+===================================
+
+.. currentmodule:: cr.sparse.vision
+
+.. autodata:: KERNEL_BOX_21X21

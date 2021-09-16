@@ -1,0 +1,6 @@
+﻿cr.sparse.vision.kernel\_gaussian
+=================================
+
+.. currentmodule:: cr.sparse.vision
+
+.. autofunction:: kernel_gaussian
