@@ -17,6 +17,7 @@ CR.Sparse API Documentation
    la
    opt
    geo
+   vision
    ef
 
 .. ::

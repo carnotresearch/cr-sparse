@@ -15,32 +15,43 @@
 import jax.numpy as jnp
 
 KERNEL_BOX_3X3 = jnp.ones((3, 3), dtype="float") * (1.0 / (3*3))
+"""Simple 3x3 box averaging kernel"""
+
 KERNEL_BOX_5X5 = jnp.ones((5, 5), dtype="float") * (1.0 / (5*5))
+"""Simple 5x5 box averaging kernel"""
+
 KERNEL_BOX_7X7 = jnp.ones((7, 7), dtype="float") * (1.0 / (7 * 7))
+"""Simple 7x7 box averaging kernel"""
+
 KERNEL_BOX_21X21 = jnp.ones((21, 21), dtype="float") * (1.0 / (21 * 21))
+"""Simple 21x21 box averaging kernel"""
 
 
 KERNEL_SHARPEN_3X3 = jnp.array((
     [0, -1, 0],
     [-1, 5, -1],
     [0, -1, 0]), dtype="int")
+"""3x3 sharpening kernel"""
 
 KERNEL_LAPLACIAN_3X3 = jnp.array((
     [0, 1, 0],
     [1, -4, 1],
     [0, 1, 0]), dtype="int")
+"""3x3 Laplacian sharpening kernel"""
 
 # construct the Sobel x-axis kernel
 KERNEL_SOBEL_X = jnp.array((
     [-1, 0, 1],
     [-2, 0, 2],
     [-1, 0, 1]), dtype="int")
+"""Horizontal Sobel filter kernel"""
 
 # construct the Sobel y-axis kernel
 KERNEL_SOBEL_Y = jnp.array((
     [-1, -2, -1],
     [0, 0, 0],
     [1, 2, 1]), dtype="int")
+"""Vertical Sobel filter kernel"""
 
 
 def kernel_gaussian(size=5, sigma=1.):
