@@ -1,7 +1,7 @@
 Functional Models and Algorithms for Sparse Signal Processing
 =========================================================================================================
 
-|pypi| |license| |zenodo| |docs| |unit_tests| |coverage| |codacy|
+|pypi| |license| |zenodo| |docs| |unit_tests| |coverage|
 
 An `overview <https://carnotresearch.github.io/cr-sparse/intro.html>`_ of the library.
 
