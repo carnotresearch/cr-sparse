@@ -1,5 +1,6 @@
 name: Documentation
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -7,7 +8,6 @@ on:
       - 'docs/**'
       - 'src/**'
       - 'examples/**'
-      - '.github/workflows/**'
   pull_request:
     branches:
       - master
