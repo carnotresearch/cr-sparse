@@ -25,3 +25,7 @@ from cr.sparse._src.sls.lsqr import (
     lsqr_jit
 )
 
+from cr.sparse._src.sls.power import (
+    power_iterations,
+    power_iterations_jit,
+)
