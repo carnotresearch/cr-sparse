@@ -59,6 +59,8 @@ extensions = [
     'sphinxcontrib.bibtex',
     'sphinx_gallery.gen_gallery',
     'sphinx_panels',
+    # markdown support
+    'myst_parser',
 ]
 
 intersphinx_mapping = {

@@ -21,3 +21,4 @@ ipykernel>=5.3.4
 nbsphinx>=0.8.0
 sphinx-gallery>=0.8.0
 sphinx-panels
+myst-parser

@@ -1,9 +1,12 @@
 Functional Models and Algorithms for Sparse Signal Processing
-=========================================================================================================
+
 
 |pypi| |license| |zenodo| |docs| |unit_tests| |coverage|
 
-An `overview <https://carnotresearch.github.io/cr-sparse/intro.html>`_ of the library.
+Quick Start
+=========================
+
+An `overview <https://cr-sparse.readthedocs.io/en/latest/intro.html>`_ of the library.
 
 This library aims to provide XLA/JAX based Python implementations for
 various models and algorithms related to:
@@ -27,7 +30,7 @@ The library also provides
 * Sample data generation utilities
 * Framework for evaluation of sparse recovery algorithms
 
-Example usage
+Examples
 ----------------
 
 .. rubric:: A greedy pursuit based sparse recovery with synthetic data
@@ -75,6 +78,34 @@ Solve the recovery problem:
 
 For the complete set of available solvers, see the documentation.
 
+Platform Support
+----------------------
+
+``CR-Sparse`` can run on any platform supported by ``JAX``. 
+``JAX`` doesn't run natively on Windows platforms at the moment. 
+We have tested ``CR-Sparse`` on Mac and Linux platforms.
+
+
+Installation
+-------------------------------
+
+Installation from PyPI:
+
+.. code:: shell
+
+    python -m pip install cr-sparse
+
+Directly from our GITHUB repository:
+
+.. code:: shell
+
+    python -m pip install git+https://github.com/carnotresearch/cr-sparse.git
+
+
+Exploring CR-Sparse capabilities
+-----------------------------------
+
+* See the `examples gallery <https://cr-sparse.readthedocs.io/en/latest/gallery/index.html>`_
 
 Citing CR.Sparse
 ------------------------
@@ -92,6 +123,8 @@ To cite this repository:
     year = {2021},
     doi={10.5281/zenodo.5322044},
     }
+
+
 
 
 `Documentation <https://carnotresearch.github.io/cr-sparse>`_ | 
