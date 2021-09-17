@@ -3,10 +3,16 @@ Functional Models and Algorithms for Sparse Signal Processing
 
 |pypi| |license| |zenodo| |docs| |unit_tests| |coverage|
 
+
 Quick Start
 =========================
 
 An `overview <https://cr-sparse.readthedocs.io/en/latest/intro.html>`_ of the library.
+
+.. contents::
+    :depth: 2
+    :local:
+
 
 This library aims to provide XLA/JAX based Python implementations for
 various models and algorithms related to:
@@ -33,7 +39,8 @@ The library also provides
 Examples
 ----------------
 
-.. rubric:: A greedy pursuit based sparse recovery with synthetic data
+A greedy pursuit based sparse recovery with synthetic data
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 Build a Gaussian dictionary/sensing matrix:
 
