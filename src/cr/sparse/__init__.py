@@ -194,5 +194,8 @@ from cr.sparse._src.types import (
 
 
 from cr.sparse._src.ndarray import (
-    arr_largest_index
+    arr_largest_index,
+    arr_l2norm,
+    arr_l2norm_sqr,
+    arr_vdot,
 )

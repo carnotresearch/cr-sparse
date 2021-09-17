@@ -33,3 +33,19 @@ def arr_largest_index(x):
     """
     x = jnp.asarray(x)
     return jnp.unravel_index(jnp.argmax(jnp.abs(x)), x.shape)
+
+
+def arr_l2norm(x):
+    """Returns the l2-norm of an array by flattening it
+    """
+    return jnp.sqrt(jnp.abs(jnp.vdot(x, x)))
+
+def arr_l2norm_sqr(x):
+    """Returns the squared l2-norm of an array by flattening it
+    """
+    return jnp.vdot(x, x)
+
+def arr_vdot(x, y):
+    """Returns the inner product of two arrays  by flattening it 
+    """
+    return jnp.vdot(x, y)
