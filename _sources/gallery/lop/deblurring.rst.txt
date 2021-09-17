@@ -235,11 +235,11 @@ An initial guess of the deblurred image is all zeros
  .. code-block:: none
 
     x: (200, 200)
-    A_norm: 4.946758875785471
+    A_norm: 4.946758875785472
     A_cond: 167.3069908856023
-    x_norm: 34971.66794553036
-    r_norm: 28.394130441228945
-    atr_norm: 3.8161913539049293
+    x_norm: 34971.66794553037
+    r_norm: 28.39413044122921
+    atr_norm: 3.8161913539049643
     iterations: 50
     n_times: 50
     n_trans: 50
@@ -250,7 +250,7 @@ An initial guess of the deblurred image is all zeros
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.693 seconds)
+   **Total running time of the script:** ( 0 minutes  4.249 seconds)
 
 
 .. _sphx_glr_download_gallery_lop_deblurring.py:

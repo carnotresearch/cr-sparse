@@ -111,24 +111,6 @@ The library also provides
 
 .. highlight:: shell
 
-Platform Support
-----------------------
-
-``CR-Sparse`` can run on any platform supported by ``JAX``. ``JAX`` doesn't run natively on Windows platforms at the moment. 
-The authors have tested ``CR-Sparse`` on Mac and Linux platforms.
-
-Installation
----------------------
-
-
-Basic installation from PYPI::
-
-    python -m pip install cr-sparse
-
-Installation from GitHub::
-
-    python -m pip install git+https://github.com/carnotresearch/cr-sparse.git
-
 
 Open Source Credits
 -----------------------------

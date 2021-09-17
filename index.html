@@ -30,7 +30,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introduction" href="intro.html" /> 
+    <link rel="next" title="Quick Start" href="start.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,15 +50,17 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fwsp/index.html">Fourier and Wavelet Representations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/index.html">CR.Sparse API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gallery/index.html">Examples Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks/index.html">Benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="acronyms.html">Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
 </ul>
 
         </div>
@@ -114,6 +116,85 @@
 <p>A JAX/XLA based library of accelerated models and algorithms for inverse problems in
 sparse representation and compressive sensing.
 <a class="reference external" href="https://github.com/carnotresearch/cr-sparse">GITHUB</a>.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="start.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start.html#platform-support">Platform Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start.html#exploring-cr-sparse-capabilities">Exploring CR-Sparse capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="start.html#citing-cr-sparse">Citing CR.Sparse</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#functional-programming">Functional Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#linear-operators">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#greedy-sparse-recovery-approximation-algorithms">Greedy Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#convex-optimization-based-recovery-algorithms">Convex Optimization based Recovery Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#evaluation-framework">Evaluation Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#open-source-credits">Open Source Credits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#further-reading">Further Reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/dirac_cosine_dictionaries.html">Dirac Cosine Dictionaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/admm_l1.html">Alternating direction algorithms for l1 problems in compressive sensing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fwsp/index.html">Fourier and Wavelet Representations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fwsp/filter_banks.html">Filter Banks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fwsp/dwt.html">Discrete Wavelet Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fwsp/cwt.html">Continuous Wavelet Transform</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="source/index.html">CR.Sparse API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="source/dsp.html">Digital Signal Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/wavelets.html">Wavelets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/lop.html">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/sls.html">Sparse Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/util.html">Utilities in cr.sparse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/la.html">Linear Algebra Subroutines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/opt.html">Numerical Optimization Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/geo.html">Geophysical Signal Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/vision.html">Computer Vision and Image Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/ef.html">Evaluation Framework</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gallery/index.html">Examples Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gallery/index.html#linear-operators">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gallery/index.html#greedy-pursuit-algorithms-for-sparse-recovery">Greedy Pursuit Algorithms for Sparse Recovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gallery/index.html#sparse-recovery-via-l1-minimization">Sparse Recovery via L1 minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gallery/index.html#wavelets">Wavelets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks/index.html">Benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="benchmarks/comparison.html">Computation Time Comparison of Sparse Recovery Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmarks/omp.html">Orthogonal Matching Pursuit</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#unreleased">Unreleased</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id1">0.1.6 - 2021-08-29</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id3">0.1.5 - 2021-08-22</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id5">0.1.4 - 2021-07-12</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id7">0.1.3 - 2021-06-06</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id9">0.1.0 - 2021-06-05</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="development.html#working-with-the-source-code-in-development-mode">Working with the source code in development mode</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p class="rubric">Concept Map</p>
 <div class="sphinx-bs container pb-4 docutils">
 <div class="row docutils">
 <div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
@@ -227,71 +308,6 @@ symmetrize, restriction</p></li>
 </div>
 </div>
 </div>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#functional-programming">Functional Programming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#linear-operators">Linear Operators</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#greedy-sparse-recovery-approximation-algorithms">Greedy Sparse Recovery/Approximation Algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#convex-optimization-based-recovery-algorithms">Convex Optimization based Recovery Algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#evaluation-framework">Evaluation Framework</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#platform-support">Platform Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#open-source-credits">Open Source Credits</a></li>
-<li class="toctree-l2"><a class="reference internal" href="intro.html#further-reading">Further Reading</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/dirac_cosine_dictionaries.html">Dirac Cosine Dictionaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/admm_l1.html">Alternating direction algorithms for l1 problems in compressive sensing</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="start.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="start.html#installing-as-a-package">Installing as a package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="start.html#working-with-the-source-code-in-development-mode">Working with the source code in development mode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="start.html#examples">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="fwsp/index.html">Fourier and Wavelet Representations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="fwsp/filter_banks.html">Filter Banks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fwsp/dwt.html">Discrete Wavelet Transform</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fwsp/cwt.html">Continuous Wavelet Transform</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="source/index.html">CR.Sparse API Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/dsp.html">Digital Signal Processing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/wavelets.html">Wavelets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/lop.html">Linear Operators</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/sls.html">Sparse Linear Systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/data.html">Sample Data Generation Utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/util.html">Utilities in cr.sparse module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/la.html">Linear Algebra Subroutines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/opt.html">Numerical Optimization Routines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/geo.html">Geophysical Signal Processing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/vision.html">Computer Vision and Image Processing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/ef.html">Evaluation Framework</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="gallery/index.html">Examples Gallery</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="gallery/index.html#linear-operators">Linear Operators</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gallery/index.html#greedy-pursuit-algorithms-for-sparse-recovery">Greedy Pursuit Algorithms for Sparse Recovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gallery/index.html#sparse-recovery-via-l1-minimization">Sparse Recovery via L1 minimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gallery/index.html#wavelets">Wavelets</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="benchmarks/index.html">Benchmarks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="benchmarks/comparison.html">Computation Time Comparison of Sparse Recovery Methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="benchmarks/omp.html">Orthogonal Matching Pursuit</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="acronyms.html">Acronyms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="zzzreference.html">References</a></li>
-</ul>
-</div>
 </section>
 <section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline"></a></h1>
@@ -306,7 +322,7 @@ symmetrize, restriction</p></li>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="intro.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="start.html" class="btn btn-neutral float-right" title="Quick Start" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

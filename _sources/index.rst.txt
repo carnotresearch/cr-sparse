@@ -5,6 +5,26 @@ A JAX/XLA based library of accelerated models and algorithms for inverse problem
 sparse representation and compressive sensing. 
 `GITHUB <https://github.com/carnotresearch/cr-sparse>`_.
 
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   start
+   intro
+   tutorials/index
+   fwsp/index
+   source/index
+   gallery/index
+   benchmarks/index
+   acronyms
+   zzzreference
+   changelog.md
+   development
+
+
+.. rubric:: Concept Map
+
 .. panels::
    :card: shadow
 
@@ -55,21 +75,6 @@ sparse representation and compressive sensing.
    ----
    Utilities
    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-   intro
-   tutorials/index
-   start
-   fwsp/index
-   source/index
-   gallery/index
-   benchmarks/index
-   acronyms
-   zzzreference
 
 
 

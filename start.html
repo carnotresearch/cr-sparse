@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Getting Started &mdash; CR.Sparse  documentation</title>
+  <title>Quick Start &mdash; CR.Sparse  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
@@ -30,8 +30,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Fourier and Wavelet Representations" href="fwsp/index.html" />
-    <link rel="prev" title="Alternating direction algorithms for l1 problems in compressive sensing" href="tutorials/admm_l1.html" /> 
+    <link rel="next" title="Introduction" href="intro.html" />
+    <link rel="prev" title="CR.Sparse" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -51,20 +51,24 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installing-as-a-package">Installing as a package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#working-with-the-source-code-in-development-mode">Working with the source code in development mode</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#platform-support">Platform Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exploring-cr-sparse-capabilities">Exploring CR-Sparse capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#citing-cr-sparse">Citing CR.Sparse</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fwsp/index.html">Fourier and Wavelet Representations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="source/index.html">CR.Sparse API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gallery/index.html">Examples Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks/index.html">Benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="acronyms.html">Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
 </ul>
 
         </div>
@@ -81,7 +85,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Getting Started</li>
+      <li>Quick Start</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/start.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -115,36 +119,109 @@
     text-align: unset;
 }
 </style>
-<section id="getting-started">
-<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline"></a></h1>
-<section id="installing-as-a-package">
-<h2>Installing as a package<a class="headerlink" href="#installing-as-a-package" title="Permalink to this headline"></a></h2>
+<p>Functional Models and Algorithms for Sparse Signal Processing</p>
+<p><a class="reference external" href="https://badge.fury.io/py/cr-sparse"><img alt="PyPI CR-Sparse" src="https://badge.fury.io/py/cr-sparse.svg" /></a> <a class="reference external" href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a> <a class="reference external" href="https://zenodo.org/badge/latestdoi/323566858"><img alt="DOI" src="https://zenodo.org/badge/323566858.svg" /></a> <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/?badge=latest"><img alt="Documentation Status" src="https://readthedocs.org/projects/cr-sparse/badge/?version=latest" /></a> <a class="reference external" href="https://github.com/carnotresearch/cr-sparse/actions/workflows/ci.yml"><img alt="Unit Tests" src="https://github.com/carnotresearch/cr-sparse/actions/workflows/ci.yml/badge.svg" /></a> <a class="reference external" href="https://codecov.io/gh/carnotresearch/cr-sparse"><img alt="Coverage" src="https://codecov.io/gh/carnotresearch/cr-sparse/branch/master/graph/badge.svg?token=JZQW6QU3S4" /></a></p>
+<section id="quick-start">
+<h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline"></a></h1>
+<p>An <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/intro.html">overview</a> of the library.</p>
+<p>This library aims to provide XLA/JAX based Python implementations for
+various models and algorithms related to:</p>
+<ul class="simple">
+<li><p>Wavelet transforms</p></li>
+<li><p>Efficient linear operators</p></li>
+<li><p>Iterative methods for sparse linear systems</p></li>
+<li><p>Redundant dictionaries</p></li>
+<li><p>Sparse approximations on redundant dictionaries
+* Greedy methods
+* Convex optimization based methods</p></li>
+<li><p>Sparse recovery from compressive sensing based measurements
+* Greedy methods
+* Convex optimization based methods</p></li>
+</ul>
+<p>The library also provides</p>
+<ul class="simple">
+<li><p>Various simple dictionaries and sensing matrices</p></li>
+<li><p>Sample data generation utilities</p></li>
+<li><p>Framework for evaluation of sparse recovery algorithms</p></li>
+</ul>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+<p class="rubric">A greedy pursuit based sparse recovery with synthetic data</p>
+<p>Build a Gaussian dictionary/sensing matrix:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="kn">import</span> <span class="nn">cr.sparse.dict</span> <span class="k">as</span> <span class="nn">crdict</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Phi</span> <span class="o">=</span> <span class="n">crdict</span><span class="o">.</span><span class="n">gaussian_mtx</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Build a K-sparse signal with Gaussian non-zero entries:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cr.sparse.data</span> <span class="k">as</span> <span class="nn">crdata</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">key</span><span class="p">,</span> <span class="n">subkey</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">crdata</span><span class="o">.</span><span class="n">sparse_normal_representations</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Build the measurement vector:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">Phi</span> <span class="o">@</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>Import the Compressive Sampling Matching Pursuit sparse recovery solver:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cr.sparse.pursuit</span> <span class="kn">import</span> <span class="n">cosamp</span>
+</pre></div>
+</div>
+<p>Solve the recovery problem:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span> <span class="o">=</span>  <span class="n">cosamp</span><span class="o">.</span><span class="n">matrix_solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For the complete set of available solvers, see the documentation.</p>
+</section>
+<section id="platform-support">
+<h2>Platform Support<a class="headerlink" href="#platform-support" title="Permalink to this headline"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">CR-Sparse</span></code> can run on any platform supported by <code class="docutils literal notranslate"><span class="pre">JAX</span></code>.
+<code class="docutils literal notranslate"><span class="pre">JAX</span></code> doesn’t run natively on Windows platforms at the moment.
+We have tested <code class="docutils literal notranslate"><span class="pre">CR-Sparse</span></code> on Mac and Linux platforms.</p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
+<p>Installation from PyPI:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m pip install cr-sparse
+</pre></div>
+</div>
 <p>Directly from our GITHUB repository:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m pip install git+https://github.com/carnotresearch/cr-sparse.git
 </pre></div>
 </div>
 </section>
-<section id="working-with-the-source-code-in-development-mode">
-<h2>Working with the source code in development mode<a class="headerlink" href="#working-with-the-source-code-in-development-mode" title="Permalink to this headline"></a></h2>
-<p>Clone the repository:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/carnotresearch/cr-sparse.git
-</pre></div>
-</div>
-<p>Change into the code:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> cr-sparse
-</pre></div>
-</div>
-<p>Install the package in development mode:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m pip install -e .
-</pre></div>
-</div>
+<section id="exploring-cr-sparse-capabilities">
+<h2>Exploring CR-Sparse capabilities<a class="headerlink" href="#exploring-cr-sparse-capabilities" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>See the <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/index.html">examples gallery</a></p></li>
+</ul>
 </section>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
-<p>Explore the examples directory:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> examples
+<section id="citing-cr-sparse">
+<h2>Citing CR.Sparse<a class="headerlink" href="#citing-cr-sparse" title="Permalink to this headline"></a></h2>
+<p>To cite this repository:</p>
+<div class="highlight-tex notranslate"><div class="highlight"><pre><span></span>@software<span class="nb">{</span>crsparse2021github,
+author = <span class="nb">{</span>Shailesh Kumar<span class="nb">}</span>,
+title = <span class="nb">{{</span>CR.Sparse<span class="nb">}</span>: Functional Models and Algorithms for Sparse Signal Processing<span class="nb">}</span>,
+url = <span class="nb">{</span>https://cr-sparse.readthedocs.io/en/latest/<span class="nb">}</span>,
+version = <span class="nb">{</span>0.1.6<span class="nb">}</span>,
+year = <span class="nb">{</span>2021<span class="nb">}</span>,
+doi=<span class="nb">{</span>10.5281/zenodo.5322044<span class="nb">}</span>,
+<span class="nb">}</span>
 </pre></div>
 </div>
+<p><a class="reference external" href="https://carnotresearch.github.io/cr-sparse">Documentation</a> |
+<a class="reference external" href="https://github.com/carnotresearch/cr-sparse">Code</a> |
+<a class="reference external" href="https://github.com/carnotresearch/cr-sparse/issues">Issues</a> |
+<a class="reference external" href="https://github.com/carnotresearch/cr-sparse/discussions">Discussions</a> |
+<a class="reference external" href="https://github.com/carnotresearch/cr-sparse/blob/master/notebooks/README.rst">Examples</a> |
+<a class="reference external" href="https://github.com/carnotresearch/cr-sparse/blob/master/notebooks/experiments/README.rst">Experiments</a> |
+<a class="reference external" href="https://sparse-plex.readthedocs.io">Sparse-Plex</a></p>
 </section>
 </section>
 
@@ -152,8 +229,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="tutorials/admm_l1.html" class="btn btn-neutral float-left" title="Alternating direction algorithms for l1 problems in compressive sensing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="fwsp/index.html" class="btn btn-neutral float-right" title="Fourier and Wavelet Representations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="CR.Sparse" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="intro.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
