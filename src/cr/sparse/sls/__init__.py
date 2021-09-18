@@ -29,3 +29,8 @@ from cr.sparse._src.sls.power import (
     power_iterations,
     power_iterations_jit,
 )
+
+from cr.sparse._src.sls.ista import (
+    ista,
+    ista_jit,
+)
