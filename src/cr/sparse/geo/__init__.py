@@ -22,3 +22,20 @@ from cr.sparse._src.geo.wavelets import (
     ricker
 )
 
+from cr.sparse._src.geo.thresholding import (
+    # Thresholding operators
+    hard_threshold,
+    hard_threshold_jit,
+    soft_threshold,
+    soft_threshold_jit,
+    half_threshold,
+    half_threshold_jit,
+    hard_threshold_percentile,
+    hard_threshold_percentile_jit,
+    soft_threshold_percentile,
+    soft_threshold_percentile_jit,
+    half_threshold_percentile,
+    half_threshold_percentile_jit,
+    gamma_to_tau_half_threshold,
+    gamma_to_tau_hard_threshold,
+)
