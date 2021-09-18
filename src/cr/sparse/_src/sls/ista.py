@@ -21,6 +21,7 @@ import jax.numpy as jnp
 from typing import NamedTuple
 
 from cr.sparse import arr_l2norm, arr_l2norm_sqr, arr_vdot
+from .defs import identity_op, default_threshold
 
 class ISTAState(NamedTuple):
     """ISTA algorithm state
@@ -40,8 +41,9 @@ def ista(
     operator,
     b,
     x0,
-    threshold_func,
     step_size,
+    threshold_func=default_threshold,
+    basis=identity_op,
     res_norm_rtol=1e-3,
     x_norm_change_tol=1e-10,
     max_iters=1000,
@@ -67,10 +69,14 @@ def ista(
         grad = step_size * operator.trans(state.r)
         # update the solution
         x = state.x + grad
-        # apply the thresholding function
-        x = threshold_func(state.iterations, x)
+        # compute the representation of x in the sparsifying basis
+        alpha = basis.trans(x)
+        # apply the thresholding function on the sparse representation
+        alpha = threshold_func(state.iterations, alpha)
+        # convert back to data space
+        x = basis.times(alpha)
         # update the residual
-        r = b - operator.times(state.x)
+        r = b - operator.times(x)
         # compute the norm of the current residual
         r_norm_sqr = arr_l2norm_sqr(r)
         x_change_norm = arr_l2norm(x - state.x)
@@ -87,4 +93,4 @@ def ista(
     return state
 
 
-ista_jit = jit(ista, static_argnums=(0, 3, 4, 5, 6, 7))
+ista_jit = jit(ista, static_argnums=(0, 3, 4, 5, 6, 7, 8))
