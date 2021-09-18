@@ -90,6 +90,7 @@ from cr.sparse._src.lop.onb import (
 # wavelet transforms
 from cr.sparse._src.lop.dwt import (
     dwt,
+    dwt2D,
 )
 
 
