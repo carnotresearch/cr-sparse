@@ -250,7 +250,7 @@ An initial guess of the deblurred image is all zeros
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.956 seconds)
+   **Total running time of the script:** ( 0 minutes  3.994 seconds)
 
 
 .. _sphx_glr_download_gallery_lop_deblurring.py:

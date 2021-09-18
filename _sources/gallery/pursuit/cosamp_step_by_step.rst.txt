@@ -188,7 +188,7 @@ A sparse model vector
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f61ac027580>]
+    [<matplotlib.lines.Line2D object at 0x7f5258287910>]
 
 
 
@@ -245,7 +245,7 @@ Compressive measurements
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f61acc579d0>]
+    [<matplotlib.lines.Line2D object at 0x7f5258c96af0>]
 
 
 
@@ -624,7 +624,7 @@ We now have our first estimate of the solution
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x7f619ceb2850>
+    <matplotlib.legend.Legend object at 0x7f52680acc10>
 
 
 
@@ -1042,7 +1042,7 @@ Here is our updated estimate of the solution
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x7f619cee1b80>
+    <matplotlib.legend.Legend object at 0x7f525831f0a0>
 
 
 
@@ -1259,14 +1259,14 @@ Let's plot the solution
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x7f619cc82100>
+    <matplotlib.legend.Legend object at 0x7f524ce2d490>
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  6.733 seconds)
+   **Total running time of the script:** ( 0 minutes  6.747 seconds)
 
 
 .. _sphx_glr_download_gallery_pursuit_cosamp_step_by_step.py:

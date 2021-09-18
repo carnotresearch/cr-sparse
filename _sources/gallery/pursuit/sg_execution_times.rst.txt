@@ -5,8 +5,8 @@
 
 Computation times
 =================
-**00:06.733** total execution time for **gallery_pursuit** files:
+**00:06.747** total execution time for **gallery_pursuit** files:
 
 +-------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_pursuit_cosamp_step_by_step.py` (``cosamp_step_by_step.py``) | 00:06.733 | 0.0 MB |
+| :ref:`sphx_glr_gallery_pursuit_cosamp_step_by_step.py` (``cosamp_step_by_step.py``) | 00:06.747 | 0.0 MB |
 +-------------------------------------------------------------------------------------+-----------+--------+
