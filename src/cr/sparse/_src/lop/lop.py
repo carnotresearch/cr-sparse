@@ -325,3 +325,18 @@ def hcat(A, B):
 
 
 
+def gram(A):
+    """Returns the gram of a given operator :math:`T = A^H A`"""
+    m, n = A.shape
+    times = lambda x: A.trans(A.times(x))
+
+    return Operator(times=times, trans=times, shape=(n,n), 
+        jit_safe=A.jit_safe, matrix_safe=A.matrix_safe, real=A.real)
+
+def frame(A):
+    """Returns the frame of a given operator :math:`T = A A^H`"""
+    m, n = A.shape
+    times = lambda x: A.times(A.trans(x))
+
+    return Operator(times=times, trans=times, shape=(m, m), 
+        jit_safe=A.jit_safe, matrix_safe=A.matrix_safe, real=A.real)

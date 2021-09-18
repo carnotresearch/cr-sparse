@@ -32,6 +32,8 @@ from cr.sparse._src.lop.lop import (
     hermitian,
     hcat,
     power,
+    gram,
+    frame,
     # operator parts
     column,
     columns
