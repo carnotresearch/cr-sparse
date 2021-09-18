@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+import numpy as np
 import jax.numpy as jnp
 from jax import lax
 from jax._src import dtypes
@@ -85,6 +85,16 @@ def check_shapes_are_equal(array1, array2):
     if not array1.shape == array1.shape:
         raise ValueError('Input arrays must have the same shape.')
     return
+
+def promote_to_complex(arg):
+    """Promotes an argument to complex type"""
+    dtype = dtypes.result_type(arg, np.complex64)
+    return lax.convert_element_type(arg, dtype)
+
+def promote_to_real(arg):
+    """Promotes an argument to real type"""
+    dtype = dtypes.result_type(arg, np.float32)
+    return lax.convert_element_type(arg, dtype)
 
 
 integer_types = (
