@@ -79,13 +79,17 @@ from cr.sparse._src.lop.conv import (
     convolveND
 )
 
-
 # Orthogonal bases
 from cr.sparse._src.lop.onb import (
     fourier_basis,
     dirac_fourier_basis,
     cosine_basis,
     walsh_hadamard_basis,
+)
+
+# wavelet transforms
+from cr.sparse._src.lop.dwt import (
+    dwt,
 )
 
 
