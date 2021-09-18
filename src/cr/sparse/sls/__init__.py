@@ -34,3 +34,8 @@ from cr.sparse._src.sls.ista import (
     ista,
     ista_jit,
 )
+
+from cr.sparse._src.sls.fista import (
+    fista,
+    fista_jit,
+)
