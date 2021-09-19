@@ -201,7 +201,7 @@ Apply the blurring operator to the original image
 
  .. code-block:: none
 
-    Blurred PSNR:  14.592858290084086 dB
+    Blurred PSNR:  14.59285829008409 dB
 
     Text(0.5, 1.0, 'After blurring')
 
@@ -249,13 +249,13 @@ An initial guess of the deblurred image is all zeros
 
  .. code-block:: none
 
-    Deblurred PSNR:  21.206455209076864 dB
+    Deblurred PSNR:  21.20645520907686 dB
     x: (200, 200)
-    A_norm: 4.946758875785472
+    A_norm: 4.946758875785471
     A_cond: 167.3069908856023
-    x_norm: 34971.66794553037
-    r_norm: 28.39413044122921
-    atr_norm: 3.8161913539049643
+    x_norm: 34971.66794553036
+    r_norm: 28.394130441228945
+    atr_norm: 3.8161913539049293
     iterations: 50
     n_times: 50
     n_trans: 50
@@ -361,7 +361,7 @@ We combine the convolution operator and the wavelet basis operator
  .. code-block:: none
 
     Number of FISTA iterations 50
-    Deblurred PSNR:  20.411790224661726 dB
+    Deblurred PSNR:  20.41179022466172 dB
 
     Text(0.5, 1.0, 'FISTA deblurring')
 
@@ -370,7 +370,7 @@ We combine the convolution operator and the wavelet basis operator
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  26.645 seconds)
+   **Total running time of the script:** ( 0 minutes  21.320 seconds)
 
 
 .. _sphx_glr_download_gallery_lop_deblurring.py:
