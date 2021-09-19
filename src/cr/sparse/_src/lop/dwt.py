@@ -57,7 +57,7 @@ def waverec(coefs, rec_lo, rec_hi, level):
 def wavedec2(image, dec_lo, dec_hi, level, axes):
     """Compute multilevel wavelet decomposition of 2D images
     """
-    image = promote_arg_dtypes(image)
+    image, dec_lo, dec_hi = promote_arg_dtypes(image, dec_lo, dec_hi)
     ax0 = axes[0]
     ax1 = axes[1]
     mode = 'periodization'
@@ -121,7 +121,7 @@ def waverec2(coefs, rec_lo, rec_hi, level, axes):
     return caa
 
 
-def dwt(n, wavelet="haar", level=1, axis=0):
+def dwt(n, wavelet="haar", level=1, axis=0, basis=False):
     """1D Discrete Wavelet Transform operator
     """
     wavelet = wt.to_wavelet(wavelet)
@@ -146,10 +146,15 @@ def dwt(n, wavelet="haar", level=1, axis=0):
         return x[:n]
 
     times, trans = apply_along_axis(times1d, trans1d, axis)
-    return Operator(times=times, trans=trans, shape=(m,n))
+    if basis:
+        # Return the wavelet basis
+        return Operator(times=trans, trans=times, shape=(n,m))
+    else:
+        # Return the wavelet transform
+        return Operator(times=times, trans=trans, shape=(m,n))
 
 
-def dwt2D(shape, wavelet="haar", level=1, axes=None):
+def dwt2D(shape, wavelet="haar", level=1, axes=None, basis=False):
     """2D Discrete Wavelet Transform operator
     """
     wavelet = wt.to_wavelet(wavelet)
@@ -192,4 +197,9 @@ def dwt2D(shape, wavelet="haar", level=1, axes=None):
         x = waverec2(coefs, rec_lo, rec_hi, level, axes)
         return x[:h, :w]
 
-    return Operator(times=times, trans=trans, shape=(shape, out_shape))
+    if basis:
+        # Return the wavelet basis
+        return Operator(times=trans, trans=times, shape=(shape, out_shape))
+    else:
+        # Return the wavelet transform
+        return Operator(times=times, trans=trans, shape=(out_shape, shape))
