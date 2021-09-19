@@ -178,7 +178,7 @@ def dwt2D(shape, wavelet="haar", level=1, axes=None, basis=False):
     max_level_1 = wt.dwt_max_level(h, wavelet.dec_len)
     max_level_2 = wt.dwt_max_level(w, wavelet.dec_len)
     max_level = min(max_level_1, max_level_2)
-    assert level <= max_level, f"Level too high {level=}, {max_level=}"
+    assert level <= max_level, f"Level too high level={level}, max_level={max_level}"
 
     hh = wt.next_pow_of_2(h)
     ww = wt.next_pow_of_2(w)
