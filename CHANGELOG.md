@@ -10,25 +10,30 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-Linear Operators
-- Convolution 1D, 2D, ND
-
-Sparse Linear Systems
-- LSQR solver for least squares problems with support for N-D data
-
-Geophysics
-- Ricker wavelet
-
-Image Processing
-- Gaussian kernels
-
-Examples
-- Deconvolution
+- Linear Operators
+  - Convolution 1D, 2D, ND
+  - Gram and Frame operators for a given linear operator
+  - DWT 1D operator
+  - DWT 2D operator
+- Sparse Linear Systems
+  - Power iterations for computing the largest eigen value of a symmetric linear operator
+  - LSQR solver for least squares problems with support for N-D data
+  - ISTA: Iterative Shrinkage and Thresholding Algorithm
+  - FISTA: Fast Iterative Shrinkage and Thresholding Algorithm
+- Geophysics
+  - Ricker wavelet
+  - Hard, soft and half thresholding operators for ND arrays
+- Image Processing
+  - Gaussian kernels
+- Examples
+  - Deconvolution
+- Utilities
+  - More functions for ND-arrays
 
 ### Improved
 
-Linear Operators
-- Ability to apply a 1D linear operator along a specific axis of input data
+- Linear Operators
+  - Ability to apply a 1D linear operator along a specific axis of input data
 
 
 
