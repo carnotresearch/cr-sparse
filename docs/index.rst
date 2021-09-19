@@ -13,10 +13,11 @@ sparse representation and compressive sensing.
    start
    intro
    tutorials/index
-   fwsp/index
    source/index
+   sls/index
    gallery/index
    benchmarks/index
+   fwsp/index
    acronyms
    zzzreference
    changelog.md
