@@ -14,6 +14,7 @@ sparse representation and compressive sensing.
    intro
    tutorials/index
    source/index
+   la/index
    sls/index
    gallery/index
    benchmarks/index
