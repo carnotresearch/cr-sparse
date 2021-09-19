@@ -300,7 +300,7 @@ def compose(A, B):
     """Returns the composite linear operator :math:`T = AB` such that :math:`T(x)= A(B(x))`"""
     ma, na = A.shape
     mb, nb = B.shape
-    assert na == mb
+    assert na == mb, "Input shape of A must match the output shape of B"
     jit_safe = A.jit_safe and B.jit_safe
     matrix_safe = A.matrix_safe and B.matrix_safe
     real = A.real and B.real
