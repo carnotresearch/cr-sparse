@@ -132,7 +132,7 @@ def dwt(n, wavelet="haar", level=1, axis=0, basis=False):
 
     # We need to verify that the level is not too high
     max_level = wt.dwt_max_level(n, wavelet.dec_len)
-    assert level <= max_level, f"Level too high {level=}, {max_level=}"
+    assert level <= max_level, f"Level too high level={level}, max_level={max_level}"
 
     m = wt.next_pow_of_2(n)
     pad = (0, m-n)
