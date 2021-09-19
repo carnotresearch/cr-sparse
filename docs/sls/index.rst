@@ -5,4 +5,5 @@ Sparse Linear Systems
    :maxdepth: 2
    :caption: Contents:
 
+   underdetermined
    thresholding
