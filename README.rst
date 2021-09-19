@@ -22,10 +22,13 @@ various models and algorithms related to:
 * Iterative methods for sparse linear systems
 * Redundant dictionaries
 * Sparse approximations on redundant dictionaries
+
   * Greedy methods
   * Convex optimization based methods
+  * Shrinkage methods
 
 * Sparse recovery from compressive sensing based measurements
+
   * Greedy methods
   * Convex optimization based methods
 
@@ -88,9 +91,9 @@ For the complete set of available solvers, see the documentation.
 Platform Support
 ----------------------
 
-``CR-Sparse`` can run on any platform supported by ``JAX``. 
+``cr-sparse`` can run on any platform supported by ``JAX``. 
 ``JAX`` doesn't run natively on Windows platforms at the moment. 
-We have tested ``CR-Sparse`` on Mac and Linux platforms.
+We have tested ``cr-sparse`` on Mac and Linux platforms.
 
 
 Installation
@@ -109,12 +112,12 @@ Directly from our GITHUB repository:
     python -m pip install git+https://github.com/carnotresearch/cr-sparse.git
 
 
-Exploring CR-Sparse capabilities
+Exploring cr-sparse capabilities
 -----------------------------------
 
 * See the `examples gallery <https://cr-sparse.readthedocs.io/en/latest/gallery/index.html>`_
 
-Citing CR.Sparse
+Citing cr-sparse
 ------------------------
 
 
@@ -124,7 +127,7 @@ To cite this repository:
 
     @software{crsparse2021github,
     author = {Shailesh Kumar},
-    title = {{CR.Sparse}: Functional Models and Algorithms for Sparse Signal Processing},
+    title = {{cr-sparse}: Functional Models and Algorithms for Sparse Signal Processing},
     url = {https://cr-sparse.readthedocs.io/en/latest/},
     version = {0.1.6},
     year = {2021},
@@ -155,7 +158,7 @@ To cite this repository:
 
 
 .. |pypi| image:: https://badge.fury.io/py/cr-sparse.svg
-    :alt: PyPI CR-Sparse
+    :alt: PyPI cr-sparse
     :scale: 100%
     :target: https://badge.fury.io/py/cr-sparse
 
