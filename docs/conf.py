@@ -25,9 +25,9 @@ sys.path.append(os.path.abspath('extensions'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'CR.Sparse'
-copyright = '2021, CR.Sparse Development Team'
-author = 'CR.Sparse Development Team'
+project = 'cr-sparse'
+copyright = '2021, CR-Sparse Development Team'
+author = 'CR-Sparse Development Team'
 
 # The short X.Y version
 version = ""
@@ -109,20 +109,7 @@ napolean_use_rtype = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
-
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
-
-html_css_files = [
-    'css/custom.css',
-]
-html_js_files = [
-    'js/custom.js',
-    #'js/disqus.js',
-]
+html_theme = 'alabaster'
 
 
 # The name of the Pygments (syntax highlighting) style to use.
@@ -197,3 +184,44 @@ sphinx_gallery_conf = {
         'cr.sparse.wt': None,
     }
 }
+
+math_number_all = True
+
+
+### Theme customization ###
+
+
+
+html_sidebars = {
+    '**': [
+        'about.html',
+        'navigation.html',
+        'relations.html',
+        'searchbox.html',
+        'donate.html',
+    ]
+}
+
+# Add any paths that contain custom static files (such as style sheets) here,
+# relative to this directory. They are copied after the builtin static files,
+# so a file named "default.css" will overwrite the builtin "default.css".
+html_static_path = ['_static']
+
+html_css_files = [
+    'css/custom.css',
+]
+html_js_files = [
+    'js/custom.js',
+]
+
+html_theme_options = {
+    "fixed_sidebar": True,
+    "github_banner": True,
+    "github_button": True,
+    "github_repo": 'cr-sparse',
+    "github_user": 'carnotresearch',
+    "show_powered_by": False,
+    "sidebar_width": "300px",
+    "page_width": "1200px",
+}
+
