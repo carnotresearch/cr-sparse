@@ -1,60 +1,68 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cr.sparse.take_along_cols &mdash; CR.Sparse  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="../../_static/js/custom.js"></script>
-    <script src="../../_static/js/theme.js"></script>
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>cr.sparse.take_along_cols &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/custom.js"></script>
+    <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="cr.sparse.sparse_approximation_cw" href="cr.sparse.sparse_approximation_cw.html" />
-    <link rel="prev" title="cr.sparse.largest_indices_cw" href="cr.sparse.largest_indices_cw.html" /> 
-</head>
+    <link rel="prev" title="cr.sparse.largest_indices_cw" href="cr.sparse.largest_indices_cw.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> CR.Sparse
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fwsp/index.html">Fourier and Wavelet Representations</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">CR.Sparse API Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../dsp.html">Digital Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../wavelets.html">Wavelets</a></li>
@@ -64,35 +72,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../util.html#array-data-type-utilities">Array data type utilities</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../util.html#utilities-for-vectors">Utilities for vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../util.html#metrics-for-measuring-signal-and-error-levels">Metrics for measuring signal and error levels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../util.html#some-checks-and-utilities-for-matrices-2d-arrays">Some checks and utilities for matrices (2D arrays)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../util.html#row-wise-and-column-wise-norms-for-signal-representation-matrices">Row wise and column wise norms for signal/representation matrices</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../util.html#sparse-representations">Sparse representations</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.nonzero_values.html">cr.sparse.nonzero_values</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.nonzero_indices.html">cr.sparse.nonzero_indices</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.randomize_rows.html">cr.sparse.randomize_rows</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.randomize_cols.html">cr.sparse.randomize_cols</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.largest_indices.html">cr.sparse.largest_indices</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.hard_threshold.html">cr.sparse.hard_threshold</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.hard_threshold_sorted.html">cr.sparse.hard_threshold_sorted</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.sparse_approximation.html">cr.sparse.sparse_approximation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.build_signal_from_indices_and_values.html">cr.sparse.build_signal_from_indices_and_values</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.dynamic_range.html">cr.sparse.dynamic_range</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.nonzero_dynamic_range.html">cr.sparse.nonzero_dynamic_range</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.largest_indices_rw.html">cr.sparse.largest_indices_rw</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.take_along_rows.html">cr.sparse.take_along_rows</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.sparse_approximation_rw.html">cr.sparse.sparse_approximation_rw</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.largest_indices_cw.html">cr.sparse.largest_indices_cw</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">cr.sparse.take_along_cols</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cr.sparse.sparse_approximation_cw.html">cr.sparse.sparse_approximation_cw</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../util.html#utilities-for-nd-arrays">Utilities for ND-Arrays</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra Subroutines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../opt.html">Numerical Optimization Routines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../geo.html">Geophysical Signal Processing</a></li>
@@ -100,103 +80,87 @@
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../la/index.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sls/index.html">Sparse Linear Systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../gallery/index.html">Examples Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fwsp/index.html">Fourier and Wavelet Representations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../acronyms.html">Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../zzzreference.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
 </ul>
 
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">CR.Sparse API Documentation</a><ul>
+  <li><a href="../util.html">Utilities in cr.sparse module</a><ul>
+      <li>Previous: <a href="cr.sparse.largest_indices_cw.html" title="previous chapter">cr.sparse.largest_indices_cw</a></li>
+      <li>Next: <a href="cr.sparse.sparse_approximation_cw.html" title="next chapter">cr.sparse.sparse_approximation_cw</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
-    </nav>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">CR.Sparse</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">CR.Sparse API Documentation</a> &raquo;</li>
-          <li><a href="../util.html">Utilities in cr.sparse module</a> &raquo;</li>
-      <li>cr.sparse.take_along_cols</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/source/_autosummary/cr.sparse.take_along_cols.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="cr-sparse-take-along-cols">
-<h1>cr.sparse.take_along_cols<a class="headerlink" href="#cr-sparse-take-along-cols" title="Permalink to this headline"></a></h1>
+          <div class="body" role="main">
+            
+  <section id="cr-sparse-take-along-cols">
+<h1>cr.sparse.take_along_cols<a class="headerlink" href="#cr-sparse-take-along-cols" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="cr.sparse.take_along_cols">
-<span class="sig-prename descclassname"><span class="pre">cr.sparse.</span></span><span class="sig-name descname"><span class="pre">take_along_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/signal.html#take_along_cols"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.take_along_cols" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cr.sparse.</span></span><span class="sig-name descname"><span class="pre">take_along_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/signal.html#take_along_cols"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.take_along_cols" title="Permalink to this definition">¶</a></dt>
 <dd><p>Picks K entries from each column of X specified by indices matrix</p>
 </dd></dl>
 
 </section>
 
 
-           </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="cr.sparse.largest_indices_cw.html" class="btn btn-neutral float-left" title="cr.sparse.largest_indices_cw" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="cr.sparse.sparse_approximation_cw.html" class="btn btn-neutral float-right" title="cr.sparse.sparse_approximation_cw" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2021, CR.Sparse Development Team.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
+          
         </div>
       </div>
-    </section>
+    <div class="clearer"></div>
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+    <div class="footer">
+      &copy;2021, CR-Sparse Development Team.
+      
+      |
+      <a href="../../_sources/source/_autosummary/cr.sparse.take_along_cols.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
 
-</body>
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
 </html>

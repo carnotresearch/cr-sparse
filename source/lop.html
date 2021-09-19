@@ -1,147 +1,74 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Linear Operators &mdash; CR.Sparse  documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script src="../_static/js/custom.js"></script>
-    <script src="../_static/js/theme.js"></script>
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Linear Operators &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="cr.sparse.lop.Operator" href="_autosummary/cr.sparse.lop.Operator.html" />
-    <link rel="prev" title="cr.sparse.wt.idwt_axis_" href="_autosummary/cr.sparse.wt.idwt_axis_.html" /> 
-</head>
+    <link rel="prev" title="cr.sparse.wt.idwt_axis_" href="_autosummary/cr.sparse.wt.idwt_axis_.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> CR.Sparse
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fwsp/index.html">Fourier and Wavelet Representations</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">CR.Sparse API Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="dsp.html">Digital Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wavelets.html">Wavelets</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Linear Operators</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#data-types">Data types</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.Operator.html">cr.sparse.lop.Operator</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#basic-operators">Basic operators</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.identity.html">cr.sparse.lop.identity</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.matrix.html">cr.sparse.lop.matrix</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.diagonal.html">cr.sparse.lop.diagonal</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.zero.html">cr.sparse.lop.zero</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.flipud.html">cr.sparse.lop.flipud</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.sum.html">cr.sparse.lop.sum</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.pad_zeros.html">cr.sparse.lop.pad_zeros</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.symmetrize.html">cr.sparse.lop.symmetrize</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.restriction.html">cr.sparse.lop.restriction</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#signal-processing-operators">Signal processing operators</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.running_average.html">cr.sparse.lop.running_average</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.fir_filter.html">cr.sparse.lop.fir_filter</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.convolve.html">cr.sparse.lop.convolve</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.convolve2D.html">cr.sparse.lop.convolve2D</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.convolveND.html">cr.sparse.lop.convolveND</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#orthonormal-bases-and-multi-base-dictionaries">Orthonormal bases and multi-base dictionaries</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.fourier_basis.html">cr.sparse.lop.fourier_basis</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.dirac_fourier_basis.html">cr.sparse.lop.dirac_fourier_basis</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.cosine_basis.html">cr.sparse.lop.cosine_basis</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.walsh_hadamard_basis.html">cr.sparse.lop.walsh_hadamard_basis</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#random-compressive-sensing-operators">Random compressive sensing operators</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.gaussian_dict.html">cr.sparse.lop.gaussian_dict</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.rademacher_dict.html">cr.sparse.lop.rademacher_dict</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.random_onb_dict.html">cr.sparse.lop.random_onb_dict</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.random_orthonormal_rows_dict.html">cr.sparse.lop.random_orthonormal_rows_dict</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#operators-for-special-matrices">Operators for special matrices</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.circulant.html">cr.sparse.lop.circulant</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#derivatives-finite-differences">Derivatives (finite differences)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.first_derivative.html">cr.sparse.lop.first_derivative</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.second_derivative.html">cr.sparse.lop.second_derivative</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#convenience-operators">Convenience operators</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.real.html">cr.sparse.lop.real</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#operator-algebra">Operator algebra</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.neg.html">cr.sparse.lop.neg</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.scale.html">cr.sparse.lop.scale</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.add.html">cr.sparse.lop.add</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.subtract.html">cr.sparse.lop.subtract</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.compose.html">cr.sparse.lop.compose</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.transpose.html">cr.sparse.lop.transpose</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.hermitian.html">cr.sparse.lop.hermitian</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.hcat.html">cr.sparse.lop.hcat</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.power.html">cr.sparse.lop.power</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#operator-parts">Operator parts</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.column.html">cr.sparse.lop.column</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.columns.html">cr.sparse.lop.columns</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#properties-of-a-linear-operator">Properties of a linear operator</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.upper_frame_bound.html">cr.sparse.lop.upper_frame_bound</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#utilities">Utilities</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.jit.html">cr.sparse.lop.jit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.to_matrix.html">cr.sparse.lop.to_matrix</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.to_adjoint_matrix.html">cr.sparse.lop.to_adjoint_matrix</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_autosummary/cr.sparse.lop.to_complex_matrix.html">cr.sparse.lop.to_complex_matrix</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Linear Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sls.html">Sparse Linear Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
@@ -155,65 +82,56 @@
 <li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../la/index.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sls/index.html">Sparse Linear Systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fwsp/index.html">Fourier and Wavelet Representations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../acronyms.html">Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
 </ul>
 
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">CR.Sparse API Documentation</a><ul>
+      <li>Previous: <a href="_autosummary/cr.sparse.wt.idwt_axis_.html" title="previous chapter">cr.sparse.wt.idwt_axis_</a></li>
+      <li>Next: <a href="_autosummary/cr.sparse.lop.Operator.html" title="next chapter">cr.sparse.lop.Operator</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
-    </nav>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">CR.Sparse</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">CR.Sparse API Documentation</a> &raquo;</li>
-      <li>Linear Operators</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/source/lop.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="linear-operators">
-<h1>Linear Operators<a class="headerlink" href="#linear-operators" title="Permalink to this headline"></a></h1>
+          <div class="body" role="main">
+            
+  <section id="linear-operators">
+<h1>Linear Operators<a class="headerlink" href="#linear-operators" title="Permalink to this headline">¶</a></h1>
 <p>We provide a collection of linear operators with efficient JAX based implementations
 that are
 relevant in standard signal/image processing problems.
@@ -224,13 +142,13 @@ is different.</p>
 <p>A linear operator <span class="math notranslate nohighlight">\(T : X \to Y\)</span> connects a model space <span class="math notranslate nohighlight">\(X\)</span>
 to a data space <span class="math notranslate nohighlight">\(Y\)</span>.</p>
 <p>A linear operator satisfies following laws:</p>
-<div class="math notranslate nohighlight">
-\[T (x + y) = T (x) + T (y)\]</div>
-<div class="math notranslate nohighlight">
-\[T (\alpha x) = \alpha T(x)\]</div>
+<div class="math notranslate nohighlight" id="equation-source-lop-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-source-lop-0" title="Permalink to this equation">¶</a></span>\[T (x + y) = T (x) + T (y)\]</div>
+<div class="math notranslate nohighlight" id="equation-source-lop-1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-source-lop-1" title="Permalink to this equation">¶</a></span>\[T (\alpha x) = \alpha T(x)\]</div>
 <p>Thus, for a general linear combination:</p>
-<div class="math notranslate nohighlight">
-\[T (\alpha x + \beta y) = \alpha T (x) + \beta T (y)\]</div>
+<div class="math notranslate nohighlight" id="equation-source-lop-2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-source-lop-2" title="Permalink to this equation">¶</a></span>\[T (\alpha x + \beta y) = \alpha T (x) + \beta T (y)\]</div>
 <p>We are concerned with linear operators <span class="math notranslate nohighlight">\(T : \mathbb{F}^n \to \mathbb{F}^m\)</span>
 where <span class="math notranslate nohighlight">\(\mathbb{F}\)</span> is either the field of real numbers or
 complex numbers.
@@ -238,17 +156,17 @@ complex numbers.
 <span class="math notranslate nohighlight">\(Y = \mathbb{F}^m\)</span> is the data space.</p>
 <p>Such a linear operator can be represented by a two dimensional matrix <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <p>The forward operation is given by:</p>
-<div class="math notranslate nohighlight">
-\[y = A x.\]</div>
+<div class="math notranslate nohighlight" id="equation-source-lop-3">
+<span class="eqno">(4)<a class="headerlink" href="#equation-source-lop-3" title="Permalink to this equation">¶</a></span>\[y = A x.\]</div>
 <p>The corresponding adjoint operation is given by:</p>
-<div class="math notranslate nohighlight">
-\[\hat{x} = A^H y\]</div>
+<div class="math notranslate nohighlight" id="equation-source-lop-4">
+<span class="eqno">(5)<a class="headerlink" href="#equation-source-lop-4" title="Permalink to this equation">¶</a></span>\[\hat{x} = A^H y\]</div>
 <p>We represent a linear operator by a pair of functions <code class="docutils literal notranslate"><span class="pre">times</span></code> and <code class="docutils literal notranslate"><span class="pre">trans</span></code>.
 The <code class="docutils literal notranslate"><span class="pre">times</span></code> function implements the forward operation while the <code class="docutils literal notranslate"><span class="pre">trans</span></code>
 function implements the adjoint operation.</p>
 <p>An inverse problem consists of computing <span class="math notranslate nohighlight">\(x\)</span> given <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <section id="data-types">
-<h2>Data types<a class="headerlink" href="#data-types" title="Permalink to this headline"></a></h2>
+<h2>Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -262,7 +180,7 @@ function implements the adjoint operation.</p>
 </table>
 </section>
 <section id="basic-operators">
-<h2>Basic operators<a class="headerlink" href="#basic-operators" title="Permalink to this headline"></a></h2>
+<h2>Basic operators<a class="headerlink" href="#basic-operators" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -300,7 +218,7 @@ function implements the adjoint operation.</p>
 </table>
 </section>
 <section id="signal-processing-operators">
-<h2>Signal processing operators<a class="headerlink" href="#signal-processing-operators" title="Permalink to this headline"></a></h2>
+<h2>Signal processing operators<a class="headerlink" href="#signal-processing-operators" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -326,7 +244,7 @@ function implements the adjoint operation.</p>
 </table>
 </section>
 <section id="orthonormal-bases-and-multi-base-dictionaries">
-<h2>Orthonormal bases and multi-base dictionaries<a class="headerlink" href="#orthonormal-bases-and-multi-base-dictionaries" title="Permalink to this headline"></a></h2>
+<h2>Orthonormal bases and multi-base dictionaries<a class="headerlink" href="#orthonormal-bases-and-multi-base-dictionaries" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -349,7 +267,7 @@ function implements the adjoint operation.</p>
 </table>
 </section>
 <section id="random-compressive-sensing-operators">
-<h2>Random compressive sensing operators<a class="headerlink" href="#random-compressive-sensing-operators" title="Permalink to this headline"></a></h2>
+<h2>Random compressive sensing operators<a class="headerlink" href="#random-compressive-sensing-operators" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -372,7 +290,7 @@ function implements the adjoint operation.</p>
 </table>
 </section>
 <section id="operators-for-special-matrices">
-<h2>Operators for special matrices<a class="headerlink" href="#operators-for-special-matrices" title="Permalink to this headline"></a></h2>
+<h2>Operators for special matrices<a class="headerlink" href="#operators-for-special-matrices" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -386,7 +304,7 @@ function implements the adjoint operation.</p>
 </table>
 </section>
 <section id="derivatives-finite-differences">
-<h2>Derivatives (finite differences)<a class="headerlink" href="#derivatives-finite-differences" title="Permalink to this headline"></a></h2>
+<h2>Derivatives (finite differences)<a class="headerlink" href="#derivatives-finite-differences" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -403,7 +321,7 @@ function implements the adjoint operation.</p>
 </table>
 </section>
 <section id="convenience-operators">
-<h2>Convenience operators<a class="headerlink" href="#convenience-operators" title="Permalink to this headline"></a></h2>
+<h2>Convenience operators<a class="headerlink" href="#convenience-operators" title="Permalink to this headline">¶</a></h2>
 <p>These operators are technically not linear on <span class="math notranslate nohighlight">\(\mathbb{F}^n \to \mathbb{F}^m\)</span></p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -418,7 +336,7 @@ function implements the adjoint operation.</p>
 </table>
 </section>
 <section id="operator-algebra">
-<h2>Operator algebra<a class="headerlink" href="#operator-algebra" title="Permalink to this headline"></a></h2>
+<h2>Operator algebra<a class="headerlink" href="#operator-algebra" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -456,7 +374,7 @@ function implements the adjoint operation.</p>
 </table>
 </section>
 <section id="operator-parts">
-<h2>Operator parts<a class="headerlink" href="#operator-parts" title="Permalink to this headline"></a></h2>
+<h2>Operator parts<a class="headerlink" href="#operator-parts" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -473,7 +391,7 @@ function implements the adjoint operation.</p>
 </table>
 </section>
 <section id="properties-of-a-linear-operator">
-<h2>Properties of a linear operator<a class="headerlink" href="#properties-of-a-linear-operator" title="Permalink to this headline"></a></h2>
+<h2>Properties of a linear operator<a class="headerlink" href="#properties-of-a-linear-operator" title="Permalink to this headline">¶</a></h2>
 <p>These are still experimental and not efficient.</p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -488,7 +406,7 @@ function implements the adjoint operation.</p>
 </table>
 </section>
 <section id="utilities">
-<h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline"></a></h2>
+<h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -513,34 +431,26 @@ function implements the adjoint operation.</p>
 </section>
 
 
-           </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="_autosummary/cr.sparse.wt.idwt_axis_.html" class="btn btn-neutral float-left" title="cr.sparse.wt.idwt_axis_" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="_autosummary/cr.sparse.lop.Operator.html" class="btn btn-neutral float-right" title="cr.sparse.lop.Operator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2021, CR.Sparse Development Team.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
+          
         </div>
       </div>
-    </section>
+    <div class="clearer"></div>
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+    <div class="footer">
+      &copy;2021, CR-Sparse Development Team.
+      
+      |
+      <a href="../_sources/source/lop.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
 
-</body>
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
 </html>

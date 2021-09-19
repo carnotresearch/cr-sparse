@@ -1,108 +1,123 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dirac Cosine Dictionaries &mdash; CR.Sparse  documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script src="../_static/js/custom.js"></script>
-    <script src="../_static/js/theme.js"></script>
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Dirac Cosine Dictionaries &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Alternating direction algorithms for l1 problems in compressive sensing" href="admm_l1.html" />
-    <link rel="prev" title="Tutorials" href="index.html" /> 
-</head>
+    <link rel="prev" title="Tutorials" href="index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> CR.Sparse
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Dirac Cosine Dictionaries</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Cosine-basis-construction">Cosine basis construction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Dirac-Cosine-dictionary-construction">Dirac-Cosine dictionary construction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#A-mixture-signal-of-impulses-and-sinusoids">A mixture signal of impulses and sinusoids</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Mixture-signal-representation-in-Cosine-basis">Mixture signal representation in Cosine basis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Building-a-sparse-representation-in-the-Dirac-Cosine-basis">Building a sparse representation in the Dirac Cosine basis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Sparse-representation-error">Sparse representation error</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Dirac Cosine Dictionaries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="admm_l1.html">Alternating direction algorithms for l1 problems in compressive sensing</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../fwsp/index.html">Fourier and Wavelet Representations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../la/index.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sls/index.html">Sparse Linear Systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fwsp/index.html">Fourier and Wavelet Representations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../acronyms.html">Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
 </ul>
 
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Tutorials</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Tutorials</a></li>
+      <li>Next: <a href="admm_l1.html" title="next chapter">Alternating direction algorithms for l1 problems in compressive sensing</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
-    </nav>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">CR.Sparse</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">Tutorials</a> &raquo;</li>
-      <li>Dirac Cosine Dictionaries</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/tutorials/dirac_cosine_dictionaries.ipynb.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+          <div class="body" role="main">
+            
   
 <style>
 /* CSS for nbsphinx extension */
@@ -350,31 +365,9 @@ div.rendered_html tbody tr:nth-child(odd) {
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
-
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
 </style>
 <section id="Dirac-Cosine-Dictionaries">
-<h1>Dirac Cosine Dictionaries<a class="headerlink" href="#Dirac-Cosine-Dictionaries" title="Permalink to this headline"></a></h1>
+<h1>Dirac Cosine Dictionaries<a class="headerlink" href="#Dirac-Cosine-Dictionaries" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://colab.research.google.com/github/carnotresearch/cr-sparse/blob/master/docs/tutorials/dirac_cosine_dictionaries.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <p>In this tutorial we will:</p>
 <ul class="simple">
@@ -483,7 +476,7 @@ WARNING:absl:No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 
 </div>
 </div>
 <section id="Cosine-basis-construction">
-<h2>Cosine basis construction<a class="headerlink" href="#Cosine-basis-construction" title="Permalink to this headline"></a></h2>
+<h2>Cosine basis construction<a class="headerlink" href="#Cosine-basis-construction" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -526,7 +519,7 @@ WARNING:absl:No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 
 </div>
 </section>
 <section id="Dirac-Cosine-dictionary-construction">
-<h2>Dirac-Cosine dictionary construction<a class="headerlink" href="#Dirac-Cosine-dictionary-construction" title="Permalink to this headline"></a></h2>
+<h2>Dirac-Cosine dictionary construction<a class="headerlink" href="#Dirac-Cosine-dictionary-construction" title="Permalink to this headline">¶</a></h2>
 <p>A Dirac-Cosine dictionary is a concatenation of the two orthonormal bases (the Dirac basis and the Cosine basis). A simple way to do the same using Jax is:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -609,7 +602,7 @@ WARNING:absl:No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 
 </div>
 </section>
 <section id="A-mixture-signal-of-impulses-and-sinusoids">
-<h2>A mixture signal of impulses and sinusoids<a class="headerlink" href="#A-mixture-signal-of-impulses-and-sinusoids" title="Permalink to this headline"></a></h2>
+<h2>A mixture signal of impulses and sinusoids<a class="headerlink" href="#A-mixture-signal-of-impulses-and-sinusoids" title="Permalink to this headline">¶</a></h2>
 <p>We can combine some of the atoms from the Dirac basis and some of the atoms from the Cosine basis, alternatively, some atoms from Dirac-Cosine dictionary to form a signal which is a mixture of impulses and sinusoids. The atoms from Dirac basis contribute the impulses and the atoms from the Dirac basis contribute the sinusoids.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
@@ -682,7 +675,7 @@ DeviceArray([ 1. , -0.4,  0.6,  1.2, -0.8], dtype=float32)
 <p>We remind that we can write <span class="math notranslate nohighlight">\(y = \Phi x\)</span> as <span class="math notranslate nohighlight">\(y = \Phi_I x_I\)</span> too as atoms with zero contribution in <span class="math notranslate nohighlight">\(y\)</span> can be removed from the computation.</p>
 </section>
 <section id="Mixture-signal-representation-in-Cosine-basis">
-<h2>Mixture signal representation in Cosine basis<a class="headerlink" href="#Mixture-signal-representation-in-Cosine-basis" title="Permalink to this headline"></a></h2>
+<h2>Mixture signal representation in Cosine basis<a class="headerlink" href="#Mixture-signal-representation-in-Cosine-basis" title="Permalink to this headline">¶</a></h2>
 <p>The representation of a signal <span class="math notranslate nohighlight">\(y\)</span> in an orthogonal basis <span class="math notranslate nohighlight">\(\Psi\)</span> is constructed by computing <span class="math notranslate nohighlight">\(\Psi^T y\)</span>. Let’s see how does our <span class="math notranslate nohighlight">\(y\)</span> fare in the Cosine basis:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
@@ -713,7 +706,7 @@ DeviceArray([ 1. , -0.4,  0.6,  1.2, -0.8], dtype=float32)
 <p>We can see that there are two impulses in the Cosine basis representation of <span class="math notranslate nohighlight">\(y\)</span> which correspond to the sinusoids present in <span class="math notranslate nohighlight">\(y\)</span>. However, it also consists of a mix of sinusoids which are the representation of the impulses in <span class="math notranslate nohighlight">\(y\)</span> in the Cosine basis. Thus, the representation of <span class="math notranslate nohighlight">\(y\)</span> in the Cosine basis <span class="math notranslate nohighlight">\(\Psi\)</span> is not sparse. In fact, <span class="math notranslate nohighlight">\(y\)</span> doesn’t have a sparse representation in any orthonormal basis for <span class="math notranslate nohighlight">\(\mathbb{R}^M\)</span>.</p>
 </section>
 <section id="Building-a-sparse-representation-in-the-Dirac-Cosine-basis">
-<h2>Building a sparse representation in the Dirac Cosine basis<a class="headerlink" href="#Building-a-sparse-representation-in-the-Dirac-Cosine-basis" title="Permalink to this headline"></a></h2>
+<h2>Building a sparse representation in the Dirac Cosine basis<a class="headerlink" href="#Building-a-sparse-representation-in-the-Dirac-Cosine-basis" title="Permalink to this headline">¶</a></h2>
 <p>Constructing the representation of <span class="math notranslate nohighlight">\(y\)</span> in a dictionary is a non-trivial problem as it is an overcomplete set of atoms. There are infinite possible representations of <span class="math notranslate nohighlight">\(y\)</span> in <span class="math notranslate nohighlight">\(\Phi\)</span>. However, under suitable conditions, the sparse representation of <span class="math notranslate nohighlight">\(y\)</span> in <span class="math notranslate nohighlight">\(\Phi\)</span> is unique. Also, under suitable conditions, there exist algorithms which can recover the sparse representation of <span class="math notranslate nohighlight">\(y\)</span> in <span class="math notranslate nohighlight">\(\Phi\)</span>.</p>
 <p>One class of algorithms is called greedy pursuit algorithms. A representative in this class is Orthogonal Matching Pursuit (OMP). In order to run this algorithm, it is imperative that we are aware of the number of non-zero entries in the sparse representation (a.k.a. the sparsity of the representation of <span class="math notranslate nohighlight">\(y\)</span> in <span class="math notranslate nohighlight">\(\Phi\)</span>). Fortunatley, in this example, we know this trivially:</p>
 <div class="nbinput docutils container">
@@ -826,7 +819,7 @@ DeviceArray([259,  20, 313, 100,  30], dtype=int32)
 </div>
 </section>
 <section id="Sparse-representation-error">
-<h2>Sparse representation error<a class="headerlink" href="#Sparse-representation-error" title="Permalink to this headline"></a></h2>
+<h2>Sparse representation error<a class="headerlink" href="#Sparse-representation-error" title="Permalink to this headline">¶</a></h2>
 <p>In general, OMP may be fed a signal <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> where <span class="math notranslate nohighlight">\(e\)</span> is the sparse representation error. When OMP estimates <span class="math notranslate nohighlight">\(x\)</span> is actually computes an approximation <span class="math notranslate nohighlight">\(\hat{x}\)</span>. It also estimates a residual <span class="math notranslate nohighlight">\(r = y - \Phi \hat{x}\)</span>.</p>
 <p>The energy of the residual is given by:</p>
 <div class="nbinput docutils container">
@@ -879,34 +872,26 @@ DeviceArray(3.802608e-14, dtype=float32)
 </section>
 
 
-           </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="admm_l1.html" class="btn btn-neutral float-right" title="Alternating direction algorithms for l1 problems in compressive sensing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2021, CR.Sparse Development Team.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
+          
         </div>
       </div>
-    </section>
+    <div class="clearer"></div>
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+    <div class="footer">
+      &copy;2021, CR-Sparse Development Team.
+      
+      |
+      <a href="../_sources/tutorials/dirac_cosine_dictionaries.ipynb.txt"
+          rel="nofollow">Page source</a>
+    </div>
 
-</body>
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
 </html>

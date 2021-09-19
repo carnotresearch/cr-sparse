@@ -1,114 +1,123 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alternating direction algorithms for l1 problems in compressive sensing &mdash; CR.Sparse  documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script src="../_static/js/custom.js"></script>
-    <script src="../_static/js/theme.js"></script>
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Alternating direction algorithms for l1 problems in compressive sensing &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Fourier and Wavelet Representations" href="../fwsp/index.html" />
-    <link rel="prev" title="Dirac Cosine Dictionaries" href="dirac_cosine_dictionaries.html" /> 
-</head>
+    <link rel="next" title="CR.Sparse API Documentation" href="../source/index.html" />
+    <link rel="prev" title="Dirac Cosine Dictionaries" href="dirac_cosine_dictionaries.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> CR.Sparse
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="dirac_cosine_dictionaries.html">Dirac Cosine Dictionaries</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Alternating direction algorithms for l1 problems in compressive sensing</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Standard-sparse-recovery-problems-for-compressive-sensing">Standard sparse recovery problems for compressive sensing</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Basis-pursuit">Basis pursuit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Basis-pursuit-denoising">Basis pursuit denoising</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Basis-pursuit-with-inequality-constraints">Basis pursuit with inequality constraints</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Alternating direction algorithms for l1 problems in compressive sensing</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#Non-negative-counterparts">Non-negative counterparts</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Non-negative-basis-pursuit">Non-negative basis pursuit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Non-negative-basis-pursuit-denoising">Non-negative basis pursuit denoising</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Non-negative-basis-pursuit-with-inequality-constraints">Non-negative basis pursuit with inequality constraints</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../fwsp/index.html">Fourier and Wavelet Representations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../la/index.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sls/index.html">Sparse Linear Systems</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fwsp/index.html">Fourier and Wavelet Representations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../acronyms.html">Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
 </ul>
 
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Tutorials</a><ul>
+      <li>Previous: <a href="dirac_cosine_dictionaries.html" title="previous chapter">Dirac Cosine Dictionaries</a></li>
+      <li>Next: <a href="../source/index.html" title="next chapter">CR.Sparse API Documentation</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
-    </nav>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">CR.Sparse</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">Tutorials</a> &raquo;</li>
-      <li>Alternating direction algorithms for l1 problems in compressive sensing</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/tutorials/admm_l1.ipynb.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+          <div class="body" role="main">
+            
   
 <style>
 /* CSS for nbsphinx extension */
@@ -356,61 +365,39 @@ div.rendered_html tbody tr:nth-child(odd) {
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
-
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
 </style>
 <section id="Alternating-direction-algorithms-for-l1-problems-in-compressive-sensing">
-<h1>Alternating direction algorithms for l1 problems in compressive sensing<a class="headerlink" href="#Alternating-direction-algorithms-for-l1-problems-in-compressive-sensing" title="Permalink to this headline"></a></h1>
+<h1>Alternating direction algorithms for l1 problems in compressive sensing<a class="headerlink" href="#Alternating-direction-algorithms-for-l1-problems-in-compressive-sensing" title="Permalink to this headline">¶</a></h1>
 <p>We provide a port of <a class="reference external" href="http://yall1.blogs.rice.edu/">YALL1 basic</a> package. This is built on top of JAX and can be used to solve the following <span class="math notranslate nohighlight">\(\ell_1\)</span> minimization problems.</p>
 <p>The basis pursuit problem</p>
-<div class="math notranslate nohighlight">
-\[\tag{BP}
+<div class="math notranslate nohighlight" id="equation-tutorials-admm-l1-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-tutorials-admm-l1-0" title="Permalink to this equation">¶</a></span>\[\tag{BP}
 {\min}_{x} \| W x\|_{w,1} \; \text{s.t.} \, A x = b\]</div>
 <p>The L1/L2 minimization or basis pursuit denoising problem</p>
-<div class="math notranslate nohighlight">
-\[\tag{L1/L2}
+<div class="math notranslate nohighlight" id="equation-tutorials-admm-l1-1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-tutorials-admm-l1-1" title="Permalink to this equation">¶</a></span>\[\tag{L1/L2}
 {\min}_{x} \| W x\|_{w,1} + \frac{1}{2\rho}\| A x - b \|_2^2\]</div>
 <p>The L1 minimization problem with L2 constraints</p>
-<div class="math notranslate nohighlight">
-\[\tag{L1/L2con}
+<div class="math notranslate nohighlight" id="equation-tutorials-admm-l1-2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-tutorials-admm-l1-2" title="Permalink to this equation">¶</a></span>\[\tag{L1/L2con}
 {\min}_{x} \| W x\|_{w,1} \; \text{s.t.} \, \| A x - b \|_2 \leq \delta\]</div>
 <p>We also support corresponding non-negative counter-parts.</p>
 <p>The nonnegative basis pursuit problem</p>
-<div class="math notranslate nohighlight">
-\[\tag{BP+}
+<div class="math notranslate nohighlight" id="equation-tutorials-admm-l1-3">
+<span class="eqno">(4)<a class="headerlink" href="#equation-tutorials-admm-l1-3" title="Permalink to this equation">¶</a></span>\[\tag{BP+}
 {\min}_{x} \| W x\|_{w,1} \; \text{s.t.} \, A x = b \, \, \text{and} \, x \succeq 0\]</div>
 <p>The nonnegative L1/L2 minimization or basis pursuit denoising problem</p>
-<div class="math notranslate nohighlight">
-\[\tag{L1/L2+}
+<div class="math notranslate nohighlight" id="equation-tutorials-admm-l1-4">
+<span class="eqno">(5)<a class="headerlink" href="#equation-tutorials-admm-l1-4" title="Permalink to this equation">¶</a></span>\[\tag{L1/L2+}
 {\min}_{x} \| W x\|_{w,1} + \frac{1}{2\rho}\| A x - b \|_2^2  \; \text{s.t.} \, x \succeq 0\]</div>
 <p>The nonnegative L1 minimization problem with L2 constraints</p>
-<div class="math notranslate nohighlight">
-\[\tag{L1/L2con+}
+<div class="math notranslate nohighlight" id="equation-tutorials-admm-l1-5">
+<span class="eqno">(6)<a class="headerlink" href="#equation-tutorials-admm-l1-5" title="Permalink to this equation">¶</a></span>\[\tag{L1/L2con+}
 {\min}_{x} \| W x\|_{w,1} \; \text{s.t.} \, \| A x - b \|_2 \leq \delta \, \, \text{and} \, x \succeq 0\]</div>
 <p>In the above, <span class="math notranslate nohighlight">\(W\)</span> is a sparsifying basis s.t. <span class="math notranslate nohighlight">\(Wx = \alpha\)</span> is a sparse representation of <span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\(W\)</span> given by <span class="math notranslate nohighlight">\(\alpha = W^T x\)</span>. For simple examples, we can assume <span class="math notranslate nohighlight">\(W=I\)</span> is the identity basis.</p>
 <p>The <span class="math notranslate nohighlight">\(\| \cdot \|_{w,1}\)</span> is the weighted L1 (semi-) norm defined as</p>
-<div class="math notranslate nohighlight">
-\[\|x \|_{w,1} = \sum_{i=1}^n w_i |x_i|\]</div>
+<div class="math notranslate nohighlight" id="equation-tutorials-admm-l1-6">
+<span class="eqno">(7)<a class="headerlink" href="#equation-tutorials-admm-l1-6" title="Permalink to this equation">¶</a></span>\[\|x \|_{w,1} = \sum_{i=1}^n w_i |x_i|\]</div>
 <p>for a given non-negative weight vector <span class="math notranslate nohighlight">\(w\)</span>. In the simplest case, we assume <span class="math notranslate nohighlight">\(w=1\)</span> reducing it to the famous <span class="math notranslate nohighlight">\(\ell_1\)</span> norm.</p>
 <p>Import relevant libraries</p>
 <div class="nbinput nblast docutils container">
@@ -568,12 +555,12 @@ DeviceArray(True, dtype=bool)
 </div>
 </div>
 <section id="Standard-sparse-recovery-problems-for-compressive-sensing">
-<h2>Standard sparse recovery problems for compressive sensing<a class="headerlink" href="#Standard-sparse-recovery-problems-for-compressive-sensing" title="Permalink to this headline"></a></h2>
+<h2>Standard sparse recovery problems for compressive sensing<a class="headerlink" href="#Standard-sparse-recovery-problems-for-compressive-sensing" title="Permalink to this headline">¶</a></h2>
 <section id="Basis-pursuit">
-<h3>Basis pursuit<a class="headerlink" href="#Basis-pursuit" title="Permalink to this headline"></a></h3>
+<h3>Basis pursuit<a class="headerlink" href="#Basis-pursuit" title="Permalink to this headline">¶</a></h3>
 <p>The simple form of basis pursuit problem is:</p>
-<div class="math notranslate nohighlight">
-\[{\min}_{x} \| x\|_{1} \; \text{s.t.} \, A x = b\]</div>
+<div class="math notranslate nohighlight" id="equation-tutorials-admm-l1-7">
+<span class="eqno">(8)<a class="headerlink" href="#equation-tutorials-admm-l1-7" title="Permalink to this equation">¶</a></span>\[{\min}_{x} \| x\|_{1} \; \text{s.t.} \, A x = b\]</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -687,10 +674,10 @@ DeviceArray(0.01208655, dtype=float64)
 </div>
 </section>
 <section id="Basis-pursuit-denoising">
-<h3>Basis pursuit denoising<a class="headerlink" href="#Basis-pursuit-denoising" title="Permalink to this headline"></a></h3>
+<h3>Basis pursuit denoising<a class="headerlink" href="#Basis-pursuit-denoising" title="Permalink to this headline">¶</a></h3>
 <p>The simple form of L1-L2 unconstrained minimization or basis pursuit denoising is:</p>
-<div class="math notranslate nohighlight">
-\[{\min}_{x} \| x\|_{1} + \frac{1}{2\rho}\| A x - b \|_2^2\]</div>
+<div class="math notranslate nohighlight" id="equation-tutorials-admm-l1-8">
+<span class="eqno">(9)<a class="headerlink" href="#equation-tutorials-admm-l1-8" title="Permalink to this equation">¶</a></span>\[{\min}_{x} \| x\|_{1} + \frac{1}{2\rho}\| A x - b \|_2^2\]</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
@@ -814,10 +801,10 @@ DeviceArray(0.05690205, dtype=float64)
 </div>
 </section>
 <section id="Basis-pursuit-with-inequality-constraints">
-<h3>Basis pursuit with inequality constraints<a class="headerlink" href="#Basis-pursuit-with-inequality-constraints" title="Permalink to this headline"></a></h3>
+<h3>Basis pursuit with inequality constraints<a class="headerlink" href="#Basis-pursuit-with-inequality-constraints" title="Permalink to this headline">¶</a></h3>
 <p>The simple form of L1 minimization with L2 constraints or basis pursuit with inequality constraints is:</p>
-<div class="math notranslate nohighlight">
-\[{\min}_{x} \| x\|_{1} \; \text{s.t.} \, \| A x - b \|_2 \leq \delta\]</div>
+<div class="math notranslate nohighlight" id="equation-tutorials-admm-l1-9">
+<span class="eqno">(10)<a class="headerlink" href="#equation-tutorials-admm-l1-9" title="Permalink to this equation">¶</a></span>\[{\min}_{x} \| x\|_{1} \; \text{s.t.} \, \| A x - b \|_2 \leq \delta\]</div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
@@ -924,7 +911,7 @@ DeviceArray(0.05584753, dtype=float64)
 </section>
 </section>
 <section id="Non-negative-counterparts">
-<h2>Non-negative counterparts<a class="headerlink" href="#Non-negative-counterparts" title="Permalink to this headline"></a></h2>
+<h2>Non-negative counterparts<a class="headerlink" href="#Non-negative-counterparts" title="Permalink to this headline">¶</a></h2>
 <p>In this case, the signal <span class="math notranslate nohighlight">\(x\)</span> with the sparse representation <span class="math notranslate nohighlight">\(\alpha = W x\)</span> has only non-negative entries. i.e. if an entry in <span class="math notranslate nohighlight">\(x\)</span> is non-zero, it is positive. This is typical for images.</p>
 <p>Let us construct a sparse representation with non-negative entries.</p>
 <div class="nbinput nblast docutils container">
@@ -954,10 +941,10 @@ DeviceArray(0.05584753, dtype=float64)
 </div>
 </div>
 <section id="Non-negative-basis-pursuit">
-<h3>Non-negative basis pursuit<a class="headerlink" href="#Non-negative-basis-pursuit" title="Permalink to this headline"></a></h3>
+<h3>Non-negative basis pursuit<a class="headerlink" href="#Non-negative-basis-pursuit" title="Permalink to this headline">¶</a></h3>
 <p>The simple form of basis pursuit for non-negative <span class="math notranslate nohighlight">\(x\)</span> is:</p>
-<div class="math notranslate nohighlight">
-\[{\min}_{x} \| x\|_{1} \; \text{s.t.} \, A x = b \, \, \text{and} \, x \succeq 0\]</div>
+<div class="math notranslate nohighlight" id="equation-tutorials-admm-l1-10">
+<span class="eqno">(11)<a class="headerlink" href="#equation-tutorials-admm-l1-10" title="Permalink to this equation">¶</a></span>\[{\min}_{x} \| x\|_{1} \; \text{s.t.} \, A x = b \, \, \text{and} \, x \succeq 0\]</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
@@ -1070,10 +1057,10 @@ DeviceArray(0.01095682, dtype=float64)
 </div>
 </section>
 <section id="Non-negative-basis-pursuit-denoising">
-<h3>Non-negative basis pursuit denoising<a class="headerlink" href="#Non-negative-basis-pursuit-denoising" title="Permalink to this headline"></a></h3>
+<h3>Non-negative basis pursuit denoising<a class="headerlink" href="#Non-negative-basis-pursuit-denoising" title="Permalink to this headline">¶</a></h3>
 <p>The simple form of L1-L2 unconstrained minimization with non-negative <span class="math notranslate nohighlight">\(x\)</span> is:</p>
-<div class="math notranslate nohighlight">
-\[{\min}_{x} \| x\|_{1} + \frac{1}{2\rho}\| A x - b \|_2^2  \; \text{s.t.} \, x \succeq 0\]</div>
+<div class="math notranslate nohighlight" id="equation-tutorials-admm-l1-11">
+<span class="eqno">(12)<a class="headerlink" href="#equation-tutorials-admm-l1-11" title="Permalink to this equation">¶</a></span>\[{\min}_{x} \| x\|_{1} + \frac{1}{2\rho}\| A x - b \|_2^2  \; \text{s.t.} \, x \succeq 0\]</div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
 </pre></div>
@@ -1187,9 +1174,9 @@ DeviceArray(0.04551954, dtype=float64)
 </div>
 </section>
 <section id="Non-negative-basis-pursuit-with-inequality-constraints">
-<h3>Non-negative basis pursuit with inequality constraints<a class="headerlink" href="#Non-negative-basis-pursuit-with-inequality-constraints" title="Permalink to this headline"></a></h3>
-<div class="math notranslate nohighlight">
-\[{\min}_{x} \| x\|_{1} \; \text{s.t.} \, \| A x - b \|_2 \leq \delta \, \, \text{and} \, x \succeq 0\]</div>
+<h3>Non-negative basis pursuit with inequality constraints<a class="headerlink" href="#Non-negative-basis-pursuit-with-inequality-constraints" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight" id="equation-tutorials-admm-l1-12">
+<span class="eqno">(13)<a class="headerlink" href="#equation-tutorials-admm-l1-12" title="Permalink to this equation">¶</a></span>\[{\min}_{x} \| x\|_{1} \; \text{s.t.} \, \| A x - b \|_2 \leq \delta \, \, \text{and} \, x \succeq 0\]</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
 </pre></div>
@@ -1288,34 +1275,26 @@ DeviceArray(0.05724303, dtype=float64)
 </section>
 
 
-           </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="dirac_cosine_dictionaries.html" class="btn btn-neutral float-left" title="Dirac Cosine Dictionaries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../fwsp/index.html" class="btn btn-neutral float-right" title="Fourier and Wavelet Representations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2021, CR.Sparse Development Team.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
+          
         </div>
       </div>
-    </section>
+    <div class="clearer"></div>
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+    <div class="footer">
+      &copy;2021, CR-Sparse Development Team.
+      
+      |
+      <a href="../_sources/tutorials/admm_l1.ipynb.txt"
+          rel="nofollow">Page source</a>
+    </div>
 
-</body>
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
 </html>

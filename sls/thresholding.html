@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Thresholding &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/mathconf.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Examples Gallery" href="../gallery/index.html" />
+    <link rel="prev" title="Underdetermined Linear Systems" href="underdetermined.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../la/index.html">Linear Algebra</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Sparse Linear Systems</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="underdetermined.html">Underdetermined Linear Systems</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Thresholding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Sparse Linear Systems</a><ul>
+      <li>Previous: <a href="underdetermined.html" title="previous chapter">Underdetermined Linear Systems</a></li>
+      <li>Next: <a href="../gallery/index.html" title="next chapter">Examples Gallery</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="thresholding">
+<h1>Thresholding<a class="headerlink" href="#thresholding" title="Permalink to this headline">¶</a></h1>
+<p>For a real or complex scalar <span class="math notranslate nohighlight">\(x\)</span>, the <strong>hard thresholding</strong> operator can be defined as:</p>
+<div class="math notranslate nohighlight" id="equation-sls-thresholding-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-sls-thresholding-0" title="Permalink to this equation">¶</a></span>\[\begin{split}\mathbf{HT}_{\gamma}(x) = \begin{cases}
+ x &amp; \text{for} &amp; |x| \gt \gamma\\
+ 0 &amp; \text{for} &amp; |x| \le \gamma
+\end{cases}\end{split}\]</div>
+<p>For a multi-dimensional array, we apply the same operator on each entry in the array.</p>
+<p>The <strong>soft thresholding</strong> operator for real and complex scalars can be defined as:</p>
+<div class="math notranslate nohighlight" id="equation-sls-thresholding-1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-sls-thresholding-1" title="Permalink to this equation">¶</a></span>\[\begin{split}\mathbf{ST}_{\gamma}(x) = \begin{cases}
+ x\left ( 1 -  \frac{\gamma}{|x|} \right ) &amp; \text{for} &amp; |x| \gt \gamma\\
+ 0 &amp; \text{for} &amp; |x| \le \gamma
+\end{cases}\end{split}\]</div>
+<p>For real numbers, this reduces to:</p>
+<div class="math notranslate nohighlight" id="equation-sls-thresholding-2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-sls-thresholding-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\mathbf{ST}_{\gamma}(x) = \begin{cases}
+ x - \gamma &amp; \text{for} &amp; x \gt \gamma \\
+ x + \gamma &amp; \text{for} &amp; x \lt -\gamma \\
+ 0 &amp; \text{for} &amp; |x| \le \gamma
+\end{cases}\end{split}\]</div>
+<p><span id="id1">[<a class="reference internal" href="../zzzreference.html#id60" title="Yangkang Chen, Keling Chen, Peidong Shi, and Yanyan Wang. Irregular seismic data reconstruction using a percentile-half-thresholding algorithm. Journal of Geophysics and Engineering, 11(6):065001, 2014.">CCSW14</a>]</span> consider the general minimization problem:</p>
+<div class="math notranslate nohighlight" id="equation-sls-thresholding-3">
+<span class="eqno">(4)<a class="headerlink" href="#equation-sls-thresholding-3" title="Permalink to this equation">¶</a></span>\[\widehat{x} = \text{arg} \min_{x} \| b - A x \|_2 + \mathbf{R}(x)\]</div>
+<p>where <span class="math notranslate nohighlight">\(x\)</span> is a vector in the model space, <span class="math notranslate nohighlight">\(b\)</span> is a vector in the data space,
+<span class="math notranslate nohighlight">\(A\)</span> is a linear operator from model space to data space, and
+<span class="math notranslate nohighlight">\(\mathbf{R}(x)\)</span> is the regularization term on the model vector.
+They specifically consider the regularizations</p>
+<div class="math notranslate nohighlight" id="equation-sls-thresholding-4">
+<span class="eqno">(5)<a class="headerlink" href="#equation-sls-thresholding-4" title="Permalink to this equation">¶</a></span>\[\mathbf{R}(x) =  \tau \|x\|_p^p\]</div>
+<p>for <span class="math notranslate nohighlight">\(p\)</span>-norms where <span class="math notranslate nohighlight">\(0 \leq p \leq 1\)</span>.
+This can be solved by the IST (Iterative Shrinkage and Thresholding)
+algorithm where the thresholding operator depends on the selection of <span class="math notranslate nohighlight">\(p\)</span>-norm and the
+regularization parameter <span class="math notranslate nohighlight">\(\tau\)</span>.
+They describe the IST iterations in terms of a more general thresholding operator <span class="math notranslate nohighlight">\(\mathbf{T}_{\gamma(\tau, p)}(x)\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-sls-thresholding-5">
+<span class="eqno">(6)<a class="headerlink" href="#equation-sls-thresholding-5" title="Permalink to this equation">¶</a></span>\[x_{n+1} = \mathbf{T}_{\gamma(\tau, p)}\left [x_n + A^H (b - A x_n) \right ]\]</div>
+<p>They provide the definition of the thresholding operator for:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p=0\)</span> <strong>hard thresholding</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(p=1\)</span> <strong>soft thresholding</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(p=1/2\)</span> <strong>half thresholding</strong></p></li>
+</ul>
+<p class="rubric">Hard thresholding</p>
+<p>Whe <span class="math notranslate nohighlight">\(p=0\)</span>, we have:</p>
+<div class="math notranslate nohighlight" id="equation-sls-thresholding-6">
+<span class="eqno">(7)<a class="headerlink" href="#equation-sls-thresholding-6" title="Permalink to this equation">¶</a></span>\[\mathbf{R}(x) = \| x \|_0\]</div>
+<div class="math notranslate nohighlight" id="equation-sls-thresholding-7">
+<span class="eqno">(8)<a class="headerlink" href="#equation-sls-thresholding-7" title="Permalink to this equation">¶</a></span>\[\gamma(\tau, 0) = \sqrt{2 \tau}\]</div>
+<p>The hard thresholding operator reduces to:</p>
+<div class="math notranslate nohighlight" id="equation-sls-thresholding-8">
+<span class="eqno">(9)<a class="headerlink" href="#equation-sls-thresholding-8" title="Permalink to this equation">¶</a></span>\[\begin{split}\mathbf{T}_{\gamma(\tau, 0)}(x) = \begin{cases}
+ x &amp; \text{for} &amp; |x| \gt \gamma (\tau, 0)\\
+ 0 &amp; \text{for} &amp; |x| \le \gamma  (\tau, 0)
+\end{cases}\end{split}\]</div>
+<p class="rubric">Soft thresholding</p>
+<p>Whe <span class="math notranslate nohighlight">\(p=1\)</span>, we have:</p>
+<div class="math notranslate nohighlight" id="equation-sls-thresholding-9">
+<span class="eqno">(10)<a class="headerlink" href="#equation-sls-thresholding-9" title="Permalink to this equation">¶</a></span>\[\mathbf{R}(x) = \| x \|_1\]</div>
+<div class="math notranslate nohighlight" id="equation-sls-thresholding-10">
+<span class="eqno">(11)<a class="headerlink" href="#equation-sls-thresholding-10" title="Permalink to this equation">¶</a></span>\[\gamma(\tau, 1) = \tau\]</div>
+<p>The soft thresholding operator reduces to:</p>
+<div class="math notranslate nohighlight" id="equation-sls-thresholding-11">
+<span class="eqno">(12)<a class="headerlink" href="#equation-sls-thresholding-11" title="Permalink to this equation">¶</a></span>\[\begin{split}\mathbf{T}_{\gamma(\tau, 1)}(x) = \begin{cases}
+ x\left ( 1 -  \frac{\gamma}{|x|} \right ) &amp; \text{for} &amp; |x| \gt \gamma (\tau, 1)\\
+ 0 &amp; \text{for} &amp; |x| \le \gamma (\tau, 1)
+\end{cases}\end{split}\]</div>
+<p class="rubric">Half thresholding</p>
+<p>Whe <span class="math notranslate nohighlight">\(p=\frac{1}{2}\)</span>, we have:</p>
+<div class="math notranslate nohighlight" id="equation-sls-thresholding-12">
+<span class="eqno">(13)<a class="headerlink" href="#equation-sls-thresholding-12" title="Permalink to this equation">¶</a></span>\[\mathbf{R}(x) = \| x \|_{\frac{1}{2}}^{\frac{1}{2}}\]</div>
+<div class="math notranslate nohighlight" id="equation-sls-thresholding-13">
+<span class="eqno">(14)<a class="headerlink" href="#equation-sls-thresholding-13" title="Permalink to this equation">¶</a></span>\[\gamma(\tau, \frac{1}{2}) = \frac{3}{2} \tau^{\frac{2}{3}}\]</div>
+<p>The half thresholding operator is more complicated:</p>
+<div class="math notranslate nohighlight" id="equation-sls-thresholding-14">
+<span class="eqno">(15)<a class="headerlink" href="#equation-sls-thresholding-14" title="Permalink to this equation">¶</a></span>\[\begin{split}\mathbf{T}_{\gamma(\tau, 1)}(x) = \begin{cases}
+ \frac{2}{3} x\left ( 1 +  \cos \left ( \frac{2}{3} \pi - \frac{2}{3} \arccos \left ( \frac{\tau}{8} \left (\frac{|x|}{3} \right)^{\frac{3}{2}}
+     \right )   \right )  \right )
+ &amp; \text{for} &amp; |x| \gt \gamma (\tau, \frac{1}{2})\\
+ 0 &amp; \text{for} &amp; |x| \le \gamma (\tau, \frac{1}{2})
+\end{cases}\end{split}\]</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2021, CR-Sparse Development Team.
+      
+      |
+      <a href="../_sources/sls/thresholding.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

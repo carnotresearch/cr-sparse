@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Underdetermined Linear Systems &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/mathconf.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Thresholding" href="thresholding.html" />
+    <link rel="prev" title="Sparse Linear Systems" href="index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../la/index.html">Linear Algebra</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Sparse Linear Systems</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Underdetermined Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thresholding.html">Thresholding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Sparse Linear Systems</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Sparse Linear Systems</a></li>
+      <li>Next: <a href="thresholding.html" title="next chapter">Thresholding</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="underdetermined-linear-systems">
+<h1>Underdetermined Linear Systems<a class="headerlink" href="#underdetermined-linear-systems" title="Permalink to this headline">¶</a></h1>
+<p>The discussion in this section is largely based on chapter 1 of
+<span id="id1">[<a class="reference internal" href="../zzzreference.html#id116" title="Michael Elad. Sparse and redundant representations. Springer, 2010.">Ela10</a>]</span>.</p>
+<p>Consider a matrix <span class="math notranslate nohighlight">\(\Phi \in \CC^{M \times N}\)</span> with <span class="math notranslate nohighlight">\(M &lt; N\)</span>.</p>
+<p>Define an under-determined system of linear equations:</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-sls-underdetermined-0" title="Permalink to this equation">¶</a></span>\[\Phi x = y\]</div>
+<p>where <span class="math notranslate nohighlight">\(y \in \CC^M\)</span> is known and <span class="math notranslate nohighlight">\(x \in \CC^N\)</span> is unknown.</p>
+<p>This system has <span class="math notranslate nohighlight">\(N\)</span> unknowns and
+<span class="math notranslate nohighlight">\(M\)</span> linear equations.
+There are more unknowns than equations.</p>
+<p>Let the columns of <span class="math notranslate nohighlight">\(\Phi\)</span> be given by <span class="math notranslate nohighlight">\(\phi_1, \phi_2, \dots, \phi_N\)</span>.</p>
+<p>Column space of <span class="math notranslate nohighlight">\(\Phi\)</span> (vector space spanned by all columns of <span class="math notranslate nohighlight">\(\Phi\)</span>)  is denoted by <span class="math notranslate nohighlight">\(\ColSpace(\Phi)\)</span>
+i.e.</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-sls-underdetermined-1" title="Permalink to this equation">¶</a></span>\[\ColSpace(\Phi) = \sum_{i=1}^{N} c_i \phi_i, \quad c_i \in \CC.\]</div>
+<p>We know that <span class="math notranslate nohighlight">\(\ColSpace(\Phi) \subset \CC^M\)</span>.</p>
+<p>Clearly <span class="math notranslate nohighlight">\(\Phi x \in \ColSpace(\Phi)\)</span> for every <span class="math notranslate nohighlight">\(x \in \CC^N\)</span>.  Thus if <span class="math notranslate nohighlight">\(y \notin \ColSpace(\Phi)\)</span> then we have no solution. But, if <span class="math notranslate nohighlight">\(y \in \ColSpace(\Phi)\)</span> then we have infinite number of solutions.</p>
+<p>Let <span class="math notranslate nohighlight">\(\NullSpace(\Phi)\)</span> represent the null space of <span class="math notranslate nohighlight">\(\Phi\)</span> given by</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-sls-underdetermined-2" title="Permalink to this equation">¶</a></span>\[\NullSpace(\Phi) = \{ x \in \CC^N : \Phi x = 0\}.\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\widehat{x}\)</span> be a solution of <span class="math notranslate nohighlight">\(y = \Phi x\)</span>. And let <span class="math notranslate nohighlight">\(z \in \NullSpace(\Phi)\)</span>. Then</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-3">
+<span class="eqno">(4)<a class="headerlink" href="#equation-sls-underdetermined-3" title="Permalink to this equation">¶</a></span>\[\Phi (\widehat{x} + z) = \Phi \widehat{x} + \Phi z = y + 0  = y.\]</div>
+<p>Thus the set <span class="math notranslate nohighlight">\(\widehat{x} + \NullSpace(\Phi)\)</span> forms the complete set of infinite solutions to the
+problem <span class="math notranslate nohighlight">\(y = \Phi x\)</span> where</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-4">
+<span class="eqno">(5)<a class="headerlink" href="#equation-sls-underdetermined-4" title="Permalink to this equation">¶</a></span>\[\widehat{x} + \NullSpace(\Phi) = \{\widehat{x} + z \quad \Forall z \in \NullSpace(\Phi)\}.\]</div>
+<section id="regularization">
+<h2>Regularization<a class="headerlink" href="#regularization" title="Permalink to this headline">¶</a></h2>
+<p>One way to pick a specific solution from the set of all possible solutions is to introduce <strong>regularization</strong>.</p>
+<p id="index-0">We define a cost function <span class="math notranslate nohighlight">\(J(x) : \CC^N \to \RR\)</span> which defines the <strong>desirability</strong> of a given solution <span class="math notranslate nohighlight">\(x\)</span> out
+of infinitely possible solutions. The higher the cost, lower is the desirability of
+the solution.</p>
+<p id="index-1">Thus the goal of the optimization problem is to find a desired <span class="math notranslate nohighlight">\(x\)</span> with minimum possible cost.</p>
+<p>We can write this optimization problem as</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-5">
+<span class="eqno">(6)<a class="headerlink" href="#equation-sls-underdetermined-5" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+  &amp; \underset{x}{\text{minimize}}
+  &amp; &amp;  J(x) \\
+  &amp; \text{subject to}
+  &amp; &amp;  y = \Phi x.
+\end{aligned}\end{split}\]</div>
+<p>If <span class="math notranslate nohighlight">\(J(x)\)</span> is convex, then its possible to find a global minimum cost solution over the solution set.</p>
+<p>If <span class="math notranslate nohighlight">\(J(x)\)</span> is not convex, then it may not be possible to find a global minimum, we may have to
+settle with a local minimum.</p>
+<p>A variety of such cost function based criteria can be considered.</p>
+</section>
+<section id="l-2-regularization">
+<h2><span class="math notranslate nohighlight">\(l_2\)</span> Regularization<a class="headerlink" href="#l-2-regularization" title="Permalink to this headline">¶</a></h2>
+<p>One of the most common criteria is to choose a solution with the smallest <span class="math notranslate nohighlight">\(l_2\)</span> norm.</p>
+<p>The problem can then be reformulated as an optimization problem</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-6">
+<span class="eqno">(7)<a class="headerlink" href="#equation-sls-underdetermined-6" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+  &amp; \underset{x}{\text{minimize}}
+  &amp; &amp;  \| x \|_2 \\
+  &amp; \text{subject to}
+  &amp; &amp;  y = \Phi x.
+\end{aligned}\end{split}\]</div>
+<p>In fact minimizing <span class="math notranslate nohighlight">\(\| x \|_2\)</span> is same as minimizing its square <span class="math notranslate nohighlight">\(\| x \|_2^2 = x^H x\)</span>.</p>
+<p>So an equivalent formulation is</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-7">
+<span class="eqno">(8)<a class="headerlink" href="#equation-sls-underdetermined-7" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+  &amp; \underset{x}{\text{minimize}}
+  &amp; &amp;  x^H x \\
+  &amp; \text{subject to}
+  &amp; &amp;  y = \Phi x.
+\end{aligned}\end{split}\]</div>
+<p>A formal solution to <span class="math notranslate nohighlight">\(l_2\)</span> norm minimization problem can be easily obtained using
+Lagrange multipliers.</p>
+<p>We define the Lagrangian</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-8">
+<span class="eqno">(9)<a class="headerlink" href="#equation-sls-underdetermined-8" title="Permalink to this equation">¶</a></span>\[\mathcal{L}(x) = \|x\|_2^2 + \lambda^H (\Phi x  - y)\]</div>
+<p>with <span class="math notranslate nohighlight">\(\lambda \in \CC^M\)</span> being the Lagrange multipliers for the (equality) constraint set.</p>
+<p>Differentiating <span class="math notranslate nohighlight">\(\mathcal{L}(x)\)</span> w.r.t. <span class="math notranslate nohighlight">\(x\)</span> we get</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-9">
+<span class="eqno">(10)<a class="headerlink" href="#equation-sls-underdetermined-9" title="Permalink to this equation">¶</a></span>\[\frac{\partial \mathcal{L}(x)} {\partial x} = 2 x + \Phi^H \lambda.\]</div>
+<p>By equating the derivative to <span class="math notranslate nohighlight">\(0\)</span> we obtain the optimal value of <span class="math notranslate nohighlight">\(x\)</span> as</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-10">
+<span class="eqno">(11)<a class="headerlink" href="#equation-sls-underdetermined-10" title="Permalink to this equation">¶</a></span>\[x^* = - \frac{1}{2} \Phi^H \lambda.
+\label{eq:ssm:underdetermined_l2_optimal_value_expression_1}\]</div>
+<p>Plugging this solution back into the constraint <span class="math notranslate nohighlight">\(\Phi x= y\)</span> gives us</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-11">
+<span class="eqno">(12)<a class="headerlink" href="#equation-sls-underdetermined-11" title="Permalink to this equation">¶</a></span>\[\Phi x^* = - \frac{1}{2} (\Phi \Phi^H) \lambda= y\implies \lambda = -2(\Phi \Phi^H)^{-1} y.\]</div>
+<p>In above we are implicitly assuming that <span class="math notranslate nohighlight">\(\Phi\)</span> is a full rank matrix thus, <span class="math notranslate nohighlight">\(\Phi \Phi^H\)</span> is invertible
+and positive definite.</p>
+<p>Putting <span class="math notranslate nohighlight">\(\lambda\)</span> back in above we obtain
+the well known closed form least squares solution using pseudo-inverse solution</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-12">
+<span class="eqno">(13)<a class="headerlink" href="#equation-sls-underdetermined-12" title="Permalink to this equation">¶</a></span>\[x^* = \Phi^H (\Phi \Phi^H)^{-1} y = \Phi^{\dag} y.\]</div>
+</section>
+<section id="convexity">
+<h2>Convexity<a class="headerlink" href="#convexity" title="Permalink to this headline">¶</a></h2>
+<p>Convex optimization
+problems have a unique feature that it is possible to find the global optimal solution if
+such a solution exists.</p>
+<p>The solution space  <span class="math notranslate nohighlight">\(\Omega = \{x : \Phi x = y\}\)</span> is convex.
+Thus the feasible set of solutions for the optimization problem
+is also convex. All it remains is to make sure that we choose a cost function
+<span class="math notranslate nohighlight">\(J(x)\)</span> which happens to be convex. This will ensure that a global minimum can be found through
+convex optimization techniques. Moreover, if <span class="math notranslate nohighlight">\(J(x)\)</span> is strictly convex, then it is guaranteed
+that the global minimum solution is <em>unique</em>. Thus even though, we may not have
+a nice looking closed form expression for the solution of a strictly convex cost function minimization problem,
+the guarantee of the existence and uniqueness of solution as well as well developed algorithms
+for solving the problem make it very appealing to choose cost functions which are convex.</p>
+<p>We recall that all <span class="math notranslate nohighlight">\(l_p\)</span> norms with <span class="math notranslate nohighlight">\(p \geq 1\)</span> are convex functions.
+In particular <span class="math notranslate nohighlight">\(l_{\infty}\)</span> and <span class="math notranslate nohighlight">\(l_1\)</span> norms are very interesting and popular where</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-13">
+<span class="eqno">(14)<a class="headerlink" href="#equation-sls-underdetermined-13" title="Permalink to this equation">¶</a></span>\[l_{\infty}(x) = \max(|x_i|), \, 1 \leq i \leq N\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-14">
+<span class="eqno">(15)<a class="headerlink" href="#equation-sls-underdetermined-14" title="Permalink to this equation">¶</a></span>\[l_1(x) = \sum_{i=1}^{N} |x_i|.\]</div>
+<p>In the following section we will attempt to find a unique solution to our
+optimization problem using <span class="math notranslate nohighlight">\(l_1\)</span> norm.</p>
+</section>
+<section id="l-1-regularization">
+<h2><span class="math notranslate nohighlight">\(l_1\)</span> Regularization<a class="headerlink" href="#l-1-regularization" title="Permalink to this headline">¶</a></h2>
+<p>In this section we will restrict our attention to the
+Euclidean space case where <span class="math notranslate nohighlight">\(x \in \RR^N\)</span>,
+<span class="math notranslate nohighlight">\(\Phi \in \RR^{M \times N}\)</span> and <span class="math notranslate nohighlight">\(y \in \RR^M\)</span>.</p>
+<p>We choose our cost function <span class="math notranslate nohighlight">\(J(x) = l_1(x)\)</span>.</p>
+<p>The cost minimization problem can be reformulated as</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-15">
+<span class="eqno">(16)<a class="headerlink" href="#equation-sls-underdetermined-15" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+  &amp; \underset{x}{\text{minimize}}
+  &amp; &amp;  \| x \|_1 \\
+  &amp; \text{subject to}
+  &amp; &amp;  \Phi x = y.
+\end{aligned}\end{split}\]</div>
+<p>It’s time to have a closer look at our cost function <span class="math notranslate nohighlight">\(J(x) = \|x \|_1\)</span>. This function
+is convex yet not strictly convex.</p>
+<p>For the <span class="math notranslate nohighlight">\(l_1\)</span> norm minimization problem since <span class="math notranslate nohighlight">\(J(x)\)</span> is not strictly convex,
+hence a unique solution may not be guaranteed. In specific cases, there may be
+infinitely many solutions. Yet what we can claim is</p>
+<ul class="simple">
+<li><p>these solutions are gathered in a set that is bounded and convex, and</p></li>
+<li><p>among these solutions, there exists at least one solution with at most
+<span class="math notranslate nohighlight">\(M\)</span> non-zeros (as the number of constraints in <span class="math notranslate nohighlight">\(\Phi x = y\)</span>).</p></li>
+</ul>
+<div class="theoremenv theorem">
+<div class="theoremenv_caption theorem_caption">Theorem<span class="theoremenv_counter theorem_counter"></span></div><div class="theoremenv_body theorem_body"><p>Let <span class="math notranslate nohighlight">\(S\)</span> denote the solution set of <span class="math notranslate nohighlight">\(l_1\)</span> norm minimization problem.
+<span class="math notranslate nohighlight">\(S\)</span>
+contains at least one solution <span class="math notranslate nohighlight">\(\widehat{x}\)</span> with
+<span class="math notranslate nohighlight">\(\| \widehat{x} \|_0 = M\)</span>.</p>
+</div></div><p>See <span id="id2">[<a class="reference internal" href="../zzzreference.html#id116" title="Michael Elad. Sparse and redundant representations. Springer, 2010.">Ela10</a>]</span> for proof.</p>
+<p>We thus note that <span class="math notranslate nohighlight">\(l_1\)</span> norm has a tendency to prefer sparse solutions. This is a
+well known and fundamental property of linear programming.</p>
+</section>
+<section id="l-1-norm-minimization-problem-as-a-linear-programming-problem">
+<h2><span class="math notranslate nohighlight">\(l_1\)</span> norm minimization problem as a linear programming problem<a class="headerlink" href="#l-1-norm-minimization-problem-as-a-linear-programming-problem" title="Permalink to this headline">¶</a></h2>
+<p>We now show that <span class="math notranslate nohighlight">\(l_1\)</span> norm minimization problem in <span class="math notranslate nohighlight">\(\RR^N\)</span>
+is in fact a linear programming problem.</p>
+<p>Recalling the problem:</p>
+<div class="math notranslate nohighlight" id="equation-l1-norm-minimization-problem">
+<span class="eqno">(17)<a class="headerlink" href="#equation-l1-norm-minimization-problem" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+  &amp; \underset{x \in \RR^N}{\text{minimize}}
+  &amp; &amp;  \| x \|_1 \\
+  &amp; \text{subject to}
+  &amp; &amp;  y = \Phi x.
+\end{aligned}\end{split}\]</div>
+<p>Let us write <span class="math notranslate nohighlight">\(x\)</span> as <span class="math notranslate nohighlight">\(u  - v\)</span>  where <span class="math notranslate nohighlight">\(u, v \in \RR^N\)</span> are both non-negative vectors such that
+<span class="math notranslate nohighlight">\(u\)</span> takes all positive entries in <span class="math notranslate nohighlight">\(x\)</span> while <span class="math notranslate nohighlight">\(v\)</span> takes all the negative entries in <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>We note here that by definition</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-16">
+<span class="eqno">(18)<a class="headerlink" href="#equation-sls-underdetermined-16" title="Permalink to this equation">¶</a></span>\[\supp(u) \cap \supp(v) = \EmptySet\]</div>
+<p>i.e. support of <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span> do not overlap.</p>
+<p>We now construct a vector</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-17">
+<span class="eqno">(19)<a class="headerlink" href="#equation-sls-underdetermined-17" title="Permalink to this equation">¶</a></span>\[\begin{split}z = \begin{bmatrix}
+u \\ v
+\end{bmatrix} \in \RR^{2N}.\end{split}\]</div>
+<p>We can now verify that</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-18">
+<span class="eqno">(20)<a class="headerlink" href="#equation-sls-underdetermined-18" title="Permalink to this equation">¶</a></span>\[\| x \|_1 = \|u\|_1 + \| v \|_1 = 1^T z.\]</div>
+<p>And</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-19">
+<span class="eqno">(21)<a class="headerlink" href="#equation-sls-underdetermined-19" title="Permalink to this equation">¶</a></span>\[\begin{split}\Phi x = \Phi (u - v) = \Phi u - \Phi v =
+\begin{bmatrix}
+\Phi &amp; -\Phi
+\end{bmatrix}
+\begin{bmatrix}
+u \\ v
+\end{bmatrix}
+= \begin{bmatrix}
+\Phi &amp; -\Phi
+\end{bmatrix} z\end{split}\]</div>
+<p>where  <span class="math notranslate nohighlight">\(z \succeq 0\)</span>.</p>
+<p>Hence the optimization problem <a class="reference internal" href="#equation-l1-norm-minimization-problem">(17)</a> can be recast as</p>
+<div class="math notranslate nohighlight" id="equation-l1-norm-minimization-problem-as-lp">
+<span class="eqno">(22)<a class="headerlink" href="#equation-l1-norm-minimization-problem-as-lp" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+  &amp; \underset{z \in \RR^{2N}}{\text{minimize}}
+  &amp; &amp;  1^T z \\
+  &amp; \text{subject to}
+  &amp; &amp;  \begin{bmatrix} \Phi &amp; -\Phi \end{bmatrix} z = y\\
+  &amp; \text{and}
+  &amp; &amp; z \succeq 0.
+\end{aligned}\end{split}\]</div>
+<p>This optimization problem has the classic Linear Programming structure since the
+objective function is affine as well as constraints are affine.</p>
+<p>Let <span class="math notranslate nohighlight">\(z^* =\begin{bmatrix} u^* \\ v^* \end{bmatrix}\)</span> be an optimal solution to the
+problem <a class="reference internal" href="#equation-l1-norm-minimization-problem-as-lp">(22)</a>.</p>
+<p>In order to show that the two optimization problems are equivalent, we need
+to verify that our assumption about the decomposition of <span class="math notranslate nohighlight">\(x\)</span> into positive entries in <span class="math notranslate nohighlight">\(u\)</span>
+and negative entries in <span class="math notranslate nohighlight">\(v\)</span> is indeed satisfied by the optimal solution <span class="math notranslate nohighlight">\(u^*\)</span> and <span class="math notranslate nohighlight">\(v^*\)</span>.
+i.e. support of <span class="math notranslate nohighlight">\(u^*\)</span> and <span class="math notranslate nohighlight">\(v^*\)</span> do not overlap.</p>
+<p>Since <span class="math notranslate nohighlight">\(z \succeq 0\)</span> hence <span class="math notranslate nohighlight">\(\langle u^* , v^* \rangle  \geq 0\)</span>. If support of <span class="math notranslate nohighlight">\(u^*\)</span> and <span class="math notranslate nohighlight">\(v^*\)</span>
+don’t overlap, then we  have <span class="math notranslate nohighlight">\(\langle u^* , v^* \rangle = 0\)</span>. And if they overlap then
+<span class="math notranslate nohighlight">\(\langle u^* , v^* \rangle &gt; 0\)</span>.</p>
+<p>Now for the sake of contradiction, let us assume that support of <span class="math notranslate nohighlight">\(u^*\)</span> and <span class="math notranslate nohighlight">\(v^*\)</span> do overlap for
+the optimal solution <span class="math notranslate nohighlight">\(z^*\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(k\)</span> be one of the indices at which both <span class="math notranslate nohighlight">\(u_k \neq 0\)</span> and <span class="math notranslate nohighlight">\(v_k \neq 0\)</span>. Since <span class="math notranslate nohighlight">\(z \succeq 0\)</span>,
+hence <span class="math notranslate nohighlight">\(u_k &gt; 0\)</span> and <span class="math notranslate nohighlight">\(v_k &gt; 0\)</span>.</p>
+<p>Without loss of generality let us assume that <span class="math notranslate nohighlight">\(u_k &gt; v_k &gt; 0\)</span>.</p>
+<p>In the equality constraint</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-20">
+<span class="eqno">(23)<a class="headerlink" href="#equation-sls-underdetermined-20" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{bmatrix} \Phi &amp; -\Phi \end{bmatrix} \begin{bmatrix} u \\ v \end{bmatrix} = y\end{split}\]</div>
+<p>Both of these coefficients multiply the same column of <span class="math notranslate nohighlight">\(\Phi\)</span> with opposite signs giving us a term</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-21">
+<span class="eqno">(24)<a class="headerlink" href="#equation-sls-underdetermined-21" title="Permalink to this equation">¶</a></span>\[\phi_k (u_k - v_k).\]</div>
+<p>Now if we replace the two entries in <span class="math notranslate nohighlight">\(z^*\)</span> by</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-22">
+<span class="eqno">(25)<a class="headerlink" href="#equation-sls-underdetermined-22" title="Permalink to this equation">¶</a></span>\[u_k'  = u_k - v_k\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-23">
+<span class="eqno">(26)<a class="headerlink" href="#equation-sls-underdetermined-23" title="Permalink to this equation">¶</a></span>\[v_k' = 0\]</div>
+<p>to obtain an new vector <span class="math notranslate nohighlight">\(z'\)</span>,
+we see that there is no impact in the equality constraint</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-24">
+<span class="eqno">(27)<a class="headerlink" href="#equation-sls-underdetermined-24" title="Permalink to this equation">¶</a></span>\[\begin{bmatrix} \Phi &amp; -\Phi \end{bmatrix} z = y.\]</div>
+<p>Also the positivity constraint</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-25">
+<span class="eqno">(28)<a class="headerlink" href="#equation-sls-underdetermined-25" title="Permalink to this equation">¶</a></span>\[z \succeq 0\]</div>
+<p>is satisfied. This means that <span class="math notranslate nohighlight">\(z'\)</span> is a feasible solution.</p>
+<p>On the other hand, the objective function <span class="math notranslate nohighlight">\(1^T z\)</span> value reduces by <span class="math notranslate nohighlight">\(2 v_k\)</span> for <span class="math notranslate nohighlight">\(z'\)</span>.
+This contradicts our assumption that <span class="math notranslate nohighlight">\(z^*\)</span> is the optimal solution.</p>
+<p>Hence for the optimal solution of <a class="reference internal" href="#equation-l1-norm-minimization-problem-as-lp">(22)</a>
+we have</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-26">
+<span class="eqno">(29)<a class="headerlink" href="#equation-sls-underdetermined-26" title="Permalink to this equation">¶</a></span>\[\supp(u^*) \cap \supp(v^*) = \EmptySet\]</div>
+<p>thus</p>
+<div class="math notranslate nohighlight" id="equation-sls-underdetermined-27">
+<span class="eqno">(30)<a class="headerlink" href="#equation-sls-underdetermined-27" title="Permalink to this equation">¶</a></span>\[x^* = u^* - v^*\]</div>
+<p>is indeed the desired solution for the optimization problem <a class="reference internal" href="#equation-l1-norm-minimization-problem">(17)</a>.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2021, CR-Sparse Development Team.
+      
+      |
+      <a href="../_sources/sls/underdetermined.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

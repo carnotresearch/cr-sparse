@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Vector Norms &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/mathconf.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sparse Vectors" href="sparse_vectors.html" />
+    <link rel="prev" title="Linear Algebra" href="index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Linear Algebra</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Vector Norms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sparse_vectors.html">Sparse Vectors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sls/index.html">Sparse Linear Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Linear Algebra</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Linear Algebra</a></li>
+      <li>Next: <a href="sparse_vectors.html" title="next chapter">Sparse Vectors</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="vector-norms">
+<h1>Vector Norms<a class="headerlink" href="#vector-norms" title="Permalink to this headline">¶</a></h1>
+<p>Our interest is in operators mapping vectors from a model space <span class="math notranslate nohighlight">\(\mathbb{C}^n\)</span> to a data space <span class="math notranslate nohighlight">\(\mathbb{C}^m\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The vectors may be stored using multi-dimensional arrays in memory. E.g., images are usually stored in 2-3 dimensional arrays.
+The operators themselves may work directly on multi-dimensions arrays. E.g. a convolution operator can be applied directly
+to an image to result in another image.</p>
+</div>
+<p>There are some simple and useful results on relationships between
+different  <span class="math notranslate nohighlight">\(p\)</span>-norms listed in this section. We also discuss
+some interesting properties of  <span class="math notranslate nohighlight">\(l_1\)</span>-norm specifically.</p>
+<div class="theoremenv definition" id="def-ssm-sign-vector">
+<div class="theoremenv_caption definition_caption">Definition<span class="theoremenv_counter definition_counter"></span></div><div class="theoremenv_body definition_body"><p id="index-0">Let  <span class="math notranslate nohighlight">\(v \in \mathbb{C}^n\)</span>. Let the entries in  <span class="math notranslate nohighlight">\(v\)</span> be represented as</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-la-vector-norms-0" title="Permalink to this equation">¶</a></span>\[v_i = r_i \exp (j \theta_i)\]</div>
+<p>where  <span class="math notranslate nohighlight">\(r_i = | v_i |\)</span> with the convention that  <span class="math notranslate nohighlight">\(\theta_i = 0\)</span>
+whenever  <span class="math notranslate nohighlight">\(r_i = 0\)</span>.</p>
+<p>The sign vector for  <span class="math notranslate nohighlight">\(v\)</span> denoted by  <span class="math notranslate nohighlight">\(\sgn(v)\)</span> is defined as</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-la-vector-norms-1" title="Permalink to this equation">¶</a></span>\[\begin{split}\sgn(v)  = \begin{bmatrix}\sgn(v_1) \\ \vdots \\ \sgn(v_N)  \end{bmatrix}\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-la-vector-norms-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\sgn(v_i) = \left\{
+        \begin{array}{ll}
+            \exp (j \theta_i) &amp; \mbox{if  $r_i \neq 0$ };\\
+            0 &amp; \mbox{if  $r_i = 0$ }.
+        \end{array}
+      \right.\end{split}\]</div>
+</div></div><div class="theoremenv lemma" id="res-ssm-l1-norm-as-inner-product-with-sign-vector">
+<div class="theoremenv_caption lemma_caption">Lemma<span class="theoremenv_counter lemma_counter"></span></div><div class="theoremenv_body lemma_body"><p>For any  <span class="math notranslate nohighlight">\(v \in \mathbb{C}^n\)</span> :</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-3">
+<span class="eqno">(4)<a class="headerlink" href="#equation-la-vector-norms-3" title="Permalink to this equation">¶</a></span>\[\| v \|_1 = \sgn(v)^H v = \langle v , \sgn(v) \rangle.\]</div>
+</div></div><div class="theoremenv proof">
+<div class="theoremenv_caption proof_caption">Proof<span class="theoremenv_counter proof_counter"></span></div><div class="theoremenv_body proof_body"><div class="math notranslate nohighlight" id="equation-la-vector-norms-4">
+<span class="eqno">(5)<a class="headerlink" href="#equation-la-vector-norms-4" title="Permalink to this equation">¶</a></span>\[\| v \|_1 = \sum_{i=1}^n r_i  = \sum_{i=1}^n \left [r_i e^{j \theta_i} \right ] e^{- j \theta_i}
+= \sum_{i=1}^n v_i e^{- j \theta_i} = \sgn(v)^H v.\]</div>
+<p>Note that whenever  <span class="math notranslate nohighlight">\(v_i = 0\)</span>, corresponding  <span class="math notranslate nohighlight">\(0\)</span> entry in  <span class="math notranslate nohighlight">\(\sgn(v)\)</span> has no effect on the sum.</p>
+</div></div><div class="theoremenv lemma" id="lem-ssm-l1-norm-l2-bounds">
+<div class="theoremenv_caption lemma_caption">Lemma<span class="theoremenv_counter lemma_counter"></span></div><div class="theoremenv_body lemma_body"><p>Suppose  <span class="math notranslate nohighlight">\(v \in \mathbb{C}^n\)</span>.  Then</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-5">
+<span class="eqno">(6)<a class="headerlink" href="#equation-la-vector-norms-5" title="Permalink to this equation">¶</a></span>\[\| v \|_2 \leq \| v\|_1 \leq \sqrt{n} \| v \|_2.\]</div>
+</div></div><div class="theoremenv proof">
+<div class="theoremenv_caption proof_caption">Proof<span class="theoremenv_counter proof_counter"></span></div><div class="theoremenv_body proof_body"><p>For the lower bound, we go as follows</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-6">
+<span class="eqno">(7)<a class="headerlink" href="#equation-la-vector-norms-6" title="Permalink to this equation">¶</a></span>\[\| v \|_2^2 = \sum_{i=1}^n | v_i|^2  \leq \left ( \sum_{i=1}^n | v_i|^2  + 2 \sum_{i, j, i \neq j} | v_i | | v_j| \right )
+= \left ( \sum_{i=1}^n | v_i| \right )^2 = \| v \|_1^2.\]</div>
+<p>This gives us</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-7">
+<span class="eqno">(8)<a class="headerlink" href="#equation-la-vector-norms-7" title="Permalink to this equation">¶</a></span>\[\| v \|_2 \leq \| v \|_1.\]</div>
+<p>We can write  <span class="math notranslate nohighlight">\(l_1\)</span> norm as</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-8">
+<span class="eqno">(9)<a class="headerlink" href="#equation-la-vector-norms-8" title="Permalink to this equation">¶</a></span>\[\| v \|_1 = \langle v, \sgn (v) \rangle.\]</div>
+<p>By Cauchy-Schwartz inequality we have</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-9">
+<span class="eqno">(10)<a class="headerlink" href="#equation-la-vector-norms-9" title="Permalink to this equation">¶</a></span>\[\langle v, \sgn (v) \rangle \leq  \| v \|_2  \| \sgn (v) \|_2\]</div>
+<p>Since  <span class="math notranslate nohighlight">\(\sgn(v)\)</span> can have at most  <span class="math notranslate nohighlight">\(n\)</span> non-zero values, each with magnitude 1,</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-10">
+<span class="eqno">(11)<a class="headerlink" href="#equation-la-vector-norms-10" title="Permalink to this equation">¶</a></span>\[\| \sgn (v) \|_2^2 \leq n \implies \| \sgn (v) \|_2 \leq \sqrt{n}.\]</div>
+<p>Thus, we get</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-11">
+<span class="eqno">(12)<a class="headerlink" href="#equation-la-vector-norms-11" title="Permalink to this equation">¶</a></span>\[\| v \|_1  \leq \sqrt{n} \| v \|_2.\]</div>
+</div></div><div class="theoremenv lemma" id="res-ssm-l2-upper-bound-max-norm">
+<div class="theoremenv_caption lemma_caption">Lemma<span class="theoremenv_counter lemma_counter"></span></div><div class="theoremenv_body lemma_body"><p>Let  <span class="math notranslate nohighlight">\(v \in \mathbb{C}^n\)</span>. Then</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-12">
+<span class="eqno">(13)<a class="headerlink" href="#equation-la-vector-norms-12" title="Permalink to this equation">¶</a></span>\[\| v \|_2 \leq \sqrt{n} \| v \|_{\infty}\]</div>
+</div></div><div class="theoremenv proof">
+<div class="theoremenv_caption proof_caption">Proof<span class="theoremenv_counter proof_counter"></span></div><div class="theoremenv_body proof_body"><div class="math notranslate nohighlight" id="equation-la-vector-norms-13">
+<span class="eqno">(14)<a class="headerlink" href="#equation-la-vector-norms-13" title="Permalink to this equation">¶</a></span>\[\| v \|_2^2 = \sum_{i=1}^n | v_i |^2 \leq n \underset{1 \leq i \leq n}{\max} ( | v_i |^2) = n \| v \|_{\infty}^2.\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-14">
+<span class="eqno">(15)<a class="headerlink" href="#equation-la-vector-norms-14" title="Permalink to this equation">¶</a></span>\[\| v \|_2 \leq \sqrt{n} \| v \|_{\infty}.\]</div>
+</div></div><div class="theoremenv lemma" id="res-ssm-p-q-norm-bounds">
+<div class="theoremenv_caption lemma_caption">Lemma<span class="theoremenv_counter lemma_counter"></span></div><div class="theoremenv_body lemma_body"><p>Let  <span class="math notranslate nohighlight">\(v \in \mathbb{C}^n\)</span>. Let  <span class="math notranslate nohighlight">\(1 \leq p, q \leq \infty\)</span>.
+Then</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-15">
+<span class="eqno">(16)<a class="headerlink" href="#equation-la-vector-norms-15" title="Permalink to this equation">¶</a></span>\[\| v \|_q \leq \| v \|_p \text{ whenever } p \leq q.\]</div>
+</div></div><div class="theoremenv proof">
+<div class="theoremenv_caption proof_caption">Proof<span class="theoremenv_counter proof_counter"></span></div><div class="theoremenv_body proof_body"><p>TBD</p>
+</div></div><div class="theoremenv lemma" id="res-ssm-one-vec-l1-norm">
+<div class="theoremenv_caption lemma_caption">Lemma<span class="theoremenv_counter lemma_counter"></span></div><div class="theoremenv_body lemma_body"><p>Let  <span class="math notranslate nohighlight">\(\OneVec \in \mathbb{C}^n\)</span> be the vector of all ones i.e.  <span class="math notranslate nohighlight">\(\OneVec = (1, \dots, 1)\)</span>.
+Let  <span class="math notranslate nohighlight">\(v \in \mathbb{C}^n\)</span> be some arbitrary vector. Let  <span class="math notranslate nohighlight">\(| v |\)</span> denote the vector of
+absolute values of entries in  <span class="math notranslate nohighlight">\(v\)</span>. i.e.  <span class="math notranslate nohighlight">\(|v|_i = |v_i| \Forall 1 \leq i \leq n\)</span>. Then</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-16">
+<span class="eqno">(17)<a class="headerlink" href="#equation-la-vector-norms-16" title="Permalink to this equation">¶</a></span>\[\| v \|_1 = \OneVec^T | v | = \OneVec^H | v |.\]</div>
+</div></div><div class="theoremenv proof">
+<div class="theoremenv_caption proof_caption">Proof<span class="theoremenv_counter proof_counter"></span></div><div class="theoremenv_body proof_body"><div class="math notranslate nohighlight" id="equation-la-vector-norms-17">
+<span class="eqno">(18)<a class="headerlink" href="#equation-la-vector-norms-17" title="Permalink to this equation">¶</a></span>\[\OneVec^T | v | = \sum_{i=1}^n  | v |_i =   \sum_{i=1}^n  | v_i | = \| v \|_1.\]</div>
+<p>Finally since  <span class="math notranslate nohighlight">\(\OneVec\)</span> consists only of real entries, hence its transpose and Hermitian
+transpose are same.</p>
+</div></div><div class="theoremenv lemma" id="res-ssm-ones-matrix-l1-norm">
+<div class="theoremenv_caption lemma_caption">Lemma<span class="theoremenv_counter lemma_counter"></span></div><div class="theoremenv_body lemma_body"><p>Let  <span class="math notranslate nohighlight">\(\OneMat \in \CC^{n \times n}\)</span> be a square matrix of all ones. Let  <span class="math notranslate nohighlight">\(v \in \mathbb{C}^n\)</span>
+be some arbitrary vector. Then</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-18">
+<span class="eqno">(19)<a class="headerlink" href="#equation-la-vector-norms-18" title="Permalink to this equation">¶</a></span>\[|v|^T \OneMat | v | = \| v \|_1^2.\]</div>
+</div></div><div class="theoremenv proof">
+<div class="theoremenv_caption proof_caption">Proof<span class="theoremenv_counter proof_counter"></span></div><div class="theoremenv_body proof_body"><p>We know that</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-19">
+<span class="eqno">(20)<a class="headerlink" href="#equation-la-vector-norms-19" title="Permalink to this equation">¶</a></span>\[\OneMat = \OneVec \OneVec^T\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-20">
+<span class="eqno">(21)<a class="headerlink" href="#equation-la-vector-norms-20" title="Permalink to this equation">¶</a></span>\[|v|^T \OneMat | v |  = |v|^T  \OneVec \OneVec^T | v |  = (\OneVec^T | v | )^T \OneVec^T | v | =  \| v \|_1 \| v \|_1 = \| v \|_1^2.\]</div>
+<p>We used the fact that  <span class="math notranslate nohighlight">\(\| v \|_1 = \OneVec^T | v |\)</span>.</p>
+</div></div><div class="theoremenv theorem" id="eq-ssm-k-th-largest-entry-l1-norm">
+<span id="res-ssm-k-th-largest-entry-l1-norm"></span><div class="theoremenv_caption theorem_caption">Theorem<span class="theoremenv_counter theorem_counter"></span></div><div class="theoremenv_body theorem_body"><blockquote>
+<div><p><span class="math notranslate nohighlight">\(k\)</span>-th largest (magnitude) entry in a vector  <span class="math notranslate nohighlight">\(x \in \mathbb{C}^n\)</span> denoted by  <span class="math notranslate nohighlight">\(x_{(k)}\)</span> obeys</p>
+</div></blockquote>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-21">
+<span class="eqno">(22)<a class="headerlink" href="#equation-la-vector-norms-21" title="Permalink to this equation">¶</a></span>\[| x_{(k)} | \leq  \frac{\| x \|_1}{k}\]</div>
+</div></div><div class="theoremenv proof">
+<div class="theoremenv_caption proof_caption">Proof<span class="theoremenv_counter proof_counter"></span></div><div class="theoremenv_body proof_body"><p>Let  <span class="math notranslate nohighlight">\(n_1, n_2, \dots, n_N\)</span> be a permutation of  <span class="math notranslate nohighlight">\(\{ 1, 2, \dots, n \}\)</span> such that</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-22">
+<span class="eqno">(23)<a class="headerlink" href="#equation-la-vector-norms-22" title="Permalink to this equation">¶</a></span>\[|x_{n_1} | \geq  | x_{n_2} | \geq \dots \geq  | x_{n_N} |.\]</div>
+<p>Thus, the  <span class="math notranslate nohighlight">\(k\)</span>-th largest entry in  <span class="math notranslate nohighlight">\(x\)</span> is  <span class="math notranslate nohighlight">\(x_{n_k}\)</span>. It is clear that</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-23">
+<span class="eqno">(24)<a class="headerlink" href="#equation-la-vector-norms-23" title="Permalink to this equation">¶</a></span>\[\| x \|_1 = \sum_{i=1}^n | x_i | = \sum_{i=1}^n |x_{n_i} |\]</div>
+<p>Obviously</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-24">
+<span class="eqno">(25)<a class="headerlink" href="#equation-la-vector-norms-24" title="Permalink to this equation">¶</a></span>\[|x_{n_1} | \leq \sum_{i=1}^n |x_{n_i} | = \| x \|_1.\]</div>
+<p>Similarly</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-25">
+<span class="eqno">(26)<a class="headerlink" href="#equation-la-vector-norms-25" title="Permalink to this equation">¶</a></span>\[k |x_{n_k} | = |x_{n_k} | + \dots + |x_{n_k} |  \leq |x_{n_1} | + \dots + |x_{n_k} | \leq \sum_{i=1}^n |x_{n_i} | \leq  \| x \|_1.\]</div>
+<p>Thus</p>
+<div class="math notranslate nohighlight" id="equation-la-vector-norms-26">
+<span class="eqno">(27)<a class="headerlink" href="#equation-la-vector-norms-26" title="Permalink to this equation">¶</a></span>\[|x_{n_k} |  \leq \frac{\| x \|_1}{k}.\]</div>
+</div></div></section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2021, CR-Sparse Development Team.
+      
+      |
+      <a href="../_sources/la/vector_norms.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
