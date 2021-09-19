@@ -5,10 +5,10 @@
 
 Computation times
 =================
-**00:14.940** total execution time for **gallery_rec_l1** files:
+**00:16.280** total execution time for **gallery_rec_l1** files:
 
 +----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_rec_l1_spikes_l1ls.py` (``spikes_l1ls.py``)                                       | 00:08.143 | 0.0 MB |
+| :ref:`sphx_glr_gallery_rec_l1_spikes_l1ls.py` (``spikes_l1ls.py``)                                       | 00:08.819 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_rec_l1_partial_wh_sensor_cosine_basis.py` (``partial_wh_sensor_cosine_basis.py``) | 00:06.797 | 0.0 MB |
+| :ref:`sphx_glr_gallery_rec_l1_partial_wh_sensor_cosine_basis.py` (``partial_wh_sensor_cosine_basis.py``) | 00:07.461 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------------+-----------+--------+
