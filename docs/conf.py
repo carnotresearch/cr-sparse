@@ -61,6 +61,8 @@ extensions = [
     'sphinx_panels',
     # markdown support
     'myst_parser',
+    # project specific extensions
+    'environments',
 ]
 
 intersphinx_mapping = {
@@ -212,6 +214,7 @@ html_css_files = [
 ]
 html_js_files = [
     'js/custom.js',
+    'js/mathconf.js',
 ]
 
 html_theme_options = {
