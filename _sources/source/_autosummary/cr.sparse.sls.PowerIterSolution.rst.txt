@@ -1,0 +1,19 @@
+﻿cr.sparse.sls.PowerIterSolution
+===============================
+
+.. currentmodule:: cr.sparse.sls
+
+.. autoclass:: PowerIterSolution
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~PowerIterSolution.iterations
+      ~PowerIterSolution.s
+      ~PowerIterSolution.v
+   
+   

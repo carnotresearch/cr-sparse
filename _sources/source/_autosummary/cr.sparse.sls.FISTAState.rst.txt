@@ -1,0 +1,23 @@
+﻿cr.sparse.sls.FISTAState
+========================
+
+.. currentmodule:: cr.sparse.sls
+
+.. autoclass:: FISTAState
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FISTAState.iterations
+      ~FISTAState.r
+      ~FISTAState.r_norm_sqr
+      ~FISTAState.t
+      ~FISTAState.x
+      ~FISTAState.x_change_norm
+      ~FISTAState.z
+   
+   

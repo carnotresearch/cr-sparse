@@ -30,7 +30,7 @@
     <script src="../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cr.sparse.sls.LSQRSolution" href="_autosummary/cr.sparse.sls.LSQRSolution.html" />
+    <link rel="next" title="cr.sparse.sls.lsqr" href="_autosummary/cr.sparse.sls.lsqr.html" />
     <link rel="prev" title="cr.sparse.lop.to_complex_matrix" href="_autosummary/cr.sparse.lop.to_complex_matrix.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -99,7 +99,7 @@
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">CR.Sparse API Documentation</a><ul>
       <li>Previous: <a href="_autosummary/cr.sparse.lop.to_complex_matrix.html" title="previous chapter">cr.sparse.lop.to_complex_matrix</a></li>
-      <li>Next: <a href="_autosummary/cr.sparse.sls.LSQRSolution.html" title="next chapter">cr.sparse.sls.LSQRSolution</a></li>
+      <li>Next: <a href="_autosummary/cr.sparse.sls.lsqr.html" title="next chapter">cr.sparse.sls.lsqr</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -140,20 +140,6 @@ where the matrix <span class="math notranslate nohighlight">\(A\)</span> is spar
 represented by a linear operator abstraction
 providing the matrix multiplication and adjoint
 multiplication functions.</p>
-<section id="data-types">
-<h2>Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.LSQRSolution.html#cr.sparse.sls.LSQRSolution" title="cr.sparse.sls.LSQRSolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LSQRSolution</span></code></a></p></td>
-<td><p>Solution for LSQR algorithm</p></td>
-</tr>
-</tbody>
-</table>
-</section>
 <section id="solvers">
 <h2>Solvers<a class="headerlink" href="#solvers" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
@@ -167,6 +153,47 @@ multiplication functions.</p>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.lsqr_jit.html#cr.sparse.sls.lsqr_jit" title="cr.sparse.sls.lsqr_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lsqr_jit</span></code></a>(A, b, x0[, damp, atol, btol, …])</p></td>
 <td><p>Solves the overdetermined system <span class="math notranslate nohighlight">\(A x = b\)</span> in least square sense using LSQR algorithm.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.power_iterations.html#cr.sparse.sls.power_iterations" title="cr.sparse.sls.power_iterations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power_iterations</span></code></a>(operator, b[, max_iters, …])</p></td>
+<td><p>Computes the largest eigen value of a (symmetric) linear operator by power method</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.power_iterations_jit.html#cr.sparse.sls.power_iterations_jit" title="cr.sparse.sls.power_iterations_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power_iterations_jit</span></code></a>(operator, b[, …])</p></td>
+<td><p>Computes the largest eigen value of a (symmetric) linear operator by power method</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.ista.html#cr.sparse.sls.ista" title="cr.sparse.sls.ista"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ista</span></code></a>(operator, b, x0, step_size[, …])</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(\widehat{x} = \text{arg} \min_{x} \frac{1}{2}\| b - A x \|_2^2 + \lambda \mathbf{R}(x)\)</span> via iterative shrinkage and thresholding.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.ista_jit.html#cr.sparse.sls.ista_jit" title="cr.sparse.sls.ista_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ista_jit</span></code></a>(operator, b, x0, step_size[, …])</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(\widehat{x} = \text{arg} \min_{x} \frac{1}{2}\| b - A x \|_2^2 + \lambda \mathbf{R}(x)\)</span> via iterative shrinkage and thresholding.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.fista.html#cr.sparse.sls.fista" title="cr.sparse.sls.fista"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fista</span></code></a>(operator, b, x0, step_size[, …])</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(\widehat{x} = \text{arg} \min_{x} \frac{1}{2}\| b - A x \|_2^2 + \lambda \mathbf{R}(x)\)</span> via fast iterative shrinkage and thresholding.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.fista_jit.html#cr.sparse.sls.fista_jit" title="cr.sparse.sls.fista_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fista_jit</span></code></a>(operator, b, x0, step_size[, …])</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(\widehat{x} = \text{arg} \min_{x} \frac{1}{2}\| b - A x \|_2^2 + \lambda \mathbf{R}(x)\)</span> via fast iterative shrinkage and thresholding.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="data-types">
+<h2>Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.LSQRSolution.html#cr.sparse.sls.LSQRSolution" title="cr.sparse.sls.LSQRSolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LSQRSolution</span></code></a></p></td>
+<td><p>Solution for LSQR algorithm</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.PowerIterSolution.html#cr.sparse.sls.PowerIterSolution" title="cr.sparse.sls.PowerIterSolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PowerIterSolution</span></code></a></p></td>
+<td><p>Solution of the eigen vector estimate</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.ISTAState.html#cr.sparse.sls.ISTAState" title="cr.sparse.sls.ISTAState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ISTAState</span></code></a></p></td>
+<td><p>ISTA algorithm state</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.FISTAState.html#cr.sparse.sls.FISTAState" title="cr.sparse.sls.FISTAState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FISTAState</span></code></a></p></td>
+<td><p>ISTA algorithm state</p></td>
 </tr>
 </tbody>
 </table>

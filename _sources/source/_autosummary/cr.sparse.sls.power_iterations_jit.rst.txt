@@ -1,0 +1,6 @@
+﻿cr.sparse.sls.power\_iterations\_jit
+====================================
+
+.. currentmodule:: cr.sparse.sls
+
+.. autofunction:: power_iterations_jit

@@ -1,0 +1,6 @@
+﻿cr.sparse.sls.ista
+==================
+
+.. currentmodule:: cr.sparse.sls
+
+.. autofunction:: ista

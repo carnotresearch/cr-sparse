@@ -30,7 +30,7 @@
     <script src="../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Examples Gallery" href="../gallery/index.html" />
+    <link rel="next" title="Iterative Shrinkage and Thresholding Algorithm" href="ista.html" />
     <link rel="prev" title="Underdetermined Linear Systems" href="underdetermined.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -70,6 +70,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Sparse Linear Systems</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="underdetermined.html">Underdetermined Linear Systems</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Thresholding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ista.html">Iterative Shrinkage and Thresholding Algorithm</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
@@ -87,7 +88,7 @@
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">Sparse Linear Systems</a><ul>
       <li>Previous: <a href="underdetermined.html" title="previous chapter">Underdetermined Linear Systems</a></li>
-      <li>Next: <a href="../gallery/index.html" title="next chapter">Examples Gallery</a></li>
+      <li>Next: <a href="ista.html" title="next chapter">Iterative Shrinkage and Thresholding Algorithm</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -119,7 +120,7 @@
           <div class="body" role="main">
             
   <section id="thresholding">
-<h1>Thresholding<a class="headerlink" href="#thresholding" title="Permalink to this headline">¶</a></h1>
+<span id="sls-thresholding"></span><h1>Thresholding<a class="headerlink" href="#thresholding" title="Permalink to this headline">¶</a></h1>
 <p>For a real or complex scalar <span class="math notranslate nohighlight">\(x\)</span>, the <strong>hard thresholding</strong> operator can be defined as:</p>
 <div class="math notranslate nohighlight" id="equation-sls-thresholding-0">
 <span class="eqno">(1)<a class="headerlink" href="#equation-sls-thresholding-0" title="Permalink to this equation">¶</a></span>\[\begin{split}\mathbf{HT}_{\gamma}(x) = \begin{cases}
@@ -142,7 +143,7 @@
 \end{cases}\end{split}\]</div>
 <p><span id="id1">[<a class="reference internal" href="../zzzreference.html#id60" title="Yangkang Chen, Keling Chen, Peidong Shi, and Yanyan Wang. Irregular seismic data reconstruction using a percentile-half-thresholding algorithm. Journal of Geophysics and Engineering, 11(6):065001, 2014.">CCSW14</a>]</span> consider the general minimization problem:</p>
 <div class="math notranslate nohighlight" id="equation-sls-thresholding-3">
-<span class="eqno">(4)<a class="headerlink" href="#equation-sls-thresholding-3" title="Permalink to this equation">¶</a></span>\[\widehat{x} = \text{arg} \min_{x} \| b - A x \|_2 + \mathbf{R}(x)\]</div>
+<span class="eqno">(4)<a class="headerlink" href="#equation-sls-thresholding-3" title="Permalink to this equation">¶</a></span>\[\widehat{x} = \text{arg} \min_{x} \| b - A x \|_2^2 + \mathbf{R}(x)\]</div>
 <p>where <span class="math notranslate nohighlight">\(x\)</span> is a vector in the model space, <span class="math notranslate nohighlight">\(b\)</span> is a vector in the data space,
 <span class="math notranslate nohighlight">\(A\)</span> is a linear operator from model space to data space, and
 <span class="math notranslate nohighlight">\(\mathbf{R}(x)\)</span> is the regularization term on the model vector.

@@ -112,7 +112,7 @@ Non-sparse signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fdf2ccf0310>]
+    [<matplotlib.lines.Line2D object at 0x7f1f3cab3490>]
 
 
 
@@ -147,7 +147,7 @@ The Sparsifying Basis
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fdf48564700>]
+    [<matplotlib.lines.Line2D object at 0x7f1f4c008f40>]
 
 
 
@@ -231,7 +231,7 @@ Measurement process
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fdf2cd74970>]
+    [<matplotlib.lines.Line2D object at 0x7f1f3cd35fd0>]
 
 
 
@@ -303,14 +303,14 @@ Solution
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x7fdf2c72a4c0>
+    <matplotlib.legend.Legend object at 0x7f1f3c6dc4f0>
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  7.387 seconds)
+   **Total running time of the script:** ( 0 minutes  5.772 seconds)
 
 
 .. _sphx_glr_download_gallery_rec_l1_partial_wh_sensor_cosine_basis.py:

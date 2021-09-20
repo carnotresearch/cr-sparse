@@ -12,6 +12,21 @@ multiplication functions.
 
 .. currentmodule:: cr.sparse.sls
 
+Solvers
+-----------------
+
+.. autosummary::
+    :toctree: _autosummary
+
+    lsqr
+    lsqr_jit
+    power_iterations
+    power_iterations_jit
+    ista
+    ista_jit
+    fista
+    fista_jit
+
 Data types
 ------------------
 
@@ -22,13 +37,8 @@ Data types
     :template: namedtuple.rst
 
     LSQRSolution
+    PowerIterSolution
+    ISTAState
+    FISTAState
 
 
-Solvers
------------------
-
-.. autosummary::
-    :toctree: _autosummary
-
-    lsqr
-    lsqr_jit

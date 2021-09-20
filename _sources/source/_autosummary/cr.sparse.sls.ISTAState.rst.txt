@@ -1,0 +1,21 @@
+﻿cr.sparse.sls.ISTAState
+=======================
+
+.. currentmodule:: cr.sparse.sls
+
+.. autoclass:: ISTAState
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ISTAState.iterations
+      ~ISTAState.r
+      ~ISTAState.r_norm_sqr
+      ~ISTAState.x
+      ~ISTAState.x_change_norm
+   
+   

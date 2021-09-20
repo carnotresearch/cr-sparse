@@ -1,0 +1,6 @@
+﻿cr.sparse.sls.fista
+===================
+
+.. currentmodule:: cr.sparse.sls
+
+.. autofunction:: fista

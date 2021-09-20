@@ -7,3 +7,4 @@ Sparse Linear Systems
 
    underdetermined
    thresholding
+   ista
