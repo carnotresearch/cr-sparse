@@ -22,11 +22,12 @@ All notable changes to this project will be documented in this file.
   - FISTA: Fast Iterative Shrinkage and Thresholding Algorithm
 - Geophysics
   - Ricker wavelet
-  - Hard, soft and half thresholding operators for ND arrays
+  - Hard, soft and half thresholding operators for ND arrays (both absolute and percentile thresholds)
 - Image Processing
   - Gaussian kernels
 - Examples
   - Deconvolution
+  - Image Deblurring
 - Utilities
   - More functions for ND-arrays
 

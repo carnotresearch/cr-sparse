@@ -1,5 +1,11 @@
+.. _sls:thresholding:
+
 Thresholding
 ==========================
+
+.. contents::
+    :depth: 2
+    :local:
 
 
 For a real or complex scalar :math:`x`, the **hard thresholding** operator can be defined as:
@@ -37,7 +43,7 @@ For real numbers, this reduces to:
 
 .. math::
 
-    \widehat{x} = \text{arg} \min_{x} \| b - A x \|_2 + \mathbf{R}(x)
+    \widehat{x} = \text{arg} \min_{x} \| b - A x \|_2^2 + \mathbf{R}(x)
 
 where :math:`x` is a vector in the model space, :math:`b` is a vector in the data space,
 :math:`A` is a linear operator from model space to data space, and

@@ -52,7 +52,33 @@ def fista(
     x_norm_change_tol=1e-10,
     max_iters=1000,
     ):
-    """Solves the problemm A x = b via iterative shrinkage and thresholding
+    r"""Solves the problem :math:`\widehat{x} = \text{arg} \min_{x} \frac{1}{2}\| b - A x \|_2^2 + \lambda \mathbf{R}(x)` 
+    via fast iterative shrinkage and thresholding.
+
+    It supports the more general problem where :math:`x` is sparse in a basis :math:`B` 
+
+    .. math::
+
+        \widehat{x} = \text{arg} \min_{x} \frac{1}{2}\| b - A x \|_2^2 + \lambda \mathbf{R} (B^H x) 
+
+    Args:
+        operator (cr.sparse.lop.Operator): A linear operator :math:`A`
+        b (jax.numpy.ndarray): Data vector
+        x0 (jax.numpy.ndarray): An initial estimate :math:`x_0` of the model vector :math:`x`
+        step_size (float): Step size for ISTA iteration
+        threshold_func (Function): A user defined thresholding function. See :ref:`sls:thresholding` for details.
+        basis (cr.sparse.lop.Operator): A sparsifying basis :math:`B` for :math:`x`
+        res_norm_rtol (float): Relative tolerance for norm of residual :math:`r = b - A x` relative to norm of :math:`b`
+        x_norm_change_tol (float): Tolerance for change in :math:`x` in each iteration
+        max_iters (int): Maximum number of iterations 
+
+    Returns:
+        FISTAState: a named tuple containing the solution :math:`x`, the residual :math:`r`
+        and other details.
+
+    See :ref:`sls:ista` for an introduction to IST algorithm.
+
+    Both ``x0`` and ``b`` can be multi-dimensional arrays. 
     """
     m, n = operator.shape
 

@@ -176,12 +176,6 @@ some interesting properties of  :math:`l_1`-norm specifically.
         \| v \|_q \leq \| v \|_p \text{ whenever } p \leq q.
     
 
-
-.. proof::
-
-    TBD
-
-
 .. _res:ssm:one_vec_l1_norm:
 
 .. lemma::

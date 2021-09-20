@@ -26,16 +26,19 @@ from cr.sparse._src.sls.lsqr import (
 )
 
 from cr.sparse._src.sls.power import (
+    PowerIterSolution,
     power_iterations,
     power_iterations_jit,
 )
 
 from cr.sparse._src.sls.ista import (
+    ISTAState,
     ista,
     ista_jit,
 )
 
 from cr.sparse._src.sls.fista import (
+    FISTAState,
     fista,
     fista_jit,
 )
