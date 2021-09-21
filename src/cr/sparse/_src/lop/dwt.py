@@ -30,7 +30,7 @@ from .util import apply_along_axis
 def wavedec(data, dec_lo, dec_hi, level):
     """Compute multilevel wavelet decomposition
     """
-    data = promote_arg_dtypes(data)
+    data, dec_lo, dec_hi = promote_arg_dtypes(data, dec_lo, dec_hi)
     a, result = wt.dwt_(data, dec_lo, dec_hi, 'periodization')
     for i in range(level-1):
         a, d = wt.dwt_(a, dec_lo, dec_hi, 'periodization')
@@ -42,7 +42,7 @@ def wavedec(data, dec_lo, dec_hi, level):
 def waverec(coefs, rec_lo, rec_hi, level):
     """Compute multilevel wavelet reconstruction
     """
-    coefs = promote_arg_dtypes(coefs)
+    coefs, rec_lo, rec_hi = promote_arg_dtypes(coefs, rec_lo, rec_hi)
     mid = coefs.shape[0] >> level
     a = coefs[:mid]
     end = mid*2
