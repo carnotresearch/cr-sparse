@@ -40,8 +40,11 @@ from cr.sparse._src.lop.lop import (
 )
 
 # basic operators
-from cr.sparse._src.lop.basic import (
+from cr.sparse._src.lop.identity import (
     identity,
+)
+
+from cr.sparse._src.lop.basic import (
     matrix,
     diagonal,
     zero,
