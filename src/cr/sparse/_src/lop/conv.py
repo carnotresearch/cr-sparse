@@ -18,12 +18,13 @@ Convolutions 1D, 2D, ND
 import numpy as np
 import jax.numpy as jnp
 import jax.scipy as jsp
+from jax import lax
 
 
 from .impl import _hermitian
 from .lop import Operator
 from .util import apply_along_axis
-
+from cr.sparse import promote_arg_dtypes
 
 def convolve(n, h, offset=0, axis=0):
     """Implements a convolution operator with the filter h
@@ -41,11 +42,35 @@ def convolve(n, h, offset=0, axis=0):
     assert offset < m
     forward = offset
     adjoint = m  - 1 - offset
-    h_conj = _hermitian(h[::-1])
+    # for the adjoint, we will simply use the conjugate of h
+    h_conj = jnp.conjugate(h)
+    # invert the entries as lax convolve is actually correlation
+    h = h[slice(None, None, -1)]
     f_slice = slice(forward, forward+n, None)
     b_slice = slice(adjoint, adjoint+n, None)
-    times1d = lambda x : jnp.convolve(x, h, 'full')[f_slice]
-    trans1d = lambda x : jnp.convolve(x, h_conj, 'full')[b_slice]
+    
+    # add additional dimensions to h
+    h =  h[None, None, None]
+    h_conj = h_conj[None, None, None]
+    # padding for conv_general_dilated
+    padding = [(0, 0), (m - 1, m - 1)]
+    # strides for conv_general_dilated
+    strides = (1,1)
+
+    def times1d(x):
+        """Forward convolution
+        """
+        result = lax.conv_general_dilated(x[None, None, None], h, strides, 
+            padding)
+        return result[0, 0, 0, f_slice]
+
+    def trans1d(x):
+        """Adjoint convolution
+        """
+        result = lax.conv_general_dilated(x[None, None, None], h_conj, strides, 
+            padding)
+        return result[0, 0, 0, b_slice]
+
     times, trans = apply_along_axis(times1d, trans1d, axis)
     return Operator(times=times, trans=trans, shape=(n,n))
 
@@ -57,6 +82,7 @@ def convolve2D(shape, h, offset=None, axes=None):
     assert N == 2
     # Implemented in terms of N dimensional convolution
     return convolveND(shape, h, offset, axes)
+
 
 def convolveND(shape, h, offset=None, axes=None):
     """Performs N dimensional convolution on input array
@@ -103,6 +129,35 @@ def convolveND(shape, h, offset=None, axes=None):
         h_dims = np.ones(data_ndim, dtype=int)
         h_dims[axes] = h.shape
         h = jnp.reshape(h, h_dims)
-    times = lambda x : jsp.signal.convolve(jnp.reshape(x, shape), h, 'full')[f_slices]
-    trans = lambda x : jsp.signal.correlate(jnp.reshape(x, shape), h, 'full')[a_slices]
+    
+    padding = [(s - 1, s - 1) for s in h.shape]
+    strides = tuple(1 for s in h.shape)
+    # reverse the h kernel
+    h_conv = h[tuple(slice(None, None, -1) for s in shape)]
+    # extend it
+    h_conv = h_conv[None, None]
+    h_corr = h[None, None]
+
+    def times(x):
+        """Forward N-D convolution
+        """
+        # Make sure that x has the appropriate shape
+        x = jnp.reshape(x, shape)
+        result = lax.conv_general_dilated(x[None, None], h_conv, strides, 
+            padding)
+        result = result[0, 0]
+        # pick the slices from other dimensions
+        return result[f_slices]
+
+    def trans(x):
+        """Backward N-D convolution
+        """
+        # Make sure that x has the appropriate shape
+        x = jnp.reshape(x, shape)
+        result = lax.conv_general_dilated(x[None, None], h_corr, strides, 
+            padding)
+        result = result[0, 0]
+        # pick the slices from other dimensions
+        return result[a_slices]
+
     return Operator(times=times, trans=trans, shape=(shape,shape))
