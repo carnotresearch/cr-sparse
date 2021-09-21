@@ -18,6 +18,8 @@ Utility functions for working with vectors
 
 from jax import jit
 import jax.numpy as jnp
+from jax.scipy import signal
+
 
 from .util import promote_arg_dtypes
 
@@ -263,3 +265,13 @@ def vec_centered(x, length):
     return x[start:end]
 
 vec_centered_jit = jit(vec_centered, static_argnums=(1,))
+
+
+def vec_convolve(x, h):
+    """1D full convolution based on a hack suggested by Jake Vanderplas
+
+    See https://github.com/google/jax/discussions/7961 for details
+    """
+    return signal.convolve(x[None], h[None])[0]
+
+vec_convolve_jit = jit(vec_convolve)
