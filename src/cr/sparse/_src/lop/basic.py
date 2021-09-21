@@ -72,12 +72,23 @@ def diagonal(d, axis=0):
     return Operator(times=times, trans=trans, shape=(n,n))
 
 
-def zero(m,n=None):
-    """Returns a linear operator which maps everything to 0 vector in data space"""
-    n = m if n is None else n
-    times = lambda x: jnp.zeros( (m,) + x.shape[1:], dtype=x.dtype)
-    trans = lambda x: jnp.zeros((n,) + x.shape[1:], dtype=x.dtype)
-    return Operator(times=times, trans=trans, shape=(m,n))
+def zero(in_dim, out_dim=None, axis=0):
+    """Returns a linear operator which maps everything to 0 vector in data space
+
+    Args:
+        in_dim (int): Dimension of the model space 
+        out_dim (int): Dimension of the data space (default in_dim)
+        axis (int): For multi-dimensional array input, the axis along which
+          the linear operator will be applied 
+
+    Returns:
+        Operator: A zero linear operator
+    """
+    out_dim = in_dim if out_dim is None else out_dim
+    times = lambda x: jnp.zeros(out_dim, dtype=x.dtype)
+    trans = lambda x: jnp.zeros(in_dim, dtype=x.dtype)
+    times, trans = apply_along_axis(times, trans, axis)
+    return Operator(times=times, trans=trans, shape=(out_dim,in_dim))
 
 def flipud(n):
     """Returns an operator which flips the order of entries in input upside down"""
