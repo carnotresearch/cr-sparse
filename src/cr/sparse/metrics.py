@@ -25,5 +25,6 @@ from cr.sparse._src.metrics import (
     root_mse,
     normalization_factor,
     normalized_root_mse,
-    peak_signal_noise_ratio
+    peak_signal_noise_ratio,
+    signal_noise_ratio
 )

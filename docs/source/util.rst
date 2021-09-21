@@ -73,6 +73,7 @@ These functions are available under ``cr.sparse.metrics``.
     root_mse
     normalized_root_mse
     peak_signal_noise_ratio
+    signal_noise_ratio
 
 
 Some checks and utilities for matrices (2D arrays)
