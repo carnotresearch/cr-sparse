@@ -1,3 +1,5 @@
+.. _api:lop:
+
 Linear Operators
 =======================
 
@@ -139,16 +141,26 @@ Signal processing operators
     convolve2D
     convolveND
 
-Orthonormal bases and multi-base dictionaries
+
+Orthonormal transforms and bases
 ------------------------------------------------
 
 .. autosummary::
     :toctree: _autosummary
 
+    dwt
+    dwt2D
     fourier_basis
-    dirac_fourier_basis
     cosine_basis
     walsh_hadamard_basis
+
+Unions of bases
+--------------------
+
+.. autosummary::
+    :toctree: _autosummary
+
+    dirac_fourier_basis
 
 
 Random compressive sensing operators

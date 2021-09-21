@@ -122,7 +122,19 @@ def waverec2(coefs, rec_lo, rec_hi, level, axes):
 
 
 def dwt(n, wavelet="haar", level=1, axis=0, basis=False):
-    """1D Discrete Wavelet Transform operator
+    """Returns a 1D Discrete Wavelet Transform operator
+
+    Args:
+        n (int): Dimension of the input signal and output coefficients  
+        wavelet (string): Name of the discrete wavelet to be used (see :ref:`api:wavelets`)
+        level (int): Number of wavelet decompositions (default 1) 
+        axis (int): For multi-dimensional array input, the axis along which
+          the linear operator will be applied
+        basis (bool): If False, the transform operator is returned. 
+          If True, the wavelet basis operator is returned instead. Default False. 
+
+    Returns:
+        Operator: A linear operator wrapping 1D DWT transform or basis
     """
     wavelet = wt.to_wavelet(wavelet)
     dec_lo = wavelet.dec_lo
@@ -155,7 +167,19 @@ def dwt(n, wavelet="haar", level=1, axis=0, basis=False):
 
 
 def dwt2D(shape, wavelet="haar", level=1, axes=None, basis=False):
-    """2D Discrete Wavelet Transform operator
+    """Returns a 2D Discrete Wavelet Transform operator
+
+    Args:
+        shape (tuple): Shape of input image / output coefficients  
+        wavelet (string): Name of the discrete wavelet to be used (see :ref:`api:wavelets`)
+        level (int): Number of wavelet decompositions (default 1) 
+        axes (tuple): For multi-dimensional array input, the pair of axes along which
+          the linear operator will be applied
+        basis (bool): If False, the transform operator is returned. 
+          If True, the wavelet basis operator is returned instead. Default False. 
+
+    Returns:
+        Operator: A linear operator wrapping 2D DWT transform or basis
     """
     wavelet = wt.to_wavelet(wavelet)
     dec_lo = wavelet.dec_lo

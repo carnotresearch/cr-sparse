@@ -73,7 +73,7 @@ def normalization_factor(array, normalization : str):
 
 @partial(jit, static_argnames=("normalization",))
 def normalized_root_mse(reference_arr, test_arr, normalization='euclidean'):
-    """Returns the root mean square error between two arrays
+    """Returns the normalized root mean square error between two arrays
     """
     rmse = root_mse(reference_arr, test_arr)
     denom = normalization_factor(reference_arr, normalization)
@@ -91,3 +91,29 @@ def peak_signal_noise_ratio(reference_arr, test_arr):
     drange = max_val - min_val
     mse = mean_squared_error(reference_arr, test_arr)
     return 10 * jnp.log10((drange ** 2) / mse)
+
+@jit
+def signal_noise_ratio(reference_arr, test_arr):
+    """Returns the signal to noise ratio between a reference array and a test array
+
+    Args:
+        reference_arr (jax.numpy.ndarray): Reference signal (can be ND array)
+        test_arr (jax.numpy.ndarray): Test signal (can be ND array)
+
+    Returns:
+        Signal to Noise Ratio between reference and test signals
+
+    Example:
+        ::
+
+            >>> x = jnp.ones(10)
+            >>> y = 0.9 * x
+            >>> signal_noise_ratio(x, y)
+            DeviceArray(19.999998, dtype=float32)
+    """
+    reference_arr, test_arr = promote_arg_dtypes(reference_arr, test_arr)
+    ref_energy = jnp.abs(jnp.vdot(reference_arr, reference_arr))
+    error = reference_arr - test_arr
+    err_energy = jnp.abs(jnp.vdot(error, error))
+    return 10 * jnp.log10(ref_energy/ err_energy)
+

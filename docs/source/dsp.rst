@@ -1,3 +1,5 @@
+.. _api:dsp:
+
 Digital Signal Processing
 ===============================
 

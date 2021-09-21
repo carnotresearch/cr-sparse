@@ -23,6 +23,21 @@ def time_values(fs, T, initial_time=0, endpoint=False):
         T (float): Period of the signal in seconds.
         initial_time (float): time at waveform start in seconds, default is 0.
         endpoint (bool): Whether to include last end point in the sequence or not, default is False.
+
+    Returns:
+        jax.numpy.ndarray: A 1D array of time values
+
+    Example:
+        ::
+
+            >>> fs=2 # Hz
+            >>> T = 4 # Sec
+            >>> cr.sparse.dsp.time_values(fs, T)
+            DeviceArray([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. , 3.5], dtype=float32)
+            >>> cr.sparse.dsp.time_values(fs, T, endpoint=True)
+            DeviceArray([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. , 3.5, 4. ], dtype=float32)
+            >>> cr.sparse.dsp.time_values(fs, T, initial_time=-2, endpoint=True)
+            DeviceArray([-2. , -1.5, -1. , -0.5,  0. ,  0.5,  1. ,  1.5,  2. ], dtype=float32)
     """
     # Number of samples
     n = int(fs * T) + int(endpoint)
