@@ -3,13 +3,6 @@ Vector Norms
 
 Our interest is in operators mapping vectors from a model space :math:`\mathbb{C}^n` to a data space :math:`\mathbb{C}^m`.
 
-.. note::
-
-    The vectors may be stored using multi-dimensional arrays in memory. E.g., images are usually stored in 2-3 dimensional arrays.
-    The operators themselves may work directly on multi-dimensions arrays. E.g. a convolution operator can be applied directly
-    to an image to result in another image.
-
-
 There are some simple and useful results on relationships between 
 different  :math:`p`-norms listed in this section. We also discuss
 some interesting properties of  :math:`l_1`-norm specifically.
