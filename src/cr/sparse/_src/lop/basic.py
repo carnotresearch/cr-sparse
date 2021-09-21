@@ -53,12 +53,22 @@ def matrix(A, axis=0):
     times, trans = apply_along_axis(times, trans, axis)
     return Operator(times=times, trans=trans, shape=(m,n))
 
-def diagonal(d):
-    """Returns a linear operator which can be represented by a diagonal matrix"""
+def diagonal(d, axis=0):
+    """Returns a linear operator which mimics multiplication by a diagonal matrix
+
+    Args:
+        d (jax.numpy.ndarray): A vector (1D array) of diagonal entries
+        axis (int): For multi-dimensional array input, the axis along which
+          the linear operator will be applied 
+
+    Returns:
+        Operator: A linear operator wrapping the diagonal matrix multiplication
+    """
     assert d.ndim == 1
     n = d.shape[0]
     times = lambda x: d * x
     trans = lambda x: _hermitian(d) * x
+    times, trans = apply_along_axis(times, trans, axis)
     return Operator(times=times, trans=trans, shape=(n,n))
 
 
