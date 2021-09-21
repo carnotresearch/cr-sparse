@@ -10,6 +10,8 @@ This example demonstrates following features:
 
 - ``cr.sparse.lop.convolve2D`` A 2D convolution linear operator
 - ``cr.sparse.sls.lsqr`` LSQR algorithm for solving a least square problem on 2D images
+- ``cr.sparse.lop.dwt2D`` A 2D discrete wavelet basis operator
+- ``cr.sparse.sls.fista`` Fast Iterative Shrinkage and Thresholding Algorithm on 2D images
 
 Image deblurring can be treated as a deconvolution problem if the filter used
 for blurring the image is known.
@@ -50,7 +52,7 @@ print(image.shape)
 
 # %%
 # Gaussian blur kernel
-# ----------------------
+# ''''''''''''''''''''''''''''''''''''''''''''''''''''''
 h  = vision.kernel_gaussian((15,25), (8,4))
 # plot the kernel
 fig, ax = plt.subplots(1, 1, figsize=(5, 3))
@@ -86,7 +88,7 @@ ax[1].set_title('After blurring')
 
 # %%
 # The deblurring using LSQR algorithm
-# ''''''''''''''''''''''''''''''''''''''''''''''''''''''
+# -------------------------------------------------
 # An initial guess of the deblurred image is all zeros
 x0 = jnp.zeros_like(blurred_image)
 # We run LSQR algorithm to deblur the image for 50 iterations
@@ -108,7 +110,7 @@ print(sol)
 
 # %%
 # A wavelet basis for the images
-# ''''''''''''''''''''''''''''''''''''''''''''''''''''''
+# ---------------------------------------------------------------------------
 # Construct the basis
 DWT_basis = lop.dwt2D(image.shape, wavelet='haar', level=3, basis=True)
 DWT_basis = lop.jit(DWT_basis)
@@ -123,7 +125,7 @@ ax[1].set_title('Wavelet coefficients')
 
 # %%
 # Deblurring with Fast Iterative Shrinkage and Thresholding Algorithm
-# '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+# ---------------------------------------------------------------------------
 # We combine the convolution operator and the wavelet basis operator 
 A = H @ DWT_basis
 # Step size for the FISTA algorithm
