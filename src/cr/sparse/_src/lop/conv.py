@@ -60,14 +60,16 @@ def convolve(n, h, offset=0, axis=0):
     def times1d(x):
         """Forward convolution
         """
-        result = lax.conv_general_dilated(x[None, None, None], h, strides, 
+        x, f = promote_arg_dtypes(x, h)
+        result = lax.conv_general_dilated(x[None, None, None], f, strides, 
             padding)
         return result[0, 0, 0, f_slice]
 
     def trans1d(x):
         """Adjoint convolution
         """
-        result = lax.conv_general_dilated(x[None, None, None], h_conj, strides, 
+        x, f = promote_arg_dtypes(x, h_conj)
+        result = lax.conv_general_dilated(x[None, None, None], f, strides, 
             padding)
         return result[0, 0, 0, b_slice]
 
@@ -141,9 +143,10 @@ def convolveND(shape, h, offset=None, axes=None):
     def times(x):
         """Forward N-D convolution
         """
+        x, f = promote_arg_dtypes(x, h_conv)
         # Make sure that x has the appropriate shape
         x = jnp.reshape(x, shape)
-        result = lax.conv_general_dilated(x[None, None], h_conv, strides, 
+        result = lax.conv_general_dilated(x[None, None], f, strides, 
             padding)
         result = result[0, 0]
         # pick the slices from other dimensions
@@ -152,9 +155,10 @@ def convolveND(shape, h, offset=None, axes=None):
     def trans(x):
         """Backward N-D convolution
         """
+        x, f = promote_arg_dtypes(x, h_corr)
         # Make sure that x has the appropriate shape
         x = jnp.reshape(x, shape)
-        result = lax.conv_general_dilated(x[None, None], h_corr, strides, 
+        result = lax.conv_general_dilated(x[None, None], f, strides, 
             padding)
         result = result[0, 0]
         # pick the slices from other dimensions
