@@ -1,3 +1,5 @@
+.. _api:opt:
+
 Numerical Optimization Routines
 ==================================
 

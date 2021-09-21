@@ -133,6 +133,21 @@
 <span class="sd">        T (float): Period of the signal in seconds.</span>
 <span class="sd">        initial_time (float): time at waveform start in seconds, default is 0.</span>
 <span class="sd">        endpoint (bool): Whether to include last end point in the sequence or not, default is False.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        jax.numpy.ndarray: A 1D array of time values</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; fs=2 # Hz</span>
+<span class="sd">            &gt;&gt;&gt; T = 4 # Sec</span>
+<span class="sd">            &gt;&gt;&gt; cr.sparse.dsp.time_values(fs, T)</span>
+<span class="sd">            DeviceArray([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. , 3.5], dtype=float32)</span>
+<span class="sd">            &gt;&gt;&gt; cr.sparse.dsp.time_values(fs, T, endpoint=True)</span>
+<span class="sd">            DeviceArray([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. , 3.5, 4. ], dtype=float32)</span>
+<span class="sd">            &gt;&gt;&gt; cr.sparse.dsp.time_values(fs, T, initial_time=-2, endpoint=True)</span>
+<span class="sd">            DeviceArray([-2. , -1.5, -1. , -0.5,  0. ,  0.5,  1. ,  1.5,  2. ], dtype=float32)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Number of samples</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fs</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span>

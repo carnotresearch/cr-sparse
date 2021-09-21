@@ -1,3 +1,5 @@
+.. _api:lop:
+
 Linear Operators
 =======================
 
@@ -58,6 +60,44 @@ function implements the adjoint operation.
 
 An inverse problem consists of computing :math:`x` given :math:`y` and :math:`A`.
 
+..  rubric:: 1D, 2D, ND operators
+
+* A 1D operator takes a 1D array as input and returns a 1D array as output.
+  E.g. identity, pad, etc.
+* A 2D operator takes a 2D array as input and returns a 2D array as output. 
+  E.g. conv2D, dwt2D, etc.
+* An ND operator takes an ND array as input and returns an ND array as output.
+
+The vectors may be stored using multi-dimensional arrays in memory. 
+E.g., images are usually stored in 2-3 dimensional arrays.
+The operators themselves may work directly on multi-dimensions arrays. 
+E.g. a 2D convolution operator can be applied directly
+to an image to result in another image. 
+
+In other words, the vectors from the model space as well as data space 
+may be stored in memory using 1D,2D,...,ND array.  They should still
+be treated as vectors for the purposes of this module.
+
+This is a departure from pylops convention where input to a 
+linear operator must be flattened into a 1D array and output 
+needs to be reshaped again.
+In this library, the input and output to a 2D linear operator 
+would be a 2D array.
+
+.. rubric:: axis parameter in a 1D linear operator
+
+* A 1D linear operator may get an ND array as input.
+* In this case, the axis parameter to the operator specifies the
+ axis along which the linear operator is to be applied.
+* The input ND array will be broken into slices of 1D arrays along the
+  axis and the linear operator will be applied separately to each slice.
+* Then the slices will be combined to generate the output ND array.
+* E.g. if the input is a matrix then:
+  
+  * axis=0 means apply the linear operator over each column (along axis=0)
+  * axis=1 means apply the linear operator over each row  (along axis=1)
+
+This is based on the convention followed by ``numpy.apply_along_axis``.
 
 .. currentmodule:: cr.sparse.lop
 
@@ -101,16 +141,26 @@ Signal processing operators
     convolve2D
     convolveND
 
-Orthonormal bases and multi-base dictionaries
+
+Orthonormal transforms and bases
 ------------------------------------------------
 
 .. autosummary::
     :toctree: _autosummary
 
+    dwt
+    dwt2D
     fourier_basis
-    dirac_fourier_basis
     cosine_basis
     walsh_hadamard_basis
+
+Unions of bases
+--------------------
+
+.. autosummary::
+    :toctree: _autosummary
+
+    dirac_fourier_basis
 
 
 Random compressive sensing operators

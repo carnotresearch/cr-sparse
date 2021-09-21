@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cr.sparse._src.lop.dwt &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../../../_static/js/custom.js"></script>
+    <script src="../../../../../_static/js/mathconf.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../la/index.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../sls/index.html">Sparse Linear Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../changelog.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../development.html">Development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for cr.sparse._src.lop.dwt</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2021 CR.Sparse Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;Linear Operators based on Wavelet Transforms</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">lax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+
+<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">wt</span>
+<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">promote_arg_dtypes</span>
+
+<span class="kn">from</span> <span class="nn">.lop</span> <span class="kn">import</span> <span class="n">Operator</span>
+<span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">apply_along_axis</span>
+
+<span class="nd">@partial</span><span class="p">(</span><span class="n">jit</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,))</span>
+<span class="k">def</span> <span class="nf">wavedec</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute multilevel wavelet decomposition</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span> <span class="o">=</span> <span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">)</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">dwt_</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="s1">&#39;periodization&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">level</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">dwt_</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="s1">&#39;periodization&#39;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">d</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="nd">@partial</span><span class="p">(</span><span class="n">jit</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,))</span>
+<span class="k">def</span> <span class="nf">waverec</span><span class="p">(</span><span class="n">coefs</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute multilevel wavelet reconstruction</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">coefs</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span> <span class="o">=</span> <span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">coefs</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span><span class="p">)</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="n">coefs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">level</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">coefs</span><span class="p">[:</span><span class="n">mid</span><span class="p">]</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span><span class="o">*</span><span class="mi">2</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">level</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">coefs</span><span class="p">[</span><span class="n">mid</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">idwt_</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span><span class="p">,</span> <span class="s1">&#39;periodization&#39;</span><span class="p">)</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">end</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">a</span>
+
+<span class="nd">@partial</span><span class="p">(</span><span class="n">jit</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">wavedec2</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">axes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute multilevel wavelet decomposition of 2D images</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">image</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span> <span class="o">=</span> <span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">)</span>
+    <span class="n">ax0</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;periodization&#39;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">image</span>
+    <span class="n">slices</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">ndim</span><span class="p">)]</span>
+    <span class="n">slices</span><span class="p">[</span><span class="n">ax0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">ax0</span><span class="p">])</span>
+    <span class="n">slices</span><span class="p">[</span><span class="n">ax1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">ax1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">level</span><span class="p">):</span>
+        <span class="n">ca</span><span class="p">,</span> <span class="n">cd</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">dwt_axis_</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="n">ax0</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+        <span class="n">caa</span><span class="p">,</span> <span class="n">cad</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">dwt_axis_</span><span class="p">(</span><span class="n">ca</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+        <span class="n">cda</span><span class="p">,</span> <span class="n">cdd</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">dwt_axis_</span><span class="p">(</span><span class="n">cd</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+        <span class="n">ca</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">caa</span><span class="p">,</span> <span class="n">cad</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+        <span class="n">cd</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">cda</span><span class="p">,</span> <span class="n">cdd</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+        <span class="n">coefs</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">ca</span><span class="p">,</span> <span class="n">cd</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="n">ax0</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">slices</span><span class="p">)]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">coefs</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">caa</span>
+        <span class="n">slices</span><span class="p">[</span><span class="n">ax0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">caa</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">ax0</span><span class="p">])</span>
+        <span class="n">slices</span><span class="p">[</span><span class="n">ax1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">caa</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">ax1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="nd">@partial</span><span class="p">(</span><span class="n">jit</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">waverec2</span><span class="p">(</span><span class="n">coefs</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">axes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute multilevel wavelet reconstruction for 2D images</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">coefs</span> <span class="o">=</span> <span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">coefs</span><span class="p">)</span>
+    <span class="n">ax0</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;periodization&#39;</span>
+    <span class="n">mid0</span> <span class="o">=</span> <span class="n">coefs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">ax0</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">level</span>
+    <span class="n">mid1</span> <span class="o">=</span> <span class="n">coefs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">ax1</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">level</span>
+    <span class="n">slices</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">coefs</span><span class="o">.</span><span class="n">ndim</span><span class="p">)]</span>
+    <span class="n">slices</span><span class="p">[</span><span class="n">ax0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mid0</span><span class="p">)</span>
+    <span class="n">slices</span><span class="p">[</span><span class="n">ax1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mid1</span><span class="p">)</span>
+    <span class="n">caa</span> <span class="o">=</span> <span class="n">coefs</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">slices</span><span class="p">)]</span>
+    <span class="n">end0</span> <span class="o">=</span> <span class="n">mid0</span><span class="o">*</span><span class="mi">2</span>
+    <span class="n">end1</span> <span class="o">=</span> <span class="n">mid1</span><span class="o">*</span><span class="mi">2</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">level</span><span class="p">):</span>
+        <span class="c1"># cad</span>
+        <span class="n">slices</span><span class="p">[</span><span class="n">ax0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mid0</span><span class="p">)</span>
+        <span class="n">slices</span><span class="p">[</span><span class="n">ax1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">mid1</span><span class="p">,</span> <span class="n">end1</span><span class="p">)</span>
+        <span class="n">cad</span> <span class="o">=</span> <span class="n">coefs</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">slices</span><span class="p">)]</span>
+        <span class="c1"># cda</span>
+        <span class="n">slices</span><span class="p">[</span><span class="n">ax0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">mid0</span><span class="p">,</span> <span class="n">end0</span><span class="p">)</span>
+        <span class="n">slices</span><span class="p">[</span><span class="n">ax1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mid1</span><span class="p">)</span>
+        <span class="n">cda</span> <span class="o">=</span> <span class="n">coefs</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">slices</span><span class="p">)]</span>
+        <span class="c1"># cdd</span>
+        <span class="n">slices</span><span class="p">[</span><span class="n">ax0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">mid0</span><span class="p">,</span> <span class="n">end0</span><span class="p">)</span>
+        <span class="n">slices</span><span class="p">[</span><span class="n">ax1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">mid1</span><span class="p">,</span> <span class="n">end1</span><span class="p">)</span>
+        <span class="n">cdd</span> <span class="o">=</span> <span class="n">coefs</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">slices</span><span class="p">)]</span>
+        <span class="c1"># ca</span>
+        <span class="n">ca</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">idwt_axis_</span><span class="p">(</span><span class="n">caa</span><span class="p">,</span> <span class="n">cad</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span><span class="p">,</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+        <span class="c1"># cd</span>
+        <span class="n">cd</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">idwt_axis_</span><span class="p">(</span><span class="n">cda</span><span class="p">,</span> <span class="n">cdd</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span><span class="p">,</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+        <span class="c1"># combine ca,cd</span>
+        <span class="n">caa</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">idwt_axis_</span><span class="p">(</span><span class="n">ca</span><span class="p">,</span> <span class="n">cd</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span><span class="p">,</span> <span class="n">ax0</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+        <span class="c1"># now update the ranges for next round</span>
+        <span class="n">mid0</span> <span class="o">=</span> <span class="n">end0</span>
+        <span class="n">mid1</span> <span class="o">=</span> <span class="n">end1</span>
+        <span class="n">end0</span> <span class="o">=</span> <span class="n">mid0</span><span class="o">*</span><span class="mi">2</span>
+        <span class="n">end1</span> <span class="o">=</span> <span class="n">mid1</span><span class="o">*</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">caa</span>
+
+
+<div class="viewcode-block" id="dwt"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.dwt.html#cr.sparse.lop.dwt">[docs]</a><span class="k">def</span> <span class="nf">dwt</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">wavelet</span><span class="o">=</span><span class="s2">&quot;haar&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns a 1D Discrete Wavelet Transform operator</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        n (int): Dimension of the input signal and output coefficients  </span>
+<span class="sd">        wavelet (string): Name of the discrete wavelet to be used (see :ref:`api:wavelets`)</span>
+<span class="sd">        level (int): Number of wavelet decompositions (default 1) </span>
+<span class="sd">        axis (int): For multi-dimensional array input, the axis along which</span>
+<span class="sd">          the linear operator will be applied</span>
+<span class="sd">        basis (bool): If False, the transform operator is returned. </span>
+<span class="sd">          If True, the wavelet basis operator is returned instead. Default False. </span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Operator: A linear operator wrapping 1D DWT transform or basis</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wavelet</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">to_wavelet</span><span class="p">(</span><span class="n">wavelet</span><span class="p">)</span>
+    <span class="n">dec_lo</span> <span class="o">=</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">dec_lo</span>
+    <span class="n">dec_hi</span> <span class="o">=</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">dec_hi</span>
+    <span class="n">rec_lo</span> <span class="o">=</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">rec_lo</span>
+    <span class="n">rec_hi</span> <span class="o">=</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">rec_hi</span>
+
+    <span class="c1"># We need to verify that the level is not too high</span>
+    <span class="n">max_level</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">dwt_max_level</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">dec_len</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">level</span> <span class="o">&lt;=</span> <span class="n">max_level</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Level too high level=</span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s2">, max_level=</span><span class="si">{</span><span class="n">max_level</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="n">m</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">next_pow_of_2</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">pad</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="o">-</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">times1d</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pad</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">wavedec</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">trans1d</span><span class="p">(</span><span class="n">coefs</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">waverec</span><span class="p">(</span><span class="n">coefs</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+
+    <span class="n">times</span><span class="p">,</span> <span class="n">trans</span> <span class="o">=</span> <span class="n">apply_along_axis</span><span class="p">(</span><span class="n">times1d</span><span class="p">,</span> <span class="n">trans1d</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">basis</span><span class="p">:</span>
+        <span class="c1"># Return the wavelet basis</span>
+        <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Return the wavelet transform</span>
+        <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="dwt2D"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.dwt2D.html#cr.sparse.lop.dwt2D">[docs]</a><span class="k">def</span> <span class="nf">dwt2D</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">wavelet</span><span class="o">=</span><span class="s2">&quot;haar&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns a 2D Discrete Wavelet Transform operator</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        shape (tuple): Shape of input image / output coefficients  </span>
+<span class="sd">        wavelet (string): Name of the discrete wavelet to be used (see :ref:`api:wavelets`)</span>
+<span class="sd">        level (int): Number of wavelet decompositions (default 1) </span>
+<span class="sd">        axes (tuple): For multi-dimensional array input, the pair of axes along which</span>
+<span class="sd">          the linear operator will be applied</span>
+<span class="sd">        basis (bool): If False, the transform operator is returned. </span>
+<span class="sd">          If True, the wavelet basis operator is returned instead. Default False. </span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Operator: A linear operator wrapping 2D DWT transform or basis</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wavelet</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">to_wavelet</span><span class="p">(</span><span class="n">wavelet</span><span class="p">)</span>
+    <span class="n">dec_lo</span> <span class="o">=</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">dec_lo</span>
+    <span class="n">dec_hi</span> <span class="o">=</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">dec_hi</span>
+    <span class="n">rec_lo</span> <span class="o">=</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">rec_lo</span>
+    <span class="n">rec_hi</span> <span class="o">=</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">rec_hi</span>
+
+    <span class="c1"># Make sure that input shape is more than 2D</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Input shape must be 2 or more dimensional&quot;</span>
+
+    <span class="k">if</span> <span class="n">axes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># By default, the DWT will happen over the first 2 dimensions</span>
+        <span class="n">axes</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">axes</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">axes</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">shape</span><span class="p">[</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">shape</span><span class="p">[</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+
+    <span class="c1"># We need to verify that the level is not too high</span>
+    <span class="n">max_level_1</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">dwt_max_level</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">dec_len</span><span class="p">)</span>
+    <span class="n">max_level_2</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">dwt_max_level</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">dec_len</span><span class="p">)</span>
+    <span class="n">max_level</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">max_level_1</span><span class="p">,</span> <span class="n">max_level_2</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">level</span> <span class="o">&lt;=</span> <span class="n">max_level</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Level too high level=</span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s2">, max_level=</span><span class="si">{</span><span class="n">max_level</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="n">hh</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">next_pow_of_2</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">ww</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">next_pow_of_2</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="n">pad</span> <span class="o">=</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">hh</span><span class="o">-</span><span class="n">h</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ww</span><span class="o">-</span><span class="n">w</span><span class="p">))</span>
+
+    <span class="n">out_shape</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">out_shape</span><span class="p">[</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">hh</span>
+    <span class="n">out_shape</span><span class="p">[</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">ww</span>
+    <span class="n">out_shape</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">out_shape</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">times</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pad</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">wavedec2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">axes</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">trans</span><span class="p">(</span><span class="n">coefs</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">waverec2</span><span class="p">(</span><span class="n">coefs</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">axes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">[:</span><span class="n">h</span><span class="p">,</span> <span class="p">:</span><span class="n">w</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">basis</span><span class="p">:</span>
+        <span class="c1"># Return the wavelet basis</span>
+        <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">out_shape</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Return the wavelet transform</span>
+        <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">out_shape</span><span class="p">,</span> <span class="n">shape</span><span class="p">))</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2021, CR-Sparse Development Team.
+      
+    </div>
+
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

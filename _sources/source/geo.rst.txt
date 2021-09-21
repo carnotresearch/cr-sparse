@@ -1,3 +1,5 @@
+.. _api:geo:
+
 Geophysical Signal Processing
 ===================================
 

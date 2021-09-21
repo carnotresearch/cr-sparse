@@ -28,7 +28,7 @@
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="CoSaMP step by step" href="../pursuit/cosamp_step_by_step.html" />
+    <link rel="next" title="Wavelet Transform Operators" href="wt_op.html" />
     <link rel="prev" title="Deconvolution" href="deconvolution.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -88,7 +88,7 @@
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html">Examples Gallery</a><ul>
       <li>Previous: <a href="deconvolution.html" title="previous chapter">Deconvolution</a></li>
-      <li>Next: <a href="../pursuit/cosamp_step_by_step.html" title="next chapter">CoSaMP step by step</a></li>
+      <li>Next: <a href="wt_op.html" title="next chapter">Wavelet Transform Operators</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -128,22 +128,24 @@ to download the full example code</p>
 <span id="sphx-glr-gallery-lop-deblurring-py"></span><h1>Image Deblurring<a class="headerlink" href="#image-deblurring" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#problem-setup" id="id1">Problem Setup</a></p></li>
-<li><p><a class="reference internal" href="#gaussian-blur-kernel" id="id2">Gaussian blur kernel</a></p>
+<li><p><a class="reference internal" href="#problem-setup" id="id1">Problem Setup</a></p>
 <ul>
+<li><p><a class="reference internal" href="#gaussian-blur-kernel" id="id2">Gaussian blur kernel</a></p></li>
 <li><p><a class="reference internal" href="#the-linear-operator-for-the-blur-kernel" id="id3">The linear operator for the blur kernel</a></p></li>
 <li><p><a class="reference internal" href="#the-blurring" id="id4">The blurring</a></p></li>
+</ul>
+</li>
 <li><p><a class="reference internal" href="#the-deblurring-using-lsqr-algorithm" id="id5">The deblurring using LSQR algorithm</a></p></li>
 <li><p><a class="reference internal" href="#a-wavelet-basis-for-the-images" id="id6">A wavelet basis for the images</a></p></li>
 <li><p><a class="reference internal" href="#deblurring-with-fast-iterative-shrinkage-and-thresholding-algorithm" id="id7">Deblurring with Fast Iterative Shrinkage and Thresholding Algorithm</a></p></li>
-</ul>
-</li>
 </ul>
 </div>
 <p>This example demonstrates following features:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">cr.sparse.lop.convolve2D</span></code> A 2D convolution linear operator</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cr.sparse.sls.lsqr</span></code> LSQR algorithm for solving a least square problem on 2D images</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cr.sparse.lop.dwt2D</span></code> A 2D discrete wavelet basis operator</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cr.sparse.sls.fista</span></code> Fast Iterative Shrinkage and Thresholding Algorithm on 2D images</p></li>
 </ul>
 <p>Image deblurring can be treated as a deconvolution problem if the filter used
 for blurring the image is known.</p>
@@ -181,9 +183,8 @@ for blurring the image is known.</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(200, 200)
 </pre></div>
 </div>
-</section>
 <section id="gaussian-blur-kernel">
-<h2><a class="toc-backref" href="#id2">Gaussian blur kernel</a><a class="headerlink" href="#gaussian-blur-kernel" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id2">Gaussian blur kernel</a><a class="headerlink" href="#gaussian-blur-kernel" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h</span>  <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">kernel_gaussian</span><span class="p">((</span><span class="mi">15</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="c1"># plot the kernel</span>
 <a href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a> <span class="o">=</span> <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
@@ -198,6 +199,7 @@ for blurring the image is known.</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(-0.5, 24.5, 14.5, -0.5)
 </pre></div>
 </div>
+</section>
 <section id="the-linear-operator-for-the-blur-kernel">
 <h3><a class="toc-backref" href="#id3">The linear operator for the blur kernel</a><a class="headerlink" href="#the-linear-operator-for-the-blur-kernel" title="Permalink to this headline">¶</a></h3>
 <p>Locate the center of the filter</p>
@@ -236,8 +238,9 @@ Text(0.5, 1.0, &#39;After blurring&#39;)
 </pre></div>
 </div>
 </section>
+</section>
 <section id="the-deblurring-using-lsqr-algorithm">
-<h3><a class="toc-backref" href="#id5">The deblurring using LSQR algorithm</a><a class="headerlink" href="#the-deblurring-using-lsqr-algorithm" title="Permalink to this headline">¶</a></h3>
+<h2><a class="toc-backref" href="#id5">The deblurring using LSQR algorithm</a><a class="headerlink" href="#the-deblurring-using-lsqr-algorithm" title="Permalink to this headline">¶</a></h2>
 <p>An initial guess of the deblurred image is all zeros</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.zeros_like.html#jax.numpy.zeros_like" title="jax.numpy.zeros_like" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">zeros_like</span></a><span class="p">(</span><span class="n">blurred_image</span><span class="p">)</span>
 <span class="c1"># We run LSQR algorithm to deblur the image for 50 iterations</span>
@@ -273,7 +276,7 @@ n_trans: 50
 </div>
 </section>
 <section id="a-wavelet-basis-for-the-images">
-<h3><a class="toc-backref" href="#id6">A wavelet basis for the images</a><a class="headerlink" href="#a-wavelet-basis-for-the-images" title="Permalink to this headline">¶</a></h3>
+<h2><a class="toc-backref" href="#id6">A wavelet basis for the images</a><a class="headerlink" href="#a-wavelet-basis-for-the-images" title="Permalink to this headline">¶</a></h2>
 <p>Construct the basis</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DWT_basis</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">dwt2D</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#tuple" title="builtins.tuple" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">image</span><span class="o">.</span><span class="n">shape</span></a><span class="p">,</span> <span class="n">wavelet</span><span class="o">=</span><span class="s1">&#39;haar&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">DWT_basis</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">DWT_basis</span><span class="p">)</span>
@@ -293,7 +296,7 @@ n_trans: 50
 </div>
 </section>
 <section id="deblurring-with-fast-iterative-shrinkage-and-thresholding-algorithm">
-<h3><a class="toc-backref" href="#id7">Deblurring with Fast Iterative Shrinkage and Thresholding Algorithm</a><a class="headerlink" href="#deblurring-with-fast-iterative-shrinkage-and-thresholding-algorithm" title="Permalink to this headline">¶</a></h3>
+<h2><a class="toc-backref" href="#id7">Deblurring with Fast Iterative Shrinkage and Thresholding Algorithm</a><a class="headerlink" href="#deblurring-with-fast-iterative-shrinkage-and-thresholding-algorithm" title="Permalink to this headline">¶</a></h2>
 <p>We combine the convolution operator and the wavelet basis operator</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">H</span> <span class="o">@</span> <span class="n">DWT_basis</span>
 <span class="c1"># Step size for the FISTA algorithm</span>
@@ -338,7 +341,7 @@ Deblurred PSNR:  20.41179022466172 dB
 Text(0.5, 1.0, &#39;FISTA deblurring&#39;)
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  21.604 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  24.185 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-lop-deblurring-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/ff81b3dbb89737fc3407e69d867c1318/deblurring.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">deblurring.py</span></code></a></p>
@@ -348,7 +351,6 @@ Text(0.5, 1.0, &#39;FISTA deblurring&#39;)
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
-</section>
 </section>
 </section>
 

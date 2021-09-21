@@ -131,7 +131,7 @@
           <div class="body" role="main">
             
   <section id="linear-operators">
-<h1>Linear Operators<a class="headerlink" href="#linear-operators" title="Permalink to this headline">¶</a></h1>
+<span id="api-lop"></span><h1>Linear Operators<a class="headerlink" href="#linear-operators" title="Permalink to this headline">¶</a></h1>
 <p>We provide a collection of linear operators with efficient JAX based implementations
 that are
 relevant in standard signal/image processing problems.
@@ -165,6 +165,47 @@ complex numbers.
 The <code class="docutils literal notranslate"><span class="pre">times</span></code> function implements the forward operation while the <code class="docutils literal notranslate"><span class="pre">trans</span></code>
 function implements the adjoint operation.</p>
 <p>An inverse problem consists of computing <span class="math notranslate nohighlight">\(x\)</span> given <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p class="rubric">1D, 2D, ND operators</p>
+<ul class="simple">
+<li><p>A 1D operator takes a 1D array as input and returns a 1D array as output.
+E.g. identity, pad, etc.</p></li>
+<li><p>A 2D operator takes a 2D array as input and returns a 2D array as output.
+E.g. conv2D, dwt2D, etc.</p></li>
+<li><p>An ND operator takes an ND array as input and returns an ND array as output.</p></li>
+</ul>
+<p>The vectors may be stored using multi-dimensional arrays in memory.
+E.g., images are usually stored in 2-3 dimensional arrays.
+The operators themselves may work directly on multi-dimensions arrays.
+E.g. a 2D convolution operator can be applied directly
+to an image to result in another image.</p>
+<p>In other words, the vectors from the model space as well as data space
+may be stored in memory using 1D,2D,…,ND array.  They should still
+be treated as vectors for the purposes of this module.</p>
+<p>This is a departure from pylops convention where input to a
+linear operator must be flattened into a 1D array and output
+needs to be reshaped again.
+In this library, the input and output to a 2D linear operator
+would be a 2D array.</p>
+<p class="rubric">axis parameter in a 1D linear operator</p>
+<ul class="simple">
+<li><p>A 1D linear operator may get an ND array as input.</p></li>
+<li><p>In this case, the axis parameter to the operator specifies the</p></li>
+</ul>
+<blockquote>
+<div><p>axis along which the linear operator is to be applied.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>The input ND array will be broken into slices of 1D arrays along the
+axis and the linear operator will be applied separately to each slice.</p></li>
+<li><p>Then the slices will be combined to generate the output ND array.</p></li>
+<li><p>E.g. if the input is a matrix then:</p>
+<ul>
+<li><p>axis=0 means apply the linear operator over each column (along axis=0)</p></li>
+<li><p>axis=1 means apply the linear operator over each row  (along axis=1)</p></li>
+</ul>
+</li>
+</ul>
+<p>This is based on the convention followed by <code class="docutils literal notranslate"><span class="pre">numpy.apply_along_axis</span></code>.</p>
 <section id="data-types">
 <h2>Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
@@ -187,16 +228,16 @@ function implements the adjoint operation.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.identity.html#cr.sparse.lop.identity" title="cr.sparse.lop.identity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">identity</span></code></a>(m[, n])</p></td>
-<td><p>Returns an identity linear operator from A to B</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.identity.html#cr.sparse.lop.identity" title="cr.sparse.lop.identity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">identity</span></code></a>(in_dim[, out_dim, axis])</p></td>
+<td><p>Returns an identity linear operator from model space to data space</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.matrix.html#cr.sparse.lop.matrix" title="cr.sparse.lop.matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrix</span></code></a>(A)</p></td>
-<td><p>Converts a two-dimensional matrix to a linear operator</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.matrix.html#cr.sparse.lop.matrix" title="cr.sparse.lop.matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrix</span></code></a>(A[, axis])</p></td>
+<td><p>Converts a matrix into a linear operator</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.diagonal.html#cr.sparse.lop.diagonal" title="cr.sparse.lop.diagonal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diagonal</span></code></a>(d)</p></td>
-<td><p>Returns a linear operator which can be represented by a diagonal matrix</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.diagonal.html#cr.sparse.lop.diagonal" title="cr.sparse.lop.diagonal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diagonal</span></code></a>(d[, axis])</p></td>
+<td><p>Returns a linear operator which mimics multiplication by a diagonal matrix</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.zero.html#cr.sparse.lop.zero" title="cr.sparse.lop.zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero</span></code></a>(m[, n])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.zero.html#cr.sparse.lop.zero" title="cr.sparse.lop.zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero</span></code></a>(in_dim[, out_dim, axis])</p></td>
 <td><p>Returns a linear operator which maps everything to 0 vector in data space</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.flipud.html#cr.sparse.lop.flipud" title="cr.sparse.lop.flipud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flipud</span></code></a>(n)</p></td>
@@ -243,25 +284,42 @@ function implements the adjoint operation.</p>
 </tbody>
 </table>
 </section>
-<section id="orthonormal-bases-and-multi-base-dictionaries">
-<h2>Orthonormal bases and multi-base dictionaries<a class="headerlink" href="#orthonormal-bases-and-multi-base-dictionaries" title="Permalink to this headline">¶</a></h2>
+<section id="orthonormal-transforms-and-bases">
+<h2>Orthonormal transforms and bases<a class="headerlink" href="#orthonormal-transforms-and-bases" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dwt.html#cr.sparse.lop.dwt" title="cr.sparse.lop.dwt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt</span></code></a>(n[, wavelet, level, axis, basis])</p></td>
+<td><p>Returns a 1D Discrete Wavelet Transform operator</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dwt2D.html#cr.sparse.lop.dwt2D" title="cr.sparse.lop.dwt2D"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt2D</span></code></a>(shape[, wavelet, level, axes, basis])</p></td>
+<td><p>Returns a 2D Discrete Wavelet Transform operator</p></td>
+</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.fourier_basis.html#cr.sparse.lop.fourier_basis" title="cr.sparse.lop.fourier_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fourier_basis</span></code></a>(n)</p></td>
 <td><p>Returns an operator which represents the DFT orthonormal basis</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dirac_fourier_basis.html#cr.sparse.lop.dirac_fourier_basis" title="cr.sparse.lop.dirac_fourier_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dirac_fourier_basis</span></code></a>(n)</p></td>
-<td><p>Returns an operator for a two-ortho basis dictionary consisting of Dirac basis and Fourier basis</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.cosine_basis.html#cr.sparse.lop.cosine_basis" title="cr.sparse.lop.cosine_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cosine_basis</span></code></a>(n)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.cosine_basis.html#cr.sparse.lop.cosine_basis" title="cr.sparse.lop.cosine_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cosine_basis</span></code></a>(n)</p></td>
 <td><p>Returns an operator which represents the DCT-II orthonormal basis</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.walsh_hadamard_basis.html#cr.sparse.lop.walsh_hadamard_basis" title="cr.sparse.lop.walsh_hadamard_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">walsh_hadamard_basis</span></code></a>(n)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.walsh_hadamard_basis.html#cr.sparse.lop.walsh_hadamard_basis" title="cr.sparse.lop.walsh_hadamard_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">walsh_hadamard_basis</span></code></a>(n)</p></td>
 <td><p>Returns an operator which represents the Walsh Hadamard Transform Basis</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="unions-of-bases">
+<h2>Unions of bases<a class="headerlink" href="#unions-of-bases" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dirac_fourier_basis.html#cr.sparse.lop.dirac_fourier_basis" title="cr.sparse.lop.dirac_fourier_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dirac_fourier_basis</span></code></a>(n)</p></td>
+<td><p>Returns an operator for a two-ortho basis dictionary consisting of Dirac basis and Fourier basis</p></td>
 </tr>
 </tbody>
 </table>

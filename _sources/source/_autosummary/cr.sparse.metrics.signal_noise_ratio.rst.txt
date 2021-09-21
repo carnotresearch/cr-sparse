@@ -1,0 +1,6 @@
+﻿cr.sparse.metrics.signal\_noise\_ratio
+======================================
+
+.. currentmodule:: cr.sparse.metrics
+
+.. autofunction:: signal_noise_ratio

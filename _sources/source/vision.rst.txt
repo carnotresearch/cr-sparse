@@ -1,3 +1,5 @@
+.. _api:vision:
+
 Computer Vision and Image Processing 
 ======================================
 

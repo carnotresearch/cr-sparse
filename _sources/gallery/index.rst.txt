@@ -109,6 +109,27 @@ Linear Operators
    :hidden:
 
    /gallery/lop/deblurring
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates following features:">
+
+.. only:: html
+
+ .. figure:: /gallery/lop/images/thumb/sphx_glr_wt_op_thumb.png
+     :alt: Wavelet Transform Operators
+
+     :ref:`sphx_glr_gallery_lop_wt_op.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/lop/wt_op
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

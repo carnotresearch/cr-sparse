@@ -1,3 +1,5 @@
+.. _api:dict:
+
 Sparsifying Dictionaries and Sensing Matrices
 ===================================================
 

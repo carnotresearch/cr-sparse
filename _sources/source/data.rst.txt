@@ -1,3 +1,5 @@
+.. _api:data:
+
 Sample Data Generation Utilities
 =====================================
 

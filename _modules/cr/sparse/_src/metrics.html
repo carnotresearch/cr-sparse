@@ -183,7 +183,7 @@
 
 <div class="viewcode-block" id="normalized_root_mse"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.metrics.normalized_root_mse.html#cr.sparse.metrics.normalized_root_mse">[docs]</a><span class="nd">@partial</span><span class="p">(</span><span class="n">jit</span><span class="p">,</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;normalization&quot;</span><span class="p">,))</span>
 <span class="k">def</span> <span class="nf">normalized_root_mse</span><span class="p">(</span><span class="n">reference_arr</span><span class="p">,</span> <span class="n">test_arr</span><span class="p">,</span> <span class="n">normalization</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the root mean square error between two arrays</span>
+    <span class="sd">&quot;&quot;&quot;Returns the normalized root mean square error between two arrays</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">rmse</span> <span class="o">=</span> <span class="n">root_mse</span><span class="p">(</span><span class="n">reference_arr</span><span class="p">,</span> <span class="n">test_arr</span><span class="p">)</span>
     <span class="n">denom</span> <span class="o">=</span> <span class="n">normalization_factor</span><span class="p">(</span><span class="n">reference_arr</span><span class="p">,</span> <span class="n">normalization</span><span class="p">)</span>
@@ -201,6 +201,32 @@
     <span class="n">drange</span> <span class="o">=</span> <span class="n">max_val</span> <span class="o">-</span> <span class="n">min_val</span>
     <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">reference_arr</span><span class="p">,</span> <span class="n">test_arr</span><span class="p">)</span>
     <span class="k">return</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="n">drange</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">mse</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="signal_noise_ratio"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.metrics.signal_noise_ratio.html#cr.sparse.metrics.signal_noise_ratio">[docs]</a><span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">signal_noise_ratio</span><span class="p">(</span><span class="n">reference_arr</span><span class="p">,</span> <span class="n">test_arr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the signal to noise ratio between a reference array and a test array</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reference_arr (jax.numpy.ndarray): Reference signal (can be ND array)</span>
+<span class="sd">        test_arr (jax.numpy.ndarray): Test signal (can be ND array)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Signal to Noise Ratio between reference and test signals</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        ::</span>
+
+<span class="sd">            &gt;&gt;&gt; x = jnp.ones(10)</span>
+<span class="sd">            &gt;&gt;&gt; y = 0.9 * x</span>
+<span class="sd">            &gt;&gt;&gt; signal_noise_ratio(x, y)</span>
+<span class="sd">            DeviceArray(19.999998, dtype=float32)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">reference_arr</span><span class="p">,</span> <span class="n">test_arr</span> <span class="o">=</span> <span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">reference_arr</span><span class="p">,</span> <span class="n">test_arr</span><span class="p">)</span>
+    <span class="n">ref_energy</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">reference_arr</span><span class="p">,</span> <span class="n">reference_arr</span><span class="p">))</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">reference_arr</span> <span class="o">-</span> <span class="n">test_arr</span>
+    <span class="n">err_energy</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">error</span><span class="p">))</span>
+    <span class="k">return</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">ref_energy</span><span class="o">/</span> <span class="n">err_energy</span><span class="p">)</span></div>
+
 </pre></div>
 
           </div>
