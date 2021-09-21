@@ -16,23 +16,41 @@ import jax.numpy as jnp
 
 from .impl import _hermitian
 from .lop import Operator
+from .util import apply_along_axis
 
 ###########################################################################################
 #  Basic operators
 ###########################################################################################
 
-def identity(m, n=None):
-    """Returns an identity linear operator from A to B"""
-    n = m if n is None else n
-    times = lambda x:  x
-    trans = lambda x : x
-    return Operator(times=times, trans=trans, shape=(m,n))
 
-def matrix(A):
-    """Converts a two-dimensional matrix to a linear operator"""
+def matrix(A, axis=0):
+    """Converts a matrix into a linear operator
+
+    Args:
+        A (jax.numpy.ndarray): A matrix (2D array) 
+        axis (int): For multi-dimensional array input, the axis along which
+          the linear operator will be applied 
+
+    Returns:
+        Operator: A linear operator wrapping the matrix
+
+    Forward operation: 
+
+    .. math::
+
+        y  = A x
+
+    Adjoint operation:
+
+    .. math::
+
+        y = A^H x = (x^H A)^H
+
+    """
     m, n = A.shape
     times = lambda x: A @ x
     trans = lambda x : _hermitian(_hermitian(x) @ A )
+    times, trans = apply_along_axis(times, trans, axis)
     return Operator(times=times, trans=trans, shape=(m,n))
 
 def diagonal(d):
