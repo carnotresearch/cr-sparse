@@ -31,7 +31,7 @@ def test_diag():
 
 def test_zero():
     m, n = 4, 5
-    Z = lop.zero(m, n)
+    Z = lop.zero(n, m)
     x = random.normal(keys[0], (m,))
     y = random.normal(keys[0], (n,))
     assert_allclose(Z.times(y), jnp.zeros((m,)))
