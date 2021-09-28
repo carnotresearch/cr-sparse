@@ -42,59 +42,25 @@ The library also provides
 Examples
 ----------------
 
-A greedy pursuit based sparse recovery with synthetic data
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+See the `examples gallery <https://cr-sparse.readthedocs.io/en/latest/gallery/index.html>`_ for an 
+extensive set of examples. Here is a small selection of examples:
 
-Build a Gaussian dictionary/sensing matrix:
-
-.. code:: python
-
-  from jax import random
-  import cr.sparse.dict as crdict
-  M = 128
-  N = 256
-  key = random.PRNGKey(0)
-  Phi = crdict.gaussian_mtx(key, M,N)
-
-Build a K-sparse signal with Gaussian non-zero entries:
-
-.. code:: python
-
-  import cr.sparse.data as crdata
-  import jax.numpy as jnp
-  K = 16
-  key, subkey = random.split(key)
-  x, omega = crdata.sparse_normal_representations(key, N, K, 1)
-  x = jnp.squeeze(x)
-
-Build the measurement vector:
-
-.. code:: python
-
-  y = Phi @ x
-
-
-Import the Compressive Sampling Matching Pursuit sparse recovery solver:
-
-.. code:: python
-
-  from cr.sparse.pursuit import cosamp
-
-Solve the recovery problem:
-
-.. code:: python
-
-  solution =  cosamp.matrix_solve(Phi, y, K)
-
-For the complete set of available solvers, see the documentation.
+* `Sparse recovery using Truncated Newton Interior Points Method <https://cr-sparse.readthedocs.io/en/latest/gallery/rec_l1/spikes_l1ls.html>`_ 
+* `Sparse recovery with ADMM <https://cr-sparse.readthedocs.io/en/latest/gallery/rec_l1/partial_wh_sensor_cosine_basis.html>`_ 
+* `Compressive sensing operators <https://cr-sparse.readthedocs.io/en/latest/gallery/lop/cs_operators.html>`_ 
+* `Image deblurring with LSQR and FISTA algorithms <https://cr-sparse.readthedocs.io/en/latest/gallery/lop/deblurring.html>`_ 
+* `Deconvolution of the effects of a Ricker wavelet <https://cr-sparse.readthedocs.io/en/latest/gallery/lop/deconvolution.html>`_ 
+* `Wavelet transform operators <https://cr-sparse.readthedocs.io/en/latest/gallery/lop/wt_op.html>`_ 
+* `CoSaMP step by step <https://cr-sparse.readthedocs.io/en/latest/gallery/pursuit/cosamp_step_by_step.html>`_ 
 
 Platform Support
 ----------------------
 
 ``cr-sparse`` can run on any platform supported by ``JAX``. 
-``JAX`` doesn't run natively on Windows platforms at the moment. 
-We have tested ``cr-sparse`` on Mac and Linux platforms.
+We have tested ``cr-sparse`` on Mac and Linux platforms and Google Colaboratory.
 
+``JAX`` is not officially supported on Windows platforms at the moment. 
+Although, it is possible to build it from source using Windows Subsystems for Linux.
 
 Installation
 -------------------------------
@@ -111,11 +77,6 @@ Directly from our GITHUB repository:
 
     python -m pip install git+https://github.com/carnotresearch/cr-sparse.git
 
-
-Exploring cr-sparse capabilities
------------------------------------
-
-* See the `examples gallery <https://cr-sparse.readthedocs.io/en/latest/gallery/index.html>`_
 
 Citing cr-sparse
 ------------------------
