@@ -3,6 +3,9 @@
 Linear Operators
 =======================
 
+.. contents::
+    :depth: 2
+    :local:
 
 We provide a collection of linear operators with efficient JAX based implementations 
 that are
@@ -88,7 +91,7 @@ would be a 2D array.
 
 * A 1D linear operator may get an ND array as input.
 * In this case, the axis parameter to the operator specifies the
- axis along which the linear operator is to be applied.
+  axis along which the linear operator is to be applied.
 * The input ND array will be broken into slices of 1D arrays along the
   axis and the linear operator will be applied separately to each slice.
 * Then the slices will be combined to generate the output ND array.
@@ -128,6 +131,27 @@ Basic operators
     pad_zeros
     symmetrize
     restriction
+
+Operator algebra
+------------------
+
+It is possible to combine one or more linear operators
+to create new linear operators. The functions in this
+section provide different ways to combine linear operators.
+
+.. autosummary::
+    :toctree: _autosummary
+
+    neg
+    scale
+    add
+    subtract
+    compose
+    transpose
+    hermitian
+    hcat
+    power
+    block_diag
 
 Signal processing operators
 ------------------------------------
@@ -203,21 +227,6 @@ These operators are technically not linear on :math:`\mathbb{F}^n \to \mathbb{F}
 
     real
 
-Operator algebra
-------------------
-
-.. autosummary::
-    :toctree: _autosummary
-
-    neg
-    scale
-    add
-    subtract
-    compose
-    transpose
-    hermitian
-    hcat
-    power
 
 Operator parts
 ------------------

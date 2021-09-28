@@ -91,9 +91,10 @@ Sampling frequency in Hz
 
 
 
-.. image:: /gallery/wavelets/images/sphx_glr_chirp_cwt_mexh_001.png
-    :alt: chirp cwt mexh
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/wavelets/images/sphx_glr_chirp_cwt_mexh_001.png
+   :alt: chirp cwt mexh
+   :srcset: /gallery/wavelets/images/sphx_glr_chirp_cwt_mexh_001.png
+   :class: sphx-glr-single-img
 
 
 
@@ -120,9 +121,10 @@ Power spectrum
 
 
 
-.. image:: /gallery/wavelets/images/sphx_glr_chirp_cwt_mexh_002.png
-    :alt: chirp cwt mexh
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/wavelets/images/sphx_glr_chirp_cwt_mexh_002.png
+   :alt: chirp cwt mexh
+   :srcset: /gallery/wavelets/images/sphx_glr_chirp_cwt_mexh_002.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -163,9 +165,10 @@ Ricker/Mexican Hat Wavelet
 
 
 
-.. image:: /gallery/wavelets/images/sphx_glr_chirp_cwt_mexh_003.png
-    :alt: chirp cwt mexh
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/wavelets/images/sphx_glr_chirp_cwt_mexh_003.png
+   :alt: chirp cwt mexh
+   :srcset: /gallery/wavelets/images/sphx_glr_chirp_cwt_mexh_003.png
+   :class: sphx-glr-single-img
 
 
 
@@ -214,9 +217,10 @@ voices per octave
 
 
 
-.. image:: /gallery/wavelets/images/sphx_glr_chirp_cwt_mexh_004.png
-    :alt: Wavelet Transform (Power Spectrum) of signal
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/wavelets/images/sphx_glr_chirp_cwt_mexh_004.png
+   :alt: Wavelet Transform (Power Spectrum) of signal
+   :srcset: /gallery/wavelets/images/sphx_glr_chirp_cwt_mexh_004.png
+   :class: sphx-glr-single-img
 
 
 
@@ -225,7 +229,7 @@ voices per octave
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  4.623 seconds)
+   **Total running time of the script:** ( 0 minutes  29.594 seconds)
 
 
 .. _sphx_glr_download_gallery_wavelets_chirp_cwt_mexh.py:

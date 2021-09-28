@@ -121,9 +121,10 @@ Test signal generation
 
 
 
-.. image:: /gallery/wavelets/images/sphx_glr_frequency_change_detection_001.png
-    :alt: frequency change detection
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/wavelets/images/sphx_glr_frequency_change_detection_001.png
+   :alt: frequency change detection
+   :srcset: /gallery/wavelets/images/sphx_glr_frequency_change_detection_001.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -133,7 +134,7 @@ Test signal generation
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fe97bf428b0>]
+    [<matplotlib.lines.Line2D object at 0x7f8ba020a820>]
 
 
 
@@ -161,9 +162,10 @@ Frequency spectrum
 
 
 
-.. image:: /gallery/wavelets/images/sphx_glr_frequency_change_detection_002.png
-    :alt: frequency change detection
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/wavelets/images/sphx_glr_frequency_change_detection_002.png
+   :alt: frequency change detection
+   :srcset: /gallery/wavelets/images/sphx_glr_frequency_change_detection_002.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -173,7 +175,7 @@ Frequency spectrum
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fe97b764850>]
+    [<matplotlib.lines.Line2D object at 0x7f8b5bb2b460>]
 
 
 
@@ -250,9 +252,10 @@ Second level detail coefficients
 
 
 
-.. image:: /gallery/wavelets/images/sphx_glr_frequency_change_detection_003.png
-    :alt: frequency change detection
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/wavelets/images/sphx_glr_frequency_change_detection_003.png
+   :alt: frequency change detection
+   :srcset: /gallery/wavelets/images/sphx_glr_frequency_change_detection_003.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -262,7 +265,7 @@ Second level detail coefficients
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fe97b53ac40>]
+    [<matplotlib.lines.Line2D object at 0x7f8b5be5ebe0>]
 
 
 
@@ -310,7 +313,7 @@ correspond to t=12 sec.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.155 seconds)
+   **Total running time of the script:** ( 0 minutes  2.120 seconds)
 
 
 .. _sphx_glr_download_gallery_wavelets_frequency_change_detection.py:

@@ -18,6 +18,8 @@
 .. _sphx_glr_gallery_lop_deconvolution.py:
 
 
+.. _gallery:lop:deconvolution:
+
 Deconvolution
 =======================
 
@@ -68,11 +70,11 @@ explicitly. All it needs are two functions to compute the matrix multiplication
 
 We model :math:`H` using the ``cr.sparse.lop.convolve`` operator.
 
-.. GENERATED FROM PYTHON SOURCE LINES 55-56
+.. GENERATED FROM PYTHON SOURCE LINES 57-58
 
 Let's import necessary libraries 
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-73
+.. GENERATED FROM PYTHON SOURCE LINES 58-75
 
 .. code-block:: default
 
@@ -100,12 +102,12 @@ Let's import necessary libraries
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 74-76
+.. GENERATED FROM PYTHON SOURCE LINES 76-78
 
 Problem Setup
 ------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 76-79
+.. GENERATED FROM PYTHON SOURCE LINES 78-81
 
 .. code-block:: default
 
@@ -119,13 +121,13 @@ Problem Setup
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 80-83
+.. GENERATED FROM PYTHON SOURCE LINES 82-85
 
 The Ricker wavelet response of the instrument
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''
 The time duration of the instrument response
 
-.. GENERATED FROM PYTHON SOURCE LINES 83-96
+.. GENERATED FROM PYTHON SOURCE LINES 85-98
 
 .. code-block:: default
 
@@ -145,9 +147,10 @@ The time duration of the instrument response
 
 
 
-.. image:: /gallery/lop/images/sphx_glr_deconvolution_001.png
-    :alt: deconvolution
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/lop/images/sphx_glr_deconvolution_001.png
+   :alt: deconvolution
+   :srcset: /gallery/lop/images/sphx_glr_deconvolution_001.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -161,12 +164,12 @@ The time duration of the instrument response
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 97-99
+.. GENERATED FROM PYTHON SOURCE LINES 99-101
 
 The impulse signal to be observed
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-.. GENERATED FROM PYTHON SOURCE LINES 99-111
+.. GENERATED FROM PYTHON SOURCE LINES 101-113
 
 .. code-block:: default
 
@@ -185,9 +188,10 @@ The impulse signal to be observed
 
 
 
-.. image:: /gallery/lop/images/sphx_glr_deconvolution_002.png
-    :alt: deconvolution
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/lop/images/sphx_glr_deconvolution_002.png
+   :alt: deconvolution
+   :srcset: /gallery/lop/images/sphx_glr_deconvolution_002.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -201,13 +205,13 @@ The impulse signal to be observed
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 112-115
+.. GENERATED FROM PYTHON SOURCE LINES 114-117
 
 The linear operator representing the instrument
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Identify the peak of the impulse response
 
-.. GENERATED FROM PYTHON SOURCE LINES 115-122
+.. GENERATED FROM PYTHON SOURCE LINES 117-124
 
 .. code-block:: default
 
@@ -225,13 +229,13 @@ Identify the peak of the impulse response
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 123-126
+.. GENERATED FROM PYTHON SOURCE LINES 125-128
 
 The measurement process
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Compute the measured signal via convolution
 
-.. GENERATED FROM PYTHON SOURCE LINES 126-136
+.. GENERATED FROM PYTHON SOURCE LINES 128-138
 
 .. code-block:: default
 
@@ -248,9 +252,10 @@ Compute the measured signal via convolution
 
 
 
-.. image:: /gallery/lop/images/sphx_glr_deconvolution_003.png
-    :alt: Signal vs Measurements
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/lop/images/sphx_glr_deconvolution_003.png
+   :alt: Signal vs Measurements
+   :srcset: /gallery/lop/images/sphx_glr_deconvolution_003.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -264,13 +269,13 @@ Compute the measured signal via convolution
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 137-140
+.. GENERATED FROM PYTHON SOURCE LINES 139-142
 
 Deconvolution to clean the signal using LSQR
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''
 An initial guess of the actual signal is all zeros
 
-.. GENERATED FROM PYTHON SOURCE LINES 140-158
+.. GENERATED FROM PYTHON SOURCE LINES 142-160
 
 .. code-block:: default
 
@@ -295,9 +300,10 @@ An initial guess of the actual signal is all zeros
 
 
 
-.. image:: /gallery/lop/images/sphx_glr_deconvolution_004.png
-    :alt: Deconvolution
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/lop/images/sphx_glr_deconvolution_004.png
+   :alt: Deconvolution
+   :srcset: /gallery/lop/images/sphx_glr_deconvolution_004.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -306,21 +312,21 @@ An initial guess of the actual signal is all zeros
 
  .. code-block:: none
 
-    A norm:  12.192408487474447
-    A condition number:  59.631297182522054
-    r_norm:  0.027126481687630526 x_norm:  0.7360252062150447 atr_norm:  0.014044078613519372
+    A norm:  12.192408487474458
+    A condition number:  59.631297182522076
+    r_norm:  0.02712648168763044 x_norm:  0.7360252062150447 atr_norm:  0.01404407861351939
     Iterations:  25  H x calls:  25 H^T x calls:  25
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 159-162
+.. GENERATED FROM PYTHON SOURCE LINES 161-164
 
 Stronger deconvolution
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''
 We run LSQR algorithm to clean the signal contents for 100 iterations
 
-.. GENERATED FROM PYTHON SOURCE LINES 162-176
+.. GENERATED FROM PYTHON SOURCE LINES 164-178
 
 .. code-block:: default
 
@@ -341,9 +347,10 @@ We run LSQR algorithm to clean the signal contents for 100 iterations
 
 
 
-.. image:: /gallery/lop/images/sphx_glr_deconvolution_005.png
-    :alt: Deconvolution
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/lop/images/sphx_glr_deconvolution_005.png
+   :alt: Deconvolution
+   :srcset: /gallery/lop/images/sphx_glr_deconvolution_005.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -352,9 +359,9 @@ We run LSQR algorithm to clean the signal contents for 100 iterations
 
  .. code-block:: none
 
-    A norm:  24.348380483410278
-    A condition number:  485.8943729208613
-    r_norm:  0.00589397127035775 x_norm:  0.7979078081486051 atr_norm:  0.0015629080522622293
+    A norm:  24.348380483410274
+    A condition number:  485.89437292085995
+    r_norm:  0.005893971270357611 x_norm:  0.7979078081486042 atr_norm:  0.0015629080522622028
     Iterations:  100  H x calls:  100 H^T x calls:  100
 
 
@@ -363,7 +370,7 @@ We run LSQR algorithm to clean the signal contents for 100 iterations
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.490 seconds)
+   **Total running time of the script:** ( 0 minutes  2.324 seconds)
 
 
 .. _sphx_glr_download_gallery_lop_deconvolution.py:

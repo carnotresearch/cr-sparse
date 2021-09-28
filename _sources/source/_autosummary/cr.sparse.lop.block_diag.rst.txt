@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.block\_diag
+=========================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: block_diag

@@ -18,6 +18,8 @@
 .. _sphx_glr_gallery_lop_deblurring.py:
 
 
+.. _gallery:lop:image_deblurring:
+
 Image Deblurring
 ===========================
 
@@ -37,11 +39,11 @@ for blurring the image is known.
 
 Please see the deconvolution example for some background.
 
-.. GENERATED FROM PYTHON SOURCE LINES 24-25
+.. GENERATED FROM PYTHON SOURCE LINES 26-27
 
 Let's import necessary libraries 
 
-.. GENERATED FROM PYTHON SOURCE LINES 25-46
+.. GENERATED FROM PYTHON SOURCE LINES 27-48
 
 .. code-block:: default
 
@@ -73,12 +75,12 @@ Let's import necessary libraries
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 47-49
+.. GENERATED FROM PYTHON SOURCE LINES 49-51
 
 Problem Setup
 ------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 49-53
+.. GENERATED FROM PYTHON SOURCE LINES 51-55
 
 .. code-block:: default
 
@@ -101,12 +103,12 @@ Problem Setup
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 54-56
+.. GENERATED FROM PYTHON SOURCE LINES 56-58
 
 Gaussian blur kernel
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-64
+.. GENERATED FROM PYTHON SOURCE LINES 58-66
 
 .. code-block:: default
 
@@ -121,9 +123,10 @@ Gaussian blur kernel
 
 
 
-.. image:: /gallery/lop/images/sphx_glr_deblurring_001.png
-    :alt: Blurring kernel
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/lop/images/sphx_glr_deblurring_001.png
+   :alt: Blurring kernel
+   :srcset: /gallery/lop/images/sphx_glr_deblurring_001.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -137,13 +140,13 @@ Gaussian blur kernel
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 65-68
+.. GENERATED FROM PYTHON SOURCE LINES 67-70
 
 The linear operator for the blur kernel
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Locate the center of the filter
 
-.. GENERATED FROM PYTHON SOURCE LINES 68-75
+.. GENERATED FROM PYTHON SOURCE LINES 70-77
 
 .. code-block:: default
 
@@ -169,13 +172,13 @@ Locate the center of the filter
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 76-79
+.. GENERATED FROM PYTHON SOURCE LINES 78-81
 
 The blurring
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Apply the blurring operator to the original image 
 
-.. GENERATED FROM PYTHON SOURCE LINES 79-89
+.. GENERATED FROM PYTHON SOURCE LINES 81-91
 
 .. code-block:: default
 
@@ -192,9 +195,10 @@ Apply the blurring operator to the original image
 
 
 
-.. image:: /gallery/lop/images/sphx_glr_deblurring_002.png
-    :alt: Original, After blurring
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/lop/images/sphx_glr_deblurring_002.png
+   :alt: Original, After blurring
+   :srcset: /gallery/lop/images/sphx_glr_deblurring_002.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -203,19 +207,19 @@ Apply the blurring operator to the original image
 
  .. code-block:: none
 
-    Blurred PSNR:  14.59285829008409 dB
+    Blurred PSNR:  14.592858290084086 dB
 
     Text(0.5, 1.0, 'After blurring')
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 90-93
+.. GENERATED FROM PYTHON SOURCE LINES 92-95
 
 The deblurring using LSQR algorithm
 -------------------------------------------------
 An initial guess of the deblurred image is all zeros
 
-.. GENERATED FROM PYTHON SOURCE LINES 93-111
+.. GENERATED FROM PYTHON SOURCE LINES 95-113
 
 .. code-block:: default
 
@@ -240,9 +244,10 @@ An initial guess of the deblurred image is all zeros
 
 
 
-.. image:: /gallery/lop/images/sphx_glr_deblurring_003.png
-    :alt: Original, After blurring, After deblurring
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/lop/images/sphx_glr_deblurring_003.png
+   :alt: Original, After blurring, After deblurring
+   :srcset: /gallery/lop/images/sphx_glr_deblurring_003.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -254,10 +259,10 @@ An initial guess of the deblurred image is all zeros
     Deblurred PSNR:  21.20645520907686 dB
     x: (200, 200)
     A_norm: 4.946758875785471
-    A_cond: 167.3069908856023
-    x_norm: 34971.66794553036
-    r_norm: 28.394130441228945
-    atr_norm: 3.8161913539049293
+    A_cond: 167.30699088560237
+    x_norm: 34971.667945530375
+    r_norm: 28.394130441229276
+    atr_norm: 3.816191353904951
     iterations: 50
     n_times: 50
     n_trans: 50
@@ -265,13 +270,13 @@ An initial guess of the deblurred image is all zeros
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 112-115
+.. GENERATED FROM PYTHON SOURCE LINES 114-117
 
 A wavelet basis for the images
 ---------------------------------------------------------------------------
 Construct the basis
 
-.. GENERATED FROM PYTHON SOURCE LINES 115-126
+.. GENERATED FROM PYTHON SOURCE LINES 117-128
 
 .. code-block:: default
 
@@ -289,9 +294,10 @@ Construct the basis
 
 
 
-.. image:: /gallery/lop/images/sphx_glr_deblurring_004.png
-    :alt: Image, Wavelet coefficients
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/lop/images/sphx_glr_deblurring_004.png
+   :alt: Image, Wavelet coefficients
+   :srcset: /gallery/lop/images/sphx_glr_deblurring_004.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -305,13 +311,13 @@ Construct the basis
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 127-130
+.. GENERATED FROM PYTHON SOURCE LINES 129-132
 
 Deblurring with Fast Iterative Shrinkage and Thresholding Algorithm
 ---------------------------------------------------------------------------
 We combine the convolution operator and the wavelet basis operator 
 
-.. GENERATED FROM PYTHON SOURCE LINES 130-163
+.. GENERATED FROM PYTHON SOURCE LINES 132-165
 
 .. code-block:: default
 
@@ -351,9 +357,10 @@ We combine the convolution operator and the wavelet basis operator
 
 
 
-.. image:: /gallery/lop/images/sphx_glr_deblurring_005.png
-    :alt: Original, After blurring, FISTA deblurring
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/lop/images/sphx_glr_deblurring_005.png
+   :alt: Original, After blurring, FISTA deblurring
+   :srcset: /gallery/lop/images/sphx_glr_deblurring_005.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -372,7 +379,7 @@ We combine the convolution operator and the wavelet basis operator
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  24.185 seconds)
+   **Total running time of the script:** ( 0 minutes  21.151 seconds)
 
 
 .. _sphx_glr_download_gallery_lop_deblurring.py:

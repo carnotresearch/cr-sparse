@@ -1,0 +1,6 @@
+﻿cr.sparse.data.sparse\_spikes
+=============================
+
+.. currentmodule:: cr.sparse.data
+
+.. autofunction:: sparse_spikes

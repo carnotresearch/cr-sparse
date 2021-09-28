@@ -70,6 +70,27 @@ Linear Operators
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Compressive Sensing Operators">
+
+.. only:: html
+
+ .. figure:: /gallery/lop/images/thumb/sphx_glr_cs_operators_thumb.png
+     :alt: Compressive Sensing Operators
+
+     :ref:`sphx_glr_gallery_lop_cs_operators.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/lop/cs_operators
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates following features:">
 
 .. only:: html

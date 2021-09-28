@@ -18,6 +18,8 @@
 .. _sphx_glr_gallery_lop_wt_op.py:
 
 
+.. _gallery:lop:wt_ops:
+
 Wavelet Transform Operators
 ==============================
 
@@ -30,11 +32,11 @@ This example demonstrates following features:
 - ``cr.sparse.lop.convolve2D`` A 2D convolution linear operator
 - ``cr.sparse.sls.lsqr`` LSQR algorithm for solving a least square problem on 2D images
 
-.. GENERATED FROM PYTHON SOURCE LINES 18-19
+.. GENERATED FROM PYTHON SOURCE LINES 20-21
 
 Let's import necessary libraries 
 
-.. GENERATED FROM PYTHON SOURCE LINES 19-36
+.. GENERATED FROM PYTHON SOURCE LINES 21-38
 
 .. code-block:: default
 
@@ -62,19 +64,19 @@ Let's import necessary libraries
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 37-39
+.. GENERATED FROM PYTHON SOURCE LINES 39-41
 
 1D Wavelet Transform Operator
 ---------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 42-46
+.. GENERATED FROM PYTHON SOURCE LINES 44-48
 
 A signal consisting of multiple sinusoids 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Individual sinusoids have different frequencies and amplitudes.
 Sampling frequency
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-63
+.. GENERATED FROM PYTHON SOURCE LINES 48-65
 
 .. code-block:: default
 
@@ -98,9 +100,10 @@ Sampling frequency
 
 
 
-.. image:: /gallery/lop/images/sphx_glr_wt_op_001.png
-    :alt: wt op
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/lop/images/sphx_glr_wt_op_001.png
+   :alt: wt op
+   :srcset: /gallery/lop/images/sphx_glr_wt_op_001.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -110,16 +113,16 @@ Sampling frequency
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fe9a47aca00>]
+    [<matplotlib.lines.Line2D object at 0x7f8ba08f1370>]
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 64-66
+.. GENERATED FROM PYTHON SOURCE LINES 66-68
 
 1D wavelet transform operator
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-.. GENERATED FROM PYTHON SOURCE LINES 66-68
+.. GENERATED FROM PYTHON SOURCE LINES 68-70
 
 .. code-block:: default
 
@@ -132,12 +135,12 @@ Sampling frequency
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 69-71
+.. GENERATED FROM PYTHON SOURCE LINES 71-73
 
 Wavelet coefficients
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-.. GENERATED FROM PYTHON SOURCE LINES 71-75
+.. GENERATED FROM PYTHON SOURCE LINES 73-77
 
 .. code-block:: default
 
@@ -148,9 +151,10 @@ Wavelet coefficients
 
 
 
-.. image:: /gallery/lop/images/sphx_glr_wt_op_002.png
-    :alt: wt op
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/lop/images/sphx_glr_wt_op_002.png
+   :alt: wt op
+   :srcset: /gallery/lop/images/sphx_glr_wt_op_002.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -160,17 +164,17 @@ Wavelet coefficients
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fe9a4648be0>]
+    [<matplotlib.lines.Line2D object at 0x7f8ba0d5fc10>]
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 76-79
+.. GENERATED FROM PYTHON SOURCE LINES 78-81
 
 Compression
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Let's keep only 10 percent of the coefficients
 
-.. GENERATED FROM PYTHON SOURCE LINES 79-84
+.. GENERATED FROM PYTHON SOURCE LINES 81-86
 
 .. code-block:: default
 
@@ -182,9 +186,10 @@ Let's keep only 10 percent of the coefficients
 
 
 
-.. image:: /gallery/lop/images/sphx_glr_wt_op_003.png
-    :alt: wt op
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/lop/images/sphx_glr_wt_op_003.png
+   :alt: wt op
+   :srcset: /gallery/lop/images/sphx_glr_wt_op_003.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -194,16 +199,16 @@ Let's keep only 10 percent of the coefficients
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fe9a4592370>]
+    [<matplotlib.lines.Line2D object at 0x7f8ba08ca3d0>]
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 85-87
+.. GENERATED FROM PYTHON SOURCE LINES 87-89
 
 Reconstruction
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-.. GENERATED FROM PYTHON SOURCE LINES 87-101
+.. GENERATED FROM PYTHON SOURCE LINES 89-103
 
 .. code-block:: default
 
@@ -224,9 +229,10 @@ Reconstruction
 
 
 
-.. image:: /gallery/lop/images/sphx_glr_wt_op_004.png
-    :alt: Reconstructed signal
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/lop/images/sphx_glr_wt_op_004.png
+   :alt: Reconstructed signal
+   :srcset: /gallery/lop/images/sphx_glr_wt_op_004.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -235,19 +241,19 @@ Reconstruction
 
  .. code-block:: none
 
-    0.034259365997888716
-    36.56352988951195
+    0.034259365997888334
+    36.56352988951204
 
-    <matplotlib.legend.Legend object at 0x7fe9a44677f0>
+    <matplotlib.legend.Legend object at 0x7f8ba07aa6d0>
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 102-104
+.. GENERATED FROM PYTHON SOURCE LINES 104-106
 
 2D Wavelet Transform Operator
 ---------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 104-111
+.. GENERATED FROM PYTHON SOURCE LINES 106-113
 
 .. code-block:: default
 
@@ -265,12 +271,12 @@ Reconstruction
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 112-114
+.. GENERATED FROM PYTHON SOURCE LINES 114-116
 
 Wavelet coefficients
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-.. GENERATED FROM PYTHON SOURCE LINES 114-116
+.. GENERATED FROM PYTHON SOURCE LINES 116-118
 
 .. code-block:: default
 
@@ -283,13 +289,13 @@ Wavelet coefficients
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 117-120
+.. GENERATED FROM PYTHON SOURCE LINES 119-122
 
 Compression
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 Let's keep only 1/16 of the coefficients
 
-.. GENERATED FROM PYTHON SOURCE LINES 120-124
+.. GENERATED FROM PYTHON SOURCE LINES 122-126
 
 .. code-block:: default
 
@@ -304,12 +310,12 @@ Let's keep only 1/16 of the coefficients
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 125-127
+.. GENERATED FROM PYTHON SOURCE LINES 127-129
 
 Reconstruction
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-.. GENERATED FROM PYTHON SOURCE LINES 127-152
+.. GENERATED FROM PYTHON SOURCE LINES 129-154
 
 .. code-block:: default
 
@@ -341,9 +347,10 @@ Reconstruction
 
 
 
-.. image:: /gallery/lop/images/sphx_glr_wt_op_005.png
-    :alt: Image, DWT2 coefficients, After compression, Reconstructed image
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/lop/images/sphx_glr_wt_op_005.png
+   :alt: Image, DWT2 coefficients, After compression, Reconstructed image
+   :srcset: /gallery/lop/images/sphx_glr_wt_op_005.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -362,7 +369,7 @@ Reconstruction
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  8.986 seconds)
+   **Total running time of the script:** ( 0 minutes  8.146 seconds)
 
 
 .. _sphx_glr_download_gallery_lop_wt_op.py:

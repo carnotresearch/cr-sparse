@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>cr.sparse.lop.block_diag &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="../../_static/js/custom.js"></script>
+    <script src="../../_static/js/mathconf.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="cr.sparse.lop.running_average" href="cr.sparse.lop.running_average.html" />
+    <link rel="prev" title="cr.sparse.lop.power" href="cr.sparse.lop.power.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">CR.Sparse API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../dsp.html">Digital Signal Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wavelets.html">Wavelets</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../lop.html">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sls.html">Sparse Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra Subroutines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../opt.html">Numerical Optimization Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../geo.html">Geophysical Signal Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vision.html">Computer Vision and Image Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../la/index.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sls/index.html">Sparse Linear Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">CR.Sparse API Documentation</a><ul>
+  <li><a href="../lop.html">Linear Operators</a><ul>
+      <li>Previous: <a href="cr.sparse.lop.power.html" title="previous chapter">cr.sparse.lop.power</a></li>
+      <li>Next: <a href="cr.sparse.lop.running_average.html" title="next chapter">cr.sparse.lop.running_average</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cr-sparse-lop-block-diag">
+<h1>cr.sparse.lop.block_diag<a class="headerlink" href="#cr-sparse-lop-block-diag" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="cr.sparse.lop.block_diag">
+<span class="sig-prename descclassname"><span class="pre">cr.sparse.lop.</span></span><span class="sig-name descname"><span class="pre">block_diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operators</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/lop/block_diag.html#block_diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.lop.block_diag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a block diagonal operator from 2 or more operators</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>operators</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – List of linear operators</p></li>
+<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – For multi-dimensional array input, the axis along which
+the linear operator will be applied</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A block diagonal operator</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="cr.sparse.lop.Operator.html#cr.sparse.lop.Operator" title="cr.sparse.lop.Operator">Operator</a></p>
+</dd>
+</dl>
+<p>Assume a set of operators <span class="math notranslate nohighlight">\(T_1, T_2, \dots, T_k\)</span>
+each having the shape <span class="math notranslate nohighlight">\((m_i, n_i)\)</span>.</p>
+<p>The input model space dimension for the block diagonal operator is:</p>
+<div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-lop-block-diag-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-lop-block-diag-0" title="Permalink to this equation">¶</a></span>\[n = \sum_{i=1}^k n_i\]</div>
+<p>The output data space dimension for the block diagonal operator is:</p>
+<div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-lop-block-diag-1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-lop-block-diag-1" title="Permalink to this equation">¶</a></span>\[m = \sum_{i=1}^k m_i\]</div>
+<p>For the forward mode, split the input model vector <span class="math notranslate nohighlight">\(x \in \mathbb{F}^n\)</span> into</p>
+<div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-lop-block-diag-2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-lop-block-diag-2" title="Permalink to this equation">¶</a></span>\[\begin{split}x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_k \end{bmatrix}\end{split}\]</div>
+<p>such that <span class="math notranslate nohighlight">\(\text{dim}(x_i) = n_i\)</span>.</p>
+<p>Then the application of the block diagonal operator
+in the forward mode from model space to data space
+can be represented as:</p>
+<div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-lop-block-diag-3">
+<span class="eqno">(4)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-lop-block-diag-3" title="Permalink to this equation">¶</a></span>\[\begin{split}T x =  \begin{bmatrix}
+T_1 &amp; 0 &amp; \dots &amp; 0 \\
+0 &amp; T_2 &amp; \dots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0  &amp; 0 &amp; \dots &amp;  T_k
+\end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_k \end{bmatrix}
+= \begin{bmatrix} T_1 x_1 \\ T_2 x_2 \\ \vdots \\ T_k x_k \end{bmatrix}\end{split}\]</div>
+<p>Similarly the application in the adjoint mode from the
+data space to the model space can be represented as:</p>
+<div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-lop-block-diag-4">
+<span class="eqno">(5)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-lop-block-diag-4" title="Permalink to this equation">¶</a></span>\[\begin{split}T^H y =  \begin{bmatrix}
+T_1^H &amp; 0 &amp; \dots &amp; 0 \\
+0 &amp; T_2^H &amp; \dots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0  &amp; 0 &amp; \dots &amp;  T_k^H
+\end{bmatrix}\begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_k \end{bmatrix}
+= \begin{bmatrix} T_1^H y_1 \\ T_2^H y_2 \\ \vdots \\ T_k^H y_k \end{bmatrix}\end{split}\]</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">T1</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T2</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="mf">3.</span><span class="o">*</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">block_diag</span><span class="p">([</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+<span class="go">[[2. 2. 0. 0. 0.]</span>
+<span class="go">[2. 2. 0. 0. 0.]</span>
+<span class="go">[0. 0. 3. 3. 3.]</span>
+<span class="go">[0. 0. 3. 3. 3.]</span>
+<span class="go">[0. 0. 3. 3. 3.]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="go">[ 6.  6. 36. 36. 36.]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="go">[ 6.  6. 36. 36. 36.]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2021, CR-Sparse Development Team.
+      
+      |
+      <a href="../../_sources/source/_autosummary/cr.sparse.lop.block_diag.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

@@ -100,9 +100,10 @@ Non-sparse signal
 
 
 
-.. image:: /gallery/rec_l1/images/sphx_glr_partial_wh_sensor_cosine_basis_001.png
-    :alt: partial wh sensor cosine basis
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/rec_l1/images/sphx_glr_partial_wh_sensor_cosine_basis_001.png
+   :alt: partial wh sensor cosine basis
+   :srcset: /gallery/rec_l1/images/sphx_glr_partial_wh_sensor_cosine_basis_001.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -112,7 +113,7 @@ Non-sparse signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fe9a4d4ae20>]
+    [<matplotlib.lines.Line2D object at 0x7f8ba0b0c5e0>]
 
 
 
@@ -135,9 +136,10 @@ The Sparsifying Basis
 
 
 
-.. image:: /gallery/rec_l1/images/sphx_glr_partial_wh_sensor_cosine_basis_002.png
-    :alt: partial wh sensor cosine basis
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/rec_l1/images/sphx_glr_partial_wh_sensor_cosine_basis_002.png
+   :alt: partial wh sensor cosine basis
+   :srcset: /gallery/rec_l1/images/sphx_glr_partial_wh_sensor_cosine_basis_002.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -147,7 +149,7 @@ The Sparsifying Basis
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fe9a41d6280>]
+    [<matplotlib.lines.Line2D object at 0x7f8ba0805bb0>]
 
 
 
@@ -219,9 +221,10 @@ Measurement process
 
 
 
-.. image:: /gallery/rec_l1/images/sphx_glr_partial_wh_sensor_cosine_basis_003.png
-    :alt: partial wh sensor cosine basis
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/rec_l1/images/sphx_glr_partial_wh_sensor_cosine_basis_003.png
+   :alt: partial wh sensor cosine basis
+   :srcset: /gallery/rec_l1/images/sphx_glr_partial_wh_sensor_cosine_basis_003.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -231,7 +234,7 @@ Measurement process
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fe9a4036c70>]
+    [<matplotlib.lines.Line2D object at 0x7f8ba00838e0>]
 
 
 
@@ -291,9 +294,10 @@ Solution
 
 
 
-.. image:: /gallery/rec_l1/images/sphx_glr_partial_wh_sensor_cosine_basis_004.png
-    :alt: partial wh sensor cosine basis
-    :class: sphx-glr-single-img
+.. image-sg:: /gallery/rec_l1/images/sphx_glr_partial_wh_sensor_cosine_basis_004.png
+   :alt: partial wh sensor cosine basis
+   :srcset: /gallery/rec_l1/images/sphx_glr_partial_wh_sensor_cosine_basis_004.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -303,14 +307,14 @@ Solution
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x7fe97ba00550>
+    <matplotlib.legend.Legend object at 0x7f8b77e13370>
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  6.246 seconds)
+   **Total running time of the script:** ( 0 minutes  5.961 seconds)
 
 
 .. _sphx_glr_download_gallery_rec_l1_partial_wh_sensor_cosine_basis.py:

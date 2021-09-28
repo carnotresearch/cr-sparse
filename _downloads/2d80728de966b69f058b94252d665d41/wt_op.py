@@ -1,4 +1,6 @@
 """
+.. _gallery:lop:wt_ops:
+
 Wavelet Transform Operators
 ==============================
 

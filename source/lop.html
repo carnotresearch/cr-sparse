@@ -11,10 +11,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
@@ -132,6 +132,23 @@
             
   <section id="linear-operators">
 <span id="api-lop"></span><h1>Linear Operators<a class="headerlink" href="#linear-operators" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#data-types" id="id1">Data types</a></p></li>
+<li><p><a class="reference internal" href="#basic-operators" id="id2">Basic operators</a></p></li>
+<li><p><a class="reference internal" href="#operator-algebra" id="id3">Operator algebra</a></p></li>
+<li><p><a class="reference internal" href="#signal-processing-operators" id="id4">Signal processing operators</a></p></li>
+<li><p><a class="reference internal" href="#orthonormal-transforms-and-bases" id="id5">Orthonormal transforms and bases</a></p></li>
+<li><p><a class="reference internal" href="#unions-of-bases" id="id6">Unions of bases</a></p></li>
+<li><p><a class="reference internal" href="#random-compressive-sensing-operators" id="id7">Random compressive sensing operators</a></p></li>
+<li><p><a class="reference internal" href="#operators-for-special-matrices" id="id8">Operators for special matrices</a></p></li>
+<li><p><a class="reference internal" href="#derivatives-finite-differences" id="id9">Derivatives (finite differences)</a></p></li>
+<li><p><a class="reference internal" href="#convenience-operators" id="id10">Convenience operators</a></p></li>
+<li><p><a class="reference internal" href="#operator-parts" id="id11">Operator parts</a></p></li>
+<li><p><a class="reference internal" href="#properties-of-a-linear-operator" id="id12">Properties of a linear operator</a></p></li>
+<li><p><a class="reference internal" href="#utilities" id="id13">Utilities</a></p></li>
+</ul>
+</div>
 <p>We provide a collection of linear operators with efficient JAX based implementations
 that are
 relevant in standard signal/image processing problems.
@@ -189,12 +206,8 @@ would be a 2D array.</p>
 <p class="rubric">axis parameter in a 1D linear operator</p>
 <ul class="simple">
 <li><p>A 1D linear operator may get an ND array as input.</p></li>
-<li><p>In this case, the axis parameter to the operator specifies the</p></li>
-</ul>
-<blockquote>
-<div><p>axis along which the linear operator is to be applied.</p>
-</div></blockquote>
-<ul class="simple">
+<li><p>In this case, the axis parameter to the operator specifies the
+axis along which the linear operator is to be applied.</p></li>
 <li><p>The input ND array will be broken into slices of 1D arrays along the
 axis and the linear operator will be applied separately to each slice.</p></li>
 <li><p>Then the slices will be combined to generate the output ND array.</p></li>
@@ -207,7 +220,7 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 </ul>
 <p>This is based on the convention followed by <code class="docutils literal notranslate"><span class="pre">numpy.apply_along_axis</span></code>.</p>
 <section id="data-types">
-<h2>Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id1">Data types</a><a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -221,7 +234,7 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 </table>
 </section>
 <section id="basic-operators">
-<h2>Basic operators<a class="headerlink" href="#basic-operators" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">Basic operators</a><a class="headerlink" href="#basic-operators" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -258,143 +271,11 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 </tbody>
 </table>
 </section>
-<section id="signal-processing-operators">
-<h2>Signal processing operators<a class="headerlink" href="#signal-processing-operators" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.running_average.html#cr.sparse.lop.running_average" title="cr.sparse.lop.running_average"><code class="xref py py-obj docutils literal notranslate"><span class="pre">running_average</span></code></a>(n, length[, axis])</p></td>
-<td><p>Computes a running average of entries in x</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.fir_filter.html#cr.sparse.lop.fir_filter" title="cr.sparse.lop.fir_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fir_filter</span></code></a>(n, h[, axis])</p></td>
-<td><p>Implements an FIR filter defined by coeffs</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.convolve.html#cr.sparse.lop.convolve" title="cr.sparse.lop.convolve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convolve</span></code></a>(n, h[, offset, axis])</p></td>
-<td><p>Implements a convolution operator with the filter h</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.convolve2D.html#cr.sparse.lop.convolve2D" title="cr.sparse.lop.convolve2D"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convolve2D</span></code></a>(shape, h[, offset, axes])</p></td>
-<td><p>Performs 2 dimensional convolution on the input array</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.convolveND.html#cr.sparse.lop.convolveND" title="cr.sparse.lop.convolveND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convolveND</span></code></a>(shape, h[, offset, axes])</p></td>
-<td><p>Performs N dimensional convolution on input array</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="orthonormal-transforms-and-bases">
-<h2>Orthonormal transforms and bases<a class="headerlink" href="#orthonormal-transforms-and-bases" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dwt.html#cr.sparse.lop.dwt" title="cr.sparse.lop.dwt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt</span></code></a>(n[, wavelet, level, axis, basis])</p></td>
-<td><p>Returns a 1D Discrete Wavelet Transform operator</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dwt2D.html#cr.sparse.lop.dwt2D" title="cr.sparse.lop.dwt2D"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt2D</span></code></a>(shape[, wavelet, level, axes, basis])</p></td>
-<td><p>Returns a 2D Discrete Wavelet Transform operator</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.fourier_basis.html#cr.sparse.lop.fourier_basis" title="cr.sparse.lop.fourier_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fourier_basis</span></code></a>(n)</p></td>
-<td><p>Returns an operator which represents the DFT orthonormal basis</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.cosine_basis.html#cr.sparse.lop.cosine_basis" title="cr.sparse.lop.cosine_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cosine_basis</span></code></a>(n)</p></td>
-<td><p>Returns an operator which represents the DCT-II orthonormal basis</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.walsh_hadamard_basis.html#cr.sparse.lop.walsh_hadamard_basis" title="cr.sparse.lop.walsh_hadamard_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">walsh_hadamard_basis</span></code></a>(n)</p></td>
-<td><p>Returns an operator which represents the Walsh Hadamard Transform Basis</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="unions-of-bases">
-<h2>Unions of bases<a class="headerlink" href="#unions-of-bases" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dirac_fourier_basis.html#cr.sparse.lop.dirac_fourier_basis" title="cr.sparse.lop.dirac_fourier_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dirac_fourier_basis</span></code></a>(n)</p></td>
-<td><p>Returns an operator for a two-ortho basis dictionary consisting of Dirac basis and Fourier basis</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="random-compressive-sensing-operators">
-<h2>Random compressive sensing operators<a class="headerlink" href="#random-compressive-sensing-operators" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.gaussian_dict.html#cr.sparse.lop.gaussian_dict" title="cr.sparse.lop.gaussian_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_dict</span></code></a>(key, m, n[, normalize_atoms])</p></td>
-<td><p>An operator which represents a Gaussian sensix matrix (with normalized columns)</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.rademacher_dict.html#cr.sparse.lop.rademacher_dict" title="cr.sparse.lop.rademacher_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rademacher_dict</span></code></a>(key, m, n)</p></td>
-<td><p>An operator which represents a Rademacher sensing matrix</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.random_onb_dict.html#cr.sparse.lop.random_onb_dict" title="cr.sparse.lop.random_onb_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_onb_dict</span></code></a>(key, n)</p></td>
-<td><p>An operator representing a random orthonormal basis</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.random_orthonormal_rows_dict.html#cr.sparse.lop.random_orthonormal_rows_dict" title="cr.sparse.lop.random_orthonormal_rows_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_orthonormal_rows_dict</span></code></a>(key, m, n)</p></td>
-<td><p>An operator whose rows are orthonormal (sampled from a random orthonormal basis)</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="operators-for-special-matrices">
-<h2>Operators for special matrices<a class="headerlink" href="#operators-for-special-matrices" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.circulant.html#cr.sparse.lop.circulant" title="cr.sparse.lop.circulant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">circulant</span></code></a>(n, c[, axis])</p></td>
-<td><p>Circulant matrix operator</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="derivatives-finite-differences">
-<h2>Derivatives (finite differences)<a class="headerlink" href="#derivatives-finite-differences" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.first_derivative.html#cr.sparse.lop.first_derivative" title="cr.sparse.lop.first_derivative"><code class="xref py py-obj docutils literal notranslate"><span class="pre">first_derivative</span></code></a>(n[, dx, kind])</p></td>
-<td><p>Computes the first derivative</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.second_derivative.html#cr.sparse.lop.second_derivative" title="cr.sparse.lop.second_derivative"><code class="xref py py-obj docutils literal notranslate"><span class="pre">second_derivative</span></code></a>(n[, dx])</p></td>
-<td><p></p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="convenience-operators">
-<h2>Convenience operators<a class="headerlink" href="#convenience-operators" title="Permalink to this headline">¶</a></h2>
-<p>These operators are technically not linear on <span class="math notranslate nohighlight">\(\mathbb{F}^n \to \mathbb{F}^m\)</span></p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.real.html#cr.sparse.lop.real" title="cr.sparse.lop.real"><code class="xref py py-obj docutils literal notranslate"><span class="pre">real</span></code></a>(n)</p></td>
-<td><p>Returns the real parts of a vector of complex numbers</p></td>
-</tr>
-</tbody>
-</table>
-</section>
 <section id="operator-algebra">
-<h2>Operator algebra<a class="headerlink" href="#operator-algebra" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">Operator algebra</a><a class="headerlink" href="#operator-algebra" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to combine one or more linear operators
+to create new linear operators. The functions in this
+section provide different ways to combine linear operators.</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -428,11 +309,149 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.power.html#cr.sparse.lop.power" title="cr.sparse.lop.power"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power</span></code></a>(A, p)</p></td>
 <td><p>Returns the linear operator <span class="math notranslate nohighlight">\(T = A^p\)</span></p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.block_diag.html#cr.sparse.lop.block_diag" title="cr.sparse.lop.block_diag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">block_diag</span></code></a>(operators[, axis])</p></td>
+<td><p>Returns a block diagonal operator from 2 or more operators</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="signal-processing-operators">
+<h2><a class="toc-backref" href="#id4">Signal processing operators</a><a class="headerlink" href="#signal-processing-operators" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.running_average.html#cr.sparse.lop.running_average" title="cr.sparse.lop.running_average"><code class="xref py py-obj docutils literal notranslate"><span class="pre">running_average</span></code></a>(n, length[, axis])</p></td>
+<td><p>Computes a running average of entries in x</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.fir_filter.html#cr.sparse.lop.fir_filter" title="cr.sparse.lop.fir_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fir_filter</span></code></a>(n, h[, axis])</p></td>
+<td><p>Implements an FIR filter defined by coeffs</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.convolve.html#cr.sparse.lop.convolve" title="cr.sparse.lop.convolve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convolve</span></code></a>(n, h[, offset, axis])</p></td>
+<td><p>Implements a convolution operator with the filter h</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.convolve2D.html#cr.sparse.lop.convolve2D" title="cr.sparse.lop.convolve2D"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convolve2D</span></code></a>(shape, h[, offset, axes])</p></td>
+<td><p>Performs 2 dimensional convolution on the input array</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.convolveND.html#cr.sparse.lop.convolveND" title="cr.sparse.lop.convolveND"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convolveND</span></code></a>(shape, h[, offset, axes])</p></td>
+<td><p>Performs N dimensional convolution on input array</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="orthonormal-transforms-and-bases">
+<h2><a class="toc-backref" href="#id5">Orthonormal transforms and bases</a><a class="headerlink" href="#orthonormal-transforms-and-bases" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dwt.html#cr.sparse.lop.dwt" title="cr.sparse.lop.dwt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt</span></code></a>(n[, wavelet, level, axis, basis])</p></td>
+<td><p>Returns a 1D Discrete Wavelet Transform operator</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dwt2D.html#cr.sparse.lop.dwt2D" title="cr.sparse.lop.dwt2D"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt2D</span></code></a>(shape[, wavelet, level, axes, basis])</p></td>
+<td><p>Returns a 2D Discrete Wavelet Transform operator</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.fourier_basis.html#cr.sparse.lop.fourier_basis" title="cr.sparse.lop.fourier_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fourier_basis</span></code></a>(n)</p></td>
+<td><p>Returns an operator which represents the DFT orthonormal basis</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.cosine_basis.html#cr.sparse.lop.cosine_basis" title="cr.sparse.lop.cosine_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cosine_basis</span></code></a>(n)</p></td>
+<td><p>Returns an operator which represents the DCT-II orthonormal basis</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.walsh_hadamard_basis.html#cr.sparse.lop.walsh_hadamard_basis" title="cr.sparse.lop.walsh_hadamard_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">walsh_hadamard_basis</span></code></a>(n)</p></td>
+<td><p>Returns an operator which represents the Walsh Hadamard Transform Basis</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="unions-of-bases">
+<h2><a class="toc-backref" href="#id6">Unions of bases</a><a class="headerlink" href="#unions-of-bases" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dirac_fourier_basis.html#cr.sparse.lop.dirac_fourier_basis" title="cr.sparse.lop.dirac_fourier_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dirac_fourier_basis</span></code></a>(n)</p></td>
+<td><p>Returns an operator for a two-ortho basis dictionary consisting of Dirac basis and Fourier basis</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="random-compressive-sensing-operators">
+<h2><a class="toc-backref" href="#id7">Random compressive sensing operators</a><a class="headerlink" href="#random-compressive-sensing-operators" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.gaussian_dict.html#cr.sparse.lop.gaussian_dict" title="cr.sparse.lop.gaussian_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_dict</span></code></a>(key, m[, n, normalize_atoms, axis])</p></td>
+<td><p>An operator which represents a Gaussian sensix matrix (with normalized columns)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.rademacher_dict.html#cr.sparse.lop.rademacher_dict" title="cr.sparse.lop.rademacher_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rademacher_dict</span></code></a>(key, m[, n, …])</p></td>
+<td><p>An operator which represents a Rademacher sensing matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.random_onb_dict.html#cr.sparse.lop.random_onb_dict" title="cr.sparse.lop.random_onb_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_onb_dict</span></code></a>(key, n[, axis])</p></td>
+<td><p>An operator representing a random orthonormal basis</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.random_orthonormal_rows_dict.html#cr.sparse.lop.random_orthonormal_rows_dict" title="cr.sparse.lop.random_orthonormal_rows_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_orthonormal_rows_dict</span></code></a>(key, m[, n, axis])</p></td>
+<td><p>An operator whose rows are orthonormal (sampled from a random orthonormal basis)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="operators-for-special-matrices">
+<h2><a class="toc-backref" href="#id8">Operators for special matrices</a><a class="headerlink" href="#operators-for-special-matrices" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.circulant.html#cr.sparse.lop.circulant" title="cr.sparse.lop.circulant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">circulant</span></code></a>(n, c[, axis])</p></td>
+<td><p>Circulant matrix operator</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="derivatives-finite-differences">
+<h2><a class="toc-backref" href="#id9">Derivatives (finite differences)</a><a class="headerlink" href="#derivatives-finite-differences" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.first_derivative.html#cr.sparse.lop.first_derivative" title="cr.sparse.lop.first_derivative"><code class="xref py py-obj docutils literal notranslate"><span class="pre">first_derivative</span></code></a>(n[, dx, kind])</p></td>
+<td><p>Computes the first derivative</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.second_derivative.html#cr.sparse.lop.second_derivative" title="cr.sparse.lop.second_derivative"><code class="xref py py-obj docutils literal notranslate"><span class="pre">second_derivative</span></code></a>(n[, dx])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="convenience-operators">
+<h2><a class="toc-backref" href="#id10">Convenience operators</a><a class="headerlink" href="#convenience-operators" title="Permalink to this headline">¶</a></h2>
+<p>These operators are technically not linear on <span class="math notranslate nohighlight">\(\mathbb{F}^n \to \mathbb{F}^m\)</span></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.real.html#cr.sparse.lop.real" title="cr.sparse.lop.real"><code class="xref py py-obj docutils literal notranslate"><span class="pre">real</span></code></a>(n)</p></td>
+<td><p>Returns the real parts of a vector of complex numbers</p></td>
+</tr>
 </tbody>
 </table>
 </section>
 <section id="operator-parts">
-<h2>Operator parts<a class="headerlink" href="#operator-parts" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id11">Operator parts</a><a class="headerlink" href="#operator-parts" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -449,7 +468,7 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 </table>
 </section>
 <section id="properties-of-a-linear-operator">
-<h2>Properties of a linear operator<a class="headerlink" href="#properties-of-a-linear-operator" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id12">Properties of a linear operator</a><a class="headerlink" href="#properties-of-a-linear-operator" title="Permalink to this headline">¶</a></h2>
 <p>These are still experimental and not efficient.</p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -464,7 +483,7 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 </table>
 </section>
 <section id="utilities">
-<h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id13">Utilities</a><a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />

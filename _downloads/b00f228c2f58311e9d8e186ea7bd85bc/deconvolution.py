@@ -1,4 +1,6 @@
 """
+.. _gallery:lop:deconvolution:
+
 Deconvolution
 =======================
 
