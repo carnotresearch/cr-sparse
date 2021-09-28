@@ -6,19 +6,39 @@ from jax import random
 
 def sparse_normal_representations(key, D, K, S=1):
     """
-    Generates a block of representation vectors where each vector is
-    K-sparse, the non-zero basis indexes are randomly selected
-    and shared among all vectors and non-zero values are normally
-    distributed. 
+    Generates a set of sparse model vectors with normally distributed non-zero entries.
+    
+    * Each vector is K-sparse.
+    * The non-zero basis indexes are randomly selected
+      and shared among all vectors.
+    * The non-zero values are normally distributed. 
 
     Args:
-        D (int): Dimension of the sparse representation space
-        K (int): Number of non-zero entries in the sparse signals
-        S (int): Number of sparse signals
+        key: a PRNG key used as the random key.
+        D (int): Dimension of the model space
+        K (int): Number of non-zero entries in the sparse model vectors
+        S (int): Number of sparse model vectors (default 1)
 
     Returns:
-        result (DeviceArray): Block of sparse representations
-        omega (DeviceArray): Locations of Non-Zero entries
+        (jax.numpy.ndarray, jax.numpy.ndarray): A tuple consisting of 
+        (i) a matrix of sparse model vectors
+        (ii) an index set of locations of non-zero entries
+
+    Example:
+
+        >>> key = random.PRNGKey(1)
+        >>> X, Omega = sparse_normal_representations(key, 6, 2, 3)
+        >>> print(X.shape)
+        (6, 3)
+        >>> print(Omega)
+        [1 5]
+        >>> print(X)
+        [[ 0.          0.          0.        ]
+        [ 0.07545021 -1.0032069  -1.1431499 ]
+        [ 0.          0.          0.        ]
+        [ 0.          0.          0.        ]
+        [ 0.          0.          0.        ]
+        [-0.14357079  0.59042295 -1.43841705]]
     """
     r = jnp.arange(D)
     r = random.permutation(key, r)
@@ -34,9 +54,39 @@ def sparse_normal_representations(key, D, K, S=1):
 
 def sparse_spikes(key, N, K, S=1):
     """
-    Generates a block of representation vectors where each vector is
-    K-sparse, the non-zero basis indexes are randomly selected
-    and shared among all vectors and non-zero values are Rademacher distributed spikes. 
+    Generates a set of sparse model vectors with Rademacher distributed non-zero entries.
+    
+    * Each vector is K-sparse.
+    * The non-zero basis indexes are randomly selected
+      and shared among all vectors.
+    * Non-zero values are Rademacher distributed spikes (-1, 1). 
+
+    Args:
+        key: a PRNG key used as the random key.
+        N (int): Dimension of the model space
+        K (int): Number of non-zero entries in the sparse model vectors
+        S (int): Number of sparse model vectors (default 1)
+
+    Returns:
+        (jax.numpy.ndarray, jax.numpy.ndarray): A tuple consisting of 
+        (i) a matrix of sparse model vectors
+        (ii) an index set of locations of non-zero entries
+
+    Example:
+
+        >>> key = random.PRNGKey(3)
+        >>> X, Omega = sparse_spikes(key, 6, 2, 3)
+        >>> print(X.shape)
+        (6, 3)
+        >>> print(Omega)
+        [2 5]
+        >>> print(X)
+        [[ 0.  0.  0.]
+        [ 0.  0.  0.]
+        [-1.  1.  1.]
+        [ 0.  0.  0.]
+        [ 0.  0.  0.]
+        [ 1. -1.  1.]]
     """
     key, subkey = random.split(key)
     perm = random.permutation(key, N)
