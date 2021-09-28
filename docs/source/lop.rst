@@ -132,6 +132,27 @@ Basic operators
     symmetrize
     restriction
 
+Operator algebra
+------------------
+
+It is possible to combine one or more linear operators
+to create new linear operators. The functions in this
+section provide different ways to combine linear operators.
+
+.. autosummary::
+    :toctree: _autosummary
+
+    neg
+    scale
+    add
+    subtract
+    compose
+    transpose
+    hermitian
+    hcat
+    power
+    block_diag
+
 Signal processing operators
 ------------------------------------
 
@@ -206,21 +227,6 @@ These operators are technically not linear on :math:`\mathbb{F}^n \to \mathbb{F}
 
     real
 
-Operator algebra
-------------------
-
-.. autosummary::
-    :toctree: _autosummary
-
-    neg
-    scale
-    add
-    subtract
-    compose
-    transpose
-    hermitian
-    hcat
-    power
 
 Operator parts
 ------------------

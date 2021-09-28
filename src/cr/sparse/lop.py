@@ -21,7 +21,13 @@ from cr.sparse._src.lop.lop import (
     Operator,
     # jax support
     jit,
-    # operator algebra
+    # operator parts
+    column,
+    columns
+)
+
+# operator algebra
+from cr.sparse._src.lop.lop import (
     neg,
     scale,
     partial_op,
@@ -34,9 +40,9 @@ from cr.sparse._src.lop.lop import (
     power,
     gram,
     frame,
-    # operator parts
-    column,
-    columns
+)
+from cr.sparse._src.lop.block_diag import (
+    block_diag
 )
 
 # basic operators
