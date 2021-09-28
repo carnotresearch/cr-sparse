@@ -91,7 +91,7 @@ would be a 2D array.
 
 * A 1D linear operator may get an ND array as input.
 * In this case, the axis parameter to the operator specifies the
- axis along which the linear operator is to be applied.
+  axis along which the linear operator is to be applied.
 * The input ND array will be broken into slices of 1D arrays along the
   axis and the linear operator will be applied separately to each slice.
 * Then the slices will be combined to generate the output ND array.

@@ -5,8 +5,11 @@ Sample Data Generation Utilities
 
 .. currentmodule:: cr.sparse.data
 
-.. automodule:: cr.sparse.data
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. autosummary::
+  :toctree: _autosummary
+
+  sparse_normal_representations
+  sparse_spikes
+
+
 
