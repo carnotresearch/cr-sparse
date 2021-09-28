@@ -38,13 +38,15 @@ def gaussian_mtx(key, N, D, normalize_atoms=True):
         dict = dict / sigma
     return dict
 
-def rademacher_mtx(key, M, N):
+def rademacher_mtx(key, M, N, normalize_atoms=True):
     """A dictionary/sensing matrix where entries are drawn independently from Rademacher distribution.
     """
     shape = (M, N)
     dict = random.bernoulli(key, shape=shape)
     dict = 2*promote_arg_dtypes(dict) - 1
-    return dict / math.sqrt(M)
+    if normalize_atoms:
+        return dict / math.sqrt(M)
+    return dict
 
 
 def random_onb(key, N):
