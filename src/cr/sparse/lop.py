@@ -44,6 +44,11 @@ from cr.sparse._src.lop.identity import (
     identity,
 )
 
+from cr.sparse._src.lop.spread import (
+spread_with_table
+)
+
+
 from cr.sparse._src.lop.basic import (
     matrix,
     diagonal,
