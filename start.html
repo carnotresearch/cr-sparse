@@ -64,7 +64,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#platform-support">Platform Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#exploring-cr-sparse-capabilities">Exploring cr-sparse capabilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#citing-cr-sparse">Citing cr-sparse</a></li>
 </ul>
 </li>
@@ -124,15 +123,10 @@
 <p>An <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/intro.html">overview</a> of the library.</p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#examples" id="id2">Examples</a></p>
-<ul>
-<li><p><a class="reference internal" href="#a-greedy-pursuit-based-sparse-recovery-with-synthetic-data" id="id3">A greedy pursuit based sparse recovery with synthetic data</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#platform-support" id="id4">Platform Support</a></p></li>
-<li><p><a class="reference internal" href="#installation" id="id5">Installation</a></p></li>
-<li><p><a class="reference internal" href="#exploring-cr-sparse-capabilities" id="id6">Exploring cr-sparse capabilities</a></p></li>
-<li><p><a class="reference internal" href="#citing-cr-sparse" id="id7">Citing cr-sparse</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id2">Examples</a></p></li>
+<li><p><a class="reference internal" href="#platform-support" id="id3">Platform Support</a></p></li>
+<li><p><a class="reference internal" href="#installation" id="id4">Installation</a></p></li>
+<li><p><a class="reference internal" href="#citing-cr-sparse" id="id5">Citing cr-sparse</a></p></li>
 </ul>
 </div>
 <p>This library aims to provide XLA/JAX based Python implementations for
@@ -164,49 +158,27 @@ various models and algorithms related to:</p>
 </ul>
 <section id="examples">
 <h2><a class="toc-backref" href="#id2">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<section id="a-greedy-pursuit-based-sparse-recovery-with-synthetic-data">
-<h3><a class="toc-backref" href="#id3">A greedy pursuit based sparse recovery with synthetic data</a><a class="headerlink" href="#a-greedy-pursuit-based-sparse-recovery-with-synthetic-data" title="Permalink to this headline">¶</a></h3>
-<p>Build a Gaussian dictionary/sensing matrix:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">random</span>
-<span class="kn">import</span> <span class="nn">cr.sparse.dict</span> <span class="k">as</span> <span class="nn">crdict</span>
-<span class="n">M</span> <span class="o">=</span> <span class="mi">128</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">256</span>
-<span class="n">key</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">Phi</span> <span class="o">=</span> <span class="n">crdict</span><span class="o">.</span><span class="n">gaussian_mtx</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Build a K-sparse signal with Gaussian non-zero entries:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cr.sparse.data</span> <span class="k">as</span> <span class="nn">crdata</span>
-<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-<span class="n">K</span> <span class="o">=</span> <span class="mi">16</span>
-<span class="n">key</span><span class="p">,</span> <span class="n">subkey</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">crdata</span><span class="o">.</span><span class="n">sparse_normal_representations</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Build the measurement vector:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">Phi</span> <span class="o">@</span> <span class="n">x</span>
-</pre></div>
-</div>
-<p>Import the Compressive Sampling Matching Pursuit sparse recovery solver:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cr.sparse.pursuit</span> <span class="kn">import</span> <span class="n">cosamp</span>
-</pre></div>
-</div>
-<p>Solve the recovery problem:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span> <span class="o">=</span>  <span class="n">cosamp</span><span class="o">.</span><span class="n">matrix_solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>For the complete set of available solvers, see the documentation.</p>
-</section>
+<p>See the <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/index.html">examples gallery</a> for an
+extensive set of examples. Here is a small selection of examples:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/rec_l1/spikes_l1ls.html">Sparse recovery using Truncated Newton Interior Points Method</a></p></li>
+<li><p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/rec_l1/partial_wh_sensor_cosine_basis.html">Sparse recovery with ADMM</a></p></li>
+<li><p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/lop/cs_operators.html">Compressive sensing operators</a></p></li>
+<li><p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/lop/deblurring.html">Image deblurring with LSQR and FISTA algorithms</a></p></li>
+<li><p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/lop/deconvolution.html">Deconvolution of the effects of a Ricker wavelet</a></p></li>
+<li><p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/lop/wt_op.html">Wavelet transform operators</a></p></li>
+<li><p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/pursuit/cosamp_step_by_step.html">CoSaMP step by step</a></p></li>
+</ul>
 </section>
 <section id="platform-support">
-<h2><a class="toc-backref" href="#id4">Platform Support</a><a class="headerlink" href="#platform-support" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">Platform Support</a><a class="headerlink" href="#platform-support" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">cr-sparse</span></code> can run on any platform supported by <code class="docutils literal notranslate"><span class="pre">JAX</span></code>.
-<code class="docutils literal notranslate"><span class="pre">JAX</span></code> doesn’t run natively on Windows platforms at the moment.
-We have tested <code class="docutils literal notranslate"><span class="pre">cr-sparse</span></code> on Mac and Linux platforms.</p>
+We have tested <code class="docutils literal notranslate"><span class="pre">cr-sparse</span></code> on Mac and Linux platforms and Google Colaboratory.</p>
+<p><code class="docutils literal notranslate"><span class="pre">JAX</span></code> is not officially supported on Windows platforms at the moment.
+Although, it is possible to build it from source using Windows Subsystems for Linux.</p>
 </section>
 <section id="installation">
-<h2><a class="toc-backref" href="#id5">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>Installation from PyPI:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m pip install cr-sparse
 </pre></div>
@@ -216,14 +188,8 @@ We have tested <code class="docutils literal notranslate"><span class="pre">cr-s
 </pre></div>
 </div>
 </section>
-<section id="exploring-cr-sparse-capabilities">
-<h2><a class="toc-backref" href="#id6">Exploring cr-sparse capabilities</a><a class="headerlink" href="#exploring-cr-sparse-capabilities" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>See the <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/index.html">examples gallery</a></p></li>
-</ul>
-</section>
 <section id="citing-cr-sparse">
-<h2><a class="toc-backref" href="#id7">Citing cr-sparse</a><a class="headerlink" href="#citing-cr-sparse" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">Citing cr-sparse</a><a class="headerlink" href="#citing-cr-sparse" title="Permalink to this headline">¶</a></h2>
 <p>To cite this repository:</p>
 <div class="highlight-tex notranslate"><div class="highlight"><pre><span></span>@software<span class="nb">{</span>crsparse2021github,
 author = <span class="nb">{</span>Shailesh Kumar<span class="nb">}</span>,

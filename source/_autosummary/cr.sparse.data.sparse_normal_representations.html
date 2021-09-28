@@ -135,26 +135,47 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="cr.sparse.data.sparse_normal_representations">
 <span class="sig-prename descclassname"><span class="pre">cr.sparse.data.</span></span><span class="sig-name descname"><span class="pre">sparse_normal_representations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/data/synthetic/random.html#sparse_normal_representations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.data.sparse_normal_representations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates a block of representation vectors where each vector is
-K-sparse, the non-zero basis indexes are randomly selected
-and shared among all vectors and non-zero values are normally
-distributed.</p>
+<dd><p>Generates a set of sparse model vectors with normally distributed non-zero entries.</p>
+<ul class="simple">
+<li><p>Each vector is K-sparse.</p></li>
+<li><p>The non-zero basis indexes are randomly selected
+and shared among all vectors.</p></li>
+<li><p>The non-zero values are normally distributed.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>D</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Dimension of the sparse representation space</p></li>
-<li><p><strong>K</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Number of non-zero entries in the sparse signals</p></li>
-<li><p><strong>S</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Number of sparse signals</p></li>
+<li><p><strong>key</strong> – a PRNG key used as the random key.</p></li>
+<li><p><strong>D</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Dimension of the model space</p></li>
+<li><p><strong>K</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Number of non-zero entries in the sparse model vectors</p></li>
+<li><p><strong>S</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – Number of sparse model vectors (default 1)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Block of sparse representations
-omega (DeviceArray): Locations of Non-Zero entries</p>
+<dd class="field-even"><p>A tuple consisting of
+(i) a matrix of sparse model vectors
+(ii) an index set of locations of non-zero entries</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>result (DeviceArray)</p>
+<dd class="field-odd"><p>(<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)">jax.numpy.ndarray</a>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)">jax.numpy.ndarray</a>)</p>
 </dd>
 </dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">key</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">Omega</span> <span class="o">=</span> <span class="n">sparse_normal_representations</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(6, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Omega</span><span class="p">)</span>
+<span class="go">[1 5]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">[[ 0.          0.          0.        ]</span>
+<span class="go">[ 0.07545021 -1.0032069  -1.1431499 ]</span>
+<span class="go">[ 0.          0.          0.        ]</span>
+<span class="go">[ 0.          0.          0.        ]</span>
+<span class="go">[ 0.          0.          0.        ]</span>
+<span class="go">[-0.14357079  0.59042295 -1.43841705]]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>

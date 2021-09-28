@@ -174,7 +174,7 @@ Let's plot the vector to see where the non-zero entries are
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.675 seconds)
+   **Total running time of the script:** ( 0 minutes  1.828 seconds)
 
 
 .. _sphx_glr_download_gallery_sparse_vector_normals.py:

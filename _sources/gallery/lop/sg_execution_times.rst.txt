@@ -5,16 +5,16 @@
 
 Computation times
 =================
-**00:34.840** total execution time for **gallery_lop** files:
+**00:36.917** total execution time for **gallery_lop** files:
 
 +-------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_lop_deblurring.py` (``deblurring.py``)           | 00:21.151 | 0.0 MB |
+| :ref:`sphx_glr_gallery_lop_deblurring.py` (``deblurring.py``)           | 00:22.418 | 0.0 MB |
 +-------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_lop_wt_op.py` (``wt_op.py``)                     | 00:08.146 | 0.0 MB |
+| :ref:`sphx_glr_gallery_lop_wt_op.py` (``wt_op.py``)                     | 00:08.673 | 0.0 MB |
 +-------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_lop_cs_operators.py` (``cs_operators.py``)       | 00:03.143 | 0.0 MB |
+| :ref:`sphx_glr_gallery_lop_cs_operators.py` (``cs_operators.py``)       | 00:03.288 | 0.0 MB |
 +-------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_lop_deconvolution.py` (``deconvolution.py``)     | 00:02.324 | 0.0 MB |
+| :ref:`sphx_glr_gallery_lop_deconvolution.py` (``deconvolution.py``)     | 00:02.465 | 0.0 MB |
 +-------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_lop_matrix_operator.py` (``matrix_operator.py``) | 00:00.076 | 0.0 MB |
+| :ref:`sphx_glr_gallery_lop_matrix_operator.py` (``matrix_operator.py``) | 00:00.073 | 0.0 MB |
 +-------------------------------------------------------------------------+-----------+--------+

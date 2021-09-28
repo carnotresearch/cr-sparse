@@ -116,19 +116,39 @@
 
 <div class="viewcode-block" id="sparse_normal_representations"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.data.sparse_normal_representations.html#cr.sparse.data.sparse_normal_representations">[docs]</a><span class="k">def</span> <span class="nf">sparse_normal_representations</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generates a block of representation vectors where each vector is</span>
-<span class="sd">    K-sparse, the non-zero basis indexes are randomly selected</span>
-<span class="sd">    and shared among all vectors and non-zero values are normally</span>
-<span class="sd">    distributed. </span>
+<span class="sd">    Generates a set of sparse model vectors with normally distributed non-zero entries.</span>
+<span class="sd">    </span>
+<span class="sd">    * Each vector is K-sparse.</span>
+<span class="sd">    * The non-zero basis indexes are randomly selected</span>
+<span class="sd">      and shared among all vectors.</span>
+<span class="sd">    * The non-zero values are normally distributed. </span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        D (int): Dimension of the sparse representation space</span>
-<span class="sd">        K (int): Number of non-zero entries in the sparse signals</span>
-<span class="sd">        S (int): Number of sparse signals</span>
+<span class="sd">        key: a PRNG key used as the random key.</span>
+<span class="sd">        D (int): Dimension of the model space</span>
+<span class="sd">        K (int): Number of non-zero entries in the sparse model vectors</span>
+<span class="sd">        S (int): Number of sparse model vectors (default 1)</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        result (DeviceArray): Block of sparse representations</span>
-<span class="sd">        omega (DeviceArray): Locations of Non-Zero entries</span>
+<span class="sd">        (jax.numpy.ndarray, jax.numpy.ndarray): A tuple consisting of </span>
+<span class="sd">        (i) a matrix of sparse model vectors</span>
+<span class="sd">        (ii) an index set of locations of non-zero entries</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; key = random.PRNGKey(1)</span>
+<span class="sd">        &gt;&gt;&gt; X, Omega = sparse_normal_representations(key, 6, 2, 3)</span>
+<span class="sd">        &gt;&gt;&gt; print(X.shape)</span>
+<span class="sd">        (6, 3)</span>
+<span class="sd">        &gt;&gt;&gt; print(Omega)</span>
+<span class="sd">        [1 5]</span>
+<span class="sd">        &gt;&gt;&gt; print(X)</span>
+<span class="sd">        [[ 0.          0.          0.        ]</span>
+<span class="sd">        [ 0.07545021 -1.0032069  -1.1431499 ]</span>
+<span class="sd">        [ 0.          0.          0.        ]</span>
+<span class="sd">        [ 0.          0.          0.        ]</span>
+<span class="sd">        [ 0.          0.          0.        ]</span>
+<span class="sd">        [-0.14357079  0.59042295 -1.43841705]]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
@@ -144,9 +164,39 @@
 
 <div class="viewcode-block" id="sparse_spikes"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.data.sparse_spikes.html#cr.sparse.data.sparse_spikes">[docs]</a><span class="k">def</span> <span class="nf">sparse_spikes</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generates a block of representation vectors where each vector is</span>
-<span class="sd">    K-sparse, the non-zero basis indexes are randomly selected</span>
-<span class="sd">    and shared among all vectors and non-zero values are Rademacher distributed spikes. </span>
+<span class="sd">    Generates a set of sparse model vectors with Rademacher distributed non-zero entries.</span>
+<span class="sd">    </span>
+<span class="sd">    * Each vector is K-sparse.</span>
+<span class="sd">    * The non-zero basis indexes are randomly selected</span>
+<span class="sd">      and shared among all vectors.</span>
+<span class="sd">    * Non-zero values are Rademacher distributed spikes (-1, 1). </span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: a PRNG key used as the random key.</span>
+<span class="sd">        N (int): Dimension of the model space</span>
+<span class="sd">        K (int): Number of non-zero entries in the sparse model vectors</span>
+<span class="sd">        S (int): Number of sparse model vectors (default 1)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray, jax.numpy.ndarray): A tuple consisting of </span>
+<span class="sd">        (i) a matrix of sparse model vectors</span>
+<span class="sd">        (ii) an index set of locations of non-zero entries</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; key = random.PRNGKey(3)</span>
+<span class="sd">        &gt;&gt;&gt; X, Omega = sparse_spikes(key, 6, 2, 3)</span>
+<span class="sd">        &gt;&gt;&gt; print(X.shape)</span>
+<span class="sd">        (6, 3)</span>
+<span class="sd">        &gt;&gt;&gt; print(Omega)</span>
+<span class="sd">        [2 5]</span>
+<span class="sd">        &gt;&gt;&gt; print(X)</span>
+<span class="sd">        [[ 0.  0.  0.]</span>
+<span class="sd">        [ 0.  0.  0.]</span>
+<span class="sd">        [-1.  1.  1.]</span>
+<span class="sd">        [ 0.  0.  0.]</span>
+<span class="sd">        [ 0.  0.  0.]</span>
+<span class="sd">        [ 1. -1.  1.]]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">key</span><span class="p">,</span> <span class="n">subkey</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
     <span class="n">perm</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
