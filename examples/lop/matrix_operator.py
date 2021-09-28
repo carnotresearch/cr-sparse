@@ -1,4 +1,6 @@
 """
+.. _gallery:lop:matrix_op:
+
 A matrix backed linear operator
 ==================================
 

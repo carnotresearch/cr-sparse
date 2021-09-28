@@ -1,4 +1,6 @@
 """
+.. _gallery:lop:image_deblurring:
+
 Image Deblurring
 ===========================
 
