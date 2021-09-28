@@ -100,7 +100,7 @@ def cwt_id_time(data, scales, wavelet, precision, axis):
             conv = lax.complex(conv_real, conv_imag)
         coeffs = - jnp.sqrt(scale) * jnp.diff(conv, axis=axis)
         start = psi_len // 2 -1 
-        coeffs = jnp.take(coeffs, indices=range(start, start+n), axis=axis)
+        coeffs = jnp.take(coeffs, indices=tuple(range(start, start+n)), axis=axis)
         output = output.at[index].set(coeffs)
     return output
 
