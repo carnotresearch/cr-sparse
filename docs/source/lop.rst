@@ -3,6 +3,9 @@
 Linear Operators
 =======================
 
+.. contents::
+    :depth: 2
+    :local:
 
 We provide a collection of linear operators with efficient JAX based implementations 
 that are
