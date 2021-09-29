@@ -22,3 +22,7 @@ from cr.sparse._src.data.synthetic.random import (
     sparse_normal_representations,
     sparse_spikes
 )
+
+from cr.sparse._src.data.synthetic.subspaces import (
+    random_subspaces
+)

@@ -3,6 +3,10 @@
 Sample Data Generation Utilities
 =====================================
 
+
+Sparse Model Vectors
+------------------------
+
 .. currentmodule:: cr.sparse.data
 
 .. autosummary::
@@ -13,3 +17,10 @@ Sample Data Generation Utilities
 
 
 
+Subspaces
+------------------------
+
+.. autosummary::
+  :toctree: _autosummary
+
+  random_subspaces
