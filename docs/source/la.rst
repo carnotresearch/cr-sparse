@@ -31,5 +31,14 @@ Fundamental Subspaces
     row_space
     null_space
     left_null_space
+
+
+Singular Value Decomposition 
+---------------------------------------
+
+.. autosummary::
+  :toctree: _autosummary
+
     effective_rank
     effective_rank_from_svd
+    singular_values

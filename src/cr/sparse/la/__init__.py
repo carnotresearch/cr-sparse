@@ -69,5 +69,6 @@ from cr.sparse._src.la.svd_utils import (
     left_null_space_jit,
     effective_rank,
     effective_rank_jit,
-    effective_rank_from_svd
+    effective_rank_from_svd,
+    singular_values
 )

@@ -251,3 +251,27 @@ def effective_rank_from_svd(u, s, vh, rcond=None):
     tol = jnp.amax(s) * rcond
     rank = jnp.sum(s > tol, dtype=int)
     return rank
+
+
+@jit
+def singular_values(A):
+    """Returns the singular values of a matrix
+
+    Args:
+        A (jax.numpy.ndarray): Input matrix of size (M, N) where 
+            M is the dimension of the ambient vector space and N 
+            is the number of vectors in A
+
+
+    Returns:
+        (jax.numpy.ndarray): The list of singular values
+
+
+    Examples:
+        >>> key = random.PRNGKey(0)
+        >>> A = random.normal(key, (20, 10))
+        >>> print(singular_values(A))
+        [6.6780386  6.19980196 5.65133988 4.89395458 4.49728071 3.9139061
+         3.50887351 2.66701591 2.12520081 1.63708146]
+    """
+    return jnp.linalg.svd(A, full_matrices=False, compute_uv=False)
