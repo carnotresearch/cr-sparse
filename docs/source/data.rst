@@ -24,3 +24,4 @@ Subspaces
   :toctree: _autosummary
 
   random_subspaces
+  uniform_points_on_subspaces
