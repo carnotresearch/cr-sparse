@@ -42,3 +42,21 @@ Singular Value Decomposition
     effective_rank
     effective_rank_from_svd
     singular_values
+
+
+Subspaces
+----------------
+
+.. currentmodule:: cr.sparse.la.subspaces
+
+.. autosummary::
+  :toctree: _autosummary
+
+  principal_angles_cos
+  principal_angles_rad
+  principal_angles_deg
+  smallest_principal_angle_cos
+  smallest_principal_angle_rad
+  smallest_principal_angle_deg
+  smallest_principal_angles_cos
+
