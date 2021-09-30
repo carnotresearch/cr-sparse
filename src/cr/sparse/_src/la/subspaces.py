@@ -144,3 +144,33 @@ def smallest_principal_angles_cos(subspaces):
 
 
 smallest_principal_angles_cos_jit = jit(smallest_principal_angles_cos)
+
+def smallest_principal_angles_rad(subspaces):
+    """Returns the smallest principal angles between each pair of subspaces in radians
+
+    Args:
+        A (:obj:`list` of :obj:`jax.numpy.ndarray`): ONBs for the subspaces
+
+    Returns:
+        (jax.numpy.ndarray): A symmetric matrix containing the 
+            smallest principal angles between each pair of subspaces in radians
+    """
+    result = smallest_principal_angles_cos(subspaces)
+    return jnp.arccos(result)
+
+smallest_principal_angles_rad_jit = jit(smallest_principal_angles_rad)
+
+def smallest_principal_angles_deg(subspaces):
+    """Returns the smallest principal angles between each pair of subspaces in degrees
+
+    Args:
+        A (:obj:`list` of :obj:`jax.numpy.ndarray`): ONBs for the subspaces
+
+    Returns:
+        (jax.numpy.ndarray): A symmetric matrix containing the 
+            smallest principal angles between each pair of subspaces in degrees
+    """
+    result = smallest_principal_angles_rad(subspaces)
+    return jnp.rad2deg(result)
+
+smallest_principal_angles_deg_jit = jit(smallest_principal_angles_deg)

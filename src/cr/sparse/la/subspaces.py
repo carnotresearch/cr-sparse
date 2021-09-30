@@ -27,5 +27,9 @@ from cr.sparse._src.la.subspaces import (
     smallest_principal_angle_deg,
     smallest_principal_angle_deg_jit,
     smallest_principal_angles_cos,
-    smallest_principal_angles_cos_jit
+    smallest_principal_angles_cos_jit,
+    smallest_principal_angles_rad,
+    smallest_principal_angles_rad_jit,
+    smallest_principal_angles_deg,
+    smallest_principal_angles_deg_jit,
 )

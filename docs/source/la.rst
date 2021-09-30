@@ -59,4 +59,7 @@ Subspaces
   smallest_principal_angle_rad
   smallest_principal_angle_deg
   smallest_principal_angles_cos
+  smallest_principal_angles_rad
+  smallest_principal_angles_deg
+  
 
