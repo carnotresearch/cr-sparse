@@ -61,5 +61,6 @@ Subspaces
   smallest_principal_angles_cos
   smallest_principal_angles_rad
   smallest_principal_angles_deg
-  
+  subspace_distance
+
 

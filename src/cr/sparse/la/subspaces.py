@@ -32,4 +32,5 @@ from cr.sparse._src.la.subspaces import (
     smallest_principal_angles_rad_jit,
     smallest_principal_angles_deg,
     smallest_principal_angles_deg_jit,
+    subspace_distance,
 )

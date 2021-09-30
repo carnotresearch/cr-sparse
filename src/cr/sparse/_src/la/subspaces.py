@@ -174,3 +174,28 @@ def smallest_principal_angles_deg(subspaces):
     return jnp.rad2deg(result)
 
 smallest_principal_angles_deg_jit = jit(smallest_principal_angles_deg)
+
+
+def subspace_distance(A, B):
+    r"""Returns the Grassmannian distance between two subspaces
+
+    Args:
+        A (jax.numpy.ndarray): ONB for the first subspace
+        B (jax.numpy.ndarray): ONB for the second subspace
+
+    the `Grassmannian <https://en.wikipedia.org/wiki/Grassmannian>`_ 
+    is a space that parameterizes  all  k dimensional linear 
+    subspaces of a vector space V. 
+    A `metric <https://math.stackexchange.com/questions/198111/distance-between-real-finite-dimensional-linear-subspaces>`_
+    can be defined over this space. We can use this metric
+    to compute the distance between two subspaces.
+    """
+    # Compute the projection operators for the two subspaces
+    PA = A @ jnp.conjugate(A.T)
+    PB = B @ jnp.conjugate(B.T)
+    # Difference between the projection operators
+    D = PA  - PB
+    # Return the operator norm of D
+    return jnp.linalg.norm(D)
+
+subspace_distance_jit = jit(subspace_distance)
