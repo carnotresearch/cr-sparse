@@ -41,6 +41,10 @@ from cr.sparse._src.matrix import (
     has_orthogonal_rows,
     has_unitary_columns,
     has_unitary_rows,
+    off_diagonal_elements,
+    off_diagonal_min,
+    off_diagonal_max,
+    off_diagonal_mean,
 )
 
 from cr.sparse._src.norm import (

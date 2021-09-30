@@ -95,6 +95,11 @@ Some checks and utilities for matrices (2D arrays)
     has_orthogonal_rows
     has_unitary_columns
     has_unitary_rows
+    off_diagonal_elements
+    off_diagonal_min
+    off_diagonal_max
+    off_diagonal_mean
+
 
 Row wise and column wise norms for signal/representation matrices
 ----------------------------------------------------------------------

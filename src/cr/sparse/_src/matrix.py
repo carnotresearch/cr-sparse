@@ -176,3 +176,52 @@ def has_unitary_rows(A):
     m = G.shape[0]
     I = jnp.eye(m)
     return jnp.allclose(G, I, atol=m*1e-6)
+
+
+def off_diagonal_elements(A):
+    """Returns the off diagonal elements of a matrix A
+
+    Args:
+        A (jax.numpy.ndarray): A real 2D matrix
+
+    Returns:
+        (jax.numpy.ndarray): A vector of off-diagonal elements in A
+    """
+    mask = ~jnp.eye(*A.shape, dtype=bool)
+    return A[mask]
+
+def off_diagonal_min(A):
+    """Returns the minimum of the off diagonal elements
+
+    Args:
+        A (jax.numpy.ndarray): A real 2D matrix
+
+    Returns:
+        (float): The smallest off-diagonal element in A
+    """
+    off_diagonal_entries = off_diagonal_elements(A)
+    return jnp.min(off_diagonal_entries)
+
+def off_diagonal_max(A):
+    """Returns the maximum of the off diagonal elements
+
+    Args:
+        A (jax.numpy.ndarray): A real 2D matrix
+
+    Returns:
+        (float): The largest off-diagonal element in A
+    """
+    off_diagonal_entries = off_diagonal_elements(A)
+    return jnp.max(off_diagonal_entries)
+
+def off_diagonal_mean(A):
+    """Returns the maximum of the off diagonal elements
+
+    Args:
+        A (jax.numpy.ndarray): A real 2D matrix
+
+    Returns:
+        (float): The mean of all off-diagonal elements in A
+    """
+    off_diagonal_entries = off_diagonal_elements(A)
+    return jnp.mean(off_diagonal_entries)
