@@ -57,3 +57,17 @@ from cr.sparse._src.la.chol import (
 from cr.sparse._src.la.householder import (
     householder_vec_
 )
+
+from cr.sparse._src.la.svd_utils import (
+    orth,
+    orth_jit,
+    row_space,
+    row_space_jit,
+    null_space,
+    null_space_jit,
+    left_null_space,
+    left_null_space_jit,
+    effective_rank,
+    effective_rank_jit,
+    effective_rank_from_svd
+)

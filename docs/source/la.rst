@@ -5,7 +5,7 @@ Linear Algebra Subroutines
 
 
 
-Triangular systems
+Triangular Systems
 ------------------------
 
 
@@ -20,3 +20,16 @@ Triangular systems
     solve_UTx_b
     solve_spd_chol
 
+
+Fundamental Subspaces
+--------------------------
+
+.. autosummary::
+  :toctree: _autosummary
+
+    orth
+    row_space
+    null_space
+    left_null_space
+    effective_rank
+    effective_rank_from_svd
