@@ -17,6 +17,10 @@ Linear algebra utility functions
 """
 # pylint: disable=W0611
 
+from cr.sparse._src.la.util import (
+    hermitian,
+    AH_v
+)
 
 from cr.sparse._src.la.linear import (
     point2d,

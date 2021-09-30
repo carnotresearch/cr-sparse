@@ -3,6 +3,18 @@
 Linear Algebra Subroutines
 ==================================
 
+.. contents::
+    :depth: 2
+    :local:
+
+.. currentmodule:: cr.sparse.la
+
+.. autosummary::
+  :toctree: _autosummary
+
+  hermitian
+  AH_v
+
 
 
 Triangular Systems
@@ -52,6 +64,7 @@ Subspaces
 .. autosummary::
   :toctree: _autosummary
 
+  project_to_subspace
   principal_angles_cos
   principal_angles_rad
   principal_angles_deg

@@ -14,6 +14,7 @@
 
 from cr.sparse._src.la.subspaces import (
     orth_complement,
+    project_to_subspace,
     principal_angles_cos,
     principal_angles_cos_jit,
     principal_angles_rad,

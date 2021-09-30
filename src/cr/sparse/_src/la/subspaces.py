@@ -16,6 +16,7 @@ import jax.numpy as jnp
 from jax import jit, lax
 
 from .svd_utils import singular_values
+from .util import hermitian, AH_v
 
 def orth_complement(A, B):
     """Returns the orthogonal complement of A in B
@@ -183,6 +184,9 @@ def subspace_distance(A, B):
         A (jax.numpy.ndarray): ONB for the first subspace
         B (jax.numpy.ndarray): ONB for the second subspace
 
+    Returns:
+        (float): Distance between the two subspaces
+
     the `Grassmannian <https://en.wikipedia.org/wiki/Grassmannian>`_ 
     is a space that parameterizes  all  k dimensional linear 
     subspaces of a vector space V. 
@@ -199,3 +203,33 @@ def subspace_distance(A, B):
     return jnp.linalg.norm(D)
 
 subspace_distance_jit = jit(subspace_distance)
+
+
+def project_to_subspace(U, v):
+    """Projects a vector to a subspace
+
+    Args:
+        U (jax.numpy.ndarray): ONB for the subspace
+        v (jax.numpy.ndarray): A vector in the ambient space
+
+    Returns:
+        (jax.numpy.ndarray): Projection of v onto the subspace spanned by U
+
+    Example:
+        >>> A = jnp.eye(6)[:, :3]
+        >>> v = jnp.arange(6) + 0.
+        >>> u = project_to_subspace(A, v)
+        >>> print(A)
+        [[1. 0. 0.]
+        [0. 1. 0.]
+        [0. 0. 1.]
+        [0. 0. 0.]
+        [0. 0. 0.]
+        [0. 0. 0.]]
+        >>> print(v)
+        [0. 1. 2. 3. 4. 5.]
+        >>> print(u)
+        [0. 1. 2. 0. 0. 0.]
+    """
+    UHv = AH_v(U, v)
+    return U  @ UHv
