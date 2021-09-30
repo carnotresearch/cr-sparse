@@ -1,6 +1,6 @@
 .. _api:la:
 
-Linear Algebra Subroutines
+Linear Algebra
 ==================================
 
 .. contents::
@@ -65,6 +65,7 @@ Subspaces
   :toctree: _autosummary
 
   project_to_subspace
+  is_in_subspace
   principal_angles_cos
   principal_angles_rad
   principal_angles_deg

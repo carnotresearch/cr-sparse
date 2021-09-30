@@ -15,6 +15,8 @@
 import jax.numpy as jnp
 from jax import jit, lax
 
+from jax.numpy.linalg import norm
+
 from .svd_utils import singular_values
 from .util import hermitian, AH_v
 
@@ -233,3 +235,30 @@ def project_to_subspace(U, v):
     """
     UHv = AH_v(U, v)
     return U  @ UHv
+
+def is_in_subspace(U, v):
+    """Checks whether a vector v is in the subspace spanned by an ONB U or not
+
+    Args:
+        U (jax.numpy.ndarray): ONB for the subspace
+        v (jax.numpy.ndarray): A vector in the ambient space
+
+    Returns:
+        (bool): True if v lies in the subspace spanned by U, False otherwise
+
+    Example:
+        >>> A = jnp.eye(6)[:, :3]
+        >>> v = jnp.arange(6) + 0.
+        >>> print(is_in_subspace(A, v))
+        False
+        >>> u = project_to_subspace(A, v)
+        >>> print(is_in_subspace(A, u))
+        True
+    """
+    # Compute the projection
+    p = project_to_subspace(U, v)
+    # Compute the error
+    e = p - v
+    nv = norm(v)
+    ne = norm(e)
+    return ne <= 1e-6 * nv
