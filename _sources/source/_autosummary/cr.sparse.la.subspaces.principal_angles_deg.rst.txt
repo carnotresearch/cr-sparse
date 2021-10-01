@@ -1,0 +1,6 @@
+﻿cr.sparse.la.subspaces.principal\_angles\_deg
+=============================================
+
+.. currentmodule:: cr.sparse.la.subspaces
+
+.. autofunction:: principal_angles_deg

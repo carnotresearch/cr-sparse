@@ -1,0 +1,6 @@
+﻿cr.sparse.off\_diagonal\_min
+============================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: off_diagonal_min

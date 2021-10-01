@@ -1,0 +1,6 @@
+﻿cr.sparse.la.subspaces.project\_to\_subspace
+============================================
+
+.. currentmodule:: cr.sparse.la.subspaces
+
+.. autofunction:: project_to_subspace

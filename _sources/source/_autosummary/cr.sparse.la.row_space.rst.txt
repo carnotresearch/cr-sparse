@@ -1,0 +1,6 @@
+﻿cr.sparse.la.row\_space
+=======================
+
+.. currentmodule:: cr.sparse.la
+
+.. autofunction:: row_space

@@ -286,6 +286,55 @@
     <span class="n">m</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">I</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">m</span><span class="o">*</span><span class="mf">1e-6</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="off_diagonal_elements"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.off_diagonal_elements.html#cr.sparse.off_diagonal_elements">[docs]</a><span class="k">def</span> <span class="nf">off_diagonal_elements</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the off diagonal elements of a matrix A</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (jax.numpy.ndarray): A real 2D matrix</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): A vector of off-diagonal elements in A</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="o">~</span><span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="o">*</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="off_diagonal_min"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.off_diagonal_min.html#cr.sparse.off_diagonal_min">[docs]</a><span class="k">def</span> <span class="nf">off_diagonal_min</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the minimum of the off diagonal elements</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (jax.numpy.ndarray): A real 2D matrix</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float): The smallest off-diagonal element in A</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">off_diagonal_entries</span> <span class="o">=</span> <span class="n">off_diagonal_elements</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">off_diagonal_entries</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="off_diagonal_max"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.off_diagonal_max.html#cr.sparse.off_diagonal_max">[docs]</a><span class="k">def</span> <span class="nf">off_diagonal_max</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the maximum of the off diagonal elements</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (jax.numpy.ndarray): A real 2D matrix</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float): The largest off-diagonal element in A</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">off_diagonal_entries</span> <span class="o">=</span> <span class="n">off_diagonal_elements</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">off_diagonal_entries</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="off_diagonal_mean"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.off_diagonal_mean.html#cr.sparse.off_diagonal_mean">[docs]</a><span class="k">def</span> <span class="nf">off_diagonal_mean</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the maximum of the off diagonal elements</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (jax.numpy.ndarray): A real 2D matrix</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float): The mean of all off-diagonal elements in A</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">off_diagonal_entries</span> <span class="o">=</span> <span class="n">off_diagonal_elements</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">off_diagonal_entries</span><span class="p">)</span></div>
 </pre></div>
 
           </div>

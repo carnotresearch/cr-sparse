@@ -1,0 +1,6 @@
+﻿cr.sparse.la.subspaces.subspace\_distance
+=========================================
+
+.. currentmodule:: cr.sparse.la.subspaces
+
+.. autofunction:: subspace_distance

@@ -1,0 +1,6 @@
+﻿cr.sparse.la.hermitian
+======================
+
+.. currentmodule:: cr.sparse.la
+
+.. autofunction:: hermitian

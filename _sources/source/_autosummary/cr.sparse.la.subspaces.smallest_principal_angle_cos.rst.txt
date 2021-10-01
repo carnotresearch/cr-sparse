@@ -1,0 +1,6 @@
+﻿cr.sparse.la.subspaces.smallest\_principal\_angle\_cos
+======================================================
+
+.. currentmodule:: cr.sparse.la.subspaces
+
+.. autofunction:: smallest_principal_angle_cos

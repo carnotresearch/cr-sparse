@@ -73,7 +73,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="util.html">Utilities in cr.sparse module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="la.html">Linear Algebra Subroutines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="la.html">Linear Algebra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="opt.html">Numerical Optimization Routines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vision.html">Computer Vision and Image Processing</a></li>
@@ -130,6 +130,8 @@
             
   <section id="sample-data-generation-utilities">
 <span id="api-data"></span><h1>Sample Data Generation Utilities<a class="headerlink" href="#sample-data-generation-utilities" title="Permalink to this headline">¶</a></h1>
+<section id="sparse-model-vectors">
+<h2>Sparse Model Vectors<a class="headerlink" href="#sparse-model-vectors" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -144,6 +146,24 @@
 </tr>
 </tbody>
 </table>
+</section>
+<section id="subspaces">
+<h2>Subspaces<a class="headerlink" href="#subspaces" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.data.random_subspaces.html#cr.sparse.data.random_subspaces" title="cr.sparse.data.random_subspaces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_subspaces</span></code></a>(key, N, D, K)</p></td>
+<td><p>Generates a set of orthonormal bases for random low dimensional subspaces</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.data.uniform_points_on_subspaces.html#cr.sparse.data.uniform_points_on_subspaces" title="cr.sparse.data.uniform_points_on_subspaces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniform_points_on_subspaces</span></code></a>(key, bases, n)</p></td>
+<td><p>Generates a set of nk points on the unit sphere of each of the subspaces</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 
 

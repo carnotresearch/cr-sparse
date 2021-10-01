@@ -1,0 +1,6 @@
+﻿cr.sparse.data.random\_subspaces
+================================
+
+.. currentmodule:: cr.sparse.data
+
+.. autofunction:: random_subspaces

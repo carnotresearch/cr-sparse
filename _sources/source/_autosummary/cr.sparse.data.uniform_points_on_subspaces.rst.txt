@@ -1,0 +1,6 @@
+﻿cr.sparse.data.uniform\_points\_on\_subspaces
+=============================================
+
+.. currentmodule:: cr.sparse.data
+
+.. autofunction:: uniform_points_on_subspaces
