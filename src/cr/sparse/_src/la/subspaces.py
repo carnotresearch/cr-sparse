@@ -148,6 +148,27 @@ def smallest_principal_angles_cos(subspaces):
 
 smallest_principal_angles_cos_jit = jit(smallest_principal_angles_cos)
 
+
+def smallest_principal_angles_cos_2(subspaces):
+    """Returns the smallest principal angles between each pair of subspaces
+
+    Args:
+        A (:obj:`list` of :obj:`jax.numpy.ndarray`): ONBs for the subspaces
+
+    Returns:
+        (jax.numpy.ndarray): A symmetric matrix containing the cosine of the 
+            smallest principal angles between each pair of subspaces
+
+    See `here <https://stackoverflow.com/questions/69391894/how-to-vectorize-a-2-level-loop-in-numpy>`_ 
+    for the vectorization of the computation.
+    """
+    k = len(subspaces)
+    M=subspaces[:,None,:,:].transpose(0,1,3,2)@subspaces
+    r = jnp.linalg.svd(M, compute_uv=False)
+    return r[:, :, 0]
+
+smallest_principal_angles_cos_2_jit = jit(smallest_principal_angles_cos_2)
+
 def smallest_principal_angles_rad(subspaces):
     """Returns the smallest principal angles between each pair of subspaces in radians
 

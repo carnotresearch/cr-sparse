@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
   - Gram and Frame operators for a given linear operator
   - DWT 1D operator
   - DWT 2D operator
+  - Block diagonal operator (by combining one or more operators)
 - Sparse Linear Systems
   - Power iterations for computing the largest eigen value of a symmetric linear operator
   - LSQR solver for least squares problems with support for N-D data
@@ -28,13 +29,21 @@ All notable changes to this project will be documented in this file.
 - Examples
   - Deconvolution
   - Image Deblurring
+- Data generation
+  - Random subspaces, uniform points on subspaces
+  - three_subspaces_at_angle
 - Utilities
   - More functions for ND-arrays
+  - Off diagonal elements in a matrix, min,max, mean
+- Linear Algebra
+  - orth, row_space, null_space, left_null_space, effective_rank
+  - subspaces: principal angles, is_in_subspace, project_to_subspace
 
 ### Improved
 
 - Linear Operators
   - Ability to apply a 1D linear operator along a specific axis of input data
+  - axis parameter added to various compressive sensing operators
 
 
 
