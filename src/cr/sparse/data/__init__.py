@@ -26,5 +26,6 @@ from cr.sparse._src.data.synthetic.random import (
 from cr.sparse._src.data.synthetic.subspaces import (
     random_subspaces,
     random_subspaces_jit,
-    uniform_points_on_subspaces
+    uniform_points_on_subspaces,
+    three_subspaces_at_angle
 )

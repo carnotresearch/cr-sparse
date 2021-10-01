@@ -77,3 +77,66 @@ def uniform_points_on_subspaces(key, bases, n):
         X = X.at[start:start+n].set(points)
         start += n
     return X
+
+def three_subspaces_at_angle(key, N, D, theta):
+    """Returns ONBs for three subspaces at angle theta with each other
+
+    Args:
+        key: a PRNG key used as the random key.
+        N (int): Dimension of the ambient space
+        D (int): Dimension of the low dimensional subspace
+        theta (float): Smallest principal angle (in degrees) between the three subspaces
+
+    Returns:
+        (jax.numpy.ndarray, jax.numpy.ndarray, jax.numpy.ndarray): A tuple consiting of three
+            ONBs for the three subspaces
+
+    Example:
+        >>> rkey = random.PRNGKey(1)
+        >>> N = 20
+        >>> D = 4
+        >>> theta = 15
+        >>> A, B, C = three_subspaces_at_angle(rkey, N, D, theta)
+        >>> print(A.shape, B.shape, C.shape)
+        (20, 4) (20, 4) (20, 4)
+        >>> from cr.sparse.la.subspaces import smallest_principal_angles_deg
+        >>> angles = smallest_principal_angles_deg(jnp.array([A, B, C]))
+        >>> print(jnp.round(angles, 2))
+        [[ 0. 15. 15.]
+        [15.  0. 15.]
+        [15. 15.  0.]]
+    """
+    # Convert theta to radians
+    theta = jnp.deg2rad(theta)
+    # Draw three random vectors in the ambient space
+    X = random.normal(key, (N, 3))
+    # Orthogonalize them
+    U, s, VH = jnp.linalg.svd(X, full_matrices=False)
+    # Pick these three vectors
+    a1 = U[:, 0]
+    a2 = U[:, 1]
+    a3 = U[:, 2]
+    #  expected value of inner product between the vectors
+    p = jnp.cos(theta)
+    # linear combination terms for the first vector of the second space
+    c1 = p
+    s1 = jnp.sqrt(1 - c1**2)
+    # first vector for second space
+    b1 = s1 * a2 + c1 * a1
+    # first vector for third space
+    c1_1 = p
+    c1_2 = p * (1 - p) / jnp.sqrt(1 - p**2)
+    c1_3 = jnp.sqrt(1 - c1_1**2 - c1_2**2)
+    c1 = c1_1 * a1 + c1_2 * a2 + c1_3 * a3
+    # put these vectors together
+    X = jnp.column_stack((a1, b1, c1))
+    # Find the orthogonal complement of X 
+    U, s, VH = jnp.linalg.svd(X, full_matrices=True)
+    Y = U[:, 3:]
+    # Prepare the subspaces by picking the additional orthogonal vectors from Y
+    A = jnp.column_stack((a1, Y[:, :D-1]))
+    B = jnp.column_stack((b1, Y[:, D-1:2*D-2]))
+    C = jnp.column_stack((c1, Y[:, 2*D-2:3*D-3]))
+    return A, B, C
+
+three_subspaces_at_angle_jit = jit(three_subspaces_at_angle, static_argnums=(1,2,3))
