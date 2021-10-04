@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="cr.sparse.data.sparse_normal_representations" href="_autosummary/cr.sparse.data.sparse_normal_representations.html" />
-    <link rel="prev" title="cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit.html" />
+    <link rel="prev" title="cr.sparse.cluster.vq.KMeansSolution" href="_autosummary/cr.sparse.cluster.vq.KMeansSolution.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -69,8 +69,9 @@
 <li class="toctree-l2"><a class="reference internal" href="lop.html">Linear Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sls.html">Sparse Linear Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery/Approximation Algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">Convex Optimization based Sparse Recovery/Approximation Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cluster.html">Data Clustering</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="la.html">Linear Algebra</a></li>
@@ -96,7 +97,7 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">CR.Sparse API Documentation</a><ul>
-      <li>Previous: <a href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit.html" title="previous chapter">cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit</a></li>
+      <li>Previous: <a href="_autosummary/cr.sparse.cluster.vq.KMeansSolution.html" title="previous chapter">cr.sparse.cluster.vq.KMeansSolution</a></li>
       <li>Next: <a href="_autosummary/cr.sparse.data.sparse_normal_representations.html" title="next chapter">cr.sparse.data.sparse_normal_representations</a></li>
   </ul></li>
   </ul></li>
@@ -160,6 +161,12 @@
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.data.uniform_points_on_subspaces.html#cr.sparse.data.uniform_points_on_subspaces" title="cr.sparse.data.uniform_points_on_subspaces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">uniform_points_on_subspaces</span></code></a>(key, bases, n)</p></td>
 <td><p>Generates a set of nk points on the unit sphere of each of the subspaces</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.data.two_subspaces_at_angle.html#cr.sparse.data.two_subspaces_at_angle" title="cr.sparse.data.two_subspaces_at_angle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">two_subspaces_at_angle</span></code></a>(key, N, D, theta)</p></td>
+<td><p>Returns ONBs for two subspaces at angle theta with each other</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.data.three_subspaces_at_angle.html#cr.sparse.data.three_subspaces_at_angle" title="cr.sparse.data.three_subspaces_at_angle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">three_subspaces_at_angle</span></code></a>(key, N, D, theta)</p></td>
+<td><p>Returns ONBs for three subspaces at angle theta with each other</p></td>
 </tr>
 </tbody>
 </table>

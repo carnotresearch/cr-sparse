@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.vq.find\_new\_centroids
+=========================================
+
+.. currentmodule:: cr.sparse.cluster.vq
+
+.. autofunction:: find_new_centroids

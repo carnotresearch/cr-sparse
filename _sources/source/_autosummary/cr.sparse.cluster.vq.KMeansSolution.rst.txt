@@ -1,0 +1,21 @@
+﻿cr.sparse.cluster.vq.KMeansSolution
+===================================
+
+.. currentmodule:: cr.sparse.cluster.vq
+
+.. autoclass:: KMeansSolution
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~KMeansSolution.assignment
+      ~KMeansSolution.centroids
+      ~KMeansSolution.distortion
+      ~KMeansSolution.iterations
+      ~KMeansSolution.key
+   
+   

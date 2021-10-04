@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.vq.find\_assignment\_jit
+==========================================
+
+.. currentmodule:: cr.sparse.cluster.vq
+
+.. autofunction:: find_assignment_jit

@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.vq.kmeans\_jit
+================================
+
+.. currentmodule:: cr.sparse.cluster.vq
+
+.. autofunction:: kmeans_jit

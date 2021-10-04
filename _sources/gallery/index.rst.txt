@@ -38,6 +38,41 @@ Examples Gallery
 
 
 
+.. _sphx_glr_gallery_cluster:
+
+.. _cluster_gallery:
+
+Data Clustering
+------------------------
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="CR-Sparse includes a K-means implementation as part of its sparse subspace clustering module.">
+
+.. only:: html
+
+ .. figure:: /gallery/cluster/images/thumb/sphx_glr_kmeans_thumb.png
+     :alt: K-means Clustering
+
+     :ref:`sphx_glr_gallery_cluster_kmeans.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/cluster/kmeans
+.. raw:: html
+
+    <div class="sphx-glr-clear"></div>
+
+
+
 .. _sphx_glr_gallery_lop:
 
 .. _lop_gallery:

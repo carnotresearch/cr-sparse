@@ -1,0 +1,21 @@
+﻿cr.sparse.cluster.vq.KMeansState
+================================
+
+.. currentmodule:: cr.sparse.cluster.vq
+
+.. autoclass:: KMeansState
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~KMeansState.assignment
+      ~KMeansState.centroids
+      ~KMeansState.distortion
+      ~KMeansState.iterations
+      ~KMeansState.prev_distortion
+   
+   

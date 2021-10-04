@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.vq.kmeans\_with\_seed\_jit
+============================================
+
+.. currentmodule:: cr.sparse.cluster.vq
+
+.. autofunction:: kmeans_with_seed_jit

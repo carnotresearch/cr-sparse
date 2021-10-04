@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.vq.find\_nearest
+==================================
+
+.. currentmodule:: cr.sparse.cluster.vq
+
+.. autofunction:: find_nearest

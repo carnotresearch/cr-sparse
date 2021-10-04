@@ -68,6 +68,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../sls/index.html">Sparse Linear Systems</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples Gallery</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../sparse_vector_normals.html">A sparse model vector generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#data-clustering">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#linear-operators">Linear Operators</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#greedy-pursuit-algorithms-for-sparse-recovery">Greedy Pursuit Algorithms for Sparse Recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#sparse-recovery-via-l1-minimization">Sparse Recovery via L1 minimization</a></li>
@@ -199,7 +200,7 @@ that the energy of the residual <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>0.3881940752728345
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>0.38819407527283445
 </pre></div>
 </div>
 </section>
@@ -211,7 +212,7 @@ that the energy of the residual <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cosamp_step_by_step_001.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_001.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7f7c50f2d0d0&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ff664c32610&gt;]
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">omega</span></code> contains the set of indices at which x is nonzero (support of <code class="docutils literal notranslate"><span class="pre">x</span></code>)</p>
@@ -231,7 +232,7 @@ that the energy of the residual <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cosamp_step_by_step_002.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_002.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7f7c50f38e80&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7ff664ef9e50&gt;]
 </pre></div>
 </div>
 </section>
@@ -261,7 +262,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>r_norm_sqr=7.40121202914161
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>r_norm_sqr=7.401212029141609
 </pre></div>
 </div>
 <p>A boolean array to track the indices selected for least squares steps</p>
@@ -364,7 +365,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cosamp_step_by_step_003.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_003.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7f7c5828a6a0&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7ff66c853f40&gt;
 </pre></div>
 </div>
 <p>We can check how good we were in picking the correct indices from the actual support of the signal</p>
@@ -509,7 +510,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cosamp_step_by_step_004.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_004.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7f7c50fee340&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7ff664ed9550&gt;
 </pre></div>
 </div>
 <p>The algorithm has no direct way of knowing that it indeed found the solution
@@ -525,7 +526,7 @@ It is time to compute the residual after the second iteration</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>r_norm_sqr=5.96e-30 &lt; max_r_norm_sqr=7.40e-06
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>r_norm_sqr=3.12e-30 &lt; max_r_norm_sqr=7.40e-06
 </pre></div>
 </div>
 <p>We have completed the signal recovery. We can stop iterating now.</p>
@@ -576,7 +577,7 @@ It is time to compute the residual after the second iteration</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>1.7170354531939396e-29 3
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>2.14594481109173e-29 3
 </pre></div>
 </div>
 <p>Let’s plot the solution</p>
@@ -588,10 +589,10 @@ It is time to compute the residual after the second iteration</p>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cosamp_step_by_step_005.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_005.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7f7c507b7cd0&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7ff6647f6d60&gt;
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  7.069 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.082 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-pursuit-cosamp-step-by-step-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/7cece7d024bda50295b7a347f4f2a669/cosamp_step_by_step.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">cosamp_step_by_step.py</span></code></a></p>

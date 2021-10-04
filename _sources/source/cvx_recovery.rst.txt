@@ -1,4 +1,4 @@
-Convex Optimization based Sparse Recovery/Approximation Algorithms
+L1 Minimization
 =============================================================================
 
 .. contents::

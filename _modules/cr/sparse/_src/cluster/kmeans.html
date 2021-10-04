@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cr.sparse._src.cluster.kmeans &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../../../_static/js/custom.js"></script>
+    <script src="../../../../../_static/js/mathconf.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/index.html">CR.Sparse API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../la/index.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../sls/index.html">Sparse Linear Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../benchmarks/index.html">Benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../acronyms.html">Acronyms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../changelog.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../development.html">Development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for cr.sparse._src.cluster.kmeans</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2021 CR.Sparse Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The implementation in this file is based on the example provided by</span>
+<span class="sd">Sabrina J. Mielke</span>
+<span class="sd">in https://colab.research.google.com/drive/1AwS4haUx6swF82w3nXr6QKhajdF8aSvA#scrollTo=LJyoi46rIJr7</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span>
+
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">lax</span><span class="p">,</span> <span class="n">jit</span><span class="p">,</span> <span class="n">vmap</span><span class="p">,</span> <span class="n">random</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">jax.numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<div class="viewcode-block" id="KMeansState"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cluster.vq.KMeansState.html#cr.sparse.cluster.vq.KMeansState">[docs]</a><span class="k">class</span> <span class="nc">KMeansState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The state for K-means algorithm</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">centroids</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Current set of centroids&quot;&quot;&quot;</span>
+    <span class="n">assignment</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Current assignment of points to centroids&quot;&quot;&quot;</span>
+    <span class="n">distortion</span> <span class="p">:</span> <span class="nb">float</span>
+    <span class="sd">&quot;&quot;&quot; Current mean distance&quot;&quot;&quot;</span>
+    <span class="n">prev_distortion</span> <span class="p">:</span> <span class="nb">float</span>
+    <span class="sd">&quot;&quot;&quot; Previous mean distance&quot;&quot;&quot;</span>
+    <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="KMeansSolution"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cluster.vq.KMeansSolution.html#cr.sparse.cluster.vq.KMeansSolution">[docs]</a><span class="k">class</span> <span class="nc">KMeansSolution</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The solution for K-means algorithm</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">centroids</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Current set of centroids&quot;&quot;&quot;</span>
+    <span class="n">assignment</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot;Current assignment of points to centroids&quot;&quot;&quot;</span>
+    <span class="n">distortion</span> <span class="p">:</span> <span class="nb">float</span>
+    <span class="sd">&quot;&quot;&quot; Current mean distance&quot;&quot;&quot;</span>
+    <span class="n">key</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="sd">&quot;&quot;&quot; The PRNG key seed for the k-means run with least distortion&quot;&quot;&quot;</span>
+    <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="find_nearest"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cluster.vq.find_nearest.html#cr.sparse.cluster.vq.find_nearest">[docs]</a><span class="k">def</span> <span class="nf">find_nearest</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">centroids</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the index of the nearest centroid for a specific point</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        point (jax.numpy.ndarray) : A specific point</span>
+<span class="sd">        centroids (jax.numpy.ndarray) : An array of centroids</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (int) : The index of the nearest centroid</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">vmap</span><span class="p">(</span><span class="n">norm</span><span class="p">)(</span><span class="n">centroids</span> <span class="o">-</span> <span class="n">point</span><span class="p">))</span></div>
+
+<span class="n">find_nearest_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">find_nearest</span><span class="p">)</span>
+
+<div class="viewcode-block" id="find_assignment"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cluster.vq.find_assignment.html#cr.sparse.cluster.vq.find_assignment">[docs]</a><span class="k">def</span> <span class="nf">find_assignment</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">centroids</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Finds the assignment of each point to a specific centroid</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        points (jax.numpy.ndarray) : Each row of the points matrix is a point. </span>
+<span class="sd">        centroids (jax.numpy.ndarray) : An array of centroids</span>
+
+<span class="sd">    Returns: </span>
+<span class="sd">        (jax.numpy.ndarray, jax.numpy.ndarray): A tuple consisting of </span>
+
+<span class="sd">        #. An assignment array of each point to a cluster</span>
+<span class="sd">        #. Distance of each point from corresponding cluster centroid </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">assignment</span> <span class="o">=</span> <span class="n">vmap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">point</span><span class="p">:</span> <span class="n">find_nearest</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">centroids</span><span class="p">))(</span><span class="n">points</span><span class="p">)</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="n">centroids</span><span class="p">[</span><span class="n">assignment</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">points</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">vmap</span><span class="p">(</span><span class="n">norm</span><span class="p">)(</span><span class="n">errors</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">assignment</span><span class="p">,</span> <span class="n">distances</span></div>
+
+<span class="n">find_assignment_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">find_assignment</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">assignment_counts</span><span class="p">(</span><span class="n">assignment</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the number of points in each cluster based on the current assignment</span>
+
+<span class="sd">    If a cluster has no points, we return 1.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span>  <span class="p">((</span><span class="n">assignment</span><span class="p">[</span><span class="n">jnp</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span> <span class="o">==</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">k</span><span class="p">)[:,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span>
+            <span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<div class="viewcode-block" id="find_new_centroids"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cluster.vq.find_new_centroids.html#cr.sparse.cluster.vq.find_new_centroids">[docs]</a><span class="k">def</span> <span class="nf">find_new_centroids</span><span class="p">(</span><span class="n">assignment</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Finds new centroids based on current assignment</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        assignment (jax.numpy.ndarray) : current assignment of each point to a specific cluster</span>
+<span class="sd">        points (jax.numpy.ndarray) : Each row of the points matrix is a point. </span>
+<span class="sd">        k (int): The number of clusters</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">assignment_counts</span><span class="p">(</span><span class="n">assignment</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">new_centroids</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+            <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="c1"># axes: (data points, clusters, data dimension)</span>
+                <span class="n">assignment</span><span class="p">[:,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> \
+                    <span class="o">==</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">k</span><span class="p">)[</span><span class="n">jnp</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span>
+                <span class="n">points</span><span class="p">[:,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:],</span>
+                <span class="mf">0.</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">/</span> <span class="n">counts</span>
+    <span class="k">return</span> <span class="n">new_centroids</span></div>
+
+<span class="n">find_new_centroids_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">find_new_centroids</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,))</span>
+
+<div class="viewcode-block" id="kmeans_with_seed"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cluster.vq.kmeans_with_seed.html#cr.sparse.cluster.vq.kmeans_with_seed">[docs]</a><span class="k">def</span> <span class="nf">kmeans_with_seed</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Runs the k-means algorithm for a specific random initialization</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: a PRNG key used as the random key for choosing initial centroids</span>
+<span class="sd">        points (jax.numpy.ndarray): Each row of the points matrix is a point. </span>
+<span class="sd">        k (int): The number of clusters</span>
+<span class="sd">        thresh (float): Convergence threshold on change in distortion</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (KMeansState): A named tuple consisting of: </span>
+<span class="sd">        centroids for each cluster, assignment of each point to a cluster,</span>
+<span class="sd">        current distorition, previous distortion, number of iterations </span>
+<span class="sd">        for convergence. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># number of points</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
+        <span class="c1"># select k points as initial centroids randomly</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">))[:</span><span class="n">k</span><span class="p">]</span>
+        <span class="c1"># the initial centroids</span>
+        <span class="n">centroids</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="c1"># assign all points to centroids and compute distances</span>
+        <span class="n">assignment</span><span class="p">,</span> <span class="n">distances</span> <span class="o">=</span> <span class="n">find_assignment</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">centroids</span><span class="p">)</span>
+        <span class="n">distortion</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+        <span class="c1"># algorithm state</span>
+        <span class="k">return</span> <span class="n">KMeansState</span><span class="p">(</span><span class="n">centroids</span><span class="o">=</span><span class="n">centroids</span><span class="p">,</span> <span class="n">assignment</span><span class="o">=</span><span class="n">assignment</span><span class="p">,</span> 
+            <span class="n">distortion</span><span class="o">=</span><span class="n">distortion</span><span class="p">,</span> <span class="n">prev_distortion</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="c1"># update centroids</span>
+        <span class="n">centroids</span> <span class="o">=</span> <span class="n">find_new_centroids</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">assignment</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        <span class="c1"># update assignment</span>
+        <span class="n">assignment</span><span class="p">,</span> <span class="n">distances</span> <span class="o">=</span> <span class="n">find_assignment</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">centroids</span><span class="p">)</span>
+        <span class="c1"># mean distance</span>
+        <span class="n">distortion</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+        <span class="c1"># algorithm state</span>
+        <span class="k">return</span> <span class="n">KMeansState</span><span class="p">(</span><span class="n">centroids</span><span class="o">=</span><span class="n">centroids</span><span class="p">,</span> <span class="n">assignment</span><span class="o">=</span><span class="n">assignment</span><span class="p">,</span> 
+            <span class="n">distortion</span><span class="o">=</span><span class="n">distortion</span><span class="p">,</span> <span class="n">prev_distortion</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">distortion</span><span class="p">,</span>
+            <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">cond</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="c1"># check if the mean distance has updated enough</span>
+        <span class="n">gap</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">prev_distortion</span> <span class="o">-</span> <span class="n">state</span><span class="o">.</span><span class="n">distortion</span>
+        <span class="c1"># print(state.prev_distortion, state.distortion, gap, thresh, gap &gt; thresh)</span>
+        <span class="k">return</span> <span class="n">gap</span> <span class="o">&gt;</span> <span class="n">thresh</span>
+
+    <span class="c1"># state = init()</span>
+    <span class="c1"># while cond(state):</span>
+    <span class="c1">#     state = body(state)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">init</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">state</span></div>
+
+<span class="n">kmeans_with_seed_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">kmeans_with_seed</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,))</span>
+
+<div class="viewcode-block" id="kmeans"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cluster.vq.kmeans.html#cr.sparse.cluster.vq.kmeans">[docs]</a><span class="k">def</span> <span class="nf">kmeans</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="nb">iter</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Clusters points using k-means algorithm</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: a PRNG key used as the random key</span>
+<span class="sd">        points (jax.numpy.ndarray): Each row of the points matrix is a point. </span>
+<span class="sd">          From the statistical point of view, each row is an observation vector</span>
+<span class="sd">          and each column is a feature.</span>
+<span class="sd">        k (int): The number of clusters</span>
+<span class="sd">        iter (int): The number of times k-means will be restarted with </span>
+<span class="sd">          different seeds. The result with least amount of distortion is returned.</span>
+<span class="sd">        thresh (float): Convergence threshold on change in distortion</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (KMeansSolution): A named tuple consisting of:</span>
+
+<span class="sd">        * centroids : centroid for each cluster</span>
+<span class="sd">        * assignment: assignment of each point to a cluster</span>
+<span class="sd">        * distortion: distortion after current assignment</span>
+<span class="sd">        * key: The PRNG key seed for the k-means run with the least distortion</span>
+<span class="sd">        * iterations: number of iterations taken in convergence</span>
+
+<span class="sd">    Let the k centroids be :math:`m_1, m_2, \dots, m_k`. </span>
+<span class="sd">    Let the n points be :math:`x_1, x_2, \dots, x_n`.</span>
+<span class="sd">    Let the assignment of i-th point to j-th cluster be given by</span>
+<span class="sd">    :math:`a_1, a_2, \dots, a_n` where :math:`1 \leq a_i = j \leq k`.</span>
+
+<span class="sd">    Then the distance of i-th point from its centroid is given by:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        d_i = \| x_i - m_{a_i} \|_2</span>
+
+<span class="sd">    The distortion is given by the mean of all the distances.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># keys for each restart of kmeans algorithm</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">iter</span><span class="p">)</span>
+    <span class="c1"># individual run of k-means algorithm</span>
+    <span class="n">kmeans_core</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">key</span><span class="p">:</span> <span class="n">kmeans_with_seed</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="n">thresh</span><span class="p">)</span>
+    <span class="c1"># Run all restarts of kmeans using vmap</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">vmap</span><span class="p">(</span><span class="n">kmeans_core</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)(</span><span class="n">keys</span><span class="p">)</span>
+    <span class="c1"># Find the run with the least distortion</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">distortion</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">KMeansSolution</span><span class="p">(</span><span class="n">centroids</span><span class="o">=</span><span class="n">results</span><span class="o">.</span><span class="n">centroids</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">assignment</span><span class="o">=</span><span class="n">results</span><span class="o">.</span><span class="n">assignment</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
+        <span class="n">distortion</span><span class="o">=</span><span class="n">results</span><span class="o">.</span><span class="n">distortion</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="n">keys</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+        <span class="n">iterations</span><span class="o">=</span><span class="n">results</span><span class="o">.</span><span class="n">iterations</span><span class="p">[</span><span class="n">i</span><span class="p">])</span></div>
+
+<span class="n">kmeans_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">kmeans</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,))</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2021, CR-Sparse Development Team.
+      
+    </div>
+
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

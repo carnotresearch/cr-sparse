@@ -1,4 +1,4 @@
-Greedy Sparse Recovery/Approximation Algorithms
+Greedy Sparse Recovery
 ================================================
 
 .. contents::

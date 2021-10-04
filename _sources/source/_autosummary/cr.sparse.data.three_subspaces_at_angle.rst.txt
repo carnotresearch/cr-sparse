@@ -1,0 +1,6 @@
+﻿cr.sparse.data.three\_subspaces\_at\_angle
+==========================================
+
+.. currentmodule:: cr.sparse.data
+
+.. autofunction:: three_subspaces_at_angle

@@ -1,0 +1,12 @@
+
+:orphan:
+
+.. _sphx_glr_gallery_cluster_sg_execution_times:
+
+Computation times
+=================
+**00:05.101** total execution time for **gallery_cluster** files:
+
++-----------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_gallery_cluster_kmeans.py` (``kmeans.py``) | 00:05.101 | 0.0 MB |
++-----------------------------------------------------------+-----------+--------+

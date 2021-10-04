@@ -238,31 +238,45 @@
     <span class="sd">&quot;&quot;&quot;Returns the smallest principal angles between each pair of subspaces</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        A (:obj:`list` of :obj:`jax.numpy.ndarray`): ONBs for the subspaces</span>
+<span class="sd">        A (jax.numpy.ndarray): An array of ONBs for the subspaces</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        (jax.numpy.ndarray): A symmetric matrix containing the cosine of the </span>
 <span class="sd">            smallest principal angles between each pair of subspaces</span>
+
+<span class="sd">    Further reading on implementation:</span>
+
+<span class="sd">    * `Vectorizing computations on pairs of elements in an nd-array &lt;https://towardsdatascience.com/vectorizing-computations-on-pairs-of-elements-in-an-nd-array-326b5a648ad6&gt;`_</span>
+<span class="sd">    * `SO: How to vectorize a 2 level loop in NumPy &lt;https://stackoverflow.com/questions/69391894/how-to-vectorize-a-2-level-loop-in-numpy&gt;`_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">subspaces</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-        <span class="n">A</span> <span class="o">=</span> <span class="n">subspaces</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-            <span class="n">B</span> <span class="o">=</span> <span class="n">subspaces</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-            <span class="n">angle</span> <span class="o">=</span> <span class="n">smallest_principal_angle_cos_jit</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span></div>
+    <span class="n">subspaces</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">subspaces</span><span class="p">)</span>
+    <span class="c1"># Number of subspaces</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">subspaces</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># Indices for upper triangular matrix</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># prepare all the possible pairs of A and B</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">subspaces</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">subspaces</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    <span class="n">AH</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">AH</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">compute_uv</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># keep only the first index</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># prepare the returning matrix</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">r</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">r</span></div>
 
 
 <span class="n">smallest_principal_angles_cos_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">smallest_principal_angles_cos</span><span class="p">)</span>
+
 
 <div class="viewcode-block" id="smallest_principal_angles_rad"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.la.subspaces.smallest_principal_angles_rad.html#cr.sparse.la.subspaces.smallest_principal_angles_rad">[docs]</a><span class="k">def</span> <span class="nf">smallest_principal_angles_rad</span><span class="p">(</span><span class="n">subspaces</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the smallest principal angles between each pair of subspaces in radians</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        A (:obj:`list` of :obj:`jax.numpy.ndarray`): ONBs for the subspaces</span>
+<span class="sd">        A (jax.numpy.ndarray): An array of ONBs for the subspaces</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        (jax.numpy.ndarray): A symmetric matrix containing the </span>
@@ -277,7 +291,7 @@
     <span class="sd">&quot;&quot;&quot;Returns the smallest principal angles between each pair of subspaces in degrees</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        A (:obj:`list` of :obj:`jax.numpy.ndarray`): ONBs for the subspaces</span>
+<span class="sd">        A (jax.numpy.ndarray): An array of ONBs for the subspaces</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        (jax.numpy.ndarray): A symmetric matrix containing the </span>
