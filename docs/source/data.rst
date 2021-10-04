@@ -25,5 +25,6 @@ Subspaces
 
   random_subspaces
   uniform_points_on_subspaces
+  two_subspaces_at_angle
   three_subspaces_at_angle
   
