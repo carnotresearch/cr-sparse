@@ -12,23 +12,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Pairwise distances between a set of points
+"""
 
 import jax.numpy as jnp
 
-
-from scipy.spatial.distance import pdist
-
-
-# def pdist_rw(X, metric):
-#     return pdist(X, metric)
-
-# def pdist_cw(X, metric):
-#     return pdist(X.T, metric)
-
-
 def pairwise_sqr_l2_distances_rw(A, B):
-    """
-    Computes the pairwise distances between points in A and points in B where each point is a row vector
+    r"""Computes the pairwise squared distances between points in A and points in B where each point is a row vector
+
+    Args:
+        A (jax.numpy.ndarray): A set of M K-dimensional points (row-wise)
+        B (jax.numpy.ndarray): A set of N K-dimensional points (row-wise)
+
+    Returns:
+        (jax.numpy.ndarray): An MxN matrix D of squared distances 
+        between points in A and points in B
+
+    * Let the ambient space of points be :math:`\mathbb{F}^K`.
+    * :math:`A` contains the points :math:`a_i` with :math:`1 \leq i \leq M` 
+      and each point maps to a row of :math:`A`.
+    * :math:`B` contains the points :math:`b_j` with :math:`1 \leq j \leq N` 
+      and each point maps to a row of :math:`B`.
+
+    Then the distance matrix :math:`D` is of size :math:`M \times N` and consists of:
+
+    .. math::
+
+        d_{i, j} = \| a_i - b_j \|_2^2 = \langle a_i - b_j , a_i - b_j  \rangle
     """
     M = A.shape[0]
     N = B.shape[0]
@@ -49,8 +59,28 @@ def pairwise_sqr_l2_distances_rw(A, B):
     return a_sums + b_sums - 2 * prods
 
 def pairwise_sqr_l2_distances_cw(A, B):
-    """
-    Computes the pairwise distances between points in A and points in B where each point is a column vector
+    r"""Computes the pairwise squared distances between points in A and points in B where each point is a column vector
+
+    Args:
+        A (jax.numpy.ndarray): A set of M K-dimensional points (column-wise)
+        B (jax.numpy.ndarray): A set of N K-dimensional points (column-wise)
+
+    Returns:
+        (jax.numpy.ndarray): An MxN matrix D of squared distances 
+        between points in A and points in B
+
+    * Let the ambient space of points be :math:`\mathbb{F}^K`.
+    * :math:`A` contains the points :math:`a_i` with :math:`1 \leq i \leq M` 
+      and each point maps to a column of :math:`A`.
+    * :math:`B` contains the points :math:`b_j` with :math:`1 \leq j \leq N` 
+      and each point maps to a column of :math:`B`.
+
+    Then the distance matrix :math:`D` is of size :math:`M \times N` and consists of:
+
+    .. math::
+
+        d_{i, j} = \| a_i - b_j \|_2^2 = \langle a_i - b_j , a_i - b_j  \rangle
+
     """
     M = A.shape[1]
     N = B.shape[1]
@@ -72,14 +102,53 @@ def pairwise_sqr_l2_distances_cw(A, B):
 
 
 def pairwise_l2_distances_rw(A, B):
+    r"""Computes the pairwise distances between points in A and points in B where each point is a row vector
+
+    Args:
+        A (jax.numpy.ndarray): A set of M K-dimensional points (row-wise)
+        B (jax.numpy.ndarray): A set of N K-dimensional points (row-wise)
+
+    Returns:
+        (jax.numpy.ndarray): An MxN matrix D of euclidean distances 
+        between points in A and points in B
+    """
     return jnp.sqrt(pairwise_sqr_l2_distances_rw(A, B))
 
 
 def pairwise_l2_distances_cw(A, B):
+    r"""Computes the pairwise distances between points in A and points in B where each point is a column vector
+
+    Args:
+        A (jax.numpy.ndarray): A set of M K-dimensional points (column-wise)
+        B (jax.numpy.ndarray): A set of N K-dimensional points (column-wise)
+
+    Returns:
+        (jax.numpy.ndarray): An MxN matrix D of euclidean distances 
+        between points in A and points in B
+    """
     return jnp.sqrt(pairwise_sqr_l2_distances_cw(A, B))
 
 
 def pdist_sqr_l2_rw(A):
+    r"""Computes the pairwise squared distances between points in A where each point is a row vector
+
+    Args:
+        A (jax.numpy.ndarray): A set of N K-dimensional points (row-wise)
+
+    Returns:
+        (jax.numpy.ndarray): An NxN matrix D of squared euclidean distances 
+        between points in A
+
+    * Let the ambient space of points be :math:`\mathbb{F}^K`.
+    * :math:`A` contains the points :math:`a_i` with :math:`1 \leq i \leq N` 
+      and each point maps to a row of :math:`A`.
+
+    Then the distance matrix :math:`D` is of size :math:`N \times N` and consists of:
+
+    .. math::
+
+        d_{i, j} = \| a_i - a_j \|_2^2 = \langle a_i - a_j , a_i - a_j  \rangle
+    """
     M = A.shape[0]
     # compute squared sums for each row vector
     sums = jnp.sum(A*A, axis=1)
@@ -91,6 +160,25 @@ def pdist_sqr_l2_rw(A):
     return 2*(sums - prods)
 
 def pdist_sqr_l2_cw(A):
+    r"""Computes the pairwise squared distances between points in A where each point is a column vector
+
+    Args:
+        A (jax.numpy.ndarray): A set of N K-dimensional points (column-wise)
+
+    Returns:
+        (jax.numpy.ndarray): An NxN matrix D of squared euclidean distances 
+        between points in A
+
+    * Let the ambient space of points be :math:`\mathbb{F}^K`.
+    * :math:`A` contains the points :math:`a_i` with :math:`1 \leq i \leq N` 
+      and each point maps to a column of :math:`A`.
+
+    Then the distance matrix :math:`D` is of size :math:`N \times N` and consists of:
+
+    .. math::
+
+        d_{i, j} = \| a_i - a_j \|_2^2 = \langle a_i - a_j , a_i - a_j  \rangle
+    """
     M = A.shape[1]
     # compute squared sums for each col vector
     sums = jnp.sum(A*A, axis=0)
@@ -101,35 +189,129 @@ def pdist_sqr_l2_cw(A):
     return 2*(sums - prods)
 
 def pdist_l2_rw(A):
+    r"""Computes the pairwise distances between points in A where ach point is a row vector
+
+    Args:
+        A (jax.numpy.ndarray): A set of N K-dimensional points (row-wise)
+
+    Returns:
+        (jax.numpy.ndarray): An NxN matrix D of euclidean distances 
+        between points in A
+    """
     return jnp.sqrt(pdist_sqr_l2_rw(A))
 
 def pdist_l2_cw(A):
+    r"""Computes the pairwise distances between points in A where each point is a column vector
+
+    Args:
+        A (jax.numpy.ndarray): A set of N K-dimensional points (column-wise)
+
+    Returns:
+        (jax.numpy.ndarray): An NxN matrix D of euclidean distances 
+        between points in A
+    """
     return jnp.sqrt(pdist_sqr_l2_cw(A))
 
 
 def pairwise_l1_distances_rw(A, B):
+    r"""Computes the pairwise city-block distances between points in A and points in B where each point is a row vector
+
+    Args:
+        A (jax.numpy.ndarray): A set of M K-dimensional points (row-wise)
+        B (jax.numpy.ndarray): A set of N K-dimensional points (row-wise)
+
+    Returns:
+        (jax.numpy.ndarray): An MxN matrix D of city-block distances 
+        between points in A and points in B
+    """
     return jnp.sum(jnp.abs(A[:, None, :] - B[None, :, :]), axis=-1)
 
 def pairwise_l1_distances_cw(A, B):
+    r"""Computes the pairwise city-block distances between points in A and points in B where each point is a column vector
+
+    Args:
+        A (jax.numpy.ndarray): A set of M K-dimensional points (column-wise)
+        B (jax.numpy.ndarray): A set of N K-dimensional points (column-wise)
+
+    Returns:
+        (jax.numpy.ndarray): An MxN matrix D of city-block distances 
+        between points in A and points in B
+    """
     return jnp.sum(jnp.abs(A[:, :, None] - B[:, None, :]), axis=0)
 
 def pdist_l1_rw(A):
+    r"""Computes the pairwise city-block distances between points in A where each point is a row vector
+
+    Args:
+        A (jax.numpy.ndarray): A set of M K-dimensional points (row-wise)
+
+    Returns:
+        (jax.numpy.ndarray): An MxM matrix D of city-block distances 
+        between points in A
+    """
     return pairwise_l1_distances_rw(A, A)
 
 def pdist_l1_cw(A):
+    r"""Computes the pairwise city-block distances between points in A where each point is a column vector
+
+    Args:
+        A (jax.numpy.ndarray): A set of M K-dimensional points (column-wise)
+
+    Returns:
+        (jax.numpy.ndarray): An MxM matrix D of city-block distances 
+        between points in A
+    """
     return pairwise_l1_distances_cw(A, A)
 
 
 def pairwise_linf_distances_rw(A, B):
+    r"""Computes the pairwise Chebyshev distances between points in A and points in B where each point is a row vector
+
+    Args:
+        A (jax.numpy.ndarray): A set of M K-dimensional points (row-wise)
+        B (jax.numpy.ndarray): A set of N K-dimensional points (row-wise)
+
+    Returns:
+        (jax.numpy.ndarray): An MxN matrix D of Chebyshev distances 
+        between points in A and points in B
+    """
     return jnp.max(jnp.abs(A[:, None, :] - B[None, :, :]), axis=-1)
 
 def pairwise_linf_distances_cw(A, B):
+    r"""Computes the pairwise Chebyshev distances between points in A and points in B where each point is a column vector
+
+    Args:
+        A (jax.numpy.ndarray): A set of M K-dimensional points (column-wise)
+        B (jax.numpy.ndarray): A set of N K-dimensional points (column-wise)
+
+    Returns:
+        (jax.numpy.ndarray): An MxN matrix D of Chebyshev distances 
+        between points in A and points in B
+    """
     return jnp.max(jnp.abs(A[:, :, None] - B[:, None, :]), axis=0)
 
 
 def pdist_linf_rw(A):
+    r"""Computes the pairwise Chebyshev distances between points in A where each point is a row vector
+
+    Args:
+        A (jax.numpy.ndarray): A set of M K-dimensional points (row-wise)
+
+    Returns:
+        (jax.numpy.ndarray): An MxM matrix D of Chebyshev distances 
+        between points in A
+    """
     return pairwise_linf_distances_rw(A, A)
 
 def pdist_linf_cw(A):
+    r"""Computes the pairwise Chebyshev distances between points in A where each point is a column vector
+
+    Args:
+        A (jax.numpy.ndarray): A set of M K-dimensional points (column-wise)
+
+    Returns:
+        (jax.numpy.ndarray): An MxM matrix D of Chebyshev distances 
+        between points in A
+    """
     return pairwise_linf_distances_cw(A, A)
 
