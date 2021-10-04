@@ -12,6 +12,7 @@ CR.Sparse API Documentation
    dict
    pursuit
    cvx_recovery
+   cluster
    data
    util
    la
