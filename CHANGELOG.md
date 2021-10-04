@@ -38,6 +38,8 @@ All notable changes to this project will be documented in this file.
 - Linear Algebra
   - orth, row_space, null_space, left_null_space, effective_rank
   - subspaces: principal angles, is_in_subspace, project_to_subspace
+- Clustering
+  - K-means 
 
 ### Improved
 
