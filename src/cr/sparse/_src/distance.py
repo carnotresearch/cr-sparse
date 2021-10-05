@@ -14,9 +14,10 @@
 
 """Pairwise distances between a set of points
 """
-
+from jax import jit
 import jax.numpy as jnp
 
+@jit
 def pairwise_sqr_l2_distances_rw(A, B):
     r"""Computes the pairwise squared distances between points in A and points in B where each point is a row vector
 
@@ -58,6 +59,7 @@ def pairwise_sqr_l2_distances_rw(A, B):
     prods = A @ B.T 
     return a_sums + b_sums - 2 * prods
 
+@jit
 def pairwise_sqr_l2_distances_cw(A, B):
     r"""Computes the pairwise squared distances between points in A and points in B where each point is a column vector
 
@@ -101,6 +103,7 @@ def pairwise_sqr_l2_distances_cw(A, B):
     return a_sums + b_sums - 2 * prods
 
 
+@jit
 def pairwise_l2_distances_rw(A, B):
     r"""Computes the pairwise distances between points in A and points in B where each point is a row vector
 
@@ -115,6 +118,7 @@ def pairwise_l2_distances_rw(A, B):
     return jnp.sqrt(pairwise_sqr_l2_distances_rw(A, B))
 
 
+@jit
 def pairwise_l2_distances_cw(A, B):
     r"""Computes the pairwise distances between points in A and points in B where each point is a column vector
 
@@ -128,7 +132,7 @@ def pairwise_l2_distances_cw(A, B):
     """
     return jnp.sqrt(pairwise_sqr_l2_distances_cw(A, B))
 
-
+@jit
 def pdist_sqr_l2_rw(A):
     r"""Computes the pairwise squared distances between points in A where each point is a row vector
 
@@ -153,12 +157,14 @@ def pdist_sqr_l2_rw(A):
     # compute squared sums for each row vector
     sums = jnp.sum(A*A, axis=1)
     # broadcast to MxM matrix
-    sums = sums * jnp.ones((M, 1))
+    a_sums = jnp.reshape(sums, (M,1)) * jnp.ones((1, M))
+    b_sums = sums * jnp.ones((M, 1))
 
     # multiply A (M x p) and A.T (p x M)
     prods = A @ A.T 
-    return 2*(sums - prods)
+    return a_sums + b_sums - 2*prods
 
+@jit
 def pdist_sqr_l2_cw(A):
     r"""Computes the pairwise squared distances between points in A where each point is a column vector
 
@@ -188,6 +194,7 @@ def pdist_sqr_l2_cw(A):
     prods = A.T @ A 
     return 2*(sums - prods)
 
+@jit
 def pdist_l2_rw(A):
     r"""Computes the pairwise distances between points in A where ach point is a row vector
 
@@ -200,6 +207,7 @@ def pdist_l2_rw(A):
     """
     return jnp.sqrt(pdist_sqr_l2_rw(A))
 
+@jit
 def pdist_l2_cw(A):
     r"""Computes the pairwise distances between points in A where each point is a column vector
 
@@ -213,6 +221,7 @@ def pdist_l2_cw(A):
     return jnp.sqrt(pdist_sqr_l2_cw(A))
 
 
+@jit
 def pairwise_l1_distances_rw(A, B):
     r"""Computes the pairwise city-block distances between points in A and points in B where each point is a row vector
 
@@ -226,6 +235,7 @@ def pairwise_l1_distances_rw(A, B):
     """
     return jnp.sum(jnp.abs(A[:, None, :] - B[None, :, :]), axis=-1)
 
+@jit
 def pairwise_l1_distances_cw(A, B):
     r"""Computes the pairwise city-block distances between points in A and points in B where each point is a column vector
 
@@ -239,6 +249,7 @@ def pairwise_l1_distances_cw(A, B):
     """
     return jnp.sum(jnp.abs(A[:, :, None] - B[:, None, :]), axis=0)
 
+@jit
 def pdist_l1_rw(A):
     r"""Computes the pairwise city-block distances between points in A where each point is a row vector
 
@@ -251,6 +262,7 @@ def pdist_l1_rw(A):
     """
     return pairwise_l1_distances_rw(A, A)
 
+@jit
 def pdist_l1_cw(A):
     r"""Computes the pairwise city-block distances between points in A where each point is a column vector
 
@@ -264,6 +276,7 @@ def pdist_l1_cw(A):
     return pairwise_l1_distances_cw(A, A)
 
 
+@jit
 def pairwise_linf_distances_rw(A, B):
     r"""Computes the pairwise Chebyshev distances between points in A and points in B where each point is a row vector
 
@@ -277,6 +290,7 @@ def pairwise_linf_distances_rw(A, B):
     """
     return jnp.max(jnp.abs(A[:, None, :] - B[None, :, :]), axis=-1)
 
+@jit
 def pairwise_linf_distances_cw(A, B):
     r"""Computes the pairwise Chebyshev distances between points in A and points in B where each point is a column vector
 
@@ -291,6 +305,7 @@ def pairwise_linf_distances_cw(A, B):
     return jnp.max(jnp.abs(A[:, :, None] - B[:, None, :]), axis=0)
 
 
+@jit
 def pdist_linf_rw(A):
     r"""Computes the pairwise Chebyshev distances between points in A where each point is a row vector
 
@@ -303,6 +318,7 @@ def pdist_linf_rw(A):
     """
     return pairwise_linf_distances_rw(A, A)
 
+@jit
 def pdist_linf_cw(A):
     r"""Computes the pairwise Chebyshev distances between points in A where each point is a column vector
 
