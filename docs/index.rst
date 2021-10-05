@@ -14,14 +14,9 @@ sparse representation and compressive sensing.
    intro
    tutorials/index
    source/index
-   la/index
-   sls/index
+   theory
    gallery/index
-   benchmarks/index
-   fwsp/index
-   acronyms
    zzzreference
-   changelog.md
    development
 
 
