@@ -109,3 +109,44 @@ def unnormalized_k(key, W, k):
         connectivity=S[-2])
 
 unnormalized_k_jit = jit(unnormalized_k, static_argnums=(2,))
+
+
+def normalized_random_walk(key, W):
+    """Normalized spectral clustering with random walk
+
+    Args:
+        key: a PRNG key used for the k-means algorithm
+        W (jax.numpy.ndarray): Similarity/Weights matrix
+
+    Returns:
+        (SpectralclusteringSolution): A named tuple with the spectral clustering 
+        solution (Laplacian, singular values, cluster assignment)
+    """
+    # make sure that W is square
+    m, n = W.shape
+    assert m == n, "W must be square"
+    # Compute the degree
+    D = jnp.sum(W, 0)
+    D_inv = D**(-1)
+    D_inv = jnp.diag(D_inv)
+    I = jnp.eye(m)
+    # Compute the Laplacian
+    L = I - D_inv @ W
+    # Compute the SVD of the Laplacian
+    U, S, VH = jnp.linalg.svd(L)
+    # we need to look from the smaller singular value side
+    # smallest one will be 0.
+    sdiff = jnp.diff(S[:-1])
+    index = jnp.argmin(sdiff)
+    # number of clusters
+    k = n - index - 1
+    # Choose the last k eigen vectors
+    # TODO this step cannot be JITTED
+    kernel = VH.T[:,n-k:]
+    # TODO we cannot use JITTED kmeans since k itself is dynamic
+    result = kmeans(key, kernel, k, iter=100)
+    return SpectralclusteringSolution(singular_values=S, 
+        assignment=result.assignment,
+        laplancian=L,
+        num_clusters=k,
+        connectivity=S[-2])

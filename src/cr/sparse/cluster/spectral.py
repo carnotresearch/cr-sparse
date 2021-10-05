@@ -20,5 +20,6 @@ from cr.sparse._src.cluster.spectral import (
     SpectralclusteringSolution,
     unnormalized,
     unnormalized_k,
-    unnormalized_k_jit
+    unnormalized_k_jit,
+    normalized_random_walk
 )
