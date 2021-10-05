@@ -38,6 +38,15 @@ class SpectralclusteringSolution(NamedTuple):
     connectivity: float
     """Graph connectivity"""
 
+
+def unnormalized_laplacian(W):
+    # Compute the degree
+    D = jnp.diag(jnp.sum(W, 0))
+    # Compute the Laplacian
+    L = D - W
+    return L
+
+
 def unnormalized(key, W):
     """Unnormalized spectral clustering
 
@@ -52,10 +61,8 @@ def unnormalized(key, W):
     # make sure that W is square
     m, n = W.shape
     assert m == n, "W must be square"
-    # Compute the degree
-    D = jnp.diag(jnp.sum(W, 0))
     # Compute the Laplacian
-    L = D - W
+    L = unnormalized_laplacian(W)
     # Compute the SVD of the Laplacian
     U, S, VH = jnp.linalg.svd(L)
     #print(jnp.round(S, 2))
@@ -93,10 +100,8 @@ def unnormalized_k(key, W, k):
     # make sure that W is square
     m, n = W.shape
     assert m == n, "W must be square"
-    # Compute the degree
-    D = jnp.diag(jnp.sum(W, 0))
     # Compute the Laplacian
-    L = D - W
+    L = unnormalized_laplacian(W)
     # Compute the SVD of the Laplacian
     U, S, VH = jnp.linalg.svd(L)
     # Choose the last k eigen vectors
@@ -110,6 +115,15 @@ def unnormalized_k(key, W, k):
 
 unnormalized_k_jit = jit(unnormalized_k, static_argnums=(2,))
 
+def normalized_random_walk_laplacian(W):
+    # Compute the degree
+    D = jnp.sum(W, 0)
+    D_inv = D**(-1)
+    D_inv = jnp.diag(D_inv)
+    I = jnp.eye(W.shape[0])
+    # Compute the Laplacian
+    L = I - D_inv @ W
+    return L
 
 def normalized_random_walk(key, W):
     """Normalized spectral clustering with random walk
@@ -125,13 +139,8 @@ def normalized_random_walk(key, W):
     # make sure that W is square
     m, n = W.shape
     assert m == n, "W must be square"
-    # Compute the degree
-    D = jnp.sum(W, 0)
-    D_inv = D**(-1)
-    D_inv = jnp.diag(D_inv)
-    I = jnp.eye(m)
     # Compute the Laplacian
-    L = I - D_inv @ W
+    L = normalized_random_walk_laplacian(W)
     # Compute the SVD of the Laplacian
     U, S, VH = jnp.linalg.svd(L)
     # we need to look from the smaller singular value side
