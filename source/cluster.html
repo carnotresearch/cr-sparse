@@ -63,7 +63,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">CR.Sparse API Documentation</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Docs</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="dsp.html">Digital Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wavelets.html">Wavelets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lop.html">Linear Operators</a></li>
@@ -81,14 +81,9 @@
 <li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../la/index.html">Linear Algebra</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sls/index.html">Sparse Linear Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../benchmarks/index.html">Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fwsp/index.html">Fourier and Wavelet Representations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../acronyms.html">Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
 </ul>
 
@@ -96,7 +91,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="index.html">CR.Sparse API Documentation</a><ul>
+  <li><a href="index.html">API Docs</a><ul>
       <li>Previous: <a href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit.html" title="previous chapter">cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit</a></li>
       <li>Next: <a href="_autosummary/cr.sparse.cluster.vq.kmeans.html" title="next chapter">cr.sparse.cluster.vq.kmeans</a></li>
   </ul></li>
@@ -171,16 +166,42 @@
 </tr>
 </tbody>
 </table>
+</section>
+<section id="spectral-clustering">
+<h2>Spectral Clustering<a class="headerlink" href="#spectral-clustering" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.vq.KMeansState.html#cr.sparse.cluster.vq.KMeansState" title="cr.sparse.cluster.vq.KMeansState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KMeansState</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.spectral.unnormalized.html#cr.sparse.cluster.spectral.unnormalized" title="cr.sparse.cluster.spectral.unnormalized"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unnormalized</span></code></a>(key, W)</p></td>
+<td><p>Unnormalized spectral clustering</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.spectral.unnormalized_k.html#cr.sparse.cluster.spectral.unnormalized_k" title="cr.sparse.cluster.spectral.unnormalized_k"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unnormalized_k</span></code></a>(key, W, k)</p></td>
+<td><p>Unnormalized spectral clustering with known number of clusters</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.spectral.unnormalized_k_jit.html#cr.sparse.cluster.spectral.unnormalized_k_jit" title="cr.sparse.cluster.spectral.unnormalized_k_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unnormalized_k_jit</span></code></a>(key, W, k)</p></td>
+<td><p>Unnormalized spectral clustering with known number of clusters</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="data-types">
+<h2>Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.vq.KMeansState.html#cr.sparse.cluster.vq.KMeansState" title="cr.sparse.cluster.vq.KMeansState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vq.KMeansState</span></code></a></p></td>
 <td><p>The state for K-means algorithm</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.vq.KMeansSolution.html#cr.sparse.cluster.vq.KMeansSolution" title="cr.sparse.cluster.vq.KMeansSolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KMeansSolution</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.vq.KMeansSolution.html#cr.sparse.cluster.vq.KMeansSolution" title="cr.sparse.cluster.vq.KMeansSolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vq.KMeansSolution</span></code></a></p></td>
+<td><p>The solution for K-means algorithm</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.spectral.SpectralclusteringSolution.html#cr.sparse.cluster.spectral.SpectralclusteringSolution" title="cr.sparse.cluster.spectral.SpectralclusteringSolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spectral.SpectralclusteringSolution</span></code></a></p></td>
 <td><p>The solution for K-means algorithm</p></td>
 </tr>
 </tbody>

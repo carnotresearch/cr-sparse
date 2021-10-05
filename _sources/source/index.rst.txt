@@ -1,4 +1,4 @@
-CR.Sparse API Documentation
+API Docs
 =============================
 
 .. toctree::

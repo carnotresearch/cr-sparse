@@ -121,6 +121,31 @@ Row wise and column wise norms for signal/representation matrices
     normalize_l2_rw
 
 
+Pairwise Distances
+-------------------------
+
+.. autosummary::
+  :toctree: _autosummary
+
+  pairwise_sqr_l2_distances_rw
+  pairwise_sqr_l2_distances_cw
+  pairwise_l2_distances_rw
+  pairwise_l2_distances_cw
+  pdist_sqr_l2_rw
+  pdist_sqr_l2_cw
+  pdist_l2_rw
+  pdist_l2_cw
+  pairwise_l1_distances_rw
+  pairwise_l1_distances_cw
+  pdist_l1_rw
+  pdist_l1_cw
+  pairwise_linf_distances_rw
+  pairwise_linf_distances_cw
+  pdist_linf_rw
+  pdist_linf_cw
+
+
+
 Sparse representations
 ------------------------------------
 

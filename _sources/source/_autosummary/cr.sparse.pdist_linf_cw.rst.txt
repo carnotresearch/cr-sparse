@@ -1,0 +1,6 @@
+﻿cr.sparse.pdist\_linf\_cw
+=========================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: pdist_linf_cw

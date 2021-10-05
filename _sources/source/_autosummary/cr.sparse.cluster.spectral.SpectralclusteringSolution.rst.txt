@@ -1,0 +1,21 @@
+﻿cr.sparse.cluster.spectral.SpectralclusteringSolution
+=====================================================
+
+.. currentmodule:: cr.sparse.cluster.spectral
+
+.. autoclass:: SpectralclusteringSolution
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SpectralclusteringSolution.assignment
+      ~SpectralclusteringSolution.connectivity
+      ~SpectralclusteringSolution.laplancian
+      ~SpectralclusteringSolution.num_clusters
+      ~SpectralclusteringSolution.singular_values
+   
+   

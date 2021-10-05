@@ -63,7 +63,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">CR.Sparse API Documentation</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Docs</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="dsp.html">Digital Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wavelets.html">Wavelets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lop.html">Linear Operators</a></li>
@@ -81,14 +81,9 @@
 <li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../la/index.html">Linear Algebra</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../sls/index.html">Sparse Linear Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../benchmarks/index.html">Benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fwsp/index.html">Fourier and Wavelet Representations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../acronyms.html">Acronyms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
 </ul>
 
@@ -96,7 +91,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="index.html">CR.Sparse API Documentation</a><ul>
+  <li><a href="index.html">API Docs</a><ul>
       <li>Previous: <a href="_autosummary/cr.sparse.data.three_subspaces_at_angle.html" title="previous chapter">cr.sparse.data.three_subspaces_at_angle</a></li>
       <li>Next: <a href="_autosummary/cr.sparse.promote_arg_dtypes.html" title="next chapter">cr.sparse.promote_arg_dtypes</a></li>
   </ul></li>
@@ -138,8 +133,9 @@
 <li><p><a class="reference internal" href="#metrics-for-measuring-signal-and-error-levels" id="id3">Metrics for measuring signal and error levels</a></p></li>
 <li><p><a class="reference internal" href="#some-checks-and-utilities-for-matrices-2d-arrays" id="id4">Some checks and utilities for matrices (2D arrays)</a></p></li>
 <li><p><a class="reference internal" href="#row-wise-and-column-wise-norms-for-signal-representation-matrices" id="id5">Row wise and column wise norms for signal/representation matrices</a></p></li>
-<li><p><a class="reference internal" href="#sparse-representations" id="id6">Sparse representations</a></p></li>
-<li><p><a class="reference internal" href="#utilities-for-nd-arrays" id="id7">Utilities for ND-Arrays</a></p></li>
+<li><p><a class="reference internal" href="#pairwise-distances" id="id6">Pairwise Distances</a></p></li>
+<li><p><a class="reference internal" href="#sparse-representations" id="id7">Sparse representations</a></p></li>
+<li><p><a class="reference internal" href="#utilities-for-nd-arrays" id="id8">Utilities for ND-Arrays</a></p></li>
 </ul>
 </div>
 <section id="array-data-type-utilities">
@@ -375,8 +371,67 @@
 </tbody>
 </table>
 </section>
+<section id="pairwise-distances">
+<h2><a class="toc-backref" href="#id6">Pairwise Distances</a><a class="headerlink" href="#pairwise-distances" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pairwise_sqr_l2_distances_rw.html#cr.sparse.pairwise_sqr_l2_distances_rw" title="cr.sparse.pairwise_sqr_l2_distances_rw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pairwise_sqr_l2_distances_rw</span></code></a>(A, B)</p></td>
+<td><p>Computes the pairwise squared distances between points in A and points in B where each point is a row vector</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pairwise_sqr_l2_distances_cw.html#cr.sparse.pairwise_sqr_l2_distances_cw" title="cr.sparse.pairwise_sqr_l2_distances_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pairwise_sqr_l2_distances_cw</span></code></a>(A, B)</p></td>
+<td><p>Computes the pairwise squared distances between points in A and points in B where each point is a column vector</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pairwise_l2_distances_rw.html#cr.sparse.pairwise_l2_distances_rw" title="cr.sparse.pairwise_l2_distances_rw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pairwise_l2_distances_rw</span></code></a>(A, B)</p></td>
+<td><p>Computes the pairwise distances between points in A and points in B where each point is a row vector</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pairwise_l2_distances_cw.html#cr.sparse.pairwise_l2_distances_cw" title="cr.sparse.pairwise_l2_distances_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pairwise_l2_distances_cw</span></code></a>(A, B)</p></td>
+<td><p>Computes the pairwise distances between points in A and points in B where each point is a column vector</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pdist_sqr_l2_rw.html#cr.sparse.pdist_sqr_l2_rw" title="cr.sparse.pdist_sqr_l2_rw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdist_sqr_l2_rw</span></code></a>(A)</p></td>
+<td><p>Computes the pairwise squared distances between points in A where each point is a row vector</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pdist_sqr_l2_cw.html#cr.sparse.pdist_sqr_l2_cw" title="cr.sparse.pdist_sqr_l2_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdist_sqr_l2_cw</span></code></a>(A)</p></td>
+<td><p>Computes the pairwise squared distances between points in A where each point is a column vector</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pdist_l2_rw.html#cr.sparse.pdist_l2_rw" title="cr.sparse.pdist_l2_rw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdist_l2_rw</span></code></a>(A)</p></td>
+<td><p>Computes the pairwise distances between points in A where ach point is a row vector</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pdist_l2_cw.html#cr.sparse.pdist_l2_cw" title="cr.sparse.pdist_l2_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdist_l2_cw</span></code></a>(A)</p></td>
+<td><p>Computes the pairwise distances between points in A where each point is a column vector</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pairwise_l1_distances_rw.html#cr.sparse.pairwise_l1_distances_rw" title="cr.sparse.pairwise_l1_distances_rw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pairwise_l1_distances_rw</span></code></a>(A, B)</p></td>
+<td><p>Computes the pairwise city-block distances between points in A and points in B where each point is a row vector</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pairwise_l1_distances_cw.html#cr.sparse.pairwise_l1_distances_cw" title="cr.sparse.pairwise_l1_distances_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pairwise_l1_distances_cw</span></code></a>(A, B)</p></td>
+<td><p>Computes the pairwise city-block distances between points in A and points in B where each point is a column vector</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pdist_l1_rw.html#cr.sparse.pdist_l1_rw" title="cr.sparse.pdist_l1_rw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdist_l1_rw</span></code></a>(A)</p></td>
+<td><p>Computes the pairwise city-block distances between points in A where each point is a row vector</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pdist_l1_cw.html#cr.sparse.pdist_l1_cw" title="cr.sparse.pdist_l1_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdist_l1_cw</span></code></a>(A)</p></td>
+<td><p>Computes the pairwise city-block distances between points in A where each point is a column vector</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pairwise_linf_distances_rw.html#cr.sparse.pairwise_linf_distances_rw" title="cr.sparse.pairwise_linf_distances_rw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pairwise_linf_distances_rw</span></code></a>(A, B)</p></td>
+<td><p>Computes the pairwise Chebyshev distances between points in A and points in B where each point is a row vector</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pairwise_linf_distances_cw.html#cr.sparse.pairwise_linf_distances_cw" title="cr.sparse.pairwise_linf_distances_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pairwise_linf_distances_cw</span></code></a>(A, B)</p></td>
+<td><p>Computes the pairwise Chebyshev distances between points in A and points in B where each point is a column vector</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pdist_linf_rw.html#cr.sparse.pdist_linf_rw" title="cr.sparse.pdist_linf_rw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdist_linf_rw</span></code></a>(A)</p></td>
+<td><p>Computes the pairwise Chebyshev distances between points in A where each point is a row vector</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pdist_linf_cw.html#cr.sparse.pdist_linf_cw" title="cr.sparse.pdist_linf_cw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdist_linf_cw</span></code></a>(A)</p></td>
+<td><p>Computes the pairwise Chebyshev distances between points in A where each point is a column vector</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="sparse-representations">
-<h2><a class="toc-backref" href="#id6">Sparse representations</a><a class="headerlink" href="#sparse-representations" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id7">Sparse representations</a><a class="headerlink" href="#sparse-representations" title="Permalink to this headline">¶</a></h2>
 <p>Following functions analyze or construct representation vectors which are known to be sparse.</p>
 <table class="longtable docutils align-default">
 <colgroup>
@@ -457,7 +512,7 @@
 </table>
 </section>
 <section id="utilities-for-nd-arrays">
-<h2><a class="toc-backref" href="#id7">Utilities for ND-Arrays</a><a class="headerlink" href="#utilities-for-nd-arrays" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id8">Utilities for ND-Arrays</a><a class="headerlink" href="#utilities-for-nd-arrays" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />

@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.spectral.unnormalized
+=======================================
+
+.. currentmodule:: cr.sparse.cluster.spectral
+
+.. autofunction:: unnormalized

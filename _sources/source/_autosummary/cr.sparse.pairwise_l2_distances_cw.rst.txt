@@ -1,0 +1,6 @@
+﻿cr.sparse.pairwise\_l2\_distances\_cw
+=====================================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: pairwise_l2_distances_cw
