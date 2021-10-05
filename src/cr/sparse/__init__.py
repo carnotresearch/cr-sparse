@@ -205,3 +205,9 @@ from cr.sparse._src.ndarray import (
     arr_l2norm_sqr,
     arr_vdot,
 )
+
+from cr.sparse._src.similarity import (
+    dist_to_gaussian_sim,
+    sqr_dist_to_gaussian_sim,
+    eps_neighborhood_sim
+)
