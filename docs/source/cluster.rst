@@ -23,12 +23,31 @@ Vector Quantization
   find_new_centroids
   find_new_centroids_jit
   
+ 
+Spectral Clustering
+------------------------
+
+.. currentmodule:: cr.sparse.cluster.spectral
+
+.. autosummary::
+  :toctree: _autosummary
+
+  unnormalized
+  unnormalized_k
+  unnormalized_k_jit
+
+
+Data types
+--------------------
+
+.. currentmodule:: cr.sparse.cluster
+
 .. autosummary::
   :nosignatures:
   :toctree: _autosummary
   :template: namedtuple.rst
 
-  KMeansState
-  KMeansSolution
+  vq.KMeansState
+  vq.KMeansSolution
+  spectral.SpectralclusteringSolution
 
- 
