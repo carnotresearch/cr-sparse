@@ -119,7 +119,7 @@ def find_new_centroids(assignment, points, k):
 
 find_new_centroids_jit = jit(find_new_centroids, static_argnums=(2,))
 
-def kmeans_with_seed(key, points, k, thresh=1e-5):
+def kmeans_with_seed(key, points, k, thresh=1e-5, max_iters=100):
     """Runs the k-means algorithm for a specific random initialization
 
     Args:
@@ -127,6 +127,7 @@ def kmeans_with_seed(key, points, k, thresh=1e-5):
         points (jax.numpy.ndarray): Each row of the points matrix is a point. 
         k (int): The number of clusters
         thresh (float): Convergence threshold on change in distortion
+        max_iters (int): Maximum number of iterations for k-means algorithm
 
     Returns:
         (KMeansState): A named tuple consisting of: 
@@ -165,7 +166,7 @@ def kmeans_with_seed(key, points, k, thresh=1e-5):
         # check if the mean distance has updated enough
         gap = state.prev_distortion - state.distortion
         # print(state.prev_distortion, state.distortion, gap, thresh, gap > thresh)
-        return gap > thresh
+        return jnp.logical_and(gap > thresh, state.iterations < max_iters)
 
     # state = init()
     # while cond(state):
@@ -173,9 +174,9 @@ def kmeans_with_seed(key, points, k, thresh=1e-5):
     state = lax.while_loop(cond, body, init())
     return state
 
-kmeans_with_seed_jit = jit(kmeans_with_seed, static_argnums=(2,))
+kmeans_with_seed_jit = jit(kmeans_with_seed, static_argnums=(2,3))
 
-def kmeans(key, points, k, iter=20, thresh=1e-5):
+def kmeans(key, points, k, iter=20, thresh=1e-5, max_iters=100):
     r"""Clusters points using k-means algorithm
 
     Args:
@@ -187,6 +188,7 @@ def kmeans(key, points, k, iter=20, thresh=1e-5):
         iter (int): The number of times k-means will be restarted with 
           different seeds. The result with least amount of distortion is returned.
         thresh (float): Convergence threshold on change in distortion
+        max_iters (int): Maximum number of iterations for each replicate of k-means algorithm
 
     Returns:
         (KMeansSolution): A named tuple consisting of:
@@ -213,7 +215,8 @@ def kmeans(key, points, k, iter=20, thresh=1e-5):
     # keys for each restart of kmeans algorithm
     keys = random.split(key, iter)
     # individual run of k-means algorithm
-    kmeans_core = lambda key: kmeans_with_seed(key, points, k, thresh=thresh)
+    kmeans_core = lambda key: kmeans_with_seed(key, points, k, 
+        thresh=thresh, max_iters=max_iters)
     # Run all restarts of kmeans using vmap
     results = vmap(kmeans_core, 0, 0)(keys)
     # Find the run with the least distortion
@@ -222,4 +225,4 @@ def kmeans(key, points, k, iter=20, thresh=1e-5):
         distortion=results.distortion[i], key=keys[i],
         iterations=results.iterations[i])
 
-kmeans_jit = jit(kmeans, static_argnums=(2,3,))
+kmeans_jit = jit(kmeans, static_argnums=(2,3,4,5))
