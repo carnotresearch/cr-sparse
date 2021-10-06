@@ -16,11 +16,13 @@
 Utility functions for 2D matrices
 """
 
+from jax import jit
+
 import jax.numpy as jnp
 
 from .util import promote_arg_dtypes
 
-
+@jit
 def transpose(A):
     """Returns the transpose of an array
 
@@ -32,6 +34,7 @@ def transpose(A):
     """
     return jnp.swapaxes(A, -1, -2)
 
+@jit
 def hermitian(a):
     """Returns the conjugate transpose of an array
 
@@ -43,6 +46,7 @@ def hermitian(a):
     """
     return jnp.conjugate(jnp.swapaxes(a, -1, -2))
 
+@jit
 def is_matrix(A):
     """Checks if an array is a matrix
 
@@ -55,6 +59,7 @@ def is_matrix(A):
     """
     return A.ndim == 2
 
+@jit
 def is_square(A):
     """Checks if an array is a square matrix
 
@@ -68,6 +73,7 @@ def is_square(A):
     shape = A.shape
     return A.ndim == 2 and shape[0] == shape[1]
 
+@jit
 def is_symmetric(A):
     """Checks if an array is a symmetric matrix
 
@@ -82,6 +88,7 @@ def is_symmetric(A):
         return False
     return jnp.array_equal(A, A.T)
 
+@jit
 def is_hermitian(A):
     """Checks if an array is a Hermitian matrix
 
@@ -110,12 +117,15 @@ def is_positive_definite(A):
     Symmetric positive definite matrices have real and positive eigen values.
     This function checks if all the eigen values are positive. 
     """
-    if not is_symmetric(A):
+    if A.ndim != 2: 
         return False
     A = promote_arg_dtypes(A)
-    return jnp.all(jnp.real(jnp.linalg.eigvals(A)) > 0)
+    is_sym = jnp.array_equal(A, A.T)
+    is_pd = jnp.all(jnp.real(jnp.linalg.eigvals(A)) > 0)
+    return jnp.logical_and(is_sym, is_pd)
 
 
+@jit
 def has_orthogonal_columns(A, atol=1e-6):
     """Checks if a matrix has orthogonal columns
 
@@ -132,6 +142,7 @@ def has_orthogonal_columns(A, atol=1e-6):
     return jnp.allclose(G, I, atol=m*m*atol)
 
 
+@jit
 def has_orthogonal_rows(A, atol=1e-6):
     """Checks if a matrix has orthogonal rows
 
@@ -147,6 +158,7 @@ def has_orthogonal_rows(A, atol=1e-6):
     I = jnp.eye(m)
     return jnp.allclose(G, I, atol=m*m*atol)
 
+@jit
 def has_unitary_columns(A):
     """Checks if a matrix has unitary columns
 
@@ -162,6 +174,7 @@ def has_unitary_columns(A):
     I = jnp.eye(m)
     return jnp.allclose(G, I, atol=m*1e-6)
 
+@jit
 def has_unitary_rows(A):
     """Checks if a matrix has unitary rows
 
@@ -225,3 +238,29 @@ def off_diagonal_mean(A):
     """
     off_diagonal_entries = off_diagonal_elements(A)
     return jnp.mean(off_diagonal_entries)
+
+@jit
+def set_diagonal(A, value):
+    """Sets the diagonal elements to a specific value
+
+    Args:
+        A (jax.numpy.ndarray): A 2D matrix
+
+    Returns:
+        (jax.numpy.ndarray): Matrix with updated diagonal
+    """
+    indices = jnp.diag_indices(A.shape[0])
+    return A.at[indices].set(value)
+
+
+@jit
+def abs_max_idx_cw(A):
+    """Returns the index of entry with highest magnitude in each column
+    """
+    return jnp.argmax(jnp.abs(A), axis=0)
+
+@jit
+def abs_max_idx_rw(A):
+    """Returns the index of entry with highest magnitude in each row
+    """
+    return jnp.argmax(jnp.abs(A), axis=1)

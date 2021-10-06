@@ -45,6 +45,9 @@ from cr.sparse._src.matrix import (
     off_diagonal_min,
     off_diagonal_max,
     off_diagonal_mean,
+    set_diagonal,
+    abs_max_idx_cw,
+    abs_max_idx_rw,
 )
 
 from cr.sparse._src.norm import (
