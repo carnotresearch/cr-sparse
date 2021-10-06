@@ -35,6 +35,7 @@ Spectral Clustering
   unnormalized
   unnormalized_k
   unnormalized_k_jit
+  normalized_random_walk
 
 
 Data types

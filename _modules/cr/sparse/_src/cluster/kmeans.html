@@ -224,7 +224,7 @@
 
 <span class="n">find_new_centroids_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">find_new_centroids</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,))</span>
 
-<div class="viewcode-block" id="kmeans_with_seed"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cluster.vq.kmeans_with_seed.html#cr.sparse.cluster.vq.kmeans_with_seed">[docs]</a><span class="k">def</span> <span class="nf">kmeans_with_seed</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+<div class="viewcode-block" id="kmeans_with_seed"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cluster.vq.kmeans_with_seed.html#cr.sparse.cluster.vq.kmeans_with_seed">[docs]</a><span class="k">def</span> <span class="nf">kmeans_with_seed</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Runs the k-means algorithm for a specific random initialization</span>
 
 <span class="sd">    Args:</span>
@@ -232,6 +232,7 @@
 <span class="sd">        points (jax.numpy.ndarray): Each row of the points matrix is a point. </span>
 <span class="sd">        k (int): The number of clusters</span>
 <span class="sd">        thresh (float): Convergence threshold on change in distortion</span>
+<span class="sd">        max_iters (int): Maximum number of iterations for k-means algorithm</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        (KMeansState): A named tuple consisting of: </span>
@@ -270,7 +271,7 @@
         <span class="c1"># check if the mean distance has updated enough</span>
         <span class="n">gap</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">prev_distortion</span> <span class="o">-</span> <span class="n">state</span><span class="o">.</span><span class="n">distortion</span>
         <span class="c1"># print(state.prev_distortion, state.distortion, gap, thresh, gap &gt; thresh)</span>
-        <span class="k">return</span> <span class="n">gap</span> <span class="o">&gt;</span> <span class="n">thresh</span>
+        <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">gap</span> <span class="o">&gt;</span> <span class="n">thresh</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">max_iters</span><span class="p">)</span>
 
     <span class="c1"># state = init()</span>
     <span class="c1"># while cond(state):</span>
@@ -278,9 +279,9 @@
     <span class="n">state</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">init</span><span class="p">())</span>
     <span class="k">return</span> <span class="n">state</span></div>
 
-<span class="n">kmeans_with_seed_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">kmeans_with_seed</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,))</span>
+<span class="n">kmeans_with_seed_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">kmeans_with_seed</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 
-<div class="viewcode-block" id="kmeans"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cluster.vq.kmeans.html#cr.sparse.cluster.vq.kmeans">[docs]</a><span class="k">def</span> <span class="nf">kmeans</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="nb">iter</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
+<div class="viewcode-block" id="kmeans"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cluster.vq.kmeans.html#cr.sparse.cluster.vq.kmeans">[docs]</a><span class="k">def</span> <span class="nf">kmeans</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="nb">iter</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Clusters points using k-means algorithm</span>
 
 <span class="sd">    Args:</span>
@@ -292,6 +293,7 @@
 <span class="sd">        iter (int): The number of times k-means will be restarted with </span>
 <span class="sd">          different seeds. The result with least amount of distortion is returned.</span>
 <span class="sd">        thresh (float): Convergence threshold on change in distortion</span>
+<span class="sd">        max_iters (int): Maximum number of iterations for each replicate of k-means algorithm</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        (KMeansSolution): A named tuple consisting of:</span>
@@ -318,7 +320,8 @@
     <span class="c1"># keys for each restart of kmeans algorithm</span>
     <span class="n">keys</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">iter</span><span class="p">)</span>
     <span class="c1"># individual run of k-means algorithm</span>
-    <span class="n">kmeans_core</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">key</span><span class="p">:</span> <span class="n">kmeans_with_seed</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="n">thresh</span><span class="p">)</span>
+    <span class="n">kmeans_core</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">key</span><span class="p">:</span> <span class="n">kmeans_with_seed</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> 
+        <span class="n">thresh</span><span class="o">=</span><span class="n">thresh</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="n">max_iters</span><span class="p">)</span>
     <span class="c1"># Run all restarts of kmeans using vmap</span>
     <span class="n">results</span> <span class="o">=</span> <span class="n">vmap</span><span class="p">(</span><span class="n">kmeans_core</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)(</span><span class="n">keys</span><span class="p">)</span>
     <span class="c1"># Find the run with the least distortion</span>
@@ -327,7 +330,7 @@
         <span class="n">distortion</span><span class="o">=</span><span class="n">results</span><span class="o">.</span><span class="n">distortion</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="n">keys</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
         <span class="n">iterations</span><span class="o">=</span><span class="n">results</span><span class="o">.</span><span class="n">iterations</span><span class="p">[</span><span class="n">i</span><span class="p">])</span></div>
 
-<span class="n">kmeans_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">kmeans</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,))</span>
+<span class="n">kmeans_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">kmeans</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 </pre></div>
 
           </div>

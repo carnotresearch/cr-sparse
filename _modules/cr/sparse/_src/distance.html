@@ -293,11 +293,12 @@
     <span class="n">M</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="c1"># compute squared sums for each col vector</span>
     <span class="n">sums</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">A</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="c1"># broadcast to MxM matrix</span>
-    <span class="n">sums</span> <span class="o">=</span> <span class="n">sums</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">M</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="c1"># broadcast to MxN matrix</span>
+    <span class="n">a_sums</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">sums</span><span class="p">,</span> <span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="n">M</span><span class="p">))</span>
+    <span class="n">b_sums</span> <span class="o">=</span> <span class="n">sums</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">M</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
     <span class="c1"># multiply A.T (M x p) and A (p x M)</span>
     <span class="n">prods</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">A</span> 
-    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">sums</span> <span class="o">-</span> <span class="n">prods</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">a_sums</span> <span class="o">+</span> <span class="n">b_sums</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">prods</span></div>
 
 <div class="viewcode-block" id="pdist_l2_rw"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.pdist_l2_rw.html#cr.sparse.pdist_l2_rw">[docs]</a><span class="nd">@jit</span>
 <span class="k">def</span> <span class="nf">pdist_l2_rw</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>

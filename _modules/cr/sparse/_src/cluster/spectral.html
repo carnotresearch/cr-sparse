@@ -143,6 +143,15 @@
     <span class="n">connectivity</span><span class="p">:</span> <span class="nb">float</span>
     <span class="sd">&quot;&quot;&quot;Graph connectivity&quot;&quot;&quot;</span></div>
 
+
+<span class="k">def</span> <span class="nf">unnormalized_laplacian</span><span class="p">(</span><span class="n">W</span><span class="p">):</span>
+    <span class="c1"># Compute the degree</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="c1"># Compute the Laplacian</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">D</span> <span class="o">-</span> <span class="n">W</span>
+    <span class="k">return</span> <span class="n">L</span>
+
+
 <div class="viewcode-block" id="unnormalized"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cluster.spectral.unnormalized.html#cr.sparse.cluster.spectral.unnormalized">[docs]</a><span class="k">def</span> <span class="nf">unnormalized</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Unnormalized spectral clustering</span>
 
@@ -157,10 +166,8 @@
     <span class="c1"># make sure that W is square</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">shape</span>
     <span class="k">assert</span> <span class="n">m</span> <span class="o">==</span> <span class="n">n</span><span class="p">,</span> <span class="s2">&quot;W must be square&quot;</span>
-    <span class="c1"># Compute the degree</span>
-    <span class="n">D</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
     <span class="c1"># Compute the Laplacian</span>
-    <span class="n">L</span> <span class="o">=</span> <span class="n">D</span> <span class="o">-</span> <span class="n">W</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">unnormalized_laplacian</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
     <span class="c1"># Compute the SVD of the Laplacian</span>
     <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">VH</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
     <span class="c1">#print(jnp.round(S, 2))</span>
@@ -198,10 +205,8 @@
     <span class="c1"># make sure that W is square</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">shape</span>
     <span class="k">assert</span> <span class="n">m</span> <span class="o">==</span> <span class="n">n</span><span class="p">,</span> <span class="s2">&quot;W must be square&quot;</span>
-    <span class="c1"># Compute the degree</span>
-    <span class="n">D</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
     <span class="c1"># Compute the Laplacian</span>
-    <span class="n">L</span> <span class="o">=</span> <span class="n">D</span> <span class="o">-</span> <span class="n">W</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">unnormalized_laplacian</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
     <span class="c1"># Compute the SVD of the Laplacian</span>
     <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">VH</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
     <span class="c1"># Choose the last k eigen vectors</span>
@@ -214,6 +219,51 @@
         <span class="n">connectivity</span><span class="o">=</span><span class="n">S</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span></div>
 
 <span class="n">unnormalized_k_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">unnormalized_k</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,))</span>
+
+<span class="k">def</span> <span class="nf">normalized_random_walk_laplacian</span><span class="p">(</span><span class="n">W</span><span class="p">):</span>
+    <span class="c1"># Compute the degree</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">D_inv</span> <span class="o">=</span> <span class="n">D</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">D_inv</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">D_inv</span><span class="p">)</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="c1"># Compute the Laplacian</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">I</span> <span class="o">-</span> <span class="n">D_inv</span> <span class="o">@</span> <span class="n">W</span>
+    <span class="k">return</span> <span class="n">L</span>
+
+<div class="viewcode-block" id="normalized_random_walk"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cluster.spectral.normalized_random_walk.html#cr.sparse.cluster.spectral.normalized_random_walk">[docs]</a><span class="k">def</span> <span class="nf">normalized_random_walk</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Normalized spectral clustering with random walk</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: a PRNG key used for the k-means algorithm</span>
+<span class="sd">        W (jax.numpy.ndarray): Similarity/Weights matrix</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (SpectralclusteringSolution): A named tuple with the spectral clustering </span>
+<span class="sd">        solution (Laplacian, singular values, cluster assignment)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># make sure that W is square</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">assert</span> <span class="n">m</span> <span class="o">==</span> <span class="n">n</span><span class="p">,</span> <span class="s2">&quot;W must be square&quot;</span>
+    <span class="c1"># Compute the Laplacian</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">normalized_random_walk_laplacian</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+    <span class="c1"># Compute the SVD of the Laplacian</span>
+    <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">VH</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+    <span class="c1"># we need to look from the smaller singular value side</span>
+    <span class="c1"># smallest one will be 0.</span>
+    <span class="n">sdiff</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">S</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">sdiff</span><span class="p">)</span>
+    <span class="c1"># number of clusters</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">index</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="c1"># Choose the last k eigen vectors</span>
+    <span class="c1"># TODO this step cannot be JITTED</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">VH</span><span class="o">.</span><span class="n">T</span><span class="p">[:,</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">:]</span>
+    <span class="c1"># TODO we cannot use JITTED kmeans since k itself is dynamic</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">kmeans</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="nb">iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">SpectralclusteringSolution</span><span class="p">(</span><span class="n">singular_values</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> 
+        <span class="n">assignment</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">assignment</span><span class="p">,</span>
+        <span class="n">laplancian</span><span class="o">=</span><span class="n">L</span><span class="p">,</span>
+        <span class="n">num_clusters</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
+        <span class="n">connectivity</span><span class="o">=</span><span class="n">S</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span></div>
 </pre></div>
 
           </div>

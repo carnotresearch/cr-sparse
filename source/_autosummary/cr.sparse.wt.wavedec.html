@@ -136,11 +136,11 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Input signal array whose DWT is to be computed</p></li>
-<li><p><strong>wavelet</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em> or </em><a class="reference internal" href="cr.sparse.wt.DiscreteWavelet.html#cr.sparse.wt.DiscreteWavelet" title="cr.sparse.wt.DiscreteWavelet"><em>cr.sparse.wt.DiscreteWavelet</em></a>) – The wavelet to be used to compute DWT (by name or object)</p></li>
-<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Signal extension mode to be used during DWT computation. Default ‘symmetric’.
+<li><p><strong>wavelet</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> or </em><a class="reference internal" href="cr.sparse.wt.DiscreteWavelet.html#cr.sparse.wt.DiscreteWavelet" title="cr.sparse.wt.DiscreteWavelet"><em>cr.sparse.wt.DiscreteWavelet</em></a>) – The wavelet to be used to compute DWT (by name or object)</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Signal extension mode to be used during DWT computation. Default ‘symmetric’.
 See <a class="reference internal" href="../wavelets.html#ref-wt-modes"><span class="std std-ref">Modes</span></a> for available modes.</p></li>
-<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>optional</em>) – The axis along which the vectors from data will be picked for computing DWT. Default -1 (last axis).</p></li>
-<li><p><strong>level</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>optional</em>) – The number of decomposition levels for which DWT will be computed. If the level is
+<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – The axis along which the vectors from data will be picked for computing DWT. Default -1 (last axis).</p></li>
+<li><p><strong>level</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – The number of decomposition levels for which DWT will be computed. If the level is
 unspecified, then it will be computed automatically based on data length and wavelet decomposition filter length.</p></li>
 </ul>
 </dd>
@@ -155,7 +155,7 @@ coefficients array at level 1 of the wavelet decomposition.</p>
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jax.numpy.ndarray</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jax.numpy.ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>

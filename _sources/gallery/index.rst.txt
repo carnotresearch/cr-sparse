@@ -67,6 +67,27 @@ Data Clustering
    :hidden:
 
    /gallery/cluster/kmeans
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the sparse subspace clustering algorithm via orthogonal matching purs...">
+
+.. only:: html
+
+ .. figure:: /gallery/cluster/images/thumb/sphx_glr_ssc_omp_thumb.png
+     :alt: Sparse Subspace Clustering - OMP
+
+     :ref:`sphx_glr_gallery_cluster_ssc_omp.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/cluster/ssc_omp
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

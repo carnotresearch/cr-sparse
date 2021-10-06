@@ -117,6 +117,9 @@
 <h1>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h1>
 <p>This section is a rough summary of some of the limitations
 encountered during the development of this package.
+Some of these limitations are due to not enough time
+spent on development. Others are due to lack of support
+in JAX library.
 Be aware that some of these limitations may be entirely
 due to my limited knowledge of JAX library. Hopefully,
 in future, with my better knowledge, or with better support
@@ -129,13 +132,37 @@ been acknowledged with JAX development team also.</p>
 See <a class="reference external" href="https://github.com/google/jax/discussions/8042">#8042</a></p></li>
 <li><p>1D convolution is slow in JAX (especially on CPU).
 See <a class="reference external" href="https://github.com/google/jax/discussions/7961">#7961</a>.</p></li>
+<li><p>Support for sparse matrices is still under development in JAX.</p></li>
 </ul>
+<section id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>off_diagonal_elements cannot be jitted.
+JAX arrays do not support boolean scalar indices.</p></li>
+</ul>
+</section>
 <section id="data-clustering">
 <h2>Data clustering<a class="headerlink" href="#data-clustering" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Spectral clustering assess the number of clusters
 from data. It cannot be jitted. In turn, the k-means
 invocation from inside spectral clustering cannot be jitted either.</p></li>
+<li><p>Normalized spectral clustering could make use of
+sparse matrices (identity and diagonal) whenever
+it becomes available.</p></li>
+</ul>
+</section>
+<section id="signal-processing">
+<h2>Signal Processing<a class="headerlink" href="#signal-processing" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Walsh Hadamard transform implementation is technically correct
+but possibly not vectorized enough. It is slow.</p></li>
+</ul>
+</section>
+<section id="linear-operators">
+<h2>Linear Operators<a class="headerlink" href="#linear-operators" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Some operators like pad don’t work well on matrix input yet.</p></li>
 </ul>
 </section>
 </section>

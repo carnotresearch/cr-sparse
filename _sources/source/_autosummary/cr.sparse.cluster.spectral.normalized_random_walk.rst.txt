@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.spectral.normalized\_random\_walk
+===================================================
+
+.. currentmodule:: cr.sparse.cluster.spectral
+
+.. autofunction:: normalized_random_walk

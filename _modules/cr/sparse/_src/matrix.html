@@ -121,12 +121,14 @@
 <span class="sd">Utility functions for 2D matrices</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span>
+
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 
 <span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">promote_arg_dtypes</span>
 
-
-<div class="viewcode-block" id="transpose"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.transpose.html#cr.sparse.transpose">[docs]</a><span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<div class="viewcode-block" id="transpose"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.transpose.html#cr.sparse.transpose">[docs]</a><span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the transpose of an array</span>
 
 <span class="sd">    Args:</span>
@@ -137,7 +139,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="hermitian"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.hermitian.html#cr.sparse.hermitian">[docs]</a><span class="k">def</span> <span class="nf">hermitian</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<div class="viewcode-block" id="hermitian"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.hermitian.html#cr.sparse.hermitian">[docs]</a><span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">hermitian</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the conjugate transpose of an array</span>
 
 <span class="sd">    Args:</span>
@@ -148,7 +151,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="is_matrix"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.is_matrix.html#cr.sparse.is_matrix">[docs]</a><span class="k">def</span> <span class="nf">is_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<div class="viewcode-block" id="is_matrix"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.is_matrix.html#cr.sparse.is_matrix">[docs]</a><span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">is_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Checks if an array is a matrix</span>
 
 <span class="sd">    Args:</span>
@@ -160,7 +164,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">A</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span></div>
 
-<div class="viewcode-block" id="is_square"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.is_square.html#cr.sparse.is_square">[docs]</a><span class="k">def</span> <span class="nf">is_square</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<div class="viewcode-block" id="is_square"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.is_square.html#cr.sparse.is_square">[docs]</a><span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">is_square</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Checks if an array is a square matrix</span>
 
 <span class="sd">    Args:</span>
@@ -173,7 +178,8 @@
     <span class="n">shape</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
     <span class="k">return</span> <span class="n">A</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="is_symmetric"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.is_symmetric.html#cr.sparse.is_symmetric">[docs]</a><span class="k">def</span> <span class="nf">is_symmetric</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<div class="viewcode-block" id="is_symmetric"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.is_symmetric.html#cr.sparse.is_symmetric">[docs]</a><span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">is_symmetric</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Checks if an array is a symmetric matrix</span>
 
 <span class="sd">    Args:</span>
@@ -187,7 +193,8 @@
         <span class="k">return</span> <span class="kc">False</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="is_hermitian"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.is_hermitian.html#cr.sparse.is_hermitian">[docs]</a><span class="k">def</span> <span class="nf">is_hermitian</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<div class="viewcode-block" id="is_hermitian"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.is_hermitian.html#cr.sparse.is_hermitian">[docs]</a><span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">is_hermitian</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Checks if an array is a Hermitian matrix</span>
 
 <span class="sd">    Args:</span>
@@ -215,13 +222,16 @@
 <span class="sd">    Symmetric positive definite matrices have real and positive eigen values.</span>
 <span class="sd">    This function checks if all the eigen values are positive. </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_symmetric</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span> 
         <span class="k">return</span> <span class="kc">False</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">A</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span></div>
+    <span class="n">is_sym</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">is_pd</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">A</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">is_sym</span><span class="p">,</span> <span class="n">is_pd</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="has_orthogonal_columns"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.has_orthogonal_columns.html#cr.sparse.has_orthogonal_columns">[docs]</a><span class="k">def</span> <span class="nf">has_orthogonal_columns</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+<div class="viewcode-block" id="has_orthogonal_columns"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.has_orthogonal_columns.html#cr.sparse.has_orthogonal_columns">[docs]</a><span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">has_orthogonal_columns</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Checks if a matrix has orthogonal columns</span>
 
 <span class="sd">    Args:</span>
@@ -237,7 +247,8 @@
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">m</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">atol</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="has_orthogonal_rows"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.has_orthogonal_rows.html#cr.sparse.has_orthogonal_rows">[docs]</a><span class="k">def</span> <span class="nf">has_orthogonal_rows</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+<div class="viewcode-block" id="has_orthogonal_rows"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.has_orthogonal_rows.html#cr.sparse.has_orthogonal_rows">[docs]</a><span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">has_orthogonal_rows</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Checks if a matrix has orthogonal rows</span>
 
 <span class="sd">    Args:</span>
@@ -252,7 +263,8 @@
     <span class="n">I</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">m</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">atol</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="has_unitary_columns"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.has_unitary_columns.html#cr.sparse.has_unitary_columns">[docs]</a><span class="k">def</span> <span class="nf">has_unitary_columns</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<div class="viewcode-block" id="has_unitary_columns"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.has_unitary_columns.html#cr.sparse.has_unitary_columns">[docs]</a><span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">has_unitary_columns</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Checks if a matrix has unitary columns</span>
 
 <span class="sd">    Args:</span>
@@ -267,7 +279,8 @@
     <span class="n">I</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">m</span><span class="o">*</span><span class="mf">1e-6</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="has_unitary_rows"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.has_unitary_rows.html#cr.sparse.has_unitary_rows">[docs]</a><span class="k">def</span> <span class="nf">has_unitary_rows</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<div class="viewcode-block" id="has_unitary_rows"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.has_unitary_rows.html#cr.sparse.has_unitary_rows">[docs]</a><span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">has_unitary_rows</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Checks if a matrix has unitary rows</span>
 
 <span class="sd">    Args:</span>
@@ -330,6 +343,32 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">off_diagonal_entries</span> <span class="o">=</span> <span class="n">off_diagonal_elements</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">off_diagonal_entries</span><span class="p">)</span></div>
+
+<span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">set_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sets the diagonal elements to a specific value</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (jax.numpy.ndarray): A 2D matrix</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): Matrix with updated diagonal</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">diag_indices</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">A</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+
+<span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">abs_max_idx_cw</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the index of entry with highest magnitude in each column</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">abs_max_idx_rw</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the index of entry with highest magnitude in each row</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
           </div>
