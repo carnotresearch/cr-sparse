@@ -188,11 +188,12 @@ def pdist_sqr_l2_cw(A):
     M = A.shape[1]
     # compute squared sums for each col vector
     sums = jnp.sum(A*A, axis=0)
-    # broadcast to MxM matrix
-    sums = sums * jnp.ones((M, 1))
+    # broadcast to MxN matrix
+    a_sums = jnp.reshape(sums, (M, 1)) * jnp.ones((1,M))
+    b_sums = sums * jnp.ones((M, 1))
     # multiply A.T (M x p) and A (p x M)
     prods = A.T @ A 
-    return 2*(sums - prods)
+    return a_sums + b_sums - 2 * prods
 
 @jit
 def pdist_l2_rw(A):
