@@ -76,3 +76,8 @@ from cr.sparse._src.la.svd_utils import (
     effective_rank_from_svd,
     singular_values
 )
+
+from cr.sparse._src.la.dls import (
+    mult_with_submatrix,
+    solve_on_submatrix
+)
