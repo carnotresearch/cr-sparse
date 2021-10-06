@@ -11,6 +11,7 @@ requests
 pillow
 PyWavelets
 scikit-image
+scikit-learn
 sphinx==4.0.0
 sphinxcontrib-katex>=0.7.1
 sphinxcontrib-bibtex>=1.0.0
