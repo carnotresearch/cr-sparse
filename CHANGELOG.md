@@ -31,15 +31,20 @@ All notable changes to this project will be documented in this file.
   - Image Deblurring
 - Data generation
   - Random subspaces, uniform points on subspaces
-  - three_subspaces_at_angle
+  - two_subspaces_at_angle, three_subspaces_at_angle
+  - multiple index_sets
 - Utilities
   - More functions for ND-arrays
   - Off diagonal elements in a matrix, min,max, mean
+  - set_diagonal, abs_max_idx_cw, abs_max_idx_rw
 - Linear Algebra
   - orth, row_space, null_space, left_null_space, effective_rank
   - subspaces: principal angles, is_in_subspace, project_to_subspace
+  - mult_with_submatrix, solve_on_submatrix
 - Clustering
-  - K-means 
+  - K-means clustering
+  - Spectral clustering
+  - OMP for sparse subspace clustering 
 
 ### Improved
 
