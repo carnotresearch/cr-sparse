@@ -14,7 +14,7 @@
 
 
 import jax.numpy as jnp
-from jax import jit
+from jax import jit, vmap
 from jax import random 
 
 def sparse_normal_representations(key, D, K, S=1):
@@ -111,3 +111,11 @@ def sparse_spikes(key, N, K, S=1):
     X = jnp.squeeze(X)
     return X, omega
 
+def index_sets(key, N, K, S, out_axis=0):
+    """Generates K-length index (sub)sets of the set [0..N-1] for S signals
+    """
+    omega = jnp.arange(N)
+    keys = random.split(key, S)
+    set_gen = lambda key : random.permutation(key, omega)[:K] 
+    I = vmap(set_gen, 0, out_axis)(keys)
+    return I
