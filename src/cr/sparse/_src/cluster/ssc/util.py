@@ -3,6 +3,7 @@ import jax.numpy as jnp
 
 
 import cr.sparse as crs
+import cr.sparse.cluster as crcluster
 
 
 @jit
@@ -28,3 +29,35 @@ def angles_between_points(X):
 
 
 def min_angles_within_cluster(angles, cluster_sizes):
+    """Returns the minimum angles for for each point with its neighbors within the cluster 
+    """
+    # we have to ignore the diagonal elements
+    angles = crs.set_diagonal(angles, 10000)
+    start_indices, end_indices = crcluster.start_end_indices(cluster_sizes)
+    K = len(cluster_sizes)
+    def min_angles(k):
+        start = start_indices[k]
+        end = end_indices[k]
+        A = angles[start:end, start:end]
+        return jnp.min(A, axis=0)
+
+    mins = [min_angles(k) for k in range(K)]
+    return jnp.concatenate(mins)
+
+def min_angles_across_clusters(angles, cluster_sizes):
+    """Returns the minimum angles for for each point with its neighbors from all other clusters 
+    """
+    start_indices, end_indices = crcluster.start_end_indices(cluster_sizes)
+    K = len(cluster_sizes)
+    def min_angles(k):
+        start = start_indices[k]
+        end = end_indices[k]
+        # pick the relevant rows
+        A = angles[start:end, :]
+        # set the angles within the cluster to high value
+        A = A.at[:, start:end].set(10000)
+        # minimize on each row
+        return jnp.min(A, axis=1)
+
+    mins = [min_angles(k) for k in range(K)]
+    return jnp.concatenate(mins)

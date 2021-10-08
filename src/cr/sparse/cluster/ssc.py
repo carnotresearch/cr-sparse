@@ -18,7 +18,9 @@ Sparse Subspace Clustering Algorithms
 
 from cr.sparse._src.cluster.ssc.util import (
     sparse_to_full_rep,
-    angles_between_points
+    angles_between_points,
+    min_angles_within_cluster,
+    min_angles_across_clusters
 )
 
 
