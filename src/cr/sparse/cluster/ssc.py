@@ -19,8 +19,12 @@ Sparse Subspace Clustering Algorithms
 from cr.sparse._src.cluster.ssc.util import (
     sparse_to_full_rep,
     angles_between_points,
-    min_angles_within_cluster,
-    min_angles_across_clusters
+    min_angles_inside_cluster,
+    min_angles_outside_cluster,
+    nearest_neighbors_inside_cluster,
+    nearest_neighbors_outside_cluster,
+    sorted_neighbors,
+    inn_positions
 )
 
 
