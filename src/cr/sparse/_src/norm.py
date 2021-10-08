@@ -27,6 +27,8 @@ EPS = jnp.finfo(jnp.float32).eps
 
 norm = jnp.linalg.norm
 
+from .util import promote_arg_dtypes
+
 def norm_l1(x):
     """
     Computes the l_1 norm of a vector
@@ -111,6 +113,7 @@ def normalize_l1_cw(X):
     """
     Normalize each column of X per l_1-norm
     """
+    X = promote_arg_dtypes(X)
     X2 = jnp.abs(X)
     sums = jnp.sum(X2, axis=0) + EPS
     return jnp.divide(X, sums)
@@ -119,6 +122,7 @@ def normalize_l1_rw(X):
     """
     Normalize each row of X per l_1-norm
     """
+    X = promote_arg_dtypes(X)
     X2 = jnp.abs(X)
     sums = jnp.sum(X2, axis=1) + EPS
     # row wise sum should be a column vector
@@ -130,6 +134,7 @@ def normalize_l2_cw(X):
     """
     Normalize each column of X per l_2-norm
     """
+    X = promote_arg_dtypes(X)
     X2 = jnp.square(X)
     sums = jnp.sum(X2, axis=0) 
     sums = jnp.sqrt(sums)
@@ -139,6 +144,7 @@ def normalize_l2_rw(X):
     """
     Normalize each row of X per l_2-norm
     """
+    X = promote_arg_dtypes(X)
     X2 = jnp.square(X)
     sums = jnp.sum(X2, axis=1)
     sums = jnp.sqrt(sums)
