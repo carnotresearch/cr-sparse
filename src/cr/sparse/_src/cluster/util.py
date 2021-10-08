@@ -34,6 +34,7 @@ sizes_from_labels_jit = jit(sizes_from_labels, static_argnums=(1,))
 def start_end_indices(cluster_sizes):
     """Returns the start and end indices for each cluster
     """
+    cluster_sizes = jnp.asarray(cluster_sizes)
     k = len(cluster_sizes)
     start_indices = jnp.cumsum(cluster_sizes)
     start_indices = crs.vec_shift_right(start_indices)
@@ -43,7 +44,10 @@ def start_end_indices(cluster_sizes):
 
 def labels_from_sizes(sizes):
     """Returns cluster labels from cluster sizes
+
+    TODO: Not jittable
     """
+    sizes = jnp.asarray(sizes)
     K = len(sizes)
     labels = [jnp.ones(size) * k for k, size in enumerate(sizes)]
     return jnp.concatenate(labels)
