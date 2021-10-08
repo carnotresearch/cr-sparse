@@ -49,5 +49,5 @@ def labels_from_sizes(sizes):
     """
     sizes = jnp.asarray(sizes)
     K = len(sizes)
-    labels = [jnp.ones(size) * k for k, size in enumerate(sizes)]
+    labels = [jnp.ones(size, dtype=int) * k for k, size in enumerate(sizes)]
     return jnp.concatenate(labels)
