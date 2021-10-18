@@ -245,6 +245,7 @@ def set_diagonal(A, value):
 
     Args:
         A (jax.numpy.ndarray): A 2D matrix
+        value (float) : A value to be added to the diagonal elements
 
     Returns:
         (jax.numpy.ndarray): Matrix with updated diagonal
@@ -252,6 +253,19 @@ def set_diagonal(A, value):
     indices = jnp.diag_indices(A.shape[0])
     return A.at[indices].set(value)
 
+@jit
+def add_to_diagonal(A, value):
+    """Add a specific value to the diagonal elements 
+
+    Args:
+        A (jax.numpy.ndarray): A 2D matrix
+        value (float) : A value to be added to the diagonal elements
+
+    Returns:
+        (jax.numpy.ndarray): Matrix with updated diagonal
+    """
+    indices = jnp.diag_indices(A.shape[0])
+    return A.at[indices].add(value)
 
 @jit
 def abs_max_idx_cw(A):
@@ -264,3 +278,17 @@ def abs_max_idx_rw(A):
     """Returns the index of entry with highest magnitude in each row
     """
     return jnp.argmax(jnp.abs(A), axis=1)
+
+
+
+@jit
+def diag_premultiply(d, A):
+    """Compute D @ A where D is a diagonal matrix with entries from vector d
+    """
+    return jnp.multiply(d[:, None], A)
+
+@jit
+def diag_postmultiply(A, d):
+    """Compute A @ D where D is a diagonal matrix with entries from vector d
+    """
+    return jnp.multiply(A, d)

@@ -46,8 +46,11 @@ from cr.sparse._src.matrix import (
     off_diagonal_max,
     off_diagonal_mean,
     set_diagonal,
+    add_to_diagonal,
     abs_max_idx_cw,
     abs_max_idx_rw,
+    diag_premultiply,
+    diag_postmultiply
 )
 
 from cr.sparse._src.norm import (
@@ -134,6 +137,8 @@ from cr.sparse._src.vector import (
     vec_centered_jit,
     vec_convolve,
     vec_convolve_jit,
+    vec_safe_divide_by_scalar,
+    vec_safe_divide_by_scalar_jit
 )
 
 from cr.sparse._src.signal import (
