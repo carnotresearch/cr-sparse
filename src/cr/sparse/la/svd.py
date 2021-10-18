@@ -13,22 +13,25 @@
 # limitations under the License.
 
 """
-Algorithms for solving SVD problems
+Algorithms and utilities for solving SVD problems
 """
-from cr.sparse._src.sls.svdpack.util import (
-    do_elr
+
+from cr.sparse._src.la.svdpack.reorth import (
+    reorth_mgs,
+    reorth_mgs_jit,
+    reorth_noop
 )
 
-
-from cr.sparse._src.sls.svdpack.lanbpro import (
-    lanbpro_init,
-    lanbpro_iteration,
-    lanbpro_iteration_jit,
-    lanbpro,
-    lanbpro_jit,
+from cr.sparse._src.la.svdpack.bdsqr import (
+    bdsqr,
 )
 
-
-from cr.sparse._src.sls.svdpack.lansvd import (
-    lansvd
+from cr.sparse._src.la.svdpack.lanbpro_utils import (
+    LanBDOptions,
+    LanBProState,
+    lanbpro_options_init,
+    lanbpro_random_start,
+    update_nu,
+    update_mu,
+    compute_ind,
 )
