@@ -18,8 +18,16 @@ Spectral Clustering Based Algorithms
 
 from cr.sparse._src.cluster.spectral import (
     SpectralclusteringSolution,
+    # laplacians
+    normalized_random_walk_laplacian,
+    normalized_random_walk_laplacian_jit,
+    # spectral clustering algorithms
+    # unnormalized spectral clustering
     unnormalized,
     unnormalized_k,
     unnormalized_k_jit,
-    normalized_random_walk
+    # normalized random walk clustering
+    normalized_random_walk,
+    normalized_random_walk_k,
+    normalized_random_walk_k_jit    
 )
