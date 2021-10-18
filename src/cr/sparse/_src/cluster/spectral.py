@@ -24,6 +24,8 @@ from jax.numpy.linalg import norm
 
 from .kmeans import kmeans
 
+import cr.sparse as crs
+
 class SpectralclusteringSolution(NamedTuple):
     """The solution for K-means algorithm
     """
@@ -119,11 +121,12 @@ def normalized_random_walk_laplacian(W):
     # Compute the degree
     D = jnp.sum(W, 0)
     D_inv = D**(-1)
-    D_inv = jnp.diag(D_inv)
-    I = jnp.eye(W.shape[0])
     # Compute the Laplacian
-    L = I - D_inv @ W
+    # L = I - D_inv @ W
+    L = crs.add_to_diagonal(-crs.diag_premultiply(D_inv, W), 1.)
     return L
+
+normalized_random_walk_laplacian_jit = jit(normalized_random_walk_laplacian)
 
 def normalized_random_walk(key, W):
     """Normalized spectral clustering with random walk
@@ -159,3 +162,34 @@ def normalized_random_walk(key, W):
         laplancian=L,
         num_clusters=k,
         connectivity=S[-2])
+
+
+def normalized_random_walk_k(key, W, k):
+    """Normalized spectral clustering with random walk
+
+    Args:
+        key: a PRNG key used for the k-means algorithm
+        W (jax.numpy.ndarray): Similarity/Weights matrix
+        k (int): The number of clusters
+
+    Returns:
+        (SpectralclusteringSolution): A named tuple with the spectral clustering 
+        solution (Laplacian, singular values, cluster assignment)
+    """
+    # make sure that W is square
+    m, n = W.shape
+    assert m == n, "W must be square"
+    # Compute the Laplacian
+    L = normalized_random_walk_laplacian(W)
+    # Compute the SVD of the Laplacian
+    U, S, VH = jnp.linalg.svd(L)
+    # Choose the last k eigen vectors
+    kernel = VH.T[:,n-k:]
+    result = kmeans(key, kernel, k, iter=100)
+    return SpectralclusteringSolution(singular_values=S, 
+        assignment=result.assignment,
+        laplancian=L,
+        num_clusters=k,
+        connectivity=S[-2])
+
+normalized_random_walk_k_jit = jit(normalized_random_walk_k, static_argnums=(2,))
