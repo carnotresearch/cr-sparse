@@ -16,7 +16,7 @@
 Utility functions for working with vectors
 """
 
-from jax import jit
+from jax import jit, lax
 import jax.numpy as jnp
 from jax.scipy import signal
 
@@ -275,3 +275,9 @@ def vec_convolve(x, h):
     return signal.convolve(x[None], h[None])[0]
 
 vec_convolve_jit = jit(vec_convolve)
+
+
+def vec_safe_divide_by_scalar(x, alpha):
+    return lax.cond(alpha == 0, lambda x : x, lambda x: x / alpha, x)
+
+vec_safe_divide_by_scalar_jit = jit(vec_safe_divide_by_scalar)
