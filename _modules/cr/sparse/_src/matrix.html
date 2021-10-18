@@ -350,6 +350,7 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        A (jax.numpy.ndarray): A 2D matrix</span>
+<span class="sd">        value (float) : A value to be added to the diagonal elements</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        (jax.numpy.ndarray): Matrix with updated diagonal</span>
@@ -357,6 +358,19 @@
     <span class="n">indices</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">diag_indices</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">A</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
+<span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">add_to_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add a specific value to the diagonal elements </span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (jax.numpy.ndarray): A 2D matrix</span>
+<span class="sd">        value (float) : A value to be added to the diagonal elements</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): Matrix with updated diagonal</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">diag_indices</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">A</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <span class="nd">@jit</span>
 <span class="k">def</span> <span class="nf">abs_max_idx_cw</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
@@ -369,6 +383,20 @@
     <span class="sd">&quot;&quot;&quot;Returns the index of entry with highest magnitude in each row</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+
+
+<span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">diag_premultiply</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute D @ A where D is a diagonal matrix with entries from vector d</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">d</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">A</span><span class="p">)</span>
+
+<span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">diag_postmultiply</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute A @ D where D is a diagonal matrix with entries from vector d</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
 </pre></div>
 
           </div>
