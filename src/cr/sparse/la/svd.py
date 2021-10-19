@@ -24,6 +24,7 @@ from cr.sparse._src.la.svdpack.reorth import (
 
 from cr.sparse._src.la.svdpack.bdsqr import (
     bdsqr,
+    bdsqr_jit
 )
 
 from cr.sparse._src.la.svdpack.lanbpro_utils import (
@@ -34,4 +35,8 @@ from cr.sparse._src.la.svdpack.lanbpro_utils import (
     update_nu,
     update_mu,
     compute_ind,
+)
+
+from cr.sparse._src.la.svdpack.lansvd_utils import (
+    refine_bounds,
 )

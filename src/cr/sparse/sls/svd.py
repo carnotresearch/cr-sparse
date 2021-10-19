@@ -26,9 +26,12 @@ from cr.sparse._src.sls.svdpack.lanbpro import (
     lanbpro_iteration_jit,
     lanbpro,
     lanbpro_jit,
+    new_p_vec,
+    new_p_vec_jit,
 )
 
 
 from cr.sparse._src.sls.svdpack.lansvd import (
-    lansvd
+    lansvd_simple,
+    lansvd_simple_jit
 )
