@@ -31,6 +31,7 @@ from cr.sparse._src.la.svdpack.lanbpro_utils import (
     LanBDOptions,
     LanBProState,
     lanbpro_options_init,
+    do_elr,
     lanbpro_random_start,
     update_nu,
     update_mu,
@@ -38,6 +39,13 @@ from cr.sparse._src.la.svdpack.lanbpro_utils import (
     bpro_norm_estimate,
 )
 
+from cr.sparse._src.la.svdpack.lanbpro import (
+    lanbpro_init,
+    lanbpro_iteration,
+    lanbpro_iteration_jit,
+    lanbpro,
+    lanbpro_jit,
+)
 from cr.sparse._src.la.svdpack.lansvd_utils import (
     refine_bounds,
 )
