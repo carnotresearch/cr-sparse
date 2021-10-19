@@ -16,34 +16,3 @@ from jax import lax, jit, vmap, random
 import jax.numpy as jnp
 from jax.numpy.linalg import norm
 
-def do_elr(v_prev, v, v_norm, gamma):
-    """
-    Extended local reorthogonalization
-    """
-    def init():
-        t = jnp.vdot(v_prev, v)
-        v2 = v - t * v_prev
-        v2_norm = norm(v2)
-        return v2, v2_norm, v_norm, t
-
-    def body(state):
-        v, old_norm, older_norm, proj = state
-        t = jnp.vdot(v_prev, v)
-        v = v - t * v_prev
-        v_norm = norm(v)
-        return v, v_norm, old_norm, proj + t
-
-    def cond(state):
-        v, v_norm, old_norm, proj = state
-        return v_norm < gamma * old_norm
-
-    # state = init()
-    # while cond(state):
-    #     state = body(state)
-    state = lax.while_loop(cond, body, init())
-    v, v_norm, old_norm, proj = state
-    return v, v_norm, proj
-
-def do_elr_noop(v, v_norm):
-    """No-op version of ELR for conditional execution"""
-    return v, v_norm, 0.
