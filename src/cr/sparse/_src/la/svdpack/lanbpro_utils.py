@@ -321,6 +321,10 @@ def bpro_norm_estimate(alpha, beta):
     """Estimates the norm based on a 6x5 matrix
     """
     k = 5
+    if len(alpha) < k:
+        alpha = jnp.pad(alpha, (0, k - len(alpha)))
+    if len(beta) <= k:
+        beta = jnp.pad(beta, (0, k + 1 - len(beta)))
     # prepare the k+1 x k bidiagonal matrix
     B = jnp.zeros((k+1, k))
     # diagonal indices for k alpha entries
