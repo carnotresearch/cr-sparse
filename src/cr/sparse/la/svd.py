@@ -35,6 +35,7 @@ from cr.sparse._src.la.svdpack.lanbpro_utils import (
     update_nu,
     update_mu,
     compute_ind,
+    bpro_norm_estimate,
 )
 
 from cr.sparse._src.la.svdpack.lansvd_utils import (

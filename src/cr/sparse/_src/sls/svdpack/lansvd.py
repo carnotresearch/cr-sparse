@@ -48,12 +48,11 @@ def lansvd_simple(A, k, p0):
     tol = 16*eps
     n_converged = 0
     # number of iterations for LanBPro algorithm
-    #j = min(k + max(8, k), lanmax)
-    j = min(k + max(30, 2*k), lanmax)
+    j = min(k + max(8, k), lanmax)
     options = lanbpro_options_init(lanmax)
     state  = lanbpro_init(A, lanmax, p0, options)
     # carry out the lanbpro iterations
-    state = lax.fori_loop(0, j-1, 
+    state = lax.fori_loop(1, j, 
         lambda i, state: lanbpro_iteration(A, state, options),
         state)
     # norm of the residual 
@@ -73,6 +72,8 @@ def lansvd_simple(A, k, p0):
     # find the index of first non-converged singular value
     n_converged = jnp.argmin(converged)
     n_converged = jnp.where(converged[n_converged], len(converged), n_converged)
+    U = state.U[:, :j]
+    V = state.V[:, :j]
     # keep only the first k ritz vectors
     P = P[:, :k]
     Q = Qh.T[:, :k]

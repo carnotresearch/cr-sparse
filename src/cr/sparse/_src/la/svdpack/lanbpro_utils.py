@@ -74,8 +74,10 @@ class LanBProState(NamedTuple):
     "Maximum values of nu for each iteration"
     indices: jnp.ndarray
     "Set of indices to orthogonalize against"
+    anorms : jnp.ndarray
+    "Tracking the a norms over multiple iterations" 
     anorm : float = -1.
-    "Running estimate of the norm of A"    
+    "Running estimate of the norm of A" 
     nreorthu: int = 0
     "Number of reorthogonalizations on U"
     nreorthv: int = 0
@@ -99,18 +101,20 @@ class LanBProState(NamedTuple):
 
     def __str__(self):
         s = []
-        s.append(f'p= {self.p}')
-        s.append(f'U= {self.U}')
-        s.append(f'V= {self.V}')
-        s.append(f'alpha= {self.alpha}')
-        s.append(f'beta= {self.beta}')
-        s.append(f'mu= {self.mu}')
-        s.append(f'nu= {self.nu}')
-        s.append(f'mumax= {self.mumax}')
-        s.append(f'numax= {self.numax}')
-        s.append(f'indices= {self.indices}')
-        s.append(f'anorm= {self.anorm}')
+        j = self.iterations
+        # s.append(f'p= {self.p}')
+        # s.append(f'U= {self.U}')
+        # s.append(f'V= {self.V}')
+        s.append(f'alpha= {self.alpha[:j]}')
+        s.append(f'beta= {self.beta[:j+1]}')
+        s.append(f'mu= {self.mu[:j]}')
+        s.append(f'nu= {self.nu[:j]}')
+        s.append(f'mumax= {self.mumax[:j]}')
+        s.append(f'numax= {self.numax[:j]}')
+        # s.append(f'anorm= {self.anorm}')
         s.append(f'b_fro= {self.b_fro}, b_force_reorth={self.b_force_reorth}')
+        ind = jnp.where(self.indices)[0]
+        s.append(f'indices= {ind}')
         s.append(f'iterations= {self.iterations}')
         return '\n'.join(s)
 
@@ -297,6 +301,7 @@ def compute_ind(mu, delta, eta):
     """Identifies indices for reorthogonalization
     """
     k = len(mu)
+    mu = jnp.abs(mu)
     indices = jnp.zeros(k, dtype=bool)
     indices = mu >= delta
     # number of indices to orthogonalize against
@@ -312,3 +317,18 @@ def compute_ind(mu, delta, eta):
     return indices
 
 
+def bpro_norm_estimate(alpha, beta):
+    """Estimates the norm based on a 6x5 matrix
+    """
+    k = 5
+    # prepare the k+1 x k bidiagonal matrix
+    B = jnp.zeros((k+1, k))
+    # diagonal indices for k alpha entries
+    indices = jnp.diag_indices(k)
+    B = B.at[indices].set(alpha[:k])
+    # subdiagonal indices for k beta entries (from second row)
+    rows, cols = indices
+    rows = rows + 1
+    B = B.at[(rows, cols)].set(beta[1:k+1])
+    result = norm(B, 2)
+    return result

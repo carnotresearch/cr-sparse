@@ -27,7 +27,8 @@ from cr.sparse.la.svd import (
     lanbpro_options_init,
     update_mu,
     update_nu,
-    compute_ind
+    compute_ind,
+    bpro_norm_estimate
 )
 
 FUDGE = 1.01
@@ -52,6 +53,7 @@ def lanbpro_init(A, k, p0, options: LanBDOptions):
     mumax = jnp.zeros(k)
     numax = jnp.zeros(k)
     indices = jnp.zeros(k, dtype=bool)
+    anorms = jnp.zeros(k)
     # options 
     delta = options.delta
     eps = options.eps
@@ -103,9 +105,10 @@ def lanbpro_init(A, k, p0, options: LanBDOptions):
     # TODO add condition with elr > 0
     mu = mu.at[0].set(M2 * eps)
     # prepare state after completion of one iteration
+    anorms = anorms.at[0].set(anorm)
     return  LanBProState(p=p, U=U, V=V, alpha=alpha, beta=beta,
         mu=mu, nu=nu, mumax=mumax, numax=numax,
-        anorm=anorm,
+        anorm=anorm, anorms=anorms,
         indices=indices, 
         b_force_reorth=b_force_reorth, b_fro=b_fro, iterations=1,
         )
@@ -130,6 +133,7 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
     anorm = state.anorm
     b_fro = state.b_fro
     b_force_reorth = state.b_force_reorth
+    b_est_anorm = state.b_est_anorm
     # the total number of iterations
     k = len(alpha)
     # index for k
@@ -150,6 +154,15 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
     # compute next left singular vector
     u = crs.vec_safe_divide_by_scalar(p, beta_j)
     U = U.at[:, j].set(u)
+    # once sufficient iterations are completed, we can
+    # compute a better estimate of a norm
+    anorm, b_est_anorm = lax.cond(j == 5, 
+        # Replace norm estimate with largest Ritz value.
+        lambda _ : (FUDGE*bpro_norm_estimate(alpha, beta), False),
+        # continue with current value
+        lambda _ : (anorm, b_est_anorm),
+        None
+    )
     # step 2 r update
     v_jm1 = V[:, j-1]
     r = A.trans(u) - beta_j * v_jm1
@@ -173,7 +186,12 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
     anorm_up_j = lambda anorm: jnp.maximum(anorm,
         FUDGE*jnp.sqrt(alpha[j-1]**2+beta[j]**2
             + alpha[j-1]*beta[j-1] + alpha[j]*beta[j]))
-    anorm = lax.cond(j == 1, anorm_up_1, anorm_up_j, anorm)
+    anorm = lax.cond(b_est_anorm,
+        # We need to update norm estimate
+        lambda anorm : lax.cond(j == 1, anorm_up_1, anorm_up_j, anorm),
+        # no more norm estimation needed
+        lambda anorm : anorm,
+        anorm)
     # nu update condition
     nu_update_cond = jnp.logical_and(b_no_fro, r_norm != 0)
     nu, numax = lax.cond(nu_update_cond, 
@@ -247,7 +265,12 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
     beta = beta.at[j+1].set(p_norm)
     # make changes to alpha_j if required.
     alpha = alpha.at[j].add(proj)
-    anorm = jnp.maximum(anorm,FUDGE*jnp.sqrt(alpha[j]**2+beta[j+1]**2+alpha[j]*beta[j]))
+    anorm = lax.cond(b_est_anorm,
+        # we need to update anorm estimate
+        lambda anorm: jnp.maximum(anorm,FUDGE*jnp.sqrt(alpha[j]**2+beta[j+1]**2+alpha[j]*beta[j])),
+        # no further need to update norm estimate
+        lambda anorm: anorm,
+        anorm)
 
     # mu update condition
     mu_update_cond = jnp.logical_and(b_no_fro, p_norm != 0)
@@ -271,7 +294,8 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
             lambda _ : jp1_mask,
             # partial reorthogonalization case
             lambda _ : lax.cond(b_force_reorth,
-                lambda _ : indices,
+                # for forced reorth, we need to add one more vec
+                lambda _ : indices.at[k - jnp.argmax(indices[::-1])].set(True),
                 lambda _ : compute_ind(mu, delta, eta),
                 None
             ),
@@ -300,12 +324,14 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
     # save updated p_norm in beta_{j+1} (if there are any changes)
     beta = beta.at[j+1].set(p_norm)
 
+    # track anorm for the current iteration
+    anorms = state.anorms.at[j].set(anorm)
     # prepare the state for next iteration
     return  LanBProState(p=p, U=U, V=V, alpha=alpha, beta=beta,
         mu=mu, nu=nu, mumax=mumax, numax=numax,
-        anorm=anorm,
+        anorm=anorm, anorms=anorms,
         indices=indices, b_fro=b_fro, b_force_reorth=b_force_reorth,
-        iterations=j+1
+        b_est_anorm=b_est_anorm, iterations=j+1
         )
 
 
