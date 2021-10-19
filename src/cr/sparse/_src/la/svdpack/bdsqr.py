@@ -23,18 +23,22 @@ from jax.scipy.linalg import svd
 def bdsqr(alpha, beta, k):
     """Computes the SVD of the bidiagonal matrix
     """
-    # prepare the bidiagonal matrix
-    B = jnp.zeros((k, k))
+    # prepare the k+1 x k bidiagonal matrix
+    B = jnp.zeros((k+1, k))
+    # diagonal indices for k alpha entries
     indices = jnp.diag_indices(k)
     B = B.at[indices].set(alpha[:k])
+    # subdiagonal indices for k beta entries (from second row)
     rows, cols = indices
-    rows = rows[1:]
-    cols = cols[:-1]
-    B = B.at[(rows, cols)].set(beta[1:k])
-    print(B)
-    U, s, Vh = svd(B)
-    print(s)
+    rows = rows + 1
+    B = B.at[(rows, cols)].set(beta[1:k+1])
+    # print(B)
+    # perform full svd
+    U, s, Vh = svd(B, full_matrices=False, compute_uv=True)
+    # print(s)
     # pick the last row of U as the bounds
-    bnd = U[-1, :]
-    print(bnd)
-    return s, bnd
+    bnd = U[-1, :k]
+    # print(bnd)
+    return U, s, Vh, bnd
+
+bdsqr_jit = jit(bdsqr, static_argnums=(2,))
