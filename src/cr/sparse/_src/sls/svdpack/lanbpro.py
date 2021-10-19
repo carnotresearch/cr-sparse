@@ -47,18 +47,26 @@ def lanbpro_init(A, k, p0, options: LanBDOptions):
     V = jnp.zeros((n, k))
     alpha = jnp.zeros(k)
     beta = jnp.zeros(k+1)
-    mu = jnp.zeros(k+1)
-    nu = jnp.zeros(k+1)
+    mu = jnp.zeros(k)
+    nu = jnp.zeros(k)
     mumax = jnp.zeros(k)
     numax = jnp.zeros(k)
     indices = jnp.zeros(k, dtype=bool)
-    b_fro = options.delta == 0
+    # options 
+    delta = options.delta
+    eps = options.eps
+    gamma = options.gamma
+    # whether full reorthogonalization will be done
+    b_fro = delta == 0
+    # initial value of force reorthogonalization
+    b_force_reorth = False
     # step 1
     p_norm = norm(p0)
+    # beta_0
     beta = beta.at[0].set(p_norm)
+    # U_0
     u = crs.vec_safe_divide_by_scalar(p0, p_norm)
     U = U.at[:, 0].set(u)
-    nu = nu.at[0].set(1)
     # step 2 r update
     r = A.trans(u)
     # step 2.1b alpha update
@@ -72,16 +80,24 @@ def lanbpro_init(A, k, p0, options: LanBDOptions):
     p = A.times(v) - alpha[0] * u
     # step 2.2b beta update
     p_norm = norm(p)
-    beta = beta.at[1].set(p_norm)
     p, p_norm, p_proj = do_elr(u, p, p_norm, options.gamma)
+    # Check for convergence or failure to maintain semiorthogonality
+    semiorth_cond = p_norm < max(m, n) * anorm * eps
+    p, p_norm, b_force_reorth, indices = lax.cond(semiorth_cond, 
+        # compute a new random p vector orthogonal to previous U
+        lambda _ : (new_p_vec(A, U, 1, gamma)[0], 0., True, indices.at[0].set(True)),
+        lambda _ : (p, p_norm, b_force_reorth, indices), 
+        None) 
+    beta = beta.at[1].set(p_norm)
     # update anorm estimate 
     anorm = jnp.maximum(anorm,FUDGE*jnp.hypot(alpha[0],beta[1]))
     # update mu for the first iteration before computation of U_1
     eps = jnp.finfo(float).eps
     eps1 = 100*eps/2
     T = eps1*(anorm + jnp.hypot(alpha[0],beta[1]) + jnp.hypot(alpha[0],beta[0]) )
-    mu = mu.at[0].set(T / beta[1])
-    mu = mu.at[1].set(1)
+    # TODO this is problematic if p_norm is 0
+    mu0 = lax.cond(p_norm, lambda _ :  T / p_norm, lambda _ : 0., None)
+    mu = mu.at[0].set(mu0)
     # mumax update
     mumax = mumax.at[0].set(jnp.abs(mu[0]))
     # TODO add condition with elr > 0
@@ -90,7 +106,8 @@ def lanbpro_init(A, k, p0, options: LanBDOptions):
     return  LanBProState(p=p, U=U, V=V, alpha=alpha, beta=beta,
         mu=mu, nu=nu, mumax=mumax, numax=numax,
         anorm=anorm,
-        indices=indices, b_fro=b_fro, iterations=1,
+        indices=indices, 
+        b_force_reorth=b_force_reorth, b_fro=b_fro, iterations=1,
         )
 
 
@@ -98,6 +115,7 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
     """One single (j-th) iteration of Lanczos bidiagonalization with partial reorthogonalization algorithm
     """
     m, n = A.shape
+    max_m_n = max(m, n)
     # copy variables from the state
     p = state.p
     U = state.U
@@ -108,7 +126,7 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
     nu = state.nu
     mumax = state.mumax
     numax = state.numax
-    saved_indices = state.indices
+    indices = state.indices
     anorm = state.anorm
     b_fro = state.b_fro
     b_force_reorth = state.b_force_reorth
@@ -136,8 +154,6 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
     v_jm1 = V[:, j-1]
     r = A.trans(u) - beta_j * v_jm1
     r_norm = norm(r)
-    # update alpha_j
-    alpha = alpha.at[j].set(r_norm)
     # elr condition
     b_no_fro = jnp.logical_not(b_fro)
     elr_cond = jnp.logical_and(jnp.logical_and(r_norm < gamma * beta_j, elr), b_no_fro)
@@ -147,14 +163,16 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
         lambda _ : do_elr_noop(r, r_norm),
         None
     )
-    # save updated r_norm in alpha_j (if there are any changes)
+    # save updated r_norm in alpha_j
     alpha = alpha.at[j].set(r_norm)
     # make changes to beta_j if required.
     beta = beta.at[j].add(proj)
     # norm estimate
-    anorm_up_1 = lambda anorm: jnp.maximum(anorm,FUDGE*jnp.sqrt(alpha[0]**2+beta[1]**2+alpha[1]*beta[1]))
-    anorm_up_j = lambda anorm: jnp.maximum(anorm,FUDGE*jnp.sqrt(alpha[j-1]**2+beta[j]**2+alpha[j-1]*
-	    beta[j-1] + alpha[j]*beta[j]))
+    anorm_up_1 = lambda anorm: jnp.maximum(anorm,
+        FUDGE*jnp.sqrt(alpha[0]**2+beta[1]**2+alpha[1]*beta[1]))
+    anorm_up_j = lambda anorm: jnp.maximum(anorm,
+        FUDGE*jnp.sqrt(alpha[j-1]**2+beta[j]**2
+            + alpha[j-1]*beta[j-1] + alpha[j]*beta[j]))
     anorm = lax.cond(j == 1, anorm_up_1, anorm_up_j, anorm)
     # nu update condition
     nu_update_cond = jnp.logical_and(b_no_fro, r_norm != 0)
@@ -163,39 +181,52 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
         lambda nu : (nu, numax),
         nu
     )
-    # TODO add condition with elr > 0
-    nu = nu.at[j-1].set(N2 * eps)
+    # if elr is on, then current vector is orthogonalized against previous one
+    nu = lax.cond(elr > 0,
+        lambda nu: nu.at[j-1].set(N2 * eps),
+        lambda nu: nu,
+        nu)
     # condition for partial or full reorthogonalization
     reorth_cond = jnp.logical_or(b_fro, numax[j] > delta)
     reorth_cond = jnp.logical_or(reorth_cond, b_force_reorth)
     reorth_cond = jnp.logical_and(reorth_cond, alpha[j] != 0)
-    # identify the indices at which partial or full reorthogonalization will be done
-    indices = lax.cond(jnp.logical_or(b_fro, eta == 0),
-        # full reorthogonalization case
-        lambda _ : j_mask,
-        # partial reorthogonalization case
-        lambda _ : lax.cond(b_force_reorth,
-            lambda _ : saved_indices,
-            lambda _ : compute_ind(nu[:k].at[j].set(0), delta, eta),
+    # function to reorth r w.r.t. previous V
+    def reorth_r(_):
+        # identify the indices at which partial or full reorthogonalization will be done
+        reorth_indices = lax.cond(jnp.logical_or(b_fro, eta == 0),
+            # full reorthogonalization case
+            lambda _ : j_mask,
+            # partial reorthogonalization case
+            lambda _ : lax.cond(b_force_reorth,
+                lambda _ : indices,
+                lambda _ : compute_ind(nu, delta, eta),
+                None
+            ),
             None
-        ),
-        None
-    )
+        )
+        # carry out reorthogonalization
+        r2, r2_norm, iters = reorth_mgs(V, r, r_norm, reorth_indices, gamma)
+        # reset nu in the entries which have been reorthogonalized
+        nu2 = jnp.where(reorth_indices, N2*eps, nu)
+        # if a reorthogonalization was forced. it won't be for next iteration
+        b_force_reorth2 = jnp.logical_not(b_force_reorth)
+        return r2, r2_norm, reorth_indices, nu2, b_force_reorth2
     # reorthogonalize r if required
-    r, r_norm, iters = lax.cond(reorth_cond,
-        lambda _ : reorth_mgs(V, r, r_norm, indices, gamma),
-        lambda _ : reorth_noop(r, r_norm),
+    r, r_norm, indices, nu, b_force_reorth = lax.cond(reorth_cond,
+        reorth_r,
+        lambda _ : (r, r_norm, indices, nu, b_force_reorth),
         None
     )
+    # Check for convergence or failure to maintain semiorthogonality
+    # this is the case where r is in the column space of previous V vectors
+    semiorth_cond = r_norm < max(m, n) * anorm * eps
+    r, r_norm, b_force_reorth, indices = lax.cond(semiorth_cond, 
+        # compute a new random r vector orthogonal to previous V
+        lambda _ : (new_r_vec(A, V, j, gamma)[0], 0., True, j_mask),
+        lambda _ : (r, r_norm, b_force_reorth, indices), 
+        None) 
     # update alpha_j again if required
     alpha = alpha.at[j].set(r_norm)
-    # reset nu in the entries which have been reorthogonalized
-    nu_indices = jnp.append(indices, jnp.zeros(len(nu) - len(indices), dtype=bool))
-    nu = jnp.where(nu_indices, N2*eps, nu)
-    # change the b_force_reorth flag if needed
-    b_force_reorth = jnp.logical_xor(reorth_cond, b_force_reorth)
-    # TODO we need to replace r with a new unit vector if r is close to 0.
-    # this is the case where r is in the column space of previous V vectors
     # step 2.1b v update
     v = crs.vec_safe_divide_by_scalar(r, r_norm)
     V = V.at[:, j].set(v)
@@ -204,7 +235,6 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
     p = A.times(v) - alpha[j] * u
     # step 2.2b beta update
     p_norm = norm(p)
-    beta = beta.at[j+1].set(p_norm)
     # elr condition for p
     elr_cond = jnp.logical_and(jnp.logical_and(p_norm < gamma * r_norm, elr), b_no_fro)
     # extended local reorthogonalization of p w.r.t. previous u_j
@@ -232,43 +262,49 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
     reorth_cond = jnp.logical_or(b_fro, mumax[j] > delta)
     reorth_cond = jnp.logical_or(reorth_cond, b_force_reorth)
     reorth_cond = jnp.logical_and(reorth_cond, p_norm != 0)
-    # identify the indices at which partial or full reorthogonalization will be done
-    # from U_0 to U_j [j+1 vectors] have already been computed 
-    indices = lax.cond(jnp.logical_or(b_fro, eta == 0),
-        # full reorthogonalization case
-        lambda _ : jp1_mask,
-        # partial reorthogonalization case
-        lambda _ : lax.cond(b_force_reorth,
-            lambda _ : saved_indices,
-            lambda _ : compute_ind(mu[:k].at[j+1].set(0), delta, eta),
+    # function to reorth p w.r.t. previous U
+    def reorth_p(_):
+        # identify the indices at which partial or full reorthogonalization will be done
+        # from U_0 to U_j [j+1 vectors] have already been computed 
+        reorth_indices = lax.cond(jnp.logical_or(b_fro, eta == 0),
+            # full reorthogonalization case
+            lambda _ : jp1_mask,
+            # partial reorthogonalization case
+            lambda _ : lax.cond(b_force_reorth,
+                lambda _ : indices,
+                lambda _ : compute_ind(mu, delta, eta),
+                None
+            ),
             None
-        ),
-        None
-    )
+        )
+        # carry out reorthogonalization
+        p2, p2_norm, iters = reorth_mgs(U, p, p_norm, indices, gamma)
+        # reset mu in the entries which have been reorthogonalized
+        mu2 = jnp.where(reorth_indices, M2*eps, mu)
+        # if a reorthogonalization was forced. it won't be for next iteration
+        b_force_reorth2 = jnp.logical_not(b_force_reorth)
+        return p2, p2_norm, reorth_indices, mu2, b_force_reorth2
     # reorthogonalize p if required
-    p, p_norm, iters = lax.cond(reorth_cond,
-        lambda _ : reorth_mgs(U, p, p_norm, indices, gamma),
-        lambda _ : reorth_noop(p, p_norm),
+    p, p_norm, indices, nu, b_force_reorth = lax.cond(reorth_cond,
+        reorth_p,
+        lambda _ : (p, p_norm, indices, nu, b_force_reorth),
         None
     )
+    # Check for convergence or failure to maintain semiorthogonality
+    semiorth_cond = p_norm < max(m, n) * anorm * eps
+    p, p_norm, b_force_reorth, indices = lax.cond(semiorth_cond, 
+        # compute a new random p vector orthogonal to previous U
+        lambda _ : (new_p_vec(A, U, j+1, gamma)[0], 0., True, jp1_mask),
+        lambda _ : (p, p_norm, b_force_reorth, indices), 
+        None) 
     # save updated p_norm in beta_{j+1} (if there are any changes)
     beta = beta.at[j+1].set(p_norm)
-    # reset nu in the entries which have been reorthogonalized
-    mu_indices = jnp.append(indices, jnp.zeros(len(mu) - len(indices), dtype=bool))
-    mu = jnp.where(mu_indices, M2*eps, mu)
-    # change the b_force_reorth flag if needed
-    b_force_reorth = jnp.logical_xor(reorth_cond, b_force_reorth)
-    # TODO we need to replace p with a new unit vector if p is close to 0.
-
-
-    # save the indices back for next iteration if b_force_reorth
-    saved_indices = saved_indices.at[:len(indices)].set(indices)
 
     # prepare the state for next iteration
     return  LanBProState(p=p, U=U, V=V, alpha=alpha, beta=beta,
         mu=mu, nu=nu, mumax=mumax, numax=numax,
         anorm=anorm,
-        indices=saved_indices, b_fro=b_fro, b_force_reorth=b_force_reorth,
+        indices=indices, b_fro=b_fro, b_force_reorth=b_force_reorth,
         iterations=j+1
         )
 
@@ -300,3 +336,71 @@ def lanbpro(A, k, p0):
 lanbpro_jit = jit(lanbpro, static_argnums=(0, 1))
 
 
+def new_p_vec(A, U, j,  gamma):
+    """Generates a new p vector which is orthogonal to all previous U vectors
+    """
+    m, n = A.shape
+    idx = jnp.arange(U.shape[1])
+    j_mask =  idx < j
+
+    def p_vec(i):
+        p = random.uniform(KEYS[i], (n,))
+        p = A.times(p)
+        p_norm = norm(p)
+        p, p_norm, iters = reorth_mgs(U, p, p_norm, j_mask, gamma)
+        return p, p_norm
+
+    def init():
+        p, p_norm = p_vec(0)
+        return p, p_norm, 1
+
+    def cond(state):
+        p, p_norm, iterations = state
+        cond = jnp.logical_and(iterations < 10, p_norm <1e-10)
+        return cond
+
+    def body(state):
+        p, p_norm, i = state
+        p, p_norm  = p_vec(i)
+        return p, p_norm, i+1
+
+    state = lax.while_loop(cond, body, init())
+    p, p_norm, i = state
+    return p / p_norm, i
+
+new_p_vec_jit = jit(new_p_vec, static_argnums=(0,))
+
+
+def new_r_vec(A, V, j,  gamma):
+    """Generates a new r vector which is orthogonal to all previous V vectors
+    """
+    m, n = A.shape
+    idx = jnp.arange(V.shape[1])
+    j_mask =  idx < j
+
+    def r_vec(i):
+        r = random.uniform(KEYS[i], (m,))
+        r = A.trans(r)
+        r_norm = norm(r)
+        r, r_norm, iters = reorth_mgs(V, r, r_norm, j_mask, gamma)
+        return r, r_norm
+
+    def init():
+        r, r_norm = r_vec(0)
+        return r, r_norm, 1
+
+    def cond(state):
+        r, r_norm, iterations = state
+        cond = jnp.logical_and(iterations < 10, r_norm <1e-10)
+        return cond
+
+    def body(state):
+        r, r_norm, i = state
+        r, r_norm  = r_vec(i)
+        return r, r_norm, i+1
+
+    state = lax.while_loop(cond, body, init())
+    r, r_norm, i = state
+    return r / r_norm, i
+
+new_r_vec_jit = jit(new_r_vec, static_argnums=(0,))

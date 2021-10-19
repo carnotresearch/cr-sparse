@@ -41,7 +41,7 @@ class LanBDOptions(NamedTuple):
 def lanbpro_options_init(k : int, eps: float =jnp.finfo(float).eps):
     """Initializes options"""
     delta = jnp.sqrt(eps/k)
-    eta = eps ** 0.75 / jnp.sqrt(k)
+    eta = (eps ** 0.75) / jnp.sqrt(k)
     gamma = 1 / math.sqrt(2)
     return LanBDOptions(delta=delta, eta=eta, gamma=gamma, eps=eps)
 
@@ -110,6 +110,7 @@ class LanBProState(NamedTuple):
         s.append(f'numax= {self.numax}')
         s.append(f'indices= {self.indices}')
         s.append(f'anorm= {self.anorm}')
+        s.append(f'b_fro= {self.b_fro}, b_force_reorth={self.b_force_reorth}')
         s.append(f'iterations= {self.iterations}')
         return '\n'.join(s)
 
@@ -163,25 +164,25 @@ def update_mu(mu, mumax, nu, j, alpha, beta, anorm):
     # sub function to update the middle part of mu
     def update_middle_part(mu):
         idx = jnp.arange(k)
-        mask_1 = jnp.logical_and(idx > 0, idx < j)
-        mask_0 = idx < j-1
-        alpha_sub = jnp.where(mask_1, alpha, 0)
-        beta_base = beta[:k]
-        beta_sub = jnp.where(mask_1, beta_base, 0)
-        nu_base = nu[:k]
-        nu_sub = jnp.where(mask_1, nu_base, 0)
-        nu_sub_m1 = jnp.where(mask_0, nu_base, 0)
-        mu_base = mu[:k]
-        mu_sub = jnp.where(mask_1, mu_base, 0)
-        # relevant part of alpha
-        # k = slice(1, j)
-        # relevant part of beta
-        # km1 = slice(0, j-1)
-        tmp = alpha_sub*nu_sub + beta_sub*nu_sub_m1 - aj*mu_sub
-        y = jnp.sqrt(alpha_sub**2+beta_sub**2)
+        mask = jnp.logical_and(idx > 0, idx < j)
+        # alpha between 1 to j-1
+        alpha0 = jnp.where(mask, alpha, 0)
+        # beta between 1 to j-1
+        beta0 = beta[:k]
+        beta0 = jnp.where(mask, beta0, 0)
+        # nu between 1 to j-1
+        nu0 = jnp.where(mask, nu, 0)
+        # nu between 0 to j
+        nu1 = jnp.roll(nu, 1)
+        nu1 = jnp.where(mask, nu1, 0)
+        # mu between 1 to j-1
+        mu0 = jnp.where(mask, mu, 0)
+        tmp = alpha0*nu0 + beta0*nu1 - aj*mu0
+        y = jnp.sqrt(alpha0**2+beta0**2)
         T = eps1*(x + y + anorm)
         tmp = binv*(tmp + jnp.sign(tmp)*T)
-        mu = mu.at[:k].set(tmp)
+        # update mu on the range 1 to j-1
+        mu = jnp.where(mask, tmp, mu)
         return mu
     # update the middle part only if j > 1
     mu = lax.cond(j > 1, update_middle_part, lambda mu: mu, mu)
@@ -192,8 +193,6 @@ def update_mu(mu, mumax, nu, j, alpha, beta, anorm):
     mu = mu.at[j].set(binv * (tmp + jnp.sign(tmp)*T))
     # mumax update
     mumax = mumax.at[j].set(jnp.max(jnp.abs(mu) ))
-    # update mu[j+1] to 1
-    mu = mu.at[j+1].set(1)
     return mu, mumax
 
 def update_nu(nu, numax, mu, j, alpha, beta, anorm):
@@ -211,36 +210,34 @@ def update_nu(nu, numax, mu, j, alpha, beta, anorm):
     * nu[j] = 1 always.
     """
     eps = jnp.finfo(float).eps
-    #print(eps)
     ainv = 1/alpha[j]
-    #print(ainv)
     eps1 = 100*eps/2
-    last = jnp.sqrt(alpha[j]**2 + beta[j]**2)
-    #print(last)
+    aj = alpha[j]
+    bj = beta[j]
+    x = jnp.sqrt(aj**2 + bj**2)
     k = len(alpha)
     idx = jnp.arange(k)
     j_mask = idx < j
-    alpha_sub =  jnp.where(j_mask, alpha, 0)
-    beta_rest = beta[1:]
-    beta_sub = jnp.where(j_mask, beta_rest, 0)
-    mu_base = mu[:k]
-    mu_sub = jnp.where(j_mask, mu_base, 0)
-    nu_base = nu[:k]
-    nu_sub = jnp.where(j_mask, nu_base, 0)
-    mu_rest = mu[1:]
-    mu_sub1 = jnp.where(j_mask, mu_rest, 0)
-
-    y = jnp.sqrt(alpha_sub**2 + beta_sub**2)
-    T = eps1*(y + last + anorm)
-    # print(T)
-    nu_sub = beta_sub*mu_sub1 + alpha_sub*mu_sub - beta[j]*nu_sub
-    nu_sub =  ainv*(nu_sub + jnp.sign(nu_sub)*T)
-    # numax update
-    numax = numax.at[j].set(jnp.max(jnp.abs(nu_sub) ))
-
-    nu = nu.at[:k].set(nu_sub)
-    nu = nu.at[j].set(1.)
-    return nu, numax
+    # alpha from 0 to j-1
+    alpha =  jnp.where(j_mask, alpha, 0)
+    # beta from 1 to j
+    beta = beta[1:]
+    beta = jnp.where(j_mask, beta, 0)
+    # mu from 0 to j-1
+    mu0 = jnp.where(j_mask, mu, 0)
+    # nu from 0 to j-1
+    nu0 = jnp.where(j_mask, nu, 0)
+    # mu from 1 to j
+    mu1 = jnp.roll(mu, -1)
+    mu1 = jnp.where(j_mask, mu1, 0)
+    # compute T
+    y = jnp.sqrt(alpha**2 + beta**2)
+    T = eps1*(x + y + anorm)
+    # update nu
+    nu0 = beta*mu1 + alpha*mu0 - bj*nu0
+    nu0 =  ainv*(nu0 + jnp.sign(nu0)*T)
+    numax = numax.at[j].set(jnp.max(jnp.abs(nu0) ))
+    return nu0, numax
 
 
 def abs_max_boolean_index(mu):
@@ -313,3 +310,5 @@ def compute_ind(mu, delta, eta):
             lambda indices: indices, indices)
     indices = lax.fori_loop(0, k, extend_rs_iter, indices)
     return indices
+
+
