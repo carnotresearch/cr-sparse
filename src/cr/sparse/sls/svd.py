@@ -15,10 +15,6 @@
 """
 Algorithms for solving SVD problems
 """
-from cr.sparse._src.sls.svdpack.util import (
-    do_elr
-)
-
 
 from cr.sparse._src.sls.svdpack.lanbpro import (
     lanbpro_init,

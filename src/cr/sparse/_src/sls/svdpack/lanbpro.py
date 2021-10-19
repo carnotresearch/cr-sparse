@@ -19,12 +19,12 @@ from jax.numpy.linalg import norm
 
 import cr.sparse as crs
 
-from .util import do_elr, do_elr_noop
 from cr.sparse.la.svd import reorth_mgs, reorth_noop
 from cr.sparse.la.svd import (
     LanBDOptions,
     LanBProState,
     lanbpro_options_init,
+    do_elr,
     update_mu,
     update_nu,
     compute_ind,
@@ -173,7 +173,7 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
     # extended local reorthogonalization of r w.r.t. previous v_j
     r, r_norm, proj = lax.cond(elr_cond, 
         lambda _ : do_elr(v_jm1, r, r_norm, gamma),
-        lambda _ : do_elr_noop(r, r_norm),
+        lambda _ : (r, r_norm, 0.),
         None
     )
     # save updated r_norm in alpha_j
@@ -258,7 +258,7 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
     # extended local reorthogonalization of p w.r.t. previous u_j
     p, p_norm, proj = lax.cond(elr_cond, 
         lambda _ : do_elr(u, p, p_norm, gamma),
-        lambda _ : do_elr_noop(p, p_norm),
+        lambda _ : (p, p_norm, 0.),
         None
     )
     # save updated p_norm in beta_{j+1} (if there are any changes)
