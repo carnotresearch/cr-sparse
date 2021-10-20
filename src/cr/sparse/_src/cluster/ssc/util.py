@@ -144,6 +144,11 @@ class SubspacePreservationStats(NamedTuple):
     spr_flag : bool
     spr_perc : float
 
+    def __str__(self):
+        s = []
+        s.append(f'spr_error: {self.spr_error}, spr_flag: {self.spr_flag}, spr_perc: {self.spr_perc}')
+        return '\n'.join(s)
+
 def subspace_preservation_stats(C, labels):
     """Returns the statistics for subspace preservation
     """
