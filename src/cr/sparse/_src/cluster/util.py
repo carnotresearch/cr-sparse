@@ -101,12 +101,22 @@ class ClusteringError(NamedTuple):
     """Predicted labels assigned to each data point"""
     mapped_labels: jnp.ndarray
     """Predicted labels after relabeling by assignment method"""
+    mapping :  jnp.ndarray
+    "Mapping of labels from true to predicted"
     num_missed: int
     """Number of points where the true labels and predicted labels don't match"""
     error: float
     """Relative error (0 to 1)"""
     error_perc: float
     """Relative error in percentage"""
+
+    def __str__(self):
+        s = []
+        s.append(f'num_missed: {self.num_missed}, error: {self.error:.2f}, error_perc: {self.error_perc:.2f}')
+        mapping = [f'{i}=>{v}' for (i, v) in enumerate(self.mapping) ]
+        s.append(f'{self.mapping}')
+        s.append(', '.join(mapping))
+        return '\n'.join(s)
 
 
 def clustering_error(true_labels, pred_labels):
@@ -118,5 +128,5 @@ def clustering_error(true_labels, pred_labels):
     error = num_missed / num_labels
     error_perc = error * 100
     return ClusteringError(true_labels=true_labels, pred_labels=pred_labels,
-        mapped_labels=mapped_labels, num_missed=num_missed, 
+        mapped_labels=mapped_labels, mapping=mapping, num_missed=num_missed, 
         error=error, error_perc=error_perc)
