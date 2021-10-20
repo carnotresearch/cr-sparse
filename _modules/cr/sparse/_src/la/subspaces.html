@@ -261,6 +261,8 @@
     <span class="n">r</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">r</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="c1"># make sure that there is no overflow</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">r</span></div>
 
 
