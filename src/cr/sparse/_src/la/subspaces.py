@@ -156,6 +156,8 @@ def smallest_principal_angles_cos(subspaces):
     r = jnp.eye(k)
     r = r.at[i, j].set(s)
     r = r + r.T - jnp.eye(k)
+    # make sure that there is no overflow
+    r = jnp.minimum(r, 1.)
     return r
 
 
