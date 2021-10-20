@@ -29,5 +29,8 @@ from cr.sparse._src.cluster.spectral import (
     # normalized random walk clustering
     normalized_random_walk,
     normalized_random_walk_k,
-    normalized_random_walk_k_jit    
+    normalized_random_walk_k_jit,  
+    # fast normalized symmetric clustering
+    normalized_symmetric_fast_k,
+    normalized_symmetric_fast_k_jit
 )

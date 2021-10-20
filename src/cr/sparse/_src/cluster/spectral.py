@@ -21,10 +21,12 @@ from typing import NamedTuple
 from jax import lax, jit, vmap, random
 import jax.numpy as jnp
 from jax.numpy.linalg import norm
-
+from jax.experimental.sparse import BCOO
 from .kmeans import kmeans
 
 import cr.sparse as crs
+import cr.sparse.la.svd as lasvd
+from cr.sparse import promote_arg_dtypes
 
 class SpectralclusteringSolution(NamedTuple):
     """The solution for K-means algorithm
@@ -193,3 +195,33 @@ def normalized_random_walk_k(key, W, k):
         connectivity=S[-2])
 
 normalized_random_walk_k_jit = jit(normalized_random_walk_k, static_argnums=(2,))
+
+
+def normalized_symmetric_fast_k(key, W, k):
+    """Normalized symmetric spectral clustering fast implementation
+    """
+    W = promote_arg_dtypes(W)
+    # make sure that W is square
+    m, n = W.shape
+    assert m == n, "W must be square"
+    # following is a shortcut to compute D^{-1} W
+    W = crs.normalize_l1_rw(W)
+    max_w = jnp.max(W)
+    # Reset all the small entries in W
+    W = jnp.where(W < max_w / 1000, 0, W)
+    # convert it into a sparse matrix
+    # W = BCOO.fromdense(W)
+    p0 = lasvd.lanbpro_random_start(key, W)
+    U, S, V, bnd, n_converged, state = lasvd.lansvd_simple_jit(W, k, p0)
+    # Choose the last k eigen vectors
+    kernel = V
+    result = kmeans(key, kernel, k, iter=100)
+    return SpectralclusteringSolution(singular_values=S, 
+        assignment=result.assignment,
+        # technically we didn't compute the Laplacian correctly
+        laplancian=W,
+        num_clusters=k,
+        # we didn't compute the connectivity
+        connectivity=-1)
+
+normalized_symmetric_fast_k_jit = jit(normalized_symmetric_fast_k, static_argnums=(2,))
