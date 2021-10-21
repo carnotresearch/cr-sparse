@@ -24,6 +24,7 @@ import jax.numpy as jnp
 
 import cr.sparse as crs
 import cr.sparse.cluster as crcluster
+from jax.experimental.sparse import BCOO, sparsify
 
 
 @jit
@@ -35,6 +36,40 @@ def sparse_to_full_rep(X, I):
     mapper = lambda x, i : jnp.zeros(n).at[i].set(x)
     return vmap(mapper, (1,1), 1)(X, I)
 
+@jit
+def sparse_to_bcoo(X, I):
+    """"Combines values and indices arrays to a BCOO formatted sparse matrix
+    """
+    # number of signals
+    n  = X.shape[1]
+    # output shape
+    shape = (n, n)
+    # sparsity level
+    k = I.shape[0]
+    # column numbers of each entry
+    cols = jnp.arange(n)
+    # repeat column numbers for k rows
+    cols = jnp.tile(cols, (k,1))
+    # total number of non-zero values
+    nse = k*n
+    # flatten rows and cols matrices
+    cols = jnp.reshape(cols, (nse,1))
+    rows = jnp.reshape(I, (nse, 1))
+    # prepare combined indices list
+    indices = jnp.hstack((rows, cols))
+    # flatten values list
+    values = jnp.reshape(X, nse)
+    # combine values and indices
+    Y = BCOO((values, indices), shape=(n,n))
+    return Y
+
+@sparsify
+def rep_to_affinity(Z):
+    """Converts sparse representations to symmetric affinity matrix
+    """
+    Z = jnp.abs(Z)
+    affinity = Z + Z.T
+    return affinity
 
 def angles_between_points(X):
     """Returns an SxS matrix of angles between each pair of points
