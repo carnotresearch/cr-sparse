@@ -8,8 +8,8 @@ def test_dwt_idwt_basic():
     cA_expect = jnp.array([5.65685425, 7.39923721, 0.22414387, 3.33677403, 7.77817459])
     cD_expect = jnp.array([-2.44948974, -1.60368225, -4.44140056, -0.41361256,
                  1.22474487])
-    assert_allclose(cA, cA_expect)
-    assert_allclose(cD, cD_expect)
+    assert_allclose(cA, cA_expect, atol=atol, rtol=rtol)
+    assert_allclose(cD, cD_expect, atol=atol, rtol=rtol)
 
     x_roundtrip = wt.idwt(cA, cD, 'db2')
     assert_allclose(x_roundtrip, x, rtol=rtol)
@@ -152,8 +152,8 @@ def test_idwt_single_axis():
     x0 = wt.idwt(cA[0], cD[0], 'db2', axis=-1)
     x1 = wt.idwt(cA[1], cD[1], 'db2', axis=-1)
 
-    assert_allclose(x[0], x0)
-    assert_allclose(x[1], x1)
+    assert_allclose(x[0], x0, atol=atol, rtol=rtol)
+    assert_allclose(x[1], x1, atol=atol, rtol=rtol)
 
 
 def test_dwt_axis_arg():
