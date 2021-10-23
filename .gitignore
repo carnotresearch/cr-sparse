@@ -125,6 +125,7 @@ record_*.csv
 *.mat
 
 tmp/*
+junk/*
 
 docs/gallery/
 
