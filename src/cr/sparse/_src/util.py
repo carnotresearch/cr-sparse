@@ -17,7 +17,17 @@ import jax.numpy as jnp
 from jax import lax
 from jax._src import dtypes
 
+from jax.lib import xla_bridge
+platform = xla_bridge.get_backend().platform
 
+def is_cpu():
+    return platform == 'cpu'
+
+def is_gpu():
+    return platform == 'gpu'
+
+def is_tpu():
+    return platform == 'tpu'
 
 def promote_arg_dtypes(*args):
     """Promotes `args` to a common inexact type.
