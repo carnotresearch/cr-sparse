@@ -14,20 +14,30 @@
 
 import numpy as np
 import jax.numpy as jnp
-from jax import lax
+from jax import lax, random
 from jax._src import dtypes
 
 from jax.lib import xla_bridge
 platform = xla_bridge.get_backend().platform
 
 def is_cpu():
+    """Returns True if the code is running on a CPU platform
+    """
     return platform == 'cpu'
 
 def is_gpu():
+    """Returns True if the code is running on a GPU platform
+    """
     return platform == 'gpu'
 
 def is_tpu():
+    """Returns True if the code is running on a TPU platform
+    """
     return platform == 'tpu'
+
+
+KEY0 = random.PRNGKey(0)
+KEYS = random.split(KEY0, 64)
 
 def promote_arg_dtypes(*args):
     """Promotes `args` to a common inexact type.
