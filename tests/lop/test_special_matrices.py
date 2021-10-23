@@ -10,8 +10,8 @@ def test_circulant():
     expected = jnp.array([-3.5,  1.6, -7.9,  5.1, -2.5,  2.7, -6.7,  9. ])
     assert_allclose(T.times(x), expected, atol=atol, rtol=rtol)
     A = lop.to_matrix(T)
-    AT = lop.to_adjoint_matrix(T) 
-    assert jnp.allclose(A.T, AT)
+    AT = lop.to_adjoint_matrix(T)
+    assert_allclose(A.T, AT, atol=atol, rtol=rtol)
     for i in range(n -k):
         assert_allclose(A[i:i+k, i], c, atol=atol, rtol=rtol)
     #assert lop.dot_test_real(keys[0], T, tol=1e-5)
