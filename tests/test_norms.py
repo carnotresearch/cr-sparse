@@ -36,10 +36,10 @@ def test_l1_norm_rw():
 
 
 def test_l2_norm_cw():
-    check_equal(norms_l2_cw(X2), jnp.array([sqrt(10), sqrt(20)]))
+    check_approx_equal(norms_l2_cw(X2), jnp.array([sqrt(10), sqrt(20)]))
 
 def test_l2_norm_rw():
-    check_equal(norms_l2_rw(X2), jnp.array([sqrt(5), sqrt(25)]))
+    check_approx_equal(norms_l2_rw(X2), jnp.array([sqrt(5), sqrt(25)]))
  
 
 def test_linf_norm_cw():
