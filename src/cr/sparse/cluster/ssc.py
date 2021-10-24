@@ -39,4 +39,6 @@ from cr.sparse._src.cluster.ssc.util import (
 from cr.sparse._src.cluster.ssc.omp import (
     build_representation_omp,
     build_representation_omp_jit,
+    batch_build_representation_omp,
+    batch_build_representation_omp_jit,
 )
