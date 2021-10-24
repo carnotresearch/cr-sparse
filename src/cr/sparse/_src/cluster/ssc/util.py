@@ -63,6 +63,23 @@ def sparse_to_bcoo(X, I):
     Y = BCOO((values, indices), shape=(n,n))
     return Y
 
+def bcoo_to_sparse(C, k):
+    """Converts it back to values and indices (column-wise) format
+    """
+    rows, cols = C.indices.T
+    data = C.data
+    # number of values
+    nse = len(data)
+    # number of signals
+    n = nse // k
+    X = jnp.reshape(data, (k, n))
+    I = jnp.reshape(rows, (k, n))
+    return X, I
+
+bcoo_to_sparse_jit = jit(bcoo_to_sparse, static_argnums=(1,))
+
+
+
 @sparsify
 def rep_to_affinity(Z):
     """Converts sparse representations to symmetric affinity matrix
@@ -219,3 +236,44 @@ def subspace_preservation_stats(C, labels):
         spr_flag=spr_flag, spr_perc=spr_perc)
 
 subspace_preservation_stats_jit = jit(subspace_preservation_stats)
+
+
+
+
+def sparse_subspace_preservation_stats(Z, I, labels):
+    """Returns the statistics for subspace preservation from sparse representations
+    """
+    # subpsace dimension and number of signals
+    d, n = Z.shape
+    # we are concerned only with absolute values
+    Z = jnp.abs(Z)
+
+    def stats(i):
+        # pick the i-th signal
+        ci = Z[:, i]
+        # corresponding indices
+        indices = I[:, i]
+        # identify its cluster number
+        k = labels[i]
+        # identify the clusters of corresponding vectors
+        non_zero_labels = labels[indices]
+        # mark the labels for small coefficients to k
+        non_zero_labels = jnp.where(ci < 1e-3, k, non_zero_labels)
+        # verify that they all belong to same subspace
+        spr_flag = jnp.all(non_zero_labels == k)
+        # flags for current subspace
+        w = labels == k
+        # identify entries in current subspace
+        cik = jnp.where(non_zero_labels == k, ci, 0)
+        spr_error = 1 - jnp.sum(cik) / jnp.sum (ci)
+        return spr_flag, spr_error
+
+    spr_flags, spr_errors = vmap(stats)(jnp.arange(n))
+    spr_error = jnp.mean(spr_errors)
+    spr_flag = jnp.all(spr_flags)
+    spr_perc = jnp.sum(spr_flags) * 100. / n
+    return SubspacePreservationStats(spr_errors=spr_errors,
+        spr_flags=spr_flags, spr_error=spr_error,
+        spr_flag=spr_flag, spr_perc=spr_perc)
+
+sparse_subspace_preservation_stats_jit = jit(sparse_subspace_preservation_stats)
