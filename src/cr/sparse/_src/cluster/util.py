@@ -92,6 +92,26 @@ def best_map(true_labels, pred_labels):
     return mapped_labels, cols, G 
 
 
+def best_map_k(true_labels, pred_labels, k):
+    """Estimates the mapping  between true and estimated labels using Hungarian assignment for k clusters
+
+    TODO: Make this jittable by implementing linear_sum_assignment function.
+    """
+    if len(true_labels) != len(pred_labels):
+        raise ValueError("Number of labels must be same.")
+    # prepare the cost matrix
+    G = jnp.zeros((k, k), dtype=int)
+    G = G.at[true_labels, pred_labels].add(1)
+    # Run the Hungarian assignment algorithm
+    rows, cols = linear_sum_assignment(-G)
+    mapped_labels = jnp.zeros_like(pred_labels)
+    for i in range(k):
+        old_label = cols[i]
+        new_label = i
+        mapped_labels = mapped_labels.at[pred_labels == old_label].set(new_label)
+    return mapped_labels, cols, G 
+
+
 class ClusteringError(NamedTuple):
     """Error between true labels and predicted labels
     """
@@ -124,6 +144,19 @@ def clustering_error(true_labels, pred_labels):
     """
     num_labels = len(true_labels)
     mapped_labels, mapping, _ = best_map(true_labels, pred_labels)
+    num_missed = jnp.sum(true_labels != mapped_labels)
+    error = num_missed / num_labels
+    error_perc = error * 100
+    return ClusteringError(true_labels=true_labels, pred_labels=pred_labels,
+        mapped_labels=mapped_labels, mapping=mapping, num_missed=num_missed, 
+        error=error, error_perc=error_perc)
+
+
+def clustering_error_k(true_labels, pred_labels, k):
+    """Computes the clustering error between true labels and predicted labels for k clusters
+    """
+    num_labels = len(true_labels)
+    mapped_labels, mapping, _ = best_map_k(true_labels, pred_labels, k)
     num_missed = jnp.sum(true_labels != mapped_labels)
     error = num_missed / num_labels
     error_perc = error * 100

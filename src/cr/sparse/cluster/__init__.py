@@ -22,6 +22,8 @@ from cr.sparse._src.cluster.util import (
     start_end_indices,
     labels_from_sizes,
     best_map,
+    best_map_k,
     ClusteringError,
-    clustering_error
+    clustering_error,
+    clustering_error_k
 )
