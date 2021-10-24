@@ -340,6 +340,50 @@
         <span class="n">connectivity</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">normalized_symmetric_fast_k_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">normalized_symmetric_fast_k</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,))</span>
+
+
+
+<span class="k">def</span> <span class="nf">normalized_symmetric_sparse_w</span><span class="p">(</span><span class="n">W</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">W</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span>
+    <span class="k">assert</span> <span class="n">W</span><span class="o">.</span><span class="n">n_sparse</span> <span class="o">==</span> <span class="mi">2</span>
+    <span class="c1"># Compute the degree</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+    <span class="n">D_half_inv</span> <span class="o">=</span> <span class="n">D</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># Compute the normalized W</span>
+    <span class="c1"># not implemented... do it by hand</span>
+    <span class="c1"># return D_half_inv[:, None] * W * D_half_inv</span>
+    <span class="c1"># W = D_inv @ W @ D_inv</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">data</span> <span class="o">*</span> <span class="n">D_half_inv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">D_half_inv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">BCOO</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">W</span><span class="o">.</span><span class="n">indices</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="n">W</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">normalized_symmetric_sparse_fast_k</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Normalized symmetric spectral clustering fast implementation for sparse W</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># make sure that W is square</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">assert</span> <span class="n">m</span> <span class="o">==</span> <span class="n">n</span><span class="p">,</span> <span class="s2">&quot;W must be square&quot;</span>
+    <span class="c1"># following is a shortcut to compute D^{-1} W</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">normalized_symmetric_sparse_w</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+    <span class="c1"># convert it into a sparse matrix</span>
+    <span class="c1"># W = BCOO.fromdense(W)</span>
+    <span class="n">p0</span> <span class="o">=</span> <span class="n">lasvd</span><span class="o">.</span><span class="n">lanbpro_random_start</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+    <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">bnd</span><span class="p">,</span> <span class="n">n_converged</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="n">lasvd</span><span class="o">.</span><span class="n">lansvd_simple_jit</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="mi">5</span><span class="o">*</span><span class="n">k</span><span class="p">,</span> <span class="n">p0</span><span class="p">)</span>
+    <span class="c1"># Choose the last k eigen vectors</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">V</span><span class="p">[:,</span> <span class="p">:</span><span class="n">k</span><span class="p">]</span>
+    <span class="c1"># normalize the rows of kernel</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">normalize_l2_rw</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">kmeans</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="nb">iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">SpectralclusteringSolution</span><span class="p">(</span><span class="n">singular_values</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> 
+        <span class="n">assignment</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">assignment</span><span class="p">,</span>
+        <span class="c1"># technically we didn&#39;t compute the Laplacian correctly</span>
+        <span class="n">laplancian</span><span class="o">=</span><span class="n">W</span><span class="p">,</span>
+        <span class="n">num_clusters</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
+        <span class="c1"># we didn&#39;t compute the connectivity</span>
+        <span class="n">connectivity</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">normalized_symmetric_sparse_fast_k_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">normalized_symmetric_sparse_fast_k</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,))</span>
 </pre></div>
 
           </div>
