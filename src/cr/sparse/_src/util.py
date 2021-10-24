@@ -14,6 +14,7 @@
 
 import numpy as np
 import jax.numpy as jnp
+import jax
 from jax import lax, random
 from jax._src import dtypes
 
@@ -144,3 +145,13 @@ dtype_ranges = {
 }
 
 dtype_ranges.update(integer_ranges)
+
+
+def nbytes_live_buffers():
+    """Returns the number of bytes consumed by the live buffers
+    """
+    backend = jax.lib.xla_bridge.get_backend()
+    nbytes = [buf.nbytes for buf in backend.live_buffers()]
+    return np.sum(nbytes)
+
+

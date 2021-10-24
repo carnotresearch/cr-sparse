@@ -32,7 +32,8 @@ from cr.sparse._src.util import (
     check_shapes_are_equal,
     integer_types,
     integer_ranges,
-    dtype_ranges
+    dtype_ranges,
+    nbytes_live_buffers
 )
 
 from cr.sparse._src.matrix import (
