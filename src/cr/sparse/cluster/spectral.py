@@ -33,5 +33,8 @@ from cr.sparse._src.cluster.spectral import (
     # fast normalized symmetric clustering
     normalized_symmetric_w,
     normalized_symmetric_fast_k,
-    normalized_symmetric_fast_k_jit
+    normalized_symmetric_fast_k_jit,
+    normalized_symmetric_sparse_w,
+    normalized_symmetric_sparse_fast_k,
+    normalized_symmetric_sparse_fast_k_jit,
 )

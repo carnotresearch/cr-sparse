@@ -235,3 +235,47 @@ def normalized_symmetric_fast_k(key, W, k):
         connectivity=-1)
 
 normalized_symmetric_fast_k_jit = jit(normalized_symmetric_fast_k, static_argnums=(2,))
+
+
+
+def normalized_symmetric_sparse_w(W):
+    assert W.ndim == 2
+    assert W.n_sparse == 2
+    # Compute the degree
+    D = W.sum(0).todense()
+    D_half_inv = D**(-1/2)
+    # Compute the normalized W
+    # not implemented... do it by hand
+    # return D_half_inv[:, None] * W * D_half_inv
+    # W = D_inv @ W @ D_inv
+    i, j = W.indices.T
+    data = W.data * D_half_inv[i] * D_half_inv[j]
+    return BCOO((data, W.indices), shape=W.shape)
+
+
+def normalized_symmetric_sparse_fast_k(key, W, k):
+    """Normalized symmetric spectral clustering fast implementation for sparse W
+    """
+    # make sure that W is square
+    m, n = W.shape
+    assert m == n, "W must be square"
+    # following is a shortcut to compute D^{-1} W
+    W = normalized_symmetric_sparse_w(W)
+    # convert it into a sparse matrix
+    # W = BCOO.fromdense(W)
+    p0 = lasvd.lanbpro_random_start(key, W)
+    U, S, V, bnd, n_converged, state = lasvd.lansvd_simple_jit(W, 5*k, p0)
+    # Choose the last k eigen vectors
+    kernel = V[:, :k]
+    # normalize the rows of kernel
+    kernel = crs.normalize_l2_rw(kernel)
+    result = kmeans(key, kernel, k, iter=100)
+    return SpectralclusteringSolution(singular_values=S, 
+        assignment=result.assignment,
+        # technically we didn't compute the Laplacian correctly
+        laplancian=W,
+        num_clusters=k,
+        # we didn't compute the connectivity
+        connectivity=-1)
+
+normalized_symmetric_sparse_fast_k_jit = jit(normalized_symmetric_sparse_fast_k, static_argnums=(2,))
