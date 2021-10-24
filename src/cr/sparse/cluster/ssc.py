@@ -26,6 +26,7 @@ from cr.sparse._src.cluster.ssc.util import (
     sorted_neighbors,
     inn_positions,
     subspace_preservation_stats,
+    subspace_preservation_stats_jit,
 )
 
 

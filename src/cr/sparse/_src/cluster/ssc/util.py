@@ -182,3 +182,5 @@ def subspace_preservation_stats(C, labels):
     return SubspacePreservationStats(spr_errors=spr_errors,
         spr_flags=spr_flags, spr_error=spr_error,
         spr_flag=spr_flag, spr_perc=spr_perc)
+
+subspace_preservation_stats_jit = jit(subspace_preservation_stats)
