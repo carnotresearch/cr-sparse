@@ -21,6 +21,12 @@ CR.Sparse
 from .version import __version__
 
 from cr.sparse._src.util import (
+    platform,
+    is_cpu,
+    is_gpu,
+    is_tpu,
+    KEY0,
+    KEYS,
     promote_arg_dtypes,
     canonicalize_dtype,
     check_shapes_are_equal,

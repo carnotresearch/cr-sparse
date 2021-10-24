@@ -9,8 +9,8 @@ from jax import random, lax
 import cr.sparse as crs
 from cr.sparse import lop
 
-atol = 1e-6
-rtol = 1e-6
+rtol = 1e-8 if jax.config.jax_enable_x64 else 1e-6
+atol = 1e-7 if jax.config.jax_enable_x64 else 1e-5
 
 
 import numpy as np

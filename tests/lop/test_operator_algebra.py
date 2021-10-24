@@ -22,8 +22,8 @@ def test_negation():
     B = -A
     x = jnp.arange(5)
     assert_allclose(A.times(x), -B.times(x))
-    assert lop.dot_test_real(keys[0], A)
-    assert lop.dot_test_real(keys[1], B)
+    assert lop.dot_test_real(keys[0], A, tol=1e-4)
+    assert lop.dot_test_real(keys[1], B, tol=1e-4)
 
 
 def test_scale():

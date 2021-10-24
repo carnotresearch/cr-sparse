@@ -16,7 +16,7 @@
 Utility functions for 2D matrices
 """
 
-from jax import jit
+from jax import jit, lax
 
 import jax.numpy as jnp
 
@@ -102,7 +102,9 @@ def is_hermitian(A):
     shape = A.shape
     if A.ndim != 2: 
         return False
-    return jnp.array_equal(A, hermitian(A))
+    if shape[0] != shape[1]:
+        return False
+    return jnp.allclose(A, hermitian(A), atol=1e-6)
 
 def is_positive_definite(A):
     """Checks if an array is a symmetric positive definite matrix
@@ -121,8 +123,12 @@ def is_positive_definite(A):
         return False
     A = promote_arg_dtypes(A)
     is_sym = jnp.array_equal(A, A.T)
-    is_pd = jnp.all(jnp.real(jnp.linalg.eigvals(A)) > 0)
-    return jnp.logical_and(is_sym, is_pd)
+    # check for eigen values only if we know that the matrix is symmetric
+    is_pd = lax.cond(is_sym, 
+        lambda _ : jnp.all(jnp.real(jnp.linalg.eigvals(A)) > 0), 
+        lambda _ : False,
+        None) 
+    return is_pd
 
 
 @jit
