@@ -18,6 +18,12 @@ Algorithms for solving sparse linear systems
 
 # pylint: disable=W0611
 
+from cr.sparse._src.sls.defs import (
+    identity_func,
+    identity_op,
+    default_threshold
+)
+
 from cr.sparse._src.sls.lsqr import (
     LSQRSolution,
     LSQRState,
