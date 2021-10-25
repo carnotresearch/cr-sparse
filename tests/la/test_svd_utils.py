@@ -42,4 +42,4 @@ def test_effective_rank():
 def test_singular_values():
     A = bases[0]
     s = crla.singular_values(A)
-    assert_allclose(s, 1.)
+    assert_allclose(s, 1., atol=atol)
