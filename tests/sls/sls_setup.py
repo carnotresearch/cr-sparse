@@ -16,6 +16,8 @@ import cr.sparse.lop as lop
 import cr.sparse.sls as sls
 import cr.sparse.dict as crdict
 import cr.sparse.geo as geo
+import cr.sparse.la.svd as lasvd
+import cr.sparse.sls.svd as crsvd
 
 rtol = 1e-8 if jax.config.jax_enable_x64 else 1e-6
 atol = 1e-7 if jax.config.jax_enable_x64 else 1e-5
