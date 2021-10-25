@@ -15,6 +15,7 @@ import cr.sparse.dict as crdict
 import cr.sparse.data as crdata
 import cr.sparse.la as crla
 import cr.sparse.la.subspaces as subspaces
+import cr.sparse.la.svd as lasvd
 
 key = random.PRNGKey(0)
 keys = random.split(key, 16)
