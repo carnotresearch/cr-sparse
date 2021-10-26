@@ -103,7 +103,7 @@ def check_shapes_are_equal(array1, array2):
     Raises:
         ValueError: if the shape of two arrays is not same
     """
-    if not array1.shape == array1.shape:
+    if not array1.shape == array2.shape:
         raise ValueError('Input arrays must have the same shape.')
     return
 

@@ -30,6 +30,8 @@ from cr.sparse._src.util import (
     promote_arg_dtypes,
     canonicalize_dtype,
     check_shapes_are_equal,
+    promote_to_complex,
+    promote_to_real,
     integer_types,
     integer_ranges,
     dtype_ranges,
