@@ -82,7 +82,7 @@ def test_bior_index_invalid():
     assert idx is None
     assert max is None
 
-@pytest.mark.parametrize("name", ['mexh', 'cmor'])
+@pytest.mark.parametrize("name", ['mexh', 'cmor1.5-2.0'])
 def test_build_continuous_wavelet(name):
     wavelet = wt.build_wavelet(name)
     assert wavelet
@@ -104,8 +104,7 @@ def test_to_wavelet():
         wt.to_wavelet(None)
 
 
-@pytest.mark.parametrize("name,family,order,valid", [
-    ('gaus', wt.FAMILY.GAUS, 2, True), 
+, approach='tc'    ('gaus', wt.FAMILY.GAUS, 2, True), 
     ('gaus', wt.FAMILY.GAUS, 3, True), 
     ('gaus', wt.FAMILY.GAUS, 10, False), 
     ('morl', wt.FAMILY.MORL, 0, True),

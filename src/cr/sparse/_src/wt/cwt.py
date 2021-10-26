@@ -12,4 +12,3 @@ def cwt(data, scales, wavelet, sampling_period=1., method='conv', axis=-1, preci
     elif approach == 'tc':
         return cwt_tc(data, scales, wavelet, method=method, axis=axis)
     raise NotImplementedError("The specified approach is not supported yet")
-    return output
