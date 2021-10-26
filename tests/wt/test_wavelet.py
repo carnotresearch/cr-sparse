@@ -104,7 +104,8 @@ def test_to_wavelet():
         wt.to_wavelet(None)
 
 
-, approach='tc'    ('gaus', wt.FAMILY.GAUS, 2, True), 
+@pytest.mark.parametrize("name,family,order,valid", [
+    ('gaus', wt.FAMILY.GAUS, 2, True), 
     ('gaus', wt.FAMILY.GAUS, 3, True), 
     ('gaus', wt.FAMILY.GAUS, 10, False), 
     ('morl', wt.FAMILY.MORL, 0, True),
