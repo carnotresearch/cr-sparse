@@ -313,8 +313,8 @@ An initial guess of the actual signal is all zeros
  .. code-block:: none
 
     A norm:  12.192408487474458
-    A condition number:  59.63129718252201
-    r_norm:  0.027126481687630495 x_norm:  0.7360252062150451 atr_norm:  0.014044078613519407
+    A condition number:  59.631297182522076
+    r_norm:  0.02712648168763044 x_norm:  0.7360252062150447 atr_norm:  0.01404407861351939
     Iterations:  25  H x calls:  25 H^T x calls:  25
 
 
@@ -360,8 +360,8 @@ We run LSQR algorithm to clean the signal contents for 100 iterations
  .. code-block:: none
 
     A norm:  24.348380483410274
-    A condition number:  485.89437292085955
-    r_norm:  0.005893971270357649 x_norm:  0.797907808148605 atr_norm:  0.0015629080522622037
+    A condition number:  485.89437292085995
+    r_norm:  0.005893971270357611 x_norm:  0.7979078081486042 atr_norm:  0.0015629080522622028
     Iterations:  100  H x calls:  100 H^T x calls:  100
 
 
@@ -370,7 +370,7 @@ We run LSQR algorithm to clean the signal contents for 100 iterations
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.037 seconds)
+   **Total running time of the script:** ( 0 minutes  2.307 seconds)
 
 
 .. _sphx_glr_download_gallery_lop_deconvolution.py:

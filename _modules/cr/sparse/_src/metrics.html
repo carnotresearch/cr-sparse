@@ -117,7 +117,7 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
-<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">lax</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 
 <span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">promote_arg_dtypes</span><span class="p">,</span> <span class="n">check_shapes_are_equal</span><span class="p">,</span> <span class="n">dtype_ranges</span>
@@ -182,6 +182,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">rmse</span> <span class="o">=</span> <span class="n">root_mse</span><span class="p">(</span><span class="n">reference_arr</span><span class="p">,</span> <span class="n">test_arr</span><span class="p">)</span>
     <span class="n">denom</span> <span class="o">=</span> <span class="n">normalization_factor</span><span class="p">(</span><span class="n">reference_arr</span><span class="p">,</span> <span class="n">normalization</span><span class="p">)</span>
+    <span class="c1"># make sure that denom is non-zero</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span>
+    <span class="n">denom</span> <span class="o">=</span> <span class="n">denom</span> <span class="o">+</span> <span class="n">eps</span>
     <span class="k">return</span> <span class="n">rmse</span> <span class="o">/</span> <span class="n">denom</span></div>
 
 <div class="viewcode-block" id="peak_signal_noise_ratio"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.metrics.peak_signal_noise_ratio.html#cr.sparse.metrics.peak_signal_noise_ratio">[docs]</a><span class="nd">@jit</span>
@@ -195,6 +198,8 @@
     <span class="n">min_val</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data_min</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">zero</span><span class="p">,</span> <span class="n">min_val</span><span class="p">)</span>
     <span class="n">drange</span> <span class="o">=</span> <span class="n">max_val</span> <span class="o">-</span> <span class="n">min_val</span>
     <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">reference_arr</span><span class="p">,</span> <span class="n">test_arr</span><span class="p">)</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">mse</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">_</span> <span class="p">:</span> <span class="n">mse</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">_</span> <span class="p">:</span> <span class="n">eps</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="k">return</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="n">drange</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">mse</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="signal_noise_ratio"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.metrics.signal_noise_ratio.html#cr.sparse.metrics.signal_noise_ratio">[docs]</a><span class="nd">@jit</span>
@@ -220,6 +225,11 @@
     <span class="n">ref_energy</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">reference_arr</span><span class="p">,</span> <span class="n">reference_arr</span><span class="p">))</span>
     <span class="n">error</span> <span class="o">=</span> <span class="n">reference_arr</span> <span class="o">-</span> <span class="n">test_arr</span>
     <span class="n">err_energy</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">error</span><span class="p">))</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span>
+    <span class="c1"># make sure that error energy is non-zero</span>
+    <span class="n">err_energy</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">err_energy</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">_</span> <span class="p">:</span> <span class="n">err_energy</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">_</span> <span class="p">:</span> <span class="n">eps</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># make sure that ref energy is non-zero</span>
+    <span class="n">ref_energy</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">ref_energy</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">_</span> <span class="p">:</span> <span class="n">ref_energy</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">_</span> <span class="p">:</span> <span class="n">eps</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="k">return</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">ref_energy</span><span class="o">/</span> <span class="n">err_energy</span><span class="p">)</span></div>
 
 </pre></div>
