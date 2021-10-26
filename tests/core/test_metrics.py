@@ -35,7 +35,7 @@ def test_normalized_root_mse():
 
 
 def test_peak_signal_noise_ratio():
-    assert_almost_equal(metrics.peak_signal_noise_ratio(z, z), 156.5356)
+    assert_almost_equal(metrics.peak_signal_noise_ratio(z, z), 156.5356, decimal=2)
 
 
 @pytest.mark.parametrize("x,expected", [(o, 168.5768), (z, 0)])
