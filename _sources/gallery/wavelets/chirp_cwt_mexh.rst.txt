@@ -229,7 +229,7 @@ voices per octave
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  4.524 seconds)
+   **Total running time of the script:** ( 0 minutes  4.621 seconds)
 
 
 .. _sphx_glr_download_gallery_wavelets_chirp_cwt_mexh.py:

@@ -134,7 +134,7 @@ Test signal generation
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f284a2ac880>]
+    [<matplotlib.lines.Line2D object at 0x7f93d094ea00>]
 
 
 
@@ -175,7 +175,7 @@ Frequency spectrum
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f284add0c40>]
+    [<matplotlib.lines.Line2D object at 0x7f93d0984e80>]
 
 
 
@@ -265,7 +265,7 @@ Second level detail coefficients
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f2849f19f10>]
+    [<matplotlib.lines.Line2D object at 0x7f93d1708970>]
 
 
 
@@ -313,7 +313,7 @@ correspond to t=12 sec.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.121 seconds)
+   **Total running time of the script:** ( 0 minutes  2.193 seconds)
 
 
 .. _sphx_glr_download_gallery_wavelets_frequency_change_detection.py:
