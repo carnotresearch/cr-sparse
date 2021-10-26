@@ -404,10 +404,13 @@ def new_r_vec(A, V, j,  gamma):
     m, n = A.shape
     idx = jnp.arange(V.shape[1])
     j_mask =  idx < j
+    max_iters = 20
 
     def r_vec(i):
-        r = random.uniform(KEYS[i], (m,))
-        r = AH_v(A, r)
+        # This approach fails for large matrices with low rank
+        # r = random.uniform(keys[i], (m,))
+        # r = AH_v(A, r)
+        r = random.uniform(KEYS[i], (n,))
         r_norm = norm(r)
         r, r_norm, iters = reorth_mgs(V, r, r_norm, j_mask, gamma)
         return r, r_norm
@@ -418,7 +421,7 @@ def new_r_vec(A, V, j,  gamma):
 
     def cond(state):
         r, r_norm, iterations = state
-        cond = jnp.logical_and(iterations < 10, r_norm <1e-10)
+        cond = jnp.logical_and(iterations < max_iters, r_norm <1e-10)
         return cond
 
     def body(state):
@@ -428,6 +431,7 @@ def new_r_vec(A, V, j,  gamma):
 
     state = lax.while_loop(cond, body, init())
     r, r_norm, i = state
+    # print(f'r_norm {r_norm}, iters: {i}')
     return r / r_norm, i
 
 new_r_vec_jit = jit(new_r_vec)

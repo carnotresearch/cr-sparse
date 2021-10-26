@@ -45,6 +45,8 @@ from cr.sparse._src.la.svdpack.lanbpro import (
     lanbpro_iteration_jit,
     lanbpro,
     lanbpro_jit,
+    new_r_vec,
+    new_p_vec,
 )
 from cr.sparse._src.la.svdpack.lansvd_utils import (
     refine_bounds,
