@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from functools import partial
-from jax import jit
+from jax import jit, lax
 import jax.numpy as jnp
 
 from .util import promote_arg_dtypes, check_shapes_are_equal, dtype_ranges
@@ -77,6 +77,9 @@ def normalized_root_mse(reference_arr, test_arr, normalization='euclidean'):
     """
     rmse = root_mse(reference_arr, test_arr)
     denom = normalization_factor(reference_arr, normalization)
+    # make sure that denom is non-zero
+    eps = jnp.finfo(float).eps
+    denom = denom + eps
     return rmse / denom
 
 @jit
@@ -90,6 +93,8 @@ def peak_signal_noise_ratio(reference_arr, test_arr):
     min_val = jnp.where(data_min >= 0, zero, min_val)
     drange = max_val - min_val
     mse = mean_squared_error(reference_arr, test_arr)
+    eps = jnp.finfo(float).eps
+    mse = lax.cond(mse, lambda _ : mse, lambda _ : eps, None)
     return 10 * jnp.log10((drange ** 2) / mse)
 
 @jit
@@ -115,5 +120,10 @@ def signal_noise_ratio(reference_arr, test_arr):
     ref_energy = jnp.abs(jnp.vdot(reference_arr, reference_arr))
     error = reference_arr - test_arr
     err_energy = jnp.abs(jnp.vdot(error, error))
+    eps = jnp.finfo(float).eps
+    # make sure that error energy is non-zero
+    err_energy = lax.cond(err_energy, lambda _ : err_energy, lambda _ : eps, None)
+    # make sure that ref energy is non-zero
+    ref_energy = lax.cond(ref_energy, lambda _ : ref_energy, lambda _ : eps, None)
     return 10 * jnp.log10(ref_energy/ err_energy)
 
