@@ -687,7 +687,7 @@ def integrate_wavelet(wavelet, precision=8):
         dt = t[1] - t[0]
         return rec_integrate(psi, dt), t
     elif len(approximations) == 5:
-        phi_d, psi_d, phi_r, psi_r, t = functions_approximations
+        phi_d, psi_d, phi_r, psi_r, t = approximations
         dt = t[1] - t[0]
         return rec_integrate(psi_d, dt), rec_integrate(psi_r, dt), t
 
