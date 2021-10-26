@@ -19,5 +19,5 @@ Proximal operators
 def prox_l1(x, t):
     """The proximal operator for l1 norm
     """
-     jnp.maximum(0, x-t) - jnp.maximum(0, -x - t)
+    jnp.maximum(0, x-t) - jnp.maximum(0, -x - t)
 
