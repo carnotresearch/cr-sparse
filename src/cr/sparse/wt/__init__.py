@@ -126,6 +126,7 @@ from cr.sparse._src.wt.multilevel import (
 
 # Functions/Types for continuous wavelets
 from cr.sparse._src.wt.wavelet import (
+    build_continuous_wavelet,
     ContinuousWavelet,
     integrate_wavelet,
     central_frequency,
