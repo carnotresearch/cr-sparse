@@ -64,6 +64,48 @@ def sparse_normal_representations(key, D, K, S=1):
     result = jnp.squeeze(result)
     return result, omega
 
+def sparse_biuniform_representations(key, a, b, D, K, S=1):
+    """
+    Generates a set of sparse model vectors with bi-uniformly distributed non-zero entries.
+    
+    * Each vector is K-sparse.
+    * The non-zero basis indexes are randomly selected
+      and shared among all vectors.
+    * The non-zero values have a random positive or negative sign.
+    * The non-zero values have a magnitude which varies uniformly between [a,b] 
+
+    Args:
+        key: a PRNG key used as the random key.
+        a (float): Minimum magnitude
+        b (float): Maximum magnitude
+        D (int): Dimension of the model space
+        K (int): Number of non-zero entries in the sparse model vectors
+        S (int): Number of sparse model vectors (default 1)
+
+    Returns:
+        (jax.numpy.ndarray, jax.numpy.ndarray): A tuple consisting of 
+        (i) a matrix of sparse model vectors
+        (ii) an index set of locations of non-zero entries
+    """
+    keys = random.split(key, 3)
+    r = jnp.arange(D)
+    r = random.permutation(keys[0], r)
+    omega = r[:K]
+    omega = jnp.sort(omega)
+    shape = [K, S]
+    values = random.uniform(keys[1], shape)
+    values = a + (b -a) * values
+    # Generate sign for non-zero entries randomly
+    sgn = jnp.sign(random.normal(keys[2], shape))
+    # Combine sign and magnitude
+    values = sgn * values
+    result = jnp.zeros([D, S])
+    result = result.at[omega, :].set(values)
+    result = jnp.squeeze(result)
+    return result, omega
+
+
+
 
 def sparse_spikes(key, N, K, S=1):
     """
