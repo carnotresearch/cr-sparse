@@ -1,0 +1,23 @@
+{
+  "@context": "https://raw.githubusercontent.com/codemeta/codemeta/master/codemeta.jsonld",
+  "@type": "Code",
+  "author": [
+    {
+      "@id": "0000-0003-2217-4768",
+      "@type": "Person",
+      "email": "shaileshk@gmail.com",
+      "name": "Shailesh Kumar",
+      "affiliation": "Indian Institute of Technology, Delhi"
+    }
+  ],
+  "identifier": "",
+  "codeRepository": "https://github.com/carnotresearch/cr-sparse",
+  "datePublished": "2021-10-28",
+  "dateModified": "2021-10-28",
+  "dateCreated": "2021-10-28",
+  "description": "Functional models and algorithms for sparse signal processing",
+  "keywords": "functional programming, sparse linear systems, convex optimization, compressive sensing, sparse recovery, wavelets, jax, sparse subspace clustering",
+  "license": "Apache 2.0",
+  "title": "CR-Sparse",
+  "version": "0.2.0"
+}
