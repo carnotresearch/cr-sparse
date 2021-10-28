@@ -42,6 +42,10 @@ The library also provides
 Examples
 ----------------
 
+Some micro-benchmarks are reported `here <https://github.com/carnotresearch/cr-sparse/blob/master/paper/paper.md#runtime-comparisons>`_.
+Jupyter notebooks for these benchmarks are in the `companion repository <https://github.com/carnotresearch/cr-sparse-companion>`_.
+
+
 See the `examples gallery <https://cr-sparse.readthedocs.io/en/latest/gallery/index.html>`_ for an 
 extensive set of examples. Here is a small selection of examples:
 
@@ -52,6 +56,10 @@ extensive set of examples. Here is a small selection of examples:
 * `Deconvolution of the effects of a Ricker wavelet <https://cr-sparse.readthedocs.io/en/latest/gallery/lop/deconvolution.html>`_ 
 * `Wavelet transform operators <https://cr-sparse.readthedocs.io/en/latest/gallery/lop/wt_op.html>`_ 
 * `CoSaMP step by step <https://cr-sparse.readthedocs.io/en/latest/gallery/pursuit/cosamp_step_by_step.html>`_ 
+
+
+A more extensive collection of example notebooks is available in the `companion repository <https://github.com/carnotresearch/cr-sparse-companion>`_.
+
 
 Platform Support
 ----------------------
