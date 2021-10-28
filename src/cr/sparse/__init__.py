@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-CR.Sparse
+CR-Sparse
 """
 # pylint: disable=W0611
 
