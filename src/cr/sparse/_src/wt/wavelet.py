@@ -117,9 +117,9 @@ class DiscreteWavelet(NamedTuple):
                 to get the approximation of scaling and wavelet functions. 
                 Default 8.
         """
-        from .discrete import orth_wavefun, biorth_wavefun
+        from .discrete import orth_wavefun_jit, biorth_wavefun
         if self.orthogonal:
-            return orth_wavefun(self, level=level)
+            return orth_wavefun_jit(self.rec_lo, self.rec_hi, level=level)
         if self.biorthogonal:
             return biorth_wavefun(self, level=level)
         raise NotImplementedError()

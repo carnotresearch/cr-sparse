@@ -16,6 +16,7 @@
 """
 Wavelet and scaling functions for discrete wavelets
 """
+from jax import jit
 import jax.numpy as jnp
 import math
 
@@ -31,13 +32,13 @@ def get_keep_length(level: int, filter_length: int):
         keep_length = 2*keep_length + lplus
     return keep_length
 
-def orth_wavefun(wavelet, level: int=8):
+def orth_wavefun(rec_lo, rec_hi, level: int=8):
     # the coefficient array [scalar] which will be processed to generate the wavelet and scaling functions
     arr = jnp.array([math.pow(math.sqrt(2), level)])
     # The upsampling factor
     p = math.pow(2, level)
     # length of the filters
-    filter_length = wavelet.dec_len
+    filter_length = len(rec_lo)
     # the length of scaling and wavelet functions
     output_length = int((filter_length-1) * p + 1)
     # expected number of coefficients in the output of upcoef
@@ -55,16 +56,17 @@ def orth_wavefun(wavelet, level: int=8):
     x = jnp.linspace(0.0, (output_length-1)/p, output_length)
     mode = 'symmetric'
     # scaling function
-    phi = upcoef_a(arr, wavelet.rec_lo, mode, level)
+    phi = upcoef_a(arr, rec_lo, mode, level)
     phi = vec_centered_jit(phi, keep_length)
     phi = jnp.concatenate((z, phi, right))
     # wavelet function
-    psi = upcoef_d(arr, wavelet.rec_hi, wavelet.rec_lo, mode, level)
+    psi = upcoef_d(arr, rec_hi, rec_lo, mode, level)
     psi = vec_centered_jit(psi, keep_length)
     psi = jnp.concatenate((z, psi, right))
     # return the result
     return phi, psi, x
 
+orth_wavefun_jit = jit(orth_wavefun, static_argnums=(2,))
 
 def biorth_wavefun(wavelet, level: int=8):
     # the coefficient array [scalar] which will be processed to generate the wavelet and scaling functions
