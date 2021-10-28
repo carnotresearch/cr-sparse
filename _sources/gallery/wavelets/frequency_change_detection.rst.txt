@@ -64,7 +64,7 @@ Let's import necessary libraries
 .. code-block:: default
 
     import jax.numpy as jnp
-    # CR.Sparse libraries
+    # CR-Sparse libraries
     import cr.sparse as crs
     import cr.sparse.wt as wt
     # Utilty functions to construct sinusoids
@@ -134,7 +134,7 @@ Test signal generation
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f93d094ea00>]
+    [<matplotlib.lines.Line2D object at 0x7fc14e14c760>]
 
 
 
@@ -175,7 +175,7 @@ Frequency spectrum
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f93d0984e80>]
+    [<matplotlib.lines.Line2D object at 0x7fc149898280>]
 
 
 
@@ -265,7 +265,7 @@ Second level detail coefficients
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f93d1708970>]
+    [<matplotlib.lines.Line2D object at 0x7fc149bd75e0>]
 
 
 
@@ -313,7 +313,7 @@ correspond to t=12 sec.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.193 seconds)
+   **Total running time of the script:** ( 0 minutes  2.290 seconds)
 
 
 .. _sphx_glr_download_gallery_wavelets_frequency_change_detection.py:

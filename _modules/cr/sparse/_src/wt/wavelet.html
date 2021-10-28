@@ -222,9 +222,9 @@
 <span class="sd">                to get the approximation of scaling and wavelet functions. </span>
 <span class="sd">                Default 8.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">.discrete</span> <span class="kn">import</span> <span class="n">orth_wavefun</span><span class="p">,</span> <span class="n">biorth_wavefun</span>
+        <span class="kn">from</span> <span class="nn">.discrete</span> <span class="kn">import</span> <span class="n">orth_wavefun_jit</span><span class="p">,</span> <span class="n">biorth_wavefun</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">orthogonal</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">orth_wavefun</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">orth_wavefun_jit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rec_lo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rec_hi</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">biorthogonal</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">biorth_wavefun</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>

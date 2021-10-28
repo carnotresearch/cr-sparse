@@ -169,6 +169,48 @@
     <span class="n">result</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">omega</span></div>
 
+<span class="k">def</span> <span class="nf">sparse_biuniform_representations</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a set of sparse model vectors with bi-uniformly distributed non-zero entries.</span>
+<span class="sd">    </span>
+<span class="sd">    * Each vector is K-sparse.</span>
+<span class="sd">    * The non-zero basis indexes are randomly selected</span>
+<span class="sd">      and shared among all vectors.</span>
+<span class="sd">    * The non-zero values have a random positive or negative sign.</span>
+<span class="sd">    * The non-zero values have a magnitude which varies uniformly between [a,b] </span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: a PRNG key used as the random key.</span>
+<span class="sd">        a (float): Minimum magnitude</span>
+<span class="sd">        b (float): Maximum magnitude</span>
+<span class="sd">        D (int): Dimension of the model space</span>
+<span class="sd">        K (int): Number of non-zero entries in the sparse model vectors</span>
+<span class="sd">        S (int): Number of sparse model vectors (default 1)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray, jax.numpy.ndarray): A tuple consisting of </span>
+<span class="sd">        (i) a matrix of sparse model vectors</span>
+<span class="sd">        (ii) an index set of locations of non-zero entries</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">)</span>
+    <span class="n">omega</span> <span class="o">=</span> <span class="n">r</span><span class="p">[:</span><span class="n">K</span><span class="p">]</span>
+    <span class="n">omega</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">omega</span><span class="p">)</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="p">[</span><span class="n">K</span><span class="p">,</span> <span class="n">S</span><span class="p">]</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">shape</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">values</span>
+    <span class="c1"># Generate sign for non-zero entries randomly</span>
+    <span class="n">sgn</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">shape</span><span class="p">))</span>
+    <span class="c1"># Combine sign and magnitude</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">sgn</span> <span class="o">*</span> <span class="n">values</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">D</span><span class="p">,</span> <span class="n">S</span><span class="p">])</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">omega</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">omega</span>
+
+
+
 
 <div class="viewcode-block" id="sparse_spikes"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.data.sparse_spikes.html#cr.sparse.data.sparse_spikes">[docs]</a><span class="k">def</span> <span class="nf">sparse_spikes</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>

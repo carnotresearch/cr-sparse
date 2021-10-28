@@ -1,4 +1,4 @@
-CR.Sparse
+CR-Sparse
 =====================================
 
 A JAX/XLA based library of accelerated models and algorithms for inverse problems in 

@@ -20,7 +20,7 @@ config.update("jax_enable_x64", True)
 # %% 
 # Let's import necessary libraries 
 import jax.numpy as jnp
-# CR.Sparse libraries
+# CR-Sparse libraries
 import cr.sparse.wt as wt
 # We use PyWavelets only for sample data
 import pywt.data
