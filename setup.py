@@ -50,7 +50,7 @@ setup(
     download_url=f"https://github.com/carnotresearch/cr-sparse/archive/v{__version__}.tar.gz",
 
     # Author details
-    author='CR.Sparse Development Team',
+    author='CR-Sparse Development Team',
     author_email='contact@carnotresearch.com',
 
     # Choose your license
