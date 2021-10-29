@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from jax import jit
 import jax.numpy as jnp
 
 from cr.sparse import hermitian
@@ -45,6 +46,7 @@ def coherence_with_index(A):
     max_val = G[index]
     return max_val, index
 
+@jit
 def coherence(A):
     """Computes the coherence of a dictionary
     """
@@ -71,6 +73,7 @@ def lower_frame_bound(A):
     return s[-1]
 
 
+@jit
 def babel(A):
     """Computes the babel function for a dictionary (generalized coherence)
     """
