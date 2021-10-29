@@ -22,6 +22,17 @@ from .util import apply_along_axis
 #  Basic operators
 ###########################################################################################
 
+def real_matrix(A):
+    """Converts a real matrix into a linear operator
+    """
+    m, n = A.shape
+    def times(x):
+        assert x.ndim == 1
+        return A @ x
+    def trans(x):
+        assert x.ndim == 1
+        return x @ A
+    return Operator(times=times, trans=trans, shape=(m,n))
 
 def matrix(A, axis=0):
     """Converts a matrix into a linear operator
