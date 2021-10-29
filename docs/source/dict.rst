@@ -25,6 +25,7 @@ Functions for constructing sparsying dictionaries and sensing matrices
     dirac_cosine_basis
     dirac_hadamard_cosine_basis
     fourier_basis
+    random_orthonormal_rows
 
 
 
@@ -43,6 +44,7 @@ Dictionary properties
     upper_frame_bound
     lower_frame_bound
     babel
+
 
 
 Dictionary comparison
