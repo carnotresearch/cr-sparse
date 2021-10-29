@@ -28,6 +28,34 @@ from cr.sparse import normalize_l2_cw, promote_arg_dtypes, hermitian
 
 def gaussian_mtx(key, N, D, normalize_atoms=True):
     """A dictionary/sensing matrix where entries are drawn independently from normal distribution.
+
+    Args:
+        key: a PRNG key used as the random key.
+        N (int): Number of rows of the sensing matrix 
+        D (int): Number of columns of the sensing matrix
+        normalize_atoms (bool): Whether the columns of sensing matrix are normalized 
+          (default True)
+
+    Returns:
+        (jax.numpy.ndarray): A Gaussian sensing matrix of shape (N, D)
+
+    Example:
+
+        >>> from jax import random
+        >>> import cr.sparse as crs
+        >>> import cr.sparse.dict
+        >>> m, n = 8, 16
+        >>> Phi = cr.sparse.dict.gaussian_mtx(random.PRNGKey(0), m, n)
+        >>> print(Phi.shape)
+        (8, 16)
+        >>> print(crs.norms_l2_cw(Phi))
+        [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+        >>> print(cr.sparse.dict.coherence(Phi))
+        [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+        >>> print(cr.sparse.dict.babel(Phi))
+        [0.85866616 1.59791754 2.13943785 2.61184779 2.9912899  3.38281051
+        3.74641682 4.08225813 4.29701559 4.49942648 4.68680188 4.83106192
+        4.95656728 5.05541184 5.10697535]
     """
     shape = (N, D)
     dict = random.normal(key, shape)
@@ -40,6 +68,34 @@ def gaussian_mtx(key, N, D, normalize_atoms=True):
 
 def rademacher_mtx(key, M, N, normalize_atoms=True):
     """A dictionary/sensing matrix where entries are drawn independently from Rademacher distribution.
+
+    Args:
+        key: a PRNG key used as the random key.
+        M (int): Number of rows of the sensing matrix 
+        N (int): Number of columns of the sensing matrix
+        normalize_atoms (bool): Whether the columns of sensing matrix are normalized 
+          (default True)
+
+    Returns:
+        (jax.numpy.ndarray): A Rademacher sensing matrix of shape (M, N)
+
+    Example:
+
+        >>> from jax import random
+        >>> import cr.sparse as crs
+        >>> import cr.sparse.dict
+        >>> m, n = 8, 16
+        >>> Phi = cr.sparse.dict.rademacher_mtx(random.PRNGKey(0), m, n, 
+              normalize_atoms=False)
+        >>> print(Phi)
+        [[ 1.  1.  1. -1. -1.  1. -1. -1.  1.  1.  1. -1.  1.  1. -1.  1.]
+        [-1.  1.  1.  1. -1.  1.  1.  1. -1. -1. -1.  1. -1. -1. -1.  1.]
+        [ 1. -1. -1.  1. -1.  1.  1. -1.  1. -1.  1. -1. -1. -1.  1. -1.]
+        [ 1. -1. -1.  1. -1.  1.  1. -1.  1. -1. -1.  1.  1.  1. -1.  1.]
+        [-1. -1. -1. -1. -1. -1. -1.  1. -1. -1. -1.  1. -1. -1. -1. -1.]
+        [-1.  1. -1.  1.  1.  1. -1. -1.  1. -1. -1.  1.  1. -1. -1.  1.]
+        [-1. -1.  1.  1. -1. -1. -1. -1. -1.  1. -1.  1.  1. -1. -1.  1.]
+        [ 1. -1.  1.  1.  1.  1.  1.  1. -1. -1.  1. -1. -1.  1.  1.  1.]]
     """
     shape = (M, N)
     dict = random.bernoulli(key, shape=shape)
@@ -50,8 +106,26 @@ def rademacher_mtx(key, M, N, normalize_atoms=True):
 
 
 def random_onb(key, N):
-    """
-    Generates a random orthonormal basis
+    r"""
+    Generates a random orthonormal basis for :math:`\mathbb{R}^N`
+
+    Args:
+        key: a PRNG key used as the random key.
+        N (int): Dimension of the vector space
+
+    Returns:
+        (jax.numpy.ndarray): A random orthonormal basis for :math:`\mathbb{R}^N` of shape (N, N)
+
+    Example:
+        >>> from jax import random
+        >>> import cr.sparse as crs
+        >>> import cr.sparse.dict
+        >>> Phi = cr.sparse.dict.random_onb(random.PRNGKey(0),4)
+        >>> print(Phi)
+        [[-0.382254 -0.266139  0.849797  0.246773]
+        [ 0.518932 -0.068848 -0.035348  0.851305]
+        [ 0.12152  -0.959138 -0.199282 -0.159919]
+        [-0.754867 -0.066964 -0.486706  0.434522]]
     """
     A = random.normal(key, [N, N])
     Q,R = jnp.linalg.qr(A)
@@ -61,6 +135,23 @@ def random_onb(key, N):
 def random_orthonormal_rows(key, M, N):
     """
     Generates a random sensing matrix with orthonormal rows
+
+    Args:
+        key: a PRNG key used as the random key.
+        M (int): Number of rows of the sensing matrix 
+        N (int): Number of columns of the sensing matrix
+
+    Returns:
+        (jax.numpy.ndarray): A random matrix of shape (M, N) with orthonormal rows
+
+    Example:
+        >>> from jax import random
+        >>> import cr.sparse as crs
+        >>> import cr.sparse.dict
+        >>> Phi = cr.sparse.dict.random_orthonormal_rows(random.PRNGKey(0),2, 4)
+        >>> print(Phi)
+        [[-0.107175 -0.373504 -0.422407 -0.81889 ]
+        [-0.769728 -0.300913  0.560666 -0.051218]]
     """
     A = random.normal(key, [N, M])
     Q,R = jnp.linalg.qr(A)
