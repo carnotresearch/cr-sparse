@@ -544,6 +544,7 @@ implementations on a set of representative problems:
 |:------:|:------:|:--:|:-:|:-:|:-:|
 | Hard Thresholding Pursuit | M=2560, N=10240, K=200 | HTP (MATLAB) | 3.5687 s | 160 ms | 22x |  
 | Orthogonal Matching Pursuit | M=2000, N=10000, K=100 | sckit-learn | 379 ms | 120 ms | 3.15x |  
+| ADMM, BP | M=2000, N=20000, K=200 | YALL1 (MATLAB) | 1.542 sec | 445 ms | 3.46x |  
 | Image blurring | Image: 500x480, Kernel: 15x25 | Pylops | 6.63 ms | 1.64 ms | 4x |  
 | Image deblurring using LSQR | Image: 500x480, Kernel: 15x25 | Pylops | 237 ms | 39.3 ms | 6x |  
 | Image DWT2 | Image: 512x512 | PyWavelets | 4.48 ms | 656 µs | 6.83x |  
@@ -551,7 +552,18 @@ implementations on a set of representative problems:
 
 
 We see significant gains achieved by `CR-Sparse` running on GPU although gain levels are not 
-uniform. 
+uniform. Few comments are in order. We have observed that gain tends to increase for larger
+problem sizes. GPUs tend to perform better when problem size increases as the matrix/vector 
+products become bigger. For smaller problems, we have seen that CPU implementations perform
+quite well. Our focus so far has been to produce straightforward and 
+faithful JAX based implementations of the
+algorithms concerned. We believe with further research, more optimized implementations may 
+be possible. JAX provides `vmap` which makes it very easy to vectorize an algorithm over
+a number of similar problems. It also provides `pmap` which can be used to distribute 
+a number of similar problems over multiple GPU devices. These tools make it extremely 
+easy to parallelize the algorithms provided in `CR-Sparse` over multiple data.
+The largest problem an algorithm in `CR-Sparse` can solve also depends on available GPU
+memory. This should be considered carefully while planning.
 
 # Acknowledgements
 
