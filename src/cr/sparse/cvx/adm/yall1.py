@@ -19,10 +19,14 @@ Port of Your Algorithms for L1
 
 from cr.sparse._src.cvx.adm.yall1 import (
     solve,
+    # basis pursuit
+    bp_setup,
     solve_bp,
     solve_bp_jit,
     solve_l1_l2,
     solve_l1_l2_jit,
     solve_l1_l2con,
-    solve_l1_l2con_jit
+    solve_l1_l2con_jit,
+    # finalize the solution
+    finalize
 )

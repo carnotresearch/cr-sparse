@@ -57,6 +57,35 @@ class BPState(NamedTuple):
     n_trans : int = 0
     """Number of times A.T b computed """
 
+
+def bp_setup(A, b):
+    """Returns the parameters for calling `solv_bp`
+    """
+    m = b.shape[0]
+    Atb = A.trans(b)
+    n_trans = 1
+    n_times = 0
+    n = Atb.shape[0]
+    b_max  = float(norm(b, ord=jnp.inf))
+    atb_max = float(norm(Atb, ord=jnp.inf))
+    x0 = Atb / b_max
+    z0 = jnp.zeros(n)
+    w = jnp.ones(n)
+    b = b / b_max
+    return b, x0, z0, w, b_max, n_times, n_trans
+
+def finalize(state, b_max, n_times, n_trans, W=None, nonneg=False):
+    """Finalizes the YALL1 solver
+    """
+    x = jnp.where(nonneg, jnp.maximum(0, state.x), state.x)
+    if W:
+        # go back from sparsifying basis to signal space
+        x = W.times(x)
+    return RecoveryFullSolution(x=b_max*x, r=b_max*state.rp, 
+        iterations=state.iterations,
+        n_times=state.n_times+n_times, 
+        n_trans=state.n_trans+n_trans)
+
 def solve_bp(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters):
     """
     Solves the problem :math:`\min \| x \|_1 \, \\text{s.t.}\, A x = b` using ADMM
@@ -109,13 +138,6 @@ def solve_bp(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters):
         primal_objective = jnp.sum(jnp.abs(w*x))        
         # dual objective
         dual_objective = b.T @ y
-
-        # print(f'x[{state.iterations+1}]', end='')
-        # print(x[0:6])
-        # print(f'y[{state.iterations+1}]', end='')
-        # print(y[0:6])
-        # print(f'z[{state.iterations+1}]', end='')
-        # print(z[0:6])
         
         # updatd state
         return BPState(x=x, x_prev=state.x, z=z,
@@ -136,7 +158,6 @@ def solve_bp(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters):
         q = 0.1
         # limit on number of iterations
         more_iters = state.iterations < max_iters
-
         # x norm
         x_norm = norm(state.x)
         # relative change in x norm
@@ -177,7 +198,7 @@ def solve_bp(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters):
     state = lax.while_loop(cond, double_iteration, init())
     return state
 
-solve_bp_jit = jit(solve_bp, static_argnums=(0, 5,6, 7, 8))
+solve_bp_jit = jit(solve_bp, static_argnums=(0,))
 
 
 def solve_l1_l2(A, b, x0, z0, w, nonneg, rho, gamma, tolerance, max_iters):
