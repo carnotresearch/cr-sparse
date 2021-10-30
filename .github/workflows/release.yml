@@ -16,10 +16,12 @@ jobs:
         python-version: 3.8
     - name: Install dependencies
       run: |
+        python --version
         python -m pip install --upgrade pip
-        pip install -r requirements/requirements.txt
-        pip install -r requirements/requirements-tests.txt
-        pip install setuptools wheel twine
+        python -m pip --version
+        python -m pip install -r requirements/requirements.txt
+        python -m pip install -r requirements/requirements-tests.txt
+        python -m pip install setuptools wheel twine
     - name: Build and publish
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
