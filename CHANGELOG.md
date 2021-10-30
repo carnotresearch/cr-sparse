@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 [Documentation](https://cr-sparse.readthedocs.io/en/latest/)
 
+## [0.2.0] - 2021-10-30
+
+[Documentation](https://cr-sparse.readthedocs.io/en/v0.2.0/)
+
 ### Added
 
 - Linear Operators
@@ -21,6 +25,7 @@ All notable changes to this project will be documented in this file.
   - LSQR solver for least squares problems with support for N-D data
   - ISTA: Iterative Shrinkage and Thresholding Algorithm
   - FISTA: Fast Iterative Shrinkage and Thresholding Algorithm
+  - lanbpro, simple lansvd
 - Geophysics
   - Ricker wavelet
   - Hard, soft and half thresholding operators for ND arrays (both absolute and percentile thresholds)
@@ -33,6 +38,7 @@ All notable changes to this project will be documented in this file.
   - Random subspaces, uniform points on subspaces
   - two_subspaces_at_angle, three_subspaces_at_angle
   - multiple index_sets
+  - sparse signals with bi-uniform non-zero values 
 - Utilities
   - More functions for ND-arrays
   - Off diagonal elements in a matrix, min,max, mean
@@ -41,16 +47,24 @@ All notable changes to this project will be documented in this file.
   - orth, row_space, null_space, left_null_space, effective_rank
   - subspaces: principal angles, is_in_subspace, project_to_subspace
   - mult_with_submatrix, solve_on_submatrix
+  - lanbpro, simple lansvd
 - Clustering
   - K-means clustering
   - Spectral clustering
-  - OMP for sparse subspace clustering 
+  - Clustering error metrics
+- Subspace clustering
+  - OMP for sparse subspace clustering
+  - Subspace preservation ratio metrics 
+
+A paper is being prepared for JOSS.
 
 ### Improved
 
 - Linear Operators
   - Ability to apply a 1D linear operator along a specific axis of input data
   - axis parameter added to various compressive sensing operators
+- Code coverage
+  - It is back to 90+% in the unit tests
 
 
 
@@ -146,7 +160,10 @@ General stuff
 
 Initial release
 
-[Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.6...HEAD
+# Version comparisons
+
+[Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.6...v0.2.0
 [0.1.6]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/carnotresearch/cr-sparse/compare/0.1.3...v0.1.4
