@@ -323,7 +323,7 @@ def solve_l1_l2(A, b, x0, z0, w, nonneg, rho, gamma, tolerance, max_iters):
     return state
 
 
-solve_l1_l2_jit = jit(solve_l1_l2, static_argnums=(0, 5,6,7,8,9))
+solve_l1_l2_jit = jit(solve_l1_l2, static_argnums=(0,))
 
 
 
