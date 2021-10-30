@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.random\_orthonormal\_rows
+========================================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: random_orthonormal_rows

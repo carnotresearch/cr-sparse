@@ -243,25 +243,28 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.matrix.html#cr.sparse.lop.matrix" title="cr.sparse.lop.matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrix</span></code></a>(A[, axis])</p></td>
 <td><p>Converts a matrix into a linear operator</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.diagonal.html#cr.sparse.lop.diagonal" title="cr.sparse.lop.diagonal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diagonal</span></code></a>(d[, axis])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.real_matrix.html#cr.sparse.lop.real_matrix" title="cr.sparse.lop.real_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">real_matrix</span></code></a>(A)</p></td>
+<td><p>Converts a real matrix into a linear operator</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.diagonal.html#cr.sparse.lop.diagonal" title="cr.sparse.lop.diagonal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diagonal</span></code></a>(d[, axis])</p></td>
 <td><p>Returns a linear operator which mimics multiplication by a diagonal matrix</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.zero.html#cr.sparse.lop.zero" title="cr.sparse.lop.zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero</span></code></a>(in_dim[, out_dim, axis])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.zero.html#cr.sparse.lop.zero" title="cr.sparse.lop.zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero</span></code></a>(in_dim[, out_dim, axis])</p></td>
 <td><p>Returns a linear operator which maps everything to 0 vector in data space</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.flipud.html#cr.sparse.lop.flipud" title="cr.sparse.lop.flipud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flipud</span></code></a>(n)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.flipud.html#cr.sparse.lop.flipud" title="cr.sparse.lop.flipud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flipud</span></code></a>(n)</p></td>
 <td><p>Returns an operator which flips the order of entries in input upside down</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.sum.html#cr.sparse.lop.sum" title="cr.sparse.lop.sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sum</span></code></a>(n)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.sum.html#cr.sparse.lop.sum" title="cr.sparse.lop.sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sum</span></code></a>(n)</p></td>
 <td><p>Returns an operator which computes the sum of a vector</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.pad_zeros.html#cr.sparse.lop.pad_zeros" title="cr.sparse.lop.pad_zeros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pad_zeros</span></code></a>(n, before, after)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.pad_zeros.html#cr.sparse.lop.pad_zeros" title="cr.sparse.lop.pad_zeros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pad_zeros</span></code></a>(n, before, after)</p></td>
 <td><p>Adds zeros before and after a vector.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.symmetrize.html#cr.sparse.lop.symmetrize" title="cr.sparse.lop.symmetrize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">symmetrize</span></code></a>(n)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.symmetrize.html#cr.sparse.lop.symmetrize" title="cr.sparse.lop.symmetrize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">symmetrize</span></code></a>(n)</p></td>
 <td><p>An operator which constructs a symmetric vector by pre-pending the input in reversed order</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.restriction.html#cr.sparse.lop.restriction" title="cr.sparse.lop.restriction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">restriction</span></code></a>(n, indices)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.restriction.html#cr.sparse.lop.restriction" title="cr.sparse.lop.restriction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">restriction</span></code></a>(n, indices)</p></td>
 <td><p>An operator which computes y = x[I] over an index set I</p></td>
 </tr>
 </tbody>

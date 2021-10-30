@@ -133,6 +133,34 @@
 
 <div class="viewcode-block" id="gaussian_mtx"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.gaussian_mtx.html#cr.sparse.dict.gaussian_mtx">[docs]</a><span class="k">def</span> <span class="nf">gaussian_mtx</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A dictionary/sensing matrix where entries are drawn independently from normal distribution.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: a PRNG key used as the random key.</span>
+<span class="sd">        N (int): Number of rows of the sensing matrix </span>
+<span class="sd">        D (int): Number of columns of the sensing matrix</span>
+<span class="sd">        normalize_atoms (bool): Whether the columns of sensing matrix are normalized </span>
+<span class="sd">          (default True)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): A Gaussian sensing matrix of shape (N, D)</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; from jax import random</span>
+<span class="sd">        &gt;&gt;&gt; import cr.sparse as crs</span>
+<span class="sd">        &gt;&gt;&gt; import cr.sparse.dict</span>
+<span class="sd">        &gt;&gt;&gt; m, n = 8, 16</span>
+<span class="sd">        &gt;&gt;&gt; Phi = cr.sparse.dict.gaussian_mtx(random.PRNGKey(0), m, n)</span>
+<span class="sd">        &gt;&gt;&gt; print(Phi.shape)</span>
+<span class="sd">        (8, 16)</span>
+<span class="sd">        &gt;&gt;&gt; print(crs.norms_l2_cw(Phi))</span>
+<span class="sd">        [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]</span>
+<span class="sd">        &gt;&gt;&gt; print(cr.sparse.dict.coherence(Phi))</span>
+<span class="sd">        [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]</span>
+<span class="sd">        &gt;&gt;&gt; print(cr.sparse.dict.babel(Phi))</span>
+<span class="sd">        [0.85866616 1.59791754 2.13943785 2.61184779 2.9912899  3.38281051</span>
+<span class="sd">        3.74641682 4.08225813 4.29701559 4.49942648 4.68680188 4.83106192</span>
+<span class="sd">        4.95656728 5.05541184 5.10697535]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
     <span class="nb">dict</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
@@ -145,6 +173,34 @@
 
 <div class="viewcode-block" id="rademacher_mtx"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.rademacher_mtx.html#cr.sparse.dict.rademacher_mtx">[docs]</a><span class="k">def</span> <span class="nf">rademacher_mtx</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A dictionary/sensing matrix where entries are drawn independently from Rademacher distribution.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: a PRNG key used as the random key.</span>
+<span class="sd">        M (int): Number of rows of the sensing matrix </span>
+<span class="sd">        N (int): Number of columns of the sensing matrix</span>
+<span class="sd">        normalize_atoms (bool): Whether the columns of sensing matrix are normalized </span>
+<span class="sd">          (default True)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): A Rademacher sensing matrix of shape (M, N)</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        &gt;&gt;&gt; from jax import random</span>
+<span class="sd">        &gt;&gt;&gt; import cr.sparse as crs</span>
+<span class="sd">        &gt;&gt;&gt; import cr.sparse.dict</span>
+<span class="sd">        &gt;&gt;&gt; m, n = 8, 16</span>
+<span class="sd">        &gt;&gt;&gt; Phi = cr.sparse.dict.rademacher_mtx(random.PRNGKey(0), m, n, </span>
+<span class="sd">              normalize_atoms=False)</span>
+<span class="sd">        &gt;&gt;&gt; print(Phi)</span>
+<span class="sd">        [[ 1.  1.  1. -1. -1.  1. -1. -1.  1.  1.  1. -1.  1.  1. -1.  1.]</span>
+<span class="sd">        [-1.  1.  1.  1. -1.  1.  1.  1. -1. -1. -1.  1. -1. -1. -1.  1.]</span>
+<span class="sd">        [ 1. -1. -1.  1. -1.  1.  1. -1.  1. -1.  1. -1. -1. -1.  1. -1.]</span>
+<span class="sd">        [ 1. -1. -1.  1. -1.  1.  1. -1.  1. -1. -1.  1.  1.  1. -1.  1.]</span>
+<span class="sd">        [-1. -1. -1. -1. -1. -1. -1.  1. -1. -1. -1.  1. -1. -1. -1. -1.]</span>
+<span class="sd">        [-1.  1. -1.  1.  1.  1. -1. -1.  1. -1. -1.  1.  1. -1. -1.  1.]</span>
+<span class="sd">        [-1. -1.  1.  1. -1. -1. -1. -1. -1.  1. -1.  1.  1. -1. -1.  1.]</span>
+<span class="sd">        [ 1. -1.  1.  1.  1.  1.  1.  1. -1. -1.  1. -1. -1.  1.  1.  1.]]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
     <span class="nb">dict</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">bernoulli</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">)</span>
@@ -155,21 +211,56 @@
 
 
 <div class="viewcode-block" id="random_onb"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.random_onb.html#cr.sparse.dict.random_onb">[docs]</a><span class="k">def</span> <span class="nf">random_onb</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generates a random orthonormal basis</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a random orthonormal basis for :math:`\mathbb{R}^N`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: a PRNG key used as the random key.</span>
+<span class="sd">        N (int): Dimension of the vector space</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): A random orthonormal basis for :math:`\mathbb{R}^N` of shape (N, N)</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from jax import random</span>
+<span class="sd">        &gt;&gt;&gt; import cr.sparse as crs</span>
+<span class="sd">        &gt;&gt;&gt; import cr.sparse.dict</span>
+<span class="sd">        &gt;&gt;&gt; Phi = cr.sparse.dict.random_onb(random.PRNGKey(0),4)</span>
+<span class="sd">        &gt;&gt;&gt; print(Phi)</span>
+<span class="sd">        [[-0.382254 -0.266139  0.849797  0.246773]</span>
+<span class="sd">        [ 0.518932 -0.068848 -0.035348  0.851305]</span>
+<span class="sd">        [ 0.12152  -0.959138 -0.199282 -0.159919]</span>
+<span class="sd">        [-0.754867 -0.066964 -0.486706  0.434522]]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">])</span>
     <span class="n">Q</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">Q</span></div>
 
 
-<span class="k">def</span> <span class="nf">random_orthonormal_rows</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+<div class="viewcode-block" id="random_orthonormal_rows"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.random_orthonormal_rows.html#cr.sparse.dict.random_orthonormal_rows">[docs]</a><span class="k">def</span> <span class="nf">random_orthonormal_rows</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates a random sensing matrix with orthonormal rows</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: a PRNG key used as the random key.</span>
+<span class="sd">        M (int): Number of rows of the sensing matrix </span>
+<span class="sd">        N (int): Number of columns of the sensing matrix</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): A random matrix of shape (M, N) with orthonormal rows</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from jax import random</span>
+<span class="sd">        &gt;&gt;&gt; import cr.sparse as crs</span>
+<span class="sd">        &gt;&gt;&gt; import cr.sparse.dict</span>
+<span class="sd">        &gt;&gt;&gt; Phi = cr.sparse.dict.random_orthonormal_rows(random.PRNGKey(0),2, 4)</span>
+<span class="sd">        &gt;&gt;&gt; print(Phi)</span>
+<span class="sd">        [[-0.107175 -0.373504 -0.422407 -0.81889 ]</span>
+<span class="sd">        [-0.769728 -0.300913  0.560666 -0.051218]]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">])</span>
     <span class="n">Q</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">Q</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">return</span> <span class="n">Q</span><span class="o">.</span><span class="n">T</span></div>
 
 <div class="viewcode-block" id="hadamard"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.hadamard.html#cr.sparse.dict.hadamard">[docs]</a><span class="k">def</span> <span class="nf">hadamard</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Hadamard matrices of size :math:`n \times n`</span>

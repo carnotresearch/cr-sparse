@@ -71,6 +71,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dev/limitations.html">Limitations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="benchmarks/index.html">Benchmarks</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Change Log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-comparisons">Version comparisons</a></li>
 </ul>
 </li>
 </ul>
@@ -119,8 +120,12 @@
 <li><p>The format of this log is based on <a class="reference external" href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>.</p></li>
 </ul>
 <section id="unreleased">
-<h2><a class="reference external" href="https://github.com/carnotresearch/cr-sparse/compare/v0.1.6...HEAD">Unreleased</a><a class="headerlink" href="#unreleased" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference external" href="https://github.com/carnotresearch/cr-sparse/compare/v0.2.0...HEAD">Unreleased</a><a class="headerlink" href="#unreleased" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/">Documentation</a></p>
+</section>
+<section id="id1">
+<h2><a class="reference external" href="https://github.com/carnotresearch/cr-sparse/compare/v0.1.6...v0.2.0">0.2.0</a> - 2021-10-30<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/v0.2.0/">Documentation</a></p>
 <section id="added">
 <h3>Added<a class="headerlink" href="#added" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -139,6 +144,7 @@
 <li><p>LSQR solver for least squares problems with support for N-D data</p></li>
 <li><p>ISTA: Iterative Shrinkage and Thresholding Algorithm</p></li>
 <li><p>FISTA: Fast Iterative Shrinkage and Thresholding Algorithm</p></li>
+<li><p>lanbpro, simple lansvd</p></li>
 </ul>
 </li>
 <li><p>Geophysics</p>
@@ -163,6 +169,7 @@
 <li><p>Random subspaces, uniform points on subspaces</p></li>
 <li><p>two_subspaces_at_angle, three_subspaces_at_angle</p></li>
 <li><p>multiple index_sets</p></li>
+<li><p>sparse signals with bi-uniform non-zero values</p></li>
 </ul>
 </li>
 <li><p>Utilities</p>
@@ -177,16 +184,24 @@
 <li><p>orth, row_space, null_space, left_null_space, effective_rank</p></li>
 <li><p>subspaces: principal angles, is_in_subspace, project_to_subspace</p></li>
 <li><p>mult_with_submatrix, solve_on_submatrix</p></li>
+<li><p>lanbpro, simple lansvd</p></li>
 </ul>
 </li>
 <li><p>Clustering</p>
 <ul>
 <li><p>K-means clustering</p></li>
 <li><p>Spectral clustering</p></li>
+<li><p>Clustering error metrics</p></li>
+</ul>
+</li>
+<li><p>Subspace clustering</p>
+<ul>
 <li><p>OMP for sparse subspace clustering</p></li>
+<li><p>Subspace preservation ratio metrics</p></li>
 </ul>
 </li>
 </ul>
+<p>A paper is being prepared for JOSS.</p>
 </section>
 <section id="improved">
 <h3>Improved<a class="headerlink" href="#improved" title="Permalink to this headline">¶</a></h3>
@@ -197,14 +212,19 @@
 <li><p>axis parameter added to various compressive sensing operators</p></li>
 </ul>
 </li>
+<li><p>Code coverage</p>
+<ul>
+<li><p>It is back to 90+% in the unit tests</p></li>
+</ul>
+</li>
 </ul>
 </section>
 </section>
-<section id="id1">
-<h2><a class="reference external" href="https://github.com/carnotresearch/cr-sparse/compare/v0.1.5...v0.1.6">0.1.6</a> - 2021-08-29<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/v0.1.6/">Documentation</a></p>
 <section id="id2">
-<h3>Added<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h2><a class="reference external" href="https://github.com/carnotresearch/cr-sparse/compare/v0.1.5...v0.1.6">0.1.6</a> - 2021-08-29<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/v0.1.6/">Documentation</a></p>
+<section id="id3">
+<h3>Added<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>Wavelets</p>
 <ul class="simple">
 <li><p>CWT implementation based on PyWavelets: CMOR and MEXH</p></li>
@@ -237,11 +257,11 @@
 </ul>
 </section>
 </section>
-<section id="id3">
-<h2><a class="reference external" href="https://github.com/carnotresearch/cr-sparse/compare/v0.1.4...v0.1.5">0.1.5</a> - 2021-08-22<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/v0.1.5/">Documentation</a></p>
 <section id="id4">
-<h3>Added<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h2><a class="reference external" href="https://github.com/carnotresearch/cr-sparse/compare/v0.1.4...v0.1.5">0.1.5</a> - 2021-08-22<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/v0.1.5/">Documentation</a></p>
+<section id="id5">
+<h3>Added<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>Linear Operators</p>
 <ul class="simple">
 <li><p>Orthogonal basis operators: Cosine, Walsh Hadamard</p></li>
@@ -284,11 +304,11 @@
 </ul>
 </section>
 </section>
-<section id="id5">
-<h2><a class="reference external" href="https://github.com/carnotresearch/cr-sparse/compare/0.1.3...v0.1.4">0.1.4</a> - 2021-07-12<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/v0.1.4/">Documentation</a></p>
 <section id="id6">
-<h3>Added<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<h2><a class="reference external" href="https://github.com/carnotresearch/cr-sparse/compare/0.1.3...v0.1.4">0.1.4</a> - 2021-07-12<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/v0.1.4/">Documentation</a></p>
+<section id="id7">
+<h3>Added<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>A framework for linear operators</p></li>
 <li><p>ADMM based algorithms for l1 minimization</p></li>
@@ -297,20 +317,23 @@
 </ul>
 </section>
 </section>
-<section id="id7">
-<h2><a class="reference external" href="https://github.com/carnotresearch/cr-sparse/compare/v0.1...0.1.3">0.1.3</a> - 2021-06-06<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <section id="id8">
-<h3>Added<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<h2><a class="reference external" href="https://github.com/carnotresearch/cr-sparse/compare/v0.1...0.1.3">0.1.3</a> - 2021-06-06<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<section id="id9">
+<h3>Added<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Subspace Pursuit</p></li>
 <li><p>Iterative Hard Thresholding</p></li>
 </ul>
 </section>
 </section>
-<section id="id9">
-<h2><a class="reference external" href="https://github.com/carnotresearch/cr-sparse/releases/tag/v0.1">0.1.0</a> - 2021-06-05<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<section id="id10">
+<h2><a class="reference external" href="https://github.com/carnotresearch/cr-sparse/releases/tag/v0.1">0.1.0</a> - 2021-06-05<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
 <p>Initial release</p>
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="version-comparisons">
+<h1>Version comparisons<a class="headerlink" href="#version-comparisons" title="Permalink to this headline">¶</a></h1>
 </section>
 
 

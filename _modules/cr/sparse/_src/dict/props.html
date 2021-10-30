@@ -117,6 +117,7 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 
 <span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">hermitian</span>
@@ -150,7 +151,8 @@
     <span class="n">max_val</span> <span class="o">=</span> <span class="n">G</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">index</span></div>
 
-<div class="viewcode-block" id="coherence"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.coherence.html#cr.sparse.dict.coherence">[docs]</a><span class="k">def</span> <span class="nf">coherence</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<div class="viewcode-block" id="coherence"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.coherence.html#cr.sparse.dict.coherence">[docs]</a><span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">coherence</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Computes the coherence of a dictionary</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">max_val</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">coherence_with_index</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -176,7 +178,8 @@
     <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="babel"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.babel.html#cr.sparse.dict.babel">[docs]</a><span class="k">def</span> <span class="nf">babel</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<div class="viewcode-block" id="babel"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.babel.html#cr.sparse.dict.babel">[docs]</a><span class="nd">@jit</span>
+<span class="k">def</span> <span class="nf">babel</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Computes the babel function for a dictionary (generalized coherence)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># compute gram matrix</span>

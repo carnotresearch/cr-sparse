@@ -5,12 +5,12 @@
 
 Computation times
 =================
-**00:07.900** total execution time for **gallery_wavelets** files:
+**00:08.540** total execution time for **gallery_wavelets** files:
 
 +----------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_wavelets_chirp_cwt_mexh.py` (``chirp_cwt_mexh.py``)                         | 00:04.846 | 0.0 MB |
+| :ref:`sphx_glr_gallery_wavelets_chirp_cwt_mexh.py` (``chirp_cwt_mexh.py``)                         | 00:05.236 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_wavelets_frequency_change_detection.py` (``frequency_change_detection.py``) | 00:02.290 | 0.0 MB |
+| :ref:`sphx_glr_gallery_wavelets_frequency_change_detection.py` (``frequency_change_detection.py``) | 00:02.454 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_wavelets_cameraman_decomposition.py` (``cameraman_decomposition.py``)       | 00:00.764 | 0.0 MB |
+| :ref:`sphx_glr_gallery_wavelets_cameraman_decomposition.py` (``cameraman_decomposition.py``)       | 00:00.850 | 0.0 MB |
 +----------------------------------------------------------------------------------------------------+-----------+--------+

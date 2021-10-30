@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>cr.sparse.lop.diagonal &#8212; cr-sparse  documentation</title>
+    <title>cr.sparse.dict.random_orthonormal_rows &#8212; cr-sparse  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
@@ -28,8 +28,8 @@
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="cr.sparse.lop.zero" href="cr.sparse.lop.zero.html" />
-    <link rel="prev" title="cr.sparse.lop.real_matrix" href="cr.sparse.lop.real_matrix.html" />
+    <link rel="next" title="cr.sparse.dict.gram" href="cr.sparse.dict.gram.html" />
+    <link rel="prev" title="cr.sparse.dict.fourier_basis" href="cr.sparse.dict.fourier_basis.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
@@ -66,9 +66,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Docs</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../dsp.html">Digital Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../wavelets.html">Wavelets</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../lop.html">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lop.html">Linear Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sls.html">Sparse Linear Systems</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pursuit.html">Greedy Sparse Recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">L1 Minimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cluster.html">Data Clustering</a></li>
@@ -92,9 +92,9 @@
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html">API Docs</a><ul>
-  <li><a href="../lop.html">Linear Operators</a><ul>
-      <li>Previous: <a href="cr.sparse.lop.real_matrix.html" title="previous chapter">cr.sparse.lop.real_matrix</a></li>
-      <li>Next: <a href="cr.sparse.lop.zero.html" title="next chapter">cr.sparse.lop.zero</a></li>
+  <li><a href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a><ul>
+      <li>Previous: <a href="cr.sparse.dict.fourier_basis.html" title="previous chapter">cr.sparse.dict.fourier_basis</a></li>
+      <li>Next: <a href="cr.sparse.dict.gram.html" title="next chapter">cr.sparse.dict.gram</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -126,27 +126,37 @@
 
           <div class="body" role="main">
             
-  <section id="cr-sparse-lop-diagonal">
-<h1>cr.sparse.lop.diagonal<a class="headerlink" href="#cr-sparse-lop-diagonal" title="Permalink to this headline">¶</a></h1>
+  <section id="cr-sparse-dict-random-orthonormal-rows">
+<h1>cr.sparse.dict.random_orthonormal_rows<a class="headerlink" href="#cr-sparse-dict-random-orthonormal-rows" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="cr.sparse.lop.diagonal">
-<span class="sig-prename descclassname"><span class="pre">cr.sparse.lop.</span></span><span class="sig-name descname"><span class="pre">diagonal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/lop/basic.html#diagonal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.lop.diagonal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a linear operator which mimics multiplication by a diagonal matrix</p>
+<dt class="sig sig-object py" id="cr.sparse.dict.random_orthonormal_rows">
+<span class="sig-prename descclassname"><span class="pre">cr.sparse.dict.</span></span><span class="sig-name descname"><span class="pre">random_orthonormal_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/dict/simple.html#random_orthonormal_rows"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.dict.random_orthonormal_rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a random sensing matrix with orthonormal rows</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – A vector (1D array) of diagonal entries</p></li>
-<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – For multi-dimensional array input, the axis along which
-the linear operator will be applied</p></li>
+<li><p><strong>key</strong> – a PRNG key used as the random key.</p></li>
+<li><p><strong>M</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Number of rows of the sensing matrix</p></li>
+<li><p><strong>N</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Number of columns of the sensing matrix</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A linear operator wrapping the diagonal matrix multiplication</p>
+<dd class="field-even"><p>A random matrix of shape (M, N) with orthonormal rows</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="cr.sparse.lop.Operator.html#cr.sparse.lop.Operator" title="cr.sparse.lop.Operator">Operator</a></p>
+<dd class="field-odd"><p>(<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)">jax.numpy.ndarray</a>)</p>
 </dd>
 </dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cr.sparse.dict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Phi</span> <span class="o">=</span> <span class="n">cr</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">dict</span><span class="o">.</span><span class="n">random_orthonormal_rows</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Phi</span><span class="p">)</span>
+<span class="go">[[-0.107175 -0.373504 -0.422407 -0.81889 ]</span>
+<span class="go">[-0.769728 -0.300913  0.560666 -0.051218]]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
@@ -162,7 +172,7 @@ the linear operator will be applied</p></li>
       &copy;2021, CR-Sparse Development Team.
       
       |
-      <a href="../../_sources/source/_autosummary/cr.sparse.lop.diagonal.rst.txt"
+      <a href="../../_sources/source/_autosummary/cr.sparse.dict.random_orthonormal_rows.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

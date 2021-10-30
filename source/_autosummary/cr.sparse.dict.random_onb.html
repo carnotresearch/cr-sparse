@@ -24,6 +24,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../../_static/js/custom.js"></script>
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -131,7 +133,33 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="cr.sparse.dict.random_onb">
 <span class="sig-prename descclassname"><span class="pre">cr.sparse.dict.</span></span><span class="sig-name descname"><span class="pre">random_onb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/dict/simple.html#random_onb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.dict.random_onb" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates a random orthonormal basis</p>
+<dd><p>Generates a random orthonormal basis for <span class="math notranslate nohighlight">\(\mathbb{R}^N\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> – a PRNG key used as the random key.</p></li>
+<li><p><strong>N</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Dimension of the vector space</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A random orthonormal basis for <span class="math notranslate nohighlight">\(\mathbb{R}^N\)</span> of shape (N, N)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)">jax.numpy.ndarray</a>)</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cr.sparse.dict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Phi</span> <span class="o">=</span> <span class="n">cr</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">dict</span><span class="o">.</span><span class="n">random_onb</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Phi</span><span class="p">)</span>
+<span class="go">[[-0.382254 -0.266139  0.849797  0.246773]</span>
+<span class="go">[ 0.518932 -0.068848 -0.035348  0.851305]</span>
+<span class="go">[ 0.12152  -0.959138 -0.199282 -0.159919]</span>
+<span class="go">[-0.754867 -0.066964 -0.486706  0.434522]]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
