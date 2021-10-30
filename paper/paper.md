@@ -684,19 +684,13 @@ memory. This should be considered carefully while planning.
 
 ### Linear operators 
 
-Following table compares the runtime of linear operators in `CR-Sparse` on GPU vs `PyLops` on CPU. 
+Following table compares the runtime of linear operators in `CR-Sparse` on GPU vs `PyLops` on CPU for large size problems. 
 Timings are measured for both forward and adjoint operations. For a linear operator $A$, 
-the forward operation is the computation:
-$$
-y = A x
-$$ 
-and the adjoint operation is the computation
-$$
-z = A^H y.
-$$
+the forward operation is the computation $y = A x$ 
+and the adjoint operation is the computation $\hat{x} = A^H y$.
 Linear operators from $\mathbb{R}^n$ to $\mathbb{R}^m$
-can be represented as a matrix of size (m,n). For, some linear operators
-the domain and range vector spaces have same dimension.
+can be represented as a matrix of size (m,n). For some linear operators,
+$m=n$ by definition and we just mention $n$.
 
 \footnotesize
 
@@ -705,7 +699,7 @@ the domain and range vector spaces have same dimension.
 | Diagonal matrix mult| n=1M | 966 µs | 95.7 µs | 10x | 992 µs | 96.3 µs | 10x | 
 | Matrix mult | (m,n)=(10K,10K) | 11 ms | 2.51 ms | 4.37x | 11.6 ms | 2.51 ms | 4.63x |
 | First derivative | n=1M | 2.15 ms | 71.1 µs | 30.2x | 2.97 ms | 186 µs | 15.97x |
-| HAAR DWT2, level=8 | (m,n)=(4K,4K) | 981 ms | 34.4 ms | 28.5x | 713 ms | 60.8 ms | 11.7x | 
+| HAAR DWT2, level=8 | input=(4000,4000) output=(4096, 4096) | 981 ms | 34.4 ms | 28.5x | 713 ms | 60.8 ms | 11.7x | 
 
 \normalsize
 
