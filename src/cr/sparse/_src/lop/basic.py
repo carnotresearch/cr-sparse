@@ -24,6 +24,24 @@ from .util import apply_along_axis
 
 def real_matrix(A):
     """Converts a real matrix into a linear operator
+
+    Args:
+        A (jax.numpy.ndarray): A real valued matrix (2D array) 
+
+    Returns:
+        Operator: A linear operator wrapping the matrix
+
+    Forward operation: 
+
+    .. math::
+
+        y  = A x
+
+    Adjoint operation:
+
+    .. math::
+
+        y = A^T x
     """
     m, n = A.shape
     def times(x):
@@ -38,7 +56,7 @@ def matrix(A, axis=0):
     """Converts a matrix into a linear operator
 
     Args:
-        A (jax.numpy.ndarray): A matrix (2D array) 
+        A (jax.numpy.ndarray): A real or complex matrix (2D array) 
         axis (int): For multi-dimensional array input, the axis along which
           the linear operator will be applied 
 
