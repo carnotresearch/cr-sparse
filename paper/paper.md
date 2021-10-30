@@ -20,11 +20,15 @@ affiliations:
 
 date: 5 November 2021
 bibliography: paper.bib
+
+header-includes:
+    - \usepackage{setspace}
 ---
 
 # Summary
 
-We introduce `CR-Sparse`, a Python package that enables efficiently solving
+We introduce [`CR-Sparse`](https://github.com/carnotresearch/cr-sparse), 
+a Python library that enables efficiently solving
 a wide variety of sparse representation based signal processing problems.
 It is a cohesive collection of sub-libraries working together. Individual
 sub-libraries provide functionalities for:
@@ -36,16 +40,41 @@ It has been built using Google JAX [@jax2018github], which enables the same high
 Python code to get efficiently compiled on CPU, GPU and TPU architectures
 using XLA.  
 
-In particular `cr.sparse.wt` package includes a JAX port of major functionality
-from `PyWavelets` [@lee2019pywavelets] making it a first major pure 
-Python wavelets implementation which can work across CPUs, GPUs and TPUs.
-The API includes:  `dwt`, `idwt`, `dwt2`, `idwt2`, 
-`upcoef`, `downcoef`, `wavedec`, `waverec`, `cwt` functions. 
-The discrete wavelets supported include: 
-Haar, Daubechies, Symlets, Coiflets, Biorthogonal, 
-Reverse biorthogonal, Discrete Meyer.
-Continuous wavelets include: Complex Morlet and Ricker (or Mexican Hat).
+The `cr.sparse.pursuit` package includes greedy and thresholding
+based solvers for sparse recovery. It includes: 
+`OMP`, `CoSaMP`, `HTP`, `IHT`, `SP` algorithms. Normalized versions
+of `HTP` and `IHT` algorithms are also supported.
+These algorithms can work with unstructured random and dense sensing matrices
+as well as structured sensing matrices represented as linear operators
+(provided in `cr.sparse.lop` package).
 
+The `cr.sparse.cvx.adm.yall1` package includes a JAX version of 
+`Your algorithms for l1` [@zhang2009user], an efficient solver
+for l1-minimization problems using 
+ADMM (alternating direction method of multipliers) approach.
+The `cr.sparse.cvx.l1ls` includes 
+*Truncated Newton Interior Points Method* for solving 
+the l1-minimization problem. 
+
+
+The `cr.sparse.sls` package provides JAX versions of
+`LSQR`, `ISTA`, `FISTA`  algorithms for solving sparse linear 
+systems. The linear system is represented by a linear operator
+from `cr.sparse.lop`. It also includes a power iteration
+algorithm to compute the largest eigen value of a 
+symmetric linear operator.
+
+The `cr.sparse.dict` package provides matrix versions of a variety
+of random/structured sensing matrices and dictionaries. It
+also provides some tools for dictionary analysis like:
+coherence, babel function, frame bounds, etc..
+
+The `cr.sparse.cluster` package includes JAX versions of 
+K-means clustering, spectral clustering. It further
+includes support for Sparse Subspace Clustering (SSC) where 
+data points are assumed to lie in a small set of disjoint low dimensional
+subspaces of an ambient space. Currently SSC is implemented using
+OMP. 
 
 The `cr.sparse.lop` package includes a collection of linear operators
 influenced by `PyLops` [@ravasi2019pylops]. The design is different
@@ -66,39 +95,25 @@ to form new operators. Following unary and binary functions are available:
 `neg`, `scale`, `partial_op`, `add`, `subtract`, `compose`, 
 `transpose`, `hermitian`, `hcat`, `power`, `gram`, `frame`.
 
-The `cr.sparse.pursuit` package includes greedy and thresholding
-based solvers for sparse recovery. It includes: 
-`OMP`, `CoSaMP`, `HTP`, `IHT`, `SP` algorithms. Normalized versions
-of `HTP` and `IHT` algorithms are also supported.
-These algorithms can work with unstructured random and dense sensing matrices
-as well as structured sensing matrices represented as linear operators.
+Following sub-libraries in `cr.sparse` have been built to enrich the 
+suite of linear operators in `cr.sparse.lop`.
 
-The `cr.sparse.cvx.adm.yall1` package includes a JAX port of 
-`Your algorithms for l1` [@zhang2009user], an efficient solver
-for l1-minimization problems using 
-ADMM (alternating direction method of multipliers) approach.
-The `cr.sparse.cvx.l1ls` includes 
-*Truncated Newton Interior Points Method* for solving 
-the l1-minimization problem. 
+`cr.sparse.wt` package includes a JAX version of major functionality
+from `PyWavelets` [@lee2019pywavelets] making it a first major pure 
+Python wavelets implementation which can work across CPUs, GPUs and TPUs.
+The API includes:  `dwt`, `idwt`, `dwt2`, `idwt2`, 
+`upcoef`, `downcoef`, `wavedec`, `waverec`, `cwt` functions. 
+The discrete wavelets supported include: 
+Haar, Daubechies, Symlets, Coiflets, Biorthogonal, 
+Reverse biorthogonal, Discrete Meyer.
+Continuous wavelets include: Complex Morlet and Ricker (or Mexican Hat).
 
-
-The `cr.sparse.sls` package provides JAX versions of
-`LSQR`, `ISTA`, `FISTA`  algorithms for solving sparse linear 
-systems. The linear system is represented by a linear operator
-from `cr.sparse.lop`. It also includes a power iteration
-algorithm to compute the largest eigen value of a 
-symmetric linear operator.
 
 The `cr.sparse.dsp` package includes JAX versions of 
 `DCT`, `IDCT`, `WHT` transforms. These in turn are used
 in the `lop` package. It also provides a number of utilities
 to construct synthetic signals like chirps, pulses, Gaussian pulses,
 etc..
-
-The `cr.sparse.dict` package provides matrix versions of a variety
-of random/structured sensing matrices and dictionaries. It
-also provides some tools for dictionary analysis like:
-coherence, babel function, frame bounds, etc..
 
 The `cr.sparse.la` package provides JAX versions of a set of linear algebra
 subroutines as required by other higher level modules. 
@@ -110,12 +125,6 @@ an implementation of **Lanczos Bidiagonalization with Partial
 Reorthogonalization** procedure which can be used to compute 
 truncated SVD. 
 
-The `cr.sparse.cluster` package includes JAX versions of 
-K-means clustering, spectral clustering. It further
-includes support for Sparse Subspace Clustering (SSC) where 
-data points are assumed to lie in a small set of disjoint low dimensional
-subspaces of an ambient space. Currently SSC is implemented using
-OMP. 
 
 # Statement of need
 
@@ -171,8 +180,9 @@ library of solvers which can work across a variety of hardware
 platforms. It also frees users from the concern of supporting 
 new hardware later as becomes the job of the JIT compiler.
 
-At the same time, JAX is relatively new and still under heavy 
-development. Besides the functional programming model places
+At the same time, JAX is relatively new and still hasn't 
+reached `1.0` level maturity. 
+Besides the functional programming model places
 several restrictions on expressing the program logic. For example,
 JAX does not have support for dynamic or data dependent shapes.
 Thus, any algorithm parameter which determines the size/shape
@@ -318,56 +328,152 @@ For details, see the online [documentation](https://cr-sparse.readthedocs.io/en/
 
 ### $\ell_1$ problems
 
+We introduce the different $\ell_1$ minimization problems supported by the
+`cr.sparse.cvx.admm` package.
 
-The basis pursuit problem
+The $\ell_0$ problems are not convex. Obtaining a global minimizer 
+is not feasible (NP hard). One way around is to use convex relaxation
+where a cost function is replaced by its convex version. 
+For $\| x \|_0$, the closest convex function is $\| x \|_1$ 
+or $\ell_1$ norm. With this, the exact-sparse recovery problem becomes
+$$
+{\min}_{x} \| x\|_{1} \; \text{s.t.} \, A x = b
+$$
+This problem is known as Basis Pursuit (BP) in literature. It can be shown 
+that under appropriate conditions on $A$, the basis pursuit solution
+coincides with the exact sparse solution. In general, $\ell_1$-norm
+minimization problems tend to give sparse solutions.
+
+If $x$ is sparse in an sparsifying basis $\Psi$ as $x  = \Psi \alpha$
+(i.e. $\alpha$ is sparse rather than $x$), then we can adapt the
+BP formulation as
+$$
+{\min}_{x} \| W x\|_{1} \; \text{s.t.} \, A x = b
+$$
+where $W = \Psi^T$ and $A$ is the sensing matrix $\Phi$.
+
+Finally, in specific problems, different atoms of $\Psi$ may 
+have different importance. In this case, the $\ell_1$ norm
+may be adapted to reflect this importance by a non-negative weight vector $w$:
+$$
+\| \alpha \|_{w,1} = \sum_{i=1}^{N} w_i | \alpha_i |.
+$$
+This is known as the weighted $\ell_1$ semi-norm.
+
+This gives us the general form of the basis pursuit problem
 $$
 \tag{BP}
 {\min}_{x} \| W x\|_{w,1} \; \text{s.t.} \, A x = b
 $$
 
-The L1/L2 minimization or basis pursuit denoising problem
+Usually, the measurement process introduces noise. Thus, 
+a constraint $A x = b$ is too strict. We can relax this 
+to allow for presence of noise as $\| A x - b \|_2 \leq \delta$
+where $\delta$ is an upper bound on the norm of the measurement noise
+or approximation error. 
+This gives us the Basis Pursuit with Inequality Constraints (BPIC) problem:
 $$
-\tag{L1/L2}
-{\min}_{x} \| W x\|_{w,1} + \frac{1}{2\rho}\| A x - b \|_2^2 
+{\min}_{x} \| x\|_{1} \; \text{s.t.} \, \| A x - b \|_2 \leq \delta
 $$
-
-The L1 minimization problem with L2 constraints
+The more general form is the L1 minimization problem with L2 constraints:
 $$
 \tag{L1/L2con}
 {\min}_{x} \| W x\|_{w,1} \; \text{s.t.} \, \| A x - b \|_2 \leq \delta
 $$
-
+The constrained BPIC problem can be transformed into an equivalent 
+unconstrained convex problem:
+$$
+{\min}_{x} \| x\|_{1} + \frac{1}{2\rho}\| A x - b \|_2^2.
+$$
+This is known as Basis Pursuit Denoising (BPDN) in literature.
+The more general form is the L1/L2 minimization:
+$$
+\tag{L1/L2}
+{\min}_{x} \| W x\|_{w,1} + \frac{1}{2\rho}\| A x - b \|_2^2 
+$$
 We also support corresponding non-negative counter-parts.
-
-The nonnegative basis pursuit problem
+The nonnegative basis pursuit problem:
 $$
 \tag{BP+}
 {\min}_{x} \| W x\|_{w,1} \; \text{s.t.} \, A x = b \, \, \text{and} \, x \succeq 0
 $$
-
-The nonnegative L1/L2 minimization or basis pursuit denoising problem
+The nonnegative L1/L2 minimization or basis pursuit denoising problem:
 $$
 \tag{L1/L2+}
 {\min}_{x} \| W x\|_{w,1} + \frac{1}{2\rho}\| A x - b \|_2^2  \; \text{s.t.} \, x \succeq 0
 $$
-
-The nonnegative L1 minimization problem with L2 constraints
+The nonnegative L1 minimization problem with L2 constraints:
 $$
 \tag{L1/L2con+}
 {\min}_{x} \| W x\|_{w,1} \; \text{s.t.} \, \| A x - b \|_2 \leq \delta \, \, \text{and} \, x \succeq 0
 $$
+For details, see our online [tutorial](https://cr-sparse.readthedocs.io/en/latest/tutorials/admm_l1.html).
 
+## Linear Operators
 
-In the above, $W$ is a sparsifying basis s.t. $Wx = \alpha$ is a sparse representation of $x$ in $W$ given by 
-$\alpha = W^T x$. For simple examples, we can assume $W=I$ is the identity basis.
+While major results on the recovery guarantees of sparse recovery algorithms focus on 
+random matrices, actual applications prefer to use structured dictionaries and 
+sensing matrices so that the operations $A x$ and $A^T x$ can be efficiently 
+computed. These structured matrices fall under the more general class
+of linear operators. In order to fully exploit the power of sparse 
+recovery algorithms, it was deemed necessary to provide a complementary 
+set of linear operators.
 
-The $\| \cdot \|_{w,1}$ is the weighted L1 (semi-) norm defined as
+A linear operator $T : X \to Y$ connects a model space $X$ 
+to a data space $Y$.
 
+A linear operator satisfies following laws:
 $$
-\|x \|_{w,1} = \sum_{i=1}^n w_i |x_i| 
+    T (x + y) = T (x) + T (y)
 $$
+and
+$$
+    T (\alpha x) = \alpha T(x)
+$$
+Thus, for a general linear combination:
+$$
+    T (\alpha x + \beta y) = \alpha T (x) + \beta T (y)
+$$
+We are concerned with linear operators $T : \mathbb{F}^n \to \mathbb{F}^m$
+where $\mathbb{F}$ is either the field of real numbers or 
+complex numbers. 
+$X = \mathbb{F}^n$ is the model space and 
+$Y = \mathbb{F}^m$ is the data space.
+Such a linear operator can be represented by a two dimensional matrix $A$.
+The forward operation is given by:
+$$
+    y = A x.
+$$
+The corresponding adjoint operation is given by:
+$$
+    \hat{x} = A^H y
+$$
+We represent a linear operator by a pair of functions `times` and `trans`. 
+The `times` function implements the forward operation while the `trans`
+function implements the adjoint operation.
 
-for a  given non-negative weight vector $w$. In the simplest case, we assume $w=1$ reducing it to the famous $\ell_1$ norm.
+An inverse problem consists of computing $x$ given $y$ and $A$.
+
+We provide a large collection of linear operators in `cr.sparse.lop`.
+
+Although inspired by `PyLops` [@ravasi2019pylops], there are several
+differences in our implementation. 
+
+- We use `times` and `trans` functions to represent operators.
+- The operators `+`, `-`, `@`, `**` etc. are overridden to provide operator algebra,
+  i.e. ways to combine operators to generate new operators.
+- All our operators can be JIT compiled. Hence, they can be sent as static
+  arguments to other functions (like LSQR, FISTA, etc.) which can be JIT compiled.
+- Our 2D and ND operators accept 2D/ND arrays as input and return 2D/ND arrays as
+  output. We don't require callers to flatten input before applying the operator.
+- Several operators are provided which are specifically meant for sparse
+  representation and compressive sensing applications.
+- We believe that our implementation is cleaner and simpler and yet gives better
+  performance (thanks to JAX) on large size problems.
+
+It is definitely quite easy to extend the library with new operators.
+
+For details, see the online [documentation](https://cr-sparse.readthedocs.io/en/latest/source/lop.html).
 
 ## Sparse Subspace Clustering Problem
 
@@ -516,7 +622,11 @@ hundreds of thousands of points efficiently.
 
 We conducted a number of experiments to benchmark the runtime of 
 `CR-Sparse` implementations viz. existing reference software
-in Python or MATLAB. 
+in Python or MATLAB. In this section, we present a small selection
+of these results. Jupyter notebooks to reproduce these micro-benchmarks
+are available on the 
+[`cr-sparse-companion`](https://github.com/carnotresearch/cr-sparse-companion)
+repository. Readers are encouraged to try them out.
 
 All Python based benchmarks have been run
 on the machine configuration: 
@@ -540,15 +650,21 @@ Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz   2.30 GHz,
 The following table provides comparison of `CR-Sparse` against reference 
 implementations on a set of representative problems:
 
+\footnotesize
+
 | Problem | Size | Ref tool | Ref time | Our time | Gain |
-|:------:|:------:|:--:|:-:|:-:|:-:|
+|:----:|:---:|:--:|:-:|:-:|:-:|
 | Hard Thresholding Pursuit | M=2560, N=10240, K=200 | HTP (MATLAB) | 3.5687 s | 160 ms | 22x |  
 | Orthogonal Matching Pursuit | M=2000, N=10000, K=100 | sckit-learn | 379 ms | 120 ms | 3.15x |  
 | ADMM, BP | M=2000, N=20000, K=200 | YALL1 (MATLAB) | 1.542 sec | 445 ms | 3.46x |  
+| ADMM, BPDN | M=2000, N=20000, K=200 | YALL1 (MATLAB) | 1.572.81 sec | 273 ms | 5.75x |  
 | Image blurring | Image: 500x480, Kernel: 15x25 | Pylops | 6.63 ms | 1.64 ms | 4x |  
 | Image deblurring using LSQR | Image: 500x480, Kernel: 15x25 | Pylops | 237 ms | 39.3 ms | 6x |  
 | Image DWT2 | Image: 512x512 | PyWavelets | 4.48 ms | 656 µs | 6.83x |  
 | Image IDWT2 | Image: 512x512 | PyWavelets | 3.4 ms | 614 µs | 5.54x |  
+| OMP for SSC | 5 subspaces 50K points | SSCOMP_Code (MATLAB) | 52.5 s | 10.2 s | 4.6x |
+
+\normalsize
 
 
 We see significant gains achieved by `CR-Sparse` running on GPU although gain levels are not 
@@ -564,6 +680,40 @@ a number of similar problems over multiple GPU devices. These tools make it extr
 easy to parallelize the algorithms provided in `CR-Sparse` over multiple data.
 The largest problem an algorithm in `CR-Sparse` can solve also depends on available GPU
 memory. This should be considered carefully while planning.
+
+
+### Linear operators 
+
+Following table compares the runtime of linear operators in `CR-Sparse` on GPU vs `PyLops` on CPU. 
+Timings are measured for both forward and adjoint operations. For a linear operator $A$, 
+the forward operation is the computation:
+$$
+y = A x
+$$ 
+and the adjoint operation is the computation
+$$
+z = A^H y.
+$$
+Linear operators from $\mathbb{R}^n$ to $\mathbb{R}^m$
+can be represented as a matrix of size (m,n). For, some linear operators
+the domain and range vector spaces have same dimension.
+
+\footnotesize
+
+| Operator | Size | Fwd ref | Fwd our | Gain | Adj ref | Adj our | Gain |
+|:--------:|:----:|:-:|:-:|:-:|:-:|:-:|:-:|
+| Diagonal matrix mult| n=1M | 966 µs | 95.7 µs | 10x | 992 µs | 96.3 µs | 10x | 
+| Matrix mult | (m,n)=(10K,10K) | 11 ms | 2.51 ms | 4.37x | 11.6 ms | 2.51 ms | 4.63x |
+| First derivative | n=1M | 2.15 ms | 71.1 µs | 30.2x | 2.97 ms | 186 µs | 15.97x |
+| HAAR DWT2, level=8 | (m,n)=(4K,4K) | 981 ms | 34.4 ms | 28.5x | 713 ms | 60.8 ms | 11.7x | 
+
+\normalsize
+
+Notebooks for reproducing these micro-benchmarks are also available in the 
+[companion](https://github.com/carnotresearch/cr-sparse-companion/tree/main/comparison/pylops) repository.
+
+We would like to mention that for small sizes, `pylops` on CPU runs much quicker. 
+Benefits of `CR-Sparse` on GPU can be seen on large sizes.
 
 # Acknowledgements
 
