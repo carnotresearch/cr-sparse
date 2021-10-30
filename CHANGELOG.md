@@ -160,8 +160,6 @@ General stuff
 
 Initial release
 
-# Version comparisons
-
 [Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.0...HEAD
 [0.2.0]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.6...v0.2.0
 [0.1.6]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.5...v0.1.6

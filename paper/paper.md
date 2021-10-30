@@ -699,7 +699,10 @@ $m=n$ by definition and we just mention $n$.
 | Diagonal matrix mult| n=1M | 966 µs | 95.7 µs | 10x | 992 µs | 96.3 µs | 10x | 
 | Matrix mult | (m,n)=(10K,10K) | 11 ms | 2.51 ms | 4.37x | 11.6 ms | 2.51 ms | 4.63x |
 | First derivative | n=1M | 2.15 ms | 71.1 µs | 30.2x | 2.97 ms | 186 µs | 15.97x |
-| HAAR DWT2, level=8 | input=(4000,4000) output=(4096, 4096) | 981 ms | 34.4 ms | 28.5x | 713 ms | 60.8 ms | 11.7x | 
+| HAAR DWT2, level=8 | in=(4K,4K) | 981 ms | 34.4 ms | 28.5x | 713 ms | 60.8 ms | 11.7x | 
+
+For HAAR DWT2, input image is of shape (4000, 4000) and the output
+wavelet coefficients image is of shape (4096, 4096).
 
 \normalsize
 
