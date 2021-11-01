@@ -46,21 +46,21 @@ def rfp_lsqr_guess(Phi, y):
     return x
 
 
-@jit
-def one_sided_quadratic(x):
-    return jnp.where(x < 0, x**2/2, 0)
+# @jit
+# def one_sided_quadratic(x):
+#     return jnp.where(x < 0, x**2/2, 0)
 
 
-@jit
-def l1_norm(x):
-    return jnp.sum(jnp.abs(x))
+# @jit
+# def l1_norm(x):
+#     return jnp.sum(jnp.abs(x))
 
-l1_norm_grad = grad(l1_norm)
+# l1_norm_grad = grad(l1_norm)
 
-def one_sided_quadratic_cost(x):
-    return jnp.sum(one_sided_quadratic(x))
+# def one_sided_quadratic_cost(x):
+#     return jnp.sum(one_sided_quadratic(x))
 
-one_sided_quadratic_cost_grad = grad(one_sided_quadratic_cost)
+# one_sided_quadratic_cost_grad = grad(one_sided_quadratic_cost)
 
 
 class RFPState(NamedTuple):
@@ -72,8 +72,8 @@ class RFPState(NamedTuple):
     """The number of iterations completed"""
 
 
-def f_dash(x):
-    return jnp.where(x <= 0, x, 0)
+# def f_dash(x):
+#     return jnp.where(x <= 0, x, 0)
 
 def rfp(Phi, y, x0, lambda_=1., delta=0.1, inner_iters=200, outer_iters=20):
     """Solver fo 1-bit compressive sensing with renormalized fixed points iteration

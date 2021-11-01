@@ -25,5 +25,6 @@ from cr.sparse._src.cs.cs1bit.rfp import (
 
 from cr.sparse._src.cs.cs1bit.biht import (
     BIHTState,
-    biht
+    biht,
+    biht_jit
 )
