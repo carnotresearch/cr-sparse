@@ -215,12 +215,33 @@ Linear Operators
 
 .. _sphx_glr_gallery_pursuit:
 
-.. _greedy_pursuit_gallery:
+.. _cs_gallery:
 
-Greedy Pursuit Algorithms for Sparse Recovery
------------------------------------------------
+Compressive Sensing
+-----------------------------------
 
 
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates following features - Making 1-bit quantized compressive measurements ...">
+
+.. only:: html
+
+ .. figure:: /gallery/pursuit/images/thumb/sphx_glr_cs1bit_biht_thumb.png
+     :alt: 1 bit Compressive Sensing
+
+     :ref:`sphx_glr_gallery_pursuit_cs1bit_biht.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/pursuit/cs1bit_biht
 
 .. raw:: html
 

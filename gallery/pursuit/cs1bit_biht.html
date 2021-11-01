@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>1 bit Compressive Sensing &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/custom.js"></script>
+    <script src="../../_static/js/mathconf.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CoSaMP step by step" href="cosamp_step_by_step.html" />
+    <link rel="prev" title="Wavelet Transform Operators" href="../lop/wt_op.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/index.html">API Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">Theory</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples Gallery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sparse_vector_normals.html">A sparse model vector generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#data-clustering">Data Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#linear-operators">Linear Operators</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compressive-sensing">Compressive Sensing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#sparse-recovery-via-l1-minimization">Sparse Recovery via L1 minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#wavelets">Wavelets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Examples Gallery</a><ul>
+      <li>Previous: <a href="../lop/wt_op.html" title="previous chapter">Wavelet Transform Operators</a></li>
+      <li>Next: <a href="cosamp_step_by_step.html" title="next chapter">CoSaMP step by step</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-gallery-pursuit-cs1bit-biht-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="bit-compressive-sensing">
+<span id="sphx-glr-gallery-pursuit-cs1bit-biht-py"></span><h1>1 bit Compressive Sensing<a class="headerlink" href="#bit-compressive-sensing" title="Permalink to this headline">¶</a></h1>
+<p>This example demonstrates following features
+- Making 1-bit quantized compressive measurements of a sparse signal
+- Recovering the original signal using the BIHT (Binary Iterative Hard Thresholding) algorithm.</p>
+<p>Let’s import necessary libraries</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">jax.numpy.linalg</span> <span class="kn">import</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.linalg.norm.html#jax.numpy.linalg.norm" title="jax.numpy.linalg.norm" class="sphx-glr-backref-module-jax-numpy-linalg sphx-glr-backref-type-py-function"><span class="n">norm</span></a>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="kn">import</span> <span class="nn">cr.sparse.dict</span> <span class="k">as</span> <span class="nn">crdict</span>
+<span class="kn">import</span> <span class="nn">cr.sparse.data</span> <span class="k">as</span> <span class="nn">crdata</span>
+<span class="kn">import</span> <span class="nn">cr.sparse.cs.cs1bit</span> <span class="k">as</span> <span class="nn">cs1bit</span>
+</pre></div>
+</div>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of measurements</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">M</span></a> <span class="o">=</span> <span class="mi">256</span>
+<span class="c1"># Ambient dimension</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">N</span></a> <span class="o">=</span> <span class="mi">512</span>
+<span class="c1"># Sparsity level</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K</span></a> <span class="o">=</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</section>
+<section id="sensing-matrix">
+<h2>Sensing Matrix<a class="headerlink" href="#sensing-matrix" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi</span> <span class="o">=</span> <span class="n">crdict</span><span class="o">.</span><span class="n">gaussian_mtx</span><span class="p">(</span><span class="n">crs</span><span class="o">.</span><span class="n">KEYS</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">M</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">N</span></a><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># frame bound</span>
+<span class="n">s0</span> <span class="o">=</span> <span class="n">crdict</span><span class="o">.</span><span class="n">upper_frame_bound</span><span class="p">(</span><span class="n">Phi</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s0</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a><span class="o">=</span><a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure" title="matplotlib.pyplot.figure" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.imshow.html#matplotlib.pyplot.imshow" title="matplotlib.pyplot.imshow" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.gray.html#matplotlib.pyplot.gray" title="matplotlib.pyplot.gray" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">gray</span></a><span class="p">()</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.colorbar.html#matplotlib.pyplot.colorbar" title="matplotlib.pyplot.colorbar" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span></a><span class="p">()</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.title.html#matplotlib.pyplot.title" title="matplotlib.pyplot.title" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Phi$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_cs1bit_biht_001.png" srcset="../../_images/sphx_glr_cs1bit_biht_001.png" alt="$\Phi$" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>2.400341648379148
+
+Text(0.5, 1.0, &#39;$\\Phi$&#39;)
+</pre></div>
+</div>
+</section>
+<section id="k-sparse-signal">
+<h2>K-sparse signal<a class="headerlink" href="#k-sparse-signal" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">crdata</span><span class="o">.</span><span class="n">sparse_normal_representations</span><span class="p">(</span><span class="n">crs</span><span class="o">.</span><span class="n">KEYS</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">N</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K</span></a><span class="p">)</span>
+<span class="c1"># normalize signal</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.linalg.norm.html#jax.numpy.linalg.norm" title="jax.numpy.linalg.norm" class="sphx-glr-backref-module-jax-numpy-linalg sphx-glr-backref-type-py-function"><span class="n">norm</span></a><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="c1"># the support indices</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">omega</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a><span class="o">=</span><a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure" title="matplotlib.pyplot.figure" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.stem.html#matplotlib.pyplot.stem" title="matplotlib.pyplot.stem" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">stem</span></a><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">markerfmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_cs1bit_biht_002.png" srcset="../../_images/sphx_glr_cs1bit_biht_002.png" alt="cs1bit biht" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[ 56 128 138 367]
+
+&lt;StemContainer object of 3 artists&gt;
+</pre></div>
+</div>
+</section>
+<section id="measurement-process">
+<h2>Measurement process<a class="headerlink" href="#measurement-process" title="Permalink to this headline">¶</a></h2>
+<p>measurements</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">cs1bit</span><span class="o">.</span><span class="n">measure_1bit</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a><span class="o">=</span><a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure" title="matplotlib.pyplot.figure" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.stem.html#matplotlib.pyplot.stem" title="matplotlib.pyplot.stem" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">stem</span></a><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">markerfmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_cs1bit_biht_003.png" srcset="../../_images/sphx_glr_cs1bit_biht_003.png" alt="cs1bit biht" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[-1. -1.  1.  1.  1. -1. -1. -1. -1. -1.  1.  1.  1. -1. -1.  1. -1. -1.
+ -1. -1. -1. -1.  1.  1. -1. -1. -1.  1.  1.  1.  1. -1. -1.  1. -1. -1.
+  1.  1. -1.  1.  1.  1. -1. -1.  1. -1. -1.  1. -1. -1.  1.  1.  1.  1.
+  1. -1. -1. -1. -1. -1. -1. -1.  1.  1. -1. -1.  1.  1. -1.  1. -1.  1.
+  1. -1. -1.  1. -1.  1. -1.  1. -1. -1.  1. -1. -1.  1. -1. -1. -1. -1.
+ -1.  1.  1. -1.  1.  1.  1. -1. -1.  1. -1. -1. -1. -1. -1. -1.  1. -1.
+  1.  1. -1. -1. -1.  1. -1. -1. -1. -1.  1. -1. -1. -1.  1.  1.  1.  1.
+ -1. -1. -1. -1.  1.  1. -1. -1.  1.  1. -1.  1. -1. -1.  1. -1.  1. -1.
+  1. -1.  1.  1. -1. -1. -1. -1.  1. -1. -1. -1.  1. -1.  1. -1.  1.  1.
+  1. -1.  1. -1. -1.  1. -1.  1.  1. -1.  1.  1. -1. -1.  1. -1.  1. -1.
+ -1. -1.  1. -1.  1.  1. -1.  1. -1.  1.  1. -1.  1. -1. -1.  1.  1.  1.
+ -1. -1.  1. -1. -1.  1.  1.  1. -1.  1. -1.  1.  1.  1. -1.  1. -1. -1.
+ -1. -1.  1. -1. -1.  1. -1.  1.  1.  1. -1.  1.  1.  1. -1.  1.  1.  1.
+ -1.  1. -1. -1.  1.  1.  1. -1.  1. -1.  1.  1. -1.  1.  1. -1.  1. -1.
+  1. -1. -1.  1.]
+</pre></div>
+</div>
+</section>
+<section id="signal-reconstruction-using-biht">
+<h2>Signal Reconstruction using BIHT<a class="headerlink" href="#signal-reconstruction-using-biht" title="Permalink to this headline">¶</a></h2>
+<p>solver step-size</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tau</span> <span class="o">=</span> <span class="mf">0.98</span> <span class="o">*</span> <span class="n">s0</span>
+<span class="c1"># solution</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">cs1bit</span><span class="o">.</span><span class="n">biht_jit</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K</span></a><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>reconstructed signal</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_rec</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">build_signal_from_indices_and_values</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">N</span></a><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">x_I</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="verification">
+<h2>Verification<a class="headerlink" href="#verification" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a><span class="o">=</span><a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure" title="matplotlib.pyplot.figure" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span></a><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplot.html#matplotlib.pyplot.subplot" title="matplotlib.pyplot.subplot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.title.html#matplotlib.pyplot.title" title="matplotlib.pyplot.title" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;original&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.stem.html#matplotlib.pyplot.stem" title="matplotlib.pyplot.stem" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">stem</span></a><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">markerfmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">linefmt</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplot.html#matplotlib.pyplot.subplot" title="matplotlib.pyplot.subplot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span></a><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.stem.html#matplotlib.pyplot.stem" title="matplotlib.pyplot.stem" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">stem</span></a><span class="p">(</span><span class="n">x_rec</span><span class="p">,</span> <span class="n">markerfmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.title.html#matplotlib.pyplot.title" title="matplotlib.pyplot.title" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">title</span></a><span class="p">(</span><span class="s1">&#39;reconstruction&#39;</span><span class="p">)</span>
+
+<span class="c1"># recovered support</span>
+<span class="n">I</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.sort.html#jax.numpy.sort" title="jax.numpy.sort" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">sort</span></a><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_cs1bit_biht_004.png" srcset="../../_images/sphx_glr_cs1bit_biht_004.png" alt="original, reconstruction" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[ 56 128 138 367]
+</pre></div>
+</div>
+<p>check if the support is recovered correctly</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array_equal.html#jax.numpy.array_equal" title="jax.numpy.array_equal" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">array_equal</span></a><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">I</span><span class="p">))</span>
+<span class="c1"># normalize recovered signal</span>
+<span class="n">x_rec</span> <span class="o">=</span> <span class="n">x_rec</span> <span class="o">/</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.linalg.norm.html#jax.numpy.linalg.norm" title="jax.numpy.linalg.norm" class="sphx-glr-backref-module-jax-numpy-linalg sphx-glr-backref-type-py-function"><span class="n">norm</span></a><span class="p">(</span><span class="n">x_rec</span><span class="p">)</span>
+<span class="c1"># the norm of error</span>
+<span class="nb">print</span><span class="p">(</span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.linalg.norm.html#jax.numpy.linalg.norm" title="jax.numpy.linalg.norm" class="sphx-glr-backref-module-jax-numpy-linalg sphx-glr-backref-type-py-function"><span class="n">norm</span></a><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_rec</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>True
+0.024352999672904357
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.497 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-pursuit-cs1bit-biht-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/393a3875de34281fd8b636232fea8c05/cs1bit_biht.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">cs1bit_biht.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/3d2259e426fb502d5b542b048cf1555b/cs1bit_biht.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">cs1bit_biht.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2021, CR-Sparse Development Team.
+      
+      |
+      <a href="../../_sources/gallery/pursuit/cs1bit_biht.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

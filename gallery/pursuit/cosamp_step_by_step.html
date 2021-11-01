@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Random Orthogonal Measurements, Cosine Basis, ADMM" href="../rec_l1/partial_wh_sensor_cosine_basis.html" />
-    <link rel="prev" title="Wavelet Transform Operators" href="../lop/wt_op.html" />
+    <link rel="prev" title="1 bit Compressive Sensing" href="cs1bit_biht.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
@@ -69,7 +69,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../sparse_vector_normals.html">A sparse model vector generator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#data-clustering">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#linear-operators">Linear Operators</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html#greedy-pursuit-algorithms-for-sparse-recovery">Greedy Pursuit Algorithms for Sparse Recovery</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#compressive-sensing">Compressive Sensing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#sparse-recovery-via-l1-minimization">Sparse Recovery via L1 minimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#wavelets">Wavelets</a></li>
 </ul>
@@ -83,7 +83,7 @@
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html">Examples Gallery</a><ul>
-      <li>Previous: <a href="../lop/wt_op.html" title="previous chapter">Wavelet Transform Operators</a></li>
+      <li>Previous: <a href="cs1bit_biht.html" title="previous chapter">1 bit Compressive Sensing</a></li>
       <li>Next: <a href="../rec_l1/partial_wh_sensor_cosine_basis.html" title="next chapter">Random Orthogonal Measurements, Cosine Basis, ADMM</a></li>
   </ul></li>
   </ul></li>
@@ -207,7 +207,7 @@ that the energy of the residual <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cosamp_step_by_step_001.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_001.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7f5d57b00c70&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7f97ae89f2b0&gt;]
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">omega</span></code> contains the set of indices at which x is nonzero (support of <code class="docutils literal notranslate"><span class="pre">x</span></code>)</p>
@@ -227,7 +227,7 @@ that the energy of the residual <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cosamp_step_by_step_002.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_002.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7f5d57498460&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7f97ae5fbcd0&gt;]
 </pre></div>
 </div>
 </section>
@@ -360,7 +360,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cosamp_step_by_step_003.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_003.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7f5d56e47b20&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7f97ae2c41f0&gt;
 </pre></div>
 </div>
 <p>We can check how good we were in picking the correct indices from the actual support of the signal</p>
@@ -505,7 +505,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cosamp_step_by_step_004.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_004.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7f5d5753d910&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7f97adfb06a0&gt;
 </pre></div>
 </div>
 <p>The algorithm has no direct way of knowing that it indeed found the solution
@@ -584,10 +584,10 @@ It is time to compute the residual after the second iteration</p>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cosamp_step_by_step_005.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_005.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7f5d56d253d0&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7f97ae209070&gt;
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.543 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.850 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-pursuit-cosamp-step-by-step-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/7cece7d024bda50295b7a347f4f2a669/cosamp_step_by_step.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">cosamp_step_by_step.py</span></code></a></p>

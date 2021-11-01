@@ -12,6 +12,7 @@ API Docs
    dict
    pursuit
    cvx_recovery
+   cs
    cluster
    data
    util

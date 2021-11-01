@@ -1,0 +1,6 @@
+﻿cr.sparse.cs.cs1bit.biht\_jit
+=============================
+
+.. currentmodule:: cr.sparse.cs.cs1bit
+
+.. autofunction:: biht_jit

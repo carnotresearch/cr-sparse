@@ -1,0 +1,21 @@
+﻿cr.sparse.cs.cs1bit.BIHTState
+=============================
+
+.. currentmodule:: cr.sparse.cs.cs1bit
+
+.. autoclass:: BIHTState
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BIHTState.I
+      ~BIHTState.iterations
+      ~BIHTState.n_mismatched_bits
+      ~BIHTState.r
+      ~BIHTState.x_I
+   
+   
