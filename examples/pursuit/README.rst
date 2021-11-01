@@ -1,4 +1,4 @@
-.. _greedy_pursuit_gallery:
+.. _cs_gallery:
 
-Greedy Pursuit Algorithms for Sparse Recovery
------------------------------------------------
+Compressive Sensing
+-----------------------------------
