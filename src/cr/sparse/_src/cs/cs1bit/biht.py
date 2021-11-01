@@ -23,6 +23,8 @@ from cr.sparse import hard_threshold, build_signal_from_indices_and_values
 
 
 class BIHTState(NamedTuple):
+    """Represents the state of the BIHT algorithm
+    """
     # The non-zero values
     x_I: jnp.ndarray
     """Non-zero values"""
@@ -37,8 +39,59 @@ class BIHTState(NamedTuple):
 
 
 def biht(Phi, y, K, tau, max_iters=1000):
-    """Solves the 1-bit compressive sensing problem :math:`y = \text{sgn} (\\Phi x)` using 
+    r"""Solves the 1-bit compressive sensing problem :math:`\text{sgn} (\\Phi x) = y` using 
     Binary Iterative Hard Thresholding
+
+    Args:
+        Phi (jax.numpy.ndarray): A random dictionary of shape (M, N)
+        y (jax.numpy.ndarray): The 1-bit measurements 
+        K (int): Sparsity level of solution x (number of non-zero entries)
+        tau (float): Step size for the x update step
+        max_iters (int): Maximum number of iterations
+
+    Returns:
+        (BIHTState): A named tuple containing the solution x and other details
+
+
+    We assume that :math:`x` is a K-sparse vector.
+
+    We assume that the one-bit measurements are made as follows:
+
+    .. math::
+
+        y = \text{sgn} (\Phi x)
+
+    Thus the vector y contains entries 1 and -1 for the signs of the entries in the
+    measurement :math:`\Phi x`.
+
+
+    The BIHT algorithm proceeds as follows:
+
+    - Start with an estimate :math:`x = 0`
+    - Compute the guess :math:`\hat{y} = \text{sgn} (\Phi x)`
+    - Measure the residual :math:`r = y - \hat{y}`
+    - Count the number of mismatched bits as number of places where r is non-zero.
+    - Compute the correlation :math:`h = \Phi^T r`
+    - Update x as :math:`x = x + \frac{\tau}{2} h`
+    - Hard threshold x to keep only K largest entries
+    - Repeat till convergence
+
+
+    Example:
+        >>> import cr.sparse as crs
+        >>> import cr.sparse.dict as crdict
+        >>> import cr.sparse.data as crdata
+        >>> import cr.sparse.cs.cs1bit as cs1bit
+        >>> M, N, K = 256, 512, 4
+        >>> Phi = crdict.gaussian_mtx(crs.KEYS[0], M, N, normalize_atoms=False)
+        >>> x, omega = crdata.sparse_normal_representations(crs.KEYS[1], N, K)
+        >>> x = x / norm(x)
+        >>> y = cs1bit.measure_1bit(Phi, x)
+        >>> s0 = crdict.upper_frame_bound(Phi)
+        >>> tau = 0.98 * s0
+        >>> state = cs1bit.biht_jit(Phi, y, K, tau)
+        >>> x_rec = crs.build_signal_from_indices_and_values(N, state.I, state.x_I)
+        >>> x_rec = x_rec / norm(x_rec)
     """
     ## Initialize some constants for the algorithm
     M, N = Phi.shape
