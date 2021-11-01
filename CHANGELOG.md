@@ -8,6 +8,16 @@ All notable changes to this project will be documented in this file.
 
 [Documentation](https://cr-sparse.readthedocs.io/en/latest/)
 
+## [0.2.1] - 2021-11-01
+
+[Documentation](https://cr-sparse.readthedocs.io/en/v0.2.1/)
+
+### Added
+
+- Compressive Sensing
+  - 1 bit compressive sensing process
+  - BIHT (Binary Iterative Hard Thresholding) algorithm for signal reconstruction from 1 bit measurements
+
 ## [0.2.0] - 2021-10-30
 
 [Documentation](https://cr-sparse.readthedocs.io/en/v0.2.0/)
@@ -160,7 +170,8 @@ General stuff
 
 Initial release
 
-[Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.6...v0.2.0
 [0.1.6]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.4...v0.1.5
