@@ -52,10 +52,10 @@ def test_smallest_principal_angles():
     assert_allclose(o, angles)
     angles = subspaces.smallest_principal_angles_rad_jit(lst)
     # allow for 32-bit floating point errors
-    assert_allclose(z, angles, atol=1e-2)
+    assert_allclose(z, angles, atol=1e-1)
     angles = subspaces.smallest_principal_angles_deg_jit(lst)
     # allow for 32-bit floating point errors
-    assert_allclose(z, angles, atol=1e-2)
+    assert_allclose(z, angles, atol=1e-1)
 
 
 def test_project_to_subspace():
