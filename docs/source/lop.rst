@@ -149,7 +149,7 @@ section provide different ways to combine linear operators.
     subtract
     compose
     transpose
-    hermitian
+    adjoint
     hcat
     power
     block_diag

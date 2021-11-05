@@ -203,12 +203,29 @@ def scale(A, alpha):
     return Operator(times=times, trans=trans, shape=A.shape, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe, real=real)
 
 def hermitian(A):
-    r"""Returns the Hermitian transpose of a given operator :math:`T = A^H`"""
+    r"""Returns the Hermitian transpose of a given operator :math:`T = A^H`
+    
+    Args:
+        A (Operator): A given linear operator 
+
+    Returns:
+        (Operator): A linear operator T such that :math:`T x = A^H x` 
+
+    Note: 
+        Deprecated. Use `adjoint` instead.
+    """
     m, n = A.shape
     return Operator(times=A.trans, trans=A.times, shape=(n,m), jit_safe=A.jit_safe, matrix_safe=A.matrix_safe, real=A.real)
 
 def adjoint(A):
-    r"""Returns the adjoint of a given operator :math:`T = A^H`"""
+    r"""Returns the adjoint of a given operator :math:`T = A^H`
+        
+    Args:
+        A (Operator): A given linear operator 
+
+    Returns:
+        (Operator): A linear operator T such that :math:`T x = A^H x` 
+    """
     m, n = A.shape
     return Operator(times=A.trans, trans=A.times, shape=(n,m), jit_safe=A.jit_safe, matrix_safe=A.matrix_safe, real=A.real)
 
