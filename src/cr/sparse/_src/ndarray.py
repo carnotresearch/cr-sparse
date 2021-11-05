@@ -49,3 +49,26 @@ def arr_vdot(x, y):
     """Returns the inner product of two arrays  by flattening it 
     """
     return jnp.vdot(x, y)
+
+@jit
+def arr_rdot(x, y):
+    """Returns the inner product Re(x^H, y) on two arrays by flattening them
+    """
+    x = jnp.ravel(x)
+    y = jnp.ravel(y)
+    if jnp.isrealobj(x) and jnp.isrealobj(y):
+        # we can fall back to real inner product
+        return jnp.sum(x * y)
+    if jnp.isrealobj(x) or jnp.isrealobj(y):
+        # 
+        x = jnp.real(x)
+        y = jnp.real(y)
+        return jnp.sum(x * y)
+    # both x and y are complex
+    # compute x^H
+    x = jnp.conjugate(x)    
+    # compute x^H y
+    prod = jnp.sum(x * y)
+    # take the real part
+    return jnp.real(prod)
+

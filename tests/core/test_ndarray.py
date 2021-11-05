@@ -21,3 +21,23 @@ def test_arr_l2norm_sqr():
 def test_arr_vdot():
     x = jnp.zeros(10)
     assert_allclose(crs.arr_vdot(x, x), 0.)
+
+
+
+
+@pytest.mark.parametrize("x,y", [ ([1, 0], [1, 0]),
+([1], [1, 0]),
+([1 + 0j, 0], [1+0j, 0]),
+([1 + 1j, 0], [1+1j, 0]),
+([1 + 1j, 2-3j], [1, 0]),
+([1, -4], [1+2j, -3j]),
+])
+def test_rdot(x, y):
+    x = jnp.asarray(x)
+    y = jnp.asarray(y)
+    x1 = jnp.ravel(x)
+    y1 = jnp.ravel(y)
+    expected = jnp.sum(jnp.conjugate(x1) * y1)
+    expected = jnp.real(expected)
+    assert_almost_equal(crs.arr_rdot(x, y), expected)
+
