@@ -77,10 +77,11 @@ def matrix(A, axis=0):
 
     """
     m, n = A.shape
+    real = jnp.isrealobj(A)
     times = lambda x: A @ x
     trans = lambda x : _hermitian(_hermitian(x) @ A )
     times, trans = apply_along_axis(times, trans, axis)
-    return Operator(times=times, trans=trans, shape=(m,n))
+    return Operator(times=times, trans=trans, shape=(m,n), real=real)
 
 def diagonal(d, axis=0):
     """Returns a linear operator which mimics multiplication by a diagonal matrix
