@@ -72,3 +72,9 @@ def arr_rdot(x, y):
     # take the real part
     return jnp.real(prod)
 
+
+@jit
+def arr2vec(x):
+    """Converts an nd array to a vector
+    """
+    return jnp.ravel(x)

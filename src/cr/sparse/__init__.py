@@ -222,6 +222,7 @@ from cr.sparse._src.ndarray import (
     arr_l2norm_sqr,
     arr_vdot,
     arr_rdot,
+    arr2vec,
 )
 
 from cr.sparse._src.similarity import (

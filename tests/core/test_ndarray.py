@@ -35,8 +35,8 @@ def test_arr_vdot():
 def test_rdot(x, y):
     x = jnp.asarray(x)
     y = jnp.asarray(y)
-    x1 = jnp.ravel(x)
-    y1 = jnp.ravel(y)
+    x1 = crs.arr2vec(x)
+    y1 = crs.arr2vec(y)
     expected = jnp.sum(jnp.conjugate(x1) * y1)
     expected = jnp.real(expected)
     assert_almost_equal(crs.arr_rdot(x, y), expected)

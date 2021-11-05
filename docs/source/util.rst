@@ -197,4 +197,5 @@ Utilities for ND-Arrays
     arr_l2norm_sqr
     arr_vdot
     arr_rdot
+    arr2vec
 
