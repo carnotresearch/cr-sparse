@@ -36,6 +36,7 @@ from cr.sparse._src.lop.lop import (
     compose,
     transpose,
     hermitian,
+    adjoint,
     hcat,
     power,
     gram,

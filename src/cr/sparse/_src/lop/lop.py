@@ -160,7 +160,8 @@ def jit(operator):
         raise Exception("This operator is not suitable for JIT compilation.")
     times = jax.jit(operator.times)
     trans = jax.jit(operator.trans)
-    return Operator(times=times, trans=trans, shape=operator.shape, matrix_safe=operator.matrix_safe)
+    return Operator(times=times, trans=trans, shape=operator.shape, 
+        matrix_safe=operator.matrix_safe, real=operator.real, linear=operator.linear)
 
 ###########################################################################################
 #
@@ -173,25 +174,47 @@ def jit(operator):
 ###########################################################################################
 
 def neg(A):
-    """Returns the negative of a linear operator :math:`T = -A`"""
+    r"""Returns the negative of a linear operator :math:`T = -A`
+    
+    Args:
+        A (Operator): A given linear operator 
+
+    Returns:
+        (Operator): A linear operator T such that :math:`T x = - A x`
+    """
     times = lambda x : -A.times(x)
     trans = lambda x : -A.trans(x)
     return Operator(times=times, trans=trans, shape=A.shape, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe, real=A.real)
 
 def scale(A, alpha):
-    """Returns the linear operator :math:`T = \\alpha A` for the operator :math:`A`"""
+    r"""Returns the linear operator :math:`T = \alpha A` for the operator :math:`A`
+    
+    Args:
+        A (Operator): A given linear operator 
+
+    Returns:
+        (Operator): A linear operator T such that :math:`T x = \alpha A x` 
+        and :math:`T^H x = \bar{\alpha} A^H x`
+    """
     real = A.real and not  isinstance(alpha, complex)
+    alpha_c = jnp.conjugate(alpha)
     times = lambda x : alpha * A.times(x)
-    trans = lambda x : alpha * A.trans(x)
+    trans = lambda x : alpha_c * A.trans(x)
     return Operator(times=times, trans=trans, shape=A.shape, jit_safe=A.jit_safe, matrix_safe=A.matrix_safe, real=real)
 
 def hermitian(A):
-    """Returns the Hermitian transpose of a given operator :math:`T = A^H`"""
+    r"""Returns the Hermitian transpose of a given operator :math:`T = A^H`"""
     m, n = A.shape
     return Operator(times=A.trans, trans=A.times, shape=(n,m), jit_safe=A.jit_safe, matrix_safe=A.matrix_safe, real=A.real)
 
+def adjoint(A):
+    r"""Returns the adjoint of a given operator :math:`T = A^H`"""
+    m, n = A.shape
+    return Operator(times=A.trans, trans=A.times, shape=(n,m), jit_safe=A.jit_safe, matrix_safe=A.matrix_safe, real=A.real)
+
+
 def transpose(A):
-    """Returns the transpose of a given operator :math:`T = A^T`"""
+    r"""Returns the transpose of a given operator :math:`T = A^T`"""
     m, n = A.shape
     if A.real:
         times = A.trans
