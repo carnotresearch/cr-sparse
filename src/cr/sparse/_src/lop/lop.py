@@ -154,6 +154,27 @@ class Operator(NamedTuple):
         return  reduce(lambda x, y : x * y, shape)
 
 
+    @property
+    def input_shape(self):
+        """Returns the shape of input to the operator as a tuple
+        """
+        shape = self.shape[1]
+        if isinstance(shape, int):
+            # it appears to be a 1D operator
+            return (shape,)
+        return  shape
+
+    @property
+    def output_shape(self):
+        """Returns the shape of output of the operator as a tuple
+        """
+        shape = self.shape[0]
+        if isinstance(shape, int):
+            # it appears to be a 1D operator
+            return (shape,)
+        return  shape
+
+
 def jit(operator):
     """Returns the same linear operator with compiled times and trans functions"""
     if not operator.jit_safe:
