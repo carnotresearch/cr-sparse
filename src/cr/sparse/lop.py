@@ -50,6 +50,9 @@ from cr.sparse._src.lop.block_diag import (
 from cr.sparse._src.lop.identity import (
     identity,
 )
+from cr.sparse._src.lop.dot import (
+    dot
+)
 
 from cr.sparse._src.lop.spread import (
 spread_with_table
@@ -74,7 +77,8 @@ from cr.sparse._src.lop.util import (
     to_adjoint_matrix,
     to_complex_matrix,
     dot_test_real,
-    dot_test_complex
+    dot_test_complex,
+    rdot_test_complex
 )
 
 # The following operators are technically not linear

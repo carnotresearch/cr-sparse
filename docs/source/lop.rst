@@ -129,11 +129,12 @@ Basic operators
     zero
     flipud
     sum
+    dot
     pad_zeros
     symmetrize
     restriction
 
-Operator algebra
+Operator calculus
 ------------------
 
 It is possible to combine one or more linear operators
