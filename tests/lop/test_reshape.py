@@ -4,7 +4,7 @@ from .lop_setup import *
     [(3,4), (2,6)],
     [(3,4,6), (6,4,3)],
 ])
-def test_fft_norm(in_shape,out_shape):
+def test_reshape(in_shape,out_shape):
     T = lop.reshape(in_shape, out_shape)
     T = lop.jit(T)
     x = jnp.ones(in_shape)
