@@ -70,6 +70,9 @@ from cr.sparse._src.lop.basic import (
     symmetrize,
     restriction,
 )
+from cr.sparse._src.lop.reshape import (
+    reshape
+)
 
 # utilities
 from cr.sparse._src.lop.util import (

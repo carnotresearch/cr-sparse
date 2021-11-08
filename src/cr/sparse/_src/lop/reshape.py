@@ -1,0 +1,36 @@
+# Copyright 2021 CR.Sparse Development Team
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import jax.numpy as jnp
+
+from .lop import Operator
+
+
+def reshape(in_shape, out_shape):
+    """Returns a linear operator which reshapes vectors from model space to data space
+
+    Args:
+        in_shape (int): Shape of vectors in the model space 
+        out_shape (int): Shape of vectors in the data space
+
+    Returns:
+        (Operator): An identity linear operator
+    """
+    in_size = jnp.prod(jnp.array(in_shape))
+    out_size = jnp.prod(jnp.array(out_shape))
+    assert in_size == out_size, "Input and output size must be equal"
+
+    times = lambda x:  jnp.reshape(x, out_shape)
+    trans = lambda x : jnp.reshape(x, in_shape)
+    return Operator(times=times, trans=trans, shape=(out_shape,in_shape))

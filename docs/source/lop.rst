@@ -133,6 +133,7 @@ Basic operators
     pad_zeros
     symmetrize
     restriction
+    reshape
 
 Operator calculus
 ------------------
