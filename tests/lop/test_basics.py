@@ -96,13 +96,3 @@ def test_symmetrize():
     assert lop.dot_test_complex(keys[1], T)
 
 
-def test_resriction():
-    n = 4
-    index = jnp.array([0, 2])
-    T = lop.jit(lop.restriction(n, index))
-    x = random.normal(keys[0], (n,))
-    assert_allclose(T.times(x), x[index])
-    y = jnp.zeros_like(x).at[index].set(x[index])
-    assert lop.dot_test_real(keys[0], T)
-    assert_allclose(T.trans(T.times(x)), y)
-    assert lop.dot_test_complex(keys[1], T)

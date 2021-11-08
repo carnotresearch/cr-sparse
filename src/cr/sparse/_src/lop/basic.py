@@ -214,10 +214,35 @@ def symmetrize(n):
     return Operator(times=times, trans=trans, shape=(2*n,n))
 
 
-def restriction(n, indices):
+def restriction(n, I, axis=0):
     """An operator which computes y = x[I] over an index set I
+
+    Args:
+        n (int): Dimension of model space
+        I (jax.numpy.ndarray): 
+        axis (int): For multi-dimensional array input, the axis along which
+          the linear operator will be applied 
     """
-    k = len(indices)
-    times = lambda x: x[indices]
-    trans = lambda x: jnp.zeros((n,)+x.shape[1:]).at[indices].set(x)
+    k = len(I)
+    times1d = lambda x: x[I]
+    trans1d = lambda x: jnp.zeros((n,), dtype=x.dtype).at[I].set(x)
+
+    def times(x):
+        if x.ndim == 1:
+            return times1d(x)
+        if x.ndim == 2:
+            if axis == 0:
+                # we apply column wise
+                return x[I, :]
+            # we apply row-wise
+            return x[:, I]
+        # general case
+        return jnp.apply_along_axis(times1d, axis, x)
+
+    def trans(x):
+        if x.ndim == 1:
+            return trans1d(x)
+        # general case
+        return jnp.apply_along_axis(trans1d, axis, x)
+
     return Operator(times=times, trans=trans, shape=(k,n))
