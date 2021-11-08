@@ -78,9 +78,36 @@ def matrix(A, axis=0):
     """
     m, n = A.shape
     real = jnp.isrealobj(A)
-    times = lambda x: A @ x
-    trans = lambda x : _hermitian(_hermitian(x) @ A )
-    times, trans = apply_along_axis(times, trans, axis)
+
+    times1d = lambda x: A @ x
+    trans1d = lambda x : _hermitian(_hermitian(x) @ A )
+
+    def times(x):
+        """Forward matrix multiplication
+        """
+        if x.ndim == 1:
+            return A @ x
+        if x.ndim == 2:
+            if axis == 0:
+                return A @ x
+            else:
+                return x @ A.T
+        # general case
+        return jnp.apply_along_axis(times1d, axis, x)
+
+    def trans(x):
+        """Adjoint matrix multiplication
+        """
+        if x.ndim == 1:
+            return trans1d(x)
+        if x.ndim == 2:
+            if axis == 0:
+                return _hermitian(A) @ x
+            else:
+                return x @ jnp.conjugate(A)
+        # general case
+        return jnp.apply_along_axis(trans1d, axis, x)
+
     return Operator(times=times, trans=trans, shape=(m,n), real=real)
 
 def diagonal(d, axis=0):

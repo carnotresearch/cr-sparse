@@ -1,22 +1,6 @@
 from .lop_setup import *
 
 
-def test_matrix_1():
-    A = jnp.ones([4, 4])
-    op = lop.matrix(A)
-    x = jnp.ones(4)
-    assert_allclose(op.times(x), A @ x)
-    assert_allclose(op.trans(x), A.T @ x)
-
-def test_matrix_2():
-    A = jnp.reshape(jnp.arange(20), (4,5))
-    op = lop.matrix(A)
-    x = jnp.ones(4)
-    y = jnp.ones(5)
-    assert_allclose(op.times(y), A @ y)
-    assert_allclose(op.trans(x), A.T @ x)
-    assert lop.dot_test_real(keys[0], op)
-
 
 def test_diag():
     n = 4
