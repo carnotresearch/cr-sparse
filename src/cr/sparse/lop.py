@@ -107,6 +107,12 @@ from cr.sparse._src.lop.onb import (
     walsh_hadamard_basis,
 )
 
+# Fast Fourier Transform
+from cr.sparse._src.lop.fft import (
+    fft
+)
+
+
 # wavelet transforms
 from cr.sparse._src.lop.dwt import (
     dwt,

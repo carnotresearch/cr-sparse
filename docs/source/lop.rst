@@ -174,6 +174,7 @@ Orthonormal transforms and bases
 .. autosummary::
     :toctree: _autosummary
 
+    fft
     dwt
     dwt2D
     fourier_basis
