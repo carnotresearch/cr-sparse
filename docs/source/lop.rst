@@ -125,6 +125,7 @@ Basic operators
     identity
     matrix
     real_matrix
+    scalar_mult
     diagonal
     zero
     flipud

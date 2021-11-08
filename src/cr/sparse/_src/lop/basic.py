@@ -129,6 +129,24 @@ def diagonal(d, axis=0):
     return Operator(times=times, trans=trans, shape=(n,n))
 
 
+def scalar_mult(alpha, n):
+    r"""Returns a linear operator T such that :math:`T v = \alpha v`
+
+    Args:
+        alpha (float): A scalar value
+        n (int): The dimension of model/data space 
+
+    Returns:
+        Operator: A linear operator wrapping the scalar multiplication
+    """
+    alpha = jnp.asarray(alpha)
+    alpha_c = jnp.conjugate(alpha)
+    assert alpha.ndim == 0, "alpha must be a scalar quantity"
+    times = lambda x: alpha * x
+    trans = lambda x: alpha_c * x
+    return Operator(times=times, trans=trans, shape=(n,n))
+
+
 def zero(in_dim, out_dim=None, axis=0):
     """Returns a linear operator which maps everything to 0 vector in data space
 
