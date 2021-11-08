@@ -17,7 +17,7 @@ import jax.numpy as jnp
 from .util import to_matrix
 
 def upper_frame_bound(T):
-    """Computes the upper frame bound for a linear operator
+    """Computes the upper frame bound for a linear operator using full SVD
     """
     A = to_matrix(T)
     s = jnp.linalg.svd(A, False, False)

@@ -131,6 +131,7 @@ from cr.sparse._src.lop.special_matrices import (
     circulant,
 )
 
+# random dictionaries
 from cr.sparse._src.lop.random import (
     gaussian_dict,
     rademacher_dict,
@@ -140,4 +141,8 @@ from cr.sparse._src.lop.random import (
 
 from cr.sparse._src.lop.props import (
     upper_frame_bound,
+)
+from cr.sparse._src.lop.normest import (
+    normest,
+    normest_jit
 )

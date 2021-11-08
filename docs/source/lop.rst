@@ -248,6 +248,8 @@ These are still experimental and not efficient.
 .. autosummary::
     :toctree: _autosummary
 
+    normest
+    normest_jit
     upper_frame_bound
 
 
