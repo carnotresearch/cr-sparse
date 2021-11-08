@@ -25,7 +25,7 @@ def reshape(in_shape, out_shape):
         out_shape (int): Shape of vectors in the data space
 
     Returns:
-        (Operator): An identity linear operator
+        (Operator): A reshaping linear operator
     """
     in_size = jnp.prod(jnp.array(in_shape))
     out_size = jnp.prod(jnp.array(out_shape))
