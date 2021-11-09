@@ -129,6 +129,10 @@ from cr.sparse._src.lop.calculus import (
     first_derivative,
     second_derivative,
 )
+from cr.sparse._src.lop.tv import (
+    tv,
+    tv2D
+)
 
 # Special matrices
 from cr.sparse._src.lop.special_matrices import (

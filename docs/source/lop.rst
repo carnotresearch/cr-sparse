@@ -221,6 +221,8 @@ Derivatives (finite differences)
 
     first_derivative
     second_derivative
+    tv
+    tv2D
 
 Convenience operators
 -----------------------
