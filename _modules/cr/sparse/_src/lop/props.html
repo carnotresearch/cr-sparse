@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -122,7 +122,7 @@
 <span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">to_matrix</span>
 
 <div class="viewcode-block" id="upper_frame_bound"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.upper_frame_bound.html#cr.sparse.lop.upper_frame_bound">[docs]</a><span class="k">def</span> <span class="nf">upper_frame_bound</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Computes the upper frame bound for a linear operator</span>
+    <span class="sd">&quot;&quot;&quot;Computes the upper frame bound for a linear operator using full SVD</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">to_matrix</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>

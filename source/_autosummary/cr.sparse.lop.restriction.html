@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -28,7 +28,7 @@
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="cr.sparse.lop.neg" href="cr.sparse.lop.neg.html" />
+    <link rel="next" title="cr.sparse.lop.reshape" href="cr.sparse.lop.reshape.html" />
     <link rel="prev" title="cr.sparse.lop.symmetrize" href="cr.sparse.lop.symmetrize.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -95,7 +95,7 @@
   <li><a href="../index.html">API Docs</a><ul>
   <li><a href="../lop.html">Linear Operators</a><ul>
       <li>Previous: <a href="cr.sparse.lop.symmetrize.html" title="previous chapter">cr.sparse.lop.symmetrize</a></li>
-      <li>Next: <a href="cr.sparse.lop.neg.html" title="next chapter">cr.sparse.lop.neg</a></li>
+      <li>Next: <a href="cr.sparse.lop.reshape.html" title="next chapter">cr.sparse.lop.reshape</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -131,8 +131,18 @@
 <h1>cr.sparse.lop.restriction<a class="headerlink" href="#cr-sparse-lop-restriction" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="cr.sparse.lop.restriction">
-<span class="sig-prename descclassname"><span class="pre">cr.sparse.lop.</span></span><span class="sig-name descname"><span class="pre">restriction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/lop/basic.html#restriction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.lop.restriction" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">cr.sparse.lop.</span></span><span class="sig-name descname"><span class="pre">restriction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/lop/basic.html#restriction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.lop.restriction" title="Permalink to this definition">¶</a></dt>
 <dd><p>An operator which computes y = x[I] over an index set I</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Dimension of model space</p></li>
+<li><p><strong>I</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – </p></li>
+<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – For multi-dimensional array input, the axis along which
+the linear operator will be applied</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

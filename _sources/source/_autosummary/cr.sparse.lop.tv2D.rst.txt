@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.tv2D
+==================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: tv2D

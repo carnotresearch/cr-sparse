@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -133,7 +133,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#data-types" id="id1">Data types</a></p></li>
 <li><p><a class="reference internal" href="#basic-operators" id="id2">Basic operators</a></p></li>
-<li><p><a class="reference internal" href="#operator-algebra" id="id3">Operator algebra</a></p></li>
+<li><p><a class="reference internal" href="#operator-calculus" id="id3">Operator calculus</a></p></li>
 <li><p><a class="reference internal" href="#signal-processing-operators" id="id4">Signal processing operators</a></p></li>
 <li><p><a class="reference internal" href="#orthonormal-transforms-and-bases" id="id5">Orthonormal transforms and bases</a></p></li>
 <li><p><a class="reference internal" href="#unions-of-bases" id="id6">Unions of bases</a></p></li>
@@ -247,17 +247,23 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.real_matrix.html#cr.sparse.lop.real_matrix" title="cr.sparse.lop.real_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">real_matrix</span></code></a>(A)</p></td>
 <td><p>Converts a real matrix into a linear operator</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.diagonal.html#cr.sparse.lop.diagonal" title="cr.sparse.lop.diagonal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diagonal</span></code></a>(d[, axis])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.scalar_mult.html#cr.sparse.lop.scalar_mult" title="cr.sparse.lop.scalar_mult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scalar_mult</span></code></a>(alpha, n)</p></td>
+<td><p>Returns a linear operator T such that <span class="math notranslate nohighlight">\(T v = \alpha v\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.diagonal.html#cr.sparse.lop.diagonal" title="cr.sparse.lop.diagonal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diagonal</span></code></a>(d[, axis])</p></td>
 <td><p>Returns a linear operator which mimics multiplication by a diagonal matrix</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.zero.html#cr.sparse.lop.zero" title="cr.sparse.lop.zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero</span></code></a>(in_dim[, out_dim, axis])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.zero.html#cr.sparse.lop.zero" title="cr.sparse.lop.zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero</span></code></a>(in_dim[, out_dim, axis])</p></td>
 <td><p>Returns a linear operator which maps everything to 0 vector in data space</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.flipud.html#cr.sparse.lop.flipud" title="cr.sparse.lop.flipud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flipud</span></code></a>(n)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.flipud.html#cr.sparse.lop.flipud" title="cr.sparse.lop.flipud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flipud</span></code></a>(n)</p></td>
 <td><p>Returns an operator which flips the order of entries in input upside down</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.sum.html#cr.sparse.lop.sum" title="cr.sparse.lop.sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sum</span></code></a>(n)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.sum.html#cr.sparse.lop.sum" title="cr.sparse.lop.sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sum</span></code></a>(n)</p></td>
 <td><p>Returns an operator which computes the sum of a vector</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dot.html#cr.sparse.lop.dot" title="cr.sparse.lop.dot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dot</span></code></a>(v[, adjoint, axis])</p></td>
+<td><p>Returns a linear operator T such that <span class="math notranslate nohighlight">\(T x = \langle v , x angle = v^H x\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.pad_zeros.html#cr.sparse.lop.pad_zeros" title="cr.sparse.lop.pad_zeros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pad_zeros</span></code></a>(n, before, after)</p></td>
 <td><p>Adds zeros before and after a vector.</p></td>
@@ -265,14 +271,17 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.symmetrize.html#cr.sparse.lop.symmetrize" title="cr.sparse.lop.symmetrize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">symmetrize</span></code></a>(n)</p></td>
 <td><p>An operator which constructs a symmetric vector by pre-pending the input in reversed order</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.restriction.html#cr.sparse.lop.restriction" title="cr.sparse.lop.restriction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">restriction</span></code></a>(n, indices)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.restriction.html#cr.sparse.lop.restriction" title="cr.sparse.lop.restriction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">restriction</span></code></a>(n, I[, axis])</p></td>
 <td><p>An operator which computes y = x[I] over an index set I</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.reshape.html#cr.sparse.lop.reshape" title="cr.sparse.lop.reshape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reshape</span></code></a>(in_shape, out_shape)</p></td>
+<td><p>Returns a linear operator which reshapes vectors from model space to data space</p></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="operator-algebra">
-<h2><a class="toc-backref" href="#id3">Operator algebra</a><a class="headerlink" href="#operator-algebra" title="Permalink to this headline">¶</a></h2>
+<section id="operator-calculus">
+<h2><a class="toc-backref" href="#id3">Operator calculus</a><a class="headerlink" href="#operator-calculus" title="Permalink to this headline">¶</a></h2>
 <p>It is possible to combine one or more linear operators
 to create new linear operators. The functions in this
 section provide different ways to combine linear operators.</p>
@@ -300,8 +309,8 @@ section provide different ways to combine linear operators.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.transpose.html#cr.sparse.lop.transpose" title="cr.sparse.lop.transpose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transpose</span></code></a>(A)</p></td>
 <td><p>Returns the transpose of a given operator <span class="math notranslate nohighlight">\(T = A^T\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.hermitian.html#cr.sparse.lop.hermitian" title="cr.sparse.lop.hermitian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hermitian</span></code></a>(A)</p></td>
-<td><p>Returns the Hermitian transpose of a given operator <span class="math notranslate nohighlight">\(T = A^H\)</span></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.adjoint.html#cr.sparse.lop.adjoint" title="cr.sparse.lop.adjoint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjoint</span></code></a>(A)</p></td>
+<td><p>Returns the adjoint of a given operator <span class="math notranslate nohighlight">\(T = A^H\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.hcat.html#cr.sparse.lop.hcat" title="cr.sparse.lop.hcat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hcat</span></code></a>(A, B)</p></td>
 <td><p>Returns the linear operator <span class="math notranslate nohighlight">\(T = [A \, B]\)</span></p></td>
@@ -349,19 +358,22 @@ section provide different ways to combine linear operators.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dwt.html#cr.sparse.lop.dwt" title="cr.sparse.lop.dwt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt</span></code></a>(n[, wavelet, level, axis, basis])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.fft.html#cr.sparse.lop.fft" title="cr.sparse.lop.fft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fft</span></code></a>(m[, n, axis, mode])</p></td>
+<td><p>1D FFT operator</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dwt.html#cr.sparse.lop.dwt" title="cr.sparse.lop.dwt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt</span></code></a>(n[, wavelet, level, axis, basis])</p></td>
 <td><p>Returns a 1D Discrete Wavelet Transform operator</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dwt2D.html#cr.sparse.lop.dwt2D" title="cr.sparse.lop.dwt2D"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt2D</span></code></a>(shape[, wavelet, level, axes, basis])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dwt2D.html#cr.sparse.lop.dwt2D" title="cr.sparse.lop.dwt2D"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dwt2D</span></code></a>(shape[, wavelet, level, axes, basis])</p></td>
 <td><p>Returns a 2D Discrete Wavelet Transform operator</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.fourier_basis.html#cr.sparse.lop.fourier_basis" title="cr.sparse.lop.fourier_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fourier_basis</span></code></a>(n)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.fourier_basis.html#cr.sparse.lop.fourier_basis" title="cr.sparse.lop.fourier_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fourier_basis</span></code></a>(n)</p></td>
 <td><p>Returns an operator which represents the DFT orthonormal basis</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.cosine_basis.html#cr.sparse.lop.cosine_basis" title="cr.sparse.lop.cosine_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cosine_basis</span></code></a>(n)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.cosine_basis.html#cr.sparse.lop.cosine_basis" title="cr.sparse.lop.cosine_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cosine_basis</span></code></a>(n)</p></td>
 <td><p>Returns an operator which represents the DCT-II orthonormal basis</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.walsh_hadamard_basis.html#cr.sparse.lop.walsh_hadamard_basis" title="cr.sparse.lop.walsh_hadamard_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">walsh_hadamard_basis</span></code></a>(n)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.walsh_hadamard_basis.html#cr.sparse.lop.walsh_hadamard_basis" title="cr.sparse.lop.walsh_hadamard_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">walsh_hadamard_basis</span></code></a>(n)</p></td>
 <td><p>Returns an operator which represents the Walsh Hadamard Transform Basis</p></td>
 </tr>
 </tbody>
@@ -432,6 +444,12 @@ section provide different ways to combine linear operators.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.second_derivative.html#cr.sparse.lop.second_derivative" title="cr.sparse.lop.second_derivative"><code class="xref py py-obj docutils literal notranslate"><span class="pre">second_derivative</span></code></a>(n[, dx])</p></td>
 <td><p></p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.tv.html#cr.sparse.lop.tv" title="cr.sparse.lop.tv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tv</span></code></a>(n[, kind, axis])</p></td>
+<td><p>Returns a total variation linear operator for 1D signals</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.tv2D.html#cr.sparse.lop.tv2D" title="cr.sparse.lop.tv2D"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tv2D</span></code></a>(shape[, kind])</p></td>
+<td><p>Returns a total variation linear operator for 2D images</p></td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -476,8 +494,14 @@ section provide different ways to combine linear operators.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.normest.html#cr.sparse.lop.normest" title="cr.sparse.lop.normest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normest</span></code></a>(operator[, max_iters, error_tolerance])</p></td>
+<td><p>Estimates the norm of a linear operator by power method</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.normest_jit.html#cr.sparse.lop.normest_jit" title="cr.sparse.lop.normest_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normest_jit</span></code></a>(operator[, max_iters, …])</p></td>
+<td><p>Estimates the norm of a linear operator by power method</p></td>
+</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.upper_frame_bound.html#cr.sparse.lop.upper_frame_bound" title="cr.sparse.lop.upper_frame_bound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">upper_frame_bound</span></code></a>(T)</p></td>
-<td><p>Computes the upper frame bound for a linear operator</p></td>
+<td><p>Computes the upper frame bound for a linear operator using full SVD</p></td>
 </tr>
 </tbody>
 </table>

@@ -1,0 +1,6 @@
+﻿cr.sparse.arr\_vdot
+===================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: arr_vdot

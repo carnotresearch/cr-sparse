@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.scalar\_mult
+==========================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: scalar_mult

@@ -125,15 +125,18 @@ Basic operators
     identity
     matrix
     real_matrix
+    scalar_mult
     diagonal
     zero
     flipud
     sum
+    dot
     pad_zeros
     symmetrize
     restriction
+    reshape
 
-Operator algebra
+Operator calculus
 ------------------
 
 It is possible to combine one or more linear operators
@@ -149,7 +152,7 @@ section provide different ways to combine linear operators.
     subtract
     compose
     transpose
-    hermitian
+    adjoint
     hcat
     power
     block_diag
@@ -173,6 +176,7 @@ Orthonormal transforms and bases
 .. autosummary::
     :toctree: _autosummary
 
+    fft
     dwt
     dwt2D
     fourier_basis
@@ -217,6 +221,8 @@ Derivatives (finite differences)
 
     first_derivative
     second_derivative
+    tv
+    tv2D
 
 Convenience operators
 -----------------------
@@ -246,6 +252,8 @@ These are still experimental and not efficient.
 .. autosummary::
     :toctree: _autosummary
 
+    normest
+    normest_jit
     upper_frame_bound
 
 

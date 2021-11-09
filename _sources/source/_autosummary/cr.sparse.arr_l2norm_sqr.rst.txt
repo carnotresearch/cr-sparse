@@ -1,0 +1,6 @@
+﻿cr.sparse.arr\_l2norm\_sqr
+==========================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: arr_l2norm_sqr

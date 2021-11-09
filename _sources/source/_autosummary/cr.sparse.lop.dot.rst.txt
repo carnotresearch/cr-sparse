@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.dot
+=================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: dot

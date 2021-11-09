@@ -13,11 +13,13 @@
    .. autosummary::
    
       ~Operator.input_ndim
+      ~Operator.input_shape
       ~Operator.input_size
       ~Operator.jit_safe
       ~Operator.linear
       ~Operator.matrix_safe
       ~Operator.output_ndim
+      ~Operator.output_shape
       ~Operator.output_size
       ~Operator.real
       ~Operator.shape

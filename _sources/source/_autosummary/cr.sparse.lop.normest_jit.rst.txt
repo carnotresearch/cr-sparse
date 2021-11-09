@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.normest\_jit
+==========================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: normest_jit
