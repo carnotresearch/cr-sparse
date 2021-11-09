@@ -72,7 +72,8 @@ from cr.sparse._src.lop.basic import (
     restriction,
 )
 from cr.sparse._src.lop.reshape import (
-    reshape
+    reshape,
+    arr2vec
 )
 
 # utilities

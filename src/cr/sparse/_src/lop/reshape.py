@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from functools import reduce
 import jax.numpy as jnp
 
 from .lop import Operator
@@ -34,3 +35,20 @@ def reshape(in_shape, out_shape):
     times = lambda x:  jnp.reshape(x, out_shape)
     trans = lambda x : jnp.reshape(x, in_shape)
     return Operator(times=times, trans=trans, shape=(out_shape,in_shape))
+
+
+def arr2vec(shape):
+    """Returns a linear operator which reshapes arrays to vectors
+
+    Args:
+        shape (int): Shape of arrays in the model space 
+
+    Returns:
+        (Operator): An array to vec linear operator
+    """
+    in_size = reduce((lambda x, y: x * y), shape)
+    out_shape = (in_size,)
+
+    times = lambda x:  jnp.reshape(x, (in_size,))
+    trans = lambda x : jnp.reshape(x, shape)
+    return Operator(times=times, trans=trans, shape=(out_shape,shape))
