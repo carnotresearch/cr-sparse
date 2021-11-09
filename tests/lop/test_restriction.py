@@ -30,8 +30,8 @@ def test_restriction1(n, k, s, i):
     y2 = T.trans(y)
     y3 = T.times(y2)
     assert_array_equal(y_ref, y3)
-    assert lop.dot_test_real(crs.KEYS[i+1], T)
-    assert lop.dot_test_complex(crs.KEYS[i+1], T)
+    assert lop.dot_test_real(crs.KEYS[i+1], T, tol=1e-4)
+    assert lop.dot_test_complex(crs.KEYS[i+1], T, tol=1e-4)
     # row-wise work
     T = lop.restriction(n, I, axis=1)
     x = random.normal(crs.KEYS[i], (s,n))
@@ -41,5 +41,5 @@ def test_restriction1(n, k, s, i):
     y2 = T.trans(y)
     y3 = T.times(y2)
     assert_array_equal(y_ref, y3)
-    assert lop.dot_test_real(crs.KEYS[i+2], T)
-    assert lop.dot_test_complex(crs.KEYS[i+2], T)
+    assert lop.dot_test_real(crs.KEYS[i+2], T, tol=1e-4)
+    assert lop.dot_test_complex(crs.KEYS[i+2], T, tol=1e-4)
