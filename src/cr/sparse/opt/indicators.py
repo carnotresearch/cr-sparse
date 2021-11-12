@@ -12,23 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+"""Indicator functions
 """
-Optimization Utilities
-"""
-# pylint: disable=W0611
 
-
-from cr.sparse._src.opt.projections import (
-    project_to_ball,
-    project_to_box,
-    project_to_real_upper_limit
+from cr.sparse._src.opt.indicators.basic import (
+    indicator_zero,
+    indicator_singleton,
+    indicator_affine,
+    indicator_box
 )
-
-from cr.sparse._src.opt.shrinkage import (
-    shrink
-)
-
-
-from .indicators import *
-from .projectors import *
-from .proximal_ops import *

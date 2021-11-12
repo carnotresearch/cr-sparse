@@ -12,23 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
-Optimization Utilities
-"""
-# pylint: disable=W0611
 
-
-from cr.sparse._src.opt.projections import (
-    project_to_ball,
-    project_to_box,
-    project_to_real_upper_limit
+from cr.sparse._src.opt.projectors.basic import (
+    proj_zero,
+    proj_singleton,
+    proj_affine,
+    proj_box
 )
-
-from cr.sparse._src.opt.shrinkage import (
-    shrink
-)
-
-
-from .indicators import *
-from .projectors import *
-from .proximal_ops import *
