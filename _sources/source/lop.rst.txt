@@ -135,6 +135,7 @@ Basic operators
     symmetrize
     restriction
     reshape
+    arr2vec
 
 Operator calculus
 ------------------
