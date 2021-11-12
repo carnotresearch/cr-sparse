@@ -17,6 +17,8 @@ import jax.numpy as jnp
 from jax import jit, vmap
 from jax import random 
 
+import cr.sparse as crs
+
 def sparse_normal_representations(key, D, K, S=1):
     """
     Generates a set of sparse model vectors with normally distributed non-zero entries.
@@ -161,3 +163,17 @@ def index_sets(key, N, K, S, out_axis=0):
     set_gen = lambda key : random.permutation(key, omega)[:K] 
     I = vmap(set_gen, 0, out_axis)(keys)
     return I
+
+
+def points_orthogonal_to(key, x, S):
+    """Generates a  set of points which are orthogonal to a given point x
+    """
+    # first we normalize x
+    norm_x = crs.arr_l2norm(x)
+    x = x / norm_x
+    # shape for the output array
+    shape = (S,) + x.shape
+    points = random.normal(key, shape)
+    correlations = points  @ x
+    projections = correlations[:, jnp.newaxis]  * x[jnp.newaxis, :]
+    return points - projections

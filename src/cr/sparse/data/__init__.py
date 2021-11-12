@@ -22,7 +22,8 @@ from cr.sparse._src.data.synthetic.random import (
     sparse_normal_representations,
     sparse_biuniform_representations,
     sparse_spikes,
-    index_sets
+    index_sets,
+    points_orthogonal_to
 )
 
 from cr.sparse._src.data.synthetic.subspaces import (
