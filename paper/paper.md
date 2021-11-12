@@ -20,9 +20,6 @@ affiliations:
 
 date: 5 November 2021
 bibliography: paper.bib
-
-header-includes:
-    - \usepackage{setspace}
 ---
 
 # Summary
