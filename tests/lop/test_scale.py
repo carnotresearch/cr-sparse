@@ -24,7 +24,7 @@ def test_scale(A, alpha):
     assert_allclose(TB1.times(x), TB2.times(x))
 
     y = random.normal(keys[2], (m,))
-    assert_allclose(TB1.trans(y), TB2.trans(y))
+    assert_allclose(TB1.trans(y), TB2.trans(y), atol=atol)
 
     assert lop.dot_test_real(keys[0], TA)
     assert lop.dot_test_real(keys[1], TB1)
