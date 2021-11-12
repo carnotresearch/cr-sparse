@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import math
 
-from jax import jit
+from jax import jit, lax
 
 import jax.numpy as jnp
 from jax.numpy.linalg import qr, norm
@@ -89,3 +90,73 @@ def proj_box(l=None, u=None):
         return lower_bound
 
     return box_bound
+
+
+def proj_box_affine(l, u, a, alpha=0., tol=1e-6):
+    """Projector function for the constraints l <= x <= u and a' x = alpha
+
+    #TODO complete this
+    """
+    if a is None:
+        raise ValueError("a is required")
+    a = jnp.asarray(a)
+    a = crs.promote_arg_dtypes(a)
+    n = a.size
+    if l is None:
+        l = jnp.full_like(a, -jnp.inf)
+    if u is None:
+        u = jnp.full_like(a, jnp.inf)
+
+    @jit
+    def box_bound(x):
+        x = jnp.maximum(x, l)
+        x =  jnp.minimum(x, u)
+        return x
+
+    def projector(x):
+        # Turning points for constraints = l (l for lower)
+        T1 = (x -l) / a
+        # Turning points for constraints = u (u for upper)
+        T2 = (x - u) / a
+        T = jnp.concatenate((T1, T2))
+        T = jnp.sort(T)
+        lower_bound = 0
+        upper_bound = 2 * n
+        k = math.ceil(math.log2(2*n))
+        for i in range(k):
+            index = (lower_bound + upper_bound) // 2
+            beta = T[index]
+            # trial solution
+            y = box_bound(x - beta * a)
+
+def proj_conic():
+    """Projector function for Lorentz/ice-cream cone {(x,t): \| x \|_2 \leq t}
+    """
+    @jit
+    def proj(x):
+        x = crs.promote_arg_dtypes(x)
+        x_pre = x[:-1]
+        t =  x[-1]
+        abs_t = jnp.abs(t)
+        norm_x = norm(x_pre)
+        outside = norm_x > abs_t
+
+        def project_inside(_):
+            pre = x_pre / norm_x
+            y = jnp.append(pre, 1)
+            alpha = (norm_x + t) / 2
+            return alpha * y
+
+        return lax.cond(outside, 
+            # bring the point inside the border
+            project_inside, 
+            # now we need to check the sign of t
+            lambda _ : lax.cond(t > 0, 
+                # the point in the upper half space, we can keep it as is
+                lambda _ : x,
+                # in the lower half space, the nearest point of the cone is the origin
+                lambda _ : jnp.zeros_like(x),
+                None)
+        , None)
+
+    return proj

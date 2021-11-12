@@ -20,5 +20,7 @@ from cr.sparse._src.opt.indicators.basic import (
     indicator_zero,
     indicator_singleton,
     indicator_affine,
-    indicator_box
+    indicator_box,
+    indicator_box_affine,
+    indicator_conic,
 )

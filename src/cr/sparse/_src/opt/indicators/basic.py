@@ -92,3 +92,39 @@ def indicator_box(l=None, u=None):
 
     return box_bound
 
+
+def indicator_box_affine(l, u, a, alpha=0., tol=1e-6):
+    """Indicator function for the constraints l <= x <= u and a' x = alpha
+    """
+    if a is None:
+        raise ValueError("a is required")
+    a = jnp.asarray(a)
+    a = crs.promote_arg_dtypes(a)
+    n = a.size
+    if l is None:
+        l = jnp.full_like(a, -jnp.inf)
+    if u is None:
+        u = jnp.full_like(a, jnp.inf)
+
+    @jit
+    def indicator(x):
+        is_invalid = jnp.any(x < l)
+        is_invalid = jnp.logical_or(is_invalid, jnp.any(x > u))
+        mismatch = jnp.abs(crs.arr_rdot(a, x) - alpha)
+        affine_invalid = mismatch > tol
+        is_invalid = jnp.logical_or(is_invalid, affine_invalid)
+        return jnp.where(is_invalid, jnp.inf, 0)
+
+    return indicator
+
+
+def indicator_conic():
+    """Indicator function for Lorentz/ice-cream cone {(x,t): \| x \|_2 \leq t}
+    """
+    @jit
+    def indicator(x):
+        x, t = x[:-1], x[-1]
+        inside = norm(x) <= t
+        return jnp.where(inside, 0, jnp.inf)
+
+    return indicator
