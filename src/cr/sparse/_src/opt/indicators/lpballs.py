@@ -65,3 +65,33 @@ def indicator_l2_ball(q=1., b=None, A=None):
         return jnp.where(invalid, jnp.inf, 0)
     
     return indicator_q_b_A
+
+
+def indicator_l1_ball(q=1., b=None):
+    r"""Indicator functions for || x - b ||_1 <= q
+    """
+
+    if b is not None:
+        b = jnp.asarray(b)
+        b = crs.promote_arg_dtypes(b)
+
+    if q <= 0:
+        raise ValueError("q must be greater than 0")
+
+    @jit
+    def indicator_q(x):
+        invalid = crs.arr_l1norm(x) > q
+        return jnp.where(invalid, jnp.inf, 0)
+
+    if b is None:
+        return indicator_q
+
+
+    @jit
+    def indicator_q_b(x):
+        # compute difference from center
+        r = x - b
+        invalid = crs.arr_l1norm(r) > q
+        return jnp.where(invalid, jnp.inf, 0)
+
+    return indicator_q_b

@@ -26,5 +26,6 @@ from cr.sparse._src.opt.indicators.basic import (
 )
 
 from cr.sparse._src.opt.indicators.lpballs import (
-    indicator_l2_ball
+    indicator_l1_ball,
+    indicator_l2_ball,
 )
