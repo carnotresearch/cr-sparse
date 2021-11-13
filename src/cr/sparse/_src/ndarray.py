@@ -34,6 +34,19 @@ def arr_largest_index(x):
     x = jnp.asarray(x)
     return jnp.unravel_index(jnp.argmax(jnp.abs(x)), x.shape)
 
+def arr_l1norm(x):
+    """Returns the l1-norm of an array by flattening it
+
+    Args:
+        x (jax.numpy.ndarray): An nd-array
+
+    Returns:
+        (float): l1 norm of x 
+    """
+    x = jnp.asarray(x)
+    x = promote_arg_dtypes(x)
+    return jnp.sum(jnp.abs(x))
+
 
 def arr_l2norm(x):
     """Returns the l2-norm of an array by flattening it

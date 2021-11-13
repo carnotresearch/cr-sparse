@@ -193,6 +193,7 @@ Utilities for ND-Arrays
   :toctree: _autosummary
 
     arr_largest_index
+    arr_l1norm
     arr_l2norm
     arr_l2norm_sqr
     arr_vdot
