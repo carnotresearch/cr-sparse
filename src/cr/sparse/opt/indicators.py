@@ -24,3 +24,7 @@ from cr.sparse._src.opt.indicators.basic import (
     indicator_box_affine,
     indicator_conic,
 )
+
+from cr.sparse._src.opt.indicators.lpballs import (
+    indicator_l2_ball
+)

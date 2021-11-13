@@ -20,3 +20,7 @@ from cr.sparse._src.opt.projectors.basic import (
     proj_box,
     proj_conic
 )
+
+from cr.sparse._src.opt.projectors.lpballs import (
+    proj_l2_ball,
+)
