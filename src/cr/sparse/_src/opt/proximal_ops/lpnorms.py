@@ -67,3 +67,31 @@ def prox_l1(q=1.):
         return x * s
 
     return func, proximal_op
+
+def prox_l1_pos(q=1.):
+    r"""Proximal operator for :math:` \| q * x \|_1 + I({x \geq 0})`   
+    """
+    q = jnp.asarray(q)
+
+    @jit
+    def func(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
+        # check if any of the entries in x is negative
+        is_invalid = jnp.any(x < 0)
+        return lax.cond(is_invalid, 
+            # this x is outside the domain
+            lambda _: jnp.inf, 
+            # x is inside the domain, we compute its l1-norm
+            lambda _: crs.arr_l1norm(q*x),
+            None)
+
+    @jit
+    def proximal_op(x, t):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
+        tq = t * q
+        # shrinkage only applies on the positive side. negative values are mapped to 0
+        return jnp.maximum(0, x - tq)
+
+    return func, proximal_op

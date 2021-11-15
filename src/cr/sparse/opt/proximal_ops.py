@@ -24,5 +24,6 @@ from cr.sparse._src.opt.proximal_ops.basic import (
 
 from cr.sparse._src.opt.proximal_ops.lpnorms import (
     prox_l1,
-    prox_l2
+    prox_l2,
+    prox_l1_pos
 )
