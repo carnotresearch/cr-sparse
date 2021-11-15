@@ -8,8 +8,8 @@ def test_running_average():
     T = lop.jit(lop.running_average(n, k))
     A = lop.to_matrix(T)
     AT = lop.to_adjoint_matrix(T) 
-    assert jnp.allclose(A.T, AT)
-    assert crs.is_symmetric(A)
+    assert_allclose(A.T, AT, atol=atol, rtol=rtol)
+    assert_allclose(A, A.T, atol=atol, rtol=rtol)
 
     x = random.normal(keys[0], (n,))
     y = jnp.convolve(x, h, 'same')
@@ -25,9 +25,9 @@ def test_fir_filter():
     T = lop.jit(lop.fir_filter(n, h))
     A = lop.to_matrix(T)
     AT = lop.to_adjoint_matrix(T) 
-    assert jnp.allclose(A.T, AT)
+    assert_allclose(A.T, AT, atol=atol, rtol=rtol)
  
     x = random.normal(keys[0], (n,))
     y = jnp.convolve(x, h, 'same')
     assert(y, T.times(x))
-    assert lop.dot_test_real(keys[0], T)
+    assert lop.dot_test_real(keys[0], T, tol=1e-4)

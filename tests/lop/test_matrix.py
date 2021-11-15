@@ -28,7 +28,7 @@ def test_matrix_3():
     X = random.normal(crs.KEYS[1], (n,k))
     assert_allclose(T.times(X), A @ X)
     Y = random.normal(crs.KEYS[2], (m,k))
-    assert_allclose(T.trans(Y), A.T @ Y)
+    assert_allclose(T.trans(Y), A.T @ Y, atol=atol, rtol=rtol)
 
     # axis=1 [process row wise]
     T = lop.jit(lop.matrix(A, axis=1))
