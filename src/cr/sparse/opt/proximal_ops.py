@@ -11,3 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+
+from cr.sparse._src.opt.proximal_ops import (
+    prox_value_vec
+)
+
+
+from cr.sparse._src.opt.proximal_ops.basic import (
+    prox_zero
+)
+
+from cr.sparse._src.opt.proximal_ops.lpnorms import (
+    prox_l1,
+    prox_l2
+)
