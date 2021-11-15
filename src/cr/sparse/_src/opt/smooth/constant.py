@@ -12,24 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
-Optimization Utilities
-"""
-# pylint: disable=W0611
+
+from jax import jit
+
+import jax.numpy as jnp
+import cr.sparse as crs
 
 
-from cr.sparse._src.opt.projections import (
-    project_to_ball,
-    project_to_box,
-    project_to_real_upper_limit
-)
+def smooth_constant(c=0.):
+    """A constant value function
+    """
+    c = jnp.asarray(c)
+    c = crs.promote_arg_dtypes(c)
 
-from cr.sparse._src.opt.shrinkage import (
-    shrink
-)
+    @jit
+    def func(x):
+        return c
 
+    @jit
+    def gradient(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
+        return 0 * x
 
-from .indicators import *
-from .projectors import *
-from .proximal_ops import *
-from .smooth import *
+    return func, gradient

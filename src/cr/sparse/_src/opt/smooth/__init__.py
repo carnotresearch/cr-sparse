@@ -12,24 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
-Optimization Utilities
-"""
-# pylint: disable=W0611
+from jax import jit
 
+import jax.numpy as jnp
+import cr.sparse as crs
 
-from cr.sparse._src.opt.projections import (
-    project_to_ball,
-    project_to_box,
-    project_to_real_upper_limit
-)
+def smooth_value_grad(func, grad):
+    """Returns a function which computes both the value and gradient of a smooth function at a specified point
+    """
+    @jit
+    def evaluator(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
+        v = func(x)
+        g = grad(x)
+        return v, g
 
-from cr.sparse._src.opt.shrinkage import (
-    shrink
-)
-
-
-from .indicators import *
-from .projectors import *
-from .proximal_ops import *
-from .smooth import *
+    return evaluator
