@@ -22,5 +22,6 @@ from cr.sparse._src.opt.projectors.basic import (
 )
 
 from cr.sparse._src.opt.projectors.lpballs import (
+    proj_l1_ball,
     proj_l2_ball,
 )

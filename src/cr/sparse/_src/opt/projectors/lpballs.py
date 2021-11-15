@@ -136,3 +136,71 @@ def proj_l2_ball(q=1., b=None, A=None):
         return x
     
     return proj_q_b_A
+
+
+
+def proj_l1_ball(q=1., b=None):
+    r"""Projector functions for || x - b ||_1 <= q
+    """
+
+    if b is not None:
+        b = jnp.asarray(b)
+        b = crs.promote_arg_dtypes(b)
+
+    if q <= 0:
+        raise ValueError("q must be greater than 0")
+
+
+    def project_inside_ball(y):
+        # sort the absolute values in descending order
+        u = jnp.sort(jnp.abs(y))[::-1]
+        # compute the cumulative sums
+        cu = jnp.cumsum(u)
+        # find the index where the cumulative some is below the threshold
+        cu_diff = cu - q
+        u_scaled = u*jnp.arange(1, 1+len(u))
+        flags = cu_diff > u_scaled
+        K = jnp.argmax(flags)
+        K = jnp.where(K == 0, len(flags), K)
+        # compute the shrinkage threshold
+        kappa = (cu[K-1] - q)/K
+        # perform shrinkage
+        return jnp.maximum(0, y - kappa) + jnp.minimum(0, y + kappa)
+
+
+
+
+    @jit
+    def proj_q(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
+        invalid = crs.arr_l1norm(x) > q
+        return lax.cond(invalid, 
+            # find the shrinkage threshold and shrink
+            lambda x: project_inside_ball(x),
+            # no changes necessary
+            lambda x : x, 
+            x)
+
+    if b is None:
+        return proj_q
+
+
+    @jit
+    def proj_q_b(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
+        # compute difference from center
+        r = x - b
+        invalid = crs.arr_l1norm(r) > q
+        # update the residual
+        r = lax.cond(invalid, 
+            # find the shrinkage threshold and shrink
+            lambda r: project_inside_ball(r),
+            # no changes necessary
+            lambda r : r, 
+            r)
+        # translate to the center
+        return r + b
+
+    return proj_q_b
