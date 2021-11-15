@@ -74,7 +74,7 @@ def test_dwt_idwt_partial_complex():
     cA_rec_expect = jnp.array([5.0+2.5j, 5.0+2.5j, 1.0+0.5j, 1.0+0.5j,
                               1.5+0.75j, 1.5+0.75j, 5.0+2.5j, 5.0+2.5j])
     cA_rec = wt.idwt(cA, None, 'haar')
-    assert_allclose(cA_rec, cA_rec_expect)
+    assert_allclose(cA_rec, cA_rec_expect, rtol=rtol, atol=atol)
 
     cD_rec_expect = jnp.array([-2.0-1.0j, 2.0+1.0j, 0.0+0.0j, 0.0+0.0j,
                               -3.5-1.75j, 3.5+1.75j, -1.0-0.5j, 1.0+0.5j])

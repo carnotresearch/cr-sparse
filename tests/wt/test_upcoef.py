@@ -9,7 +9,7 @@ def test_upcoef_reconstruct():
     ra = wt.upcoef('a', a, 'haar')
     rd = wt.upcoef('d', d, 'haar')
     r = ra + rd
-    assert jnp.allclose(data, r)
+    assert jnp.allclose(data, r, rtol=rtol, atol=atol)
 
 
 def test_upcoef_multilevel():
