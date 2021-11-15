@@ -11,3 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+from jax import jit
+
+def prox_value_vec(func, prox_op):
+    """Returns a function which computes both proximal value and vector
+    """
+    @jit
+    def operator(x, t):
+        x = prox_op(x, t)
+        v = func(x)
+        return v, x
+
+    return operator
