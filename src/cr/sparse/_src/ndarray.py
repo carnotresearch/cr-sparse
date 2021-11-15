@@ -51,22 +51,31 @@ def arr_l1norm(x):
 def arr_l2norm(x):
     """Returns the l2-norm of an array by flattening it
     """
+    x = jnp.asarray(x)
+    x = promote_arg_dtypes(x)
     return jnp.sqrt(jnp.abs(jnp.vdot(x, x)))
 
 def arr_l2norm_sqr(x):
     """Returns the squared l2-norm of an array by flattening it
     """
+    x = jnp.asarray(x)
+    x = promote_arg_dtypes(x)
     return jnp.vdot(x, x)
 
 def arr_vdot(x, y):
     """Returns the inner product of two arrays  by flattening it 
     """
+    x = jnp.asarray(x)
+    y = jnp.asarray(y)
+    x, y = promote_arg_dtypes(x, y)
     return jnp.vdot(x, y)
 
 @jit
 def arr_rdot(x, y):
     """Returns the inner product Re(x^H, y) on two arrays by flattening them
     """
+    x = jnp.asarray(x)
+    y = jnp.asarray(y)
     x = jnp.ravel(x)
     y = jnp.ravel(y)
     if jnp.isrealobj(x) and jnp.isrealobj(y):
@@ -90,4 +99,5 @@ def arr_rdot(x, y):
 def arr2vec(x):
     """Converts an nd array to a vector
     """
+    x = jnp.asarray(x)
     return jnp.ravel(x)
