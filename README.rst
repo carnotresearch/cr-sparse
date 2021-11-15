@@ -1,7 +1,7 @@
 Functional Models and Algorithms for Sparse Signal Processing
 
 
-|pypi| |license| |zenodo| |docs| |unit_tests| |coverage|
+|pypi| |license| |zenodo| |docs| |unit_tests| |coverage| |joss|
 
 
 Quick Start
@@ -151,3 +151,8 @@ To cite this repository:
     :alt: DOI
     :scale: 100%
     :target: https://zenodo.org/badge/latestdoi/323566858
+
+.. |joss| image:: https://joss.theoj.org/papers/ebd4e5ca27a5db705b1dc382b64e0bed/status.svg
+    :alt: JOSS
+    :scale: 100%
+    :target: https://joss.theoj.org/papers/ebd4e5ca27a5db705b1dc382b64e0bed
