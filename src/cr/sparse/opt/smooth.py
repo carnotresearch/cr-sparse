@@ -22,3 +22,4 @@ from cr.sparse._src.opt.smooth.constant import smooth_constant
 from cr.sparse._src.opt.smooth.entropy import (
     smooth_entropy,
     smooth_entropy_vg)
+from cr.sparse._src.opt.smooth.huber import smooth_huber
