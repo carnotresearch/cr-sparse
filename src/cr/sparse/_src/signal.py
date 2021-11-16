@@ -40,6 +40,13 @@ def find_first_signal_with_energy_le_cw(X, energy):
 
 def randomize_rows(key, X):
     """Randomizes the rows in X
+
+    Args:
+        key: a PRNG key used as the random key.
+        X (jax.numpy.ndarray): A 2D data matrix
+
+    Returns:
+        (jax.numpy.ndarray): The data matrix with randomized rows
     """
     assert is_matrix(X)
     m, n = X.shape
@@ -48,6 +55,13 @@ def randomize_rows(key, X):
 
 def randomize_cols(key, X):
     """Randomizes the columns in X
+
+    Args:
+        key: a PRNG key used as the random key.
+        X (jax.numpy.ndarray): A 2D data matrix
+
+    Returns:
+        (jax.numpy.ndarray): The data matrix with randomized columns
     """
     assert is_matrix(X)
     m, n = X.shape
@@ -57,34 +71,77 @@ def randomize_cols(key, X):
 
 def largest_indices(x, K):
     """Returns the indices of K largest entries in x by magnitude
+
+    Args:
+        x (jax.numpy.ndarray): An data vector/point
+        K (int): The number of largest entries to be identified in x
+
+    Returns:
+        (jax.numpy.ndarray): An index vector of size K identifying the K largest entries in x
+        in descending order
     """
     indices = jnp.argsort(jnp.abs(x))
     return indices[:-K-1:-1]
 
 def largest_indices_rw(X, K):
     """Returns the indices of K largest entries by magnitude in each row of X
+
+    Args:
+        X (jax.numpy.ndarray): An (S,N) data matrix with data points in rows
+        K (int): The number of largest entries to be identified in each row of X
+
+    Returns:
+        (jax.numpy.ndarray): An (S,K) index matrix indices of K largest elements in each row of X
     """
     indices = jnp.argsort(jnp.abs(X), axis=1)
     return indices[:, :-K-1:-1]
 
 def largest_indices_cw(X, K):
     """Returns the indices of K largest entries by magnitude in each column of X
+
+    Args:
+        X (jax.numpy.ndarray): An (N,S) data matrix with data points in columns
+        K (int): The number of largest entries to be identified in each column of X
+
+    Returns:
+        (jax.numpy.ndarray): An (K,S) index matrix indices of K largest elements in each column of X
     """
     indices = jnp.argsort(jnp.abs(X), axis=0)
     return indices[:-K-1:-1, :]
 
 def take_along_rows(X, indices):
     """Picks K entries from each row of X specified by indices matrix
+
+    Args:
+        X (jax.numpy.ndarray): An (S,N) data matrix with data points in rows
+        indices (jax.numpy.ndarray): An (S,K) index matrix identifying the values to be picked up from X
+
+    Returns:
+        (jax.numpy.ndarray): An (S,K) data matrix subset of X containing K elements from each row of X
     """
     return jnp.take_along_axis(X, indices, axis=1)
 
 def take_along_cols(X, indices):
     """Picks K entries from each column of X specified by indices matrix
+
+    Args:
+        X (jax.numpy.ndarray): An (N,S) data matrix with data points in columns
+        indices (jax.numpy.ndarray): An (K,S) index matrix identifying the values to be picked up from X
+
+    Returns:
+        (jax.numpy.ndarray): An (K,S) data matrix subset of X containing K elements from each column of X
     """
     return jnp.take_along_axis(X, indices, axis=0)
 
 def sparse_approximation(x, K):
     """Keeps only largest K non-zero entries by magnitude in a vector x
+
+    Args:
+        x (jax.numpy.ndarray): An data vector/point
+        K (int): The number of largest entries to be kept in x
+
+    Returns:
+        (jax.numpy.ndarray): x modified so that all entries except the K largest entries are set to 0
     """
     if K == 0:
         return x.at[:].set(0)
@@ -95,6 +152,13 @@ def sparse_approximation(x, K):
 def sparse_approximation_cw(X, K):
     #return jax.vmap(sparse_approximation, in_axes=(1, None), out_axes=1)(X, K)
     """Keeps only largest K non-zero entries by magnitude in each column of X
+
+    Args:
+        X (jax.numpy.ndarray): An (N,S) data matrix with data points in columns
+        K (int): The number of largest entries to be kept in each column of X
+
+    Returns:
+        (jax.numpy.ndarray): X modified so that all entries except the K largest entries are set to 0 in each column
     """
     if K == 0:
         return X.at[:].set(0)
@@ -106,6 +170,13 @@ def sparse_approximation_cw(X, K):
 
 def sparse_approximation_rw(X, K):
     """Keeps only largest K non-zero entries by magnitude in each row of X
+
+    Args:
+        X (jax.numpy.ndarray): An (S,N) data matrix with data points in rows
+        K (int): The number of largest entries to be kept in each row of X
+
+    Returns:
+        (jax.numpy.ndarray): X modified so that all entries except the K largest entries are set to 0 in each row
     """
     if K == 0:
         return X.at[:].set(0)
@@ -118,6 +189,14 @@ def sparse_approximation_rw(X, K):
 
 def build_signal_from_indices_and_values(length, indices, values):
     """Builds a sparse signal from its non-zero entries (specified by their indices and values)
+
+    Args:
+        length (int): Length of the sparse signal
+        indices (jax.numpy.ndarray): An index vector of length K identifying non-zero entries
+        values (jax.numpy.ndarray): Values to be stored in the non-zero positions
+
+    Returns:
+        (jax.numpy.ndarray): Resulting sparse signal such that x[indices] == values 
     """
     x = jnp.zeros(length)
     indices = jnp.asarray(indices)
@@ -127,23 +206,70 @@ def build_signal_from_indices_and_values(length, indices, values):
 
 def nonzero_values(x):
     """Returns the values of non-zero entries in x
+
+    Args:
+        x (jax.numpy.ndarray): A sparse signal
+
+    Returns:
+        (jax.numpy.ndarray): The signal stripped of its zero values
+
+
+    Note:
+        This function cannot be JIT compiled as the size of output is data dependent.
     """
     return x[x != 0]
 
 def nonzero_indices(x):
     """Returns the indices of non-zero entries in x
+
+    Args:
+        x (jax.numpy.ndarray): A sparse signal
+
+    Returns:
+        (jax.numpy.ndarray): The indices of nonzero entries in x
+
+    Note:
+        This function cannot be JIT compiled as the size of output is data dependent.
+
+    See Also:
+        :func:`support`
     """
     return jnp.nonzero(x)[0]
 
 
 def support(x):
     """Returns the indices of non-zero entries in x
+
+    Args:
+        x (jax.numpy.ndarray): A sparse signal
+
+    Returns:
+        (jax.numpy.ndarray): The support of x a.k.a. the indices of nonzero entries in x
+        
+    Note:
+        This function cannot be JIT compiled as the size of output is data dependent.
+
+    See Also:
+        :func:`nonzero_indices`
     """
     return jnp.nonzero(x)[0]
 
 
 def hard_threshold(x, K):
     """Returns the indices and corresponding values of largest K non-zero entries in a vector x
+
+    Args:
+        x (jax.numpy.ndarray): A sparse/compressible signal
+        K (int): The number of largest entries to be kept in x
+
+    Returns:
+        (jax.numpy.ndarray, jax.numpy.ndarray): A tuple comprising of:
+            * The indices of K largest entries in x
+            * Corresponding entries in x
+
+    See Also:
+        :func:`hard_threshold_sorted`
+        :func:`hard_threshold_by`
     """
     indices = jnp.argsort(jnp.abs(x))
     I = indices[:-K-1:-1]
@@ -152,6 +278,18 @@ def hard_threshold(x, K):
 
 def hard_threshold_sorted(x, K):
     """Returns the sorted indices and corresponding values of largest K non-zero entries in a vector x
+
+    Args:
+        x (jax.numpy.ndarray): A sparse/compressible signal
+        K (int): The number of largest entries to be kept in x
+
+    Returns:
+        (jax.numpy.ndarray, jax.numpy.ndarray): A tuple comprising of:
+            * The indices of K largest entries in x sorted in ascending order
+            * Corresponding entries in x
+
+    See Also:
+        :func:`hard_threshold`
     """
     # Sort entries in x by their magnitude
     indices = jnp.argsort(jnp.abs(x))
@@ -166,6 +304,19 @@ def hard_threshold_sorted(x, K):
 def hard_threshold_by(x, t):
     """
     Sets all entries in x to be zero which are less than t in magnitude
+
+    Args:
+        x (jax.numpy.ndarray): A sparse/compressible signal
+        t (float): The threshold value
+
+    Returns:
+        (jax.numpy.ndarray): x modified such that all values below t are set to 0
+
+    Note:
+        This function doesn't change the length of x and can be JIT compiled
+
+    See Also:
+        :func:`hard_threshold`
     """
     valid = jnp.abs(x) >= t
     return x * valid
@@ -173,11 +324,36 @@ def hard_threshold_by(x, t):
 def largest_indices_by(x, t):
     """
     Returns the locations of all entries in x which are larger than t in magnitude
+
+    Args:
+        x (jax.numpy.ndarray): A sparse/compressible signal
+        t (float): The threshold value
+
+    Returns:
+        (jax.numpy.ndarray): An index vector of all entries in x which are above the threshold
+
+    Note:
+        This function cannot be JIT compiled as the length of output is data dependent
+
+    See Also:
+        :func:`hard_threshold_by`
     """
     return jnp.where(jnp.abs(x) >= t)[0]
 
 def dynamic_range(x):
     """Returns the ratio of largest and smallest values (by magnitude) in x (dB)
+
+    Args:
+        x (jax.numpy.ndarray): A signal
+
+    Returns:
+        (float): The dynamic range between largest and smallest value
+
+    Note:
+        This function is not suitable for sparse signals where some values are actually 0
+
+    See Also:
+        :func:`nonzero_dynamic_range`
     """
     x = jnp.sort(jnp.abs(x))
     return 20 * jnp.log10(x[-1] / x[0])
@@ -185,6 +361,18 @@ def dynamic_range(x):
 
 def nonzero_dynamic_range(x):
     """Returns the ratio of largest and smallest non-zero values (by magnitude) in x (dB)
+
+    Args:
+        x (jax.numpy.ndarray): A sparse/compressible signal
+
+    Returns:
+        (float): The dynamic range between largest and smallest nonzero value
+
+    Note:
+        This function cannot be JIT compiled as it depends on arrays whose size is data-dependent.
+
+    See Also:
+        :func:`dynamic_range`
     """
     x = nonzero_values(x)
     return dynamic_range(x)
@@ -192,6 +380,13 @@ def nonzero_dynamic_range(x):
 
 def normalize(data, axis=-1):
     """Normalizes a data vector (data - mu) / sigma 
+
+    Args:
+        data (jax.numpy.ndarray): A data vector or array
+        axis (int): For nd arrays, the axis along which the data normalization will be done
+
+    Returns:
+        (jax.numpy.ndarray): Normalized data vector/array
     """
     mu = jnp.mean(data, axis)
     data = data - mu
@@ -255,3 +450,5 @@ def interpft(x, N):
     # scale it up
     y = y * (N / n)
     return y
+
+

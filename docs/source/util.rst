@@ -156,11 +156,14 @@ Following functions analyze or construct representation vectors which are known 
 
     nonzero_values
     nonzero_indices
+    support
     randomize_rows
     randomize_cols
     largest_indices
+    largest_indices_by
     hard_threshold
     hard_threshold_sorted
+    hard_threshold_by
     sparse_approximation
     build_signal_from_indices_and_values
     dynamic_range
@@ -199,4 +202,34 @@ Utilities for ND-Arrays
     arr_vdot
     arr_rdot
     arr2vec
+
+
+Basic Signal Information
+---------------------------------------------
+
+.. autosummary::
+  :toctree: _autosummary
+
+  frequency_spectrum
+  power_spectrum
+  energy
+
+Basic Signal Processing
+-------------------------------
+
+.. autosummary::
+  :toctree: _autosummary
+
+  normalize
+  interpft
+
+
+Artificial Noise
+-----------------------------------
+
+
+.. autosummary::
+  :toctree: _autosummary
+
+  awgn_at_snr
 
