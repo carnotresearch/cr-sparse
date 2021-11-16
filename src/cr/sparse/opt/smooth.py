@@ -24,3 +24,4 @@ from cr.sparse._src.opt.smooth.entropy import (
     smooth_entropy_vg)
 from cr.sparse._src.opt.smooth.huber import smooth_huber
 from cr.sparse._src.opt.smooth.linear import smooth_linear
+from cr.sparse._src.opt.smooth.logdet import smooth_logdet
