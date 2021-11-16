@@ -101,3 +101,10 @@ def arr2vec(x):
     """
     x = jnp.asarray(x)
     return jnp.ravel(x)
+
+
+@jit
+def log_pos(x):
+    """Computes log with the assumption that x values are positive.
+    """
+    return jnp.log(jnp.maximum(x, jnp.finfo(float).eps))
