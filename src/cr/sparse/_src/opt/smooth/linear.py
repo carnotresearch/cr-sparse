@@ -13,14 +13,28 @@
 # limitations under the License.
 
 
-from cr.sparse._src.opt.smooth import (
-    smooth_value_grad
-)
+from jax import jit, grad, lax
+
+import jax.numpy as jnp
+import cr.sparse as crs
 
 
-from cr.sparse._src.opt.smooth.constant import smooth_constant
-from cr.sparse._src.opt.smooth.entropy import (
-    smooth_entropy,
-    smooth_entropy_vg)
-from cr.sparse._src.opt.smooth.huber import smooth_huber
-from cr.sparse._src.opt.smooth.linear import smooth_linear
+def smooth_linear(C, D):
+    r"""Linear function and its gradient :math:`f(x) = \langle c, x \rangle + d`
+    """
+    C = jnp.asarray(C)
+    D = jnp.asarray(D)
+    C, D = crs.promote_arg_dtypes(C, D)
+
+    @jit
+    def func(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
+        return crs.arr_rdot(C, x) + D
+
+    @jit
+    def gradient(x):
+        return C
+
+    return func, gradient
+
