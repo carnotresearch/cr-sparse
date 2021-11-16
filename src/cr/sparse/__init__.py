@@ -206,6 +206,10 @@ from cr.sparse._src.signalcomparison import (
     snr
 )
 
+from cr.sparse._src.noise import (
+    awgn_at_snr
+)
+
 from cr.sparse._src.special import (
     pascal,
     pascal_jit
