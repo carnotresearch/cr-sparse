@@ -1,5 +1,5 @@
 """
-.. _gallery:cluster:ssc:omp
+.. _gallery:cluster:ssc:omp:
 
 Sparse Subspace Clustering - OMP
 =============================================

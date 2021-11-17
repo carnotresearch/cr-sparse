@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.ssc.sparse\_to\_bcoo
+======================================
+
+.. currentmodule:: cr.sparse.cluster.ssc
+
+.. autofunction:: sparse_to_bcoo

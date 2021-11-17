@@ -150,11 +150,30 @@
 </tr>
 </tbody>
 </table>
-<p class="rubric">sparse_to_full_rep
-sparse_to_bcoo
-bcoo_to_sparse
-bcoo_to_sparse_jit
-rep_to_affinity</p>
+<p class="rubric">Utility functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.sparse_to_full_rep.html#cr.sparse.cluster.ssc.sparse_to_full_rep" title="cr.sparse.cluster.ssc.sparse_to_full_rep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_to_full_rep</span></code></a>(X, I)</p></td>
+<td><p>Combines values and indices arrays to sparse representations</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.sparse_to_bcoo.html#cr.sparse.cluster.ssc.sparse_to_bcoo" title="cr.sparse.cluster.ssc.sparse_to_bcoo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_to_bcoo</span></code></a>(X, I)</p></td>
+<td><p>“Combines values and indices arrays to a BCOO formatted sparse matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.bcoo_to_sparse.html#cr.sparse.cluster.ssc.bcoo_to_sparse" title="cr.sparse.cluster.ssc.bcoo_to_sparse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bcoo_to_sparse</span></code></a>(C, k)</p></td>
+<td><p>Converts it back to values and indices (column-wise) format</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.bcoo_to_sparse_jit.html#cr.sparse.cluster.ssc.bcoo_to_sparse_jit" title="cr.sparse.cluster.ssc.bcoo_to_sparse_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bcoo_to_sparse_jit</span></code></a>(C, k)</p></td>
+<td><p>Converts it back to values and indices (column-wise) format</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.rep_to_affinity.html#cr.sparse.cluster.ssc.rep_to_affinity" title="cr.sparse.cluster.ssc.rep_to_affinity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rep_to_affinity</span></code></a>(Z)</p></td>
+<td><p>Converts sparse representations to symmetric affinity matrix</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="metrics-for-quality-of-sparse-subspace-clustering">
 <h2>Metrics for quality of sparse subspace clustering<a class="headerlink" href="#metrics-for-quality-of-sparse-subspace-clustering" title="Permalink to this headline">¶</a></h2>
@@ -214,7 +233,7 @@ rep_to_affinity</p>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><span class="xref std std-ref">cluster:ssc:omp</span></p></li>
+<li><p><a class="reference internal" href="../gallery/cluster/ssc_omp.html#gallery-cluster-ssc-omp"><span class="std std-ref">Sparse Subspace Clustering - OMP</span></a></p></li>
 </ul>
 </section>
 </section>

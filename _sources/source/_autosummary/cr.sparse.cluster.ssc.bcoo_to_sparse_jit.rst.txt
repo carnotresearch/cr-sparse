@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.ssc.bcoo\_to\_sparse\_jit
+===========================================
+
+.. currentmodule:: cr.sparse.cluster.ssc
+
+.. autofunction:: bcoo_to_sparse_jit

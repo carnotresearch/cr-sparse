@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.ssc.sparse\_to\_full\_rep
+===========================================
+
+.. currentmodule:: cr.sparse.cluster.ssc
+
+.. autofunction:: sparse_to_full_rep

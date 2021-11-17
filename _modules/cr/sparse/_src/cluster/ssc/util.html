@@ -132,16 +132,16 @@
 <span class="kn">from</span> <span class="nn">jax.experimental.sparse</span> <span class="kn">import</span> <span class="n">BCOO</span><span class="p">,</span> <span class="n">sparsify</span>
 
 
-<span class="nd">@jit</span>
+<div class="viewcode-block" id="sparse_to_full_rep"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.sparse_to_full_rep.html#cr.sparse.cluster.ssc.sparse_to_full_rep">[docs]</a><span class="nd">@jit</span>
 <span class="k">def</span> <span class="nf">sparse_to_full_rep</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">I</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Combines values and indices arrays to sparse representations</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># number of signals</span>
     <span class="n">n</span>  <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">mapper</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">i</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">vmap</span><span class="p">(</span><span class="n">mapper</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)(</span><span class="n">X</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vmap</span><span class="p">(</span><span class="n">mapper</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)(</span><span class="n">X</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span></div>
 
-<span class="nd">@jit</span>
+<div class="viewcode-block" id="sparse_to_bcoo"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.sparse_to_bcoo.html#cr.sparse.cluster.ssc.sparse_to_bcoo">[docs]</a><span class="nd">@jit</span>
 <span class="k">def</span> <span class="nf">sparse_to_bcoo</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">I</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;&quot;Combines values and indices arrays to a BCOO formatted sparse matrix</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -166,9 +166,9 @@
     <span class="n">values</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">nse</span><span class="p">)</span>
     <span class="c1"># combine values and indices</span>
     <span class="n">Y</span> <span class="o">=</span> <span class="n">BCOO</span><span class="p">((</span><span class="n">values</span><span class="p">,</span> <span class="n">indices</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">Y</span>
+    <span class="k">return</span> <span class="n">Y</span></div>
 
-<span class="k">def</span> <span class="nf">bcoo_to_sparse</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<div class="viewcode-block" id="bcoo_to_sparse"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.bcoo_to_sparse.html#cr.sparse.cluster.ssc.bcoo_to_sparse">[docs]</a><span class="k">def</span> <span class="nf">bcoo_to_sparse</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Converts it back to values and indices (column-wise) format</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">T</span>
@@ -179,19 +179,19 @@
     <span class="n">n</span> <span class="o">=</span> <span class="n">nse</span> <span class="o">//</span> <span class="n">k</span>
     <span class="n">X</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
     <span class="n">I</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">I</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">I</span></div>
 
 <span class="n">bcoo_to_sparse_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">bcoo_to_sparse</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
 
 
 
-<span class="nd">@sparsify</span>
+<div class="viewcode-block" id="rep_to_affinity"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.rep_to_affinity.html#cr.sparse.cluster.ssc.rep_to_affinity">[docs]</a><span class="nd">@sparsify</span>
 <span class="k">def</span> <span class="nf">rep_to_affinity</span><span class="p">(</span><span class="n">Z</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Converts sparse representations to symmetric affinity matrix</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">Z</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
     <span class="n">affinity</span> <span class="o">=</span> <span class="n">Z</span> <span class="o">+</span> <span class="n">Z</span><span class="o">.</span><span class="n">T</span>
-    <span class="k">return</span> <span class="n">affinity</span>
+    <span class="k">return</span> <span class="n">affinity</span></div>
 
 <div class="viewcode-block" id="angles_between_points"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.angles_between_points.html#cr.sparse.cluster.ssc.angles_between_points">[docs]</a><span class="k">def</span> <span class="nf">angles_between_points</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns an SxS matrix of angles between each pair of points</span>
