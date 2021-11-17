@@ -16,6 +16,8 @@
 from typing import NamedTuple
 
 
+import jax.numpy as jnp
+
 class FOCSOptions(NamedTuple):
     """Options for FOCS driver routine
     """
@@ -23,3 +25,11 @@ class FOCSOptions(NamedTuple):
     "Whether output is expected to be non-negative"
     solver : str = 'at'
     "Default first order conic solver"
+    max_iters: int = 100
+    "Maximum number of iterations for the solver"
+    tol: float = 1e-8
+    "Tolerance for convergence"
+    L0 : float = 1.
+    "Initial estimate of Lipschitz constant"
+    Lexact: float = jnp.inf
+    "Known bound of Lipschitz constant"
