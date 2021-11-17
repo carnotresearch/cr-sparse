@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from functools import partial
 from jax import jit
 
 import jax.numpy as jnp
@@ -20,12 +21,23 @@ import cr.sparse as crs
 def smooth_value_grad(func, grad):
     """Returns a function which computes both the value and gradient of a smooth function at a specified point
     """
-    @jit
-    def evaluator(x):
+    @partial(jit, static_argnums=(1,))
+    def evaluator(x, mode=0):
+        """
+        mode=0 only value
+        mode=1 only gradient
+        mode=2 both value and gradient
+        """
         x = jnp.asarray(x)
         x = crs.promote_arg_dtypes(x)
-        v = func(x)
-        g = grad(x)
-        return v, g
+        if mode == 0:
+            return func(x)
+        if mode == 1:
+            return grad(x)
+        if mode == 2:
+            v = func(x)
+            g = grad(x)
+            return v, g
+        return None
 
     return evaluator
