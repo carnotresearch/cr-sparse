@@ -1,4 +1,6 @@
 """
+.. _gallery:cluster:ssc:omp
+
 Sparse Subspace Clustering - OMP
 =============================================
 

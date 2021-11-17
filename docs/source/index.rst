@@ -14,6 +14,7 @@ API Docs
    cvx_recovery
    cs
    cluster
+   ssc
    data
    util
    la
