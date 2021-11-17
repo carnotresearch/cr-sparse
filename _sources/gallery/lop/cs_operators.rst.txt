@@ -1890,7 +1890,7 @@ Check that it's close to identity matrix
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.166 seconds)
+   **Total running time of the script:** ( 0 minutes  3.735 seconds)
 
 
 .. _sphx_glr_download_gallery_lop_cs_operators.py:

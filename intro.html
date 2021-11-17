@@ -64,6 +64,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="start.html">Quick Start</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sparse-approximation-and-recovery-problems">Sparse approximation and recovery problems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#functional-programming">Functional Programming</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#linear-operators">Linear Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#greedy-sparse-recovery-approximation-algorithms">Greedy Sparse Recovery/Approximation Algorithms</a></li>
@@ -120,13 +121,19 @@
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#functional-programming" id="id354">Functional Programming</a></p></li>
-<li><p><a class="reference internal" href="#linear-operators" id="id355">Linear Operators</a></p></li>
-<li><p><a class="reference internal" href="#greedy-sparse-recovery-approximation-algorithms" id="id356">Greedy Sparse Recovery/Approximation Algorithms</a></p></li>
-<li><p><a class="reference internal" href="#convex-optimization-based-recovery-algorithms" id="id357">Convex Optimization based Recovery Algorithms</a></p></li>
-<li><p><a class="reference internal" href="#evaluation-framework" id="id358">Evaluation Framework</a></p></li>
-<li><p><a class="reference internal" href="#open-source-credits" id="id359">Open Source Credits</a></p></li>
-<li><p><a class="reference internal" href="#further-reading" id="id360">Further Reading</a></p></li>
+<li><p><a class="reference internal" href="#sparse-approximation-and-recovery-problems" id="id355">Sparse approximation and recovery problems</a></p>
+<ul>
+<li><p><a class="reference internal" href="#ell-0-problems" id="id356"><span class="math notranslate nohighlight">\(\ell_0\)</span> problems</a></p></li>
+<li><p><a class="reference internal" href="#ell-1-problems" id="id357"><span class="math notranslate nohighlight">\(\ell_1\)</span> problems</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#functional-programming" id="id358">Functional Programming</a></p></li>
+<li><p><a class="reference internal" href="#linear-operators" id="id359">Linear Operators</a></p></li>
+<li><p><a class="reference internal" href="#greedy-sparse-recovery-approximation-algorithms" id="id360">Greedy Sparse Recovery/Approximation Algorithms</a></p></li>
+<li><p><a class="reference internal" href="#convex-optimization-based-recovery-algorithms" id="id361">Convex Optimization based Recovery Algorithms</a></p></li>
+<li><p><a class="reference internal" href="#evaluation-framework" id="id362">Evaluation Framework</a></p></li>
+<li><p><a class="reference internal" href="#open-source-credits" id="id363">Open Source Credits</a></p></li>
+<li><p><a class="reference internal" href="#further-reading" id="id364">Further Reading</a></p></li>
 </ul>
 </div>
 <p>This library aims to provide XLA/JAX based Python implementations for
@@ -139,8 +146,174 @@ various algorithms related to:</p>
 <p>Bulk of this library is built using functional programming techniques
 which is critical for the generation of efficient numerical codes for CPU
 and GPU architectures.</p>
+<section id="sparse-approximation-and-recovery-problems">
+<h2><a class="toc-backref" href="#id355">Sparse approximation and recovery problems</a><a class="headerlink" href="#sparse-approximation-and-recovery-problems" title="Permalink to this headline">¶</a></h2>
+<p>In the sparse approximation problems <span id="id3">[<a class="reference internal" href="zzzreference.html#id116" title="Michael Elad. Sparse and redundant representations. Springer, 2010.">Ela10</a>, <a class="reference internal" href="zzzreference.html#id214" title="Stephane Mallat. A wavelet tour of signal processing: the sparse way. Access Online via Elsevier, 2008.">Mal08</a>]</span>, we have a
+dictionary of atoms designed for a class of signals
+such that the dictionary enables us to construct
+a sparse representation of the signal. The
+sparse and redundant representation model is:</p>
+<div class="math notranslate nohighlight" id="equation-intro-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-intro-0" title="Permalink to this equation">¶</a></span>\[x = \mathcal{D} \alpha + \eta\]</div>
+<p>where <span class="math notranslate nohighlight">\(x \in \mathbb{R}^M\)</span> is a single from the given
+class of signals, <span class="math notranslate nohighlight">\(\mathcal{D} \in \mathbb{R}^{M \times N}\)</span>
+is a dictionary consisting of <span class="math notranslate nohighlight">\(N\)</span> atoms (column vectors) chosen
+specifically for the class of signals, <span class="math notranslate nohighlight">\(\alpha\)</span>
+is the sparse representation of <span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>
+giving us an approximation <span class="math notranslate nohighlight">\(\hat{x} = \mathcal{D} \alpha\)</span>
+and <span class="math notranslate nohighlight">\(\eta\)</span> is the approximation error. The
+dictionary <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> is called the sparsifying dictionary.
+The sparse approximation problem consists of finding
+the best sparse <span class="math notranslate nohighlight">\(\alpha\)</span> for a given <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>In the compressed sensing (CS) setting,
+a sparse signal <span class="math notranslate nohighlight">\(x \in \mathbb{R}^N\)</span> is captured
+through <span class="math notranslate nohighlight">\(M \ll N\)</span> linear measurements which are
+sufficient to recover <span class="math notranslate nohighlight">\(x\)</span> from the measurements.
+The model is given by:</p>
+<div class="math notranslate nohighlight" id="equation-intro-1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-intro-1" title="Permalink to this equation">¶</a></span>\[y = \Phi x + e\]</div>
+<p>where <span class="math notranslate nohighlight">\(y \in \mathbb{R}^M\)</span> is the vector of <span class="math notranslate nohighlight">\(M\)</span> linear
+measurements on <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(\Phi \in \mathbb{R}^{M \times N}\)</span>
+is the sensing matrix [or measurement matrix] whose
+rows represent the linear functionals on <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(x \in \mathbb{R}^N\)</span>
+is the sparse signal being measured and <span class="math notranslate nohighlight">\(e\)</span> is the measurement
+noise. Typically, <span class="math notranslate nohighlight">\(x\)</span> by itself is not sparse but it has
+a sparse representation in a sparsifying basis <span class="math notranslate nohighlight">\(\Psi\)</span>
+as <span class="math notranslate nohighlight">\(x = \Psi \alpha\)</span>. The model then becomes:</p>
+<div class="math notranslate nohighlight" id="equation-intro-2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-intro-2" title="Permalink to this equation">¶</a></span>\[y = \Phi \Psi \alpha + e.\]</div>
+<p>Sparse recovery consists of finding <span class="math notranslate nohighlight">\(\alpha\)</span> from
+<span class="math notranslate nohighlight">\(y\)</span> with minimum number of measurements possible.</p>
+<p>Both sparse recovery and sparse approximation problems
+can be addressed by same algorithms (though their
+performance analysis is different). To simplify the
+notation, we will refer to <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> or <span class="math notranslate nohighlight">\(\Phi\)</span>
+or <span class="math notranslate nohighlight">\(\Phi \Psi\)</span> collectively as <span class="math notranslate nohighlight">\(A\)</span> and attempt to
+solve the under-determined system <span class="math notranslate nohighlight">\(y = A x + e\)</span>
+with the prior on the solution that very few entries
+in <span class="math notranslate nohighlight">\(x\)</span> are non-zero. In general, we assume that
+<span class="math notranslate nohighlight">\(A\)</span> is full rank, unless otherwise specified.</p>
+<p>The indices of non-zero
+entry of <span class="math notranslate nohighlight">\(x\)</span> form the support of <span class="math notranslate nohighlight">\(x\)</span>. Corresponding
+columns in <span class="math notranslate nohighlight">\(A\)</span> participate in the sparse
+representation of <span class="math notranslate nohighlight">\(y\)</span>. We can call these columns
+also as the support of <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<div class="math notranslate nohighlight" id="equation-intro-3">
+<span class="eqno">(4)<a class="headerlink" href="#equation-intro-3" title="Permalink to this equation">¶</a></span>\[\mathop{\mathrm{supp}}(x) \triangleq \{i : x_i \neq 0 \}.\]</div>
+<p>Recovering the representation <span class="math notranslate nohighlight">\(x\)</span>
+involves identifying its support <span class="math notranslate nohighlight">\(\Lambda = \mathop{\mathrm{supp}}(x)\)</span>
+and identifying the non-zero entries over the support.
+If the support has been
+correctly identified, a straight-forward
+way to get the non-zero entries is to compute the
+least squares solution <span class="math notranslate nohighlight">\(A_{\Lambda}^{\dag} y\)</span>.
+The <span class="math notranslate nohighlight">\(\ell_0\)</span> norm of <span class="math notranslate nohighlight">\(x\)</span> denoted by <span class="math notranslate nohighlight">\(\| x\|_0\)</span>
+is the number of non-zero entries in <span class="math notranslate nohighlight">\(x\)</span>.
+A representation <span class="math notranslate nohighlight">\(y = A x\)</span>
+is sparse if <span class="math notranslate nohighlight">\(\| x\|_0 \ll N\)</span>.
+An algorithm which can
+obtain such  a representation is called a <em>sparse coding
+algorithm</em>.</p>
+<section id="ell-0-problems">
+<h3><a class="toc-backref" href="#id356"><span class="math notranslate nohighlight">\(\ell_0\)</span> problems</a><a class="headerlink" href="#ell-0-problems" title="Permalink to this headline">¶</a></h3>
+<p>The <span class="math notranslate nohighlight">\(K\)</span>-SPARSE approximation can be formally expressed as:</p>
+<div class="math notranslate nohighlight" id="equation-intro-4">
+<span class="eqno">(5)<a class="headerlink" href="#equation-intro-4" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+  &amp; \underset{x}{\text{minimize}}
+  &amp; &amp;  \| y - A x \|_2 \\
+  &amp; \text{subject to}
+  &amp; &amp;  \| x \|_0 \leq K.
+\end{aligned}\end{split}\]</div>
+<p>If the measurements are noiseless, we are interested in
+exact recovery.
+The <span class="math notranslate nohighlight">\(K\)</span>-EXACT-SPARSE approximation can be formally expressed as:</p>
+<div class="math notranslate nohighlight" id="equation-intro-5">
+<span class="eqno">(6)<a class="headerlink" href="#equation-intro-5" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+  &amp; \underset{x}{\text{minimize}}
+  &amp; &amp;  \| x \|_0 \\
+  &amp; \text{subject to}
+  &amp; &amp;  y = \Phi x\\
+  &amp; \text{and}
+  &amp; &amp;  \| x \|_0 \leq K
+\end{aligned}\end{split}\]</div>
+<p>We need to discover both the sparse support for <span class="math notranslate nohighlight">\(x\)</span> and
+the non-zero values over this support. A greedy algorithm
+attempts to guess the support incrementally and solves
+a smaller (typically least squares) subproblem to estimate
+the nonzero values on this support. It then computes the
+residual <span class="math notranslate nohighlight">\(r = y - A x\)</span> and analyzes the correlation of <span class="math notranslate nohighlight">\(r\)</span>
+with the atoms in <span class="math notranslate nohighlight">\(A\)</span>, via the vector <span class="math notranslate nohighlight">\(h = A^T r\)</span>, to
+improve its guess for the support and update <span class="math notranslate nohighlight">\(x\)</span> accordingly.</p>
+</section>
+<section id="ell-1-problems">
+<h3><a class="toc-backref" href="#id357"><span class="math notranslate nohighlight">\(\ell_1\)</span> problems</a><a class="headerlink" href="#ell-1-problems" title="Permalink to this headline">¶</a></h3>
+<p>We introduce the different <span class="math notranslate nohighlight">\(\ell_1\)</span> minimization problems supported by the
+<code class="docutils literal notranslate"><span class="pre">cr.sparse.cvx.admm</span></code> package.</p>
+<p>The <span class="math notranslate nohighlight">\(\ell_0\)</span> problems are not convex. Obtaining a global minimizer
+is not feasible (NP hard). One way around is to use convex relaxation
+where a cost function is replaced by its convex version.
+For <span class="math notranslate nohighlight">\(\| x \|_0\)</span>, the closest convex function is <span class="math notranslate nohighlight">\(\| x \|_1\)</span>
+or <span class="math notranslate nohighlight">\(\ell_1\)</span> norm. With this, the exact-sparse recovery problem becomes</p>
+<div class="math notranslate nohighlight" id="equation-intro-6">
+<span class="eqno">(7)<a class="headerlink" href="#equation-intro-6" title="Permalink to this equation">¶</a></span>\[{\min}_{x} \| x\|_{1} \; \text{s.t.} \, A x = b\]</div>
+<p>This problem is known as Basis Pursuit (BP) in literature. It can be shown
+that under appropriate conditions on <span class="math notranslate nohighlight">\(A\)</span>, the basis pursuit solution
+coincides with the exact sparse solution. In general, <span class="math notranslate nohighlight">\(\ell_1\)</span>-norm
+minimization problems tend to give sparse solutions.</p>
+<p>If <span class="math notranslate nohighlight">\(x\)</span> is sparse in an sparsifying basis <span class="math notranslate nohighlight">\(\Psi\)</span> as <span class="math notranslate nohighlight">\(x  = \Psi \alpha\)</span>
+(i.e. <span class="math notranslate nohighlight">\(\alpha\)</span> is sparse rather than <span class="math notranslate nohighlight">\(x\)</span>), then we can adapt the
+BP formulation as</p>
+<div class="math notranslate nohighlight" id="equation-intro-7">
+<span class="eqno">(8)<a class="headerlink" href="#equation-intro-7" title="Permalink to this equation">¶</a></span>\[{\min}_{x} \| W x\|_{1} \; \text{s.t.} \, A x = b\]</div>
+<p>where <span class="math notranslate nohighlight">\(W = \Psi^T\)</span> and <span class="math notranslate nohighlight">\(A\)</span> is the sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span>.</p>
+<p>Finally, in specific problems, different atoms of <span class="math notranslate nohighlight">\(\Psi\)</span> may
+have different importance. In this case, the <span class="math notranslate nohighlight">\(\ell_1\)</span> norm
+may be adapted to reflect this importance by a non-negative weight vector <span class="math notranslate nohighlight">\(w\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-intro-8">
+<span class="eqno">(9)<a class="headerlink" href="#equation-intro-8" title="Permalink to this equation">¶</a></span>\[\| \alpha \|_{w,1} = \sum_{i=1}^{N} w_i | \alpha_i |.\]</div>
+<p>This is known as the weighted <span class="math notranslate nohighlight">\(\ell_1\)</span> semi-norm.</p>
+<p>This gives us the general form of the basis pursuit problem</p>
+<div class="math notranslate nohighlight" id="equation-intro-9">
+<span class="eqno">(10)<a class="headerlink" href="#equation-intro-9" title="Permalink to this equation">¶</a></span>\[\tag{BP}
+{\min}_{x} \| W x\|_{w,1} \; \text{s.t.} \, A x = b\]</div>
+<p>Usually, the measurement process introduces noise. Thus,
+a constraint <span class="math notranslate nohighlight">\(A x = b\)</span> is too strict. We can relax this
+to allow for presence of noise as <span class="math notranslate nohighlight">\(\| A x - b \|_2 \leq \delta\)</span>
+where <span class="math notranslate nohighlight">\(\delta\)</span> is an upper bound on the norm of the measurement noise
+or approximation error.
+This gives us the Basis Pursuit with Inequality Constraints (BPIC) problem:</p>
+<div class="math notranslate nohighlight" id="equation-intro-10">
+<span class="eqno">(11)<a class="headerlink" href="#equation-intro-10" title="Permalink to this equation">¶</a></span>\[{\min}_{x} \| x\|_{1} \; \text{s.t.} \, \| A x - b \|_2 \leq \delta\]</div>
+<p>The more general form is the L1 minimization problem with L2 constraints:</p>
+<div class="math notranslate nohighlight" id="equation-intro-11">
+<span class="eqno">(12)<a class="headerlink" href="#equation-intro-11" title="Permalink to this equation">¶</a></span>\[\tag{L1/L2con}
+{\min}_{x} \| W x\|_{w,1} \; \text{s.t.} \, \| A x - b \|_2 \leq \delta\]</div>
+<p>The constrained BPIC problem can be transformed into an equivalent
+unconstrained convex problem:</p>
+<div class="math notranslate nohighlight" id="equation-intro-12">
+<span class="eqno">(13)<a class="headerlink" href="#equation-intro-12" title="Permalink to this equation">¶</a></span>\[{\min}_{x} \| x\|_{1} + \frac{1}{2\rho}\| A x - b \|_2^2.\]</div>
+<p>This is known as Basis Pursuit Denoising (BPDN) in literature.
+The more general form is the L1/L2 minimization:</p>
+<div class="math notranslate nohighlight" id="equation-intro-13">
+<span class="eqno">(14)<a class="headerlink" href="#equation-intro-13" title="Permalink to this equation">¶</a></span>\[\tag{L1/L2}
+{\min}_{x} \| W x\|_{w,1} + \frac{1}{2\rho}\| A x - b \|_2^2\]</div>
+<p>We also support corresponding non-negative counter-parts.
+The nonnegative basis pursuit problem:</p>
+<div class="math notranslate nohighlight" id="equation-intro-14">
+<span class="eqno">(15)<a class="headerlink" href="#equation-intro-14" title="Permalink to this equation">¶</a></span>\[\tag{BP+}
+{\min}_{x} \| W x\|_{w,1} \; \text{s.t.} \, A x = b \, \, \text{and} \, x \succeq 0\]</div>
+<p>The nonnegative L1/L2 minimization or basis pursuit denoising problem:</p>
+<div class="math notranslate nohighlight" id="equation-intro-15">
+<span class="eqno">(16)<a class="headerlink" href="#equation-intro-15" title="Permalink to this equation">¶</a></span>\[\tag{L1/L2+}
+{\min}_{x} \| W x\|_{w,1} + \frac{1}{2\rho}\| A x - b \|_2^2  \; \text{s.t.} \, x \succeq 0\]</div>
+<p>The nonnegative L1 minimization problem with L2 constraints:</p>
+<div class="math notranslate nohighlight" id="equation-intro-16">
+<span class="eqno">(17)<a class="headerlink" href="#equation-intro-16" title="Permalink to this equation">¶</a></span>\[\tag{L1/L2con+}
+{\min}_{x} \| W x\|_{w,1} \; \text{s.t.} \, \| A x - b \|_2 \leq \delta \, \, \text{and} \, x \succeq 0\]</div>
+</section>
+</section>
 <section id="functional-programming">
-<h2><a class="toc-backref" href="#id354">Functional Programming</a><a class="headerlink" href="#functional-programming" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id358">Functional Programming</a><a class="headerlink" href="#functional-programming" title="Permalink to this headline">¶</a></h2>
 <p>Functional Programming is a programming paradigm where computer programs are constructed
 by applying and composing functions. Functions define a tree of expressions which
 map values to other values (akin to mathematical functions) rather than a sequence
@@ -166,11 +339,38 @@ in NumPy as arrays are mutable, the equivalent functional code in JAX is
 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x.at[0].set(10)</span></code>.</p>
 </section>
 <section id="linear-operators">
-<h2><a class="toc-backref" href="#id355">Linear Operators</a><a class="headerlink" href="#linear-operators" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id359">Linear Operators</a><a class="headerlink" href="#linear-operators" title="Permalink to this headline">¶</a></h2>
 <p>Efficient linear operator implementations provide much faster
 computations compared to direct matrix vector multiplication.
-PyLops <span id="id3">[<a class="reference internal" href="zzzreference.html#id243" title="Matteo Ravasi and Ivan Vasconcelos. Pylops–a linear-operator python library for large scale optimization. arXiv preprint arXiv:1907.12349, 2019.">RV19</a>]</span> is a popular collection of
+PyLops <span id="id4">[<a class="reference internal" href="zzzreference.html#id243" title="Matteo Ravasi and Ivan Vasconcelos. Pylops–a linear-operator python library for large scale optimization. arXiv preprint arXiv:1907.12349, 2019.">RV19</a>]</span> is a popular collection of
 linear operators implemented in Python.</p>
+<p>A linear operator <span class="math notranslate nohighlight">\(T : X \to Y\)</span> connects a model space <span class="math notranslate nohighlight">\(X\)</span>
+to a data space <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>A linear operator satisfies following laws:</p>
+<div class="math notranslate nohighlight" id="equation-intro-17">
+<span class="eqno">(18)<a class="headerlink" href="#equation-intro-17" title="Permalink to this equation">¶</a></span>\[T (x + y) = T (x) + T (y)\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight" id="equation-intro-18">
+<span class="eqno">(19)<a class="headerlink" href="#equation-intro-18" title="Permalink to this equation">¶</a></span>\[T (\alpha x) = \alpha T(x)\]</div>
+<p>Thus, for a general linear combination:</p>
+<div class="math notranslate nohighlight" id="equation-intro-19">
+<span class="eqno">(20)<a class="headerlink" href="#equation-intro-19" title="Permalink to this equation">¶</a></span>\[T (\alpha x + \beta y) = \alpha T (x) + \beta T (y)\]</div>
+<p>We are concerned with linear operators <span class="math notranslate nohighlight">\(T : \mathbb{F}^n \to \mathbb{F}^m\)</span>
+where <span class="math notranslate nohighlight">\(\mathbb{F}\)</span> is either the field of real numbers or
+complex numbers.
+<span class="math notranslate nohighlight">\(X = \mathbb{F}^n\)</span> is the model space and
+<span class="math notranslate nohighlight">\(Y = \mathbb{F}^m\)</span> is the data space.
+Such a linear operator can be represented by a two dimensional matrix <span class="math notranslate nohighlight">\(A\)</span>.
+The forward operation is given by:</p>
+<div class="math notranslate nohighlight" id="equation-intro-20">
+<span class="eqno">(21)<a class="headerlink" href="#equation-intro-20" title="Permalink to this equation">¶</a></span>\[y = A x.\]</div>
+<p>The corresponding adjoint operation is given by:</p>
+<div class="math notranslate nohighlight" id="equation-intro-21">
+<span class="eqno">(22)<a class="headerlink" href="#equation-intro-21" title="Permalink to this equation">¶</a></span>\[\hat{x} = A^H y\]</div>
+<p>We represent a linear operator by a pair of functions <code class="docutils literal notranslate"><span class="pre">times</span></code> and <code class="docutils literal notranslate"><span class="pre">trans</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">times</span></code> function implements the forward operation while the <code class="docutils literal notranslate"><span class="pre">trans</span></code>
+function implements the adjoint operation.</p>
+<p>An inverse problem consists of computing <span class="math notranslate nohighlight">\(x\)</span> given <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <p>A framework for building and composing linear operators has been
 provided in <code class="docutils literal notranslate"><span class="pre">cr.sparse.lop</span></code>. Functionality includes:</p>
 <ul class="simple">
@@ -178,39 +378,39 @@ provided in <code class="docutils literal notranslate"><span class="pre">cr.spar
 sum, pad_zeros, symmetrize, restriction, etc.</p></li>
 <li><p>Signal processing: fourier_basis_1d, dirac_fourier_basis_1d, etc.</p></li>
 <li><p>Random dictionaries: gaussian_dict, rademacher_dict, random_onb_dict, random_orthonormal_rows_dict, etc.</p></li>
-<li><p>Operator algebra: neg, scale, add, subtract, compose, transpose, hermitian, hcat, etc.</p></li>
+<li><p>Operator calculus: neg, scale, add, subtract, compose, transpose, hermitian, hcat, etc.</p></li>
 <li><p>Additional utilities</p></li>
 </ul>
 </section>
 <section id="greedy-sparse-recovery-approximation-algorithms">
-<h2><a class="toc-backref" href="#id356">Greedy Sparse Recovery/Approximation Algorithms</a><a class="headerlink" href="#greedy-sparse-recovery-approximation-algorithms" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id360">Greedy Sparse Recovery/Approximation Algorithms</a><a class="headerlink" href="#greedy-sparse-recovery-approximation-algorithms" title="Permalink to this headline">¶</a></h2>
 <p>JAX based implementations for the following algorithms are included.</p>
 <ul class="simple">
-<li><p>Orthogonal Matching Pursuit <span id="id4">[<a class="reference internal" href="zzzreference.html#id232" title="Yagyensh Chandra Pati, Ramin Rezaiifar, and PS Krishnaprasad. Orthogonal matching pursuit: recursive function approximation with applications to wavelet decomposition. In Signals, Systems and Computers, 1993. 1993 Conference Record of The Twenty-Seventh Asilomar Conference on, 40–44. IEEE, 1993.">PRK93</a>, <a class="reference internal" href="zzzreference.html#id290" title="Joel A Tropp. Greed is good: algorithmic results for sparse approximation. Information Theory, IEEE Transactions on, 50(10):2231–2242, 2004.">Tro04</a>]</span></p></li>
-<li><p>Compressive Sampling Matching Pursuit <span id="id5">[<a class="reference internal" href="zzzreference.html#id227" title="Deanna Needell and Joel A Tropp. Cosamp: iterative signal recovery from incomplete and inaccurate samples. Applied and Computational Harmonic Analysis, 26(3):301–321, 2009.">NT09</a>]</span></p></li>
-<li><p>Subspace Pursuit <span id="id6">[<a class="reference internal" href="zzzreference.html#id72" title="Wei Dai and Olgica Milenkovic. Subspace pursuit for compressive sensing signal reconstruction. Information Theory, IEEE Transactions on, 55(5):2230–2249, 2009.">DM09</a>]</span></p></li>
-<li><p>Iterative Hard Thresholding <span id="id7">[<a class="reference internal" href="zzzreference.html#id23" title="Thomas Blumensath and Mike E Davies. Iterative hard thresholding for compressed sensing. Applied and Computational Harmonic Analysis, 27(3):265–274, 2009.">BD09</a>]</span></p></li>
-<li><p>Hard Thresholding Pursuit <span id="id8">[<a class="reference internal" href="zzzreference.html#id133" title="Simon Foucart. Recovering jointly sparse vectors via hard thresholding pursuit. Proc. Sampling Theory and Applications (SampTA)],(May 2-6 2011), 2011.">Fou11</a>]</span></p></li>
+<li><p>Orthogonal Matching Pursuit <span id="id5">[<a class="reference internal" href="zzzreference.html#id232" title="Yagyensh Chandra Pati, Ramin Rezaiifar, and PS Krishnaprasad. Orthogonal matching pursuit: recursive function approximation with applications to wavelet decomposition. In Signals, Systems and Computers, 1993. 1993 Conference Record of The Twenty-Seventh Asilomar Conference on, 40–44. IEEE, 1993.">PRK93</a>, <a class="reference internal" href="zzzreference.html#id290" title="Joel A Tropp. Greed is good: algorithmic results for sparse approximation. Information Theory, IEEE Transactions on, 50(10):2231–2242, 2004.">Tro04</a>]</span></p></li>
+<li><p>Compressive Sampling Matching Pursuit <span id="id6">[<a class="reference internal" href="zzzreference.html#id227" title="Deanna Needell and Joel A Tropp. Cosamp: iterative signal recovery from incomplete and inaccurate samples. Applied and Computational Harmonic Analysis, 26(3):301–321, 2009.">NT09</a>]</span></p></li>
+<li><p>Subspace Pursuit <span id="id7">[<a class="reference internal" href="zzzreference.html#id72" title="Wei Dai and Olgica Milenkovic. Subspace pursuit for compressive sensing signal reconstruction. Information Theory, IEEE Transactions on, 55(5):2230–2249, 2009.">DM09</a>]</span></p></li>
+<li><p>Iterative Hard Thresholding <span id="id8">[<a class="reference internal" href="zzzreference.html#id23" title="Thomas Blumensath and Mike E Davies. Iterative hard thresholding for compressed sensing. Applied and Computational Harmonic Analysis, 27(3):265–274, 2009.">BD09</a>]</span></p></li>
+<li><p>Hard Thresholding Pursuit <span id="id9">[<a class="reference internal" href="zzzreference.html#id133" title="Simon Foucart. Recovering jointly sparse vectors via hard thresholding pursuit. Proc. Sampling Theory and Applications (SampTA)],(May 2-6 2011), 2011.">Fou11</a>]</span></p></li>
 </ul>
 </section>
 <section id="convex-optimization-based-recovery-algorithms">
-<h2><a class="toc-backref" href="#id357">Convex Optimization based Recovery Algorithms</a><a class="headerlink" href="#convex-optimization-based-recovery-algorithms" title="Permalink to this headline">¶</a></h2>
-<p>Convex optimization <span id="id9">[<a class="reference internal" href="zzzreference.html#id28" title="Stephen Boyd and Lieven Vandenberghe. Convex optimization. Cambridge university press, 2004.">BV04</a>]</span> based methods provide more
+<h2><a class="toc-backref" href="#id361">Convex Optimization based Recovery Algorithms</a><a class="headerlink" href="#convex-optimization-based-recovery-algorithms" title="Permalink to this headline">¶</a></h2>
+<p>Convex optimization <span id="id10">[<a class="reference internal" href="zzzreference.html#id28" title="Stephen Boyd and Lieven Vandenberghe. Convex optimization. Cambridge university press, 2004.">BV04</a>]</span> based methods provide more
 reliable solutions to sparse recovery problems although they tend to be
 computationally more complex.
-The first method appeared around 1998 as basis pursuit <span id="id10">[<a class="reference internal" href="zzzreference.html#id57" title="Scott Shaobing Chen, David L Donoho, and Michael A Saunders. Atomic decomposition by basis pursuit. SIAM journal on scientific computing, 20(1):33–61, 1998.">CDS98</a>]</span>.</p>
-<p>Alternating directions <span id="id11">[<a class="reference internal" href="zzzreference.html#id29" title="Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, and Jonathan Eckstein. Distributed optimization and statistical learning via the alternating direction method of multipliers. Foundations and Trends in Machine Learning, 3(1):1–122, 2011.">BPC+11</a>]</span> based methods provide
+The first method appeared around 1998 as basis pursuit <span id="id11">[<a class="reference internal" href="zzzreference.html#id57" title="Scott Shaobing Chen, David L Donoho, and Michael A Saunders. Atomic decomposition by basis pursuit. SIAM journal on scientific computing, 20(1):33–61, 1998.">CDS98</a>]</span>.</p>
+<p>Alternating directions <span id="id12">[<a class="reference internal" href="zzzreference.html#id29" title="Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, and Jonathan Eckstein. Distributed optimization and statistical learning via the alternating direction method of multipliers. Foundations and Trends in Machine Learning, 3(1):1–122, 2011.">BPC+11</a>]</span> based methods provide
 simple yet efficient iterative solutions for sparse recovery.</p>
-<p><span id="id12">[<a class="reference internal" href="zzzreference.html#id328" title="Junfeng Yang and Yin Zhang. Alternating direction algorithms for l_1-problems in compressive sensing. SIAM journal on scientific computing, 33(1):250–278, 2011.">YZ11</a>]</span> describes inexact ADMM based solutions
+<p><span id="id13">[<a class="reference internal" href="zzzreference.html#id328" title="Junfeng Yang and Yin Zhang. Alternating direction algorithms for l_1-problems in compressive sensing. SIAM journal on scientific computing, 33(1):250–278, 2011.">YZ11</a>]</span> describes inexact ADMM based solutions
 for a variety of <span class="math notranslate nohighlight">\(\ell_1\)</span> minimization problems. The authors
-provide a MATLAB package <code class="docutils literal notranslate"><span class="pre">yall1</span></code> <span id="id13">[<a class="reference internal" href="zzzreference.html#id334" title="Yin Zhang, Junfeng Yang, and Wotao Yin. User's guide for yall1: your algorithms for l1 optimization: version 1.0. Technical Report, CAAM Department, Rice University, 2010.">ZYY10</a>]</span>.
+provide a MATLAB package <code class="docutils literal notranslate"><span class="pre">yall1</span></code> <span id="id14">[<a class="reference internal" href="zzzreference.html#id334" title="Yin Zhang, Junfeng Yang, and Wotao Yin. User's guide for yall1: your algorithms for l1 optimization: version 1.0. Technical Report, CAAM Department, Rice University, 2010.">ZYY10</a>]</span>.
 A port of <code class="docutils literal notranslate"><span class="pre">yall1</span></code> (Your algorithms for <span class="math notranslate nohighlight">\(\ell_1\)</span>) has been provided.
 It provides alternating directions method of multipliers based solutions for
 basis pursuit, basis pursuit denoising, basis pursuit with inequality constraints,
 their non-negative counterparts and other variants.</p>
 </section>
 <section id="evaluation-framework">
-<h2><a class="toc-backref" href="#id358">Evaluation Framework</a><a class="headerlink" href="#evaluation-framework" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id362">Evaluation Framework</a><a class="headerlink" href="#evaluation-framework" title="Permalink to this headline">¶</a></h2>
 <p>The library also provides</p>
 <ul class="simple">
 <li><p>Various simple dictionaries and sensing matrices</p></li>
@@ -219,7 +419,7 @@ their non-negative counterparts and other variants.</p>
 </ul>
 </section>
 <section id="open-source-credits">
-<h2><a class="toc-backref" href="#id359">Open Source Credits</a><a class="headerlink" href="#open-source-credits" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id363">Open Source Credits</a><a class="headerlink" href="#open-source-credits" title="Permalink to this headline">¶</a></h2>
 <p>Major parts of this library are directly influenced by existing projects.
 While the implementation in CR-Sparse is fresh (based on JAX), it has been
 possible thanks to the extensive study of existing implementations. We list
@@ -231,7 +431,7 @@ influenced by the conventions followed in JAX. We learned the functional program
 techniques as applicable for linear algebra work by reading the source code of JAX.</p></li>
 <li><p><a class="reference external" href="https://github.com/scipy/scipy">SciPy</a> JAX doesn’t have all parts of SciPy ported
 yet. Some parts of SciPy have been adapted and re-written (in functional manner)
-as per the needs of CR-Sparse. E.g. <code class="docutils literal notranslate"><span class="pre">cr.sparse.dsp.signals</span></code>. The <span id="id14">[<a class="reference internal" href="zzzreference.html#id285" title="Christopher Torrence and Gilbert P Compo. A practical guide to wavelet analysis. Bulletin of the American Meteorological society, 79(1):61–78, 1998.">TC98</a>]</span> version
+as per the needs of CR-Sparse. E.g. <code class="docutils literal notranslate"><span class="pre">cr.sparse.dsp.signals</span></code>. The <span id="id15">[<a class="reference internal" href="zzzreference.html#id285" title="Christopher Torrence and Gilbert P Compo. A practical guide to wavelet analysis. Bulletin of the American Meteorological society, 79(1):61–78, 1998.">TC98</a>]</span> version
 of CWT in <code class="docutils literal notranslate"><span class="pre">cr.sparse.wt</span></code>.</p></li>
 <li><p><a class="reference external" href="https://github.com/deepmind/optax">OpTax</a>  This helped in understanding how to
 use Named Tuples as states for iterative algorithms.  This was also useful
@@ -255,72 +455,72 @@ the MATLAB implementations of IHT, NIHT, AIHT algorithms.</p></li>
 From Theory to Applications in Signal and Image Processing book code helped a lot in basic understanding
 of sparse representations.</p></li>
 <li><p><a class="reference external" href="https://github.com/aaren/wavelets">aaren/wavelets</a> is a decent CWT implementation following
-<span id="id15">[<a class="reference internal" href="zzzreference.html#id285" title="Christopher Torrence and Gilbert P Compo. A practical guide to wavelet analysis. Bulletin of the American Meteorological society, 79(1):61–78, 1998.">TC98</a>]</span>. Influenced: <code class="docutils literal notranslate"><span class="pre">cr.sparse.wt</span></code>.</p></li>
+<span id="id16">[<a class="reference internal" href="zzzreference.html#id285" title="Christopher Torrence and Gilbert P Compo. A practical guide to wavelet analysis. Bulletin of the American Meteorological society, 79(1):61–78, 1998.">TC98</a>]</span>. Influenced: <code class="docutils literal notranslate"><span class="pre">cr.sparse.wt</span></code>.</p></li>
 </ul>
 </section>
 <section id="further-reading">
-<h2><a class="toc-backref" href="#id360">Further Reading</a><a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id364">Further Reading</a><a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Functional_programming">Functional programming</a></p></li>
 <li><p><a class="reference external" href="https://jax.readthedocs.io/en/latest/notebooks/thinking_in_jax.html">How to Think in JAX</a></p></li>
 <li><p><a class="reference external" href="https://jax.readthedocs.io/en/latest/notebooks/Common_Gotchas_in_JAX.html">JAX - The Sharp Bits</a></p></li>
 </ul>
-<p id="id17"><dl class="citation">
-<dt class="label" id="id28"><span class="brackets"><a class="fn-backref" href="#id2">BDDH11</a></span></dt>
+<p id="id18"><dl class="citation">
+<dt class="label" id="id29"><span class="brackets"><a class="fn-backref" href="#id2">BDDH11</a></span></dt>
 <dd><p>Richard Baraniuk, M Davenport, M Duarte, and Chinmay Hegde. An introduction to compressive sensing. <em>Connexions e-textbook</em>, 2011.</p>
 </dd>
-<dt class="label" id="id39"><span class="brackets"><a class="fn-backref" href="#id7">BD09</a></span></dt>
+<dt class="label" id="id40"><span class="brackets"><a class="fn-backref" href="#id8">BD09</a></span></dt>
 <dd><p>Thomas Blumensath and Mike E Davies. Iterative hard thresholding for compressed sensing. <em>Applied and Computational Harmonic Analysis</em>, 27(3):265–274, 2009.</p>
 </dd>
-<dt class="label" id="id45"><span class="brackets"><a class="fn-backref" href="#id11">BPC+11</a></span></dt>
+<dt class="label" id="id46"><span class="brackets"><a class="fn-backref" href="#id12">BPC+11</a></span></dt>
 <dd><p>Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, and Jonathan Eckstein. Distributed optimization and statistical learning via the alternating direction method of multipliers. <em>Foundations and Trends in Machine Learning</em>, 3(1):1–122, 2011.</p>
 </dd>
-<dt class="label" id="id44"><span class="brackets"><a class="fn-backref" href="#id9">BV04</a></span></dt>
+<dt class="label" id="id45"><span class="brackets"><a class="fn-backref" href="#id10">BV04</a></span></dt>
 <dd><p>Stephen Boyd and Lieven Vandenberghe. <em>Convex optimization</em>. Cambridge university press, 2004.</p>
 </dd>
-<dt class="label" id="id57"><span class="brackets"><a class="fn-backref" href="#id2">Candes06</a></span></dt>
+<dt class="label" id="id58"><span class="brackets"><a class="fn-backref" href="#id2">Candes06</a></span></dt>
 <dd><p>Emmanuel J Candès. Compressive sampling. In <em>Proceedings of the International Congress of Mathematicians: Madrid, August 22-30, 2006: invited lectures</em>, 1433–1452. 2006.</p>
 </dd>
-<dt class="label" id="id62"><span class="brackets"><a class="fn-backref" href="#id2">CandesW08</a></span></dt>
+<dt class="label" id="id63"><span class="brackets"><a class="fn-backref" href="#id2">CandesW08</a></span></dt>
 <dd><p>Emmanuel J Candès and Michael B Wakin. An introduction to compressive sampling. <em>Signal Processing Magazine, IEEE</em>, 25(2):21–30, 2008.</p>
 </dd>
-<dt class="label" id="id73"><span class="brackets"><a class="fn-backref" href="#id10">CDS98</a></span></dt>
+<dt class="label" id="id74"><span class="brackets"><a class="fn-backref" href="#id11">CDS98</a></span></dt>
 <dd><p>Scott Shaobing Chen, David L Donoho, and Michael A Saunders. Atomic decomposition by basis pursuit. <em>SIAM journal on scientific computing</em>, 20(1):33–61, 1998.</p>
 </dd>
-<dt class="label" id="id88"><span class="brackets"><a class="fn-backref" href="#id6">DM09</a></span></dt>
+<dt class="label" id="id89"><span class="brackets"><a class="fn-backref" href="#id7">DM09</a></span></dt>
 <dd><p>Wei Dai and Olgica Milenkovic. Subspace pursuit for compressive sensing signal reconstruction. <em>Information Theory, IEEE Transactions on</em>, 55(5):2230–2249, 2009.</p>
 </dd>
-<dt class="label" id="id112"><span class="brackets"><a class="fn-backref" href="#id2">Don06</a></span></dt>
+<dt class="label" id="id113"><span class="brackets"><a class="fn-backref" href="#id2">Don06</a></span></dt>
 <dd><p>David L Donoho. Compressed sensing. <em>Information Theory, IEEE Transactions on</em>, 52(4):1289–1306, 2006.</p>
 </dd>
-<dt class="label" id="id132"><span class="brackets"><a class="fn-backref" href="#id1">Ela10</a></span></dt>
+<dt class="label" id="id133"><span class="brackets">Ela10</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id3">2</a>)</span></dt>
 <dd><p>Michael Elad. <em>Sparse and redundant representations</em>. Springer, 2010.</p>
 </dd>
-<dt class="label" id="id149"><span class="brackets"><a class="fn-backref" href="#id8">Fou11</a></span></dt>
+<dt class="label" id="id150"><span class="brackets"><a class="fn-backref" href="#id9">Fou11</a></span></dt>
 <dd><p>Simon Foucart. Recovering jointly sparse vectors via hard thresholding pursuit. <em>Proc. Sampling Theory and Applications (SampTA)],(May 2-6 2011)</em>, 2011.</p>
 </dd>
-<dt class="label" id="id230"><span class="brackets"><a class="fn-backref" href="#id1">Mal08</a></span></dt>
+<dt class="label" id="id231"><span class="brackets">Mal08</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id3">2</a>)</span></dt>
 <dd><p>Stephane Mallat. <em>A wavelet tour of signal processing: the sparse way</em>. Access Online via Elsevier, 2008.</p>
 </dd>
-<dt class="label" id="id243"><span class="brackets"><a class="fn-backref" href="#id5">NT09</a></span></dt>
+<dt class="label" id="id244"><span class="brackets"><a class="fn-backref" href="#id6">NT09</a></span></dt>
 <dd><p>Deanna Needell and Joel A Tropp. Cosamp: iterative signal recovery from incomplete and inaccurate samples. <em>Applied and Computational Harmonic Analysis</em>, 26(3):301–321, 2009.</p>
 </dd>
-<dt class="label" id="id248"><span class="brackets"><a class="fn-backref" href="#id4">PRK93</a></span></dt>
+<dt class="label" id="id249"><span class="brackets"><a class="fn-backref" href="#id5">PRK93</a></span></dt>
 <dd><p>Yagyensh Chandra Pati, Ramin Rezaiifar, and PS Krishnaprasad. Orthogonal matching pursuit: recursive function approximation with applications to wavelet decomposition. In <em>Signals, Systems and Computers, 1993. 1993 Conference Record of The Twenty-Seventh Asilomar Conference on</em>, 40–44. IEEE, 1993.</p>
 </dd>
-<dt class="label" id="id259"><span class="brackets"><a class="fn-backref" href="#id3">RV19</a></span></dt>
+<dt class="label" id="id260"><span class="brackets"><a class="fn-backref" href="#id4">RV19</a></span></dt>
 <dd><p>Matteo Ravasi and Ivan Vasconcelos. Pylops–a linear-operator python library for large scale optimization. <em>arXiv preprint arXiv:1907.12349</em>, 2019.</p>
 </dd>
-<dt class="label" id="id301"><span class="brackets">TC98</span><span class="fn-backref">(<a href="#id14">1</a>,<a href="#id15">2</a>)</span></dt>
+<dt class="label" id="id302"><span class="brackets">TC98</span><span class="fn-backref">(<a href="#id15">1</a>,<a href="#id16">2</a>)</span></dt>
 <dd><p>Christopher Torrence and Gilbert P Compo. A practical guide to wavelet analysis. <em>Bulletin of the American Meteorological society</em>, 79(1):61–78, 1998.</p>
 </dd>
-<dt class="label" id="id306"><span class="brackets"><a class="fn-backref" href="#id4">Tro04</a></span></dt>
+<dt class="label" id="id307"><span class="brackets"><a class="fn-backref" href="#id5">Tro04</a></span></dt>
 <dd><p>Joel A Tropp. Greed is good: algorithmic results for sparse approximation. <em>Information Theory, IEEE Transactions on</em>, 50(10):2231–2242, 2004.</p>
 </dd>
-<dt class="label" id="id344"><span class="brackets"><a class="fn-backref" href="#id12">YZ11</a></span></dt>
+<dt class="label" id="id345"><span class="brackets"><a class="fn-backref" href="#id13">YZ11</a></span></dt>
 <dd><p>Junfeng Yang and Yin Zhang. Alternating direction algorithms for l_1-problems in compressive sensing. <em>SIAM journal on scientific computing</em>, 33(1):250–278, 2011.</p>
 </dd>
-<dt class="label" id="id350"><span class="brackets"><a class="fn-backref" href="#id13">ZYY10</a></span></dt>
+<dt class="label" id="id351"><span class="brackets"><a class="fn-backref" href="#id14">ZYY10</a></span></dt>
 <dd><p>Yin Zhang, Junfeng Yang, and Wotao Yin. User's guide for yall1: your algorithms for l1 optimization: version 1.0. Technical Report, CAAM Department, Rice University, 2010.</p>
 </dd>
 </dl>

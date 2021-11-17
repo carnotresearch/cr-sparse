@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduction to Sparse Subspace Clustering &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/mathconf.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Fourier and Wavelet Representations" href="../fwsp/index.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/index.html">API Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../theory.html">Theory</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../la/index.html">Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sls/index.html">Sparse Linear Systems</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Introduction to Sparse Subspace Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../acronyms.html">Acronyms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../theory.html">Theory</a><ul>
+  <li><a href="index.html">&lt;no title&gt;</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">&lt;no title&gt;</a></li>
+      <li>Next: <a href="../fwsp/index.html" title="next chapter">Fourier and Wavelet Representations</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="introduction-to-sparse-subspace-clustering">
+<h1>Introduction to Sparse Subspace Clustering<a class="headerlink" href="#introduction-to-sparse-subspace-clustering" title="Permalink to this headline">¶</a></h1>
+<p>Consider a dataset of <span class="math notranslate nohighlight">\(S\)</span> points in the ambient data space
+<span class="math notranslate nohighlight">\(\mathbb{R}^M\)</span> which have been assembled in a matrix <span class="math notranslate nohighlight">\(Y\)</span> of shape <span class="math notranslate nohighlight">\(M \times S\)</span>.</p>
+<p>In many applications, it often occurs that
+if we <em>group</em> or <em>segment</em> the data set <span class="math notranslate nohighlight">\(Y\)</span> into
+multiple disjoint subsets (clusters):
+<span class="math notranslate nohighlight">\(Y = Y_1 \cup \dots \cup Y_K\)</span>,
+then each subset can be modeled sufficiently well by a low dimensional subspace
+<span class="math notranslate nohighlight">\(\mathbb{R}^D\)</span> where <span class="math notranslate nohighlight">\(D \ll M\)</span>.
+Some of the applications include:
+motion segmentation <span id="id1">[<a class="reference internal" href="../zzzreference.html#id27" title="Terrance E Boult and Lisa Gottesfeld Brown. Factorization-based segmentation of motions. In Visual Motion, 1991., Proceedings of the IEEE Workshop on, 179–186. IEEE, 1991.">BB91</a>, <a class="reference internal" href="../zzzreference.html#id67" title="João Paulo Costeira and Takeo Kanade. A multibody factorization method for independently moving objects. International Journal of Computer Vision, 29(3):159–179, 1998.">CK98</a>, <a class="reference internal" href="../zzzreference.html#id137" title="Charles William Gear. Multibody grouping from motion images. International Journal of Computer Vision, 29(2):133–150, 1998.">Gea98</a>, <a class="reference internal" href="../zzzreference.html#id172" title="Kenichi Kanatani. Motion segmentation by subspace separation and model selection. image, 1:1, 2001.">Kan01</a>, <a class="reference internal" href="../zzzreference.html#id235" title="Conrad J Poelman and Takeo Kanade. A paraperspective factorization method for shape and motion recovery. Pattern Analysis and Machine Intelligence, IEEE Transactions on, 19(3):206–218, 1997.">PK97</a>, <a class="reference internal" href="../zzzreference.html#id283" title="Carlo Tomasi and Takeo Kanade. Detection and tracking of point features. School of Computer Science, Carnegie Mellon Univ. Pittsburgh, 1991.">TK91</a>, <a class="reference internal" href="../zzzreference.html#id284" title="Carlo Tomasi and Takeo Kanade. Shape and motion from image streams under orthography: a factorization method. International Journal of Computer Vision, 9(2):137–154, 1992.">TK92</a>]</span>,
+face clustering <span id="id2">[<a class="reference internal" href="../zzzreference.html#id14" title="Ronen Basri and David W Jacobs. Lambertian reflectance and linear subspaces. Pattern Analysis and Machine Intelligence, IEEE Transactions on, 25(2):218–233, 2003.">BJ03</a>, <a class="reference internal" href="../zzzreference.html#id162" title="Jeffrey Ho, Ming-Hsuan Yang, Jongwoo Lim, Kuang-Chih Lee, and David Kriegman. Clustering appearances of objects under varying illumination conditions. In Computer Vision and Pattern Recognition, 2003. Proceedings. 2003 IEEE Computer Society Conference on, volume 1, I–11. IEEE, 2003.">HYL+03</a>, <a class="reference internal" href="../zzzreference.html#id190" title="Kuang-Chih Lee, Jeffrey Ho, and David Kriegman. Acquiring linear subspaces for face recognition under variable lighting. Pattern Analysis and Machine Intelligence, IEEE Transactions on, 27(5):684–698, 2005.">LHK05</a>]</span>
+and handwritten digit recognition <span id="id3">[<a class="reference internal" href="../zzzreference.html#id336" title="Teng Zhang, Arthur Szlam, Yi Wang, and Gilad Lerman. Hybrid linear modeling via local best-fit flats. International Journal of Computer Vision, 100(3):217–240, 2012.">ZSWL12</a>]</span>.</p>
+<p><em>Subspace clustering</em> is a clustering framework which assumes
+that the data-set can be segmented into clusters where points in
+different clusters are drawn from different subspaces. Subspace clustering
+algorithms are able to simultaneously segment the data into
+clusters corresponding to different subspaces as well as estimate
+the subspaces from the data itself.
+A comprehensive review of subspace clustering can be found in
+<span id="id4">[<a class="reference internal" href="../zzzreference.html#id313" title="René Vidal. A tutorial on subspace clustering. IEEE Signal Processing Magazine, 28(2):52–68, 2010.">Vid10</a>]</span>.
+Several state of the art algorithms are based on building
+subspace preserving representations of individual data points
+by treating the data set itself as a (self expressive) dictionary.
+For creating subspace preserving representations, one resorts to
+using sparse coding algorithms developed in sparse representations and
+compressive sensing literature.</p>
+<p>Two common algorithms are
+<em>Sparse Subspace Clustering</em> using <span class="math notranslate nohighlight">\(\ell_1\)</span> <em>regularization</em>
+(SSC-<span class="math notranslate nohighlight">\(\ell_1\)</span>):cite:<cite>elhamifar2009sparse, elhamifar2013sparse</cite>
+and <em>Sparse Subspace Clustering using Orthogonal
+Matching Pursuit</em> (SSC-OMP) <span id="id5">[<a class="reference internal" href="../zzzreference.html#id112" title="Eva L Dyer, Aswin C Sankaranarayanan, and Richard G Baraniuk. Greedy feature selection for subspace clustering. The Journal of Machine Learning Research, 14(1):2487–2517, 2013.">DSB13</a>, <a class="reference internal" href="../zzzreference.html#id331" title="Chong You, D Robinson, and René Vidal. Scalable sparse subspace clustering by orthogonal matching pursuit. In IEEE Conference on Computer Vision and Pattern Recognition, volume 1. 2016.">YRV16</a>, <a class="reference internal" href="../zzzreference.html#id330" title="Chong You and René Vidal. Sparse subspace clustering by orthogonal matching pursuit. arXiv preprint arXiv:1507.01238, 2015.">YV15</a>]</span>.
+While SSC-<span class="math notranslate nohighlight">\(\ell_1\)</span> is guaranteed to give correct clustering under
+broad conditions (arbitrary subspaces and corrupted data), it
+requires solving a large scale convex optimization problem. On
+the other hand, SSC-OMP
+is computationally efficient but its clustering accuracy is
+poor (especially at low density of data points per subspace).</p>
+<p>The dataset <span class="math notranslate nohighlight">\(Y\)</span> is modeled as being sampled from a collection
+or arrangement <span class="math notranslate nohighlight">\(\mathcal{U}\)</span> of linear (or affine) subspaces
+<span class="math notranslate nohighlight">\(\mathcal{U}_k \subset \mathbb{R}^M\)</span> :
+<span class="math notranslate nohighlight">\(\mathcal{U} = \{ \mathcal{U}_1  , \dots , \mathcal{U}_K \}\)</span>.
+The union of the subspaces
+is denoted as
+<span class="math notranslate nohighlight">\(Z_{\mathcal{U}} = \mathcal{U}_1 \cup \dots \cup \mathcal{U}_K\)</span>.</p>
+<p>Let the data set be <span class="math notranslate nohighlight">\(\{ y_j  \in \mathbb{R}^M \}_{j=1}^S\)</span>
+drawn from the union of subspaces under consideration.
+<span class="math notranslate nohighlight">\(S\)</span> is the total number of data points being analyzed
+simultaneously.
+We put the data points together in a <em>data matrix</em> as</p>
+<div class="math notranslate nohighlight" id="equation-ssc-intro-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-ssc-intro-0" title="Permalink to this equation">¶</a></span>\[Y  \triangleq \begin{bmatrix}
+y_1 &amp; \dots &amp; y_S
+\end{bmatrix}.\]</div>
+<p>Let the vectors be drawn from a set of <span class="math notranslate nohighlight">\(K\)</span> (linear or affine) subspaces,
+The subspaces are indexed by a variable <span class="math notranslate nohighlight">\(k\)</span> with <span class="math notranslate nohighlight">\(1 \leq k \leq K\)</span>.
+The <span class="math notranslate nohighlight">\(k\)</span>-th subspace is denoted by <span class="math notranslate nohighlight">\(\mathcal{U}_k\)</span>.
+Let the (linear or affine) dimension
+of <span class="math notranslate nohighlight">\(k\)</span>-th subspace be <span class="math notranslate nohighlight">\(\dim(\mathcal{U}_k) = D_k\)</span> with <span class="math notranslate nohighlight">\(D_k \leq D \ll M\)</span>.</p>
+<p>The vectors in <span class="math notranslate nohighlight">\(Y\)</span> can be grouped (or segmented or clustered)
+as submatrices
+<span class="math notranslate nohighlight">\(Y_1, Y_2, \dots, Y_K\)</span> such
+that all vectors in <span class="math notranslate nohighlight">\(Y_k\)</span> are drawn from the subspace <span class="math notranslate nohighlight">\(\mathcal{U}_k\)</span>.
+Thus, we can write</p>
+<div class="math notranslate nohighlight" id="equation-ssc-intro-1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-ssc-intro-1" title="Permalink to this equation">¶</a></span>\[Y^* = Y \Gamma = \begin{bmatrix} y_1 &amp; \dots &amp; y_S \end{bmatrix}
+\Gamma
+= \begin{bmatrix} Y_1 &amp; \dots &amp; Y_K \end{bmatrix}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Gamma\)</span> is an <span class="math notranslate nohighlight">\(S \times S\)</span> unknown permutation
+matrix placing each vector to the right subspace.</p>
+<p>Let there be <span class="math notranslate nohighlight">\(S_k\)</span> vectors in <span class="math notranslate nohighlight">\(Y_k\)</span> with
+<span class="math notranslate nohighlight">\(S = S_1 + \dots + S_K\)</span>.
+Let <span class="math notranslate nohighlight">\(Q_k\)</span> be an orthonormal basis for subspace <span class="math notranslate nohighlight">\(\mathcal{U}_k\)</span>. Then,
+the subspaces can be described as</p>
+<div class="math notranslate nohighlight" id="equation-ssc-intro-2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-ssc-intro-2" title="Permalink to this equation">¶</a></span>\[\mathcal{U}_k = \{ y \in \mathbb{R}^M : y = \mu_k + Q_k \alpha \}, \quad 1 \leq k \leq K\]</div>
+<p>For linear subspaces, <span class="math notranslate nohighlight">\(\mu_k = 0\)</span>.</p>
+<p>A dataset where each point can be expressed as a linear combination
+of other points in the dataset is said to satisfy
+<em>self-expressiveness property</em>. The self-expressive
+representation of a point <span class="math notranslate nohighlight">\(y_s\)</span> in <span class="math notranslate nohighlight">\(Y\)</span> is given by</p>
+<div class="math notranslate nohighlight" id="equation-ssc-intro-3">
+<span class="eqno">(4)<a class="headerlink" href="#equation-ssc-intro-3" title="Permalink to this equation">¶</a></span>\[y_s = Y c_s, \; c_{ss} = 0, \text{ or } Y = Y C, \quad \text{diag}(C) = 0\]</div>
+<p>where <span class="math notranslate nohighlight">\(C = \begin{bmatrix}c_1, \dots, c_S \end{bmatrix} \in \mathbb{R}^{S \times S}\)</span>
+is the matrix of representation coefficients.</p>
+<p>Let <span class="math notranslate nohighlight">\(y_s\)</span> belong to <span class="math notranslate nohighlight">\(k\)</span>-th subspace <span class="math notranslate nohighlight">\(\mathcal{U}_k\)</span>.
+Let <span class="math notranslate nohighlight">\(Y^{-s}\)</span> denote the dataset <span class="math notranslate nohighlight">\(Y\)</span> excluding the point <span class="math notranslate nohighlight">\(y_s\)</span>
+and  <span class="math notranslate nohighlight">\(Y_k^{-s}\)</span> denote the
+set of points in <span class="math notranslate nohighlight">\(Y_k\)</span> excluding <span class="math notranslate nohighlight">\(y_s\)</span>. If <span class="math notranslate nohighlight">\(Y_k^{-s}\)</span> spans the subspace
+<span class="math notranslate nohighlight">\(\mathcal{U}_k\)</span>, then a representation of <span class="math notranslate nohighlight">\(y_s\)</span> can be constructed entirely
+from the points in <span class="math notranslate nohighlight">\(Y_k^{-s}\)</span>. A representation is called
+<em>subspace preserving</em> if it consists of points within the same subspace.</p>
+<p>If <span class="math notranslate nohighlight">\(c_i\)</span> is a subspace preserving representation of <span class="math notranslate nohighlight">\(y_i\)</span> and <span class="math notranslate nohighlight">\(y_j\)</span>
+belongs to a different subspace, then <span class="math notranslate nohighlight">\(c_{ij} = 0\)</span>. Thus, if <span class="math notranslate nohighlight">\(C\)</span> consists
+entirely of subspace preserving representations, then <span class="math notranslate nohighlight">\(C_{ij} = 0\)</span> whenever
+<span class="math notranslate nohighlight">\(y_i\)</span> and <span class="math notranslate nohighlight">\(y_j\)</span> belong to different subspaces.
+In other words, if <span class="math notranslate nohighlight">\(Y_{-k}\)</span> denotes the set of points from
+all subspaces excluding the subspace <span class="math notranslate nohighlight">\(Y_k\)</span> corresponding
+to the point <span class="math notranslate nohighlight">\(y_i\)</span>, then points in <span class="math notranslate nohighlight">\(Y_{-k}\)</span> do not
+participate in the representation <span class="math notranslate nohighlight">\(c_i\)</span>.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">cr.sparse.cluster.ssc</span></code> package, we provide a version of
+OMP which can be used to construct the sparse self expressive representations
+<span class="math notranslate nohighlight">\(C\)</span> of <span class="math notranslate nohighlight">\(Y\)</span>. Once the representation has been constructed, we compute an
+affinity matrix <span class="math notranslate nohighlight">\(W = |C| + |C^T|\)</span>.</p>
+<p>We then apply spectral clustering on <span class="math notranslate nohighlight">\(W\)</span> to complete SSC-OMP.
+For this, we have written a JAX version of spectral clustering
+in <code class="docutils literal notranslate"><span class="pre">cr.sparse.cluster.spectral</span></code> package. In particular, it
+uses our own Lanczos Bidiagonalization with Partial Orthogonalization (LANBPRO)
+algorithm to compute the <span class="math notranslate nohighlight">\(K\)</span> largest singular values of the
+normalized affinity matrix
+in as few iterations as possible. The intermediate variables
+<span class="math notranslate nohighlight">\(C\)</span>, <span class="math notranslate nohighlight">\(W\)</span> are maintained in the experimental sparse matrices
+stored in BCOO format.
+The LANBPRO algorithm also works on sparse matrices directly.
+Thus, even though <span class="math notranslate nohighlight">\(C\)</span> is of size <span class="math notranslate nohighlight">\(S \times S\)</span>, it can be stored
+efficiently in <span class="math notranslate nohighlight">\(O(DS)\)</span> storage. This enables us to process
+hundreds of thousands of points efficiently.</p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2021, CR-Sparse Development Team.
+      
+      |
+      <a href="../_sources/ssc/intro.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
