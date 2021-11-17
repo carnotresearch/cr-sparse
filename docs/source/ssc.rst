@@ -16,7 +16,11 @@ SSC-OMP
   batch_build_representation_omp_jit
 
 
-.. rubric:: 
+.. rubric:: Utility functions
+
+.. autosummary::
+  :toctree: _autosummary
+
   sparse_to_full_rep
   sparse_to_bcoo
   bcoo_to_sparse
@@ -55,7 +59,7 @@ Tools for analyzing data (with ground truth)
 Examples
 -----------------
 
-* :ref:`cluster:ssc:omp`
+* :ref:`gallery:cluster:ssc:omp`
 
 
 
