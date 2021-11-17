@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.ssc.batch\_build\_representation\_omp\_jit
+============================================================
+
+.. currentmodule:: cr.sparse.cluster.ssc
+
+.. autofunction:: batch_build_representation_omp_jit

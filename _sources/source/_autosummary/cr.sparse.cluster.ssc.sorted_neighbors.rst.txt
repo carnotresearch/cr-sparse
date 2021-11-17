@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.ssc.sorted\_neighbors
+=======================================
+
+.. currentmodule:: cr.sparse.cluster.ssc
+
+.. autofunction:: sorted_neighbors

@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.ssc.angles\_between\_points
+=============================================
+
+.. currentmodule:: cr.sparse.cluster.ssc
+
+.. autofunction:: angles_between_points

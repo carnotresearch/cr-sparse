@@ -155,7 +155,7 @@ Coherence of atoms in the sensing matrix
 
  .. code-block:: none
 
-    0.3881940752728345
+    0.38819407527283445
 
 
 
@@ -189,7 +189,7 @@ A sparse model vector
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f08a772d790>]
+    [<matplotlib.lines.Line2D object at 0x7f9cea49e2b0>]
 
 
 
@@ -247,7 +247,7 @@ Compressive measurements
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f08a76b6130>]
+    [<matplotlib.lines.Line2D object at 0x7f9cea31f220>]
 
 
 
@@ -317,7 +317,7 @@ Squared norm/energy of the residual
 
  .. code-block:: none
 
-    r_norm_sqr=7.40121202914161
+    r_norm_sqr=7.401212029141609
 
 
 
@@ -627,7 +627,7 @@ We now have our first estimate of the solution
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x7f08a6dd2430>
+    <matplotlib.legend.Legend object at 0x7f9ce9e11fd0>
 
 
 
@@ -1046,7 +1046,7 @@ Here is our updated estimate of the solution
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x7f08a7115370>
+    <matplotlib.legend.Legend object at 0x7f9cea149ee0>
 
 
 
@@ -1089,7 +1089,7 @@ Compute the residual and verify that it is now below the allowed tolerance
 
  .. code-block:: none
 
-    r_norm_sqr=1.76e-30 < max_r_norm_sqr=7.40e-06
+    r_norm_sqr=3.05e-30 < max_r_norm_sqr=7.40e-06
 
 
 
@@ -1230,7 +1230,7 @@ Print the residual energy and the number of iterations when the algorithm conver
 
  .. code-block:: none
 
-    1.0297848394871909e-29 3
+    2.14594481109173e-29 3
 
 
 
@@ -1264,14 +1264,14 @@ Let's plot the solution
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x7f08a6f19940>
+    <matplotlib.legend.Legend object at 0x7f9ce9df5490>
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  6.594 seconds)
+   **Total running time of the script:** ( 0 minutes  7.019 seconds)
 
 
 .. _sphx_glr_download_gallery_pursuit_cosamp_step_by_step.py:

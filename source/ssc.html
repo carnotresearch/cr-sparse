@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Sparse Subspace Clustering &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/mathconf.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cr.sparse.cluster.ssc.build_representation_omp" href="_autosummary/cr.sparse.cluster.ssc.build_representation_omp.html" />
+    <link rel="prev" title="cr.sparse.cluster.spectral.SpectralclusteringSolution" href="_autosummary/cr.sparse.cluster.spectral.SpectralclusteringSolution.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dsp.html">Digital Signal Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wavelets.html">Wavelets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lop.html">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sls.html">Sparse Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cs.html">Compressive Sensing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cluster.html">Data Clustering</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Sparse Subspace Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">Utilities in cr.sparse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="la.html">Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opt.html">Numerical Optimization Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geo.html">Geophysical Signal Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vision.html">Computer Vision and Image Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">API Docs</a><ul>
+      <li>Previous: <a href="_autosummary/cr.sparse.cluster.spectral.SpectralclusteringSolution.html" title="previous chapter">cr.sparse.cluster.spectral.SpectralclusteringSolution</a></li>
+      <li>Next: <a href="_autosummary/cr.sparse.cluster.ssc.build_representation_omp.html" title="next chapter">cr.sparse.cluster.ssc.build_representation_omp</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="sparse-subspace-clustering">
+<h1>Sparse Subspace Clustering<a class="headerlink" href="#sparse-subspace-clustering" title="Permalink to this headline">¶</a></h1>
+<section id="ssc-omp">
+<h2>SSC-OMP<a class="headerlink" href="#ssc-omp" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.build_representation_omp.html#cr.sparse.cluster.ssc.build_representation_omp" title="cr.sparse.cluster.ssc.build_representation_omp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_representation_omp</span></code></a>(X, K)</p></td>
+<td><p>Builds K-sparse self-expressive reprsentations of vectors in X in terms of other vectors in X</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.build_representation_omp_jit.html#cr.sparse.cluster.ssc.build_representation_omp_jit" title="cr.sparse.cluster.ssc.build_representation_omp_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_representation_omp_jit</span></code></a>(X, K)</p></td>
+<td><p>Builds K-sparse self-expressive reprsentations of vectors in X in terms of other vectors in X</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.batch_build_representation_omp.html#cr.sparse.cluster.ssc.batch_build_representation_omp" title="cr.sparse.cluster.ssc.batch_build_representation_omp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">batch_build_representation_omp</span></code></a>(X, K, batch_size)</p></td>
+<td><p>Builds K-sparse self-expressive reprsentations of vectors in X in terms of other vectors in X</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.batch_build_representation_omp_jit.html#cr.sparse.cluster.ssc.batch_build_representation_omp_jit" title="cr.sparse.cluster.ssc.batch_build_representation_omp_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">batch_build_representation_omp_jit</span></code></a>(X, K, …)</p></td>
+<td><p>Builds K-sparse self-expressive reprsentations of vectors in X in terms of other vectors in X</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">sparse_to_full_rep
+sparse_to_bcoo
+bcoo_to_sparse
+bcoo_to_sparse_jit
+rep_to_affinity</p>
+</section>
+<section id="metrics-for-quality-of-sparse-subspace-clustering">
+<h2>Metrics for quality of sparse subspace clustering<a class="headerlink" href="#metrics-for-quality-of-sparse-subspace-clustering" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.subspace_preservation_stats.html#cr.sparse.cluster.ssc.subspace_preservation_stats" title="cr.sparse.cluster.ssc.subspace_preservation_stats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subspace_preservation_stats</span></code></a>(C, labels)</p></td>
+<td><p>Returns the statistics for subspace preservation</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.subspace_preservation_stats_jit.html#cr.sparse.cluster.ssc.subspace_preservation_stats_jit" title="cr.sparse.cluster.ssc.subspace_preservation_stats_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subspace_preservation_stats_jit</span></code></a>(C, labels)</p></td>
+<td><p>Returns the statistics for subspace preservation</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.sparse_subspace_preservation_stats.html#cr.sparse.cluster.ssc.sparse_subspace_preservation_stats" title="cr.sparse.cluster.ssc.sparse_subspace_preservation_stats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_subspace_preservation_stats</span></code></a>(Z, I, labels)</p></td>
+<td><p>Returns the statistics for subspace preservation from sparse representations</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.sparse_subspace_preservation_stats_jit.html#cr.sparse.cluster.ssc.sparse_subspace_preservation_stats_jit" title="cr.sparse.cluster.ssc.sparse_subspace_preservation_stats_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_subspace_preservation_stats_jit</span></code></a>(Z, I, …)</p></td>
+<td><p>Returns the statistics for subspace preservation from sparse representations</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tools-for-analyzing-data-with-ground-truth">
+<h2>Tools for analyzing data (with ground truth)<a class="headerlink" href="#tools-for-analyzing-data-with-ground-truth" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.angles_between_points.html#cr.sparse.cluster.ssc.angles_between_points" title="cr.sparse.cluster.ssc.angles_between_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">angles_between_points</span></code></a>(X)</p></td>
+<td><p>Returns an SxS matrix of angles between each pair of points</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.min_angles_inside_cluster.html#cr.sparse.cluster.ssc.min_angles_inside_cluster" title="cr.sparse.cluster.ssc.min_angles_inside_cluster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">min_angles_inside_cluster</span></code></a>(angles, cluster_sizes)</p></td>
+<td><p>Returns the minimum angles for for each point with its neighbors inside the cluster</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.min_angles_outside_cluster.html#cr.sparse.cluster.ssc.min_angles_outside_cluster" title="cr.sparse.cluster.ssc.min_angles_outside_cluster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">min_angles_outside_cluster</span></code></a>(angles, cluster_sizes)</p></td>
+<td><p>Returns the minimum angles for each point with its neighbors from all other clusters</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.nearest_neighbors_inside_cluster.html#cr.sparse.cluster.ssc.nearest_neighbors_inside_cluster" title="cr.sparse.cluster.ssc.nearest_neighbors_inside_cluster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nearest_neighbors_inside_cluster</span></code></a>(angles, …)</p></td>
+<td><p>Returns the index of the nearest neighbor for each point inside the cluster</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.nearest_neighbors_outside_cluster.html#cr.sparse.cluster.ssc.nearest_neighbors_outside_cluster" title="cr.sparse.cluster.ssc.nearest_neighbors_outside_cluster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nearest_neighbors_outside_cluster</span></code></a>(angles, …)</p></td>
+<td><p>Returns index of the nearest neighbor for each point with its neighbors from all other clusters</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.sorted_neighbors.html#cr.sparse.cluster.ssc.sorted_neighbors" title="cr.sparse.cluster.ssc.sorted_neighbors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sorted_neighbors</span></code></a>(angles)</p></td>
+<td><p>Returns the neighbor indices sorted by angle between points</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.inn_positions.html#cr.sparse.cluster.ssc.inn_positions" title="cr.sparse.cluster.ssc.inn_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inn_positions</span></code></a>(labels, sorted_neighbor_labels)</p></td>
+<td><p>Returns the position of a neighbor inside the cluster for each point in its list of sorted neighbors across all clusters</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><span class="xref std std-ref">cluster:ssc:omp</span></p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2021, CR-Sparse Development Team.
+      
+      |
+      <a href="../_sources/source/ssc.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

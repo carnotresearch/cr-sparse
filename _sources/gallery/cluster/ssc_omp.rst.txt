@@ -18,16 +18,18 @@
 .. _sphx_glr_gallery_cluster_ssc_omp.py:
 
 
+.. _gallery:cluster:ssc:omp
+
 Sparse Subspace Clustering - OMP
 =============================================
 
 This example demonstrates the sparse subspace clustering algorithm via orthogonal matching pursuit.
 
-.. GENERATED FROM PYTHON SOURCE LINES 9-10
+.. GENERATED FROM PYTHON SOURCE LINES 11-12
 
 Configure JAX to work with 64-bit floating point precision. 
 
-.. GENERATED FROM PYTHON SOURCE LINES 10-13
+.. GENERATED FROM PYTHON SOURCE LINES 12-15
 
 .. code-block:: default
 
@@ -41,11 +43,11 @@ Configure JAX to work with 64-bit floating point precision.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-15
+.. GENERATED FROM PYTHON SOURCE LINES 16-17
 
 Let's import necessary libraries 
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-32
+.. GENERATED FROM PYTHON SOURCE LINES 17-34
 
 .. code-block:: default
 
@@ -73,11 +75,11 @@ Let's import necessary libraries
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 33-34
+.. GENERATED FROM PYTHON SOURCE LINES 35-36
 
 Problem configuration
 
-.. GENERATED FROM PYTHON SOURCE LINES 34-44
+.. GENERATED FROM PYTHON SOURCE LINES 36-46
 
 .. code-block:: default
 
@@ -98,16 +100,16 @@ Problem configuration
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 45-47
+.. GENERATED FROM PYTHON SOURCE LINES 47-49
 
 Test data preparation
 ----------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 49-50
+.. GENERATED FROM PYTHON SOURCE LINES 51-52
 
 Construct orthonormal bases for K subspaces
 
-.. GENERATED FROM PYTHON SOURCE LINES 50-52
+.. GENERATED FROM PYTHON SOURCE LINES 52-54
 
 .. code-block:: default
 
@@ -120,11 +122,11 @@ Construct orthonormal bases for K subspaces
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 53-54
+.. GENERATED FROM PYTHON SOURCE LINES 55-56
 
 Measure angles between subspaces in degrees
 
-.. GENERATED FROM PYTHON SOURCE LINES 54-56
+.. GENERATED FROM PYTHON SOURCE LINES 56-58
 
 .. code-block:: default
 
@@ -137,11 +139,11 @@ Measure angles between subspaces in degrees
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 57-58
+.. GENERATED FROM PYTHON SOURCE LINES 59-60
 
 Print the minimum angle between any pair of subspaces
 
-.. GENERATED FROM PYTHON SOURCE LINES 58-60
+.. GENERATED FROM PYTHON SOURCE LINES 60-62
 
 .. code-block:: default
 
@@ -157,16 +159,16 @@ Print the minimum angle between any pair of subspaces
 
  .. code-block:: none
 
-    53.35521088678853
+    53.35521088678854
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 61-62
+.. GENERATED FROM PYTHON SOURCE LINES 63-64
 
 Generate uniformly distributed points on each subspace
 
-.. GENERATED FROM PYTHON SOURCE LINES 62-64
+.. GENERATED FROM PYTHON SOURCE LINES 64-66
 
 .. code-block:: default
 
@@ -179,12 +181,12 @@ Generate uniformly distributed points on each subspace
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 65-67
+.. GENERATED FROM PYTHON SOURCE LINES 67-69
 
 Assign true labels to each point to corresponding 
 subspace index
 
-.. GENERATED FROM PYTHON SOURCE LINES 67-70
+.. GENERATED FROM PYTHON SOURCE LINES 69-72
 
 .. code-block:: default
 
@@ -212,11 +214,11 @@ subspace index
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 71-72
+.. GENERATED FROM PYTHON SOURCE LINES 73-74
 
 Total number of data points
 
-.. GENERATED FROM PYTHON SOURCE LINES 72-75
+.. GENERATED FROM PYTHON SOURCE LINES 74-77
 
 .. code-block:: default
 
@@ -238,17 +240,17 @@ Total number of data points
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 76-78
+.. GENERATED FROM PYTHON SOURCE LINES 78-80
 
 Sparse Subspace Clustering Algorithm
 ------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 80-82
+.. GENERATED FROM PYTHON SOURCE LINES 82-84
 
 Build representation of each point in terms of other points
 by using Orthogonal Matching Pursuit algorithm
 
-.. GENERATED FROM PYTHON SOURCE LINES 82-84
+.. GENERATED FROM PYTHON SOURCE LINES 84-86
 
 .. code-block:: default
 
@@ -261,11 +263,11 @@ by using Orthogonal Matching Pursuit algorithm
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 85-86
+.. GENERATED FROM PYTHON SOURCE LINES 87-88
 
 Combine values and indices to form full representation
 
-.. GENERATED FROM PYTHON SOURCE LINES 86-88
+.. GENERATED FROM PYTHON SOURCE LINES 88-90
 
 .. code-block:: default
 
@@ -278,11 +280,11 @@ Combine values and indices to form full representation
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 89-90
+.. GENERATED FROM PYTHON SOURCE LINES 91-92
 
 Build the affinity matrix
 
-.. GENERATED FROM PYTHON SOURCE LINES 90-93
+.. GENERATED FROM PYTHON SOURCE LINES 92-95
 
 .. code-block:: default
 
@@ -305,15 +307,15 @@ Build the affinity matrix
  .. code-block:: none
 
 
-    <matplotlib.image.AxesImage object at 0x7f08a907e670>
+    <matplotlib.image.AxesImage object at 0x7f9d080822e0>
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 94-95
+.. GENERATED FROM PYTHON SOURCE LINES 96-97
 
 Perform the spectral clustering on the affinity matrix
 
-.. GENERATED FROM PYTHON SOURCE LINES 95-97
+.. GENERATED FROM PYTHON SOURCE LINES 97-99
 
 .. code-block:: default
 
@@ -326,11 +328,11 @@ Perform the spectral clustering on the affinity matrix
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 98-99
+.. GENERATED FROM PYTHON SOURCE LINES 100-101
 
 Predicted cluster labels
 
-.. GENERATED FROM PYTHON SOURCE LINES 99-102
+.. GENERATED FROM PYTHON SOURCE LINES 101-104
 
 .. code-block:: default
 
@@ -358,11 +360,11 @@ Predicted cluster labels
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 103-104
+.. GENERATED FROM PYTHON SOURCE LINES 105-106
 
 Evaluate the clustering performance
 
-.. GENERATED FROM PYTHON SOURCE LINES 104-108
+.. GENERATED FROM PYTHON SOURCE LINES 106-110
 
 .. code-block:: default
 
@@ -385,16 +387,16 @@ Evaluate the clustering performance
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 109-111
+.. GENERATED FROM PYTHON SOURCE LINES 111-113
 
 SSC-OMP with shuffled data
 ------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 113-114
+.. GENERATED FROM PYTHON SOURCE LINES 115-116
 
 Choose a random permutation
 
-.. GENERATED FROM PYTHON SOURCE LINES 114-116
+.. GENERATED FROM PYTHON SOURCE LINES 116-118
 
 .. code-block:: default
 
@@ -407,11 +409,11 @@ Choose a random permutation
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 117-118
+.. GENERATED FROM PYTHON SOURCE LINES 119-120
 
 Randomly permute the data points
 
-.. GENERATED FROM PYTHON SOURCE LINES 118-123
+.. GENERATED FROM PYTHON SOURCE LINES 120-125
 
 .. code-block:: default
 
@@ -441,12 +443,12 @@ Randomly permute the data points
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 124-126
+.. GENERATED FROM PYTHON SOURCE LINES 126-128
 
 Build representation of each point in terms of other points
 by using Orthogonal Matching Pursuit algorithm
 
-.. GENERATED FROM PYTHON SOURCE LINES 126-128
+.. GENERATED FROM PYTHON SOURCE LINES 128-130
 
 .. code-block:: default
 
@@ -459,11 +461,11 @@ by using Orthogonal Matching Pursuit algorithm
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 129-130
+.. GENERATED FROM PYTHON SOURCE LINES 131-132
 
 Combine values and indices to form full representation
 
-.. GENERATED FROM PYTHON SOURCE LINES 130-132
+.. GENERATED FROM PYTHON SOURCE LINES 132-134
 
 .. code-block:: default
 
@@ -476,11 +478,11 @@ Combine values and indices to form full representation
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 133-134
+.. GENERATED FROM PYTHON SOURCE LINES 135-136
 
 Build the affinity matrix
 
-.. GENERATED FROM PYTHON SOURCE LINES 134-137
+.. GENERATED FROM PYTHON SOURCE LINES 136-139
 
 .. code-block:: default
 
@@ -503,15 +505,15 @@ Build the affinity matrix
  .. code-block:: none
 
 
-    <matplotlib.image.AxesImage object at 0x7f08a8edc610>
+    <matplotlib.image.AxesImage object at 0x7f9cebecf070>
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 138-139
+.. GENERATED FROM PYTHON SOURCE LINES 140-141
 
 Perform the spectral clustering on the affinity matrix
 
-.. GENERATED FROM PYTHON SOURCE LINES 139-141
+.. GENERATED FROM PYTHON SOURCE LINES 141-143
 
 .. code-block:: default
 
@@ -524,11 +526,11 @@ Perform the spectral clustering on the affinity matrix
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 142-143
+.. GENERATED FROM PYTHON SOURCE LINES 144-145
 
 Predicted cluster labels
 
-.. GENERATED FROM PYTHON SOURCE LINES 143-146
+.. GENERATED FROM PYTHON SOURCE LINES 145-148
 
 .. code-block:: default
 
@@ -545,22 +547,22 @@ Predicted cluster labels
 
  .. code-block:: none
 
-    [3 0 1 1 2 4 3 3 0 0 3 0 4 1 4 0 0 3 1 2 0 4 2 0 3 1 4 2 3 4 1 1 0 3 1 4 0
-     0 3 3 2 3 4 0 2 2 4 4 2 2 1 4 2 3 0 4 2 4 3 2 2 1 3 2 0 3 0 4 3 3 4 2 2 2
-     0 1 4 3 1 0 0 2 1 0 1 2 2 4 0 4 1 3 3 4 4 2 4 3 1 1 3 4 4 1 3 2 2 2 4 2 1
-     1 4 1 3 3 4 1 2 3 1 0 0 0 2 0 4 0 3 4 0 4 1 2 0 0 4 0 4 0 2 4 4 1 3 3 2 2
-     2 2 2 0 0 4 1 2 1 2 4 4 0 1 0 3 3 2 4 2 3 4 0 2 2 1 0 2 1 3 3 1 4 1 1 1 1
-     3 0 0 2 3 0 1 3 4 3 3 4 4 3 2 3 2 2 4 0 0 2 0 1 1 0 3 4 1 4 0 1 0 3 0 1 0
-     0 3 4 1 3 1 1 4 3 1 2 1 2 3 0 3 0 1 2 3 1 2 4 4 1 3 1 4]
+    [3 1 4 4 2 0 3 3 1 1 3 1 0 4 0 1 1 3 4 2 1 0 2 1 3 4 0 2 3 0 4 4 1 3 4 0 1
+     1 3 3 2 3 0 1 2 2 0 0 2 2 4 0 2 3 1 0 2 0 3 2 2 4 3 2 1 3 1 0 3 3 0 2 2 2
+     1 4 0 3 4 1 1 2 4 1 4 2 2 0 1 0 4 3 3 0 0 2 0 3 4 4 3 0 0 4 3 2 2 2 0 2 4
+     4 0 4 3 3 0 4 2 3 4 1 1 1 2 1 0 1 3 0 1 0 4 2 1 1 0 1 0 1 2 0 0 4 3 3 2 2
+     2 2 2 1 1 0 4 2 4 2 0 0 1 4 1 3 3 2 0 2 3 0 1 2 2 4 1 2 4 3 3 4 0 4 4 4 4
+     3 1 1 2 3 1 4 3 0 3 3 0 0 3 2 3 2 2 0 1 1 2 1 4 4 1 3 0 4 0 1 4 1 3 1 4 1
+     1 3 0 4 3 4 4 0 3 4 2 4 2 3 1 3 1 4 2 3 4 2 0 0 4 3 4 0]
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 147-148
+.. GENERATED FROM PYTHON SOURCE LINES 149-150
 
 Evaluate the clustering performance
 
-.. GENERATED FROM PYTHON SOURCE LINES 148-150
+.. GENERATED FROM PYTHON SOURCE LINES 150-152
 
 .. code-block:: default
 
@@ -584,7 +586,7 @@ Evaluate the clustering performance
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  9.789 seconds)
+   **Total running time of the script:** ( 0 minutes  10.580 seconds)
 
 
 .. _sphx_glr_download_gallery_cluster_ssc_omp.py:

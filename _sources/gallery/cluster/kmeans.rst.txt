@@ -114,7 +114,7 @@ Prepare sample data
  .. code-block:: none
 
 
-    <matplotlib.collections.PathCollection object at 0x7f08c8aa3af0>
+    <matplotlib.collections.PathCollection object at 0x7f9d14ab34f0>
 
 
 
@@ -157,7 +157,7 @@ K-means clustering
  .. code-block:: none
 
 
-    <matplotlib.collections.PathCollection object at 0x7f08c8860a30>
+    <matplotlib.collections.PathCollection object at 0x7f9d1498ef40>
 
 
 
@@ -294,7 +294,7 @@ For any new point, it is easy to find the index of nearest centroid
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  5.180 seconds)
+   **Total running time of the script:** ( 0 minutes  5.415 seconds)
 
 
 .. _sphx_glr_download_gallery_cluster_kmeans.py:

@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.ssc.sparse\_subspace\_preservation\_stats
+===========================================================
+
+.. currentmodule:: cr.sparse.cluster.ssc
+
+.. autofunction:: sparse_subspace_preservation_stats

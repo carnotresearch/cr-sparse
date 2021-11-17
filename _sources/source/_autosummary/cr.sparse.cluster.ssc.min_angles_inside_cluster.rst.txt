@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.ssc.min\_angles\_inside\_cluster
+==================================================
+
+.. currentmodule:: cr.sparse.cluster.ssc
+
+.. autofunction:: min_angles_inside_cluster

@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.ssc.build\_representation\_omp
+================================================
+
+.. currentmodule:: cr.sparse.cluster.ssc
+
+.. autofunction:: build_representation_omp

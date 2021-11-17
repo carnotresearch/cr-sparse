@@ -1,0 +1,6 @@
+﻿cr.sparse.cluster.ssc.inn\_positions
+====================================
+
+.. currentmodule:: cr.sparse.cluster.ssc
+
+.. autofunction:: inn_positions
