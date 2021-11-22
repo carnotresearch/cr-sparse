@@ -61,7 +61,7 @@ The same sparse coding algorithms can be tailored for sparse signal recovery
 from compressed measurements. 
 
 A short mathematical introduction to compressive sensing and sparse representation problems 
-is provided in [online documentation](https://cr-sparse.readthedocs.io/en/latest/intro.html).
+is provided in [docs](https://cr-sparse.readthedocs.io/en/latest/intro.html).
 For comprehensive introduction to sparse
 representations and compressive sensing,
  please refer to excellent books [@mallat2008wavelet;@elad2010sparse;@foucart2013mathintro],
@@ -90,9 +90,7 @@ the l1-minimization problem.
 The `cr.sparse.sls` package provides JAX versions of
 `LSQR`, `ISTA`, `FISTA`  algorithms for solving sparse linear 
 systems. The linear system is represented by a linear operator
-from `cr.sparse.lop`. It also includes a power iteration
-algorithm to compute the largest eigen value of a 
-symmetric linear operator.
+from `cr.sparse.lop`. 
 
 The `cr.sparse.dict` package provides matrix versions of a variety
 of random/structured sensing matrices and dictionaries. It
@@ -109,52 +107,21 @@ OMP.
 The `cr.sparse.lop` package includes a collection of linear operators
 influenced by `PyLops` [@ravasi2019pylops]. The design is different
 following functional programming principles.
-Supported operators include: 
-`identity`, `block_diag`, `matrix`, `diagonal`, `zero`, `flipud`,
-`sum`, `pad_zeros`, `symmetrize`, `restriction`, 
-`running_average`, `fir_filter`, 
-`convolve`, `convolve2D`, `convolveND`, 
-`fourier_basis`, `dirac_fourier_basis`, `cosine_basis`, `walsh_hadamard_basis`,
-`dwt`, `dwt2D`, 
-`first_derivative`, `second_derivative`,
-`circulant`, 
-`gaussian_dict`, `rademacher_dict`, `random_onb_dict`.
-All operator implementations can be jit compiled using `lop.jit`.
-Operator algebra features allow one to combine different operators 
-to form new operators. Following unary and binary functions are available:
-`neg`, `scale`, `partial_op`, `add`, `subtract`, `compose`, 
-`transpose`, `hermitian`, `hcat`, `power`, `gram`, `frame`.
-
-Following sub-libraries in `cr.sparse` have been built to enrich the 
-suite of linear operators in `cr.sparse.lop`.
+It is possible to combine different operators  
+to form new operators. 
 
 `cr.sparse.wt` package includes a JAX version of major functionality
 from `PyWavelets` [@lee2019pywavelets] making it a first major pure 
 Python wavelets implementation which can work across CPUs, GPUs and TPUs.
-The API includes:  `dwt`, `idwt`, `dwt2`, `idwt2`, 
-`upcoef`, `downcoef`, `wavedec`, `waverec`, `cwt` functions. 
-The discrete wavelets supported include: 
-Haar, Daubechies, Symlets, Coiflets, Biorthogonal, 
-Reverse biorthogonal, Discrete Meyer.
-Continuous wavelets include: Complex Morlet and Ricker (or Mexican Hat).
-
 
 The `cr.sparse.dsp` package includes JAX versions of 
-`DCT`, `IDCT`, `WHT` transforms. These in turn are used
-in the `lop` package. It also provides a number of utilities
+`DCT`, `IDCT`, `WHT` transforms. It also provides a number of utilities
 to construct synthetic signals like chirps, pulses, Gaussian pulses,
 etc..
 
 The `cr.sparse.la` package provides JAX versions of a set of linear algebra
 subroutines as required by other higher level modules. 
-These are built on top of `jax.numpy` and bridge the necessary gap.
 It also includes special routines for solving truncated SVD problems.
-JAX doesn't include `eigs` and `svds` routines at the moment.
-Several sparse problems require such functionality. We provide
-an implementation of **Lanczos Bidiagonalization with Partial
-Reorthogonalization** procedure which can be used to compute 
-truncated SVD. 
-
 
 # Statement of need
 
@@ -218,9 +185,6 @@ speech recognition, seismology, direction of arrival.
 
 # Sparse signal processing problems and available solvers
 
-A mathematical introduction to the problems supported by this library
-is given in  the online [documentation](https://cr-sparse.readthedocs.io/en/latest/intro.html).
-
 We provide JAX based implementations for the following greedy pursuit algorithms:
 
 * `cr.sparse.pursuit.omp`: Orthogonal Matching Pursuit (OMP) [@pati1993orthogonal;@tropp2004greed;@davenport2010analysis] 
@@ -229,13 +193,9 @@ We provide JAX based implementations for the following greedy pursuit algorithms
 * `cr.sparse.pursuit.iht`: Iterative Hard Thresholding and its normalized version (IHT, NIHT) [@blumensath2009iterative;@blumensath2010normalized]
 * `cr.sparse.pursuit.htp`: Hard Thresholding Pursuit and its normalized version (HTP, NHTP) [@foucart2011recovering]
 
-For details, see the online [documentation](https://cr-sparse.readthedocs.io/en/latest/source/pursuit.html).
-
 The `cr.sparse.cvx.admm` package includes solvers for basis pursuit (BP),
 basis pursuit denoising (BPDN), basis pursuit with inequality constraints (BPIC),
 and their nonnegative variants.
-
-For details, see our online [tutorial](https://cr-sparse.readthedocs.io/en/latest/tutorials/admm_l1.html).
 
 ## Linear Operators
 
@@ -247,8 +207,8 @@ of linear operators. In order to fully exploit the power of sparse
 recovery algorithms, it was deemed necessary to provide a complementary 
 set of linear operators.
 
-We provide a large collection of linear operators in `cr.sparse.lop`.
-For the complete list, see the online [documentation](https://cr-sparse.readthedocs.io/en/latest/source/lop.html).
+We provide a large collection of linear operators in 
+[`cr.sparse.lop`](https://cr-sparse.readthedocs.io/en/latest/source/lop.html).
 
 Although inspired by `PyLops` [@ravasi2019pylops], there are several
 differences in our implementation. 
@@ -420,12 +380,10 @@ Support for sparse array storage is still
 [experimental](https://jax.readthedocs.io/en/latest/jax.experimental.sparse.html)
 and is limited by static size requirements of JIT compiler. See [#8299](https://github.com/google/jax/issues/8299). 
 
-These restrictions imply good amount of creativity and a very
+These restrictions necessitate good amount of creativity and a very
 disciplined coding style so that efficient JIT friendly 
-solvers can be developed.
-
-For more details, see the [limitations](https://cr-sparse.readthedocs.io/en/latest/dev/limitations.html) section in documentation.
-
+solvers can be developed. 
+[Limitations in docs](https://cr-sparse.readthedocs.io/en/latest/dev/limitations.html).
 
 # Future Work
 
