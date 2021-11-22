@@ -4,30 +4,61 @@ Acronyms
 
 
 .. list-table::
+    :widths: 20 80
     :header-rows: 1
 
     * - Acronym
       - Full form
+    * - ADC
+      - Analog to Digital Conversion
+    * - AIC
+      - Analog to Information Conversion
     * - AIHT
       - Accelerated Iterative Hard Thresholding
+    * - AMP
+      - Approximate Message Passing
+    * - AST
+      - Affine Scaling Transformation
+    * - BAOMP
+      - Backtracking based Adaptive Orthogonal Matching Pursuit
     * - BCQP
       - Bound Constrained Quadratic Program
+    * - BCS
+      - Bayesian Compressive Sensing
+    * - BOCP
+      - Block Orthogonal Matching Pursuit
     * - BP
       - Basis Pursuit
-    * - BPIC
-      - Basis Pursuit with Inequality Constraints
     * - BPDN
       - Basis Pursuit DeNoising
+    * - BPIC
+      - Basis Pursuit with Inequality Constraints
     * - CG
       - Conjugate Gradient
     * - CoSaMP
       - Compressed Sampling Matching Pursuit
+    * - CP
+      - Chaining Pursuit
+    * - CR
+      - Cognitive Radio
     * - CS
       - Compressive Sensing, Compressed Sensing, Compressive Sampling
     * - DCT
       - Discrete Cosine Transform
+    * - DOA
+      - Direction Of Arrival
+    * - D-OMP
+      - Differential Orthogonal Matching Pursuit
+    * - DS
+      - Dantzig Selector
+    * - EM
+      - Expectation Maximization
+    * - FBP
+      - Forward Backward Pursuit
     * - FFT
       - Fast Fourier Transform
+    * - FISTA
+      - Fast Iterative Shrinkage Thresholding Algorithm
     * - GP
       - Gradient Projection
     * - GPSR

@@ -7,6 +7,8 @@ This section lists and organizes available and planned algorithms in the `CR-Spa
 Sparse recovery algorithms
 --------------------------------------------
 
+See :cite:`marques2018review` for a review of sparse recovery algorithms.
+
 .. rubric:: Convex relaxation algorithms
 
 .. list-table::
@@ -67,6 +69,14 @@ Sparse recovery algorithms
       - Acronym
       - Status
       - Docs
+    * - Iterative Shrinkage Thresholding Algorithm
+      - ISTA
+      - done
+      - :ref:`... <api:sls>`
+    * - Fast Iterative Shrinkage Thresholding Algorithm
+      - FISTA
+      - done
+      - :ref:`... <api:sls>`
     * - Iterative Hard Thresholding
       - IHT
       - done

@@ -65,7 +65,7 @@ is provided in [online documentation](https://cr-sparse.readthedocs.io/en/latest
 For comprehensive introduction to sparse
 representations and compressive sensing,
  please refer to excellent books [@mallat2008wavelet;@elad2010sparse;@foucart2013mathintro],
-papers [@donoho2006compressed;@qaisar2013compressive],
+papers [@donoho2006compressed;@qaisar2013compressive;@marques2018review],
 [Rice Compressive Sensing Resources](https://dsp.rice.edu/cs/) and references therein.
 
 # Package Overview
@@ -205,6 +205,10 @@ layer to switch explicitly between
 In contrast, 
 our use of JAX enables us to perform jit compilation with 
 abstracted out end-to-end XLA optimization to multiple backend.
+
+The algorithms in this package have a wide variety of applications. We list
+some: compressive imaging, medical imaging, compressive radar,
+
 
 # Sparse signal processing problems and available solvers
 
@@ -433,6 +437,7 @@ SSC-L1 [@pourkamali2020efficient].
 In future, we intend to increase the coverage in following areas:
 More recovery algorithms (OLS, Split Bergmann, SPGL1, etc.) 
 and specialized cases (partial known support, );
+Bayesian Compressive Sensing;
 Dictionary learning (K-SVD, MOD, etc.);
 Subspace clustering;
 Image denoising, compression, etc. problems using sparse representation principles;

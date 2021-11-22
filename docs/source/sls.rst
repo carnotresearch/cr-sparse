@@ -1,3 +1,5 @@
+.. _api:sls:
+
 Sparse Linear Systems
 =========================
 
