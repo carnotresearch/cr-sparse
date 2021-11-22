@@ -1,7 +1,7 @@
 Introduction
 =====================
 
-.. contents::`
+.. contents::
     :depth: 2
     :local:
 
@@ -12,6 +12,8 @@ various algorithms related to:
 * Sparse approximation :cite:`mallat2008wavelet,elad2010sparse`
 * Compressive sensing :cite:`donoho2006compressed,candes2006compressive,candes2008introduction,baraniuk2011introduction`
 * Linear operators
+
+.. image:: images/srr_cs.png
 
 Bulk of this library is built using functional programming techniques
 which is critical for the generation of efficient numerical codes for CPU
