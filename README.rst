@@ -27,6 +27,10 @@ using `XLA <https://www.tensorflow.org/xla>`_.
 See `here <https://cr-sparse.readthedocs.io/en/latest/intro.html>`_ 
 for a more detailed introduction.
 
+See `here <https://cr-sparse.readthedocs.io/en/latest/algorithms.html>`_
+for the list of algorithms supported (and planned) in CR-Sparse.
+
+
 The library includes several packages: 
 
 * Wavelet transforms `cr.sparse.wt <https://cr-sparse.readthedocs.io/en/latest/source/wavelets.html>`_
