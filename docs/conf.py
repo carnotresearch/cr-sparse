@@ -228,3 +228,8 @@ html_theme_options = {
     "page_width": "1200px",
 }
 
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.txt': 'markdown',
+    '.md': 'markdown',
+}

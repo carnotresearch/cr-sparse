@@ -1,9 +1,13 @@
+.. _api:l1min:
+
 L1 Minimization
 =============================================================================
 
 .. contents::
     :depth: 2
     :local:
+
+.. _api:l1min:tnipm:
 
 Truncated Newton Interior Points Method (TNIPM)
 ---------------------------------------------------------
@@ -48,6 +52,9 @@ versions.
     l1ls.solve_jit
 
 An example is provided in :ref:`recovery_l1_gallery`.
+
+
+.. _api:l1min:admmm:
 
 Alternating Directions Methods
 -------------------------------------

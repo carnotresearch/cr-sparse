@@ -14,6 +14,7 @@ sparse representation and compressive sensing.
    intro
    tutorials/index
    source/index
+   algorithms
    theory
    gallery/index
    zzzreference
