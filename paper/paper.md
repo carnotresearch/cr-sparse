@@ -207,7 +207,13 @@ our use of JAX enables us to perform jit compilation with
 abstracted out end-to-end XLA optimization to multiple backend.
 
 The algorithms in this package have a wide variety of applications. We list
-some: compressive imaging, medical imaging, compressive radar,
+a few: image denoising, deblurring, compression, inpainting, impulse noise removal,
+super-resolution,
+subspace clustering, dictionary learning, 
+compressive imaging, medical imaging, compressive radar,
+wireless sensor networks, astrophysical signals, cognitive radio,
+sparse channel estimation, analog to information conversion, 
+speech recognition, seismology, direction of arrival.
 
 
 # Sparse signal processing problems and available solvers
