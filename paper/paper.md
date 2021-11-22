@@ -35,7 +35,40 @@ standard signal processing transforms,
 and linear algebra subroutines for solving sparse linear systems. 
 It has been built using Google JAX [@jax2018github], which enables the same high level
 Python code to get efficiently compiled on CPU, GPU and TPU architectures
-using XLA.  
+using XLA [@abadi2017computational]. 
+
+![Sparse signal representations and compressive sensing](./srr_cs.png)
+
+Traditional signal processing exploits the underlying structure in signals
+by representing them using Fourier or wavelet orthonormal bases. 
+In these representations,
+most of the signal energy is concentrated in few coefficients allowing greater
+flexibility in analysis and processing of signals. More flexibility can be
+achieved by using overcomplete dictionaries [@mallat2008wavelet]
+(e.g. unions of orthonormal bases). However, the construction of
+sparse representations of signals in these overcomplete dictionaries 
+is no longer straightforward and requires use of specialized sparse
+coding algorithms like orthogonal matching pursuit [@pati1993orthogonal]
+or basis pursuit [@chen2001atomic]. The key idea behind these algorithms 
+is the fact that under-determined systems $A x = b$ can be solved efficiently
+to provide sparse solutions $x$ if the matrix $A$ satisfies specific conditions
+on its properties like coherence. Compressive sensing takes the same 
+idea in the other direction and contends that signals having sparse representations
+in suitable bases can be acquired by very few data-independent 
+random measurements $y = \Phi x$ if the sensing or measurement system $\Phi$
+satisfies certain conditions like restricted isometry property [@candes2008restricted].
+The same sparse coding algorithms can be tailored for sparse signal recovery
+from compressed measurements. 
+
+A short mathematical introduction to compressive sensing and sparse representation problems 
+is provided in [online documentation](https://cr-sparse.readthedocs.io/en/latest/intro.html).
+For comprehensive introduction to sparse
+representations and compressive sensing,
+ please refer to excellent books [@mallat2008wavelet;@elad2010sparse;@foucart2013mathintro],
+papers [@donoho2006compressed;@qaisar2013compressive],
+[Rice Compressive Sensing Resources](https://dsp.rice.edu/cs/) and references therein.
+
+# Package Overview
 
 The `cr.sparse.pursuit` package includes greedy and thresholding
 based solvers for sparse recovery. It includes: 
@@ -151,49 +184,27 @@ Several of these libraries contain key
 performance critical sub-routines
 in the form of C/C++ extensions making portability to GPUs harder. 
 
-There are some large libraries which focus on specific
-areas however they are generally CPU based. Additional effort 
-is spent in making the functionality available on GPUs.
+There are some Python libraries which focus on specific
+areas however they are generally CPU based.
+E.g., [`pyCSalgos`](https://github.com/nikcleju/pyCSalgos) is an
+old Python implementation of various Compressed Sensing algorithms.
+[`spgl1`](https://github.com/drrelyea/spgl1) is a `NumPy` based
+implementation of spectral projected gradient for L1 minimization.
+`c-lasso` [@simpson2021classo] is a Python package for constrained sparse regression 
+and classification. This is also CPU only. 
 [`PyWavelets`](https://github.com/PyWavelets/pywt) is an excellent 
 CPU only wavelets implementation in Python closely following the API
 of Wavelet toolbox in MATLAB. The performance critical parts have been
 written entirely in C. There are several attempts to port it on GPU
-using `PyTorch` or `Tensorflow` backends.
-[`PyLops`](https://github.com/PyLops/pylops) includes a GPU backend
-apart from its CPU implementation but the implementation appears to be
-somewhat complex.
-
-JAX is a new library which provides a `NumPy` [@oliphant2006guide] 
-like API and provides
-a just in time compiler to compile JAX based functions to a variety
-of hardware architectures via XLA [@abadi2017computational],
-a domain-specific compiler for linear algebra.
-It enforces a functional programming paradigm on functions which
-can be JIT compiled. This makes it very easy for the compiler 
-to reason about the program and generate efficient code. 
-
-JAX provides an excellent platform to build a comprehensive 
-library of solvers which can work across a variety of hardware
-platforms. It also frees users from the concern of supporting 
-new hardware later as becomes the job of the JIT compiler.
-
-At the same time, JAX is relatively new and still hasn't 
-reached `1.0` level maturity. 
-Besides the functional programming model places
-several restrictions on expressing the program logic. For example,
-JAX does not have support for dynamic or data dependent shapes.
-Thus, any algorithm parameter which determines the size/shape
-of individual arrays in an algorithm must be statically determined.
-Support for sparse array storage is still experimental. 
-The control flow primitives like `lax.while_loop`, `lax.fori_loop`
-etc. require that the algorithm state flowing between iterations
-must not change shape and size. 
-
-These restrictions imply good amount of creativity and a very
-disciplined coding style so that efficient JIT friendly 
-solvers can be developed. This has been a key directive
-in the development of `CR-Sparse`.
-
+using `PyTorch` ([PyTorch-Wavelet-Toolbox](https://github.com/v0lta/PyTorch-Wavelet-Toolbox)) 
+or `Tensorflow` ([tf-wavelets](https://github.com/UiO-CS/tf-wavelets)) backends.
+[`PyLops`](https://github.com/PyLops/pylops) includes GPU support. 
+They have built a [`backend.py`](https://github.com/PyLops/pylops/blob/master/pylops/utils/backend.py) 
+layer to switch explicitly between
+`NumPy` and [`CuPy`](https://cupy.dev/) for GPU support. 
+In contrast, 
+our use of JAX enables us to perform jit compilation with 
+abstracted out end-to-end XLA optimization to multiple backend.
 
 # Sparse signal processing problems and available solvers
 
@@ -362,6 +373,73 @@ Notebooks for reproducing these micro-benchmarks are also available in the
 
 We would like to mention that for small sizes, `pylops` on CPU runs much quicker. 
 Benefits of `CR-Sparse` on GPU can be seen on large sizes.
+
+# Limitations
+
+Some of the limitations in the library come from the underlying 
+JAX library. 
+JAX is relatively new and still hasn't 
+reached `1.0` level maturity. 
+The programming model chosen by JAX places
+several restrictions on expressing the program logic. For example,
+JAX does not have support for dynamic or data dependent shapes
+in their [JIT compiler](https://jax.readthedocs.io/en/latest/notebooks/thinking_in_jax.html#to-jit-or-not-to-jit).
+Thus, any algorithm parameter which determines the size/shape
+of individual arrays in an algorithm must be statically provided.
+E.g. for the greedy algorithms like OMP, 
+the sparsity level $K$ must be known in advance
+and provided as a static parameter to the API as the size of
+output array depends on $K$. 
+
+The control flow primitives like `lax.while_loop`, `lax.fori_loop`
+etc. in JAX require that the algorithm state flowing between iterations
+must not change shape and size. This makes coding of algorithms
+like OMP or SVT (singular value thresholding) very difficult.
+An incremental QR or Cholesky decomposition based implementation of OMP requires
+growing algorithm state. We ended up using a standard Python `for` loop
+for now but the JIT compiler simply unrolls it and doesn't allow for tolerance
+based early termination in them. 
+
+1D convolutions are slow in JAX on CPU 
+[#7961](https://github.com/google/jax/discussions/7961). 
+This affects the performance of DWT/IDWT in `cr.sparse.dwt`. 
+We are working on exploring ways of making it more efficient 
+while keeping the API intact.
+
+Support for sparse array storage is still 
+[experimental](https://jax.readthedocs.io/en/latest/jax.experimental.sparse.html)
+and is limited by static size requirements of JIT compiler. See [#8299](https://github.com/google/jax/issues/8299). 
+
+These restrictions imply good amount of creativity and a very
+disciplined coding style so that efficient JIT friendly 
+solvers can be developed.
+
+For more details, see the [limitations](https://cr-sparse.readthedocs.io/en/latest/dev/limitations.html) section in documentation.
+
+
+# Future Work
+
+Currently, work is underway to provide a JAX based
+implementation of [`TFOCS`](http://cvxr.com/tfocs/) [@becker2011templates]
+in the dev branch.
+This will help us increase the coverage to a wider set of
+problems (like total variation minimization, Dantzig selector,
+l1-analysis, nuclear norm minimization, etc.). As part of this
+effort, we are expanding our collection of linear operators and
+building a set of indicator and projector functions on to
+convex sets and proximal operators [@parikh2014proximal].
+This will enable us to cover other applications such as
+SSC-L1 [@pourkamali2020efficient]. 
+In future, we intend to increase the coverage in following areas:
+More recovery algorithms (OLS, Split Bergmann, SPGL1, etc.) 
+and specialized cases (partial known support, );
+Dictionary learning (K-SVD, MOD, etc.);
+Subspace clustering;
+Image denoising, compression, etc. problems using sparse representation principles;
+Matrix completion problems;
+Matrix factorization problems;
+Model based / Structured compressive sensing problems;
+Joint recovery problems from multiple measurement vectors.
 
 # Acknowledgements
 

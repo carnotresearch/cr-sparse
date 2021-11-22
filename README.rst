@@ -7,37 +7,46 @@ Functional Models and Algorithms for Sparse Signal Processing
 Quick Start
 =========================
 
-An `overview <https://cr-sparse.readthedocs.io/en/latest/intro.html>`_ of the library.
-
 .. contents::
     :depth: 2
     :local:
 
+CR-Sparse is a Python library that enables efficiently solving
+a wide variety of sparse representation based signal processing problems.
+It is a cohesive collection of sub-libraries working together. Individual
+sub-libraries provide functionalities for:
+wavelets, linear operators, greedy and convex optimization 
+based sparse recovery algorithms, subspace clustering, 
+standard signal processing transforms,
+and linear algebra subroutines for solving sparse linear systems. 
+It has been built using `Google JAX <https://jax.readthedocs.io/en/latest/>`_, 
+which enables the same high level
+Python code to get efficiently compiled on CPU, GPU and TPU architectures
+using `XLA <https://www.tensorflow.org/xla>`_. 
 
-This library aims to provide XLA/JAX based Python implementations for
-various models and algorithms related to:
+See `here <https://cr-sparse.readthedocs.io/en/latest/intro.html>`_ 
+for a more detailed introduction.
 
-* Wavelet transforms
-* Efficient linear operators
-* Iterative methods for sparse linear systems
-* Redundant dictionaries
-* Sparse approximations on redundant dictionaries
+.. image:: ../paper/srr_cs.png
 
-  * Greedy methods
-  * Convex optimization based methods
-  * Shrinkage methods
+The library includes several packages: 
 
-* Sparse recovery from compressive sensing based measurements
+* Wavelet transforms `cr.sparse.wt <https://cr-sparse.readthedocs.io/en/latest/source/wavelets.html>`_
+* Efficient linear operators `cr.sparse.lop <https://cr-sparse.readthedocs.io/en/latest/source/lop.html>`_
+* Iterative methods for sparse linear systems `cr.sparse.sls <https://cr-sparse.readthedocs.io/en/latest/source/sls.html>`_
+* Redundant dictionaries and sensing matrices `cr.sparse.dict <https://cr-sparse.readthedocs.io/en/latest/source/dict.html>`_
+* Solvers for sparse approximation and sparse recovery problems
 
-  * Greedy methods
-  * Convex optimization based methods
+  * Greedy and shrinkage based methods `cr.sparse.pursuit <https://cr-sparse.readthedocs.io/en/latest/source/pursuit.html>`_
+  * Convex optimization based methods `cr.sparse.cvx <https://cr-sparse.readthedocs.io/en/latest/source/cvx_recovery.html>`_
 
+* Sparse subspace clustering `cr.sparse.cluster.ssc <https://cr-sparse.readthedocs.io/en/latest/source/ssc.html>`_
 
 The library also provides
 
-* Various simple dictionaries and sensing matrices
-* Sample data generation utilities
-* Framework for evaluation of sparse recovery algorithms
+* Some sample data generation utilities `cr.sparse.data <https://cr-sparse.readthedocs.io/en/latest/source/data.html>`_
+* Some linear algebra utilities `cr.sparse.la <https://cr-sparse.readthedocs.io/en/latest/source/la.html>`_
+* Framework for evaluation of sparse recovery algorithms `cr.sparse.ef <https://cr-sparse.readthedocs.io/en/latest/source/ef.html>`_
 
 Examples
 ----------------
