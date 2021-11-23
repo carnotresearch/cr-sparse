@@ -59,18 +59,32 @@ Acronyms
       - Fast Fourier Transform
     * - FISTA
       - Fast Iterative Shrinkage Thresholding Algorithm
+    * - FOCUSS
+      - Focal Underdetermined System Solution
+    * - GBP
+      - Greedy Basis Pursuit
+    * - GOAMP
+      - Generalized Orthogonal Adaptive Matching Pursuit
     * - GP
       - Gradient Projection
     * - GPSR
       - Gradient Projection for Sparse Reconstruction
+    * - HDTV
+      - High Definition Television
+    * - HHS
+      - Heavy Hitters on Steroids
     * - HTP
       - Hard Thresholding Pursuit
     * - IHT
       - Iterative Hard Thresholding
+    * - IoT
+      - Internet of Things
     * - IP
       - Integer Programming, Interior Point methods
     * - IPM
       - Interior Points Method
+    * - IRLS
+      - Iterative Reweighted Least Squares
     * - IST
       - Iterative Shrinkage/Thresholding algorithms
     * - LARS
