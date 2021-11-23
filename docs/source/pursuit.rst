@@ -1,3 +1,5 @@
+.. _api:pursuit:
+
 Greedy Sparse Recovery
 ================================================
 
@@ -41,6 +43,7 @@ Different algorithms have different requirements on the dictionaries or sensing 
 
 .. currentmodule:: cr.sparse.pursuit
 
+.. _api:pursuit:matching:
 
 Basic Matching Pursuit Based Algorithms
 ------------------------------------------
@@ -78,6 +81,9 @@ Compressive Sensing Matching Pursuit (CSMP) Algorithms
     sp.matrix_solve_jit
     sp.operator_solve
     sp.operator_solve_jit
+
+
+.. _api:pursuit:ht:
 
 Hard Thresholding Based Algorithms
 -----------------------------------------

@@ -13,6 +13,8 @@ various algorithms related to:
 * Compressive sensing :cite:`donoho2006compressed,candes2006compressive,candes2008introduction,baraniuk2011introduction`
 * Linear operators
 
+.. image:: images/srr_cs.png
+
 Bulk of this library is built using functional programming techniques
 which is critical for the generation of efficient numerical codes for CPU
 and GPU architectures.
