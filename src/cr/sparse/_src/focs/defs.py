@@ -33,3 +33,31 @@ class FOCSOptions(NamedTuple):
     "Initial estimate of Lipschitz constant"
     Lexact: float = jnp.inf
     "Known bound of Lipschitz constant"
+    alpha: float = 0.9
+    "Line search increase parameter, in (0,1)"
+    beta: float = 0.5
+    "Backtracking parameter, in (0,1). No line search if >= 1"
+    mu: float = 1
+    "Strong convexity parameter"
+
+
+class FOCSState(NamedTuple):
+    """
+    State of the FOCS method
+    """
+    L : float
+    "Lipschitz constant estimate"
+    theta: float
+    ""
+    x: jnp.ndarray
+    ""
+    A_x : jnp.ndarray
+    z : jnp.ndarray
+    A_z: jnp.ndarray
+    f_v : float
+    f_x : float
+    C_x : float
+    g_x: jnp.ndarray
+    g_Ax: jnp.ndarray
+    
+

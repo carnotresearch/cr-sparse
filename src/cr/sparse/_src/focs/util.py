@@ -16,7 +16,7 @@ from jax import jit
 
 import jax.numpy as jnp
 import cr.sparse as crs
-
+from cr.sparse.la import AH_v
 
 def matrix_affine_func(A=None, b=None):
     """Returns an affine function for a matrix A and vector b
@@ -49,14 +49,25 @@ def matrix_affine_func(A=None, b=None):
         # both A and b are specified
         return A @ x + b
 
-    if A is None and b is None:
-        return identity
-
+    ax_plus_b = identity
     if A is None:
         # We assume that A is identity
-        return translate
+        ax_plus_b  = translate
+    elif b is None:
+        # we compute y = A @ x
+        ax_plus_b = similar
+    else:
+        # we compute A @ x + b
+        ax_plus_b = affine
 
-    if b is None:
-        return similar
 
-    return affine
+    @partial(jit, static_argnums=(2,))
+    def operator(x, mode=0):
+        if mode == 0:
+            return A @ x
+        if mode == 1:
+            return AH_v(A, x)
+        if mode == 2:
+            return ax_plus_b(x)
+
+    return operator

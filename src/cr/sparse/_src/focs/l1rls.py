@@ -26,5 +26,5 @@ def l1rls(A, b, lambda_, x0, options: FOCSOptions = FOCSOptions()):
     f = opt.smooth_value_grad(func, grad)
     h_func, h_prox = opt.prox_l1(lambda_)
     h = opt.prox_value_vec(h_func, h_prox)
-    af = matrix_affine_func(A, -b)
-    return focs(f, af, h, x0, options)
+    # af = matrix_affine_func(A, -b)
+    return focs(f, h, A, -b, x0, options)

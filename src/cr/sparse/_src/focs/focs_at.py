@@ -12,10 +12,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .defs import FOCSOptions
-from .focs_at import focs_at
+from .defs import FOCSOptions, FOCSState
 
-def focs(f, h, A, b, x0, options: FOCSOptions = FOCSOptions()):
-    """First order conic solver driver routine
+import jax.numpy as jnp
+
+def focs_init(f, h, A, b, x0, options: FOCSOptions):
     """
-    return focs_at(f, h, A, b, x0, options)
+    """
+    in_shape = A.input_shape
+    out_shape = A.output_shape
+    x = x0
+    f_v = jnp.inf
+    state = FOCSState(L=options.L0, theta=jnp.inf)
+    return state,
+
+def focs_at(f, h, A, b, x0, options: FOCSOptions):
+    """First order conic solver Auslender and Teboulle method
+    """
+    state, = focs_init(f, h, A, b, x0, options)
+
+    def body_func(state):
+        return
+
+    def cond_func(state):
+        return
+
+    return
