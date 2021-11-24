@@ -5,9 +5,9 @@ Functional Models and Algorithms for Sparse Signal Processing
 |pypi| |license| |zenodo| |docs| |unit_tests| |coverage| |joss|
 
 
-.. contents::
-    :depth: 2
-    :local:
+Introduction
+-------------------
+
 
 CR-Sparse is a Python library that enables efficiently solving
 a wide variety of sparse representation based signal processing problems.
@@ -26,31 +26,11 @@ using `XLA <https://www.tensorflow.org/xla>`_.
 
 For detailed documentation and usage, please visit `online docs <https://cr-sparse.readthedocs.io/en/latest>`_.
 
-
-Examples
-----------------
-
-See the `examples gallery <https://cr-sparse.readthedocs.io/en/latest/gallery/index.html>`_ in the documentation.
-Here is a small selection of examples:
-
-* `Sparse recovery using Truncated Newton Interior Points Method <https://cr-sparse.readthedocs.io/en/latest/gallery/rec_l1/spikes_l1ls.html>`_ 
-* `Sparse recovery with ADMM <https://cr-sparse.readthedocs.io/en/latest/gallery/rec_l1/partial_wh_sensor_cosine_basis.html>`_ 
-* `Compressive sensing operators <https://cr-sparse.readthedocs.io/en/latest/gallery/lop/cs_operators.html>`_ 
-* `Image deblurring with LSQR and FISTA algorithms <https://cr-sparse.readthedocs.io/en/latest/gallery/lop/deblurring.html>`_ 
-* `Deconvolution of the effects of a Ricker wavelet <https://cr-sparse.readthedocs.io/en/latest/gallery/lop/deconvolution.html>`_ 
-* `Wavelet transform operators <https://cr-sparse.readthedocs.io/en/latest/gallery/lop/wt_op.html>`_ 
-* `CoSaMP step by step <https://cr-sparse.readthedocs.io/en/latest/gallery/pursuit/cosamp_step_by_step.html>`_ 
-
-
-A more extensive collection of example notebooks is available in the `companion repository <https://github.com/carnotresearch/cr-sparse-companion>`_.
-Some micro-benchmarks are reported `here <https://github.com/carnotresearch/cr-sparse/blob/master/paper/paper.md#runtime-comparisons>`_.
-
-
-Platform Support
+Supported Platforms
 ----------------------
 
-``cr-sparse`` can run on any platform supported by ``JAX``. 
-We have tested ``cr-sparse`` on Mac and Linux platforms and Google Colaboratory.
+``CR-Sparse`` can run on any platform supported by ``JAX``. 
+We have tested ``CR-Sparse`` on Mac and Linux platforms and Google Colaboratory.
 
 ``JAX`` is not officially supported on Windows platforms at the moment. 
 Although, it is possible to build it from source using Windows Subsystems for Linux.
@@ -71,7 +51,33 @@ Directly from our GITHUB repository:
     python -m pip install git+https://github.com/carnotresearch/cr-sparse.git
 
 
-Citing cr-sparse
+
+Examples/Usage
+----------------
+
+See the `examples gallery <https://cr-sparse.readthedocs.io/en/latest/gallery/index.html>`_ in the documentation.
+Here is a small selection of examples:
+
+* `Sparse recovery using Truncated Newton Interior Points Method <https://cr-sparse.readthedocs.io/en/latest/gallery/rec_l1/spikes_l1ls.html>`_ 
+* `Sparse recovery with ADMM <https://cr-sparse.readthedocs.io/en/latest/gallery/rec_l1/partial_wh_sensor_cosine_basis.html>`_ 
+* `Compressive sensing operators <https://cr-sparse.readthedocs.io/en/latest/gallery/lop/cs_operators.html>`_ 
+* `Image deblurring with LSQR and FISTA algorithms <https://cr-sparse.readthedocs.io/en/latest/gallery/lop/deblurring.html>`_ 
+* `Deconvolution of the effects of a Ricker wavelet <https://cr-sparse.readthedocs.io/en/latest/gallery/lop/deconvolution.html>`_ 
+* `Wavelet transform operators <https://cr-sparse.readthedocs.io/en/latest/gallery/lop/wt_op.html>`_ 
+* `CoSaMP step by step <https://cr-sparse.readthedocs.io/en/latest/gallery/pursuit/cosamp_step_by_step.html>`_ 
+
+
+A more extensive collection of example notebooks is available in the `companion repository <https://github.com/carnotresearch/cr-sparse-companion>`_.
+Some micro-benchmarks are reported `here <https://github.com/carnotresearch/cr-sparse/blob/master/paper/paper.md#runtime-comparisons>`_.
+
+
+Contribution Guidelines/Code of Conduct
+----------------------------------------
+
+* `Contribution Guidelines <CONTRIBUTING.md>`_
+* `Code of Conduct <CODE_OF_CONDUCT.md>`_
+
+Citing CR-Sparse
 ------------------------
 
 
@@ -81,9 +87,9 @@ To cite this repository:
 
     @software{crsparse2021github,
     author = {Shailesh Kumar},
-    title = {{cr-sparse}: Functional Models and Algorithms for Sparse Signal Processing},
+    title = {{CR-Sparse}: Functional Models and Algorithms for Sparse Signal Processing},
     url = {https://cr-sparse.readthedocs.io/en/latest/},
-    version = {0.1.6},
+    version = {0.2.1},
     year = {2021},
     doi={10.5281/zenodo.5322044},
     }
@@ -95,9 +101,6 @@ To cite this repository:
 `Code <https://github.com/carnotresearch/cr-sparse>`_ | 
 `Issues <https://github.com/carnotresearch/cr-sparse/issues>`_ | 
 `Discussions <https://github.com/carnotresearch/cr-sparse/discussions>`_ |
-`Examples <https://github.com/carnotresearch/cr-sparse/blob/master/notebooks/README.rst>`_ |
-`Experiments <https://github.com/carnotresearch/cr-sparse/blob/master/notebooks/experiments/README.rst>`_ |
-`Sparse-Plex <https://sparse-plex.readthedocs.io>`_
 
 
 .. |docs| image:: https://readthedocs.org/projects/cr-sparse/badge/?version=latest
