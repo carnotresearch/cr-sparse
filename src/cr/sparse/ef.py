@@ -18,10 +18,10 @@ Evaluation Framework
 # pylint: disable=W0611
 
 
-from cr.sparse._src.ef.performance import (
+from cr.sparse._src.tools.performance import (
     RecoveryPerformance
 )
 
-from cr.sparse._src.ef.trials_at_fixed_m_n import (
+from cr.sparse._src.tools.trials_at_fixed_m_n import (
     RecoveryTrialsAtFixed_M_N
 )
