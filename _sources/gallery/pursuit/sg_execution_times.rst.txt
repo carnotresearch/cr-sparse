@@ -5,10 +5,10 @@
 
 Computation times
 =================
-**00:09.615** total execution time for **gallery_pursuit** files:
+**00:08.447** total execution time for **gallery_pursuit** files:
 
 +-------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_pursuit_cosamp_step_by_step.py` (``cosamp_step_by_step.py``) | 00:06.928 | 0.0 MB |
+| :ref:`sphx_glr_gallery_pursuit_cosamp_step_by_step.py` (``cosamp_step_by_step.py``) | 00:06.113 | 0.0 MB |
 +-------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_pursuit_cs1bit_biht.py` (``cs1bit_biht.py``)                 | 00:02.686 | 0.0 MB |
+| :ref:`sphx_glr_gallery_pursuit_cs1bit_biht.py` (``cs1bit_biht.py``)                 | 00:02.334 | 0.0 MB |
 +-------------------------------------------------------------------------------------+-----------+--------+
