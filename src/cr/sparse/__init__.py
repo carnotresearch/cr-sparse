@@ -236,3 +236,14 @@ from cr.sparse._src.similarity import (
     sqr_dist_to_gaussian_sim,
     eps_neighborhood_sim
 )
+
+
+# Evaluation Tools
+
+from cr.sparse._src.tools.performance import (
+    RecoveryPerformance
+)
+
+from cr.sparse._src.tools.trials_at_fixed_m_n import (
+    RecoveryTrialsAtFixed_M_N
+)
