@@ -61,10 +61,9 @@
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#platform-support">Platform Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#citing-cr-sparse">Citing cr-sparse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
@@ -112,80 +111,18 @@
 
           <div class="body" role="main">
             
-  <p>Functional Models and Algorithms for Sparse Signal Processing</p>
-<p><a class="reference external" href="https://badge.fury.io/py/cr-sparse"><img alt="PyPI cr-sparse" src="https://badge.fury.io/py/cr-sparse.svg" /></a> <a class="reference external" href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a> <a class="reference external" href="https://zenodo.org/badge/latestdoi/323566858"><img alt="DOI" src="https://zenodo.org/badge/323566858.svg" /></a> <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/?badge=latest"><img alt="Documentation Status" src="https://readthedocs.org/projects/cr-sparse/badge/?version=latest" /></a> <a class="reference external" href="https://github.com/carnotresearch/cr-sparse/actions/workflows/ci.yml"><img alt="Unit Tests" src="https://github.com/carnotresearch/cr-sparse/actions/workflows/ci.yml/badge.svg" /></a> <a class="reference external" href="https://codecov.io/gh/carnotresearch/cr-sparse"><img alt="Coverage" src="https://codecov.io/gh/carnotresearch/cr-sparse/branch/master/graph/badge.svg?token=JZQW6QU3S4" /></a> <a class="reference external" href="https://joss.theoj.org/papers/ebd4e5ca27a5db705b1dc382b64e0bed"><img alt="JOSS" src="https://joss.theoj.org/papers/ebd4e5ca27a5db705b1dc382b64e0bed/status.svg" /></a></p>
-<section id="quick-start">
+  <section id="quick-start">
 <h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
-<div class="contents local topic" id="contents">
-<ul class="simple">
-<li><p><a class="reference internal" href="#examples" id="id5">Examples</a></p></li>
-<li><p><a class="reference internal" href="#platform-support" id="id6">Platform Support</a></p></li>
-<li><p><a class="reference internal" href="#installation" id="id7">Installation</a></p></li>
-<li><p><a class="reference internal" href="#citing-cr-sparse" id="id8">Citing cr-sparse</a></p></li>
-</ul>
-</div>
-<p>CR-Sparse is a Python library that enables efficiently solving
-a wide variety of sparse representation based signal processing problems.
-It is a cohesive collection of sub-libraries working together. Individual
-sub-libraries provide functionalities for:
-wavelets, linear operators, greedy and convex optimization
-based sparse recovery algorithms, subspace clustering,
-standard signal processing transforms,
-and linear algebra subroutines for solving sparse linear systems.
-It has been built using <a class="reference external" href="https://jax.readthedocs.io/en/latest/">Google JAX</a>,
-which enables the same high level
-Python code to get efficiently compiled on CPU, GPU and TPU architectures
-using <a class="reference external" href="https://www.tensorflow.org/xla">XLA</a>.</p>
-<p>See <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/intro.html">here</a>
-for a more detailed introduction.</p>
-<p>See <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/algorithms.html">here</a>
-for the list of algorithms supported (and planned) in CR-Sparse.</p>
-<p>The library includes several packages:</p>
-<ul class="simple">
-<li><p>Wavelet transforms <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/source/wavelets.html">cr.sparse.wt</a></p></li>
-<li><p>Efficient linear operators <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/source/lop.html">cr.sparse.lop</a></p></li>
-<li><p>Iterative methods for sparse linear systems <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/source/sls.html">cr.sparse.sls</a></p></li>
-<li><p>Redundant dictionaries and sensing matrices <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/source/dict.html">cr.sparse.dict</a></p></li>
-<li><p>Solvers for sparse approximation and sparse recovery problems</p>
-<ul>
-<li><p>Greedy and shrinkage based methods <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/source/pursuit.html">cr.sparse.pursuit</a></p></li>
-<li><p>Convex optimization based methods <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/source/cvx_recovery.html">cr.sparse.cvx</a></p></li>
-</ul>
-</li>
-<li><p>Sparse subspace clustering <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/source/ssc.html">cr.sparse.cluster.ssc</a></p></li>
-</ul>
-<p>The library also provides</p>
-<ul class="simple">
-<li><p>Some sample data generation utilities <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/source/data.html">cr.sparse.data</a></p></li>
-<li><p>Some linear algebra utilities <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/source/la.html">cr.sparse.la</a></p></li>
-<li><p>Framework for evaluation of sparse recovery algorithms <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/source/ef.html">cr.sparse.ef</a></p></li>
-</ul>
-<section id="examples">
-<h2><a class="toc-backref" href="#id5">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p>Some micro-benchmarks are reported <a class="reference external" href="https://github.com/carnotresearch/cr-sparse/blob/master/paper/paper.md#runtime-comparisons">here</a>.
-Jupyter notebooks for these benchmarks are in the <a class="reference external" href="https://github.com/carnotresearch/cr-sparse-companion">companion repository</a>.</p>
-<p>See the <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/index.html">examples gallery</a> for an
-extensive set of examples. Here is a small selection of examples:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/rec_l1/spikes_l1ls.html">Sparse recovery using Truncated Newton Interior Points Method</a></p></li>
-<li><p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/rec_l1/partial_wh_sensor_cosine_basis.html">Sparse recovery with ADMM</a></p></li>
-<li><p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/lop/cs_operators.html">Compressive sensing operators</a></p></li>
-<li><p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/lop/deblurring.html">Image deblurring with LSQR and FISTA algorithms</a></p></li>
-<li><p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/lop/deconvolution.html">Deconvolution of the effects of a Ricker wavelet</a></p></li>
-<li><p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/lop/wt_op.html">Wavelet transform operators</a></p></li>
-<li><p><a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/gallery/pursuit/cosamp_step_by_step.html">CoSaMP step by step</a></p></li>
-</ul>
-<p>A more extensive collection of example notebooks is available in the <a class="reference external" href="https://github.com/carnotresearch/cr-sparse-companion">companion repository</a>.</p>
-</section>
+<p><a class="reference external" href="https://badge.fury.io/py/cr-sparse"><img alt="PyPI cr-sparse" src="https://badge.fury.io/py/cr-sparse.svg" /></a> <a class="reference external" href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a> <a class="reference external" href="https://zenodo.org/badge/latestdoi/323566858"><img alt="DOI" src="https://zenodo.org/badge/323566858.svg" /></a> <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/?badge=latest"><img alt="Documentation Status" src="https://readthedocs.org/projects/cr-sparse/badge/?version=latest" /></a> <a class="reference external" href="https://github.com/carnotresearch/cr-sparse/actions/workflows/ci.yml"><img alt="Unit Tests" src="https://github.com/carnotresearch/cr-sparse/actions/workflows/ci.yml/badge.svg" /></a> <a class="reference external" href="https://codecov.io/gh/carnotresearch/cr-sparse"><img alt="Coverage" src="https://codecov.io/gh/carnotresearch/cr-sparse/branch/master/graph/badge.svg?token=JZQW6QU3S4" /></a> <a class="reference external" href="https://joss.theoj.org/papers/ebd4e5ca27a5db705b1dc382b64e0bed"><img alt="JOSS" src="https://joss.theoj.org/papers/ebd4e5ca27a5db705b1dc382b64e0bed/status.svg" /></a></p>
 <section id="platform-support">
-<h2><a class="toc-backref" href="#id6">Platform Support</a><a class="headerlink" href="#platform-support" title="Permalink to this headline">¶</a></h2>
+<h2>Platform Support<a class="headerlink" href="#platform-support" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">cr-sparse</span></code> can run on any platform supported by <code class="docutils literal notranslate"><span class="pre">JAX</span></code>.
 We have tested <code class="docutils literal notranslate"><span class="pre">cr-sparse</span></code> on Mac and Linux platforms and Google Colaboratory.</p>
 <p><code class="docutils literal notranslate"><span class="pre">JAX</span></code> is not officially supported on Windows platforms at the moment.
 Although, it is possible to build it from source using Windows Subsystems for Linux.</p>
 </section>
 <section id="installation">
-<h2><a class="toc-backref" href="#id7">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>Installation from PyPI:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m pip install cr-sparse
 </pre></div>
@@ -195,26 +132,10 @@ Although, it is possible to build it from source using Windows Subsystems for Li
 </pre></div>
 </div>
 </section>
-<section id="citing-cr-sparse">
-<h2><a class="toc-backref" href="#id8">Citing cr-sparse</a><a class="headerlink" href="#citing-cr-sparse" title="Permalink to this headline">¶</a></h2>
-<p>To cite this repository:</p>
-<div class="highlight-tex notranslate"><div class="highlight"><pre><span></span>@software<span class="nb">{</span>crsparse2021github,
-author = <span class="nb">{</span>Shailesh Kumar<span class="nb">}</span>,
-title = <span class="nb">{{</span>cr-sparse<span class="nb">}</span>: Functional Models and Algorithms for Sparse Signal Processing<span class="nb">}</span>,
-url = <span class="nb">{</span>https://cr-sparse.readthedocs.io/en/latest/<span class="nb">}</span>,
-version = <span class="nb">{</span>0.1.6<span class="nb">}</span>,
-year = <span class="nb">{</span>2021<span class="nb">}</span>,
-doi=<span class="nb">{</span>10.5281/zenodo.5322044<span class="nb">}</span>,
-<span class="nb">}</span>
-</pre></div>
-</div>
-<p><a class="reference external" href="https://carnotresearch.github.io/cr-sparse">Documentation</a> |
-<a class="reference external" href="https://github.com/carnotresearch/cr-sparse">Code</a> |
-<a class="reference external" href="https://github.com/carnotresearch/cr-sparse/issues">Issues</a> |
-<a class="reference external" href="https://github.com/carnotresearch/cr-sparse/discussions">Discussions</a> |
-<a class="reference external" href="https://github.com/carnotresearch/cr-sparse/blob/master/notebooks/README.rst">Examples</a> |
-<a class="reference external" href="https://github.com/carnotresearch/cr-sparse/blob/master/notebooks/experiments/README.rst">Experiments</a> |
-<a class="reference external" href="https://sparse-plex.readthedocs.io">Sparse-Plex</a></p>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>See the <a class="reference internal" href="gallery/index.html#gallery"><span class="std std-ref">examples gallery</span></a> for an
+extensive set of examples.</p>
 </section>
 </section>
 
