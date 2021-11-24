@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>cr.sparse.ef.RecoveryPerformance &#8212; cr-sparse  documentation</title>
+    <title>cr.sparse.RecoveryPerformance &#8212; cr-sparse  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
@@ -30,7 +30,7 @@
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="cr.sparse.ef.RecoveryTrialsAtFixed_M_N" href="cr.sparse.ef.RecoveryTrialsAtFixed_M_N.html" />
+    <link rel="next" title="cr.sparse.RecoveryTrialsAtFixed_M_N" href="cr.sparse.RecoveryTrialsAtFixed_M_N.html" />
     <link rel="prev" title="Evaluation Framework" href="../ef.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -99,7 +99,7 @@
   <li><a href="../index.html">API Docs</a><ul>
   <li><a href="../ef.html">Evaluation Framework</a><ul>
       <li>Previous: <a href="../ef.html" title="previous chapter">Evaluation Framework</a></li>
-      <li>Next: <a href="cr.sparse.ef.RecoveryTrialsAtFixed_M_N.html" title="next chapter">cr.sparse.ef.RecoveryTrialsAtFixed_M_N</a></li>
+      <li>Next: <a href="cr.sparse.RecoveryTrialsAtFixed_M_N.html" title="next chapter">cr.sparse.RecoveryTrialsAtFixed_M_N</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -131,11 +131,11 @@
 
           <div class="body" role="main">
             
-  <section id="cr-sparse-ef-recoveryperformance">
-<h1>cr.sparse.ef.RecoveryPerformance<a class="headerlink" href="#cr-sparse-ef-recoveryperformance" title="Permalink to this headline">¶</a></h1>
+  <section id="cr-sparse-recoveryperformance">
+<h1>cr.sparse.RecoveryPerformance<a class="headerlink" href="#cr-sparse-recoveryperformance" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="cr.sparse.ef.RecoveryPerformance">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cr.sparse.ef.</span></span><span class="sig-name descname"><span class="pre">RecoveryPerformance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_hat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/ef/performance.html#RecoveryPerformance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.ef.RecoveryPerformance" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cr.sparse.RecoveryPerformance">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cr.sparse.</span></span><span class="sig-name descname"><span class="pre">RecoveryPerformance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_hat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/tools/performance.html#RecoveryPerformance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.RecoveryPerformance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performance of a sparse signal recovery operation</p>
 <ul class="simple">
 <li><p>Synthesis <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span></p></li>
@@ -144,8 +144,8 @@
 <li><p>Residual: <span class="math notranslate nohighlight">\(y - \Phi \hat{x}\)</span></p></li>
 </ul>
 <dl class="py method">
-<dt class="sig sig-object py" id="cr.sparse.ef.RecoveryPerformance.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_hat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/ef/performance.html#RecoveryPerformance.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.ef.RecoveryPerformance.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cr.sparse.RecoveryPerformance.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_hat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/tools/performance.html#RecoveryPerformance.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.RecoveryPerformance.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes all parameters related to the quality of reconstruction</p>
 </dd></dl>
 
@@ -156,7 +156,7 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cr.sparse.ef.RecoveryPerformance.__init__" title="cr.sparse.ef.RecoveryPerformance.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(Phi, y, x[, x_hat, sol])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cr.sparse.RecoveryPerformance.__init__" title="cr.sparse.RecoveryPerformance.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(Phi, y, x[, x_hat, sol])</p></td>
 <td><p>Computes all parameters related to the quality of reconstruction</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">print</span></code>()</p></td>
@@ -254,7 +254,7 @@
       &copy;2021, CR-Sparse Development Team.
       
       |
-      <a href="../../_sources/source/_autosummary/cr.sparse.ef.RecoveryPerformance.rst.txt"
+      <a href="../../_sources/source/_autosummary/cr.sparse.RecoveryPerformance.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

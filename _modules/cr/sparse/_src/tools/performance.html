@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>cr.sparse._src.ef.performance &#8212; cr-sparse  documentation</title>
+    <title>cr.sparse._src.tools.performance &#8212; cr-sparse  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css" />
@@ -103,7 +103,7 @@
 
           <div class="body" role="main">
             
-  <h1>Source code for cr.sparse._src.ef.performance</h1><div class="highlight"><pre>
+  <h1>Source code for cr.sparse._src.tools.performance</h1><div class="highlight"><pre>
 <span></span><span class="c1"># Copyright 2021 CR.Sparse Development Team</span>
 <span class="c1">#</span>
 <span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
@@ -128,7 +128,7 @@
     <span class="n">nonzero_dynamic_range</span>
 <span class="p">)</span>
 
-<div class="viewcode-block" id="RecoveryPerformance"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.ef.RecoveryPerformance.html#cr.sparse.ef.RecoveryPerformance">[docs]</a><span class="k">class</span> <span class="nc">RecoveryPerformance</span><span class="p">:</span>
+<div class="viewcode-block" id="RecoveryPerformance"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.RecoveryPerformance.html#cr.sparse.RecoveryPerformance">[docs]</a><span class="k">class</span> <span class="nc">RecoveryPerformance</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Performance of a sparse signal recovery operation</span>
 <span class="sd"> </span>
 <span class="sd">    * Synthesis :math:`y = \\Phi x + e`</span>
@@ -176,7 +176,7 @@
     <span class="n">measurement_snr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="sd">&quot;&quot;&quot;Measurement SNR (dB) in measurement/signal space :math:`20 \\log (\\| y \\|_2 / \\| r \\|_2)`&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="RecoveryPerformance.__init__"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.ef.RecoveryPerformance.html#cr.sparse.ef.RecoveryPerformance.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x_hat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sol</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="RecoveryPerformance.__init__"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.RecoveryPerformance.html#cr.sparse.RecoveryPerformance.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x_hat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sol</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Computes all parameters related to the quality of reconstruction</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Shape of the dictionary/sensing matrix</span>

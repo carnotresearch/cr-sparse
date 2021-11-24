@@ -1,7 +1,7 @@
-﻿cr.sparse.ef.RecoveryPerformance
-================================
+﻿cr.sparse.RecoveryPerformance
+=============================
 
-.. currentmodule:: cr.sparse.ef
+.. currentmodule:: cr.sparse
 
 .. autoclass:: RecoveryPerformance
 

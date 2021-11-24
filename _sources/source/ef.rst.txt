@@ -3,7 +3,7 @@ Evaluation Framework
 
 It is a set of tools to evaluate the performance of sparse recovery algorithms:
 
-* Reconstruction quality of invidual sparse recovery problems
+* Reconstruction quality of individual sparse recovery problems
 * Success rates across multiple sparsity levels
 
 Recovery performance of greedy solvers
@@ -14,6 +14,6 @@ Recovery performance of greedy solvers
 .. autosummary::
     :toctree: _autosummary
 
-    ef.RecoveryPerformance
-    ef.RecoveryTrialsAtFixed_M_N
+    RecoveryPerformance
+    RecoveryTrialsAtFixed_M_N
 

@@ -1,7 +1,7 @@
-﻿cr.sparse.ef.RecoveryTrialsAtFixed\_M\_N
-========================================
+﻿cr.sparse.RecoveryTrialsAtFixed\_M\_N
+=====================================
 
-.. currentmodule:: cr.sparse.ef
+.. currentmodule:: cr.sparse
 
 .. autoclass:: RecoveryTrialsAtFixed_M_N
 
