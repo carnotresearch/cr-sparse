@@ -123,7 +123,7 @@ The Spikes
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f608e6909d0>]
+    [<matplotlib.lines.Line2D object at 0x7f40c2b24940>]
 
 
 
@@ -181,7 +181,7 @@ Measurement process
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f608dd235e0>]
+    [<matplotlib.lines.Line2D object at 0x7f40c295b580>]
 
 
 
@@ -267,7 +267,7 @@ Solution
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f608d963f70>]
+    [<matplotlib.lines.Line2D object at 0x7f40c244f910>]
 
 
 
@@ -299,7 +299,7 @@ The magnitudes of non-zero values
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f608d943490>]
+    [<matplotlib.lines.Line2D object at 0x7f40c2430f70>]
 
 
 
@@ -335,7 +335,7 @@ Thresholding for large values
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f608d85ab20>]
+    [<matplotlib.lines.Line2D object at 0x7f40c234f400>]
 
 
 
@@ -416,14 +416,14 @@ Improvement using least squares over support
     (1024, 160)
     ls_rel_error=2.057e-02
 
-    [<matplotlib.lines.Line2D object at 0x7f608d795c70>]
+    [<matplotlib.lines.Line2D object at 0x7f40c227e550>]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  9.696 seconds)
+   **Total running time of the script:** ( 0 minutes  7.211 seconds)
 
 
 .. _sphx_glr_download_gallery_rec_l1_spikes_l1ls.py:

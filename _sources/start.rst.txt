@@ -34,8 +34,11 @@ Directly from our GITHUB repository:
 
 Examples
 ----------------
-See the :ref:`examples gallery <gallery>` for an 
-extensive set of examples. 
+See the :ref:`examples gallery <gallery>`.
+
+A more extensive collection of example notebooks is available in the `companion repository <https://github.com/carnotresearch/cr-sparse-companion>`_.
+Some micro-benchmarks are reported `here <https://github.com/carnotresearch/cr-sparse/blob/master/paper/paper.md#runtime-comparisons>`_.
+
 
 
 .. |docs| image:: https://readthedocs.org/projects/cr-sparse/badge/?version=latest
