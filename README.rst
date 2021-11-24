@@ -30,8 +30,8 @@ For detailed documentation and usage, please visit `online docs <https://cr-spar
 Examples
 ----------------
 
-See the `examples gallery <https://cr-sparse.readthedocs.io/en/latest/gallery/index.html>`_ for an 
-extensive set of examples. Here is a small selection of examples:
+See the `examples gallery <https://cr-sparse.readthedocs.io/en/latest/gallery/index.html>`_ in the documentation.
+Here is a small selection of examples:
 
 * `Sparse recovery using Truncated Newton Interior Points Method <https://cr-sparse.readthedocs.io/en/latest/gallery/rec_l1/spikes_l1ls.html>`_ 
 * `Sparse recovery with ADMM <https://cr-sparse.readthedocs.io/en/latest/gallery/rec_l1/partial_wh_sensor_cosine_basis.html>`_ 
