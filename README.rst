@@ -1,11 +1,9 @@
-Functional Models and Algorithms for Sparse Signal Processing
+Functional Models and Algorithms for Sparse Signal Processing   
+==================================================================
 
 
 |pypi| |license| |zenodo| |docs| |unit_tests| |coverage| |joss|
 
-
-Quick Start
-=========================
 
 .. contents::
     :depth: 2
@@ -24,38 +22,13 @@ which enables the same high level
 Python code to get efficiently compiled on CPU, GPU and TPU architectures
 using `XLA <https://www.tensorflow.org/xla>`_. 
 
-See `here <https://cr-sparse.readthedocs.io/en/latest/intro.html>`_ 
-for a more detailed introduction.
+.. image:: docs/images/srr_cs.png
 
-See `here <https://cr-sparse.readthedocs.io/en/latest/algorithms.html>`_
-for the list of algorithms supported (and planned) in CR-Sparse.
+For detailed documentation and usage, please visit `online docs <https://cr-sparse.readthedocs.io/en/latest>`_.
 
-
-The library includes several packages: 
-
-* Wavelet transforms `cr.sparse.wt <https://cr-sparse.readthedocs.io/en/latest/source/wavelets.html>`_
-* Efficient linear operators `cr.sparse.lop <https://cr-sparse.readthedocs.io/en/latest/source/lop.html>`_
-* Iterative methods for sparse linear systems `cr.sparse.sls <https://cr-sparse.readthedocs.io/en/latest/source/sls.html>`_
-* Redundant dictionaries and sensing matrices `cr.sparse.dict <https://cr-sparse.readthedocs.io/en/latest/source/dict.html>`_
-* Solvers for sparse approximation and sparse recovery problems
-
-  * Greedy and shrinkage based methods `cr.sparse.pursuit <https://cr-sparse.readthedocs.io/en/latest/source/pursuit.html>`_
-  * Convex optimization based methods `cr.sparse.cvx <https://cr-sparse.readthedocs.io/en/latest/source/cvx_recovery.html>`_
-
-* Sparse subspace clustering `cr.sparse.cluster.ssc <https://cr-sparse.readthedocs.io/en/latest/source/ssc.html>`_
-
-The library also provides
-
-* Some sample data generation utilities `cr.sparse.data <https://cr-sparse.readthedocs.io/en/latest/source/data.html>`_
-* Some linear algebra utilities `cr.sparse.la <https://cr-sparse.readthedocs.io/en/latest/source/la.html>`_
-* Framework for evaluation of sparse recovery algorithms `cr.sparse.ef <https://cr-sparse.readthedocs.io/en/latest/source/ef.html>`_
 
 Examples
 ----------------
-
-Some micro-benchmarks are reported `here <https://github.com/carnotresearch/cr-sparse/blob/master/paper/paper.md#runtime-comparisons>`_.
-Jupyter notebooks for these benchmarks are in the `companion repository <https://github.com/carnotresearch/cr-sparse-companion>`_.
-
 
 See the `examples gallery <https://cr-sparse.readthedocs.io/en/latest/gallery/index.html>`_ for an 
 extensive set of examples. Here is a small selection of examples:
@@ -70,6 +43,7 @@ extensive set of examples. Here is a small selection of examples:
 
 
 A more extensive collection of example notebooks is available in the `companion repository <https://github.com/carnotresearch/cr-sparse-companion>`_.
+Some micro-benchmarks are reported `here <https://github.com/carnotresearch/cr-sparse/blob/master/paper/paper.md#runtime-comparisons>`_.
 
 
 Platform Support
