@@ -142,7 +142,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>A</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Sensing matrix/dictionary</p></li>
 <li><p><strong>b</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Signal being approximated</p></li>
-<li><p><strong>x0</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Initial value of solutiion (primary variable) <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p><strong>x0</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Initial value of solution (primary variable) <span class="math notranslate nohighlight">\(x\)</span></p></li>
 <li><p><strong>z0</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Initial value of dual variable <span class="math notranslate nohighlight">\(z\)</span></p></li>
 <li><p><strong>nonneg</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Flag to indicate if values in the solution are all non-negative</p></li>
 <li><p><strong>W</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – The sparsifying orthonormal basis such that <span class="math notranslate nohighlight">\(W x\)</span> is sparse</p></li>
@@ -160,7 +160,8 @@
 <dd class="field-odd"><p>RecoveryFullSolution</p>
 </dd>
 </dl>
-<p>This function implements eq 2.25 of the paper.</p>
+<p>This function is based on <span id="id1">[<a class="reference internal" href="../../zzzreference.html#id329" title="Junfeng Yang and Yin Zhang. Alternating direction algorithms for l_1-problems in compressive sensing. SIAM journal on scientific computing, 33(1):250–278, 2011. URL: https://doi.org/10.1137/090777761, doi:10.1137/090777761.">YZ11</a>]</span>.
+It implements eq 2.25 of the paper.</p>
 </dd></dl>
 
 </section>

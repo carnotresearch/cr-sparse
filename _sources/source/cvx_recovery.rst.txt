@@ -59,6 +59,8 @@ An example is provided in :ref:`recovery_l1_gallery`.
 Alternating Directions Methods
 -------------------------------------
 
+This is based on :cite:`yang2011alternating`.
+
 A tutorial has been provided to explore these 
 methods in action. 
 The ``yall1.solve`` method is an overall wrapper method 

@@ -119,7 +119,7 @@
 <span class="c1"># limitations under the License.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This module implements algorithms from the paper</span>
-<span class="sd">ALTERNATING DIRECTION ALGORITHMS FOR ℓ1-PROBLEMS IN COMPRESSIVE SENSING</span>
+<span class="sd">ALTERNATING DIRECTION ALGORITHMS FOR ℓ1-PROBLEMS IN COMPRESSIVE SENSING :cite:`yang2011alternating`</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
@@ -571,7 +571,7 @@
 <span class="sd">    Args:</span>
 <span class="sd">        A (jax.numpy.ndarray): Sensing matrix/dictionary</span>
 <span class="sd">        b (jax.numpy.ndarray): Signal being approximated</span>
-<span class="sd">        x0 (jax.numpy.ndarray): Initial value of solutiion (primary variable) :math:`x`</span>
+<span class="sd">        x0 (jax.numpy.ndarray): Initial value of solution (primary variable) :math:`x`</span>
 <span class="sd">        z0 (jax.numpy.ndarray): Initial value of dual variable :math:`z`</span>
 <span class="sd">        nonneg (bool): Flag to indicate if values in the solution are all non-negative</span>
 <span class="sd">        W (jax.numpy.ndarray): The sparsifying orthonormal basis such that :math:`W x` is sparse</span>
@@ -584,7 +584,8 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        RecoveryFullSolution: Solution vector :math:`x` and residual :math:`r`</span>
 
-<span class="sd">    This function implements eq 2.25 of the paper.</span>
+<span class="sd">    This function is based on :cite:`yang2011alternating`.</span>
+<span class="sd">    It implements eq 2.25 of the paper.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">W</span><span class="p">:</span>
         <span class="c1"># change A to solve for alpha = W x</span>
