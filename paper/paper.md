@@ -79,7 +79,7 @@ as well as structured sensing matrices represented as linear operators
 (provided in `cr.sparse.lop` package).
 
 The `cr.sparse.cvx.adm.yall1` package includes a JAX version of 
-`Your algorithms for l1` [@zhang2009user], an efficient solver
+`Your algorithms for l1` [@yang2011alternating;@zhang2009user], an efficient solver
 for l1-minimization problems using 
 ADMM (alternating direction method of multipliers) approach.
 The `cr.sparse.cvx.l1ls` includes 
@@ -137,13 +137,13 @@ Truncated Newton Interior Points Method for solving the l1-minimization problem.
 [`Sparsify`](https://www.southampton.ac.uk/engineering/about/staff/tb1m08.page#software) 
 provides the MATLAB implementations of IHT, NIHT, AIHT algorithms.
 [`aaren/wavelets`](https://github.com/aaren/wavelets) 
-is a decent CWT implementation following
+is a CWT implementation following
 [@torrence1998practical]. 
 [`HTP`](https://github.com/foucart/HTP) provides implementation of Hard Thresholding
 Pursuit in MATLAB.
 [`WaveLab`](https://github.com/gregfreeman/wavelab850) is the 
-old reference open source wavelet implementation in MATLAB.
-However, its API has largely been superceded by later libraries.
+reference open source wavelet implementation in MATLAB.
+However, its API has largely been superseded by later libraries.
 [`Sparse and Redundant Representations book code`](https://elad.cs.technion.ac.il/wp-content/uploads/2018/02/Matlab-Package-Book-1.zip) [@elad2010sparse]
 provides basic implementations of a number of sparse recovery and related
 algorithms.
@@ -153,8 +153,8 @@ in the form of C/C++ extensions making portability to GPUs harder.
 
 There are some Python libraries which focus on specific
 areas however they are generally CPU based.
-E.g., [`pyCSalgos`](https://github.com/nikcleju/pyCSalgos) is an
-old Python implementation of various Compressed Sensing algorithms.
+E.g., [`pyCSalgos`](https://github.com/nikcleju/pyCSalgos) is a
+Python implementation of various Compressed Sensing algorithms.
 [`spgl1`](https://github.com/drrelyea/spgl1) is a `NumPy` based
 implementation of spectral projected gradient for L1 minimization.
 `c-lasso` [@simpson2021classo] is a Python package for constrained sparse regression 
@@ -195,7 +195,7 @@ We provide JAX based implementations for the following greedy pursuit algorithms
 
 The `cr.sparse.cvx.admm` package includes solvers for basis pursuit (BP),
 basis pursuit denoising (BPDN), basis pursuit with inequality constraints (BPIC),
-and their nonnegative variants.
+and their nonnegative variants [@yang2011alternating].
 
 ## Linear Operators
 
@@ -222,11 +222,8 @@ differences in our implementation.
   output. We don't require callers to flatten input before applying the operator.
 - Several operators are provided which are specifically meant for sparse
   representation and compressive sensing applications.
-- We believe that our implementation is cleaner and simpler and yet gives better
-  performance (thanks to JAX) on large size problems.
 
 It is easy to extend the library with new operators.
-
 
 ## Sparse Subspace Clustering
 
