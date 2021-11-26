@@ -13,7 +13,7 @@
 # limitations under the License.
 """
 This module implements algorithms from the paper
-ALTERNATING DIRECTION ALGORITHMS FOR ℓ1-PROBLEMS IN COMPRESSIVE SENSING
+ALTERNATING DIRECTION ALGORITHMS FOR ℓ1-PROBLEMS IN COMPRESSIVE SENSING :cite:`yang2011alternating`
 """
 
 from typing import NamedTuple, List, Dict
@@ -465,7 +465,7 @@ def solve(A, b, x0=None, z0=None, W=None, weights=None, nonneg=False, rho=0., de
     Args:
         A (jax.numpy.ndarray): Sensing matrix/dictionary
         b (jax.numpy.ndarray): Signal being approximated
-        x0 (jax.numpy.ndarray): Initial value of solutiion (primary variable) :math:`x`
+        x0 (jax.numpy.ndarray): Initial value of solution (primary variable) :math:`x`
         z0 (jax.numpy.ndarray): Initial value of dual variable :math:`z`
         nonneg (bool): Flag to indicate if values in the solution are all non-negative
         W (jax.numpy.ndarray): The sparsifying orthonormal basis such that :math:`W x` is sparse
@@ -478,7 +478,8 @@ def solve(A, b, x0=None, z0=None, W=None, weights=None, nonneg=False, rho=0., de
     Returns:
         RecoveryFullSolution: Solution vector :math:`x` and residual :math:`r`
 
-    This function implements eq 2.25 of the paper.
+    This function is based on :cite:`yang2011alternating`.
+    It implements eq 2.25 of the paper.
     """
     if W:
         # change A to solve for alpha = W x
