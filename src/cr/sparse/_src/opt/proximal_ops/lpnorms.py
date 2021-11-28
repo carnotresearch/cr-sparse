@@ -18,6 +18,8 @@ from jax import jit, lax
 import jax.numpy as jnp
 import cr.sparse as crs
 
+from .prox import build
+
 
 def prox_l2(q=1.):
     r"""Proximal operator for :math:`\| q * x \|_2`
@@ -40,7 +42,7 @@ def prox_l2(q=1.):
         x = x * s
         return x
 
-    return func, proximal_op
+    return build(func, proximal_op)
 
 
 
@@ -66,7 +68,7 @@ def prox_l1(q=1.):
         # shrink x
         return x * s
 
-    return func, proximal_op
+    return build(func, proximal_op)
 
 def prox_l1_pos(q=1.):
     r"""Proximal operator for :math:` \| q * x \|_1 + I({x \geq 0})`   
@@ -94,4 +96,4 @@ def prox_l1_pos(q=1.):
         # shrinkage only applies on the positive side. negative values are mapped to 0
         return jnp.maximum(0, x - tq)
 
-    return func, proximal_op
+    return build(func, proximal_op)

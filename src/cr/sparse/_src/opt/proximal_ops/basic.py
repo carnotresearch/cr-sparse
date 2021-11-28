@@ -19,6 +19,8 @@ import jax.numpy as jnp
 import cr.sparse as crs
 
 
+from .prox import build
+
 def prox_zero():
 
     @jit
@@ -31,4 +33,4 @@ def prox_zero():
         x = crs.promote_arg_dtypes(x)
         return x
 
-    return func, proximal_op
+    return build(func, proximal_op)

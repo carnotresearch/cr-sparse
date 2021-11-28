@@ -18,6 +18,11 @@ from cr.sparse._src.opt.proximal_ops import (
 )
 
 
+from cr.sparse._src.opt.proximal_ops.prox import (
+    ProxCapable,
+    build
+)
+
 from cr.sparse._src.opt.proximal_ops.basic import (
     prox_zero
 )
