@@ -17,7 +17,8 @@ from cr.sparse._src.opt.smooth import (
     smooth_value_grad
 )
 from cr.sparse._src.opt.smooth.smooth import (
-    SmoothFunction
+    SmoothFunction,
+    smooth_func_translate
 )
 
 from cr.sparse._src.opt.smooth.smooth import build as smooth_build

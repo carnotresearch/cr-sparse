@@ -19,6 +19,7 @@ import jax
 from jax import jit, grad
 import jax.numpy as jnp
 
+import cr.sparse as crs
 
 
 class SmoothFunction(NamedTuple):
@@ -66,3 +67,28 @@ def build_grad_val_func(func, grad):
         v = func(x)
         return g, v
     return impl
+
+
+def smooth_func_translate(smooth_func, b):
+    """Returns a smooth function g for a smooth function f s.t. g(x) = f(x + b)
+    """
+    b = jnp.asarray(b)
+    b = crs.promote_arg_dtypes(b)
+
+    @jit
+    def func(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
+        return smooth_func.func(x + b)
+    @jit
+    def grad(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
+        return smooth_func.grad(x + b)
+    @jit
+    def grad_val(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
+        return smooth_func.grad_val(x + b)
+    return SmoothFunction(func=func, grad=grad, 
+        grad_val=grad_val)
