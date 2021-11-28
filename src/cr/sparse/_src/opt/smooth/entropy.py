@@ -18,6 +18,7 @@ from jax import jit, grad, lax
 import jax.numpy as jnp
 import cr.sparse as crs
 
+from .smooth import build2, build3
 
 def smooth_entropy():
     r"""Entropy function :math:`f(x) = -\sum(x_i \log (x_i))`
@@ -44,7 +45,7 @@ def smooth_entropy():
             None)
         return g
 
-    return func, gradient
+    return build2(func, gradient)
 
 
 def smooth_entropy_vg():
@@ -55,24 +56,26 @@ def smooth_entropy_vg():
     def out_of_domain(x):
         v = -jnp.inf
         g = jnp.full_like(x, jnp.nan)
-        return v,g
+        return g, v
 
     def in_domain(x):
         logx = crs.log_pos(x)
         g = -logx - 1
         v = - jnp.vdot(x, logx)
-        return v, g
+        return g, v
 
 
     @jit
-    def value_grad(x):
+    def grad_val(x):
         x = jnp.asarray(x)
         x = crs.promote_arg_dtypes(x)
-        v, g = lax.cond(jnp.any(x < 0),
+        g, v = lax.cond(jnp.any(x < 0),
             lambda x: out_of_domain(x),
             lambda x: in_domain(x),
             x)
-        return v,g
+        return g, v
 
-    return value_grad
+    basic = smooth_entropy()
+
+    return build3(basic.func, basic.grad, grad_val)
        

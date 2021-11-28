@@ -18,6 +18,7 @@ from jax import jit, grad, lax
 import jax.numpy as jnp
 import cr.sparse as crs
 
+from .smooth import build2
 
 def smooth_huber(tau=1.):
     r"""Huber penalty function and its gradient
@@ -45,5 +46,5 @@ def smooth_huber(tau=1.):
         g = x/jnp.maximum(tau, jnp.abs(x) )
         return g
 
-    return func, gradient
+    return build2(func, gradient)
 

@@ -19,6 +19,8 @@ import jax.numpy as jnp
 from jax.numpy.linalg import det, cholesky, inv
 import cr.sparse as crs
 
+from .smooth import build2
+
 
 def smooth_logdet(q=1., C=None):
     r"""Log Det function and its gradient :math:`f(X) = -\log( \text{det}( X ) )`
@@ -47,5 +49,5 @@ def smooth_logdet(q=1., C=None):
             g = g + C
         return g
 
-    return func, gradient
+    return build2(func, gradient)
 

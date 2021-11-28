@@ -19,6 +19,7 @@ import jax.numpy as jnp
 from jax.numpy.linalg import det, cholesky, inv
 import cr.sparse as crs
 
+from .smooth import build2
 
 def smooth_quad_matrix(P=None, q=None, r=None):
     r"""Quadratic function and its gradient :math:`f(x) = \frac{1}{2} x^T P x + \langle q, x \rangle + r`
@@ -57,5 +58,5 @@ def smooth_quad_matrix(P=None, q=None, r=None):
             g = g + q
         return g
 
-    return func, gradient
+    return build2(func, gradient)
 

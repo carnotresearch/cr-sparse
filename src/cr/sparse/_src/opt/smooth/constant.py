@@ -18,6 +18,7 @@ from jax import jit
 import jax.numpy as jnp
 import cr.sparse as crs
 
+from .smooth import build2
 
 def smooth_constant(c=0.):
     """A constant value function
@@ -35,4 +36,4 @@ def smooth_constant(c=0.):
         x = crs.promote_arg_dtypes(x)
         return 0 * x
 
-    return func, gradient
+    return build2(func, gradient)

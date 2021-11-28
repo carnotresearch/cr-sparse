@@ -18,6 +18,7 @@ from jax import jit, grad, lax
 import jax.numpy as jnp
 import cr.sparse as crs
 
+from .smooth import build2
 
 def smooth_linear(C, D):
     r"""Linear function and its gradient :math:`f(x) = \langle c, x \rangle + d`
@@ -36,5 +37,5 @@ def smooth_linear(C, D):
     def gradient(x):
         return C
 
-    return func, gradient
+    return build2(func, gradient)
 
