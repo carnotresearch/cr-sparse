@@ -227,6 +227,8 @@ from cr.sparse._src.ndarray import (
     arr_l2norm_sqr,
     arr_vdot,
     arr_rdot,
+    arr_rnorm_sqr,
+    arr_rnorm,
     arr2vec,
     log_pos,
 )

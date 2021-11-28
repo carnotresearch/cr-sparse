@@ -94,6 +94,17 @@ def arr_rdot(x, y):
     # take the real part
     return jnp.real(prod)
 
+@jit
+def arr_rnorm_sqr(x):
+    """Returns the squared norm of x using the real inner product Re(x^H, x)
+    """
+    return arr_rdot(x, x)
+
+@jit
+def arr_rnorm(x):
+    """Returns the norm of x using the real inner product Re(x^H, x)
+    """
+    return jnp.sqrt(arr_rdot(x, x))
 
 @jit
 def arr2vec(x):
