@@ -20,7 +20,7 @@ from cr.sparse._src.focs.util import (
 )
 
 from cr.sparse._src.focs.focs import focs
-from cr.sparse._src.focs.l1rls import l1rls
+from cr.sparse._src.focs.l1rls import (l1rls, l1rls_jit)
 
 from cr.sparse._src.focs.defs import (
     FOCSOptions,

@@ -15,6 +15,7 @@
 from .defs import FOCSOptions, FOCSState
 
 import jax.numpy as jnp
+from jax import jit, lax
 
 import cr.sparse as crs
 import cr.sparse.opt as opt
@@ -27,7 +28,23 @@ apply_smooth is just smoothF with operator counting
 apply_projector is just projectorF with operator counting
 """
 
+@jit
+def backtrack_L(x, A_x, g_Ax, y, A_y, g_Ay, L, Lexact, beta):
+    """Improves the estimate of L
+    """
+    xy = x - y
+    xy_sq = crs.arr_rnorm_sqr( xy )
 
+    def backtrack2(L):
+        localL = 2 * crs.arr_rdot( A_x - A_y, g_Ax - g_Ay ) / xy_sq
+        new_L = jnp.minimum(Lexact, localL )
+        new_L = jnp.minimum(Lexact, jnp.maximum( localL, L / beta ) )
+        return jnp.where(localL <= L, L, new_L)
+
+    return lax.cond(xy_sq == 0, 
+        lambda L : L,
+        backtrack2,
+        L)
 
 def focs(smooth_f, prox_h, A, b, x0, options: FOCSOptions = FOCSOptions()):
     """First order conic solver driver routine
@@ -43,10 +60,12 @@ def focs(smooth_f, prox_h, A, b, x0, options: FOCSOptions = FOCSOptions()):
 
         # need to check if x is feasible
         C_x = prox_h.func(x)
-        if jnp.isinf(C_x):
+        x, C_x = lax.cond(jnp.isinf(C_x),
             # this is outside the domain. Let's project it back
-            x, C_x = prox_h.prox_vec_val(x)
-
+            lambda _: prox_h.prox_vec_val(x, 1),
+            # no changes needed
+            lambda _: (x, C_x),
+            None)
         # Compute A @ x
         A_x = A.times(x)
         g_Ax, f_x = smooth_f.grad_val(A_x)
@@ -81,20 +100,10 @@ def focs(smooth_f, prox_h, A, b, x0, options: FOCSOptions = FOCSOptions()):
         return state
 
     state = init()
-    #print(state)
 
     def advance_theta(theta_old,L,L_old):
         return 2/(1+jnp.sqrt(1+4*(L/L_old)/theta_old**2))
 
-    def backtrack_L(x, A_x, g_Ax, y, A_y, g_Ay):
-        """Improves the estimate of L
-        """
-        xy = x - y
-        xy_sq = crs.arr_rnorm_sqr( xy )
-        localL = 2 * crs.arr_rdot( A_x - A_y, g_Ax - g_Ay ) / xy_sq
-        L = jnp.minimum(options.Lexact, localL )
-        L = jnp.minimum(options.Lexact, jnp.maximum( localL, L / options.beta ) )
-        return L
 
     def body_func(state):
         # update L
@@ -112,7 +121,6 @@ def focs(smooth_f, prox_h, A, b, x0, options: FOCSOptions = FOCSOptions()):
         g_y = A.trans(g_Ay)
         # Scaled gradient
         step = 1 / ( theta * L )
-        print(f'step={step:.2f}')
         # update z 
         z, C_z = prox_h.prox_vec_val(state.z - step * g_y, step)
         # compute A @ z
@@ -124,7 +132,7 @@ def focs(smooth_f, prox_h, A, b, x0, options: FOCSOptions = FOCSOptions()):
         # compute gradient and value of f at A_x + b
         g_Ax, f_x = smooth_f.grad_val(A_x)
         # improve the estimate of L
-        L = backtrack_L(x, A_x, g_Ax, y, A_y, g_Ay)
+        L = backtrack_L(x, A_x, g_Ax, y, A_y, g_Ay, L, options.Lexact, options.beta)
         # compute parameters for convergence
         norm_x = crs.arr_rnorm(x)
         norm_dx = crs.arr_rnorm(x - state.x)
@@ -143,10 +151,9 @@ def focs(smooth_f, prox_h, A, b, x0, options: FOCSOptions = FOCSOptions()):
         b = state.norm_dx >= options.tol * jnp.maximum( state.norm_x, 1 )
         return jnp.logical_and(a, b)
 
-    print(state.at_str)
     state = body_func(state)
-    print(state.at_str)
-    while outer_cond_func(state):
-        state = body_func(state)
-        print(state.at_str)
+    state = lax.while_loop(outer_cond_func, body_func, state)
+    # while outer_cond_func(state):
+    #     state = body_func(state)
+    #     print(state.at_str)
     return state

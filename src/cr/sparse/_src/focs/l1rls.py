@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from jax import jit
+
 import cr.sparse.opt as opt
 
 
@@ -25,3 +27,6 @@ def l1rls(A, b, lambda_, x0, options: FOCSOptions = FOCSOptions()):
     f = opt.smooth_quad_matrix()
     h = opt.prox_l1(lambda_)
     return focs(f, h, A, -b, x0, options)
+
+
+l1rls_jit = jit(l1rls, static_argnums=(0, 4))
