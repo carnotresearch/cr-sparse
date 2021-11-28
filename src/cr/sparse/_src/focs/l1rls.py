@@ -22,9 +22,6 @@ from .defs import FOCSOptions
 def l1rls(A, b, lambda_, x0, options: FOCSOptions = FOCSOptions()):
     """Solver for l1 regulated least square problem
     """
-    func, grad = opt.smooth_quad_matrix()
-    f = opt.smooth_value_grad(func, grad)
-    h_func, h_prox = opt.prox_l1(lambda_)
-    h = opt.prox_value_vec(h_func, h_prox)
-    # af = matrix_affine_func(A, -b)
+    f = opt.smooth_quad_matrix()
+    h = opt.prox_l1(lambda_)
     return focs(f, h, A, -b, x0, options)
