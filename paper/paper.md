@@ -25,8 +25,7 @@ bibliography: paper.bib
 # Summary
 
 We introduce [`CR-Sparse`](https://github.com/carnotresearch/cr-sparse), 
-a Python library that enables efficiently solving
-a wide variety of sparse representation based signal processing problems.
+a Python library that enables to efficiently solve a wide variety of sparse representation based signal processing problems.
 It is a cohesive collection of sub-libraries working together. Individual
 sub-libraries provide functionalities for:
 wavelets, linear operators, greedy and convex optimization 
@@ -95,7 +94,7 @@ comprehensive set of tools for solving sparse recovery problems
 in one place. Individual researchers provide their codes
 along with their research paper only for the algorithms they have
 developed. Most of this work is available in the form of MATLAB [@MATLAB:2018]
-libraries. E.g.: [`YALL1`](http://yall1.blogs.rice.edu)is the original MATLAB implementation of the ADMM based sparse recovery algorithms. 
+libraries. E.g.: [`YALL1`](http://yall1.blogs.rice.edu) is the original MATLAB implementation of the ADMM based sparse recovery algorithms. 
 [`L1-LS`](https://web.stanford.edu/~boyd/l1_ls/) 
 is the original MATLAB implementation of the
 Truncated Newton Interior Points Method for solving the l1-minimization problem.
@@ -186,7 +185,7 @@ We conducted a number of experiments to benchmark the runtime of
 in Python or MATLAB. 
 Jupyter notebooks to reproduce these micro-benchmarks
 are available on the 
-[`cr-sparse-companion`](https://github.com/carnotresearch/cr-sparse-companion)
+[`cr-sparse-companion`](https://github.com/carnotresearch/cr-sparse-companion) [@shailesh2021companion]
 repository.
 
 All Python based benchmarks have been run
