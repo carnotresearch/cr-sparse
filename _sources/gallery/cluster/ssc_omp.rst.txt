@@ -307,7 +307,7 @@ Build the affinity matrix
  .. code-block:: none
 
 
-    <matplotlib.image.AxesImage object at 0x7fd1b81e9dc0>
+    <matplotlib.image.AxesImage object at 0x7f566cecd760>
 
 
 
@@ -505,7 +505,7 @@ Build the affinity matrix
  .. code-block:: none
 
 
-    <matplotlib.image.AxesImage object at 0x7fd1b804cd00>
+    <matplotlib.image.AxesImage object at 0x7f566cd234f0>
 
 
 
@@ -586,7 +586,7 @@ Evaluate the clustering performance
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  9.881 seconds)
+   **Total running time of the script:** ( 0 minutes  10.137 seconds)
 
 
 .. _sphx_glr_download_gallery_cluster_ssc_omp.py:
