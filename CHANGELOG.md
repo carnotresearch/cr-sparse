@@ -8,6 +8,27 @@ All notable changes to this project will be documented in this file.
 
 [Documentation](https://cr-sparse.readthedocs.io/en/latest/)
 
+## [0.2.2] - 2021-12-02
+
+[Documentation](https://cr-sparse.readthedocs.io/en/v0.2.2/)
+
+### Improved
+
+- Documentation
+  - Introduction page revised
+  - API docs improved
+  - README revised
+  - Algorithm page added
+  - Quick start page revised
+
+### Added
+
+- JOSS Paper added and revised based on feedback from reviewers
+- Linear Operators
+  - input_shape, output_shape attributes introduced
+  - fft, dot, norm estimate, reshape, scalar_mult, total variation, 
+
+
 ## [0.2.1] - 2021-11-01
 
 [Documentation](https://cr-sparse.readthedocs.io/en/v0.2.1/)
@@ -170,7 +191,8 @@ General stuff
 
 Initial release
 
-[Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.2...HEAD
+[0.2.2]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.6...v0.2.0
 [0.1.6]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.5...v0.1.6

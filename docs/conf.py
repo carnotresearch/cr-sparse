@@ -223,9 +223,11 @@ html_theme_options = {
     "github_button": True,
     "github_repo": 'cr-sparse',
     "github_user": 'carnotresearch',
-    "show_powered_by": False,
+    'github_type': 'star',
+    "show_powered_by": True,
     "sidebar_width": "300px",
     "page_width": "1200px",
+    'analytics_id': 'UA-214289683-1'
 }
 
 source_suffix = {
