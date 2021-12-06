@@ -82,3 +82,27 @@ def test_box(l, u):
     if l is not None and u is not None:
         x = (l + u) / 2
         assert_array_equal(box(x), 0)
+
+
+@pytest.mark.parametrize("l,u,shape", [
+    [0, None, (4,1)],
+    [None, 1, (4,2)],
+    [0, 4, (1,3)],
+    [[0,0], [3, 4], (2,)],
+    [[0,0], [3, 4], (2,2)],
+])
+def test_box_affine(l,u,shape):
+    a = jnp.ones(shape)
+    n = a.size
+    box = indicators.indicator_box_affine(l, u, a, 1)
+    x = jnp.ones(shape)
+    x = x / crs.arr_rdot(a, x)
+    assert_array_equal(box(x), 0)
+    if l is not None:
+        l = jnp.asarray(l)
+        x = jnp.broadcast_to(l -1, shape)
+        assert_array_equal(box(x), jnp.inf)
+    if u is not None:
+        u = jnp.asarray(u)
+        x = jnp.broadcast_to(u +1, shape)
+        assert_array_equal(box(x), jnp.inf)

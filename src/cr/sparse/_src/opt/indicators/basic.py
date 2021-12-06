@@ -121,8 +121,14 @@ def indicator_box_affine(l, u, a, alpha=0., tol=1e-6):
     n = a.size
     if l is None:
         l = jnp.full_like(a, -jnp.inf)
+    else:
+        l = jnp.asarray(l)
+        l = crs.promote_arg_dtypes(l)
     if u is None:
         u = jnp.full_like(a, jnp.inf)
+    else:
+        u = jnp.asarray(u)
+        u = crs.promote_arg_dtypes(u)
 
     @jit
     def indicator(x):
