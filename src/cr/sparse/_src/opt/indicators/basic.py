@@ -21,9 +21,13 @@ from jax.numpy.linalg import qr, norm
 import cr.sparse as crs
 
 def indicator_zero():
+    """Indicator function for all zero arrays
+    """
 
     @jit
     def indicator(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
         is_nonzero = jnp.any(x != 0)
         return jnp.where(is_nonzero, jnp.inf, 0)
     
@@ -31,22 +35,30 @@ def indicator_zero():
 
 
 def indicator_singleton(c):
-
+    """Indicator function for arrays with a constant value
+    """
+    c = jnp.asarray(c)
+    c = crs.promote_arg_dtypes(c)
     @jit
     def indicator(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
         is_nonzero = jnp.any(x - c != 0)
         return jnp.where(is_nonzero, jnp.inf, 0)
 
     return indicator
 
 
-def indicator_affine(A, b):
+def indicator_affine(A, b=0):
     """Returns an indicator function for the linear system A x = b
     """
-    # R = qr(A.T, 'r')
-
+    A = jnp.asarray(A)
+    b = jnp.asarray(b)
+    A, b = crs.promote_arg_dtypes(A, b)
     @jit
     def indicator(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
         # compute the residual
         r = A @ x - b
         # compute the strength of residual
