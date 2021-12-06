@@ -147,6 +147,8 @@ def indicator_conic():
     """
     @jit
     def indicator(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
         x, t = x[:-1], x[-1]
         inside = norm(x) <= t
         return jnp.where(inside, 0, jnp.inf)

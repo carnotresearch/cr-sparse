@@ -106,3 +106,24 @@ def test_box_affine(l,u,shape):
         u = jnp.asarray(u)
         x = jnp.broadcast_to(u +1, shape)
         assert_array_equal(box(x), jnp.inf)
+
+
+@pytest.mark.parametrize("x, t", [
+    [[1,1], 2],
+    [[1], 1],
+    [[1,2,3,4], 6],
+])
+def test_conic_inside(x, t):
+    f = indicators.indicator_conic()
+    x = jnp.append(jnp.asarray(x), t)
+    assert_array_equal(f(x), 0)
+
+@pytest.mark.parametrize("x, t", [
+    [[1,1], 1],
+    [[1], 0.1],
+    [[1,2,3,4], 5],
+])
+def test_conic_outside(x, t):
+    f = indicators.indicator_conic()
+    x = jnp.append(jnp.asarray(x), t)
+    assert_array_equal(f(x), jnp.inf)
