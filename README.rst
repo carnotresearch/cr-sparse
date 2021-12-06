@@ -81,17 +81,21 @@ Citing CR-Sparse
 ------------------------
 
 
-To cite this repository:
+To cite this library:
 
 .. code:: tex
 
-    @software{crsparse2021github,
-    author = {Shailesh Kumar},
-    title = {{CR-Sparse}: Functional Models and Algorithms for Sparse Signal Processing},
-    url = {https://cr-sparse.readthedocs.io/en/latest/},
-    version = {0.2.1},
-    year = {2021},
-    doi={10.5281/zenodo.5322044},
+    @article{Kumar2021,
+      doi = {10.21105/joss.03917},
+      url = {https://doi.org/10.21105/joss.03917},
+      year = {2021},
+      publisher = {The Open Journal},
+      volume = {6},
+      number = {68},
+      pages = {3917},
+      author = {Shailesh Kumar},
+      title = {CR-Sparse: Hardware accelerated functional algorithms for sparse signal processing in Python using JAX},
+      journal = {Journal of Open Source Software}
     }
 
 
