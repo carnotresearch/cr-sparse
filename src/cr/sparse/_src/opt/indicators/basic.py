@@ -82,17 +82,23 @@ def indicator_box(l=None, u=None):
 
     @jit
     def lower_bound(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
         is_invalid = jnp.any(x < l)
         return jnp.where(is_invalid, jnp.inf, 0)
 
     @jit
     def upper_bound(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
         is_invalid = jnp.any(x > u)
         return jnp.where(is_invalid, jnp.inf, 0)
 
 
     @jit
     def box_bound(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
         is_invalid = jnp.logical_or(jnp.any(x < l), jnp.any(x > u))
         return jnp.where(is_invalid, jnp.inf, 0)
 
