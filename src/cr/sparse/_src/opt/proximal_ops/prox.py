@@ -43,6 +43,8 @@ def build(func, prox_op):
 
 
 def build_prox_value_vec_func(func, prox_op):
+    """Creates function which computes the proximal vector and then function value at it 
+    """
     @jit
     def impl(x, t):
         x = prox_op(x, t)
