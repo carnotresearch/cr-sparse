@@ -21,7 +21,8 @@ from jax.numpy.linalg import qr, norm
 import cr.sparse as crs
 
 def indicator_l2_ball(q=1., b=None, A=None):
-
+    r"""Indicator functions for || A x - b ||_2 <= q
+    """
     if b is not None:
         b = jnp.asarray(b)
         b = crs.promote_arg_dtypes(b)
@@ -35,6 +36,8 @@ def indicator_l2_ball(q=1., b=None, A=None):
 
     @jit
     def indicator_q(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
         invalid = norm(x) > q
         return jnp.where(invalid, jnp.inf, 0)
 
@@ -44,6 +47,8 @@ def indicator_l2_ball(q=1., b=None, A=None):
 
     @jit
     def indicator_q_b(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
         # compute difference from center
         r = x - b
         invalid = norm(r) > q
@@ -59,6 +64,8 @@ def indicator_l2_ball(q=1., b=None, A=None):
 
     @jit
     def indicator_q_b_A(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
         # compute the residual vector
         r = A @ x - b
         invalid = norm(r) > q
@@ -67,31 +74,56 @@ def indicator_l2_ball(q=1., b=None, A=None):
     return indicator_q_b_A
 
 
-def indicator_l1_ball(q=1., b=None):
-    r"""Indicator functions for || x - b ||_1 <= q
+def indicator_l1_ball(q=1., b=None, A=None):
+    r"""Indicator functions for || A x - b ||_1 <= q
     """
 
     if b is not None:
         b = jnp.asarray(b)
         b = crs.promote_arg_dtypes(b)
 
+    if A is not None:
+        A = jnp.asarray(A)
+        A = crs.promote_arg_dtypes(A)
+
     if q <= 0:
         raise ValueError("q must be greater than 0")
 
     @jit
     def indicator_q(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
         invalid = crs.arr_l1norm(x) > q
         return jnp.where(invalid, jnp.inf, 0)
 
-    if b is None:
+    if b is None and A is None:
         return indicator_q
 
 
     @jit
     def indicator_q_b(x):
         # compute difference from center
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
         r = x - b
         invalid = crs.arr_l1norm(r) > q
         return jnp.where(invalid, jnp.inf, 0)
 
-    return indicator_q_b
+    if A is None:
+        return indicator_q_b
+
+    if b is None:
+        # we have q and A specified. 
+        # default value for b
+        b = 0.
+
+    @jit
+    def indicator_q_b_A(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
+        # compute the residual vector
+        r = A @ x - b
+        invalid = crs.arr_l1norm(r) > q
+        return jnp.where(invalid, jnp.inf, 0)
+    
+    return indicator_q_b_A
