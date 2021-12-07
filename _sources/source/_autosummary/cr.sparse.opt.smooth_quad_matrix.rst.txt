@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.smooth\_quad\_matrix
+==================================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: smooth_quad_matrix

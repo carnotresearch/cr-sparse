@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.prox\_build
+=========================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: prox_build

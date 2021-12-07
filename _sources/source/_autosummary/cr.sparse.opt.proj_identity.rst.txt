@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.proj\_identity
+============================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: proj_identity

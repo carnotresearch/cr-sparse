@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.proj\_singleton
+=============================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: proj_singleton

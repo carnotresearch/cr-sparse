@@ -146,6 +146,13 @@
 
 <div class="viewcode-block" id="randomize_rows"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.randomize_rows.html#cr.sparse.randomize_rows">[docs]</a><span class="k">def</span> <span class="nf">randomize_rows</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Randomizes the rows in X</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: a PRNG key used as the random key.</span>
+<span class="sd">        X (jax.numpy.ndarray): A 2D data matrix</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): The data matrix with randomized rows</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="n">is_matrix</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
@@ -154,6 +161,13 @@
 
 <div class="viewcode-block" id="randomize_cols"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.randomize_cols.html#cr.sparse.randomize_cols">[docs]</a><span class="k">def</span> <span class="nf">randomize_cols</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Randomizes the columns in X</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: a PRNG key used as the random key.</span>
+<span class="sd">        X (jax.numpy.ndarray): A 2D data matrix</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): The data matrix with randomized columns</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="n">is_matrix</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
@@ -163,34 +177,77 @@
 
 <div class="viewcode-block" id="largest_indices"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.largest_indices.html#cr.sparse.largest_indices">[docs]</a><span class="k">def</span> <span class="nf">largest_indices</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the indices of K largest entries in x by magnitude</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (jax.numpy.ndarray): An data vector/point</span>
+<span class="sd">        K (int): The number of largest entries to be identified in x</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): An index vector of size K identifying the K largest entries in x</span>
+<span class="sd">        in descending order</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">indices</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">indices</span><span class="p">[:</span><span class="o">-</span><span class="n">K</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="largest_indices_rw"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.largest_indices_rw.html#cr.sparse.largest_indices_rw">[docs]</a><span class="k">def</span> <span class="nf">largest_indices_rw</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the indices of K largest entries by magnitude in each row of X</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (jax.numpy.ndarray): An (S,N) data matrix with data points in rows</span>
+<span class="sd">        K (int): The number of largest entries to be identified in each row of X</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): An (S,K) index matrix indices of K largest elements in each row of X</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">indices</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">indices</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="n">K</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="largest_indices_cw"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.largest_indices_cw.html#cr.sparse.largest_indices_cw">[docs]</a><span class="k">def</span> <span class="nf">largest_indices_cw</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the indices of K largest entries by magnitude in each column of X</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (jax.numpy.ndarray): An (N,S) data matrix with data points in columns</span>
+<span class="sd">        K (int): The number of largest entries to be identified in each column of X</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): An (K,S) index matrix indices of K largest elements in each column of X</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">indices</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">indices</span><span class="p">[:</span><span class="o">-</span><span class="n">K</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span></div>
 
 <div class="viewcode-block" id="take_along_rows"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.take_along_rows.html#cr.sparse.take_along_rows">[docs]</a><span class="k">def</span> <span class="nf">take_along_rows</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">indices</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Picks K entries from each row of X specified by indices matrix</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (jax.numpy.ndarray): An (S,N) data matrix with data points in rows</span>
+<span class="sd">        indices (jax.numpy.ndarray): An (S,K) index matrix identifying the values to be picked up from X</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): An (S,K) data matrix subset of X containing K elements from each row of X</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">take_along_axis</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="take_along_cols"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.take_along_cols.html#cr.sparse.take_along_cols">[docs]</a><span class="k">def</span> <span class="nf">take_along_cols</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">indices</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Picks K entries from each column of X specified by indices matrix</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (jax.numpy.ndarray): An (N,S) data matrix with data points in columns</span>
+<span class="sd">        indices (jax.numpy.ndarray): An (K,S) index matrix identifying the values to be picked up from X</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): An (K,S) data matrix subset of X containing K elements from each column of X</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">take_along_axis</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="sparse_approximation"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.sparse_approximation.html#cr.sparse.sparse_approximation">[docs]</a><span class="k">def</span> <span class="nf">sparse_approximation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Keeps only largest K non-zero entries by magnitude in a vector x</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (jax.numpy.ndarray): An data vector/point</span>
+<span class="sd">        K (int): The number of largest entries to be kept in x</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): x modified so that all entries except the K largest entries are set to 0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">K</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">at</span><span class="p">[:]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -201,6 +258,13 @@
 <div class="viewcode-block" id="sparse_approximation_cw"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.sparse_approximation_cw.html#cr.sparse.sparse_approximation_cw">[docs]</a><span class="k">def</span> <span class="nf">sparse_approximation_cw</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
     <span class="c1">#return jax.vmap(sparse_approximation, in_axes=(1, None), out_axes=1)(X, K)</span>
     <span class="sd">&quot;&quot;&quot;Keeps only largest K non-zero entries by magnitude in each column of X</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (jax.numpy.ndarray): An (N,S) data matrix with data points in columns</span>
+<span class="sd">        K (int): The number of largest entries to be kept in each column of X</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): X modified so that all entries except the K largest entries are set to 0 in each column</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">K</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">X</span><span class="o">.</span><span class="n">at</span><span class="p">[:]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -212,6 +276,13 @@
 
 <div class="viewcode-block" id="sparse_approximation_rw"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.sparse_approximation_rw.html#cr.sparse.sparse_approximation_rw">[docs]</a><span class="k">def</span> <span class="nf">sparse_approximation_rw</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Keeps only largest K non-zero entries by magnitude in each row of X</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (jax.numpy.ndarray): An (S,N) data matrix with data points in rows</span>
+<span class="sd">        K (int): The number of largest entries to be kept in each row of X</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): X modified so that all entries except the K largest entries are set to 0 in each row</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">K</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">X</span><span class="o">.</span><span class="n">at</span><span class="p">[:]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -224,6 +295,14 @@
 
 <div class="viewcode-block" id="build_signal_from_indices_and_values"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.build_signal_from_indices_and_values.html#cr.sparse.build_signal_from_indices_and_values">[docs]</a><span class="k">def</span> <span class="nf">build_signal_from_indices_and_values</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Builds a sparse signal from its non-zero entries (specified by their indices and values)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        length (int): Length of the sparse signal</span>
+<span class="sd">        indices (jax.numpy.ndarray): An index vector of length K identifying non-zero entries</span>
+<span class="sd">        values (jax.numpy.ndarray): Values to be stored in the non-zero positions</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): Resulting sparse signal such that x[indices] == values </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
     <span class="n">indices</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
@@ -233,23 +312,70 @@
 
 <div class="viewcode-block" id="nonzero_values"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.nonzero_values.html#cr.sparse.nonzero_values">[docs]</a><span class="k">def</span> <span class="nf">nonzero_values</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the values of non-zero entries in x</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (jax.numpy.ndarray): A sparse signal</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): The signal stripped of its zero values</span>
+
+
+<span class="sd">    Note:</span>
+<span class="sd">        This function cannot be JIT compiled as the size of output is data dependent.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="n">x</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="nonzero_indices"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.nonzero_indices.html#cr.sparse.nonzero_indices">[docs]</a><span class="k">def</span> <span class="nf">nonzero_indices</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the indices of non-zero entries in x</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (jax.numpy.ndarray): A sparse signal</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): The indices of nonzero entries in x</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This function cannot be JIT compiled as the size of output is data dependent.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        :func:`support`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
 
 
-<span class="k">def</span> <span class="nf">support</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="support"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.support.html#cr.sparse.support">[docs]</a><span class="k">def</span> <span class="nf">support</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the indices of non-zero entries in x</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (jax.numpy.ndarray): A sparse signal</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): The support of x a.k.a. the indices of nonzero entries in x</span>
+<span class="sd">        </span>
+<span class="sd">    Note:</span>
+<span class="sd">        This function cannot be JIT compiled as the size of output is data dependent.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        :func:`nonzero_indices`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="hard_threshold"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.hard_threshold.html#cr.sparse.hard_threshold">[docs]</a><span class="k">def</span> <span class="nf">hard_threshold</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the indices and corresponding values of largest K non-zero entries in a vector x</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (jax.numpy.ndarray): A sparse/compressible signal</span>
+<span class="sd">        K (int): The number of largest entries to be kept in x</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray, jax.numpy.ndarray): A tuple comprising of:</span>
+<span class="sd">            * The indices of K largest entries in x</span>
+<span class="sd">            * Corresponding entries in x</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        :func:`hard_threshold_sorted`</span>
+<span class="sd">        :func:`hard_threshold_by`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">indices</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
     <span class="n">I</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[:</span><span class="o">-</span><span class="n">K</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -258,6 +384,18 @@
 
 <div class="viewcode-block" id="hard_threshold_sorted"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.hard_threshold_sorted.html#cr.sparse.hard_threshold_sorted">[docs]</a><span class="k">def</span> <span class="nf">hard_threshold_sorted</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the sorted indices and corresponding values of largest K non-zero entries in a vector x</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (jax.numpy.ndarray): A sparse/compressible signal</span>
+<span class="sd">        K (int): The number of largest entries to be kept in x</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray, jax.numpy.ndarray): A tuple comprising of:</span>
+<span class="sd">            * The indices of K largest entries in x sorted in ascending order</span>
+<span class="sd">            * Corresponding entries in x</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        :func:`hard_threshold`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Sort entries in x by their magnitude</span>
     <span class="n">indices</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
@@ -269,21 +407,59 @@
     <span class="n">x_I</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">I</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">I</span><span class="p">,</span> <span class="n">x_I</span></div>
 
-<span class="k">def</span> <span class="nf">hard_threshold_by</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<div class="viewcode-block" id="hard_threshold_by"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.hard_threshold_by.html#cr.sparse.hard_threshold_by">[docs]</a><span class="k">def</span> <span class="nf">hard_threshold_by</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sets all entries in x to be zero which are less than t in magnitude</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (jax.numpy.ndarray): A sparse/compressible signal</span>
+<span class="sd">        t (float): The threshold value</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): x modified such that all values below t are set to 0</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This function doesn&#39;t change the length of x and can be JIT compiled</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        :func:`hard_threshold`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">valid</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">t</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">valid</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">valid</span></div>
 
-<span class="k">def</span> <span class="nf">largest_indices_by</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<div class="viewcode-block" id="largest_indices_by"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.largest_indices_by.html#cr.sparse.largest_indices_by">[docs]</a><span class="k">def</span> <span class="nf">largest_indices_by</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the locations of all entries in x which are larger than t in magnitude</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (jax.numpy.ndarray): A sparse/compressible signal</span>
+<span class="sd">        t (float): The threshold value</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): An index vector of all entries in x which are above the threshold</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This function cannot be JIT compiled as the length of output is data dependent</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        :func:`hard_threshold_by`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">t</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">t</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="dynamic_range"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.dynamic_range.html#cr.sparse.dynamic_range">[docs]</a><span class="k">def</span> <span class="nf">dynamic_range</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the ratio of largest and smallest values (by magnitude) in x (dB)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (jax.numpy.ndarray): A signal</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float): The dynamic range between largest and smallest value</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This function is not suitable for sparse signals where some values are actually 0</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        :func:`nonzero_dynamic_range`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
     <span class="k">return</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
@@ -291,24 +467,43 @@
 
 <div class="viewcode-block" id="nonzero_dynamic_range"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.nonzero_dynamic_range.html#cr.sparse.nonzero_dynamic_range">[docs]</a><span class="k">def</span> <span class="nf">nonzero_dynamic_range</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the ratio of largest and smallest non-zero values (by magnitude) in x (dB)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (jax.numpy.ndarray): A sparse/compressible signal</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float): The dynamic range between largest and smallest nonzero value</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This function cannot be JIT compiled as it depends on arrays whose size is data-dependent.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        :func:`dynamic_range`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">nonzero_values</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">dynamic_range</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="normalize"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.normalize.html#cr.sparse.normalize">[docs]</a><span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Normalizes a data vector (data - mu) / sigma </span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (jax.numpy.ndarray): A data vector or array</span>
+<span class="sd">        axis (int): For nd arrays, the axis along which the data normalization will be done</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.numpy.ndarray): Normalized data vector/array</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">data</span> <span class="o">-</span> <span class="n">mu</span>
     <span class="n">variance</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">data</span> <span class="o">/</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">data</span>
+    <span class="k">return</span> <span class="n">data</span></div>
 
 <span class="n">normalize_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">normalize</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
 
 
-<span class="k">def</span> <span class="nf">frequency_spectrum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
+<div class="viewcode-block" id="frequency_spectrum"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.frequency_spectrum.html#cr.sparse.frequency_spectrum">[docs]</a><span class="k">def</span> <span class="nf">frequency_spectrum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Frequency spectrum of 1D data using FFT</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -317,9 +512,9 @@
     <span class="n">f</span> <span class="o">=</span> <span class="n">jfft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">dt</span><span class="p">)</span>
     <span class="n">X</span> <span class="o">=</span> <span class="n">jfft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">jfft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">X</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">X</span></div>
 
-<span class="k">def</span> <span class="nf">power_spectrum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
+<div class="viewcode-block" id="power_spectrum"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.power_spectrum.html#cr.sparse.power_spectrum">[docs]</a><span class="k">def</span> <span class="nf">power_spectrum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Power spectrum of 1D data using FFT</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -331,17 +526,17 @@
     <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">n2</span><span class="p">:]</span>
     <span class="n">sxx</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">X</span><span class="p">))</span> <span class="o">/</span> <span class="n">T</span>
     <span class="n">sxx</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sxx</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">sxx</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">sxx</span></div>
 
-<span class="k">def</span> <span class="nf">energy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="energy"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.energy.html#cr.sparse.energy">[docs]</a><span class="k">def</span> <span class="nf">energy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes the energy of the signal along the specified axis</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">power</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">power</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">power</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">interpft</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+<div class="viewcode-block" id="interpft"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.interpft.html#cr.sparse.interpft">[docs]</a><span class="k">def</span> <span class="nf">interpft</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Interpolates x to n points in Fourier Transform domain</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -360,7 +555,9 @@
         <span class="n">y</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
     <span class="c1"># scale it up</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">y</span>
+    <span class="k">return</span> <span class="n">y</span></div>
+
+
 </pre></div>
 
           </div>

@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.indicator\_singleton
+==================================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: indicator_singleton

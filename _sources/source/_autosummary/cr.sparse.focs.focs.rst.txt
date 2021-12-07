@@ -1,0 +1,6 @@
+﻿cr.sparse.focs.focs
+===================
+
+.. currentmodule:: cr.sparse.focs
+
+.. autofunction:: focs

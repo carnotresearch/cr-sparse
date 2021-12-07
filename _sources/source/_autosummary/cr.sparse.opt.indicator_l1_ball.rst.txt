@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.indicator\_l1\_ball
+=================================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: indicator_l1_ball

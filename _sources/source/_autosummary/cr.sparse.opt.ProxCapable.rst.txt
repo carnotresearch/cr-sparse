@@ -1,0 +1,32 @@
+﻿cr.sparse.opt.ProxCapable
+=========================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autoclass:: ProxCapable
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ProxCapable.__init__
+      ~ProxCapable.count
+      ~ProxCapable.index
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ProxCapable.func
+      ~ProxCapable.prox_op
+      ~ProxCapable.prox_vec_val
+   
+   

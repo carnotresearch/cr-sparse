@@ -71,6 +71,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="focs.html">First Order Conic Solvers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cs.html">Compressive Sensing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ssc.html">Sparse Subspace Clustering</a></li>
@@ -139,6 +140,9 @@
 <li><p><a class="reference internal" href="#pairwise-distances" id="id6">Pairwise Distances</a></p></li>
 <li><p><a class="reference internal" href="#sparse-representations" id="id7">Sparse representations</a></p></li>
 <li><p><a class="reference internal" href="#utilities-for-nd-arrays" id="id8">Utilities for ND-Arrays</a></p></li>
+<li><p><a class="reference internal" href="#basic-signal-information" id="id9">Basic Signal Information</a></p></li>
+<li><p><a class="reference internal" href="#basic-signal-processing" id="id10">Basic Signal Processing</a></p></li>
+<li><p><a class="reference internal" href="#artificial-noise" id="id11">Artificial Noise</a></p></li>
 </ul>
 </div>
 <section id="array-data-type-utilities">
@@ -448,14 +452,20 @@
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.nonzero_indices.html#cr.sparse.nonzero_indices" title="cr.sparse.nonzero_indices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nonzero_indices</span></code></a>(x)</p></td>
 <td><p>Returns the indices of non-zero entries in x</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.randomize_rows.html#cr.sparse.randomize_rows" title="cr.sparse.randomize_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">randomize_rows</span></code></a>(key, X)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.support.html#cr.sparse.support" title="cr.sparse.support"><code class="xref py py-obj docutils literal notranslate"><span class="pre">support</span></code></a>(x)</p></td>
+<td><p>Returns the indices of non-zero entries in x</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.randomize_rows.html#cr.sparse.randomize_rows" title="cr.sparse.randomize_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">randomize_rows</span></code></a>(key, X)</p></td>
 <td><p>Randomizes the rows in X</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.randomize_cols.html#cr.sparse.randomize_cols" title="cr.sparse.randomize_cols"><code class="xref py py-obj docutils literal notranslate"><span class="pre">randomize_cols</span></code></a>(key, X)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.randomize_cols.html#cr.sparse.randomize_cols" title="cr.sparse.randomize_cols"><code class="xref py py-obj docutils literal notranslate"><span class="pre">randomize_cols</span></code></a>(key, X)</p></td>
 <td><p>Randomizes the columns in X</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.largest_indices.html#cr.sparse.largest_indices" title="cr.sparse.largest_indices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">largest_indices</span></code></a>(x, K)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.largest_indices.html#cr.sparse.largest_indices" title="cr.sparse.largest_indices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">largest_indices</span></code></a>(x, K)</p></td>
 <td><p>Returns the indices of K largest entries in x by magnitude</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.largest_indices_by.html#cr.sparse.largest_indices_by" title="cr.sparse.largest_indices_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">largest_indices_by</span></code></a>(x, t)</p></td>
+<td><p>Returns the locations of all entries in x which are larger than t in magnitude</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.hard_threshold.html#cr.sparse.hard_threshold" title="cr.sparse.hard_threshold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hard_threshold</span></code></a>(x, K)</p></td>
 <td><p>Returns the indices and corresponding values of largest K non-zero entries in a vector x</p></td>
@@ -463,16 +473,19 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.hard_threshold_sorted.html#cr.sparse.hard_threshold_sorted" title="cr.sparse.hard_threshold_sorted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hard_threshold_sorted</span></code></a>(x, K)</p></td>
 <td><p>Returns the sorted indices and corresponding values of largest K non-zero entries in a vector x</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sparse_approximation.html#cr.sparse.sparse_approximation" title="cr.sparse.sparse_approximation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_approximation</span></code></a>(x, K)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.hard_threshold_by.html#cr.sparse.hard_threshold_by" title="cr.sparse.hard_threshold_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hard_threshold_by</span></code></a>(x, t)</p></td>
+<td><p>Sets all entries in x to be zero which are less than t in magnitude</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sparse_approximation.html#cr.sparse.sparse_approximation" title="cr.sparse.sparse_approximation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_approximation</span></code></a>(x, K)</p></td>
 <td><p>Keeps only largest K non-zero entries by magnitude in a vector x</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.build_signal_from_indices_and_values.html#cr.sparse.build_signal_from_indices_and_values" title="cr.sparse.build_signal_from_indices_and_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_signal_from_indices_and_values</span></code></a>(length, …)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.build_signal_from_indices_and_values.html#cr.sparse.build_signal_from_indices_and_values" title="cr.sparse.build_signal_from_indices_and_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_signal_from_indices_and_values</span></code></a>(length, …)</p></td>
 <td><p>Builds a sparse signal from its non-zero entries (specified by their indices and values)</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dynamic_range.html#cr.sparse.dynamic_range" title="cr.sparse.dynamic_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dynamic_range</span></code></a>(x)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dynamic_range.html#cr.sparse.dynamic_range" title="cr.sparse.dynamic_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dynamic_range</span></code></a>(x)</p></td>
 <td><p>Returns the ratio of largest and smallest values (by magnitude) in x (dB)</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.nonzero_dynamic_range.html#cr.sparse.nonzero_dynamic_range" title="cr.sparse.nonzero_dynamic_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nonzero_dynamic_range</span></code></a>(x)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.nonzero_dynamic_range.html#cr.sparse.nonzero_dynamic_range" title="cr.sparse.nonzero_dynamic_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nonzero_dynamic_range</span></code></a>(x)</p></td>
 <td><p>Returns the ratio of largest and smallest non-zero values (by magnitude) in x (dB)</p></td>
 </tr>
 </tbody>
@@ -525,20 +538,74 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.arr_largest_index.html#cr.sparse.arr_largest_index" title="cr.sparse.arr_largest_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arr_largest_index</span></code></a>(x)</p></td>
 <td><p>Returns the unraveled index of the largest entry (by magnitude) in an n-d array</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.arr_l2norm.html#cr.sparse.arr_l2norm" title="cr.sparse.arr_l2norm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arr_l2norm</span></code></a>(x)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.arr_l1norm.html#cr.sparse.arr_l1norm" title="cr.sparse.arr_l1norm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arr_l1norm</span></code></a>(x)</p></td>
+<td><p>Returns the l1-norm of an array by flattening it</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.arr_l2norm.html#cr.sparse.arr_l2norm" title="cr.sparse.arr_l2norm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arr_l2norm</span></code></a>(x)</p></td>
 <td><p>Returns the l2-norm of an array by flattening it</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.arr_l2norm_sqr.html#cr.sparse.arr_l2norm_sqr" title="cr.sparse.arr_l2norm_sqr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arr_l2norm_sqr</span></code></a>(x)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.arr_l2norm_sqr.html#cr.sparse.arr_l2norm_sqr" title="cr.sparse.arr_l2norm_sqr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arr_l2norm_sqr</span></code></a>(x)</p></td>
 <td><p>Returns the squared l2-norm of an array by flattening it</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.arr_vdot.html#cr.sparse.arr_vdot" title="cr.sparse.arr_vdot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arr_vdot</span></code></a>(x, y)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.arr_vdot.html#cr.sparse.arr_vdot" title="cr.sparse.arr_vdot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arr_vdot</span></code></a>(x, y)</p></td>
 <td><p>Returns the inner product of two arrays  by flattening it</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.arr_rdot.html#cr.sparse.arr_rdot" title="cr.sparse.arr_rdot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arr_rdot</span></code></a>(x, y)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.arr_rdot.html#cr.sparse.arr_rdot" title="cr.sparse.arr_rdot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arr_rdot</span></code></a>(x, y)</p></td>
 <td><p>Returns the inner product Re(x^H, y) on two arrays by flattening them</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.arr2vec.html#cr.sparse.arr2vec" title="cr.sparse.arr2vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arr2vec</span></code></a>(x)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.arr2vec.html#cr.sparse.arr2vec" title="cr.sparse.arr2vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arr2vec</span></code></a>(x)</p></td>
 <td><p>Converts an nd array to a vector</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="basic-signal-information">
+<h2><a class="toc-backref" href="#id9">Basic Signal Information</a><a class="headerlink" href="#basic-signal-information" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.frequency_spectrum.html#cr.sparse.frequency_spectrum" title="cr.sparse.frequency_spectrum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">frequency_spectrum</span></code></a>(x[, dt])</p></td>
+<td><p>Frequency spectrum of 1D data using FFT</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.power_spectrum.html#cr.sparse.power_spectrum" title="cr.sparse.power_spectrum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power_spectrum</span></code></a>(x[, dt])</p></td>
+<td><p>Power spectrum of 1D data using FFT</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.energy.html#cr.sparse.energy" title="cr.sparse.energy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">energy</span></code></a>(data[, axis])</p></td>
+<td><p>Computes the energy of the signal along the specified axis</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="basic-signal-processing">
+<h2><a class="toc-backref" href="#id10">Basic Signal Processing</a><a class="headerlink" href="#basic-signal-processing" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.normalize.html#cr.sparse.normalize" title="cr.sparse.normalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize</span></code></a>(data[, axis])</p></td>
+<td><p>Normalizes a data vector (data - mu) / sigma</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.interpft.html#cr.sparse.interpft" title="cr.sparse.interpft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interpft</span></code></a>(x, N)</p></td>
+<td><p>Interpolates x to n points in Fourier Transform domain</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="artificial-noise">
+<h2><a class="toc-backref" href="#id11">Artificial Noise</a><a class="headerlink" href="#artificial-noise" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.awgn_at_snr.html#cr.sparse.awgn_at_snr" title="cr.sparse.awgn_at_snr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">awgn_at_snr</span></code></a>(key, signal, snr)</p></td>
+<td><p>Generates noise for the signal at the specified SNR</p></td>
 </tr>
 </tbody>
 </table>

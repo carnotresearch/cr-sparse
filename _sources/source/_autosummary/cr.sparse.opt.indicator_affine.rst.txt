@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.indicator\_affine
+===============================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: indicator_affine

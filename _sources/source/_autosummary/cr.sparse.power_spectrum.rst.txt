@@ -1,0 +1,6 @@
+﻿cr.sparse.power\_spectrum
+=========================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: power_spectrum

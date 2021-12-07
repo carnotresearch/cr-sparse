@@ -30,7 +30,7 @@
     <script src="../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cr.sparse.opt.project_to_ball" href="_autosummary/cr.sparse.opt.project_to_ball.html" />
+    <link rel="next" title="cr.sparse.opt.indicator_zero" href="_autosummary/cr.sparse.opt.indicator_zero.html" />
     <link rel="prev" title="cr.sparse.la.subspaces.subspace_distance" href="_autosummary/cr.sparse.la.subspaces.subspace_distance.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -73,6 +73,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="focs.html">First Order Conic Solvers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cs.html">Compressive Sensing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ssc.html">Sparse Subspace Clustering</a></li>
@@ -98,7 +99,7 @@
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">API Docs</a><ul>
       <li>Previous: <a href="_autosummary/cr.sparse.la.subspaces.subspace_distance.html" title="previous chapter">cr.sparse.la.subspaces.subspace_distance</a></li>
-      <li>Next: <a href="_autosummary/cr.sparse.opt.project_to_ball.html" title="next chapter">cr.sparse.opt.project_to_ball</a></li>
+      <li>Next: <a href="_autosummary/cr.sparse.opt.indicator_zero.html" title="next chapter">cr.sparse.opt.indicator_zero</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -134,8 +135,184 @@
 <p>This section includes several routines which
 form basic building blocks for other higher level
 solvers.</p>
-<section id="projections">
-<h2>Projections<a class="headerlink" href="#projections" title="Permalink to this headline">¶</a></h2>
+<section id="indicator-function-generators">
+<h2>Indicator Function Generators<a class="headerlink" href="#indicator-function-generators" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.indicator_zero.html#cr.sparse.opt.indicator_zero" title="cr.sparse.opt.indicator_zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">indicator_zero</span></code></a>()</p></td>
+<td><p>Indicator function for all zero arrays</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.indicator_singleton.html#cr.sparse.opt.indicator_singleton" title="cr.sparse.opt.indicator_singleton"><code class="xref py py-obj docutils literal notranslate"><span class="pre">indicator_singleton</span></code></a>(c)</p></td>
+<td><p>Indicator function for arrays with a constant value</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.indicator_affine.html#cr.sparse.opt.indicator_affine" title="cr.sparse.opt.indicator_affine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">indicator_affine</span></code></a>(A[, b])</p></td>
+<td><p>Returns an indicator function for the linear system A x = b</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.indicator_box.html#cr.sparse.opt.indicator_box" title="cr.sparse.opt.indicator_box"><code class="xref py py-obj docutils literal notranslate"><span class="pre">indicator_box</span></code></a>([l, u])</p></td>
+<td><p>Indicator function for element-wise lower and upper bounds</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.indicator_box_affine.html#cr.sparse.opt.indicator_box_affine" title="cr.sparse.opt.indicator_box_affine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">indicator_box_affine</span></code></a>(l, u, a[, alpha, tol])</p></td>
+<td><p>Indicator function for the constraints l &lt;= x &lt;= u and a’ x = alpha</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.indicator_conic.html#cr.sparse.opt.indicator_conic" title="cr.sparse.opt.indicator_conic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">indicator_conic</span></code></a>()</p></td>
+<td><p>Indicator function for Lorentz/ice-cream cone {(x,t): | x |_2 leq t}</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.indicator_l1_ball.html#cr.sparse.opt.indicator_l1_ball" title="cr.sparse.opt.indicator_l1_ball"><code class="xref py py-obj docutils literal notranslate"><span class="pre">indicator_l1_ball</span></code></a>([q, b, A])</p></td>
+<td><p>Indicator functions for || A x - b ||_1 &lt;= q</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.indicator_l2_ball.html#cr.sparse.opt.indicator_l2_ball" title="cr.sparse.opt.indicator_l2_ball"><code class="xref py py-obj docutils literal notranslate"><span class="pre">indicator_l2_ball</span></code></a>([q, b, A])</p></td>
+<td><p>Indicator functions for || A x - b ||_2 &lt;= q</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="projection-function-generators">
+<h2>Projection Function Generators<a class="headerlink" href="#projection-function-generators" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.proj_zero.html#cr.sparse.opt.proj_zero" title="cr.sparse.opt.proj_zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">proj_zero</span></code></a>()</p></td>
+<td><p>Projects to the zero vector for <span class="math notranslate nohighlight">\(\RR^n\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.proj_identity.html#cr.sparse.opt.proj_identity" title="cr.sparse.opt.proj_identity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">proj_identity</span></code></a>()</p></td>
+<td><p>Projects on <span class="math notranslate nohighlight">\(\RR^n\)</span> (x =&gt; x)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.proj_singleton.html#cr.sparse.opt.proj_singleton" title="cr.sparse.opt.proj_singleton"><code class="xref py py-obj docutils literal notranslate"><span class="pre">proj_singleton</span></code></a>(c)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.proj_affine.html#cr.sparse.opt.proj_affine" title="cr.sparse.opt.proj_affine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">proj_affine</span></code></a>(A[, b])</p></td>
+<td><p>Returns a function which projects a point to the solution set A x = b</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.proj_box.html#cr.sparse.opt.proj_box" title="cr.sparse.opt.proj_box"><code class="xref py py-obj docutils literal notranslate"><span class="pre">proj_box</span></code></a>([l, u])</p></td>
+<td><p>Projector function for element-wise lower and upper bounds</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.proj_conic.html#cr.sparse.opt.proj_conic" title="cr.sparse.opt.proj_conic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">proj_conic</span></code></a>()</p></td>
+<td><p>Projector function for Lorentz/ice-cream cone {(x,t): | x |_2 leq t}</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.proj_l1_ball.html#cr.sparse.opt.proj_l1_ball" title="cr.sparse.opt.proj_l1_ball"><code class="xref py py-obj docutils literal notranslate"><span class="pre">proj_l1_ball</span></code></a>([q, b])</p></td>
+<td><p>Projector functions for || x - b ||_1 &lt;= q</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.proj_l2_ball.html#cr.sparse.opt.proj_l2_ball" title="cr.sparse.opt.proj_l2_ball"><code class="xref py py-obj docutils literal notranslate"><span class="pre">proj_l2_ball</span></code></a>([q, b, A])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="proximal-operator-generators">
+<h2>Proximal Operator Generators<a class="headerlink" href="#proximal-operator-generators" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.prox_zero.html#cr.sparse.opt.prox_zero" title="cr.sparse.opt.prox_zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prox_zero</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.prox_l1.html#cr.sparse.opt.prox_l1" title="cr.sparse.opt.prox_l1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prox_l1</span></code></a>([q])</p></td>
+<td><p>Proximal operator for :math:` | q * x |_1`</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.prox_l2.html#cr.sparse.opt.prox_l2" title="cr.sparse.opt.prox_l2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prox_l2</span></code></a>([q])</p></td>
+<td><p>Proximal operator for <span class="math notranslate nohighlight">\(\| q * x \|_2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.prox_l1_pos.html#cr.sparse.opt.prox_l1_pos" title="cr.sparse.opt.prox_l1_pos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prox_l1_pos</span></code></a>([q])</p></td>
+<td><p>Proximal operator for :math:` | q * x |_1 + I({x geq 0})`</p></td>
+</tr>
+</tbody>
+</table>
+<p>Building proximal operators:</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.ProxCapable.html#cr.sparse.opt.ProxCapable" title="cr.sparse.opt.ProxCapable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ProxCapable</span></code></a>(func, float], prox_op, float], …)</p></td>
+<td><p>Represents a function which is prox capable</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.prox_build.html#cr.sparse.opt.prox_build" title="cr.sparse.opt.prox_build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prox_build</span></code></a>(func, prox_op)</p></td>
+<td><p>Creates a wrapper for a prox capable function</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="smooth-function-generators">
+<h2>Smooth Function Generators<a class="headerlink" href="#smooth-function-generators" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_constant.html#cr.sparse.opt.smooth_constant" title="cr.sparse.opt.smooth_constant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_constant</span></code></a>([c])</p></td>
+<td><p>A constant value function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_entropy.html#cr.sparse.opt.smooth_entropy" title="cr.sparse.opt.smooth_entropy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_entropy</span></code></a>()</p></td>
+<td><p>Entropy function <span class="math notranslate nohighlight">\(f(x) = -\sum(x_i \log (x_i))\)</span> and its gradient</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_huber.html#cr.sparse.opt.smooth_huber" title="cr.sparse.opt.smooth_huber"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_huber</span></code></a>([tau])</p></td>
+<td><p>Huber penalty function and its gradient</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_linear.html#cr.sparse.opt.smooth_linear" title="cr.sparse.opt.smooth_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_linear</span></code></a>(C[, D])</p></td>
+<td><p>Linear function and its gradient <span class="math notranslate nohighlight">\(f(x) = \langle c, x \rangle + d\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_entropy.html#cr.sparse.opt.smooth_entropy" title="cr.sparse.opt.smooth_entropy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_entropy</span></code></a>()</p></td>
+<td><p>Entropy function <span class="math notranslate nohighlight">\(f(x) = -\sum(x_i \log (x_i))\)</span> and its gradient</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_logdet.html#cr.sparse.opt.smooth_logdet" title="cr.sparse.opt.smooth_logdet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_logdet</span></code></a>([q, C])</p></td>
+<td><p>Log Det function and its gradient <span class="math notranslate nohighlight">\(f(X) = -\log( \text{det}( X ) )\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_quad_matrix.html#cr.sparse.opt.smooth_quad_matrix" title="cr.sparse.opt.smooth_quad_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_quad_matrix</span></code></a>([P, q, r])</p></td>
+<td><p>Quadratic function and its gradient <span class="math notranslate nohighlight">\(f(x) = \frac{1}{2} x^T P x + \langle q, x \rangle + r\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>Operations on smooth functions:</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_func_translate.html#cr.sparse.opt.smooth_func_translate" title="cr.sparse.opt.smooth_func_translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_func_translate</span></code></a>(smooth_func, b)</p></td>
+<td><p>Returns a smooth function g for a smooth function f s.t.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Building smooth functions:</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.SmoothFunction.html#cr.sparse.opt.SmoothFunction" title="cr.sparse.opt.SmoothFunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SmoothFunction</span></code></a>(func, float], grad, float], …)</p></td>
+<td><p>Represents a smooth function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_value_grad.html#cr.sparse.opt.smooth_value_grad" title="cr.sparse.opt.smooth_value_grad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_value_grad</span></code></a>(func, grad)</p></td>
+<td><p>Returns a function which computes both the value and gradient of a smooth function at a specified point</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_build.html#cr.sparse.opt.smooth_build" title="cr.sparse.opt.smooth_build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_build</span></code></a>(func)</p></td>
+<td><p>Creates a wrapper for a smooth function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_build2.html#cr.sparse.opt.smooth_build2" title="cr.sparse.opt.smooth_build2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_build2</span></code></a>(func, grad)</p></td>
+<td><p>Creates a wrapper for a smooth function with user defined grad function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_build3.html#cr.sparse.opt.smooth_build3" title="cr.sparse.opt.smooth_build3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_build3</span></code></a>(func, grad, grad_val)</p></td>
+<td><p>Creates a wrapper for a smooth function with user defined grad and grad_val functions</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="simpler-projection-functions">
+<h2>Simpler Projection Functions<a class="headerlink" href="#simpler-projection-functions" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />

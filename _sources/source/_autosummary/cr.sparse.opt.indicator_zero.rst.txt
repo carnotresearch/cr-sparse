@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.indicator\_zero
+=============================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: indicator_zero

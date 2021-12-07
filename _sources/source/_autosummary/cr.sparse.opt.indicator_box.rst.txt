@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.indicator\_box
+============================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: indicator_box

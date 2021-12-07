@@ -1,0 +1,25 @@
+﻿cr.sparse.focs.FOCSOptions
+==========================
+
+.. currentmodule:: cr.sparse.focs
+
+.. autoclass:: FOCSOptions
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FOCSOptions.L0
+      ~FOCSOptions.Lexact
+      ~FOCSOptions.alpha
+      ~FOCSOptions.beta
+      ~FOCSOptions.max_iters
+      ~FOCSOptions.mu
+      ~FOCSOptions.nonneg
+      ~FOCSOptions.solver
+      ~FOCSOptions.tol
+   
+   

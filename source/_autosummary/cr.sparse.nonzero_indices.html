@@ -28,7 +28,7 @@
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="cr.sparse.randomize_rows" href="cr.sparse.randomize_rows.html" />
+    <link rel="next" title="cr.sparse.support" href="cr.sparse.support.html" />
     <link rel="prev" title="cr.sparse.nonzero_values" href="cr.sparse.nonzero_values.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -71,6 +71,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pursuit.html">Greedy Sparse Recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../focs.html">First Order Conic Solvers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cs.html">Compressive Sensing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ssc.html">Sparse Subspace Clustering</a></li>
@@ -97,7 +98,7 @@
   <li><a href="../index.html">API Docs</a><ul>
   <li><a href="../util.html">Utilities in cr.sparse module</a><ul>
       <li>Previous: <a href="cr.sparse.nonzero_values.html" title="previous chapter">cr.sparse.nonzero_values</a></li>
-      <li>Next: <a href="cr.sparse.randomize_rows.html" title="next chapter">cr.sparse.randomize_rows</a></li>
+      <li>Next: <a href="cr.sparse.support.html" title="next chapter">cr.sparse.support</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -135,6 +136,25 @@
 <dt class="sig sig-object py" id="cr.sparse.nonzero_indices">
 <span class="sig-prename descclassname"><span class="pre">cr.sparse.</span></span><span class="sig-name descname"><span class="pre">nonzero_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/signal.html#nonzero_indices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.nonzero_indices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the indices of non-zero entries in x</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – A sparse signal</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The indices of nonzero entries in x</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)">jax.numpy.ndarray</a>)</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function cannot be JIT compiled as the size of output is data dependent.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="cr.sparse.support.html#cr.sparse.support" title="cr.sparse.support"><code class="xref py py-func docutils literal notranslate"><span class="pre">support()</span></code></a></p>
+</div>
 </dd></dl>
 
 </section>

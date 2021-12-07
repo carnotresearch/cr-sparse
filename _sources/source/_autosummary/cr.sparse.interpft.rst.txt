@@ -1,0 +1,6 @@
+﻿cr.sparse.interpft
+==================
+
+.. currentmodule:: cr.sparse
+
+.. autofunction:: interpft

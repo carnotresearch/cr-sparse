@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.smooth\_linear
+============================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: smooth_linear

@@ -113,7 +113,7 @@ Sampling frequency
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f566c3b6250>]
+    [<matplotlib.lines.Line2D object at 0x7f2d67aa4100>]
 
 
 
@@ -164,7 +164,7 @@ Wavelet coefficients
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f566baeeeb0>]
+    [<matplotlib.lines.Line2D object at 0x7f2d6665b670>]
 
 
 
@@ -199,7 +199,7 @@ Let's keep only 10 percent of the coefficients
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7f566ba24460>]
+    [<matplotlib.lines.Line2D object at 0x7f2d6662fc10>]
 
 
 
@@ -244,7 +244,7 @@ Reconstruction
     0.034259365997888334
     36.56352988951204
 
-    <matplotlib.legend.Legend object at 0x7f566b996250>
+    <matplotlib.legend.Legend object at 0x7f2d6651fd30>
 
 
 
@@ -369,7 +369,7 @@ Reconstruction
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  9.592 seconds)
+   **Total running time of the script:** ( 0 minutes  8.324 seconds)
 
 
 .. _sphx_glr_download_gallery_lop_wt_op.py:

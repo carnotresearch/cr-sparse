@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.proj\_conic
+=========================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: proj_conic

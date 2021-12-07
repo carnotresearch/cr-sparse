@@ -1,0 +1,40 @@
+﻿cr.sparse.focs.FOCSState
+========================
+
+.. currentmodule:: cr.sparse.focs
+
+.. autoclass:: FOCSState
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FOCSState.A_x
+      ~FOCSState.A_y
+      ~FOCSState.A_z
+      ~FOCSState.C_x
+      ~FOCSState.C_y
+      ~FOCSState.C_z
+      ~FOCSState.L
+      ~FOCSState.at_str
+      ~FOCSState.f_x
+      ~FOCSState.f_y
+      ~FOCSState.f_z
+      ~FOCSState.g_Ax
+      ~FOCSState.g_Ay
+      ~FOCSState.g_Az
+      ~FOCSState.g_x
+      ~FOCSState.g_y
+      ~FOCSState.g_z
+      ~FOCSState.iterations
+      ~FOCSState.norm_dx
+      ~FOCSState.norm_x
+      ~FOCSState.theta
+      ~FOCSState.x
+      ~FOCSState.y
+      ~FOCSState.z
+   
+   

@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.smooth\_func\_translate
+=====================================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: smooth_func_translate

@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.proj\_zero
+========================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: proj_zero

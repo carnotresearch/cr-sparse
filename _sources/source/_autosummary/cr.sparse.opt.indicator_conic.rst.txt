@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.indicator\_conic
+==============================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: indicator_conic

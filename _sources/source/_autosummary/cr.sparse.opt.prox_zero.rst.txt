@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.prox\_zero
+========================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: prox_zero

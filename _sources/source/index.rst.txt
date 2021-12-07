@@ -12,6 +12,7 @@ API Docs
    dict
    pursuit
    cvx_recovery
+   focs
    cs
    cluster
    ssc

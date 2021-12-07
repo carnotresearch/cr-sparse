@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.smooth\_build2
+============================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: smooth_build2
