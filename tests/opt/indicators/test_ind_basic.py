@@ -2,7 +2,7 @@ from indicators_setup import *
 
 
 def test_zero():
-    f = indicators.indicator_zero()
+    f = indicator_zero()
     assert_array_equal(f(0), 0)
     assert_array_equal(f(1), jnp.inf)
     assert_array_equal(f([0, 0]), 0)
@@ -10,14 +10,14 @@ def test_zero():
 
 
 def test_singleton_1():
-    f = indicators.indicator_singleton(1)
+    f = indicator_singleton(1)
     assert_array_equal(f(1), 0)
     assert_array_equal(f(2), jnp.inf)
     assert_array_equal(f([1, 1]), 0)
     assert_array_equal(f([1, 0]), jnp.inf)
 
 def test_singleton_2():
-    f = indicators.indicator_singleton([1, 1])
+    f = indicator_singleton([1, 1])
     assert_array_equal(f([1, 1]), 0)
     assert_array_equal(f(2), jnp.inf)
     assert_array_equal(f([2, 1]), jnp.inf)
@@ -33,14 +33,14 @@ def test_affine_1(A):
     m,n = A.shape
     x = jnp.arange(n)
     b = A @ x
-    f = indicators.indicator_affine(A, b)
+    f = indicator_affine(A, b)
     assert_array_equal(f(x), 0)
  
 
 def test_affine_2():
     # This A simply keeps the first component of x
     A = [[1, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
-    f = indicators.indicator_affine(A)
+    f = indicator_affine(A)
     assert_array_equal(f([0, 1, 1, -1]), 0)
     assert_array_equal(f([0, 0, 1, -10]), 0)
     assert_array_equal(f([-1, 0, 1, -10]), jnp.inf)
@@ -54,7 +54,7 @@ def test_affine_2():
 def test_affine_3(b):
     # This A simply keeps the first component of x
     A = [[1, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
-    f = indicators.indicator_affine(A, [b, 0, 0])
+    f = indicator_affine(A, [b, 0, 0])
     assert_array_equal(f([b, 1, 1, -1]), 0)
     assert_array_equal(f([b, 0, 1, -10]), 0)
     assert_array_equal(f([b+1, 0, 1, -10]), jnp.inf)
@@ -68,7 +68,7 @@ def test_affine_3(b):
     [[0,0], [4, 4]],
 ])
 def test_box(l, u):
-    box = indicators.indicator_box(l, u)
+    box = indicator_box(l, u)
     if l is not None:
         assert_array_equal(box(l), 0)
         l = jnp.asarray(l)
@@ -94,7 +94,7 @@ def test_box(l, u):
 def test_box_affine(l,u,shape):
     a = jnp.ones(shape)
     n = a.size
-    box = indicators.indicator_box_affine(l, u, a, 1)
+    box = indicator_box_affine(l, u, a, 1)
     x = jnp.ones(shape)
     x = x / crs.arr_rdot(a, x)
     assert_array_equal(box(x), 0)
@@ -114,7 +114,7 @@ def test_box_affine(l,u,shape):
     [[1,2,3,4], 6],
 ])
 def test_conic_inside(x, t):
-    f = indicators.indicator_conic()
+    f = indicator_conic()
     x = jnp.append(jnp.asarray(x), t)
     assert_array_equal(f(x), 0)
 
@@ -124,6 +124,6 @@ def test_conic_inside(x, t):
     [[1,2,3,4], 5],
 ])
 def test_conic_outside(x, t):
-    f = indicators.indicator_conic()
+    f = indicator_conic()
     x = jnp.append(jnp.asarray(x), t)
     assert_array_equal(f(x), jnp.inf)

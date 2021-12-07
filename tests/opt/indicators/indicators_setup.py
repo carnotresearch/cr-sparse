@@ -7,7 +7,7 @@ from jax import random, lax
 
 # crs imports
 import cr.sparse as crs
-import cr.sparse.opt.indicators as indicators
+from cr.sparse.opt.indicators import *
 
 atol = 1e-6
 rtol = 1e-6
