@@ -97,3 +97,26 @@ def test_box_lu(u):
     assert_array_equal(proj(x), l)
     x = (l + u) / 2
     assert_array_equal(proj(x), x)
+
+
+@pytest.mark.parametrize("x, t", [
+    [[1,1], 2],
+    [[1], 1],
+    [[1,2,3,4], 6],
+])
+def test_conic_inside(x, t):
+    proj = projectors.proj_conic()
+    x = jnp.append(jnp.asarray(x), t)
+    assert_array_equal(proj(x), x)
+
+@pytest.mark.parametrize("x, t", [
+    [[1,1], 1],
+    [[1], 0.1],
+    [[1,2,3,4], 5],
+])
+def test_conic_outside(x, t):
+    proj = projectors.proj_conic()
+    x = jnp.append(jnp.asarray(x), t)
+    v = proj(x)
+    # once inside, if we project again, we will get same vector
+    assert_allclose(proj(v), v, atol=atol, rtol=rtol)

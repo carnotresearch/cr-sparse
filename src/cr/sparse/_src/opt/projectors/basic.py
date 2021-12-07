@@ -166,6 +166,7 @@ def proj_conic():
     """
     @jit
     def proj(x):
+        x = jnp.asarray(x)
         x = crs.promote_arg_dtypes(x)
         x_pre = x[:-1]
         t =  x[-1]
