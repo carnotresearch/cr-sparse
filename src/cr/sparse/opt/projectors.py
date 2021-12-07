@@ -15,6 +15,7 @@
 
 from cr.sparse._src.opt.projectors.basic import (
     proj_zero,
+    proj_identity,
     proj_singleton,
     proj_affine,
     proj_box,

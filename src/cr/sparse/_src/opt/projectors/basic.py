@@ -24,29 +24,55 @@ import cr.sparse as crs
 import cr.sparse.la as crla
 
 def proj_zero():
-
+    r"""Projects to the zero vector for :math:`\RR^n`
+    """
     @jit
     def projector(x):
+        x = jnp.asarray(x)
         return jnp.zeros_like(x)
+    
+    return projector
+
+
+def proj_identity():
+    r"""Projects on :math:`\RR^n` (x => x)
+    """
+    @jit
+    def projector(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
+        return x
     
     return projector
 
 def proj_singleton(c):
 
+    c = jnp.asarray(c)
+    c = crs.promote_arg_dtypes(c)
+
     @jit
     def projector(x):
-        return c
+        x = jnp.asarray(x)
+        return jnp.broadcast_to(c, x.shape)
 
     return projector
 
 
-def proj_affine(A, b):
+def proj_affine(A, b=0):
     """Returns a function which projects a point to the solution set A x = b
     """
+    # A must be specified
+    A = jnp.asarray(A)
+    A = crs.promote_arg_dtypes(A)
+    # b by default is 0
+    b = jnp.asarray(b)
+    b = crs.promote_arg_dtypes(b)
+    # Compute the QR decomposition of A
     R = qr(A.T, 'r')
-
     @jit
     def projector(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
         r = b - A @ x
         v = crla.solve_UTx_b(R, r)
         w = crla.solve_Ux_b(R, v)
