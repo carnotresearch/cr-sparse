@@ -20,7 +20,7 @@ import cr.sparse as crs
 
 from .smooth import build2
 
-def smooth_linear(C, D):
+def smooth_linear(C, D=0.):
     r"""Linear function and its gradient :math:`f(x) = \langle c, x \rangle + d`
     """
     C = jnp.asarray(C)
