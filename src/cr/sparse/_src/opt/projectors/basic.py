@@ -96,15 +96,21 @@ def proj_box(l=None, u=None):
 
     @jit
     def lower_bound(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
         return jnp.maximum(x, l)
 
     @jit
     def upper_bound(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
         return jnp.minimum(x, u)
 
 
     @jit
     def box_bound(x):
+        x = jnp.asarray(x)
+        x = crs.promote_arg_dtypes(x)
         x = jnp.maximum(x, l)
         x =  jnp.minimum(x, u)
         return x

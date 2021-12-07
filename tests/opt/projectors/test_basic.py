@@ -53,3 +53,47 @@ def test_affine_2(x):
     proj = projectors.proj_affine(A, b)
     v = proj(x)
     assert_allclose(A @ v - b, 0, atol=atol, rtol=rtol)
+
+
+@pytest.mark.parametrize("l", [
+    [1],
+    [2,3],
+    [1,2, 3, 4]
+])
+def test_box_l(l):
+    proj  = projectors.proj_box(l=l)
+    l = jnp.asarray(l)
+    x = l + 1
+    assert_array_equal(proj(x), x)
+    x = l - 1
+    assert_array_equal(proj(x), l)
+
+@pytest.mark.parametrize("u", [
+    [1],
+    [2,3],
+    [1,2, 3, 4]
+])
+def test_box_u(u):
+    proj  = projectors.proj_box(u=u)
+    u = jnp.asarray(u)
+    x = u + 1
+    assert_array_equal(proj(x), u)
+    x = u - 1
+    assert_array_equal(proj(x), x)
+
+
+@pytest.mark.parametrize("u", [
+    [1],
+    [2,3],
+    [1,2, 3, 4]
+])
+def test_box_lu(u):
+    u = jnp.asarray(u)
+    l = jnp.zeros_like(u)
+    proj  = projectors.proj_box(l=l, u=u)
+    x = u + 1
+    assert_array_equal(proj(x), u)
+    x = l - 1
+    assert_array_equal(proj(x), l)
+    x = (l + u) / 2
+    assert_array_equal(proj(x), x)
