@@ -17,8 +17,9 @@ from jax import jit, lax
 
 import jax.numpy as jnp
 import cr.sparse as crs
+import cr.sparse.opt as opt
 
-from .prox import build
+from .prox import build, build_from_ind_proj
 
 
 def prox_l2(q=1.):
@@ -112,3 +113,13 @@ def prox_l1_pos(q=1.):
         return jnp.maximum(0, x - tq)
 
     return build(func, proximal_op)
+
+def prox_l1_ball(q=1.):
+    """Returns a prox-capable wrapper for the l1-ball :math:`\{ x : \| x \|_1 \leq q \}` indicator
+
+    Returns:
+       ProxCapable: A prox-capable function 
+    """
+    ind = opt.indicator_l1_ball(q=q)
+    proj = opt.proj_l1_ball(q=q)
+    return build_from_ind_proj(ind, proj)

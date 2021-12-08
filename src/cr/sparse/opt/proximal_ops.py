@@ -23,6 +23,7 @@ from cr.sparse._src.opt.proximal_ops.prox import (
 )
 
 from cr.sparse._src.opt.proximal_ops.prox import build as prox_build
+from cr.sparse._src.opt.proximal_ops.prox import build as build_from_ind_proj
 
 from cr.sparse._src.opt.proximal_ops.basic import (
     prox_zero
@@ -31,5 +32,6 @@ from cr.sparse._src.opt.proximal_ops.basic import (
 from cr.sparse._src.opt.proximal_ops.lpnorms import (
     prox_l1,
     prox_l2,
-    prox_l1_pos
+    prox_l1_pos,
+    prox_l1_ball
 )
