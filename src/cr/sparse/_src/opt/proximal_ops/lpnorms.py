@@ -22,7 +22,11 @@ from .prox import build
 
 
 def prox_l2(q=1.):
-    r"""Proximal operator for :math:`\| q * x \|_2`
+    r"""Returns a prox-capable function :math:`f(x) = \| q x \|_2`
+
+    Returns:
+       ProxCapable: A prox-capable function 
+
     """
     q = jnp.asarray(q)
 
@@ -31,7 +35,7 @@ def prox_l2(q=1.):
         x = jnp.asarray(x)
         x = crs.promote_arg_dtypes(x)
         v = crs.arr_l2norm(x)
-        return v
+        return q*v
 
     @jit
     def proximal_op(x, t):
@@ -47,7 +51,11 @@ def prox_l2(q=1.):
 
 
 def prox_l1(q=1.):
-    r"""Proximal operator for :math:` \| q * x \|_1`
+    r"""Returns a prox-capable function :math:`f(x) = \| q x \|_1`
+
+    Returns:
+       ProxCapable: A prox-capable function 
+
     """
     q = jnp.asarray(q)
 
@@ -71,7 +79,14 @@ def prox_l1(q=1.):
     return build(func, proximal_op)
 
 def prox_l1_pos(q=1.):
-    r"""Proximal operator for :math:` \| q * x \|_1 + I({x \geq 0})`   
+    r"""Returns a prox-capable function :math:`f(x) = \| q x \|_1 + I({x \geq 0})`
+    
+    Returns:
+       ProxCapable: A prox-capable function 
+
+    The domain of :math:`f` is restricted to non-negative vectors. This is
+    enforced by the indicator function component :math:`I({x \geq 0})` 
+    in the definition of :math:`f`.
     """
     q = jnp.asarray(q)
 

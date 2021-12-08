@@ -23,17 +23,31 @@ import cr.sparse as crs
 
 
 class SmoothFunction(NamedTuple):
-    """Represents a smooth function
+    r"""Represents a smooth function
+
+    Let `op` be a variable of type `SmoothFunction`
+    which represents some smooth function :math:`f`. Then:
+
+    * `op.func(x)` returns the function value :math:`f(x)`.
+    * `op.grad(x)` returns the gradient of function :math:`g(x) = \nabla f(x)`.
+    * `op.grad_val(x)` returns the pair :math:`(g(x), f(x))`.
     """
     func: Callable[[jnp.ndarray], float]
     """Definition of a smooth function"""
     grad: Callable[[jnp.ndarray, float], jnp.ndarray]
-    """Gradient the function"""
+    """Definition of a gradient the function"""
     grad_val: Callable[[jnp.ndarray, float], Tuple[float, jnp.ndarray]]
-    "A wrapper function to evaluate the gradient vector and the function value"
+    "A wrapper to evaluate the gradient vector and the function value together"
 
 def build(func):
-    """Creates a wrapper for a smooth function"""
+    r"""Creates a smooth function based on function definition :math:`f(x)`
+
+    Args:
+        func: Definition of the smooth function :math:`f : \RR^n \to \RR`
+
+    Returns:
+        SmoothFunction: A smooth function wrapper
+    """
     gradient = grad(func)
     func = jit(func)
     gradient = jit(gradient)
@@ -42,7 +56,14 @@ def build(func):
         grad_val=grad_val)
 
 def build2(func, grad):
-    """Creates a wrapper for a smooth function with user defined grad function
+    r"""Creates a smooth function with user defined :math:`f(x)` and gradient :math:`g(x)`
+
+    Args:
+        func: Definition of the smooth function :math:`f : \RR^n \to \RR`
+        grad: Definition of the gradient :math:`g = \nabla f : \RR^n \to \RR^n`
+
+    Returns:
+        SmoothFunction: A smooth function wrapper
     """
     func = jit(func)
     grad = jit(grad)
@@ -51,7 +72,15 @@ def build2(func, grad):
         grad_val=grad_val)
 
 def build3(func, grad, grad_val):
-    """Creates a wrapper for a smooth function with user defined grad and grad_val functions
+    r"""Creates a a smooth function with user defined grad and grad_val functions
+
+    Args:
+        func: Definition of the smooth function :math:`f : \RR^n \to \RR`
+        grad: Definition of the gradient :math:`g = \nabla f : \RR^n \to \RR^n`
+        grad_val: Definition of a combined function which computes the pair :math:`(g(x), f(x))`
+
+    Returns:
+        SmoothFunction: A smooth function wrapper
     """
     func = jit(func)
     grad = jit(grad)
@@ -61,6 +90,15 @@ def build3(func, grad, grad_val):
 
 
 def build_grad_val_func(func, grad):
+    r"""Constructs a `grad_val` function from the definitions of function :math:`f(x)` and gradient :math:`g(x)`
+
+    Args:
+        func: Definition of the smooth function :math:`f : \RR^n \to \RR`
+        grad: Definition of the gradient :math:`g = \nabla f : \RR^n \to \RR^n`
+
+    Returns:
+        A function which computes the pair :math:`(g(x), f(x))` for input :math:`x`
+    """
     @jit
     def impl(x):
         g = grad(x)
@@ -70,7 +108,15 @@ def build_grad_val_func(func, grad):
 
 
 def smooth_func_translate(smooth_func, b):
-    """Returns a smooth function g for a smooth function f s.t. g(x) = f(x + b)
+    r"""Returns a smooth function :math:`g` for a smooth function :math:`f` s.t. :math:`g(x) = f(x + b)`
+
+    Args:
+        smooth_func (SmoothFunction): Wrapper for smooth function :math:`f : \RR^n \to \RR`
+        b (jax.numpy.ndarray): The offset/translation vector :math:`b \in \RR^n`
+
+    Returns:
+        SmoothFunction: A smooth function wrapper for the function :math:`g` such that
+        :math:`g(x) = f(x+b)`
     """
     b = jnp.asarray(b)
     b = crs.promote_arg_dtypes(b)

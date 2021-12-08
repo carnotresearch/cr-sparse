@@ -21,7 +21,37 @@ from jax.numpy.linalg import qr, norm
 import cr.sparse as crs
 
 def indicator_l2_ball(q=1., b=None, A=None):
-    r"""Indicator functions for || A x - b ||_2 <= q
+    r"""Returns an indicator function for the closed ball :math:`\| A x - b \|_2 \leq q`
+
+    Args:
+        q (float) : Radius of the ball
+        b (jax.numpy.ndarray): A vector :math:`b \in \RR^{m}`
+        A (jax.numpy.ndarray): A matrix :math:`A \in \RR^{m \times n}`
+
+    Returns:
+        An indicator function
+
+    The indicator function is defined as:
+
+    .. math::
+
+        I(x) = \begin{cases} 
+            0 & \text{if } \| A x - b \|_2 \leq q \\
+            \infty & \text{otherwise}
+        \end{cases}
+
+    Special cases:
+
+    * ``indicator_l2_ball()`` returns the Euclidean unit ball :math:`\| x \|_2 \leq 1`.
+    * ``indicator_l2_ball(q)`` returns the Euclidean ball :math:`\| x \|_2 \leq q`.
+    * ``indicator_l2_ball(q, b=b)`` returns the Euclidean ball at center :math:`b`, :math:`\| x  - b\|_2 \leq q`.
+
+    Notes:
+
+    * If center :math:`b \in \RR^m` is unspecified, we assume the center to be at origin.
+    * If radius :math:`q` is unspecified, we assume the radius to be 1.
+    * If the matrix :math:`A` is unspecified, we assume :math:`A` to be the identity matrix
+      :math:`I \in \RR^{n \times n}`.
     """
     if b is not None:
         b = jnp.asarray(b)
@@ -75,7 +105,37 @@ def indicator_l2_ball(q=1., b=None, A=None):
 
 
 def indicator_l1_ball(q=1., b=None, A=None):
-    r"""Indicator functions for || A x - b ||_1 <= q
+    r"""Returns an indicator function for the closed l1 ball :math:`\| A x - b \|_1 \leq q`
+
+    Args:
+        q (float) : Radius of the ball
+        b (jax.numpy.ndarray): A vector :math:`b \in \RR^{m}`
+        A (jax.numpy.ndarray): A matrix :math:`A \in \RR^{m \times n}`
+
+    Returns:
+        An indicator function
+
+    The indicator function is defined as:
+
+    .. math::
+
+        I(x) = \begin{cases} 
+            0 & \text{if } \| A x - b \|_1 \leq q \\
+            \infty & \text{otherwise}
+        \end{cases}
+
+    Special cases:
+
+    * ``indicator_l1_ball()`` returns the l1 unit ball :math:`\| x \|_1 \leq 1`.
+    * ``indicator_l1_ball(q)`` returns the l1 ball :math:`\| x \|_1 \leq q`.
+    * ``indicator_l1_ball(q, b=b)`` returns the l1 ball at center :math:`b`, :math:`\| x  - b\|_1 \leq q`.
+
+    Notes:
+
+    * If center :math:`b \in \RR^m` is unspecified, we assume the center to be at origin.
+    * If radius :math:`q` is unspecified, we assume the radius to be 1.
+    * If the matrix :math:`A` is unspecified, we assume :math:`A` to be the identity matrix
+      :math:`I \in \RR^{n \times n}`.
     """
 
     if b is not None:

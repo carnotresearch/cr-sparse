@@ -24,6 +24,8 @@ from cr.sparse._src.opt.smooth.smooth import (
 from cr.sparse._src.opt.smooth.smooth import build as smooth_build
 from cr.sparse._src.opt.smooth.smooth import build2 as smooth_build2
 from cr.sparse._src.opt.smooth.smooth import build3 as smooth_build3
+from cr.sparse._src.opt.smooth.smooth import build_grad_val_func
+
 
 from cr.sparse._src.opt.smooth.constant import smooth_constant
 from cr.sparse._src.opt.smooth.entropy import (

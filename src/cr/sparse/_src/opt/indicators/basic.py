@@ -21,7 +21,29 @@ from jax.numpy.linalg import qr, norm
 import cr.sparse as crs
 
 def indicator_zero():
-    """Indicator function for all zero arrays
+    r"""Returns an indicator function for all zero arrays
+
+    Returns:
+        An indicator function
+
+    The zero indicator function is defined as:
+
+    .. math::
+
+        I(x) = \begin{cases} 
+            0 & \text{if } x = 0 \\
+            \infty       & \text{if } x \neq 0
+        \end{cases}
+
+    .. note::
+
+        By :math:`0` in the R.H.S. we mean the zero 
+        vector :math:`0 \in \RR^n`.  The dimension :math:`n`
+        is left unspecified and inferred automatically 
+        from the input :math:`x`.
+
+        The 0 on the L.H.S. is a scalar :math:`0 \in \RR`
+        as an indicator function is real valued.
     """
 
     @jit
@@ -35,7 +57,35 @@ def indicator_zero():
 
 
 def indicator_singleton(c):
-    """Indicator function for arrays with a constant value
+    r"""Returns an indicator function for a singleton set :math:`C = \{c\}`
+
+    Args:
+        c (jax.numpy.ndarray): An array
+
+    Returns:
+        An indicator function
+
+
+    Let :math:`C` be a singleton convex set :math:`\{ c\}` 
+    where :math:`c \in \RR^n`.
+
+    We implement its indicator function as: 
+
+    .. math::
+
+        I(x) = \begin{cases} 
+        0 & \text{if } x = c \\
+        \infty & \text{if } x \neq c
+        \end{cases}
+
+    .. note::
+
+        The implementation broadcasts :math:`c` to the 
+        shape of :math:`x` before making the comparison.
+
+        Thus if :math:`c == 4` and :math:`x = [4,4,4,4]`,
+        then :math:`I(x) = 0`.
+
     """
     c = jnp.asarray(c)
     c = crs.promote_arg_dtypes(c)
@@ -50,7 +100,28 @@ def indicator_singleton(c):
 
 
 def indicator_affine(A, b=0):
-    """Returns an indicator function for the linear system A x = b
+    r"""Returns an indicator function for the linear system  :math:`A x = b`
+
+    Args:
+        A (jax.numpy.ndarray): A matrix :math:`A \in \RR^{m \times n}`
+        b (jax.numpy.ndarray): A vector :math:`b \in \RR^{m}`
+
+    Returns:
+        An indicator function
+
+    The indicator function is defined as:
+
+    .. math::
+
+        I(x) = \begin{cases} 
+            0 & \text{if } A x = b \\
+            \infty & \text{otherwise}
+        \end{cases}
+
+    The convex set :math:`C` is an affine space which is 
+    the solution set of system of 
+    linear equations :math:`A x = b`. It is parallel to 
+    the null space of :math:`A`.
     """
     A = jnp.asarray(A)
     b = jnp.asarray(b)
@@ -69,7 +140,30 @@ def indicator_affine(A, b=0):
 
 
 def indicator_box(l=None, u=None):
-    """Indicator function for element-wise lower and upper bounds
+    r"""Returns an indicator function for the box :math:`l \preceq  x \preceq u`
+
+    Args:
+        l (jax.numpy.ndarray): Element wise lower bound :math:`l \in \RR^{n}`
+        u (jax.numpy.ndarray): Element wise upper bound :math:`u \in \RR^{n}`
+
+    Returns:
+        An indicator function
+
+    The indicator function is defined as:
+
+    .. math::
+
+        I(x) = \begin{cases} 
+            0 & \text{if } l \preceq x \preceq u \\
+            \infty & \text{otherwise}
+        \end{cases}
+
+    * The convex set :math:`C = \{ x : \; l \preceq x \preceq u \}`..
+    * If :math:`l` is not specified, :math:`C = \{ x : \; x \preceq u \}`.
+    * If :math:`u` is not specified, :math:`C = \{ x : \; l \preceq x \}`.
+
+    At least lower or upper bound must be specified. Both cannot be left
+    unspecified.
     """
     if l is None and u is None:
         raise ValueError("At least lower or upper bound must be defined.")
@@ -112,7 +206,7 @@ def indicator_box(l=None, u=None):
 
 
 def indicator_box_affine(l, u, a, alpha=0., tol=1e-6):
-    """Indicator function for the constraints l <= x <= u and a' x = alpha
+    r"""Returns indicator function for the constraints l <= x <= u and a' x = alpha
     """
     if a is None:
         raise ValueError("a is required")
@@ -143,7 +237,24 @@ def indicator_box_affine(l, u, a, alpha=0., tol=1e-6):
 
 
 def indicator_conic():
-    """Indicator function for Lorentz/ice-cream cone {(x,t): \| x \|_2 \leq t}
+    r"""Returns an indicator function for Lorentz/ice-cream cone :math:`{(x,t): \| x \|_2 \leq t}`
+
+    Let :math:`y \in \RR^{n+1}`. Split :math:`y` as :math:`y = (x, t)` where
+    :math:`x \in \RR^n` and :math:`t` is the last (scalar) entry in :math:`y`.
+
+    We then define the convex set :math:`C \subset \RR^{n+1}` as
+    :math:`C = \{ y = (x,t) : \; \|x \|_2 \leq t  \}`.
+
+    The indicator function is defined as:
+
+    .. math::
+
+        I((x,t)) = \begin{cases} 
+            0 & \text{if } \| x \|_2 \leq t \\
+            \infty & \text{otherwise}
+        \end{cases}
+    
+    The ice-cream cone doesn't include any point with :math:`t \lt 0`.
     """
     @jit
     def indicator(x):

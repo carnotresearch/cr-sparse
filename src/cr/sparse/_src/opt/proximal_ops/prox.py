@@ -22,7 +22,20 @@ import jax.numpy as jnp
 
 
 class ProxCapable(NamedTuple):
-    """Represents a function which is prox capable
+    r"""Represents a function which is prox capable
+
+    The *proximal operator* for a function :math:`f` is defined as
+
+    .. math::
+
+        p_f(x, t) = \text{arg} \min_{z \in \RR^n} f(x) + \frac{1}{2t} \| z - x \|_2^2
+
+    Let `op` be a variable of type ProxCapable 
+    which represents some prox-capable function :math:`f`. Then:
+
+    * `op.func(x)` returns the function value :math:`f(x)`.
+    * `op.prox_op(x)` returns the proximal vector for a step size: :math:`z = p_f(x, t)`.
+    * `op.prox_vec_val(x)` returns the pair :math:`z,v = p_f(x, t), f(z)`.
     """
     func: Callable[[jnp.ndarray], float]
     """Definition of a prox capable function"""
@@ -33,7 +46,14 @@ class ProxCapable(NamedTuple):
 
 
 def build(func, prox_op):
-    """Creates a wrapper for a prox capable function 
+    r"""Creates a wrapper for a prox capable function
+
+    Args:
+        func: Definition of a a function :math:`f(x)`
+        prox_op: Definition of its proximal operator :math:`p_f(x, t)`
+
+    Returns:
+       ProxCapable: A prox-capable function 
     """
     func = jit(func)
     prox_op = jit(prox_op)
@@ -43,7 +63,14 @@ def build(func, prox_op):
 
 
 def build_prox_value_vec_func(func, prox_op):
-    """Creates function which computes the proximal vector and then function value at it 
+    r"""Creates function which computes the proximal vector and then function value at it 
+
+    Args:
+        func: Definition of a a function :math:`f(x)`
+        prox_op: Definition of its proximal operator :math:`p_f(x, t)`
+
+    Returns:
+        A function which can compute the pair :math:`z,v = p_f(x,t), f(z)`
     """
     @jit
     def impl(x, t):

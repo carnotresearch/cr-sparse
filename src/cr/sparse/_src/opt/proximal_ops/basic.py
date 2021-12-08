@@ -22,6 +22,24 @@ import cr.sparse as crs
 from .prox import build
 
 def prox_zero():
+    r"""Returns a prox-capable function  :math:`f(x)=0`
+
+    Returns:
+       ProxCapable: A prox-capable function 
+
+    The proximal operator
+
+    .. math::
+
+        p_f(x, t) = \text{arg} \min_{z \in \RR^n} f(x) + \frac{1}{2t} \| z - x \|_2^2
+
+    reduces to:
+
+    .. math::
+
+        p_f(x, t) = \text{arg} \min_{z \in \RR^n} \frac{1}{2t} \| z - x \|_2^2 = x
+
+    """
 
     @jit
     def func(x):
