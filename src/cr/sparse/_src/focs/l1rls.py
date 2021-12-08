@@ -22,7 +22,12 @@ from .focs import focs
 from .defs import FOCSOptions
 
 def l1rls(A, b, lambda_, x0, options: FOCSOptions = FOCSOptions()):
-    """Solver for l1 regulated least square problem
+    r"""Solver for l1 regulated least square problem
+
+    .. math::
+
+        \text{minimize} \frac{1}{2} \| A x - b \|_2^2 + \lambda \| x \|_1 
+
     """
     f = opt.smooth_quad_matrix()
     h = opt.prox_l1(lambda_)

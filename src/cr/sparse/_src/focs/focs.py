@@ -47,7 +47,32 @@ def backtrack_L(x, A_x, g_Ax, y, A_y, g_Ay, L, Lexact, beta):
         L)
 
 def focs(smooth_f, prox_h, A, b, x0, options: FOCSOptions = FOCSOptions()):
-    """First order conic solver driver routine
+    r"""First order conic solver driver routine
+
+    Args:
+        smooth_f (cr.sparse.opt.SmoothFunction): A smooth function 
+        prox_h (cr.sparse.opt.ProxCapable): A smooth function 
+        A (cr.sparse.lop.Operator): A linear operator 
+        b (jax.numpy.ndarray): The translation vector
+        x0 (jax.numpy.ndarray): Initial guess for solution vector
+        options (FOCSOptions): Options for configuring the algorithm
+
+    Returns: 
+        FOCSState: Solution of the optimization problem
+
+    The function uses first order conic solver algorithms to solve an
+    optimization problem of the form:
+
+    .. math::
+
+        \text{minimize } \phi(x) = f( \AAA(x) + b) + h(x)
+
+    where:
+
+    * :math:`\AAA` is a linear operator from :math:`\RR^n \to \RR^m`.
+    * :math:`b` is a translation vector.
+    * :math:`f : \RR^m \to \RR` is a *smooth* convex function.
+    * :math:`h : \RR^n \to \RR` is a *prox-capable* convex function.
     """
     #print(options)
     # add the offset b to the input of smooth function f
