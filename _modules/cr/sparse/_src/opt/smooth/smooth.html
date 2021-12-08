@@ -131,17 +131,31 @@
 
 
 <div class="viewcode-block" id="SmoothFunction"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.SmoothFunction.html#cr.sparse.opt.SmoothFunction">[docs]</a><span class="k">class</span> <span class="nc">SmoothFunction</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents a smooth function</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents a smooth function</span>
+
+<span class="sd">    Let `op` be a variable of type `SmoothFunction`</span>
+<span class="sd">    which represents some smooth function :math:`f`. Then:</span>
+
+<span class="sd">    * `op.func(x)` returns the function value :math:`f(x)`.</span>
+<span class="sd">    * `op.grad(x)` returns the gradient of function :math:`g(x) = \nabla f(x)`.</span>
+<span class="sd">    * `op.grad_val(x)` returns the pair :math:`(g(x), f(x))`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span>
     <span class="sd">&quot;&quot;&quot;Definition of a smooth function&quot;&quot;&quot;</span>
     <span class="n">grad</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
-    <span class="sd">&quot;&quot;&quot;Gradient the function&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Definition of a gradient the function&quot;&quot;&quot;</span>
     <span class="n">grad_val</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]</span>
-    <span class="s2">&quot;A wrapper function to evaluate the gradient vector and the function value&quot;</span></div>
+    <span class="s2">&quot;A wrapper to evaluate the gradient vector and the function value together&quot;</span></div>
 
 <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Creates a wrapper for a smooth function&quot;&quot;&quot;</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Creates a smooth function based on function definition :math:`f(x)`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Definition of the smooth function :math:`f : \RR^n \to \RR`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        SmoothFunction: A smooth function wrapper</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">gradient</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
     <span class="n">func</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
     <span class="n">gradient</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">gradient</span><span class="p">)</span>
@@ -150,7 +164,14 @@
         <span class="n">grad_val</span><span class="o">=</span><span class="n">grad_val</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">build2</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">grad</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Creates a wrapper for a smooth function with user defined grad function</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Creates a smooth function with user defined :math:`f(x)` and gradient :math:`g(x)`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Definition of the smooth function :math:`f : \RR^n \to \RR`</span>
+<span class="sd">        grad: Definition of the gradient :math:`g = \nabla f : \RR^n \to \RR^n`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        SmoothFunction: A smooth function wrapper</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">func</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
     <span class="n">grad</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>
@@ -159,7 +180,15 @@
         <span class="n">grad_val</span><span class="o">=</span><span class="n">grad_val</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">build3</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">grad_val</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Creates a wrapper for a smooth function with user defined grad and grad_val functions</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Creates a a smooth function with user defined grad and grad_val functions</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Definition of the smooth function :math:`f : \RR^n \to \RR`</span>
+<span class="sd">        grad: Definition of the gradient :math:`g = \nabla f : \RR^n \to \RR^n`</span>
+<span class="sd">        grad_val: Definition of a combined function which computes the pair :math:`(g(x), f(x))`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        SmoothFunction: A smooth function wrapper</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">func</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
     <span class="n">grad</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>
@@ -168,17 +197,34 @@
         <span class="n">grad_val</span><span class="o">=</span><span class="n">grad_val</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">build_grad_val_func</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">grad</span><span class="p">):</span>
+<div class="viewcode-block" id="build_grad_val_func"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.build_grad_val_func.html#cr.sparse.opt.build_grad_val_func">[docs]</a><span class="k">def</span> <span class="nf">build_grad_val_func</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">grad</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Constructs a `grad_val` function from the definitions of function :math:`f(x)` and gradient :math:`g(x)`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Definition of the smooth function :math:`f : \RR^n \to \RR`</span>
+<span class="sd">        grad: Definition of the gradient :math:`g = \nabla f : \RR^n \to \RR^n`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A function which computes the pair :math:`(g(x), f(x))` for input :math:`x`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nd">@jit</span>
     <span class="k">def</span> <span class="nf">impl</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">v</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">g</span><span class="p">,</span> <span class="n">v</span>
-    <span class="k">return</span> <span class="n">impl</span>
+    <span class="k">return</span> <span class="n">impl</span></div>
 
 
 <div class="viewcode-block" id="smooth_func_translate"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.smooth_func_translate.html#cr.sparse.opt.smooth_func_translate">[docs]</a><span class="k">def</span> <span class="nf">smooth_func_translate</span><span class="p">(</span><span class="n">smooth_func</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns a smooth function g for a smooth function f s.t. g(x) = f(x + b)</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns a smooth function :math:`g` for a smooth function :math:`f` s.t. :math:`g(x) = f(x + b)`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        smooth_func (SmoothFunction): Wrapper for smooth function :math:`f : \RR^n \to \RR`</span>
+<span class="sd">        b (jax.numpy.ndarray): The offset/translation vector :math:`b \in \RR^n`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        SmoothFunction: A smooth function wrapper for the function :math:`g` such that</span>
+<span class="sd">        :math:`g(x) = f(x+b)`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>

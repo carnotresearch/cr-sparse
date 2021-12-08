@@ -24,6 +24,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../../_static/js/custom.js"></script>
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -78,7 +80,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Numerical Optimization Routines</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vision.html">Computer Vision and Image Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
@@ -96,7 +98,7 @@
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html">API Docs</a><ul>
-  <li><a href="../opt.html">Numerical Optimization Routines</a><ul>
+  <li><a href="../opt.html">Optimization</a><ul>
       <li>Previous: <a href="cr.sparse.opt.indicator_affine.html" title="previous chapter">cr.sparse.opt.indicator_affine</a></li>
       <li>Next: <a href="cr.sparse.opt.indicator_box_affine.html" title="next chapter">cr.sparse.opt.indicator_box_affine</a></li>
   </ul></li>
@@ -135,7 +137,31 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="cr.sparse.opt.indicator_box">
 <span class="sig-prename descclassname"><span class="pre">cr.sparse.opt.</span></span><span class="sig-name descname"><span class="pre">indicator_box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/opt/indicators/basic.html#indicator_box"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.opt.indicator_box" title="Permalink to this definition">¶</a></dt>
-<dd><p>Indicator function for element-wise lower and upper bounds</p>
+<dd><p>Returns an indicator function for the box <span class="math notranslate nohighlight">\(l \preceq  x \preceq u\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Element wise lower bound <span class="math notranslate nohighlight">\(l \in \RR^{n}\)</span></p></li>
+<li><p><strong>u</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Element wise upper bound <span class="math notranslate nohighlight">\(u \in \RR^{n}\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An indicator function</p>
+</dd>
+</dl>
+<p>The indicator function is defined as:</p>
+<div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-opt-indicator-box-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-opt-indicator-box-0" title="Permalink to this equation">¶</a></span>\[\begin{split}I(x) = \begin{cases}
+    0 &amp; \text{if } l \preceq x \preceq u \\
+    \infty &amp; \text{otherwise}
+\end{cases}\end{split}\]</div>
+<ul class="simple">
+<li><p>The convex set <span class="math notranslate nohighlight">\(C = \{ x : \; l \preceq x \preceq u \}\)</span>..</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(l\)</span> is not specified, <span class="math notranslate nohighlight">\(C = \{ x : \; x \preceq u \}\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(u\)</span> is not specified, <span class="math notranslate nohighlight">\(C = \{ x : \; l \preceq x \}\)</span>.</p></li>
+</ul>
+<p>At least lower or upper bound must be specified. Both cannot be left
+unspecified.</p>
 </dd></dl>
 
 </section>

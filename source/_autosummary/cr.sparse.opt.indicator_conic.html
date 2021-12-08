@@ -24,6 +24,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../../_static/js/custom.js"></script>
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -78,7 +80,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Numerical Optimization Routines</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vision.html">Computer Vision and Image Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
@@ -96,7 +98,7 @@
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html">API Docs</a><ul>
-  <li><a href="../opt.html">Numerical Optimization Routines</a><ul>
+  <li><a href="../opt.html">Optimization</a><ul>
       <li>Previous: <a href="cr.sparse.opt.indicator_box_affine.html" title="previous chapter">cr.sparse.opt.indicator_box_affine</a></li>
       <li>Next: <a href="cr.sparse.opt.indicator_l1_ball.html" title="next chapter">cr.sparse.opt.indicator_l1_ball</a></li>
   </ul></li>
@@ -135,7 +137,18 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="cr.sparse.opt.indicator_conic">
 <span class="sig-prename descclassname"><span class="pre">cr.sparse.opt.</span></span><span class="sig-name descname"><span class="pre">indicator_conic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/opt/indicators/basic.html#indicator_conic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.opt.indicator_conic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Indicator function for Lorentz/ice-cream cone {(x,t): | x |_2 leq t}</p>
+<dd><p>Returns an indicator function for Lorentz/ice-cream cone <span class="math notranslate nohighlight">\({(x,t): \| x \|_2 \leq t}\)</span></p>
+<p>Let <span class="math notranslate nohighlight">\(y \in \RR^{n+1}\)</span>. Split <span class="math notranslate nohighlight">\(y\)</span> as <span class="math notranslate nohighlight">\(y = (x, t)\)</span> where
+<span class="math notranslate nohighlight">\(x \in \RR^n\)</span> and <span class="math notranslate nohighlight">\(t\)</span> is the last (scalar) entry in <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>We then define the convex set <span class="math notranslate nohighlight">\(C \subset \RR^{n+1}\)</span> as
+<span class="math notranslate nohighlight">\(C = \{ y = (x,t) : \; \|x \|_2 \leq t  \}\)</span>.</p>
+<p>The indicator function is defined as:</p>
+<div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-opt-indicator-conic-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-opt-indicator-conic-0" title="Permalink to this equation">¶</a></span>\[\begin{split}I((x,t)) = \begin{cases}
+    0 &amp; \text{if } \| x \|_2 \leq t \\
+    \infty &amp; \text{otherwise}
+\end{cases}\end{split}\]</div>
+<p>The ice-cream cone doesn’t include any point with <span class="math notranslate nohighlight">\(t \lt 0\)</span>.</p>
 </dd></dl>
 
 </section>

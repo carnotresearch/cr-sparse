@@ -127,7 +127,37 @@
 <span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
 
 <div class="viewcode-block" id="indicator_l2_ball"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.indicator_l2_ball.html#cr.sparse.opt.indicator_l2_ball">[docs]</a><span class="k">def</span> <span class="nf">indicator_l2_ball</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Indicator functions for || A x - b ||_2 &lt;= q</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns an indicator function for the closed ball :math:`\| A x - b \|_2 \leq q`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        q (float) : Radius of the ball</span>
+<span class="sd">        b (jax.numpy.ndarray): A vector :math:`b \in \RR^{m}`</span>
+<span class="sd">        A (jax.numpy.ndarray): A matrix :math:`A \in \RR^{m \times n}`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        An indicator function</span>
+
+<span class="sd">    The indicator function is defined as:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        I(x) = \begin{cases} </span>
+<span class="sd">            0 &amp; \text{if } \| A x - b \|_2 \leq q \\</span>
+<span class="sd">            \infty &amp; \text{otherwise}</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    Special cases:</span>
+
+<span class="sd">    * ``indicator_l2_ball()`` returns the Euclidean unit ball :math:`\| x \|_2 \leq 1`.</span>
+<span class="sd">    * ``indicator_l2_ball(q)`` returns the Euclidean ball :math:`\| x \|_2 \leq q`.</span>
+<span class="sd">    * ``indicator_l2_ball(q, b=b)`` returns the Euclidean ball at center :math:`b`, :math:`\| x  - b\|_2 \leq q`.</span>
+
+<span class="sd">    Notes:</span>
+
+<span class="sd">    * If center :math:`b \in \RR^m` is unspecified, we assume the center to be at origin.</span>
+<span class="sd">    * If radius :math:`q` is unspecified, we assume the radius to be 1.</span>
+<span class="sd">    * If the matrix :math:`A` is unspecified, we assume :math:`A` to be the identity matrix</span>
+<span class="sd">      :math:`I \in \RR^{n \times n}`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
@@ -181,7 +211,37 @@
 
 
 <div class="viewcode-block" id="indicator_l1_ball"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.indicator_l1_ball.html#cr.sparse.opt.indicator_l1_ball">[docs]</a><span class="k">def</span> <span class="nf">indicator_l1_ball</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Indicator functions for || A x - b ||_1 &lt;= q</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns an indicator function for the closed l1 ball :math:`\| A x - b \|_1 \leq q`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        q (float) : Radius of the ball</span>
+<span class="sd">        b (jax.numpy.ndarray): A vector :math:`b \in \RR^{m}`</span>
+<span class="sd">        A (jax.numpy.ndarray): A matrix :math:`A \in \RR^{m \times n}`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        An indicator function</span>
+
+<span class="sd">    The indicator function is defined as:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        I(x) = \begin{cases} </span>
+<span class="sd">            0 &amp; \text{if } \| A x - b \|_1 \leq q \\</span>
+<span class="sd">            \infty &amp; \text{otherwise}</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    Special cases:</span>
+
+<span class="sd">    * ``indicator_l1_ball()`` returns the l1 unit ball :math:`\| x \|_1 \leq 1`.</span>
+<span class="sd">    * ``indicator_l1_ball(q)`` returns the l1 ball :math:`\| x \|_1 \leq q`.</span>
+<span class="sd">    * ``indicator_l1_ball(q, b=b)`` returns the l1 ball at center :math:`b`, :math:`\| x  - b\|_1 \leq q`.</span>
+
+<span class="sd">    Notes:</span>
+
+<span class="sd">    * If center :math:`b \in \RR^m` is unspecified, we assume the center to be at origin.</span>
+<span class="sd">    * If radius :math:`q` is unspecified, we assume the radius to be 1.</span>
+<span class="sd">    * If the matrix :math:`A` is unspecified, we assume :math:`A` to be the identity matrix</span>
+<span class="sd">      :math:`I \in \RR^{n \times n}`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>

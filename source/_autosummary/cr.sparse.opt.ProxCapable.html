@@ -24,12 +24,14 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../../_static/js/custom.js"></script>
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="cr.sparse.opt.prox_build" href="cr.sparse.opt.prox_build.html" />
-    <link rel="prev" title="cr.sparse.opt.prox_l1_pos" href="cr.sparse.opt.prox_l1_pos.html" />
+    <link rel="next" title="cr.sparse.opt.prox_zero" href="cr.sparse.opt.prox_zero.html" />
+    <link rel="prev" title="cr.sparse.opt.smooth_value_grad" href="cr.sparse.opt.smooth_value_grad.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
@@ -78,7 +80,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Numerical Optimization Routines</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vision.html">Computer Vision and Image Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
@@ -96,9 +98,9 @@
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html">API Docs</a><ul>
-  <li><a href="../opt.html">Numerical Optimization Routines</a><ul>
-      <li>Previous: <a href="cr.sparse.opt.prox_l1_pos.html" title="previous chapter">cr.sparse.opt.prox_l1_pos</a></li>
-      <li>Next: <a href="cr.sparse.opt.prox_build.html" title="next chapter">cr.sparse.opt.prox_build</a></li>
+  <li><a href="../opt.html">Optimization</a><ul>
+      <li>Previous: <a href="cr.sparse.opt.smooth_value_grad.html" title="previous chapter">cr.sparse.opt.smooth_value_grad</a></li>
+      <li>Next: <a href="cr.sparse.opt.prox_zero.html" title="next chapter">cr.sparse.opt.prox_zero</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -136,30 +138,16 @@
 <dt class="sig sig-object py" id="cr.sparse.opt.ProxCapable">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">cr.sparse.opt.</span></span><span class="sig-name descname"><span class="pre">ProxCapable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prox_op</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prox_vec_val</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">jax._src.numpy.lax_numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/opt/proximal_ops/prox.html#ProxCapable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.opt.ProxCapable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Represents a function which is prox capable</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cr.sparse.opt.ProxCapable.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cr.sparse.opt.ProxCapable.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
-</dd></dl>
-
-<p class="rubric">Methods</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cr.sparse.opt.ProxCapable.__init__" title="cr.sparse.opt.ProxCapable.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>()</p></td>
-<td><p>Initialize self.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">count</span></code>(value, /)</p></td>
-<td><p>Return number of occurrences of value.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>(value[, start, stop])</p></td>
-<td><p>Return first index of value.</p></td>
-</tr>
-</tbody>
-</table>
+<p>The <em>proximal operator</em> for a function <span class="math notranslate nohighlight">\(f\)</span> is defined as</p>
+<div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-opt-proxcapable-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-opt-proxcapable-0" title="Permalink to this equation">¶</a></span>\[p_f(x, t) = \text{arg} \min_{z \in \RR^n} f(x) + \frac{1}{2t} \| z - x \|_2^2\]</div>
+<p>Let <cite>op</cite> be a variable of type ProxCapable
+which represents some prox-capable function <span class="math notranslate nohighlight">\(f\)</span>. Then:</p>
+<ul class="simple">
+<li><p><cite>op.func(x)</cite> returns the function value <span class="math notranslate nohighlight">\(f(x)\)</span>.</p></li>
+<li><p><cite>op.prox_op(x)</cite> returns the proximal vector for a step size: <span class="math notranslate nohighlight">\(z = p_f(x, t)\)</span>.</p></li>
+<li><p><cite>op.prox_vec_val(x)</cite> returns the pair <span class="math notranslate nohighlight">\(z,v = p_f(x, t), f(z)\)</span>.</p></li>
+</ul>
 <p class="rubric">Attributes</p>
 <table class="longtable docutils align-default">
 <colgroup>

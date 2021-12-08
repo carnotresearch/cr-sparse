@@ -128,7 +128,11 @@
 
 
 <div class="viewcode-block" id="prox_l2"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.prox_l2.html#cr.sparse.opt.prox_l2">[docs]</a><span class="k">def</span> <span class="nf">prox_l2</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Proximal operator for :math:`\| q * x \|_2`</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns a prox-capable function :math:`f(x) = \| q x \|_2`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">       ProxCapable: A prox-capable function </span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">q</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
 
@@ -137,7 +141,7 @@
         <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">v</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">arr_l2norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">v</span>
+        <span class="k">return</span> <span class="n">q</span><span class="o">*</span><span class="n">v</span>
 
     <span class="nd">@jit</span>
     <span class="k">def</span> <span class="nf">proximal_op</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
@@ -153,7 +157,11 @@
 
 
 <div class="viewcode-block" id="prox_l1"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.prox_l1.html#cr.sparse.opt.prox_l1">[docs]</a><span class="k">def</span> <span class="nf">prox_l1</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Proximal operator for :math:` \| q * x \|_1`</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns a prox-capable function :math:`f(x) = \| q x \|_1`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">       ProxCapable: A prox-capable function </span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">q</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
 
@@ -177,7 +185,14 @@
     <span class="k">return</span> <span class="n">build</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">proximal_op</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="prox_l1_pos"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.prox_l1_pos.html#cr.sparse.opt.prox_l1_pos">[docs]</a><span class="k">def</span> <span class="nf">prox_l1_pos</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Proximal operator for :math:` \| q * x \|_1 + I({x \geq 0})`   </span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns a prox-capable function :math:`f(x) = \| q x \|_1 + I({x \geq 0})`</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">       ProxCapable: A prox-capable function </span>
+
+<span class="sd">    The domain of :math:`f` is restricted to non-negative vectors. This is</span>
+<span class="sd">    enforced by the indicator function component :math:`I({x \geq 0})` </span>
+<span class="sd">    in the definition of :math:`f`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">q</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
 

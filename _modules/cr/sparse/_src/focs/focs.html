@@ -153,7 +153,32 @@
         <span class="n">L</span><span class="p">)</span>
 
 <div class="viewcode-block" id="focs"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.focs.focs.html#cr.sparse.focs.focs">[docs]</a><span class="k">def</span> <span class="nf">focs</span><span class="p">(</span><span class="n">smooth_f</span><span class="p">,</span> <span class="n">prox_h</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">FOCSOptions</span> <span class="o">=</span> <span class="n">FOCSOptions</span><span class="p">()):</span>
-    <span class="sd">&quot;&quot;&quot;First order conic solver driver routine</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;First order conic solver driver routine</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        smooth_f (cr.sparse.opt.SmoothFunction): A smooth function </span>
+<span class="sd">        prox_h (cr.sparse.opt.ProxCapable): A smooth function </span>
+<span class="sd">        A (cr.sparse.lop.Operator): A linear operator </span>
+<span class="sd">        b (jax.numpy.ndarray): The translation vector</span>
+<span class="sd">        x0 (jax.numpy.ndarray): Initial guess for solution vector</span>
+<span class="sd">        options (FOCSOptions): Options for configuring the algorithm</span>
+
+<span class="sd">    Returns: </span>
+<span class="sd">        FOCSState: Solution of the optimization problem</span>
+
+<span class="sd">    The function uses first order conic solver algorithms to solve an</span>
+<span class="sd">    optimization problem of the form:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \text{minimize } \phi(x) = f( \AAA(x) + b) + h(x)</span>
+
+<span class="sd">    where:</span>
+
+<span class="sd">    * :math:`\AAA` is a linear operator from :math:`\RR^n \to \RR^m`.</span>
+<span class="sd">    * :math:`b` is a translation vector.</span>
+<span class="sd">    * :math:`f : \RR^m \to \RR` is a *smooth* convex function.</span>
+<span class="sd">    * :math:`h : \RR^n \to \RR` is a *prox-capable* convex function.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#print(options)</span>
     <span class="c1"># add the offset b to the input of smooth function f</span>

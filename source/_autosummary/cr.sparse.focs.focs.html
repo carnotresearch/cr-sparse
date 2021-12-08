@@ -24,6 +24,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../../_static/js/custom.js"></script>
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -78,7 +80,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../opt.html">Numerical Optimization Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vision.html">Computer Vision and Image Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
@@ -138,9 +140,33 @@
 <dd><p>First order conic solver driver routine</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>options</strong> (<a class="reference internal" href="cr.sparse.focs.FOCSOptions.html#cr.sparse.focs.FOCSOptions" title="cr.sparse._src.focs.defs.FOCSOptions"><code class="xref py py-class docutils literal notranslate"><span class="pre">FOCSOptions</span></code></a>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>smooth_f</strong> (<a class="reference internal" href="cr.sparse.opt.SmoothFunction.html#cr.sparse.opt.SmoothFunction" title="cr.sparse.opt.SmoothFunction"><em>cr.sparse.opt.SmoothFunction</em></a>) – A smooth function</p></li>
+<li><p><strong>prox_h</strong> (<a class="reference internal" href="cr.sparse.opt.ProxCapable.html#cr.sparse.opt.ProxCapable" title="cr.sparse.opt.ProxCapable"><em>cr.sparse.opt.ProxCapable</em></a>) – A smooth function</p></li>
+<li><p><strong>A</strong> (<a class="reference internal" href="cr.sparse.lop.Operator.html#cr.sparse.lop.Operator" title="cr.sparse.lop.Operator"><em>cr.sparse.lop.Operator</em></a>) – A linear operator</p></li>
+<li><p><strong>b</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – The translation vector</p></li>
+<li><p><strong>x0</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Initial guess for solution vector</p></li>
+<li><p><strong>options</strong> (<a class="reference internal" href="cr.sparse.focs.FOCSOptions.html#cr.sparse.focs.FOCSOptions" title="cr.sparse.focs.FOCSOptions"><em>FOCSOptions</em></a>) – Options for configuring the algorithm</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Solution of the optimization problem</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="cr.sparse.focs.FOCSState.html#cr.sparse.focs.FOCSState" title="cr.sparse.focs.FOCSState">FOCSState</a></p>
 </dd>
 </dl>
+<p>The function uses first order conic solver algorithms to solve an
+optimization problem of the form:</p>
+<div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-focs-focs-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-focs-focs-0" title="Permalink to this equation">¶</a></span>\[\text{minimize } \phi(x) = f( \AAA(x) + b) + h(x)\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\AAA\)</span> is a linear operator from <span class="math notranslate nohighlight">\(\RR^n \to \RR^m\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(b\)</span> is a translation vector.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f : \RR^m \to \RR\)</span> is a <em>smooth</em> convex function.</p></li>
+<li><p><span class="math notranslate nohighlight">\(h : \RR^n \to \RR\)</span> is a <em>prox-capable</em> convex function.</p></li>
+</ul>
 </dd></dl>
 
 </section>

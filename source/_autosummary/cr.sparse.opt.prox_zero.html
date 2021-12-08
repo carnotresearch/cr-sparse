@@ -24,12 +24,14 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../../_static/js/custom.js"></script>
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="cr.sparse.opt.prox_l1" href="cr.sparse.opt.prox_l1.html" />
-    <link rel="prev" title="cr.sparse.opt.proj_l2_ball" href="cr.sparse.opt.proj_l2_ball.html" />
+    <link rel="prev" title="cr.sparse.opt.ProxCapable" href="cr.sparse.opt.ProxCapable.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
@@ -78,7 +80,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Numerical Optimization Routines</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vision.html">Computer Vision and Image Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
@@ -96,8 +98,8 @@
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html">API Docs</a><ul>
-  <li><a href="../opt.html">Numerical Optimization Routines</a><ul>
-      <li>Previous: <a href="cr.sparse.opt.proj_l2_ball.html" title="previous chapter">cr.sparse.opt.proj_l2_ball</a></li>
+  <li><a href="../opt.html">Optimization</a><ul>
+      <li>Previous: <a href="cr.sparse.opt.ProxCapable.html" title="previous chapter">cr.sparse.opt.ProxCapable</a></li>
       <li>Next: <a href="cr.sparse.opt.prox_l1.html" title="next chapter">cr.sparse.opt.prox_l1</a></li>
   </ul></li>
   </ul></li>
@@ -135,7 +137,22 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="cr.sparse.opt.prox_zero">
 <span class="sig-prename descclassname"><span class="pre">cr.sparse.opt.</span></span><span class="sig-name descname"><span class="pre">prox_zero</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/opt/proximal_ops/basic.html#prox_zero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.opt.prox_zero" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a prox-capable function  <span class="math notranslate nohighlight">\(f(x)=0\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A prox-capable function</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="cr.sparse.opt.ProxCapable.html#cr.sparse.opt.ProxCapable" title="cr.sparse.opt.ProxCapable">ProxCapable</a></p>
+</dd>
+</dl>
+<p>The proximal operator</p>
+<div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-opt-prox-zero-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-opt-prox-zero-0" title="Permalink to this equation">¶</a></span>\[p_f(x, t) = \text{arg} \min_{z \in \RR^n} f(x) + \frac{1}{2t} \| z - x \|_2^2\]</div>
+<p>reduces to:</p>
+<div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-opt-prox-zero-1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-opt-prox-zero-1" title="Permalink to this equation">¶</a></span>\[p_f(x, t) = \text{arg} \min_{z \in \RR^n} \frac{1}{2t} \| z - x \|_2^2 = x\]</div>
+</dd></dl>
 
 </section>
 

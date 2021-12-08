@@ -24,6 +24,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../../_static/js/custom.js"></script>
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -78,7 +80,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../opt.html">Numerical Optimization Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vision.html">Computer Vision and Image Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
@@ -136,6 +138,8 @@
 <dt class="sig sig-object py" id="cr.sparse.focs.l1rls_jit">
 <span class="sig-prename descclassname"><span class="pre">cr.sparse.focs.</span></span><span class="sig-name descname"><span class="pre">l1rls_jit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FOCSOptions(nonneg=False,</span> <span class="pre">solver='at',</span> <span class="pre">max_iters=1000,</span> <span class="pre">tol=1e-08,</span> <span class="pre">L0=1.0,</span> <span class="pre">Lexact=inf,</span> <span class="pre">alpha=0.9,</span> <span class="pre">beta=0.5,</span> <span class="pre">mu=0)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cr.sparse.focs.l1rls_jit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solver for l1 regulated least square problem</p>
+<div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-focs-l1rls-jit-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-focs-l1rls-jit-0" title="Permalink to this equation">¶</a></span>\[\text{minimize} \frac{1}{2} \| A x - b \|_2^2 + \lambda \| x \|_1\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>options</strong> (<a class="reference internal" href="cr.sparse.focs.FOCSOptions.html#cr.sparse.focs.FOCSOptions" title="cr.sparse._src.focs.defs.FOCSOptions"><code class="xref py py-class docutils literal notranslate"><span class="pre">FOCSOptions</span></code></a>) – </p>

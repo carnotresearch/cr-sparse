@@ -24,11 +24,13 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../../_static/js/custom.js"></script>
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="cr.sparse.opt.project_to_ball" href="cr.sparse.opt.project_to_ball.html" />
+    <link rel="next" title="cr.sparse.opt.build_grad_val_func" href="cr.sparse.opt.build_grad_val_func.html" />
     <link rel="prev" title="cr.sparse.opt.smooth_build2" href="cr.sparse.opt.smooth_build2.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -78,7 +80,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Numerical Optimization Routines</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vision.html">Computer Vision and Image Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
@@ -96,9 +98,9 @@
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html">API Docs</a><ul>
-  <li><a href="../opt.html">Numerical Optimization Routines</a><ul>
+  <li><a href="../opt.html">Optimization</a><ul>
       <li>Previous: <a href="cr.sparse.opt.smooth_build2.html" title="previous chapter">cr.sparse.opt.smooth_build2</a></li>
-      <li>Next: <a href="cr.sparse.opt.project_to_ball.html" title="next chapter">cr.sparse.opt.project_to_ball</a></li>
+      <li>Next: <a href="cr.sparse.opt.build_grad_val_func.html" title="next chapter">cr.sparse.opt.build_grad_val_func</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -135,7 +137,22 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="cr.sparse.opt.smooth_build3">
 <span class="sig-prename descclassname"><span class="pre">cr.sparse.opt.</span></span><span class="sig-name descname"><span class="pre">smooth_build3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad_val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cr.sparse.opt.smooth_build3" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a wrapper for a smooth function with user defined grad and grad_val functions</p>
+<dd><p>Creates a a smooth function with user defined grad and grad_val functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> – Definition of the smooth function <span class="math notranslate nohighlight">\(f : \RR^n \to \RR\)</span></p></li>
+<li><p><strong>grad</strong> – Definition of the gradient <span class="math notranslate nohighlight">\(g = \nabla f : \RR^n \to \RR^n\)</span></p></li>
+<li><p><strong>grad_val</strong> – Definition of a combined function which computes the pair <span class="math notranslate nohighlight">\((g(x), f(x))\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A smooth function wrapper</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="cr.sparse.opt.SmoothFunction.html#cr.sparse.opt.SmoothFunction" title="cr.sparse.opt.SmoothFunction">SmoothFunction</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

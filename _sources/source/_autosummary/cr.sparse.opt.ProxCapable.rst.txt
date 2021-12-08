@@ -5,19 +5,6 @@
 
 .. autoclass:: ProxCapable
 
-   
-   .. automethod:: __init__
-
-   
-   .. rubric:: Methods
-
-   .. autosummary::
-   
-      ~ProxCapable.__init__
-      ~ProxCapable.count
-      ~ProxCapable.index
-   
-   
 
    
    

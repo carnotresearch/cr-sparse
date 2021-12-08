@@ -1,17 +1,60 @@
 .. _api:opt:
 
-Numerical Optimization Routines
+Optimization
 ==================================
 
+.. contents::
+    :depth: 2
+    :local:
 
-This section includes several routines which 
+
+This section includes several tools which 
 form basic building blocks for other higher level
 solvers.
 
+We provide generators for:
+
+* Indicator functions
+* Projector function
+* Proximal operators for functions which are prox capable
+* Smooth functions for which gradients can be computed
+
+Most of the descriptions focus on convex sets
+:math:`C \subset \RR^n` and convex functions 
+with signatures  :math:`\RR^n \to \RR`. However,
+the implementations generalize well for the 
+complex vector space :math:`\CC^n` with the
+real inner product :math:`\langle x, y \rangle = \Re(x^H y)`.
+
+
+Also, while we describe the math for vectors 
+:math:`x \in \RR^n`, the memory layout of these
+vectors could be in the form of multi-dimensional arrays too.
+
+
 .. currentmodule:: cr.sparse.opt
+
+.. _api:opt:indicators:
 
 Indicator Function Generators
 ------------------------------
+
+Let :math:`C` be a subset of :math:`\RR^n`. An indicator function 
+:math:`I_C(x)` is defined as :math:`I_C(x) = 0` for every :math:`x \in C`.
+For our purposes, its extended-value extension is relevant which
+is defined as:
+
+.. math::
+
+  I_C(x) = \begin{cases} 
+    0 & \text{if } x \in C \\
+    \infty       & x \notin C
+  \end{cases}
+
+An *indicator function generator* creates an indicator function based
+on the specification of the set :math:`C`. For example if :math:`C`
+is a Euclidean ball, then the specification of :math:`C` is based on
+its center and radius.
 
 .. autosummary::
   :toctree: _autosummary
@@ -25,16 +68,40 @@ Indicator Function Generators
   indicator_l1_ball
   indicator_l2_ball
 
+.. _api:opt:projectors:
 
 Projection Function Generators
 ---------------------------------
+
+A key idea in covex optimization is Projection on Convex Sets
+(POCS). Given a convex set :math:`C \subset \RR^n` 
+and a point :math:`x \in \RR^n`, the projection on to convex 
+set :math:`C` is defined as :
+
+.. math::
+
+    P_C(x) =  \text{arg} \min_{v \in C} \| x - v \|_2.
+
+i.e. find the point :math:`v` in :math:`C` which is 
+closest to :math:`x`.  If :math:`x` is inside :math:`C`,
+then the projection is :math:`x` itself. 
+
+In general, computation of the projection for arbitrary
+convex sets can be very hard. However, for specific 
+classes of convex sets, the projection can be computed
+efficiently. Here we provide projection function generators for
+some classes of convex sets.
+
+A *projection function generator* creates a projection function based
+on the specification of the set :math:`C`.
+
 
 .. autosummary::
   :toctree: _autosummary
 
 
-  proj_zero
   proj_identity
+  proj_zero
   proj_singleton
   proj_affine
   proj_box
@@ -43,32 +110,59 @@ Projection Function Generators
   proj_l2_ball
 
 
-
-Proximal Operator Generators
-----------------------------------
-
-.. autosummary::
-  :toctree: _autosummary
-
-  prox_zero
-  prox_l1
-  prox_l2
-  prox_l1_pos
-
-Building proximal operators:
-
-.. autosummary::
-  :toctree: _autosummary
-
-  ProxCapable
-  prox_build
-
-
-
+.. _api:opt:smooth:
 
 
 Smooth Function Generators
 ----------------------------------
+
+The *smoothness* of a function is a property measured by the
+number of continuous derivatives it has over some domain.
+
+We are concerned with convex functions :math:`f : \RR^n \to \RR`
+defined over convex sets :math:`C \in \RR^n`
+and consider them to be smooth if the gradient :math:`g = \nabla f : \RR^n \to \RR^n`
+exists over the interior of its domain. 
+
+For a smooth convex function :math:`f`, we need to be able to
+
+* Compute the value :math:`f(x)` at :math:`x \in \RR^n` using the extended-value extension
+  (i.e. :math:`f(x) = \infty \text{if} x \notin C`.
+* Compute the gradient :math:`g = \nabla f` at :math:`x`, :math:`g(x)`
+* Compute the pair :math:`g(x), f(x)`  at :math:`x`
+
+While JAX provides automatic gradient computation capability, it doesn't 
+match exactly at the boundaries of the domain :math:`C` of :math:`f` for many of 
+our functions of interest. Hence, we choose to provide our hand-coded 
+gradient implementations.
+
+Sometimes, the gradient computation :math:`g(x)`
+and function computation :math:`f(x)` have common parts, 
+and this can be exploited in improving the algorithm efficiency. 
+Hence, we provide an ability to compute the pair too if an
+algorithm desires to compute them together efficiently.
+
+We represent smooth functions by the type :py:class:`cr.sparse.opt.SmoothFunction`.
+
+.. autosummary::
+    :toctree: _autosummary
+    :nosignatures:
+    :template: namedtuple.rst
+
+    SmoothFunction
+
+Let `op` be a variable of type :py:class:`cr.sparse.opt.SmoothFunction` 
+which represents some smooth function :math:`f`. Then:
+
+* `op.func(x)` returns the function value :math:`f(x)`.
+* `op.grad(x)` returns the gradient of function :math:`g(x) = \nabla f(x)`.
+* `op.grad_val(x)` returns the pair :math:`(g(x), f(x))`.
+
+A *smooth function generator* creates 
+an instance of :py:class:`cr.sparse.opt.SmoothFunction` based
+on the specification of the smooth function :math:`f`.
+
+Available smooth function generators:
 
 .. autosummary::
   :toctree: _autosummary
@@ -88,16 +182,107 @@ Operations on smooth functions:
 
   smooth_func_translate
 
-Building smooth functions:
+We provide tools to build your own smooth functions. 
+
+- You can provide just the definition of the smooth function and 
+  we will use JAX to compute the gradient.
+- You can provide definitions of the function :math:`f(x)` and the gradient :math:`g(x)`.
+- You can provide definitions of :math:`f(x)`, :math:`g(x)` as well as an 
+  efficient routine to compute the pair: :math:`(g(x), f(x))`.
 
 .. autosummary::
   :toctree: _autosummary
 
-  SmoothFunction
-  smooth_value_grad
   smooth_build
   smooth_build2
   smooth_build3
+
+Utilities:
+
+.. autosummary::
+  :toctree: _autosummary
+
+  build_grad_val_func
+  smooth_value_grad
+
+.. _api:opt:proximal:
+
+Proximal Operator Generators
+----------------------------------
+
+The *proximal operator* for a function :math:`f` is defined as
+
+.. math::
+
+    p_f(x, t) = \text{arg} \min_{z \in \RR^n} f(x) + \frac{1}{2t} \| z - x \|_2^2
+
+The proximal operator :math:`p` is a mapping from :math:`(\RR^n, \RR) \to \RR^n`
+which maps a vector :math:`x`  to its proximal vector :math:`z = p_f(x,t)`
+where :math:`t` can be thought of as a step size for computing the proximal vector.
+
+The proximal operator can be thought of as a generalization of the projection operator. 
+If :math:`f` is an indicator function for some convex set :math:`C`, then
+the proximal operator is nothing but the projection function onto the set :math:`C`.
+If we think of :math:`f` as a cost function over :math:`\RR^n` then indicator 
+functions are possibly the toughest cost functions.
+
+For smooth functions, the proximal operator reduces to the gradient step.
+
+We informally call a function as *prox-capable* if its proximal operator 
+can be computed efficiently.
+
+For a prox-capable function :math:`f`, in typical proximal algorithms, we need to be able to
+
+* Compute the value :math:`f(x)` at :math:`x \in \RR^n` using the extended-value extension
+* Compute the proximal vector for the step size :math:`t` as :math:`p_f(x, t)`
+* Compute the pair :math:`p_f(x, t), f(p_f(x, t))`
+
+Note that in the last case, we first compute
+:math:`z = p_f(x, t)` and then compute the value :math:`v  = f(z)`.
+
+
+We represent *prox-capable* functions by the type :py:class:`cr.sparse.opt.ProxCapable`.
+
+.. autosummary::
+    :toctree: _autosummary
+    :nosignatures:
+    :template: namedtuple.rst
+
+    ProxCapable
+
+Let `op` be a variable of type :py:class:`cr.sparse.opt.ProxCapable` 
+which represents some prox-capable function :math:`f`. Then:
+
+* `op.func(x)` returns the function value :math:`f(x)`.
+* `op.prox_op(x)` returns the proximal vector for a step size: :math:`z = p_f(x, t)`.
+* `op.prox_vec_val(x)` returns the pair :math:`z,v = p_f(x, t), f(z)`.
+
+A *proximal operator generator* creates 
+an instance of :py:class:`cr.sparse.opt.ProxCapable` based
+on the specification of the prox-capable function :math:`f`.
+
+Available proximal operator generators:
+
+.. autosummary::
+  :toctree: _autosummary
+
+  prox_zero
+  prox_l1
+  prox_l2
+  prox_l1_pos
+
+You can build your own :py:class:`cr.sparse.opt.ProxCapable` wrappers
+by providing the definition of the function :math:`f(x)` and its 
+proximal operator :math:`p_f(x, t)`.
+
+.. autosummary::
+  :toctree: _autosummary
+  
+  prox_build
+
+
+
+
 
 Simpler Projection Functions
 ----------------------------------

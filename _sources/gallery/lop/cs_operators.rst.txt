@@ -1774,7 +1774,7 @@ Let's apply the adjoint operator column wise
 
     [[-4.00000000e+00 -5.00000000e+00 -2.00000000e+00 -4.00000000e+00
        2.00000000e+00]
-     [-1.94289029e-16  2.00000000e+00 -2.00000000e+00  1.00000000e+00
+     [ 1.38777878e-16  2.00000000e+00 -2.00000000e+00  1.00000000e+00
        3.00000000e+00]
      [ 2.00000000e+00 -2.00000000e+00  4.00000000e+00 -4.00000000e+00
       -2.00000000e+00]
@@ -1890,7 +1890,7 @@ Check that it's close to identity matrix
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.164 seconds)
+   **Total running time of the script:** ( 0 minutes  4.000 seconds)
 
 
 .. _sphx_glr_download_gallery_lop_cs_operators.py:

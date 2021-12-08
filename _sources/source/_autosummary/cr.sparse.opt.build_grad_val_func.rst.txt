@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.build\_grad\_val\_func
+====================================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: build_grad_val_func

@@ -24,11 +24,13 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../../_static/js/custom.js"></script>
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="cr.sparse.opt.proj_zero" href="cr.sparse.opt.proj_zero.html" />
+    <link rel="next" title="cr.sparse.opt.proj_identity" href="cr.sparse.opt.proj_identity.html" />
     <link rel="prev" title="cr.sparse.opt.indicator_l1_ball" href="cr.sparse.opt.indicator_l1_ball.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -78,7 +80,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Numerical Optimization Routines</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vision.html">Computer Vision and Image Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
@@ -96,9 +98,9 @@
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html">API Docs</a><ul>
-  <li><a href="../opt.html">Numerical Optimization Routines</a><ul>
+  <li><a href="../opt.html">Optimization</a><ul>
       <li>Previous: <a href="cr.sparse.opt.indicator_l1_ball.html" title="previous chapter">cr.sparse.opt.indicator_l1_ball</a></li>
-      <li>Next: <a href="cr.sparse.opt.proj_zero.html" title="next chapter">cr.sparse.opt.proj_zero</a></li>
+      <li>Next: <a href="cr.sparse.opt.proj_identity.html" title="next chapter">cr.sparse.opt.proj_identity</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -135,7 +137,38 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="cr.sparse.opt.indicator_l2_ball">
 <span class="sig-prename descclassname"><span class="pre">cr.sparse.opt.</span></span><span class="sig-name descname"><span class="pre">indicator_l2_ball</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/opt/indicators/lpballs.html#indicator_l2_ball"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.opt.indicator_l2_ball" title="Permalink to this definition">¶</a></dt>
-<dd><p>Indicator functions for || A x - b ||_2 &lt;= q</p>
+<dd><p>Returns an indicator function for the closed ball <span class="math notranslate nohighlight">\(\| A x - b \|_2 \leq q\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Radius of the ball</p></li>
+<li><p><strong>b</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – A vector <span class="math notranslate nohighlight">\(b \in \RR^{m}\)</span></p></li>
+<li><p><strong>A</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – A matrix <span class="math notranslate nohighlight">\(A \in \RR^{m \times n}\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An indicator function</p>
+</dd>
+</dl>
+<p>The indicator function is defined as:</p>
+<div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-opt-indicator-l2-ball-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-opt-indicator-l2-ball-0" title="Permalink to this equation">¶</a></span>\[\begin{split}I(x) = \begin{cases}
+    0 &amp; \text{if } \| A x - b \|_2 \leq q \\
+    \infty &amp; \text{otherwise}
+\end{cases}\end{split}\]</div>
+<p>Special cases:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">indicator_l2_ball()</span></code> returns the Euclidean unit ball <span class="math notranslate nohighlight">\(\| x \|_2 \leq 1\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">indicator_l2_ball(q)</span></code> returns the Euclidean ball <span class="math notranslate nohighlight">\(\| x \|_2 \leq q\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">indicator_l2_ball(q,</span> <span class="pre">b=b)</span></code> returns the Euclidean ball at center <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(\| x  - b\|_2 \leq q\)</span>.</p></li>
+</ul>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>If center <span class="math notranslate nohighlight">\(b \in \RR^m\)</span> is unspecified, we assume the center to be at origin.</p></li>
+<li><p>If radius <span class="math notranslate nohighlight">\(q\)</span> is unspecified, we assume the radius to be 1.</p></li>
+<li><p>If the matrix <span class="math notranslate nohighlight">\(A\)</span> is unspecified, we assume <span class="math notranslate nohighlight">\(A\)</span> to be the identity matrix
+<span class="math notranslate nohighlight">\(I \in \RR^{n \times n}\)</span>.</p></li>
+</ul>
 </dd></dl>
 
 </section>

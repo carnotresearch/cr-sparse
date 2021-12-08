@@ -5,19 +5,6 @@
 
 .. autoclass:: SmoothFunction
 
-   
-   .. automethod:: __init__
-
-   
-   .. rubric:: Methods
-
-   .. autosummary::
-   
-      ~SmoothFunction.__init__
-      ~SmoothFunction.count
-      ~SmoothFunction.index
-   
-   
 
    
    

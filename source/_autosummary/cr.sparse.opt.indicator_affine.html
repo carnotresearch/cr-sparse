@@ -24,6 +24,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../../_static/js/custom.js"></script>
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -78,7 +80,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Numerical Optimization Routines</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vision.html">Computer Vision and Image Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
@@ -96,7 +98,7 @@
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html">API Docs</a><ul>
-  <li><a href="../opt.html">Numerical Optimization Routines</a><ul>
+  <li><a href="../opt.html">Optimization</a><ul>
       <li>Previous: <a href="cr.sparse.opt.indicator_singleton.html" title="previous chapter">cr.sparse.opt.indicator_singleton</a></li>
       <li>Next: <a href="cr.sparse.opt.indicator_box.html" title="next chapter">cr.sparse.opt.indicator_box</a></li>
   </ul></li>
@@ -135,7 +137,28 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="cr.sparse.opt.indicator_affine">
 <span class="sig-prename descclassname"><span class="pre">cr.sparse.opt.</span></span><span class="sig-name descname"><span class="pre">indicator_affine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/opt/indicators/basic.html#indicator_affine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.opt.indicator_affine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an indicator function for the linear system A x = b</p>
+<dd><p>Returns an indicator function for the linear system  <span class="math notranslate nohighlight">\(A x = b\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – A matrix <span class="math notranslate nohighlight">\(A \in \RR^{m \times n}\)</span></p></li>
+<li><p><strong>b</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – A vector <span class="math notranslate nohighlight">\(b \in \RR^{m}\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An indicator function</p>
+</dd>
+</dl>
+<p>The indicator function is defined as:</p>
+<div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-opt-indicator-affine-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-opt-indicator-affine-0" title="Permalink to this equation">¶</a></span>\[\begin{split}I(x) = \begin{cases}
+    0 &amp; \text{if } A x = b \\
+    \infty &amp; \text{otherwise}
+\end{cases}\end{split}\]</div>
+<p>The convex set <span class="math notranslate nohighlight">\(C\)</span> is an affine space which is
+the solution set of system of
+linear equations <span class="math notranslate nohighlight">\(A x = b\)</span>. It is parallel to
+the null space of <span class="math notranslate nohighlight">\(A\)</span>.</p>
 </dd></dl>
 
 </section>

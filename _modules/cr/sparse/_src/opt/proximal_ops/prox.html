@@ -128,7 +128,20 @@
 
 
 <div class="viewcode-block" id="ProxCapable"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.ProxCapable.html#cr.sparse.opt.ProxCapable">[docs]</a><span class="k">class</span> <span class="nc">ProxCapable</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents a function which is prox capable</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents a function which is prox capable</span>
+
+<span class="sd">    The *proximal operator* for a function :math:`f` is defined as</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        p_f(x, t) = \text{arg} \min_{z \in \RR^n} f(x) + \frac{1}{2t} \| z - x \|_2^2</span>
+
+<span class="sd">    Let `op` be a variable of type ProxCapable </span>
+<span class="sd">    which represents some prox-capable function :math:`f`. Then:</span>
+
+<span class="sd">    * `op.func(x)` returns the function value :math:`f(x)`.</span>
+<span class="sd">    * `op.prox_op(x)` returns the proximal vector for a step size: :math:`z = p_f(x, t)`.</span>
+<span class="sd">    * `op.prox_vec_val(x)` returns the pair :math:`z,v = p_f(x, t), f(z)`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span>
     <span class="sd">&quot;&quot;&quot;Definition of a prox capable function&quot;&quot;&quot;</span>
@@ -139,7 +152,14 @@
 
 
 <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">prox_op</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Creates a wrapper for a prox capable function </span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Creates a wrapper for a prox capable function</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Definition of a a function :math:`f(x)`</span>
+<span class="sd">        prox_op: Definition of its proximal operator :math:`p_f(x, t)`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">       ProxCapable: A prox-capable function </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">func</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
     <span class="n">prox_op</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">prox_op</span><span class="p">)</span>
@@ -149,7 +169,14 @@
 
 
 <span class="k">def</span> <span class="nf">build_prox_value_vec_func</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">prox_op</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Creates function which computes the proximal vector and then function value at it </span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Creates function which computes the proximal vector and then function value at it </span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Definition of a a function :math:`f(x)`</span>
+<span class="sd">        prox_op: Definition of its proximal operator :math:`p_f(x, t)`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A function which can compute the pair :math:`z,v = p_f(x,t), f(z)`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nd">@jit</span>
     <span class="k">def</span> <span class="nf">impl</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>

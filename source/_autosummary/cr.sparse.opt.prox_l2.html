@@ -80,7 +80,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Numerical Optimization Routines</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vision.html">Computer Vision and Image Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
@@ -98,7 +98,7 @@
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html">API Docs</a><ul>
-  <li><a href="../opt.html">Numerical Optimization Routines</a><ul>
+  <li><a href="../opt.html">Optimization</a><ul>
       <li>Previous: <a href="cr.sparse.opt.prox_l1.html" title="previous chapter">cr.sparse.opt.prox_l1</a></li>
       <li>Next: <a href="cr.sparse.opt.prox_l1_pos.html" title="next chapter">cr.sparse.opt.prox_l1_pos</a></li>
   </ul></li>
@@ -137,7 +137,15 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="cr.sparse.opt.prox_l2">
 <span class="sig-prename descclassname"><span class="pre">cr.sparse.opt.</span></span><span class="sig-name descname"><span class="pre">prox_l2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/opt/proximal_ops/lpnorms.html#prox_l2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.opt.prox_l2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Proximal operator for <span class="math notranslate nohighlight">\(\| q * x \|_2\)</span></p>
+<dd><p>Returns a prox-capable function <span class="math notranslate nohighlight">\(f(x) = \| q x \|_2\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A prox-capable function</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="cr.sparse.opt.ProxCapable.html#cr.sparse.opt.ProxCapable" title="cr.sparse.opt.ProxCapable">ProxCapable</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
