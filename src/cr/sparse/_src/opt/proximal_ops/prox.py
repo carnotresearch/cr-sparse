@@ -61,6 +61,32 @@ def build(func, prox_op):
     return ProxCapable(func=func, prox_op=prox_op, 
         prox_vec_val=prox_vec_val)
 
+def build_from_ind_proj(indicator, projector):
+    """Builds a prox capable function wrapper for a convex set indicator function
+
+    Args:
+        indicator: Definition of the indicator function for the convex set
+        projector: Definition of the projector function for the convex set
+
+    Returns:
+       ProxCapable: A prox-capable function 
+    """
+    indicator = jit(indicator)
+
+    @jit
+    def prox_op(x, t):
+        return projector(x)
+
+    @jit
+    def prox_vec_val(x, t):
+        # first project to the convex set
+        z = projector(x)
+        # the value of indicator function inside the convex set is 0.
+        return z, 0.
+
+    return ProxCapable(func=indicator, prox_op=prox_op, 
+        prox_vec_val=prox_vec_val)
+
 
 def build_prox_value_vec_func(func, prox_op):
     r"""Creates function which computes the proximal vector and then function value at it 
