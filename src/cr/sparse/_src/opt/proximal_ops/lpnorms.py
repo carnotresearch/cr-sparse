@@ -23,7 +23,7 @@ from .prox import build, build_from_ind_proj
 
 
 def prox_l2(q=1.):
-    r"""Returns a prox-capable function :math:`f(x) = \| q x \|_2`
+    r"""Returns a prox-capable wrapper for the function :math:`f(x) = \| q x \|_2`
 
     Returns:
        ProxCapable: A prox-capable function 
@@ -52,7 +52,7 @@ def prox_l2(q=1.):
 
 
 def prox_l1(q=1.):
-    r"""Returns a prox-capable function :math:`f(x) = \| q x \|_1`
+    r"""Returns a prox-capable wrapper for the function :math:`f(x) = \| q x \|_1`
 
     Returns:
        ProxCapable: A prox-capable function 
@@ -80,7 +80,7 @@ def prox_l1(q=1.):
     return build(func, proximal_op)
 
 def prox_l1_pos(q=1.):
-    r"""Returns a prox-capable function :math:`f(x) = \| q x \|_1 + I({x \geq 0})`
+    r"""Returns a prox-capable wrapper for the function :math:`f(x) = \| q x \|_1 + I({x \geq 0})`
     
     Returns:
        ProxCapable: A prox-capable function 

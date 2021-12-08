@@ -22,7 +22,7 @@ import cr.sparse as crs
 from .prox import build
 
 def prox_zero():
-    r"""Returns a prox-capable function  :math:`f(x)=0`
+    r"""Returns a prox-capable wrapper for the function  :math:`f(x)=0`
 
     Returns:
        ProxCapable: A prox-capable function 
