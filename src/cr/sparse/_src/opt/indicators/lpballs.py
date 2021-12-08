@@ -146,8 +146,8 @@ def indicator_l1_ball(q=1., b=None, A=None):
         A = jnp.asarray(A)
         A = crs.promote_arg_dtypes(A)
 
-    if q <= 0:
-        raise ValueError("q must be greater than 0")
+    # TODO: This creates problems in JIT
+    # assert q > 0, ValueError("q must be greater than 0")
 
     @jit
     def indicator_q(x):

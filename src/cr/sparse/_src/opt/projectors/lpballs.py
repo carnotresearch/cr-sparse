@@ -147,8 +147,9 @@ def proj_l1_ball(q=1., b=None):
         b = jnp.asarray(b)
         b = crs.promote_arg_dtypes(b)
 
-    if q <= 0:
-        raise ValueError("q must be greater than 0")
+    # TODO: This creates problems with JIT
+    # if q <= 0:
+    #     raise ValueError("q must be greater than 0")
 
 
     def project_inside_ball(y):

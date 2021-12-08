@@ -21,13 +21,13 @@ from .util import matrix_affine_func
 from .focs import focs
 from .defs import FOCSOptions
 
-def l1rls(A, b, lambda_, x0, options: FOCSOptions = FOCSOptions()):
-    r"""Solver for l1 regulated least square problem
+def lasso(A, b, tau, x0, options: FOCSOptions = FOCSOptions()):
+    r"""Solver for LASSO problem
 
     Args:
         A (cr.sparse.lop.Operator): A linear operator 
         b (jax.numpy.ndarray): The measurements :math:`b \approx A x`
-        lambda_ (float): The regularization parameter for the l1 term
+        tau (float): The radius of the l1-ball constraint
         x0 (jax.numpy.ndarray): Initial guess for solution vector
         options (FOCSOptions): Options for configuring the algorithm
 
@@ -35,17 +35,19 @@ def l1rls(A, b, lambda_, x0, options: FOCSOptions = FOCSOptions()):
         FOCSState: Solution of the optimization problem
 
 
-    The l1 regularized least square problem is defined as: 
-
+    The LASSO problem is defined as: 
+    
     .. math::
 
-        \text{minimize} \frac{1}{2} \| A x - b \|_2^2 + \lambda \| x \|_1 
+        \begin{aligned}
+        \underset{x}{\text{minimize}} \frac{1}{2} \| \AAA x - b \|_2^2\\
+        \text{subject to } \| x \|_1 \leq \tau
+        \end{aligned}
 
-    Sometimes, this is also called LASSO in literature.
     """
     f = opt.smooth_quad_matrix()
-    h = opt.prox_l1(lambda_)
+    h = opt.prox_l1_ball(tau)
     return focs(f, h, A, -b, x0, options)
 
 
-l1rls_jit = jit(l1rls, static_argnums=(0, 4))
+lasso_jit = jit(lasso, static_argnums=(0, 4))
