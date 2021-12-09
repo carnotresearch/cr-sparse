@@ -131,7 +131,7 @@
 <li><p><a class="reference internal" href="#implementation" id="id6">Implementation</a></p></li>
 </ul>
 </div>
-<p>Our description is based on <span id="id1">[<a class="reference internal" href="../zzzreference.html#id118" title="Michael Elad. Sparse and redundant representations. Springer, 2010.">Ela10</a>, <a class="reference internal" href="../zzzreference.html#id81" title="Ingrid Daubechies, Michel Defrise, and Christine De Mol. An iterative thresholding algorithm for linear inverse problems with a sparsity constraint. Communications on pure and applied mathematics, 57(11):1413–1457, 2004.">DDDM04</a>, <a class="reference internal" href="../zzzreference.html#id340" title="Michael Zibulevsky and Michael Elad. L1-l2 optimization in signal and image processing. IEEE Signal Processing Magazine, 27(3):76–88, 2010.">ZE10</a>]</span>.</p>
+<p>Our description is based on <span id="id1">[<a class="reference internal" href="../zzzreference.html#id118" title="Michael Elad. Sparse and redundant representations. Springer, 2010.">Ela10</a>, <a class="reference internal" href="../zzzreference.html#id81" title="Ingrid Daubechies, Michel Defrise, and Christine De Mol. An iterative thresholding algorithm for linear inverse problems with a sparsity constraint. Communications on pure and applied mathematics, 57(11):1413–1457, 2004.">DDDM04</a>, <a class="reference internal" href="../zzzreference.html#id341" title="Michael Zibulevsky and Michael Elad. L1-l2 optimization in signal and image processing. IEEE Signal Processing Magazine, 27(3):76–88, 2010.">ZE10</a>]</span>.</p>
 <p>ISTA can be used to solve problems of the form:</p>
 <div class="math notranslate nohighlight" id="equation-ista-l1-l2-minimization">
 <span class="eqno">(1)<a class="headerlink" href="#equation-ista-l1-l2-minimization" title="Permalink to this equation">¶</a></span>\[\widehat{x} = \text{arg} \min_{x} \frac{1}{2}\| b - A x \|_2^2 + \lambda \| x \|_1\]</div>
@@ -157,7 +157,7 @@
  \gamma\left ( 1 -  \frac{\lambda}{|\gamma|} \right ) &amp; \text{for} &amp; |\gamma| \gt \lambda\\
  0 &amp; \text{for} &amp; |\gamma| \le \lambda
 \end{cases}\end{split}\]</div>
-<p><span id="id2">[<a class="reference internal" href="../zzzreference.html#id340" title="Michael Zibulevsky and Michael Elad. L1-l2 optimization in signal and image processing. IEEE Signal Processing Magazine, 27(3):76–88, 2010.">ZE10</a>]</span> show that a similar solution emerges when <span class="math notranslate nohighlight">\(A\)</span> is unitary too.</p>
+<p><span id="id2">[<a class="reference internal" href="../zzzreference.html#id341" title="Michael Zibulevsky and Michael Elad. L1-l2 optimization in signal and image processing. IEEE Signal Processing Magazine, 27(3):76–88, 2010.">ZE10</a>]</span> show that a similar solution emerges when <span class="math notranslate nohighlight">\(A\)</span> is unitary too.</p>
 <p><span id="id3">[<a class="reference internal" href="../zzzreference.html#id81" title="Ingrid Daubechies, Michel Defrise, and Christine De Mol. An iterative thresholding algorithm for linear inverse problems with a sparsity constraint. Communications on pure and applied mathematics, 57(11):1413–1457, 2004.">DDDM04</a>]</span> introduced a surrogate term:</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-5">
 <span class="eqno">(7)<a class="headerlink" href="#equation-sls-ista-5" title="Permalink to this equation">¶</a></span>\[\text{dist}(x, x_0) = \frac{c}{2} \| x  - x_0 \|_2^2 - \frac{1}{2} \| A x - A x_0 \|_2^2\]</div>

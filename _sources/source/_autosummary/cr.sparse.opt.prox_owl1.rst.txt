@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.prox\_owl1
+========================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: prox_owl1

@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cr.sparse._src.opt.proximal_ops.prox_sorted_l1 &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/custom.css" />
+    <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../../_static/jquery.js"></script>
+    <script src="../../../../../../_static/underscore.js"></script>
+    <script src="../../../../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../../../../_static/js/custom.js"></script>
+    <script src="../../../../../../_static/js/mathconf.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../source/index.html">API Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../theory.html">Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../development.html">Development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for cr.sparse._src.opt.proximal_ops.prox_sorted_l1</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2021 CR.Sparse Development Team</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">lax</span>
+<span class="kn">from</span> <span class="nn">jax.ops</span> <span class="kn">import</span> <span class="n">segment_sum</span>
+
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
+<span class="kn">import</span> <span class="nn">cr.sparse.opt</span> <span class="k">as</span> <span class="nn">opt</span>
+
+<span class="kn">from</span> <span class="nn">.prox</span> <span class="kn">import</span> <span class="n">build</span><span class="p">,</span> <span class="n">build_from_ind_proj</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">See https://github.com/google/jax/discussions/8862 for the cool trick of averaging of increasing segments</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">prox_ordered_l1_b</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="n">y</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">state</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">l</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">segment_ids</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="o">~</span><span class="n">mask</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">y_sums</span> <span class="o">=</span> <span class="n">segment_sum</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">segment_ids</span><span class="p">,</span> <span class="n">num_segments</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">l_sums</span> <span class="o">=</span> <span class="n">segment_sum</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">segment_ids</span><span class="p">,</span> <span class="n">num_segments</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">norms</span> <span class="o">=</span> <span class="n">segment_sum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">segment_ids</span><span class="p">,</span> <span class="n">num_segments</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_sums</span> <span class="o">/</span> <span class="n">norms</span><span class="p">)[</span><span class="n">segment_ids</span><span class="p">]</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="p">(</span><span class="n">l_sums</span> <span class="o">/</span> <span class="n">norms</span><span class="p">)[</span><span class="n">segment_ids</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">l</span>
+
+
+<span class="k">def</span> <span class="nf">is_not_nonincreasing</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="n">y</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">state</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">is_nonincreasing_vec</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span><span class="n">l</span><span class="p">))</span> 
+
+<span class="k">def</span> <span class="nf">prox_ordered_l1_a</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="c1"># convert them to 1d arrays</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="c1"># get the sign vector of y</span>
+    <span class="n">sgn</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="c1"># take the absolute values</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="c1"># sort entries in y by magnitude</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="c1"># go in descending order</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="c1"># make sure that lambda and y are in same shape</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">l</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">is_not_nonincreasing</span><span class="p">,</span> <span class="n">prox_ordered_l1_b</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="n">y</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">state</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">l</span><span class="p">)</span>
+    <span class="c1"># keep only the postive part</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span> <span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># restore x at the original indices</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="c1"># restore the sign</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">sgn</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<div class="viewcode-block" id="prox_owl1"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.prox_owl1.html#cr.sparse.opt.prox_owl1">[docs]</a><span class="k">def</span> <span class="nf">prox_owl1</span><span class="p">(</span><span class="n">lambda_</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns a prox-capable wrapper for the ordered and weighted l1-norm function ``f(x) = sum(lambda * sort(abs(x), &#39;descend&#39;))``</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        lambda_ (jax.numpy.ndarray): A strictly positive vector which is sorted in decreasing order</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">       ProxCapable: A prox-capable function </span>
+
+<span class="sd">    Let :math:`x \in \RR^n`. Let :math:`|x|` represent a vector of absolute values of entries in :math:`x`.</span>
+<span class="sd">    Let :math:`|x|_{\downarrow}` represent a vector consisting of entries in :math:`|x|` sorted in descending order.</span>
+<span class="sd">    Let :math:`|x|_{(1)} \geq |x|_{(2)} \geq |x|_{(3)} \geq \dots \geq |x|_{(n)}` represent the order statistic of :math:`x`,</span>
+<span class="sd">    i.e. entries in :math:`x` arranged in descending order by magnitude.</span>
+
+<span class="sd">    Let :math:`\lambda \in \RR^n_{+}` be a weight vector such that </span>
+<span class="sd">    :math:`\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_n` and :math:`\lambda \neq 0` i.e. </span>
+<span class="sd">    not all entries in :math:`\lambda` are zero.</span>
+
+<span class="sd">    Then the ordered weighted :math:`\ell_1` norm of :math:`x` w.r.t. the weight vector :math:`\lambda` is defined as:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        J_{\lambda} (x) = \sum_{1}^n \lambda_i | x |_{(i)}</span>
+
+<span class="sd">    The function is computed in following steps:</span>
+
+<span class="sd">    - Take absolute values of entries in x</span>
+<span class="sd">    - Sort the entries of x in descending order</span>
+<span class="sd">    - Multiply the sorted entries with entries in lambda (component wise)</span>
+<span class="sd">    - Compute the sum of the entries</span>
+
+<span class="sd">    For the derivation of the proximal operator for the ordered and weighted l1 norm, see :cite:`lgorzata2013statistical`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lambda_</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">lambda_</span><span class="p">)</span>
+    <span class="n">lambda_</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">lambda_</span><span class="p">)</span>
+    <span class="n">lambda_</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">lambda_</span><span class="p">)</span>
+
+    <span class="nd">@jit</span>
+    <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># take absolute values</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># convert x to 1d array</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># sort the entries in ascending order</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># reverse the order</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># compute element wise product</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">lambda_</span> <span class="o">*</span> <span class="n">x</span>
+        <span class="c1"># return the sum</span>
+        <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="nd">@jit</span>
+    <span class="k">def</span> <span class="nf">proximal_op</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="c1"># make sure that x is a JAX array</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># make sure that x is float</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># capture original shape</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+        <span class="c1"># convert x to 1d array</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># compute the proximal vector</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">prox_ordered_l1_a</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="o">*</span><span class="n">lambda_</span><span class="p">)</span>
+        <span class="c1"># put it back into original shape</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">z</span>
+
+    <span class="k">return</span> <span class="n">build</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">proximal_op</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2021, CR-Sparse Development Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-214289683-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

@@ -12,14 +12,13 @@ API Docs
    dict
    pursuit
    cvx_recovery
+   opt
    focs
    cs
    cluster
    ssc
    data
    util
-   la
-   opt
    geo
    vision
    ef

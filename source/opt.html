@@ -31,7 +31,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="cr.sparse.opt.indicator_zero" href="_autosummary/cr.sparse.opt.indicator_zero.html" />
-    <link rel="prev" title="cr.sparse.awgn_at_snr" href="_autosummary/cr.sparse.awgn_at_snr.html" />
+    <link rel="prev" title="cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -73,13 +73,13 @@
 <li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="focs.html">First Order Conic Solvers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cs.html">Compressive Sensing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="util.html">Utilities</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vision.html">Computer Vision and Image Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
@@ -97,7 +97,7 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">API Docs</a><ul>
-      <li>Previous: <a href="_autosummary/cr.sparse.awgn_at_snr.html" title="previous chapter">cr.sparse.awgn_at_snr</a></li>
+      <li>Previous: <a href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit.html" title="previous chapter">cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit</a></li>
       <li>Next: <a href="_autosummary/cr.sparse.opt.indicator_zero.html" title="next chapter">cr.sparse.opt.indicator_zero</a></li>
   </ul></li>
   </ul></li>
@@ -456,6 +456,9 @@ on the specification of the prox-capable function <span class="math notranslate 
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.prox_l1_ball.html#cr.sparse.opt.prox_l1_ball" title="cr.sparse.opt.prox_l1_ball"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prox_l1_ball</span></code></a>([q])</p></td>
 <td><p>Returns a prox-capable wrapper for the l1-ball <span class="math notranslate nohighlight">\(\{ x : \| x \|_1 \leq q \}\)</span> indicator</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.prox_owl1.html#cr.sparse.opt.prox_owl1" title="cr.sparse.opt.prox_owl1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prox_owl1</span></code></a>([lambda_])</p></td>
+<td><p>Returns a prox-capable wrapper for the ordered and weighted l1-norm function <code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">=</span> <span class="pre">sum(lambda</span> <span class="pre">*</span> <span class="pre">sort(abs(x),</span> <span class="pre">'descend'))</span></code></p></td>
 </tr>
 </tbody>
 </table>

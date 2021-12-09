@@ -67,6 +67,9 @@ Solvers
     l1rls
     l1rls_jit
     lasso
+    lasso_jit
+    owl1rls
+    owl1rls_jit
 
 
 Data types
@@ -106,7 +109,6 @@ We consider the problem:
 
     \text{minimize} \frac{1}{2} \| \AAA x - b \|_2^2 + \lambda \| x \|_1 
 
-
 Choose:
 
 - :math:`f(x) = \frac{1}{2}\| x \|_2^2`  see :func:`cr.sparse.opt.smooth_quad_matrix`
@@ -115,7 +117,7 @@ Choose:
 - :math:`-b` as the translate input
 
 With these choices, it is straight-forward to use :func:`focs` to solve 
-the L1LRS problem.  This is implemented in the function :func:`l1rls`.
+the L1RLS problem.  This is implemented in the function :func:`l1rls`.
 
 
 LASSO
@@ -146,3 +148,28 @@ Choose:
 
 With these choices, it is straight-forward to use :func:`focs` to solve 
 the LASSO problem.  This is implemented in the function :func:`lasso`.
+
+
+
+Ordered weighted L1 regularized least square problem
+-------------------------------------------------------------
+
+
+We consider the problem:
+
+.. math::
+
+    \underset{x \in \RR^n}{\text{minimize}} \frac{1}{2} \| A x - b \|_2^2 + \sum_{i=1}^n \lambda_i | x |_{(i)} 
+
+described in :cite:`lgorzata2013statistical`.
+
+
+Choose:
+
+- :math:`f(x) = \frac{1}{2}\| x \|_2^2`  see :func:`cr.sparse.opt.smooth_quad_matrix`
+- :math:`h(x) = \sum_{i=1}^n \lambda_i | x |_{(i)}` see :func:`cr.sparse.opt.prox_owl1`
+- :math:`\AAA` as the linear operator
+- :math:`-b` as the translate input
+
+With these choices, it is straight-forward to use :func:`focs` to solve 
+the ordered weighted L1 regularized least square problem.  This is implemented in the function :func:`owl1rls`.
