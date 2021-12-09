@@ -11,6 +11,7 @@ requests
 pillow
 pandas
 PyWavelets
+cr-nimble
 scikit-image
 scikit-learn
 sphinx==4.0.0
