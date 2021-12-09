@@ -22,6 +22,7 @@ from cr.sparse._src.focs.util import (
 from cr.sparse._src.focs.focs import focs
 from cr.sparse._src.focs.l1rls import (l1rls, l1rls_jit)
 from cr.sparse._src.focs.lasso import (lasso, lasso_jit)
+from cr.sparse._src.focs.owl1rls import (owl1rls, owl1rls_jit)
 
 from cr.sparse._src.focs.defs import (
     FOCSOptions,
