@@ -32,6 +32,7 @@ Directly from our GITHUB repository:
     python -m pip install git+https://github.com/carnotresearch/cr-sparse.git
 
 
+
 Examples
 ----------------
 
@@ -39,6 +40,16 @@ Examples
 * A more extensive collection of example notebooks is available in the `companion repository <https://github.com/carnotresearch/cr-sparse-companion>`_.
 * Some micro-benchmarks are reported `here <https://github.com/carnotresearch/cr-sparse/blob/master/paper/paper.md#runtime-comparisons>`_.
 
+
+.. note::
+
+    ``cr-sparse`` depends on its sister library `cr-nimble <https://github.com/carnotresearch/cr-nimble>`_.
+    Normally, it would be installed automatically as a dependency. 
+    You may want to install it directly from GITHUB if you need access to the latest code.
+
+    .. code:: shell
+
+        python -m pip install git+https://github.com/carnotresearch/cr-nimble.git
 
 
 .. |docs| image:: https://readthedocs.org/projects/cr-sparse/badge/?version=latest

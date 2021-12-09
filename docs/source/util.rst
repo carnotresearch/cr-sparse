@@ -9,22 +9,6 @@ Utilities
 .. currentmodule:: cr.sparse
 
 
-Metrics for measuring signal and error levels
----------------------------------------------------------
-
-These functions are available under ``cr.sparse.metrics``.
-
-.. currentmodule:: cr.sparse.metrics
-
-
-
-Some checks and utilities for matrices (2D arrays)
-----------------------------------------------------------
-
-.. currentmodule:: cr.sparse
-
-
-
 
 Sparse representations
 ------------------------------------
