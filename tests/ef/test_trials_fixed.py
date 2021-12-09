@@ -1,5 +1,6 @@
 import pytest
 
+import numpy as np
 import jax.numpy as jnp
 
 from functools import partial
@@ -7,7 +8,8 @@ from functools import partial
 from cr.sparse.ef import RecoveryTrialsAtFixed_M_N
 
 def test():
-    Ks = jnp.array([1,2])
+    Ks = np.array([1,2])
+
 
     evaluation = RecoveryTrialsAtFixed_M_N(
         M = 5,
