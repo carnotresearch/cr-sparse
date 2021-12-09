@@ -16,7 +16,7 @@ config.update("jax_enable_x64", True)
 # Let's import necessary libraries 
 from jax import random
 import jax.numpy as jnp
-import cr.sparse as crs
+import cr.nimble as cnb
 import cr.sparse.data as crdata
 import cr.nimble as cnb
 import cr.nimble.subspaces
@@ -57,7 +57,7 @@ angles = cnb.subspaces.smallest_principal_angles_deg(bases)
 
 # %%
 # Print the minimum angle between any pair of subspaces
-print(crs.off_diagonal_min(angles))
+print(cnb.off_diagonal_min(angles))
 
 # %%
 # Generate uniformly distributed points on each subspace

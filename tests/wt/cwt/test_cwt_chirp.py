@@ -8,6 +8,7 @@ t, x = signals.chirp(fs, T, f0, f1, initial_phase=0)
 # voices per octave
 nu = 8
 scales = wt.scales_from_voices_per_octave(nu, jnp.arange(5))
+scales = jax.device_get(scales)
 scales = tuple(scales)
 
 

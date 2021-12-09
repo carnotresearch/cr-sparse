@@ -59,7 +59,7 @@ import jax.numpy as jnp
 # For plotting diagrams
 import matplotlib.pyplot as plt
 ## CR-Sparse modules
-import cr.sparse as crs
+import cr.nimble as cnb
 # Linear operators
 from cr.sparse import lop
 # Geophysics stuff [Ricker wavelet]

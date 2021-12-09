@@ -1,7 +1,7 @@
 from jax import random
-from cr.sparse.dict import simple
-from cr.sparse.norm import norms_l2_rw
-from cr.sparse.data.synthetic import sparse_normal_representations
+import cr.sparse.dict as crdict
+from cr.nimble import norms_l2_rw
+from cr.sparse.data import sparse_normal_representations
 
 D = 10
 N = 6
@@ -10,7 +10,7 @@ S = 6
 
 
 key = random.PRNGKey(0)
-dictionary = simple.gaussian_mtx(key, N, D)
+dictionary = crdict.gaussian_mtx(key, N, D)
 print("Sample Dictionary:")
 print(dictionary)
 print (f"Dictionary shape: {dictionary.shape}")

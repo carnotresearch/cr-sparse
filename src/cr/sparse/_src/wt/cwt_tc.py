@@ -70,7 +70,7 @@ def cwt_tc_time(data, wavelet_func, scales, dt=1., axis=-1):
     return output
 
 
-cwt_tc_time_jit = jit(cwt_tc_time, static_argnums=(1,2,3,4))
+cwt_tc_time_jit = jit(cwt_tc_time, static_argnums=(1,3,4))
 
 
 
@@ -338,7 +338,7 @@ def analyze(data, wavelet=DEFAULT_WAVELET, scales=None, dt=1., dj=0.125,
     if frequency:
         scalogram = cwt_tc_frequency_jit(data, wavelet.frequency, scales, dt, axis)
     else:
-        scalogram = cwt_tc_time_jit(data, wavelet.time, tuple(scales), dt, axis)
+        scalogram = cwt_tc_time_jit(data, wavelet.time, scales, dt, axis)
     scales = jnp.asarray(scales)
     return WaveletAnalysis(data=data, wavelet=wavelet, 
         dt=dt, dj=dj, mask_coi=mask_coi,

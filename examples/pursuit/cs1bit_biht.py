@@ -16,6 +16,7 @@ from jax.numpy.linalg import norm
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
+import cr.nimble as cnb
 import cr.sparse as crs
 import cr.sparse.dict as crdict
 import cr.sparse.data as crdata

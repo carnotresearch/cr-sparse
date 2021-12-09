@@ -1,4 +1,4 @@
-Utilities in cr.sparse module
+Utilities
 ==============================
 
 .. contents::
@@ -9,29 +9,6 @@ Utilities in cr.sparse module
 .. currentmodule:: cr.sparse
 
 
-Utilities for vectors
-------------------------------------------
-
-.. autosummary::
-  :toctree: _autosummary
-
-  vec_repeat_at_end
-  vec_repeat_at_start
-  vec_centered
-  vec_unit_jit
-  vec_repeat_at_end_jit
-  vec_repeat_at_start_jit
-  vec_centered_jit
-
-
-
-
-
-
-
-
-
-
 Metrics for measuring signal and error levels
 ---------------------------------------------------------
 
@@ -39,16 +16,6 @@ These functions are available under ``cr.sparse.metrics``.
 
 .. currentmodule:: cr.sparse.metrics
 
-.. autosummary::
-    :toctree: _autosummary
-
-    mean_squared
-    mean_squared_error
-    root_mean_squared
-    root_mse
-    normalized_root_mse
-    peak_signal_noise_ratio
-    signal_noise_ratio
 
 
 Some checks and utilities for matrices (2D arrays)
@@ -56,48 +23,6 @@ Some checks and utilities for matrices (2D arrays)
 
 .. currentmodule:: cr.sparse
 
-.. autosummary::
-  :toctree: _autosummary
-
-    transpose
-    hermitian
-    is_matrix
-    is_square
-    is_symmetric
-    is_hermitian
-    is_positive_definite
-    has_orthogonal_columns
-    has_orthogonal_rows
-    has_unitary_columns
-    has_unitary_rows
-    off_diagonal_elements
-    off_diagonal_min
-    off_diagonal_max
-    off_diagonal_mean
-
-
-Pairwise Distances
--------------------------
-
-.. autosummary::
-  :toctree: _autosummary
-
-  pairwise_sqr_l2_distances_rw
-  pairwise_sqr_l2_distances_cw
-  pairwise_l2_distances_rw
-  pairwise_l2_distances_cw
-  pdist_sqr_l2_rw
-  pdist_sqr_l2_cw
-  pdist_l2_rw
-  pdist_l2_cw
-  pairwise_l1_distances_rw
-  pairwise_l1_distances_cw
-  pdist_l1_rw
-  pdist_l1_cw
-  pairwise_linf_distances_rw
-  pairwise_linf_distances_cw
-  pdist_linf_rw
-  pdist_linf_cw
 
 
 
@@ -144,19 +69,6 @@ Following functions analyze or construct representation vectors which are known 
     sparse_approximation_cw
 
 
-Utilities for ND-Arrays
-------------------------------------------
-
-.. autosummary::
-  :toctree: _autosummary
-
-    arr_largest_index
-    arr_l1norm
-    arr_l2norm
-    arr_l2norm_sqr
-    arr_vdot
-    arr_rdot
-    arr2vec
 
 
 Basic Signal Information
