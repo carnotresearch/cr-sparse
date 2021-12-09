@@ -10,7 +10,8 @@ from jax.config import config
 config.update("jax_enable_x64", True)
 
 # %% 
-# Let's import necessary libraries 
+# Let's import necessary libraries
+import jax 
 import numpy as np
 import jax.numpy as jnp
 # CR.Sparse libraries
@@ -75,6 +76,7 @@ ax.grid('on')
 # voices per octave
 nu = 8
 scales = wt.scales_from_voices_per_octave(nu, jnp.arange(32))
+scales = jax.device_get(scales)
 # Compute the wavelet analysis
 output = wt.cwt(x, scales, wavelet)
 # Identify the frequencies for the analysis

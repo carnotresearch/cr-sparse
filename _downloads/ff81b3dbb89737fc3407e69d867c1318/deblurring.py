@@ -28,7 +28,7 @@ import jax.numpy as jnp
 # For plotting diagrams
 import matplotlib.pyplot as plt
 ## CR-Sparse modules
-import cr.sparse as crs
+import cr.nimble as cnb
 # Linear operators
 from cr.sparse import lop
 # Image processing utilities
@@ -37,8 +37,6 @@ from cr.sparse import vision
 from cr.sparse import sls
 # Several thresholding functions are available in this module
 from cr.sparse import geo
-# PSNR measurement
-from cr.sparse import metrics
 # Sample images
 import skimage.data
 # Configure JAX for 64-bit computing
@@ -67,7 +65,7 @@ ax.axis('tight')
 # The linear operator for the blur kernel
 # ''''''''''''''''''''''''''''''''''''''''''''''''''''''
 # Locate the center of the filter
-offset = crs.arr_largest_index(h)
+offset = cnb.arr_largest_index(h)
 print(offset)
 # Construct a 2D convolution operator based on the kernel
 H = lop.convolve2D(image.shape, h, offset=offset)
@@ -80,7 +78,7 @@ H = lop.jit(H)
 # Apply the blurring operator to the original image 
 blurred_image = H.times(image)
 # Measure the PSNR
-print("Blurred PSNR: ", metrics.peak_signal_noise_ratio(image, blurred_image), 'dB')
+print("Blurred PSNR: ", cnb.peak_signal_noise_ratio(image, blurred_image), 'dB')
 # plot the original and the blurred images
 fig, ax = plt.subplots(ncols=2, figsize=(10, 5))
 ax[0].imshow(image, cmap=plt.cm.gray)
@@ -97,7 +95,7 @@ x0 = jnp.zeros_like(blurred_image)
 sol = sls.lsqr(H, blurred_image, x0, max_iters=50)
 deblurred_image = sol.x
 # Measure the PSNR
-print("Deblurred PSNR: ", metrics.peak_signal_noise_ratio(image, deblurred_image), 'dB')
+print("Deblurred PSNR: ", cnb.peak_signal_noise_ratio(image, deblurred_image), 'dB')
 # Plot the original, blurred and deblurred image
 fig, ax = plt.subplots(ncols=3, figsize=(15, 5))
 ax[0].imshow(image, cmap=plt.cm.gray)
@@ -154,7 +152,7 @@ print(f"Number of FISTA iterations {sol.iterations}")
 # Compute the deblurred image from the coefficients given by FISTA
 deblurred_image = DWT_basis.times(sol.x)
 # Measure the PSNR
-print("Deblurred PSNR: ", metrics.peak_signal_noise_ratio(image, deblurred_image), 'dB')
+print("Deblurred PSNR: ", cnb.peak_signal_noise_ratio(image, deblurred_image), 'dB')
 fig, ax = plt.subplots(ncols=3, figsize=(15, 5))
 ax[0].imshow(image, cmap=plt.cm.gray)
 ax[0].set_title('Original')

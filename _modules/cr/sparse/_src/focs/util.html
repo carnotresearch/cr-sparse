@@ -121,19 +121,20 @@
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span>
 
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
 <span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
-<span class="kn">from</span> <span class="nn">cr.sparse.la</span> <span class="kn">import</span> <span class="n">AH_v</span>
+<span class="kn">from</span> <span class="nn">cr.nimble</span> <span class="kn">import</span> <span class="n">AH_v</span>
 
 <div class="viewcode-block" id="matrix_affine_func"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.focs.matrix_affine_func.html#cr.sparse.focs.matrix_affine_func">[docs]</a><span class="k">def</span> <span class="nf">matrix_affine_func</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns an affine function for a matrix A and vector b</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">A</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">A</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-        <span class="n">A</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 
     <span class="nd">@jit</span>
     <span class="k">def</span> <span class="nf">identity</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>

@@ -1,0 +1,6 @@
+﻿cr.sparse.opt.build\_from\_ind\_proj
+====================================
+
+.. currentmodule:: cr.sparse.opt
+
+.. autofunction:: build_from_ind_proj

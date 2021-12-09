@@ -130,9 +130,9 @@
 <span class="kn">from</span> <span class="nn">jax.experimental.sparse</span> <span class="kn">import</span> <span class="n">BCOO</span>
 <span class="kn">from</span> <span class="nn">.kmeans</span> <span class="kn">import</span> <span class="n">kmeans</span>
 
-<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
-<span class="kn">import</span> <span class="nn">cr.sparse.la.svd</span> <span class="k">as</span> <span class="nn">lasvd</span>
-<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">promote_arg_dtypes</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
+<span class="kn">import</span> <span class="nn">cr.nimble.svd</span> <span class="k">as</span> <span class="nn">lasvd</span>
+<span class="kn">from</span> <span class="nn">cr.nimble</span> <span class="kn">import</span> <span class="n">promote_arg_dtypes</span>
 
 <div class="viewcode-block" id="SpectralclusteringSolution"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cluster.spectral.SpectralclusteringSolution.html#cr.sparse.cluster.spectral.SpectralclusteringSolution">[docs]</a><span class="k">class</span> <span class="nc">SpectralclusteringSolution</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;The solution for K-means algorithm</span>
@@ -231,7 +231,7 @@
     <span class="n">D_inv</span> <span class="o">=</span> <span class="n">D</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
     <span class="c1"># Compute the Laplacian</span>
     <span class="c1"># L = I - D_inv @ W</span>
-    <span class="n">L</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">add_to_diagonal</span><span class="p">(</span><span class="o">-</span><span class="n">crs</span><span class="o">.</span><span class="n">diag_premultiply</span><span class="p">(</span><span class="n">D_inv</span><span class="p">,</span> <span class="n">W</span><span class="p">),</span> <span class="mf">1.</span><span class="p">)</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">add_to_diagonal</span><span class="p">(</span><span class="o">-</span><span class="n">cnb</span><span class="o">.</span><span class="n">diag_premultiply</span><span class="p">(</span><span class="n">D_inv</span><span class="p">,</span> <span class="n">W</span><span class="p">),</span> <span class="mf">1.</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">L</span>
 
 <span class="n">normalized_random_walk_laplacian_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">normalized_random_walk_laplacian</span><span class="p">)</span>
@@ -309,8 +309,8 @@
     <span class="n">D_half_inv</span> <span class="o">=</span> <span class="n">D</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
     <span class="c1"># Compute the normalized</span>
     <span class="c1"># W = D_inv @ W @ D_inv</span>
-    <span class="n">W</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">diag_premultiply</span><span class="p">(</span><span class="n">D_half_inv</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
-    <span class="n">W</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">diag_postmultiply</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">D_half_inv</span><span class="p">)</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">diag_premultiply</span><span class="p">(</span><span class="n">D_half_inv</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">diag_postmultiply</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">D_half_inv</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">W</span>
 
 
@@ -330,7 +330,7 @@
     <span class="c1"># Choose the last k eigen vectors</span>
     <span class="n">kernel</span> <span class="o">=</span> <span class="n">V</span><span class="p">[:,</span> <span class="p">:</span><span class="n">k</span><span class="p">]</span>
     <span class="c1"># normalize the rows of kernel</span>
-    <span class="n">kernel</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">normalize_l2_rw</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">normalize_l2_rw</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">kmeans</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="nb">iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">SpectralclusteringSolution</span><span class="p">(</span><span class="n">singular_values</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> 
         <span class="n">assignment</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">assignment</span><span class="p">,</span>
@@ -374,7 +374,7 @@
     <span class="c1"># Choose the last k eigen vectors</span>
     <span class="n">kernel</span> <span class="o">=</span> <span class="n">V</span><span class="p">[:,</span> <span class="p">:</span><span class="n">k</span><span class="p">]</span>
     <span class="c1"># normalize the rows of kernel</span>
-    <span class="n">kernel</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">normalize_l2_rw</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">normalize_l2_rw</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">kmeans</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="nb">iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">SpectralclusteringSolution</span><span class="p">(</span><span class="n">singular_values</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> 
         <span class="n">assignment</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">assignment</span><span class="p">,</span>

@@ -1,6 +1,0 @@
-﻿cr.sparse.la.subspaces.is\_in\_subspace
-=======================================
-
-.. currentmodule:: cr.sparse.la.subspaces
-
-.. autofunction:: is_in_subspace

@@ -16,10 +16,10 @@ config.update("jax_enable_x64", True)
 # Let's import necessary libraries 
 from jax import random
 import jax.numpy as jnp
-import cr.sparse as crs
+import cr.nimble as cnb
 import cr.sparse.data as crdata
-import cr.sparse.la as crla
-import cr.sparse.la.subspaces
+import cr.nimble as cnb
+import cr.nimble.subspaces
 # clustering related
 import cr.sparse.cluster.spectral as spectral
 import cr.sparse.cluster.ssc as ssc
@@ -53,11 +53,11 @@ bases = crdata.random_subspaces_jit(keys[0], N, D, K)
 
 # %%
 # Measure angles between subspaces in degrees
-angles = crla.subspaces.smallest_principal_angles_deg(bases)
+angles = cnb.subspaces.smallest_principal_angles_deg(bases)
 
 # %%
 # Print the minimum angle between any pair of subspaces
-print(crs.off_diagonal_min(angles))
+print(cnb.off_diagonal_min(angles))
 
 # %%
 # Generate uniformly distributed points on each subspace

@@ -1,6 +1,0 @@
-﻿cr.sparse.is\_vec
-=================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: is_vec

@@ -28,7 +28,7 @@
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Utilities in cr.sparse module" href="../util.html" />
+    <link rel="next" title="Utilities" href="../util.html" />
     <link rel="prev" title="cr.sparse.data.two_subspaces_at_angle" href="cr.sparse.data.two_subspaces_at_angle.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -76,8 +76,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vision.html">Computer Vision and Image Processing</a></li>
@@ -98,7 +97,7 @@
   <li><a href="../index.html">API Docs</a><ul>
   <li><a href="../data.html">Sample Data Generation Utilities</a><ul>
       <li>Previous: <a href="cr.sparse.data.two_subspaces_at_angle.html" title="previous chapter">cr.sparse.data.two_subspaces_at_angle</a></li>
-      <li>Next: <a href="../util.html" title="next chapter">Utilities in cr.sparse module</a></li>
+      <li>Next: <a href="../util.html" title="next chapter">Utilities</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -161,7 +160,7 @@ ONBs for the three subspaces</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">three_subspaces_at_angle</span><span class="p">(</span><span class="n">rkey</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="go">(20, 4) (20, 4) (20, 4)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cr.sparse.la.subspaces</span> <span class="kn">import</span> <span class="n">smallest_principal_angles_deg</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cr.nimble.subspaces</span> <span class="kn">import</span> <span class="n">smallest_principal_angles_deg</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">angles</span> <span class="o">=</span> <span class="n">smallest_principal_angles_deg</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">]))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="go">[[ 0. 15. 15.]</span>

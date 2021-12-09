@@ -126,8 +126,7 @@
 <span class="kn">from</span> <span class="nn">jax.numpy.linalg</span> <span class="kn">import</span> <span class="n">qr</span><span class="p">,</span> <span class="n">norm</span>
 <span class="kn">from</span> <span class="nn">jax.scipy.linalg</span> <span class="kn">import</span> <span class="n">cholesky</span>
 
-<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
-<span class="kn">import</span> <span class="nn">cr.sparse.la</span> <span class="k">as</span> <span class="nn">crla</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
 
 <div class="viewcode-block" id="proj_zero"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.proj_zero.html#cr.sparse.opt.proj_zero">[docs]</a><span class="k">def</span> <span class="nf">proj_zero</span><span class="p">():</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Projects to the zero vector for :math:`\RR^n`</span>
@@ -146,7 +145,7 @@
     <span class="nd">@jit</span>
     <span class="k">def</span> <span class="nf">projector</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x</span>
     
     <span class="k">return</span> <span class="n">projector</span></div>
@@ -154,7 +153,7 @@
 <div class="viewcode-block" id="proj_singleton"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.proj_singleton.html#cr.sparse.opt.proj_singleton">[docs]</a><span class="k">def</span> <span class="nf">proj_singleton</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
 
     <span class="n">c</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 
     <span class="nd">@jit</span>
     <span class="k">def</span> <span class="nf">projector</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -169,19 +168,19 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># A must be specified</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-    <span class="n">A</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
     <span class="c1"># b by default is 0</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
     <span class="c1"># Compute the QR decomposition of A</span>
     <span class="n">R</span> <span class="o">=</span> <span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
     <span class="nd">@jit</span>
     <span class="k">def</span> <span class="nf">projector</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="n">crla</span><span class="o">.</span><span class="n">solve_UTx_b</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
-        <span class="n">w</span> <span class="o">=</span> <span class="n">crla</span><span class="o">.</span><span class="n">solve_Ux_b</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">solve_UTx_b</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">solve_Ux_b</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
         <span class="n">h</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">w</span>
         <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">h</span>
 
@@ -195,28 +194,28 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;At least lower or upper bound must be defined.&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">l</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">l</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-        <span class="n">l</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">u</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">u</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-        <span class="n">u</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 
     <span class="nd">@jit</span>
     <span class="k">def</span> <span class="nf">lower_bound</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
 
     <span class="nd">@jit</span>
     <span class="k">def</span> <span class="nf">upper_bound</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
 
 
     <span class="nd">@jit</span>
     <span class="k">def</span> <span class="nf">box_bound</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span>  <span class="n">jnp</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x</span>
@@ -238,7 +237,7 @@
     <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;a is required&quot;</span><span class="p">)</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">size</span>
     <span class="k">if</span> <span class="n">l</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">l</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">-</span><span class="n">jnp</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
@@ -273,7 +272,7 @@
     <span class="nd">@jit</span>
     <span class="k">def</span> <span class="nf">proj</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">x_pre</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">t</span> <span class="o">=</span>  <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">abs_t</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>

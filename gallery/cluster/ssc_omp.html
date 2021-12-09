@@ -132,10 +132,10 @@ to download the full example code</p>
 <p>Let’s import necessary libraries</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">random</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
 <span class="kn">import</span> <span class="nn">cr.sparse.data</span> <span class="k">as</span> <span class="nn">crdata</span>
-<span class="kn">import</span> <span class="nn">cr.sparse.la</span> <span class="k">as</span> <span class="nn">crla</span>
-<span class="kn">import</span> <span class="nn">cr.sparse.la.subspaces</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
+<span class="kn">import</span> <span class="nn">cr.nimble.subspaces</span>
 <span class="c1"># clustering related</span>
 <span class="kn">import</span> <span class="nn">cr.sparse.cluster.spectral</span> <span class="k">as</span> <span class="nn">spectral</span>
 <span class="kn">import</span> <span class="nn">cr.sparse.cluster.ssc</span> <span class="k">as</span> <span class="nn">ssc</span>
@@ -166,11 +166,11 @@ to download the full example code</p>
 </pre></div>
 </div>
 <p>Measure angles between subspaces in degrees</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">angles</span> <span class="o">=</span> <span class="n">crla</span><span class="o">.</span><span class="n">subspaces</span><span class="o">.</span><span class="n">smallest_principal_angles_deg</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">bases</span></a><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">angles</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">subspaces</span><span class="o">.</span><span class="n">smallest_principal_angles_deg</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">bases</span></a><span class="p">)</span>
 </pre></div>
 </div>
 <p>Print the minimum angle between any pair of subspaces</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">crs</span><span class="o">.</span><span class="n">off_diagonal_min</span><span class="p">(</span><span class="n">angles</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">off_diagonal_min</span><span class="p">(</span><span class="n">angles</span><span class="p">))</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
@@ -224,7 +224,7 @@ by using Orthogonal Matching Pursuit algorithm</p>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_ssc_omp_001.png" srcset="../../_images/sphx_glr_ssc_omp_001.png" alt="ssc omp" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage object at 0x7ff49e248fd0&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage object at 0x7f76c43d11c0&gt;
 </pre></div>
 </div>
 <p>Perform the spectral clustering on the affinity matrix</p>
@@ -293,7 +293,7 @@ by using Orthogonal Matching Pursuit algorithm</p>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_ssc_omp_002.png" srcset="../../_images/sphx_glr_ssc_omp_002.png" alt="ssc omp" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage object at 0x7ff49e0bff40&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage object at 0x7f76c42cc760&gt;
 </pre></div>
 </div>
 <p>Perform the spectral clustering on the affinity matrix</p>
@@ -323,7 +323,7 @@ by using Orthogonal Matching Pursuit algorithm</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>1.0
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  10.050 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  7.986 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-cluster-ssc-omp-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/62389dad0fee8633e95d042ef09bde3c/ssc_omp.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">ssc_omp.py</span></code></a></p>

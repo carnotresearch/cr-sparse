@@ -1,6 +1,0 @@
-﻿cr.sparse.la.effective\_rank
-============================
-
-.. currentmodule:: cr.sparse.la
-
-.. autofunction:: effective_rank

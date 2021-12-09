@@ -126,7 +126,7 @@
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span>
 
-<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
 
 <span class="k">class</span> <span class="nc">NormEstState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;State for the norm estimation algorithm</span>
@@ -168,12 +168,12 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">shape</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="n">input_shape</span>
     <span class="c1"># initial eigen vector</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">crs</span><span class="o">.</span><span class="n">KEYS</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">shape</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">KEYS</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">shape</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">operator</span><span class="o">.</span><span class="n">real</span><span class="p">:</span>
-        <span class="n">bi</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">crs</span><span class="o">.</span><span class="n">KEYS</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">shape</span><span class="p">)</span>
+        <span class="n">bi</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">KEYS</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">shape</span><span class="p">)</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="n">bi</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
     <span class="c1"># normalize it</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">/</span> <span class="n">crs</span><span class="o">.</span><span class="n">arr_l2norm</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">/</span> <span class="n">cnb</span><span class="o">.</span><span class="n">arr_l2norm</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
         <span class="k">return</span> <span class="n">NormEstState</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="n">old_estimate</span><span class="o">=-</span><span class="mf">1e20</span><span class="p">,</span> <span class="n">new_estimate</span><span class="o">=</span><span class="mf">1e20</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
@@ -189,7 +189,7 @@
         <span class="sd">&quot;&quot;&quot;One step of power iteration.&quot;&quot;&quot;</span>
         <span class="n">v</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">v</span>
         <span class="c1"># normalize</span>
-        <span class="n">v_norm</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">arr_l2norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">v_norm</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">arr_l2norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
         <span class="n">v</span> <span class="o">=</span> <span class="n">v</span> <span class="o">/</span> <span class="n">v_norm</span>
         <span class="c1"># compute the next vector</span>
         <span class="n">v_new</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>

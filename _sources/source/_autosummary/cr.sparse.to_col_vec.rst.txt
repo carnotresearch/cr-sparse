@@ -1,6 +1,0 @@
-﻿cr.sparse.to\_col\_vec
-======================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: to_col_vec

@@ -41,7 +41,7 @@ Let's import necessary libraries
     # For plotting diagrams
     import matplotlib.pyplot as plt
     ## CR-Sparse modules
-    import cr.sparse as crs
+    import cr.nimble as cnb
     # Linear operators
     from cr.sparse import lop
     # Some random number seeds
@@ -322,7 +322,7 @@ Check the column wise norms
 
 .. code-block:: default
 
-    print(crs.norms_l2_cw(lop.to_matrix(Phi)))
+    print(cnb.norms_l2_cw(lop.to_matrix(Phi)))
 
 
 
@@ -1004,7 +1004,7 @@ Check the column wise norms
 
 .. code-block:: default
 
-    print(crs.norms_l2_cw(lop.to_matrix(Phi)))
+    print(cnb.norms_l2_cw(lop.to_matrix(Phi)))
 
 
 
@@ -1495,7 +1495,7 @@ Check the row wise norms
 
 .. code-block:: default
 
-    print(crs.norms_l2_rw(lop.to_matrix(Phi)))
+    print(cnb.norms_l2_rw(lop.to_matrix(Phi)))
 
 
 
@@ -1680,7 +1680,7 @@ Check the row wise norms
 
 .. code-block:: default
 
-    print(crs.norms_l2_rw(lop.to_matrix(Phi)))
+    print(cnb.norms_l2_rw(lop.to_matrix(Phi)))
 
 
 
@@ -1704,7 +1704,7 @@ Check the column wise norms
 
 .. code-block:: default
 
-    print(crs.norms_l2_cw(lop.to_matrix(Phi)))
+    print(cnb.norms_l2_cw(lop.to_matrix(Phi)))
 
 
 
@@ -1890,7 +1890,7 @@ Check that it's close to identity matrix
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  4.000 seconds)
+   **Total running time of the script:** ( 0 minutes  3.278 seconds)
 
 
 .. _sphx_glr_download_gallery_lop_cs_operators.py:

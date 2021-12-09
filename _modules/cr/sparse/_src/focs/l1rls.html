@@ -130,10 +130,24 @@
 <div class="viewcode-block" id="l1rls"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.focs.l1rls.html#cr.sparse.focs.l1rls">[docs]</a><span class="k">def</span> <span class="nf">l1rls</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">FOCSOptions</span> <span class="o">=</span> <span class="n">FOCSOptions</span><span class="p">()):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solver for l1 regulated least square problem</span>
 
+<span class="sd">    Args:</span>
+<span class="sd">        A (cr.sparse.lop.Operator): A linear operator </span>
+<span class="sd">        b (jax.numpy.ndarray): The measurements :math:`b \approx A x`</span>
+<span class="sd">        lambda_ (float): The regularization parameter for the l1 term</span>
+<span class="sd">        x0 (jax.numpy.ndarray): Initial guess for solution vector</span>
+<span class="sd">        options (FOCSOptions): Options for configuring the algorithm</span>
+
+<span class="sd">    Returns: </span>
+<span class="sd">        FOCSState: Solution of the optimization problem</span>
+
+
+<span class="sd">    The l1 regularized least square problem is defined as: </span>
+
 <span class="sd">    .. math::</span>
 
 <span class="sd">        \text{minimize} \frac{1}{2} \| A x - b \|_2^2 + \lambda \| x \|_1 </span>
 
+<span class="sd">    Sometimes, this is also called LASSO in literature.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">smooth_quad_matrix</span><span class="p">()</span>
     <span class="n">h</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">prox_l1</span><span class="p">(</span><span class="n">lambda_</span><span class="p">)</span>

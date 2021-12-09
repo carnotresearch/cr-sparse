@@ -154,7 +154,7 @@ to download the full example code</p>
 <span class="c1"># For plotting diagrams</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="c1">## CR-Sparse modules</span>
-<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
 <span class="c1"># Linear operators</span>
 <span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">lop</span>
 <span class="c1"># Some random number seeds</span>
@@ -261,7 +261,7 @@ to download the full example code</p>
 </pre></div>
 </div>
 <p>Check the column wise norms</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">crs</span><span class="o">.</span><span class="n">norms_l2_cw</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">)))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">norms_l2_cw</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">)))</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
@@ -541,7 +541,7 @@ to download the full example code</p>
 </pre></div>
 </div>
 <p>Check the column wise norms</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">crs</span><span class="o">.</span><span class="n">norms_l2_cw</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">)))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">norms_l2_cw</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">)))</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
@@ -753,7 +753,7 @@ to download the full example code</p>
 </pre></div>
 </div>
 <p>Check the row wise norms</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">crs</span><span class="o">.</span><span class="n">norms_l2_rw</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">)))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">norms_l2_rw</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">)))</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
@@ -834,7 +834,7 @@ to download the full example code</p>
 </pre></div>
 </div>
 <p>Check the row wise norms</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">crs</span><span class="o">.</span><span class="n">norms_l2_rw</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">)))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">norms_l2_rw</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">)))</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
@@ -842,7 +842,7 @@ to download the full example code</p>
 </pre></div>
 </div>
 <p>Check the column wise norms</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">crs</span><span class="o">.</span><span class="n">norms_l2_cw</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">)))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">norms_l2_cw</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">)))</span>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
@@ -927,7 +927,7 @@ to download the full example code</p>
  [0. 0. 0. 0. 0. 0. 0. 1.]]
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  4.000 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.278 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-lop-cs-operators-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/af0771c1d9d7839469d9f60430dda282/cs_operators.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">cs_operators.py</span></code></a></p>

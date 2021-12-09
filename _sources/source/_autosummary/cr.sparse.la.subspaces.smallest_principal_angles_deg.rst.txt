@@ -1,6 +1,0 @@
-﻿cr.sparse.la.subspaces.smallest\_principal\_angles\_deg
-=======================================================
-
-.. currentmodule:: cr.sparse.la.subspaces
-
-.. autofunction:: smallest_principal_angles_deg

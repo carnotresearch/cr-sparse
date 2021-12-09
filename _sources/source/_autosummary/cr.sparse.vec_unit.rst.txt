@@ -1,6 +1,0 @@
-﻿cr.sparse.vec\_unit
-===================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: vec_unit

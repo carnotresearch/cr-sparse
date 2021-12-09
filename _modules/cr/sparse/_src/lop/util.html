@@ -122,7 +122,7 @@
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">random</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 
-<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
 
 <div class="viewcode-block" id="to_matrix"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.to_matrix.html#cr.sparse.lop.to_matrix">[docs]</a><span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Converts a linear operator to a matrix&quot;&quot;&quot;</span>
@@ -199,8 +199,8 @@
     <span class="n">v</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">A</span><span class="o">.</span><span class="n">output_shape</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-    <span class="n">yy</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">arr_rdot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-    <span class="n">xx</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">arr_rdot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">yy</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">arr_rdot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+    <span class="n">xx</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">arr_rdot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 
     <span class="n">rel_gap</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yy</span> <span class="o">-</span> <span class="n">xx</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="n">yy</span> <span class="o">+</span> <span class="n">xx</span> <span class="o">+</span> <span class="mf">1e-15</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">rel_gap</span> <span class="o">&lt;</span> <span class="n">tol</span> 

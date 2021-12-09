@@ -1,6 +1,0 @@
-﻿cr.sparse.sqr\_norms\_l2\_cw
-============================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: sqr_norms_l2_cw

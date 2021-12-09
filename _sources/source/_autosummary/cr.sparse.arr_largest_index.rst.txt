@@ -1,6 +1,0 @@
-﻿cr.sparse.arr\_largest\_index
-=============================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: arr_largest_index

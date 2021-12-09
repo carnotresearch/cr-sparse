@@ -29,7 +29,7 @@ This example demonstrates following features
 
 Let's import necessary libraries 
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-25
+.. GENERATED FROM PYTHON SOURCE LINES 13-26
 
 .. code-block:: default
 
@@ -39,6 +39,7 @@ Let's import necessary libraries
     import matplotlib as mpl
     import matplotlib.pyplot as plt
 
+    import cr.nimble as cnb
     import cr.sparse as crs
     import cr.sparse.dict as crdict
     import cr.sparse.data as crdata
@@ -52,12 +53,12 @@ Let's import necessary libraries
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 26-28
+.. GENERATED FROM PYTHON SOURCE LINES 27-29
 
 Setup
 ------
 
-.. GENERATED FROM PYTHON SOURCE LINES 28-36
+.. GENERATED FROM PYTHON SOURCE LINES 29-37
 
 .. code-block:: default
 
@@ -76,16 +77,16 @@ Setup
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 37-39
+.. GENERATED FROM PYTHON SOURCE LINES 38-40
 
 Sensing Matrix
 ------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 39-49
+.. GENERATED FROM PYTHON SOURCE LINES 40-50
 
 .. code-block:: default
 
-    Phi = crdict.gaussian_mtx(crs.KEYS[0], M, N, normalize_atoms=False)
+    Phi = crdict.gaussian_mtx(cnb.KEYS[0], M, N, normalize_atoms=False)
     # frame bound
     s0 = crdict.upper_frame_bound(Phi)
     print(s0)
@@ -116,16 +117,16 @@ Sensing Matrix
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 50-52
+.. GENERATED FROM PYTHON SOURCE LINES 51-53
 
 K-sparse signal
 --------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 52-60
+.. GENERATED FROM PYTHON SOURCE LINES 53-61
 
 .. code-block:: default
 
-    x, omega = crdata.sparse_normal_representations(crs.KEYS[1], N, K)
+    x, omega = crdata.sparse_normal_representations(cnb.KEYS[1], N, K)
     # normalize signal
     x = x / norm(x)
     # the support indices
@@ -154,13 +155,13 @@ K-sparse signal
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 61-64
+.. GENERATED FROM PYTHON SOURCE LINES 62-65
 
 Measurement process
 ------------------------------------------------
 measurements
 
-.. GENERATED FROM PYTHON SOURCE LINES 64-69
+.. GENERATED FROM PYTHON SOURCE LINES 65-70
 
 .. code-block:: default
 
@@ -203,13 +204,13 @@ measurements
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 70-73
+.. GENERATED FROM PYTHON SOURCE LINES 71-74
 
 Signal Reconstruction using BIHT
 ------------------------------------------------
 solver step-size
 
-.. GENERATED FROM PYTHON SOURCE LINES 73-76
+.. GENERATED FROM PYTHON SOURCE LINES 74-77
 
 .. code-block:: default
 
@@ -223,11 +224,11 @@ solver step-size
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 77-78
+.. GENERATED FROM PYTHON SOURCE LINES 78-79
 
 reconstructed signal
 
-.. GENERATED FROM PYTHON SOURCE LINES 78-80
+.. GENERATED FROM PYTHON SOURCE LINES 79-81
 
 .. code-block:: default
 
@@ -240,12 +241,12 @@ reconstructed signal
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 81-83
+.. GENERATED FROM PYTHON SOURCE LINES 82-84
 
 Verification
 ------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 83-94
+.. GENERATED FROM PYTHON SOURCE LINES 84-95
 
 .. code-block:: default
 
@@ -280,11 +281,11 @@ Verification
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 95-96
+.. GENERATED FROM PYTHON SOURCE LINES 96-97
 
 check if the support is recovered correctly
 
-.. GENERATED FROM PYTHON SOURCE LINES 96-103
+.. GENERATED FROM PYTHON SOURCE LINES 97-104
 
 .. code-block:: default
 
@@ -314,7 +315,7 @@ check if the support is recovered correctly
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.462 seconds)
+   **Total running time of the script:** ( 0 minutes  2.376 seconds)
 
 
 .. _sphx_glr_download_gallery_pursuit_cs1bit_biht.py:

@@ -31,7 +31,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="cr.sparse.opt.indicator_zero" href="_autosummary/cr.sparse.opt.indicator_zero.html" />
-    <link rel="prev" title="cr.sparse.la.subspaces.subspace_distance" href="_autosummary/cr.sparse.la.subspaces.subspace_distance.html" />
+    <link rel="prev" title="cr.sparse.awgn_at_snr" href="_autosummary/cr.sparse.awgn_at_snr.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -78,8 +78,7 @@
 <li class="toctree-l2"><a class="reference internal" href="cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="util.html">Utilities in cr.sparse module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="la.html">Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">Utilities</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vision.html">Computer Vision and Image Processing</a></li>
@@ -98,7 +97,7 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">API Docs</a><ul>
-      <li>Previous: <a href="_autosummary/cr.sparse.la.subspaces.subspace_distance.html" title="previous chapter">cr.sparse.la.subspaces.subspace_distance</a></li>
+      <li>Previous: <a href="_autosummary/cr.sparse.awgn_at_snr.html" title="previous chapter">cr.sparse.awgn_at_snr</a></li>
       <li>Next: <a href="_autosummary/cr.sparse.opt.indicator_zero.html" title="next chapter">cr.sparse.opt.indicator_zero</a></li>
   </ul></li>
   </ul></li>
@@ -444,16 +443,19 @@ on the specification of the prox-capable function <span class="math notranslate 
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.prox_zero.html#cr.sparse.opt.prox_zero" title="cr.sparse.opt.prox_zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prox_zero</span></code></a>()</p></td>
-<td><p>Returns a prox-capable function  <span class="math notranslate nohighlight">\(f(x)=0\)</span></p></td>
+<td><p>Returns a prox-capable wrapper for the function  <span class="math notranslate nohighlight">\(f(x)=0\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.prox_l1.html#cr.sparse.opt.prox_l1" title="cr.sparse.opt.prox_l1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prox_l1</span></code></a>([q])</p></td>
-<td><p>Returns a prox-capable function <span class="math notranslate nohighlight">\(f(x) = \| q x \|_1\)</span></p></td>
+<td><p>Returns a prox-capable wrapper for the function <span class="math notranslate nohighlight">\(f(x) = \| q x \|_1\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.prox_l2.html#cr.sparse.opt.prox_l2" title="cr.sparse.opt.prox_l2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prox_l2</span></code></a>([q])</p></td>
-<td><p>Returns a prox-capable function <span class="math notranslate nohighlight">\(f(x) = \| q x \|_2\)</span></p></td>
+<td><p>Returns a prox-capable wrapper for the function <span class="math notranslate nohighlight">\(f(x) = \| q x \|_2\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.prox_l1_pos.html#cr.sparse.opt.prox_l1_pos" title="cr.sparse.opt.prox_l1_pos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prox_l1_pos</span></code></a>([q])</p></td>
-<td><p>Returns a prox-capable function <span class="math notranslate nohighlight">\(f(x) = \| q x \|_1 + I({x \geq 0})\)</span></p></td>
+<td><p>Returns a prox-capable wrapper for the function <span class="math notranslate nohighlight">\(f(x) = \| q x \|_1 + I({x \geq 0})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.prox_l1_ball.html#cr.sparse.opt.prox_l1_ball" title="cr.sparse.opt.prox_l1_ball"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prox_l1_ball</span></code></a>([q])</p></td>
+<td><p>Returns a prox-capable wrapper for the l1-ball <span class="math notranslate nohighlight">\(\{ x : \| x \|_1 \leq q \}\)</span> indicator</p></td>
 </tr>
 </tbody>
 </table>
@@ -467,6 +469,9 @@ proximal operator <span class="math notranslate nohighlight">\(p_f(x, t)\)</span
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.prox_build.html#cr.sparse.opt.prox_build" title="cr.sparse.opt.prox_build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prox_build</span></code></a>(func, prox_op)</p></td>
+<td><p>Creates a wrapper for a prox capable function</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.build_from_ind_proj.html#cr.sparse.opt.build_from_ind_proj" title="cr.sparse.opt.build_from_ind_proj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_from_ind_proj</span></code></a>(func, prox_op)</p></td>
 <td><p>Creates a wrapper for a prox capable function</p></td>
 </tr>
 </tbody>

@@ -1,6 +1,0 @@
-﻿cr.sparse.vec\_centered
-=======================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: vec_centered

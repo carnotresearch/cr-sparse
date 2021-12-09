@@ -1,6 +1,0 @@
-﻿cr.sparse.check\_shapes\_are\_equal
-===================================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: check_shapes_are_equal

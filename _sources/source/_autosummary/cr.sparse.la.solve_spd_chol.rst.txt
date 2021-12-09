@@ -1,6 +1,0 @@
-﻿cr.sparse.la.solve\_spd\_chol
-=============================
-
-.. currentmodule:: cr.sparse.la
-
-.. autofunction:: solve_spd_chol

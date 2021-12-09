@@ -30,7 +30,7 @@
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="cr.sparse.focs.FOCSOptions" href="cr.sparse.focs.FOCSOptions.html" />
+    <link rel="next" title="cr.sparse.focs.lasso" href="cr.sparse.focs.lasso.html" />
     <link rel="prev" title="cr.sparse.focs.l1rls" href="cr.sparse.focs.l1rls.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -78,8 +78,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities in cr.sparse module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../la.html">Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../vision.html">Computer Vision and Image Processing</a></li>
@@ -100,7 +99,7 @@
   <li><a href="../index.html">API Docs</a><ul>
   <li><a href="../focs.html">First Order Conic Solvers</a><ul>
       <li>Previous: <a href="cr.sparse.focs.l1rls.html" title="previous chapter">cr.sparse.focs.l1rls</a></li>
-      <li>Next: <a href="cr.sparse.focs.FOCSOptions.html" title="next chapter">cr.sparse.focs.FOCSOptions</a></li>
+      <li>Next: <a href="cr.sparse.focs.lasso.html" title="next chapter">cr.sparse.focs.lasso</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -138,13 +137,27 @@
 <dt class="sig sig-object py" id="cr.sparse.focs.l1rls_jit">
 <span class="sig-prename descclassname"><span class="pre">cr.sparse.focs.</span></span><span class="sig-name descname"><span class="pre">l1rls_jit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">FOCSOptions(nonneg=False,</span> <span class="pre">solver='at',</span> <span class="pre">max_iters=1000,</span> <span class="pre">tol=1e-08,</span> <span class="pre">L0=1.0,</span> <span class="pre">Lexact=inf,</span> <span class="pre">alpha=0.9,</span> <span class="pre">beta=0.5,</span> <span class="pre">mu=0)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cr.sparse.focs.l1rls_jit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solver for l1 regulated least square problem</p>
-<div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-focs-l1rls-jit-0">
-<span class="eqno">(1)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-focs-l1rls-jit-0" title="Permalink to this equation">¶</a></span>\[\text{minimize} \frac{1}{2} \| A x - b \|_2^2 + \lambda \| x \|_1\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>options</strong> (<a class="reference internal" href="cr.sparse.focs.FOCSOptions.html#cr.sparse.focs.FOCSOptions" title="cr.sparse._src.focs.defs.FOCSOptions"><code class="xref py py-class docutils literal notranslate"><span class="pre">FOCSOptions</span></code></a>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<a class="reference internal" href="cr.sparse.lop.Operator.html#cr.sparse.lop.Operator" title="cr.sparse.lop.Operator"><em>cr.sparse.lop.Operator</em></a>) – A linear operator</p></li>
+<li><p><strong>b</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – The measurements <span class="math notranslate nohighlight">\(b \approx A x\)</span></p></li>
+<li><p><strong>lambda</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The regularization parameter for the l1 term</p></li>
+<li><p><strong>x0</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Initial guess for solution vector</p></li>
+<li><p><strong>options</strong> (<a class="reference internal" href="cr.sparse.focs.FOCSOptions.html#cr.sparse.focs.FOCSOptions" title="cr.sparse.focs.FOCSOptions"><em>FOCSOptions</em></a>) – Options for configuring the algorithm</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Solution of the optimization problem</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="cr.sparse.focs.FOCSState.html#cr.sparse.focs.FOCSState" title="cr.sparse.focs.FOCSState">FOCSState</a></p>
 </dd>
 </dl>
+<p>The l1 regularized least square problem is defined as:</p>
+<div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-focs-l1rls-jit-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-focs-l1rls-jit-0" title="Permalink to this equation">¶</a></span>\[\text{minimize} \frac{1}{2} \| A x - b \|_2^2 + \lambda \| x \|_1\]</div>
+<p>Sometimes, this is also called LASSO in literature.</p>
 </dd></dl>
 
 </section>

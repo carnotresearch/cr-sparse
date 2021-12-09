@@ -122,7 +122,7 @@
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span>
 
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
 
 <div class="viewcode-block" id="smooth_value_grad"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.opt.smooth_value_grad.html#cr.sparse.opt.smooth_value_grad">[docs]</a><span class="k">def</span> <span class="nf">smooth_value_grad</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">grad</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns a function which computes both the value and gradient of a smooth function at a specified point</span>
@@ -135,7 +135,7 @@
 <span class="sd">        mode=2 both value and gradient</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>

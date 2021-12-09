@@ -1,6 +1,0 @@
-﻿cr.sparse.off\_diagonal\_elements
-=================================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: off_diagonal_elements

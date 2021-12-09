@@ -123,7 +123,7 @@
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">lax</span>
 
-<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
 <span class="kn">import</span> <span class="nn">cr.sparse.opt</span> <span class="k">as</span> <span class="nn">opt</span>
 <span class="kn">import</span> <span class="nn">cr.sparse.lop</span> <span class="k">as</span> <span class="nn">lop</span>
 
@@ -139,10 +139,10 @@
     <span class="sd">&quot;&quot;&quot;Improves the estimate of L</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">xy</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span>
-    <span class="n">xy_sq</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">arr_rnorm_sqr</span><span class="p">(</span> <span class="n">xy</span> <span class="p">)</span>
+    <span class="n">xy_sq</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">arr_rnorm_sqr</span><span class="p">(</span> <span class="n">xy</span> <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">backtrack2</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
-        <span class="n">localL</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">crs</span><span class="o">.</span><span class="n">arr_rdot</span><span class="p">(</span> <span class="n">A_x</span> <span class="o">-</span> <span class="n">A_y</span><span class="p">,</span> <span class="n">g_Ax</span> <span class="o">-</span> <span class="n">g_Ay</span> <span class="p">)</span> <span class="o">/</span> <span class="n">xy_sq</span>
+        <span class="n">localL</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cnb</span><span class="o">.</span><span class="n">arr_rdot</span><span class="p">(</span> <span class="n">A_x</span> <span class="o">-</span> <span class="n">A_y</span><span class="p">,</span> <span class="n">g_Ax</span> <span class="o">-</span> <span class="n">g_Ay</span> <span class="p">)</span> <span class="o">/</span> <span class="n">xy_sq</span>
         <span class="n">new_L</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">Lexact</span><span class="p">,</span> <span class="n">localL</span> <span class="p">)</span>
         <span class="n">new_L</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">Lexact</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span> <span class="n">localL</span><span class="p">,</span> <span class="n">L</span> <span class="o">/</span> <span class="n">beta</span> <span class="p">)</span> <span class="p">)</span>
         <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">localL</span> <span class="o">&lt;=</span> <span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">new_L</span><span class="p">)</span>
@@ -218,7 +218,7 @@
         <span class="n">g_z</span> <span class="o">=</span> <span class="n">g_x</span>
         <span class="n">g_Az</span> <span class="o">=</span> <span class="n">g_Ax</span>
 
-        <span class="n">norm_x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">arr_rnorm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">norm_x</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">arr_rnorm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">norm_dx</span> <span class="o">=</span> <span class="n">norm_x</span>
 
         <span class="n">state</span> <span class="o">=</span> <span class="n">FOCSState</span><span class="p">(</span><span class="n">L</span><span class="o">=</span><span class="n">options</span><span class="o">.</span><span class="n">L0</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
@@ -265,8 +265,8 @@
         <span class="c1"># improve the estimate of L</span>
         <span class="n">L</span> <span class="o">=</span> <span class="n">backtrack_L</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">A_x</span><span class="p">,</span> <span class="n">g_Ax</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">A_y</span><span class="p">,</span> <span class="n">g_Ay</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">options</span><span class="o">.</span><span class="n">Lexact</span><span class="p">,</span> <span class="n">options</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span>
         <span class="c1"># compute parameters for convergence</span>
-        <span class="n">norm_x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">arr_rnorm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">norm_dx</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">arr_rnorm</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">state</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">norm_x</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">arr_rnorm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">norm_dx</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">arr_rnorm</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">state</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
 
         <span class="n">state</span> <span class="o">=</span> <span class="n">FOCSState</span><span class="p">(</span><span class="n">L</span><span class="o">=</span><span class="n">L</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span>
             <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">A_x</span><span class="o">=</span><span class="n">A_x</span><span class="p">,</span> <span class="n">g_Ax</span><span class="o">=</span><span class="n">g_Ax</span><span class="p">,</span> <span class="n">g_x</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">g_x</span><span class="p">,</span> <span class="n">f_x</span><span class="o">=</span><span class="n">f_x</span><span class="p">,</span> <span class="n">C_x</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">C_x</span><span class="p">,</span>

@@ -270,6 +270,7 @@ Available proximal operator generators:
   prox_l1
   prox_l2
   prox_l1_pos
+  prox_l1_ball
 
 You can build your own :py:class:`cr.sparse.opt.ProxCapable` wrappers
 by providing the definition of the function :math:`f(x)` and its 
@@ -279,6 +280,7 @@ proximal operator :math:`p_f(x, t)`.
   :toctree: _autosummary
   
   prox_build
+  build_from_ind_proj
 
 
 

@@ -123,7 +123,7 @@
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">vmap</span><span class="p">,</span> <span class="n">jit</span><span class="p">,</span> <span class="n">lax</span>
 
 <span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">abs_max_idx</span><span class="p">,</span> <span class="n">gram_chol_update</span>
-<span class="kn">from</span> <span class="nn">cr.sparse.la</span> <span class="kn">import</span> <span class="n">solve_spd_chol</span>
+<span class="kn">from</span> <span class="nn">cr.nimble</span> <span class="kn">import</span> <span class="n">solve_spd_chol</span>
 <span class="kn">from</span> <span class="nn">.defs</span> <span class="kn">import</span> <span class="n">RecoverySolution</span>
 
 <div class="viewcode-block" id="matrix_solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.omp.matrix_solve.html#cr.sparse.pursuit.omp.matrix_solve">[docs]</a><span class="k">def</span> <span class="nf">matrix_solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">max_iters</span><span class="p">,</span> <span class="n">max_res_norm</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>

@@ -1,6 +1,0 @@
-﻿cr.sparse.vec\_rotate\_left\_n
-==============================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: vec_rotate_left_n

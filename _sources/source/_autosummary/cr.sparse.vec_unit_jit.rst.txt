@@ -1,6 +1,0 @@
-﻿cr.sparse.vec\_unit\_jit
-========================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: vec_unit_jit

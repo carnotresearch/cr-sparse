@@ -1,6 +1,0 @@
-﻿cr.sparse.arr\_l1norm
-=====================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: arr_l1norm

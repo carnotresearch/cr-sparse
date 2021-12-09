@@ -1,6 +1,0 @@
-﻿cr.sparse.la.subspaces.principal\_angles\_cos
-=============================================
-
-.. currentmodule:: cr.sparse.la.subspaces
-
-.. autofunction:: principal_angles_cos

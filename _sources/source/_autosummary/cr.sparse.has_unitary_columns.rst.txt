@@ -1,6 +1,0 @@
-﻿cr.sparse.has\_unitary\_columns
-===============================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: has_unitary_columns

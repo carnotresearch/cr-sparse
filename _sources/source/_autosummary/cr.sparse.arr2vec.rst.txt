@@ -1,6 +1,0 @@
-﻿cr.sparse.arr2vec
-=================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: arr2vec

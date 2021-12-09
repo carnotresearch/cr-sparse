@@ -1,6 +1,0 @@
-﻿cr.sparse.promote\_arg\_dtypes
-==============================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: promote_arg_dtypes

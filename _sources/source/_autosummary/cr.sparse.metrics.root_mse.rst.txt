@@ -1,6 +1,0 @@
-﻿cr.sparse.metrics.root\_mse
-===========================
-
-.. currentmodule:: cr.sparse.metrics
-
-.. autofunction:: root_mse

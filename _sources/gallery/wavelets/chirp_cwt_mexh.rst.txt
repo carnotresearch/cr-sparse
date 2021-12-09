@@ -41,12 +41,13 @@ In this example, we analyze a chirp signal with a Ricker (a.k.a. Mexican Hat wav
 
 .. GENERATED FROM PYTHON SOURCE LINES 13-14
 
-Let's import necessary libraries 
+Let's import necessary libraries
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-24
+.. GENERATED FROM PYTHON SOURCE LINES 14-25
 
 .. code-block:: default
 
+    import jax 
     import numpy as np
     import jax.numpy as jnp
     # CR.Sparse libraries
@@ -64,13 +65,13 @@ Let's import necessary libraries
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 25-28
+.. GENERATED FROM PYTHON SOURCE LINES 26-29
 
 Test signal generation
 ------------------------------
 Sampling frequency in Hz
 
-.. GENERATED FROM PYTHON SOURCE LINES 28-42
+.. GENERATED FROM PYTHON SOURCE LINES 29-43
 
 .. code-block:: default
 
@@ -100,12 +101,12 @@ Sampling frequency in Hz
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 43-45
+.. GENERATED FROM PYTHON SOURCE LINES 44-46
 
 Power spectrum
 ------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 45-54
+.. GENERATED FROM PYTHON SOURCE LINES 46-55
 
 .. code-block:: default
 
@@ -138,19 +139,19 @@ Power spectrum
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 55-59
+.. GENERATED FROM PYTHON SOURCE LINES 56-60
 
 As expected, the power spectrum is able to identify the
 frequencies in the zone 1Hz to 4Hz in the chirp. 
 However, the spectrum is unable to localize the 
 changes in frequency over time.
 
-.. GENERATED FROM PYTHON SOURCE LINES 61-63
+.. GENERATED FROM PYTHON SOURCE LINES 62-64
 
 Ricker/Mexican Hat Wavelet
 ------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 63-71
+.. GENERATED FROM PYTHON SOURCE LINES 64-72
 
 .. code-block:: default
 
@@ -174,19 +175,20 @@ Ricker/Mexican Hat Wavelet
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 72-76
+.. GENERATED FROM PYTHON SOURCE LINES 73-77
 
 Wavelet Analysis
 ------------------------------
 select a set of scales for wavelet analysis
 voices per octave
 
-.. GENERATED FROM PYTHON SOURCE LINES 76-105
+.. GENERATED FROM PYTHON SOURCE LINES 77-107
 
 .. code-block:: default
 
     nu = 8
     scales = wt.scales_from_voices_per_octave(nu, jnp.arange(32))
+    scales = jax.device_get(scales)
     # Compute the wavelet analysis
     output = wt.cwt(x, scales, wavelet)
     # Identify the frequencies for the analysis
@@ -229,7 +231,7 @@ voices per octave
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  6.475 seconds)
+   **Total running time of the script:** ( 0 minutes  5.045 seconds)
 
 
 .. _sphx_glr_download_gallery_wavelets_chirp_cwt_mexh.py:

@@ -122,8 +122,8 @@
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">random</span><span class="p">,</span> <span class="n">jit</span>
 
-<span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">promote_arg_dtypes</span>
-<span class="kn">from</span> <span class="nn">.ndarray</span> <span class="kn">import</span> <span class="n">arr_l2norm_sqr</span>
+<span class="kn">from</span> <span class="nn">cr.nimble</span> <span class="kn">import</span> <span class="n">promote_arg_dtypes</span>
+<span class="kn">from</span> <span class="nn">cr.nimble</span> <span class="kn">import</span> <span class="n">arr_l2norm_sqr</span>
 
 <div class="viewcode-block" id="awgn_at_snr"><a class="viewcode-back" href="../../../../source/_autosummary/cr.sparse.awgn_at_snr.html#cr.sparse.awgn_at_snr">[docs]</a><span class="k">def</span> <span class="nf">awgn_at_snr</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">signal</span><span class="p">,</span> <span class="n">snr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generates noise for the signal at the specified SNR</span>

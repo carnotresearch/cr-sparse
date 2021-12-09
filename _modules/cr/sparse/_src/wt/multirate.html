@@ -121,7 +121,7 @@
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">lax</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 
-<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
 
 <span class="kn">from</span> <span class="nn">.conv</span> <span class="kn">import</span> <span class="n">iconv</span><span class="p">,</span> <span class="n">aconv</span><span class="p">,</span> <span class="n">mirror_filter</span>
 
@@ -169,7 +169,7 @@
         <span class="c1"># Construct  the high pass mirror filter </span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">mirror_filter</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
         <span class="c1"># circular left shift the contents of x by 1.</span>
-        <span class="n">x</span>  <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">vec_rotate_left</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span>  <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">vec_rotate_left</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="c1"># Perform filtering</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">iconv</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
         <span class="c1"># Perform downsampling</span>
@@ -199,7 +199,7 @@
         <span class="c1"># Upsample by a factor of 2 and introduce zeros</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">up_sample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="c1"># circular right shift the contents of x by 1.</span>
-        <span class="n">x</span>  <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">vec_rotate_right</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span>  <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">vec_rotate_right</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="c1"># Perform low pass filtering</span>
         <span class="k">return</span> <span class="n">aconv</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 

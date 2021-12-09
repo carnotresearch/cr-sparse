@@ -1,6 +1,0 @@
-﻿cr.sparse.has\_orthogonal\_columns
-==================================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: has_orthogonal_columns

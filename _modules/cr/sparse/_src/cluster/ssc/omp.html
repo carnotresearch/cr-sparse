@@ -121,11 +121,10 @@
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">vmap</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 
-<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
-<span class="kn">import</span> <span class="nn">cr.sparse.la</span> <span class="k">as</span> <span class="nn">crla</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
 
-<span class="n">submat_multiplier</span> <span class="o">=</span> <span class="n">vmap</span><span class="p">(</span><span class="n">crla</span><span class="o">.</span><span class="n">mult_with_submatrix</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">submat_solver</span> <span class="o">=</span> <span class="n">vmap</span><span class="p">(</span><span class="n">crla</span><span class="o">.</span><span class="n">solve_on_submatrix</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,))</span>
+<span class="n">submat_multiplier</span> <span class="o">=</span> <span class="n">vmap</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">mult_with_submatrix</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">submat_solver</span> <span class="o">=</span> <span class="n">vmap</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">solve_on_submatrix</span><span class="p">,</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,))</span>
 
 
 <div class="viewcode-block" id="build_representation_omp"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.build_representation_omp.html#cr.sparse.cluster.ssc.build_representation_omp">[docs]</a><span class="k">def</span> <span class="nf">build_representation_omp</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
@@ -136,7 +135,7 @@
     <span class="c1"># Number of data points</span>
     <span class="n">N</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="c1"># We normalize the columns of X</span>
-    <span class="n">Xn</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">normalize_l2_cw</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">Xn</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">normalize_l2_cw</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
     <span class="c1"># The dictionary</span>
     <span class="n">Dict</span> <span class="o">=</span> <span class="n">Xn</span>
     <span class="c1"># The residual </span>
@@ -146,9 +145,9 @@
     <span class="n">P</span> <span class="o">=</span> <span class="n">Dict</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">R</span>
     <span class="c1"># First correlation of residual with signal</span>
     <span class="c1"># Set the diagonal to zero</span>
-    <span class="n">H</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">set_diagonal</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">set_diagonal</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="c1"># Index of best match</span>
-    <span class="n">indices</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">abs_max_idx_cw</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">abs_max_idx_cw</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
     <span class="c1"># Initialize the array of selected indices</span>
     <span class="c1"># with current indices as the first row</span>
     <span class="n">I</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">jnp</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
@@ -156,9 +155,9 @@
     <span class="c1"># conduct OMP iterations</span>
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
         <span class="c1"># compute the correlations</span>
-        <span class="n">H</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">set_diagonal</span><span class="p">(</span><span class="n">Dict</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">R</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">set_diagonal</span><span class="p">(</span><span class="n">Dict</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">R</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># Index of best match</span>
-        <span class="n">indices</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">abs_max_idx_cw</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">abs_max_idx_cw</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
         <span class="c1"># Update the set of indices</span>
         <span class="n">I</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">I</span><span class="p">,</span> <span class="n">indices</span><span class="p">))</span>
         <span class="c1"># Solve over these indices</span>
@@ -184,7 +183,7 @@
     <span class="n">ends</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">N</span>
 
     <span class="c1"># We normalize the columns of X</span>
-    <span class="n">Xn</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">normalize_l2_cw</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">Xn</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">normalize_l2_cw</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
     <span class="c1"># The dictionary</span>
     <span class="n">Dict</span> <span class="o">=</span> <span class="n">Xn</span>
     <span class="n">Z_res</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">K</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
@@ -210,7 +209,7 @@
         <span class="c1"># Set the diagonal to zero</span>
         <span class="n">H</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">at</span><span class="p">[(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="c1"># Index of best match</span>
-        <span class="n">indices</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">abs_max_idx_cw</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">abs_max_idx_cw</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
         <span class="c1"># Initialize the array of selected indices</span>
         <span class="c1"># with current indices as the first row</span>
         <span class="n">I_res</span> <span class="o">=</span> <span class="n">I_res</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
@@ -222,7 +221,7 @@
             <span class="c1"># Set the diagonal to zero</span>
             <span class="n">H</span> <span class="o">=</span> <span class="n">H</span><span class="o">.</span><span class="n">at</span><span class="p">[(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="c1"># Index of best match</span>
-            <span class="n">indices</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">abs_max_idx_cw</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">abs_max_idx_cw</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
             <span class="c1"># Update the set of indices</span>
             <span class="n">I_res</span> <span class="o">=</span> <span class="n">I_res</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
             <span class="c1"># Solve over these indices</span>

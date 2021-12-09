@@ -1,6 +1,0 @@
-﻿cr.sparse.la.singular\_values
-=============================
-
-.. currentmodule:: cr.sparse.la
-
-.. autofunction:: singular_values

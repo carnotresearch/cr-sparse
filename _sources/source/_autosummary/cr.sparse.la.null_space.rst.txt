@@ -1,6 +1,0 @@
-﻿cr.sparse.la.null\_space
-========================
-
-.. currentmodule:: cr.sparse.la
-
-.. autofunction:: null_space

@@ -127,8 +127,7 @@
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">vmap</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 
-
-<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
 <span class="kn">import</span> <span class="nn">cr.sparse.cluster</span> <span class="k">as</span> <span class="nn">crcluster</span>
 <span class="kn">from</span> <span class="nn">jax.experimental.sparse</span> <span class="kn">import</span> <span class="n">BCOO</span><span class="p">,</span> <span class="n">sparsify</span>
 
@@ -198,7 +197,7 @@
     <span class="sd">&quot;&quot;&quot;Returns an SxS matrix of angles between each pair of points</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># make sure that the points are normalized</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">normalize_l2_cw</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">normalize_l2_cw</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
     <span class="c1"># Compute gram matrix</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span>
     <span class="c1"># Avoid overflow in gram matrix</span>
@@ -210,7 +209,7 @@
     <span class="sd">&quot;&quot;&quot;Returns the minimum angles for for each point with its neighbors inside the cluster </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># we have to ignore the diagonal elements</span>
-    <span class="n">angles</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">set_diagonal</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+    <span class="n">angles</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">set_diagonal</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
     <span class="n">start_indices</span><span class="p">,</span> <span class="n">end_indices</span> <span class="o">=</span> <span class="n">crcluster</span><span class="o">.</span><span class="n">start_end_indices</span><span class="p">(</span><span class="n">cluster_sizes</span><span class="p">)</span>
     <span class="n">K</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cluster_sizes</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">min_angles</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
@@ -244,7 +243,7 @@
     <span class="sd">&quot;&quot;&quot;Returns the index of the nearest neighbor for each point inside the cluster </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># we have to ignore the diagonal elements</span>
-    <span class="n">angles</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">set_diagonal</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+    <span class="n">angles</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">set_diagonal</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
     <span class="n">start_indices</span><span class="p">,</span> <span class="n">end_indices</span> <span class="o">=</span> <span class="n">crcluster</span><span class="o">.</span><span class="n">start_end_indices</span><span class="p">(</span><span class="n">cluster_sizes</span><span class="p">)</span>
     <span class="n">K</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cluster_sizes</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">inn_indices</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>

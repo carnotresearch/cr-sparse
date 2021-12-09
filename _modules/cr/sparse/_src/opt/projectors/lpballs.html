@@ -125,7 +125,7 @@
 <span class="kn">from</span> <span class="nn">jax.numpy.linalg</span> <span class="kn">import</span> <span class="n">qr</span><span class="p">,</span> <span class="n">norm</span>
 <span class="kn">from</span> <span class="nn">jax.scipy.linalg</span> <span class="kn">import</span> <span class="n">svd</span>
 
-<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
 
 <span class="n">eps</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span>
 
@@ -133,11 +133,11 @@
 
     <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">A</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">A</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-        <span class="n">A</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">q</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;q must be greater than 0&quot;</span><span class="p">)</span>
@@ -145,7 +145,7 @@
     <span class="nd">@jit</span>
     <span class="k">def</span> <span class="nf">proj_q</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">norm_x</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">invalid</span> <span class="o">=</span>  <span class="n">norm_x</span> <span class="o">&gt;</span> <span class="n">q</span>
 
@@ -166,7 +166,7 @@
     <span class="nd">@jit</span>
     <span class="k">def</span> <span class="nf">proj_q_b</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="c1"># compute difference from center</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">b</span>
         <span class="n">norm_r</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
@@ -251,10 +251,11 @@
 
     <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">q</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;q must be greater than 0&quot;</span><span class="p">)</span>
+    <span class="c1"># TODO: This creates problems with JIT</span>
+    <span class="c1"># if q &lt;= 0:</span>
+    <span class="c1">#     raise ValueError(&quot;q must be greater than 0&quot;)</span>
 
 
     <span class="k">def</span> <span class="nf">project_inside_ball</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
@@ -279,8 +280,8 @@
     <span class="nd">@jit</span>
     <span class="k">def</span> <span class="nf">proj_q</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">invalid</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">arr_l1norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">q</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">invalid</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">arr_l1norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">q</span>
         <span class="k">return</span> <span class="n">lax</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">invalid</span><span class="p">,</span> 
             <span class="c1"># find the shrinkage threshold and shrink</span>
             <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">project_inside_ball</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
@@ -295,10 +296,10 @@
     <span class="nd">@jit</span>
     <span class="k">def</span> <span class="nf">proj_q_b</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="c1"># compute difference from center</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">b</span>
-        <span class="n">invalid</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">arr_l1norm</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">q</span>
+        <span class="n">invalid</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">arr_l1norm</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">q</span>
         <span class="c1"># update the residual</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">invalid</span><span class="p">,</span> 
             <span class="c1"># find the shrinkage threshold and shrink</span>

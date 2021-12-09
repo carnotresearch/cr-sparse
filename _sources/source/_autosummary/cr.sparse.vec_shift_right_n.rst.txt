@@ -1,6 +1,0 @@
-﻿cr.sparse.vec\_shift\_right\_n
-==============================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: vec_shift_right_n

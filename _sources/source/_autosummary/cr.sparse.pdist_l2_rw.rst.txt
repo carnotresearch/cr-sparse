@@ -1,6 +1,0 @@
-﻿cr.sparse.pdist\_l2\_rw
-=======================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: pdist_l2_rw

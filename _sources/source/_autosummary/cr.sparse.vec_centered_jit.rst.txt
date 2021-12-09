@@ -1,6 +1,0 @@
-﻿cr.sparse.vec\_centered\_jit
-============================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: vec_centered_jit

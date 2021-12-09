@@ -1,6 +1,0 @@
-﻿cr.sparse.la.orth
-=================
-
-.. currentmodule:: cr.sparse.la
-
-.. autofunction:: orth

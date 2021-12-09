@@ -1,6 +1,0 @@
-﻿cr.sparse.la.solve\_Ux\_b
-=========================
-
-.. currentmodule:: cr.sparse.la
-
-.. autofunction:: solve_Ux_b

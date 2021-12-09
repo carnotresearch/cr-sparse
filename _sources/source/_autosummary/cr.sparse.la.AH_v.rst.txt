@@ -1,6 +1,0 @@
-﻿cr.sparse.la.AH\_v
-==================
-
-.. currentmodule:: cr.sparse.la
-
-.. autofunction:: AH_v

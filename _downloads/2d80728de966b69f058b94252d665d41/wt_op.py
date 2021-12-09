@@ -22,11 +22,9 @@ import jax.numpy as jnp
 # For plotting diagrams
 import matplotlib.pyplot as plt
 ## CR-Sparse modules
-import cr.sparse as crs
+import cr.nimble as cnb
 # Linear operators
 from cr.sparse import lop
-# Error measurement
-from cr.sparse import metrics
 # Sample images
 import skimage.data
 # Utilities
@@ -88,10 +86,10 @@ plt.plot(alpha2, label='Wavelet coefficients after compression')
 # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 x_rec = DWT_op.trans(alpha2)
 # RMSE 
-rmse = metrics.root_mse(x, x_rec)
+rmse = cnb.root_mse(x, x_rec)
 print(rmse)
 # SNR 
-snr = metrics.signal_noise_ratio(x, x_rec)
+snr = cnb.signal_noise_ratio(x, x_rec)
 print(snr)
 plt.figure(figsize=(8,2))
 plt.plot(x, 'k', label='Original')
@@ -128,10 +126,10 @@ coefs2 = coefs2.at[:h//4, :w//4].set(coefs[:h//4, :w//4])
 # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 image_rec = DWT2_op.trans(coefs2)
 # RMSE 
-rmse = metrics.root_mse(image, image_rec)
+rmse = cnb.root_mse(image, image_rec)
 print(rmse)
 # PSNR 
-psnr = metrics.peak_signal_noise_ratio(image, image_rec)
+psnr = cnb.peak_signal_noise_ratio(image, image_rec)
 print(psnr)
 
 # Plot everything

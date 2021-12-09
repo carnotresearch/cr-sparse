@@ -66,6 +66,7 @@ Solvers
     focs
     l1rls
     l1rls_jit
+    lasso
 
 
 Data types
@@ -108,10 +109,40 @@ We consider the problem:
 
 Choose:
 
-- :math:`f(x) = \| x \|_2^2`  see :func:`cr.sparse.opt.smooth_quad_matrix`
+- :math:`f(x) = \frac{1}{2}\| x \|_2^2`  see :func:`cr.sparse.opt.smooth_quad_matrix`
 - :math:`h(x) = \| \lambda x \|_1` see :func:`cr.sparse.opt.prox_l1`
 - :math:`\AAA` as the linear operator
 - :math:`-b` as the translate input
 
 With these choices, it is straight-forward to use :func:`focs` to solve 
-the L1LRS problem.  This is implemented in the function :func:`l1lrs`.
+the L1LRS problem.  This is implemented in the function :func:`l1rls`.
+
+
+LASSO
+------------------
+
+LASSO (least absolute shrinkage and selection operator) 
+s a regression analysis method that performs both variable selection 
+and regularization in order to enhance the prediction accuracy 
+and interpretability of the resulting statistical model.
+
+We consider the problem: 
+
+.. math::
+
+    \begin{aligned}
+    \underset{x}{\text{minimize}} \frac{1}{2} \| \AAA x - b \|_2^2\\
+    \text{subject to } \| x \|_1 \leq \tau
+    \end{aligned}
+
+
+Choose:
+
+- :math:`f(x) = \frac{1}{2}\| x \|_2^2`  see :func:`cr.sparse.opt.smooth_quad_matrix`
+- :math:`h(x) = I_C(x)` as the indicator function for l1-ball :math:`C = \{x : \| x \|_1 \leq \tau\}`, 
+  see :func:`cr.sparse.opt.prox_l1_ball`
+- :math:`\AAA` as the linear operator
+- :math:`-b` as the translate input
+
+With these choices, it is straight-forward to use :func:`focs` to solve 
+the LASSO problem.  This is implemented in the function :func:`lasso`.
