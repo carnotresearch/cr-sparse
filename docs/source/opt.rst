@@ -271,6 +271,7 @@ Available proximal operator generators:
   prox_l2
   prox_l1_pos
   prox_l1_ball
+  prox_owl1
 
 You can build your own :py:class:`cr.sparse.opt.ProxCapable` wrappers
 by providing the definition of the function :math:`f(x)` and its 

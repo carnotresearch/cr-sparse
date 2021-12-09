@@ -35,3 +35,5 @@ from cr.sparse._src.opt.proximal_ops.lpnorms import (
     prox_l1_pos,
     prox_l1_ball
 )
+
+from cr.sparse._src.opt.proximal_ops.prox_sorted_l1 import prox_owl1
