@@ -16,9 +16,10 @@ import jax
 import jax.numpy as jnp
 from jax import random, jit
 import jax.numpy.fft as jfft
+from jax.scipy import signal
 
-from .norm import sqr_norms_l2_cw, sqr_norms_l2_rw
-from .matrix import is_matrix
+from cr.nimble import sqr_norms_l2_cw, sqr_norms_l2_rw
+from cr.nimble import is_matrix
 from .discrete.number import next_pow_of_2
 
 def find_first_signal_with_energy_le_rw(X, energy):
@@ -451,4 +452,13 @@ def interpft(x, N):
     y = y * (N / n)
     return y
 
+
+def vec_convolve(x, h):
+    """1D full convolution based on a hack suggested by Jake Vanderplas
+
+    See https://github.com/google/jax/discussions/7961 for details
+    """
+    return signal.convolve(x[None], h[None])[0]
+
+vec_convolve_jit = jit(vec_convolve)
 

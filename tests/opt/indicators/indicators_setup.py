@@ -6,7 +6,7 @@ import jax.numpy as jnp
 from jax import random, lax
 
 # crs imports
-import cr.sparse as crs
+import cr.nimble as cnb
 from cr.sparse.opt.indicators import *
 
 atol = 1e-6

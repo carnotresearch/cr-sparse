@@ -36,7 +36,7 @@ K = 4
 # %%
 # Sensing Matrix
 # ------------------------------------------------
-Phi = crdict.gaussian_mtx(crs.KEYS[0], M, N, normalize_atoms=False)
+Phi = crdict.gaussian_mtx(cnb.KEYS[0], M, N, normalize_atoms=False)
 # frame bound
 s0 = crdict.upper_frame_bound(Phi)
 print(s0)
@@ -49,7 +49,7 @@ plt.title(r'$\Phi$')
 # %%
 # K-sparse signal
 # --------------------------
-x, omega = crdata.sparse_normal_representations(crs.KEYS[1], N, K)
+x, omega = crdata.sparse_normal_representations(cnb.KEYS[1], N, K)
 # normalize signal
 x = x / norm(x)
 # the support indices

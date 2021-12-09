@@ -1,6 +1,6 @@
 import jax.numpy as jnp
 
-from cr.sparse.la import rq
+from cr.nimble import rq
 
 
 def process(A):

@@ -24,9 +24,9 @@ from jax.numpy.linalg import norm
 from jax.experimental.sparse import BCOO
 from .kmeans import kmeans
 
-import cr.sparse as crs
-import cr.sparse.la.svd as lasvd
-from cr.sparse import promote_arg_dtypes
+import cr.nimble as cnb
+import cr.nimble.svd as lasvd
+from cr.nimble import promote_arg_dtypes
 
 class SpectralclusteringSolution(NamedTuple):
     """The solution for K-means algorithm
@@ -125,7 +125,7 @@ def normalized_random_walk_laplacian(W):
     D_inv = D**(-1)
     # Compute the Laplacian
     # L = I - D_inv @ W
-    L = crs.add_to_diagonal(-crs.diag_premultiply(D_inv, W), 1.)
+    L = cnb.add_to_diagonal(-cnb.diag_premultiply(D_inv, W), 1.)
     return L
 
 normalized_random_walk_laplacian_jit = jit(normalized_random_walk_laplacian)
@@ -203,8 +203,8 @@ def normalized_symmetric_w(W):
     D_half_inv = D**(-1/2)
     # Compute the normalized
     # W = D_inv @ W @ D_inv
-    W = crs.diag_premultiply(D_half_inv, W)
-    W = crs.diag_postmultiply(W, D_half_inv)
+    W = cnb.diag_premultiply(D_half_inv, W)
+    W = cnb.diag_postmultiply(W, D_half_inv)
     return W
 
 
@@ -224,7 +224,7 @@ def normalized_symmetric_fast_k(key, W, k):
     # Choose the last k eigen vectors
     kernel = V[:, :k]
     # normalize the rows of kernel
-    kernel = crs.normalize_l2_rw(kernel)
+    kernel = cnb.normalize_l2_rw(kernel)
     result = kmeans(key, kernel, k, iter=100)
     return SpectralclusteringSolution(singular_values=S, 
         assignment=result.assignment,
@@ -268,7 +268,7 @@ def normalized_symmetric_sparse_fast_k(key, W, k):
     # Choose the last k eigen vectors
     kernel = V[:, :k]
     # normalize the rows of kernel
-    kernel = crs.normalize_l2_rw(kernel)
+    kernel = cnb.normalize_l2_rw(kernel)
     result = kmeans(key, kernel, k, iter=100)
     return SpectralclusteringSolution(singular_values=S, 
         assignment=result.assignment,

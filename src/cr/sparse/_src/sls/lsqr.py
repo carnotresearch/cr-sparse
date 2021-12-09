@@ -61,7 +61,7 @@ def l2norm_sqr(x):
     return jnp.sum(x_sqr)
 
 
-from cr.sparse import promote_arg_dtypes
+from cr.nimble import promote_arg_dtypes
 from cr.sparse import RecoveryFullSolution
 
 class LSQRState(NamedTuple):

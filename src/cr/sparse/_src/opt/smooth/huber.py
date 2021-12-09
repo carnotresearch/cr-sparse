@@ -16,7 +16,7 @@
 from jax import jit, grad, lax
 
 import jax.numpy as jnp
-import cr.sparse as crs
+import cr.nimble as cnb
 
 from .smooth import build2
 
@@ -24,12 +24,12 @@ def smooth_huber(tau=1.):
     r"""Huber penalty function and its gradient
     """
     tau = jnp.asarray(tau)
-    tau = crs.promote_arg_dtypes(tau)
+    tau = cnb.promote_arg_dtypes(tau)
 
     @jit
     def func(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         x_mag = jnp.abs(x)
 
         small = x_mag <= tau
@@ -42,7 +42,7 @@ def smooth_huber(tau=1.):
     @jit
     def gradient(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         g = x/jnp.maximum(tau, jnp.abs(x) )
         return g
 

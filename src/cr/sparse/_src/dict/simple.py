@@ -23,7 +23,7 @@ from jax import random
 from jax import jit
 
 
-from cr.sparse import normalize_l2_cw, promote_arg_dtypes, hermitian
+from cr.nimble import normalize_l2_cw, promote_arg_dtypes, hermitian
 
 
 def gaussian_mtx(key, N, D, normalize_atoms=True):

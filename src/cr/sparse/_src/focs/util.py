@@ -15,19 +15,20 @@
 from jax import jit
 
 import jax.numpy as jnp
+import cr.nimble as cnb
 import cr.sparse as crs
-from cr.sparse.la import AH_v
+from cr.nimble import AH_v
 
 def matrix_affine_func(A=None, b=None):
     """Returns an affine function for a matrix A and vector b
     """
     if A is not None:
         A = jnp.asarray(A)
-        A = crs.promote_arg_dtypes(A)
+        A = cnb.promote_arg_dtypes(A)
 
     if b is not None:
         b = jnp.asarray(b)
-        b = crs.promote_arg_dtypes(b)
+        b = cnb.promote_arg_dtypes(b)
 
     @jit
     def identity(x):

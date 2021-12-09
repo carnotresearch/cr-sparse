@@ -17,7 +17,7 @@ from .defs import FOCSOptions, FOCSState
 import jax.numpy as jnp
 from jax import jit, lax
 
-import cr.sparse as crs
+import cr.nimble as cnb
 import cr.sparse.opt as opt
 import cr.sparse.lop as lop
 
@@ -33,10 +33,10 @@ def backtrack_L(x, A_x, g_Ax, y, A_y, g_Ay, L, Lexact, beta):
     """Improves the estimate of L
     """
     xy = x - y
-    xy_sq = crs.arr_rnorm_sqr( xy )
+    xy_sq = cnb.arr_rnorm_sqr( xy )
 
     def backtrack2(L):
-        localL = 2 * crs.arr_rdot( A_x - A_y, g_Ax - g_Ay ) / xy_sq
+        localL = 2 * cnb.arr_rdot( A_x - A_y, g_Ax - g_Ay ) / xy_sq
         new_L = jnp.minimum(Lexact, localL )
         new_L = jnp.minimum(Lexact, jnp.maximum( localL, L / beta ) )
         return jnp.where(localL <= L, L, new_L)
@@ -112,7 +112,7 @@ def focs(smooth_f, prox_h, A, b, x0, options: FOCSOptions = FOCSOptions()):
         g_z = g_x
         g_Az = g_Ax
 
-        norm_x = crs.arr_rnorm(x)
+        norm_x = cnb.arr_rnorm(x)
         norm_dx = norm_x
 
         state = FOCSState(L=options.L0, theta=jnp.inf,
@@ -159,8 +159,8 @@ def focs(smooth_f, prox_h, A, b, x0, options: FOCSOptions = FOCSOptions()):
         # improve the estimate of L
         L = backtrack_L(x, A_x, g_Ax, y, A_y, g_Ay, L, options.Lexact, options.beta)
         # compute parameters for convergence
-        norm_x = crs.arr_rnorm(x)
-        norm_dx = crs.arr_rnorm(x - state.x)
+        norm_x = cnb.arr_rnorm(x)
+        norm_dx = cnb.arr_rnorm(x - state.x)
 
         state = FOCSState(L=L, theta=theta,
             x=x, A_x=A_x, g_Ax=g_Ax, g_x=state.g_x, f_x=f_x, C_x=state.C_x,

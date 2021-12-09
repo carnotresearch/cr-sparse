@@ -16,7 +16,7 @@ import jax.numpy as jnp
 
 from .lop import Operator
 
-import cr.sparse as crs
+import cr.nimble as cnb
 
 
 
@@ -35,12 +35,12 @@ def dot(v, adjoint=False, axis=0):
     v = jnp.asarray(v)
     assert v.ndim >= 1, "v cannot be a scalar"
     # make sure that v is inexact
-    v = crs.promote_arg_dtypes(v)
+    v = cnb.promote_arg_dtypes(v)
     n = v.shape[0] if v.ndim == 1 else v.shape 
     m = 1
 
     def times1d(x):
-        result = crs.arr_rdot(v, x)
+        result = cnb.arr_rdot(v, x)
         return jnp.expand_dims(result, 0)
 
     def times(x):

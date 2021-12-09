@@ -18,7 +18,7 @@ from jax import random
 # For plotting diagrams
 import matplotlib.pyplot as plt
 ## CR-Sparse modules
-import cr.sparse as crs
+import cr.nimble as cnb
 # Linear operators
 from cr.sparse import lop
 # Some random number seeds
@@ -74,7 +74,7 @@ Phi = lop.rademacher_dict(keys[0], m, n, normalize_atoms=True)
 print(lop.to_matrix(Phi))
 # %%
 # Check the column wise norms
-print(crs.norms_l2_cw(lop.to_matrix(Phi)))
+print(cnb.norms_l2_cw(lop.to_matrix(Phi)))
 # %%
 # Let's print the contents of the adjoint matrix
 print(lop.to_adjoint_matrix(Phi))
@@ -190,7 +190,7 @@ Phi = lop.gaussian_dict(keys[0], m, n, normalize_atoms=True)
 print(lop.to_matrix(Phi))
 # %%
 # Check the column wise norms
-print(crs.norms_l2_cw(lop.to_matrix(Phi)))
+print(cnb.norms_l2_cw(lop.to_matrix(Phi)))
 # %%
 # Let's print the contents of the adjoint matrix
 print(lop.to_adjoint_matrix(Phi))
@@ -269,7 +269,7 @@ Phi = lop.random_orthonormal_rows_dict(keys[0], m, n)
 print(lop.to_matrix(Phi))
 # %%
 # Check the row wise norms
-print(crs.norms_l2_rw(lop.to_matrix(Phi)))
+print(cnb.norms_l2_rw(lop.to_matrix(Phi)))
 # %%
 # Let's apply the forward operator column wise
 Y = Phi.times(X)
@@ -295,10 +295,10 @@ Phi = lop.random_onb_dict(keys[0], n)
 print(lop.to_matrix(Phi))
 # %%
 # Check the row wise norms
-print(crs.norms_l2_rw(lop.to_matrix(Phi)))
+print(cnb.norms_l2_rw(lop.to_matrix(Phi)))
 # %%
 # Check the column wise norms
-print(crs.norms_l2_cw(lop.to_matrix(Phi)))
+print(cnb.norms_l2_cw(lop.to_matrix(Phi)))
 # %%
 # Let's apply the forward operator column wise
 Y = Phi.times(X)

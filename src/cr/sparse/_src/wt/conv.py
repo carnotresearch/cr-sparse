@@ -15,14 +15,14 @@
 from jax import jit
 import jax.numpy as jnp
 
-import cr.sparse as crs
+import cr.nimble as cnb
 
 def iconv(f, x):
     """Filtering by periodic convolution of x with f
     """
     n = x.shape[0]
     p = f.shape[0]
-    x_padded = crs.vec_repeat_at_start(x, p)
+    x_padded = cnb.vec_repeat_at_start(x, p)
     x_filtered = jnp.convolve(x_padded, f)
     return x_filtered[p:n+p]
 
@@ -31,7 +31,7 @@ def aconv(f, x):
     """
     n = x.shape[0]
     p = f.shape[0]
-    x_padded = crs.vec_repeat_at_end(x, p)
+    x_padded = cnb.vec_repeat_at_end(x, p)
     # reverse the filter
     f = f[::-1]
     x_filtered = jnp.convolve(x_padded, f)

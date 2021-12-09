@@ -17,7 +17,7 @@ import jax.numpy as jnp
 from jax import vmap, jit, lax
 
 from .util import abs_max_idx, gram_chol_update
-from cr.sparse.la import solve_spd_chol
+from cr.nimble import solve_spd_chol
 from .defs import RecoverySolution
 
 def matrix_solve(Phi, y, max_iters, max_res_norm=1e-6):

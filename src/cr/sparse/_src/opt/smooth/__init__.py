@@ -16,7 +16,7 @@ from functools import partial
 from jax import jit
 
 import jax.numpy as jnp
-import cr.sparse as crs
+import cr.nimble as cnb
 
 def smooth_value_grad(func, grad):
     """Returns a function which computes both the value and gradient of a smooth function at a specified point
@@ -29,7 +29,7 @@ def smooth_value_grad(func, grad):
         mode=2 both value and gradient
         """
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         if mode == 0:
             return func(x)
         if mode == 1:

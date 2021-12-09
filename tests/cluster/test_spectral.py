@@ -6,43 +6,43 @@ points_per_set = 50
 total = points_per_set*num_clusters
 means = jnp.arange(num_clusters) * gap
 means = jnp.repeat(means, points_per_set)
-points = random.uniform(crs.KEYS[0], (total,))
+points = random.uniform(cnb.KEYS[0], (total,))
 points = points  - 0.5
 points = points + means
 true_labels = jnp.repeat(jnp.arange(num_clusters), points_per_set)
-sqr_distances = crs.pdist_sqr_l2_rw(points[:, jnp.newaxis])
+sqr_distances = cnb.pdist_sqr_l2_rw(points[:, jnp.newaxis])
 sigma = .5
 similarity = crs.sqr_dist_to_gaussian_sim(sqr_distances, sigma)
 
 def test_spectral1():
-    res = spectral.unnormalized(crs.KEYS[1], similarity)
+    res = spectral.unnormalized(cnb.KEYS[1], similarity)
     pred_labels =  res.assignment
     error = cluster.clustering_error(true_labels, pred_labels)
     assert error.error == 0
 
 
 def test_spectral2():
-    res = spectral.unnormalized_k_jit(crs.KEYS[1], similarity, num_clusters)
+    res = spectral.unnormalized_k_jit(cnb.KEYS[1], similarity, num_clusters)
     pred_labels =  res.assignment
     error = cluster.clustering_error(true_labels, pred_labels)
     assert error.error == 0
 
 def test_spectral3():
-    res = spectral.normalized_random_walk(crs.KEYS[1], similarity)
+    res = spectral.normalized_random_walk(cnb.KEYS[1], similarity)
     pred_labels =  res.assignment
     error = cluster.clustering_error(true_labels, pred_labels)
     assert error.error == 0
 
 
 def test_spectral4():
-    res = spectral.normalized_random_walk_k_jit(crs.KEYS[1], similarity, num_clusters)
+    res = spectral.normalized_random_walk_k_jit(cnb.KEYS[1], similarity, num_clusters)
     pred_labels =  res.assignment
     error = cluster.clustering_error(true_labels, pred_labels)
     assert error.error == 0
 
 
 def test_spectral5():
-    res = spectral.normalized_symmetric_fast_k_jit(crs.KEYS[1], similarity, num_clusters)
+    res = spectral.normalized_symmetric_fast_k_jit(cnb.KEYS[1], similarity, num_clusters)
     pred_labels =  res.assignment
     error = cluster.clustering_error(true_labels, pred_labels)
     assert error.error == 0
@@ -59,7 +59,7 @@ def test_spectral6():
     true_labels = cluster.labels_from_sizes(jnp.array([m, m]))
     affinity = BCOO.fromdense(affinity)
     k = 2
-    res = spectral.normalized_symmetric_sparse_fast_k_jit(crs.KEYS[1], affinity, k)
+    res = spectral.normalized_symmetric_sparse_fast_k_jit(cnb.KEYS[1], affinity, k)
     pred_labels =  res.assignment
     error = cluster.clustering_error(true_labels, pred_labels)
     assert error.error == 0

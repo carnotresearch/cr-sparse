@@ -6,8 +6,8 @@ def test_lsqr1():
     m, n = 40, 20
     min_val = 0
     max_val = 50
-    A = random.randint(crs.KEYS[0], (m, n), min_val, max_val) / max_val
-    x = random.randint(crs.KEYS[1], (n, ), min_val, max_val)
+    A = random.randint(cnb.KEYS[0], (m, n), min_val, max_val) / max_val
+    x = random.randint(cnb.KEYS[1], (n, ), min_val, max_val)
     T = lop.jit(lop.matrix(A))
     # b = A x
     b = T.times(x)
@@ -20,8 +20,8 @@ def test_lsqr1():
 
 def test_lsqr2():
     m, n = 40, 20
-    A = crdict.random_onb(crs.KEYS[0], m)[:, :n]
-    x = random.normal(crs.KEYS[2], (n,))
+    A = crdict.random_onb(cnb.KEYS[0], m)[:, :n]
+    x = random.normal(cnb.KEYS[2], (n,))
     T = lop.jit(lop.matrix(A))
     # b = A x
     b = T.times(x)
@@ -33,8 +33,8 @@ def test_lsqr2():
 
 def test_lsqr3():
     m, n = 40, 20
-    A = random.normal(crs.KEYS[0], (m,n)) / jnp.sqrt(m)
-    x = random.normal(crs.KEYS[2], (n,))
+    A = random.normal(cnb.KEYS[0], (m,n)) / jnp.sqrt(m)
+    x = random.normal(cnb.KEYS[2], (n,))
     T = lop.jit(lop.matrix(A))
     # b = A x
     b = T.times(x)

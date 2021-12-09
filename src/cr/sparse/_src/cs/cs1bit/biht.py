@@ -83,8 +83,8 @@ def biht(Phi, y, K, tau, max_iters=1000):
         >>> import cr.sparse.data as crdata
         >>> import cr.sparse.cs.cs1bit as cs1bit
         >>> M, N, K = 256, 512, 4
-        >>> Phi = crdict.gaussian_mtx(crs.KEYS[0], M, N, normalize_atoms=False)
-        >>> x, omega = crdata.sparse_normal_representations(crs.KEYS[1], N, K)
+        >>> Phi = crdict.gaussian_mtx(cnb.KEYS[0], M, N, normalize_atoms=False)
+        >>> x, omega = crdata.sparse_normal_representations(cnb.KEYS[1], N, K)
         >>> x = x / norm(x)
         >>> y = cs1bit.measure_1bit(Phi, x)
         >>> s0 = crdict.upper_frame_bound(Phi)

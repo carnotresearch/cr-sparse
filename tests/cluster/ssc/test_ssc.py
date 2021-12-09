@@ -9,15 +9,15 @@ K = 5
 # number of points per subspace   
 S = 20
 
-bases = crdata.random_subspaces_jit(crs.KEYS[0], N, D, K)
-X = crdata.uniform_points_on_subspaces_jit(crs.KEYS[1], bases, S)
+bases = crdata.random_subspaces_jit(cnb.KEYS[0], N, D, K)
+X = crdata.uniform_points_on_subspaces_jit(cnb.KEYS[1], bases, S)
 sizes = jnp.repeat(S, K)
 true_labels = jnp.repeat(jnp.arange(K), S)
 
 
 def test_build_omp_rep():
     Z, I, R = ssc.build_representation_omp_jit(X, D)
-    r_norms = crs.norms_l2_cw(R)
+    r_norms = cnb.norms_l2_cw(R)
     #print(r_norms)
     assert_allclose(r_norms, 0, atol=1e-1)
     Z_full = ssc.sparse_to_full_rep(Z, I)
@@ -36,7 +36,7 @@ def test_build_omp_rep():
 
 def test_batch_build_omp_rep():
     Z, I, R = ssc.batch_build_representation_omp_jit(X, D, 10)
-    r_norms = crs.norms_l2_cw(R)
+    r_norms = cnb.norms_l2_cw(R)
     assert_allclose(r_norms, 0, atol=1e-1)
 
 def test_angles_between_points():

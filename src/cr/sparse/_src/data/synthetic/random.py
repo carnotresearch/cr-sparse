@@ -17,7 +17,7 @@ import jax.numpy as jnp
 from jax import jit, vmap
 from jax import random 
 
-import cr.sparse as crs
+import cr.nimble as cnb
 
 def sparse_normal_representations(key, D, K, S=1):
     """
@@ -169,7 +169,7 @@ def points_orthogonal_to(key, x, S):
     """Generates a  set of points which are orthogonal to a given point x
     """
     # first we normalize x
-    norm_x = crs.arr_l2norm(x)
+    norm_x = cnb.arr_l2norm(x)
     x = x / norm_x
     # shape for the output array
     shape = (S,) + x.shape

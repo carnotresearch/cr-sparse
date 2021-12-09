@@ -10,8 +10,8 @@ def test_fourier_basis():
     a = T.trans(f)
     assert_allclose(x, a, atol=atol, rtol=rtol)
     F = lop.to_matrix(T)
-    assert crs.has_unitary_rows(F)
-    assert crs.has_unitary_columns(F)
+    assert cnb.has_unitary_rows(F)
+    assert cnb.has_unitary_columns(F)
     assert lop.dot_test_real(keys[0], T)
 
 def test_cosine_basis():
@@ -23,8 +23,8 @@ def test_cosine_basis():
     a = T.trans(f)
     assert_allclose(x, a, atol=atol, rtol=rtol)
     F = lop.to_matrix(T)
-    assert crs.has_unitary_rows(F)
-    assert crs.has_unitary_columns(F)
+    assert cnb.has_unitary_rows(F)
+    assert cnb.has_unitary_columns(F)
     assert lop.dot_test_real(keys[0], T)
 
 def test_wh_basis():
@@ -36,7 +36,7 @@ def test_wh_basis():
     a = T.trans(f)
     assert_allclose(x, a, atol=atol, rtol=rtol)
     F = lop.to_matrix(T)
-    assert crs.has_unitary_rows(F)
-    assert crs.has_unitary_columns(F)
+    assert cnb.has_unitary_rows(F)
+    assert cnb.has_unitary_columns(F)
     assert lop.dot_test_real(keys[0], T)
 

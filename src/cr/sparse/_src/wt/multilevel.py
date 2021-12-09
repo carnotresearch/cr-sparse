@@ -23,7 +23,7 @@ from jax import jit, lax
 import jax.numpy as jnp
 
 
-from cr.sparse import promote_arg_dtypes
+from cr.nimble import promote_arg_dtypes
 
 from .util import *
 from .transform import *

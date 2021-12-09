@@ -17,7 +17,7 @@ from jax import jit, grad, lax
 
 import jax.numpy as jnp
 from jax.numpy.linalg import det, cholesky, inv
-import cr.sparse as crs
+import cr.nimble as cnb
 
 from .smooth import build2
 
@@ -26,21 +26,21 @@ def smooth_quad_matrix(P=None, q=None, r=None):
     """
     if P is not None:
         P = jnp.asarray(P)
-        P = crs.promote_arg_dtypes(P)
+        P = cnb.promote_arg_dtypes(P)
     if q is not None:
         q = jnp.asarray(q)
-        q = crs.promote_arg_dtypes(q)
+        q = cnb.promote_arg_dtypes(q)
 
     @jit
     def func(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         if P is None:
-            v = 0.5 * crs.arr_rdot(x, x)
+            v = 0.5 * cnb.arr_rdot(x, x)
         else:
-            v = 0.5 * crs.arr_rdot(P @ x, x)
+            v = 0.5 * cnb.arr_rdot(P @ x, x)
         if q is not None:
-            v = v +  crs.arr_rdot(q, x)
+            v = v +  cnb.arr_rdot(q, x)
         if r is not None:
             v = v + r
         return v
@@ -49,7 +49,7 @@ def smooth_quad_matrix(P=None, q=None, r=None):
     @jit
     def gradient(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         if P is None:
             g = x
         else:

@@ -8,15 +8,6 @@ Utilities in cr.sparse module
 
 .. currentmodule:: cr.sparse
 
-Array data type utilities
------------------------------------
-
-.. autosummary::
-  :toctree: _autosummary
-
-  promote_arg_dtypes
-  check_shapes_are_equal
-
 
 Utilities for vectors
 ------------------------------------------
@@ -24,22 +15,6 @@ Utilities for vectors
 .. autosummary::
   :toctree: _autosummary
 
-  is_scalar
-  is_vec
-  is_line_vec
-  is_row_vec
-  is_col_vec
-  to_row_vec
-  to_col_vec
-  vec_unit
-  vec_shift_right
-  vec_rotate_right
-  vec_shift_left
-  vec_rotate_left
-  vec_shift_right_n
-  vec_rotate_right_n
-  vec_shift_left_n
-  vec_rotate_left_n 
   vec_repeat_at_end
   vec_repeat_at_start
   vec_centered
@@ -99,26 +74,6 @@ Some checks and utilities for matrices (2D arrays)
     off_diagonal_min
     off_diagonal_max
     off_diagonal_mean
-
-
-Row wise and column wise norms for signal/representation matrices
-----------------------------------------------------------------------
-
-.. autosummary::
-  :toctree: _autosummary
-
-    norms_l1_cw
-    norms_l1_rw
-    norms_l2_cw
-    norms_l2_rw
-    norms_linf_cw
-    norms_linf_rw
-    sqr_norms_l2_cw
-    sqr_norms_l2_rw
-    normalize_l1_cw
-    normalize_l1_rw
-    normalize_l2_cw
-    normalize_l2_rw
 
 
 Pairwise Distances

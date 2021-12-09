@@ -16,7 +16,7 @@ import jax
 from jax import random
 import jax.numpy as jnp
 
-import cr.sparse as crs
+import cr.nimble as cnb
 
 def to_matrix(A):
     """Converts a linear operator to a matrix"""
@@ -93,8 +93,8 @@ def rdot_test_complex(key, A, tol=1e-6):
     v = random.normal(keys[2], A.output_shape)
     y = A.times(u)
     x = A.trans(v)
-    yy = crs.arr_rdot(y, v)
-    xx = crs.arr_rdot(u, x)
+    yy = cnb.arr_rdot(y, v)
+    xx = cnb.arr_rdot(u, x)
 
     rel_gap = jnp.abs(yy - xx) / ((yy + xx + 1e-15) / 2)
     return rel_gap < tol 

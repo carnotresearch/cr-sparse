@@ -15,7 +15,7 @@
 from jax import jit, lax
 import jax.numpy as jnp
 
-import cr.sparse as crs
+import cr.nimble as cnb
 
 from .conv import iconv, aconv, mirror_filter
 
@@ -63,7 +63,7 @@ def hi_pass_down_sample(h, x):
         # Construct  the high pass mirror filter 
         g = mirror_filter(h)
         # circular left shift the contents of x by 1.
-        x  = crs.vec_rotate_left(x)
+        x  = cnb.vec_rotate_left(x)
         # Perform filtering
         y = iconv(g, x)
         # Perform downsampling
@@ -93,7 +93,7 @@ def up_sample_hi_pass(h, x):
         # Upsample by a factor of 2 and introduce zeros
         x = up_sample(x, 2)
         # circular right shift the contents of x by 1.
-        x  = crs.vec_rotate_right(x)
+        x  = cnb.vec_rotate_right(x)
         # Perform low pass filtering
         return aconv(g, x)
 

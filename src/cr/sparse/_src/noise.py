@@ -16,8 +16,8 @@ import jax
 import jax.numpy as jnp
 from jax import random, jit
 
-from .util import promote_arg_dtypes
-from .ndarray import arr_l2norm_sqr
+from cr.nimble import promote_arg_dtypes
+from cr.nimble import arr_l2norm_sqr
 
 def awgn_at_snr(key, signal, snr):
     """Generates noise for the signal at the specified SNR

@@ -19,7 +19,7 @@ import jax.numpy as jnp
 from jax.numpy.linalg import qr, norm
 from jax.scipy.linalg import svd
 
-import cr.sparse as crs
+import cr.nimble as cnb
 
 eps = jnp.finfo(float).eps
 
@@ -27,11 +27,11 @@ def proj_l2_ball(q=1., b=None, A=None):
 
     if b is not None:
         b = jnp.asarray(b)
-        b = crs.promote_arg_dtypes(b)
+        b = cnb.promote_arg_dtypes(b)
 
     if A is not None:
         A = jnp.asarray(A)
-        A = crs.promote_arg_dtypes(A)
+        A = cnb.promote_arg_dtypes(A)
 
     if q <= 0:
         raise ValueError("q must be greater than 0")
@@ -39,7 +39,7 @@ def proj_l2_ball(q=1., b=None, A=None):
     @jit
     def proj_q(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         norm_x = norm(x)
         invalid =  norm_x > q
 
@@ -60,7 +60,7 @@ def proj_l2_ball(q=1., b=None, A=None):
     @jit
     def proj_q_b(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         # compute difference from center
         r = x - b
         norm_r = norm(r)
@@ -145,7 +145,7 @@ def proj_l1_ball(q=1., b=None):
 
     if b is not None:
         b = jnp.asarray(b)
-        b = crs.promote_arg_dtypes(b)
+        b = cnb.promote_arg_dtypes(b)
 
     # TODO: This creates problems with JIT
     # if q <= 0:
@@ -174,8 +174,8 @@ def proj_l1_ball(q=1., b=None):
     @jit
     def proj_q(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
-        invalid = crs.arr_l1norm(x) > q
+        x = cnb.promote_arg_dtypes(x)
+        invalid = cnb.arr_l1norm(x) > q
         return lax.cond(invalid, 
             # find the shrinkage threshold and shrink
             lambda x: project_inside_ball(x),
@@ -190,10 +190,10 @@ def proj_l1_ball(q=1., b=None):
     @jit
     def proj_q_b(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         # compute difference from center
         r = x - b
-        invalid = crs.arr_l1norm(r) > q
+        invalid = cnb.arr_l1norm(r) > q
         # update the residual
         r = lax.cond(invalid, 
             # find the shrinkage threshold and shrink

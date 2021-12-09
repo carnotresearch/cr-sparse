@@ -23,11 +23,11 @@ def test_matrix_2():
 def test_matrix_3():
     m, n, k = 10, 20, 5
     # axis=0 [process column wise]
-    A = random.normal(crs.KEYS[0], (m,n))
+    A = random.normal(cnb.KEYS[0], (m,n))
     T = lop.jit(lop.matrix(A))
-    X = random.normal(crs.KEYS[1], (n,k))
+    X = random.normal(cnb.KEYS[1], (n,k))
     assert_allclose(T.times(X), A @ X)
-    Y = random.normal(crs.KEYS[2], (m,k))
+    Y = random.normal(cnb.KEYS[2], (m,k))
     assert_allclose(T.trans(Y), A.T @ Y, atol=atol, rtol=rtol)
 
     # axis=1 [process row wise]
@@ -42,19 +42,19 @@ def test_matrix_4():
     # complex case
     m, n, k = 10, 20, 5
     # axis=0 [process column wise]
-    Ar = random.normal(crs.KEYS[0], (m,n))
-    Ac = random.normal(crs.KEYS[1], (m,n))
+    Ar = random.normal(cnb.KEYS[0], (m,n))
+    Ac = random.normal(cnb.KEYS[1], (m,n))
     A = Ar + Ac * 1j
     T = lop.jit(lop.matrix(A))
 
-    Xr = random.normal(crs.KEYS[2], (n,k))
-    Xc = random.normal(crs.KEYS[3], (n,k))
+    Xr = random.normal(cnb.KEYS[2], (n,k))
+    Xc = random.normal(cnb.KEYS[3], (n,k))
     X = Xr + Xc * 1j
     assert_allclose(T.times(X), A @ X)
-    Yr = random.normal(crs.KEYS[4], (m,k))
-    Yc = random.normal(crs.KEYS[5], (m,k))
+    Yr = random.normal(cnb.KEYS[4], (m,k))
+    Yc = random.normal(cnb.KEYS[5], (m,k))
     Y = Yr + Yc * 1j
-    assert_allclose(T.trans(Y), crs.hermitian(A) @ Y)
+    assert_allclose(T.trans(Y), cnb.hermitian(A) @ Y)
 
     # axis=1 [process row wise]
     T = lop.jit(lop.matrix(A, axis=1))

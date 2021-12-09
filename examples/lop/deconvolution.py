@@ -104,7 +104,7 @@ t = dsp.time_values(fs, T, endpoint=True)
 n = len(t)
 mid = n // 2
 # A unit vector with one at mid position and zero everywhere else
-x = crs.vec_unit(n, mid)
+x = cnb.vec_unit(n, mid)
 fig, ax = plt.subplots(1,1, figsize=(10, 3), dpi= 100, facecolor='w', edgecolor='k')
 ax.plot(t, x)
 # Let's focus on the middle part of the signal

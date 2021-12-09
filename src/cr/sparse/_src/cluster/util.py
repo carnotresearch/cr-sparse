@@ -25,7 +25,7 @@ from scipy.optimize import linear_sum_assignment
 from jax import jit
 import jax.numpy as jnp
 
-import cr.sparse as crs
+import cr.nimble as cnb
 
 def sizes_from_labels(labels, k):
     """Returns the cluster sizes for each label
@@ -43,7 +43,7 @@ def start_end_indices(cluster_sizes):
     cluster_sizes = jnp.asarray(cluster_sizes)
     k = len(cluster_sizes)
     start_indices = jnp.cumsum(cluster_sizes)
-    start_indices = crs.vec_shift_right(start_indices)
+    start_indices = cnb.vec_shift_right(start_indices)
     end_indices = start_indices + cluster_sizes
     return start_indices, end_indices
 

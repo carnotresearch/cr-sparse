@@ -18,7 +18,7 @@ from jax import jit
 import jax.numpy as jnp
 from jax.numpy.linalg import qr, norm
 
-import cr.sparse as crs
+import cr.nimble as cnb
 
 def indicator_l2_ball(q=1., b=None, A=None):
     r"""Returns an indicator function for the closed ball :math:`\| A x - b \|_2 \leq q`
@@ -55,11 +55,11 @@ def indicator_l2_ball(q=1., b=None, A=None):
     """
     if b is not None:
         b = jnp.asarray(b)
-        b = crs.promote_arg_dtypes(b)
+        b = cnb.promote_arg_dtypes(b)
 
     if A is not None:
         A = jnp.asarray(A)
-        A = crs.promote_arg_dtypes(A)
+        A = cnb.promote_arg_dtypes(A)
 
     if q <= 0:
         raise ValueError("q must be greater than 0")
@@ -67,7 +67,7 @@ def indicator_l2_ball(q=1., b=None, A=None):
     @jit
     def indicator_q(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         invalid = norm(x) > q
         return jnp.where(invalid, jnp.inf, 0)
 
@@ -78,7 +78,7 @@ def indicator_l2_ball(q=1., b=None, A=None):
     @jit
     def indicator_q_b(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         # compute difference from center
         r = x - b
         invalid = norm(r) > q
@@ -95,7 +95,7 @@ def indicator_l2_ball(q=1., b=None, A=None):
     @jit
     def indicator_q_b_A(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         # compute the residual vector
         r = A @ x - b
         invalid = norm(r) > q
@@ -140,11 +140,11 @@ def indicator_l1_ball(q=1., b=None, A=None):
 
     if b is not None:
         b = jnp.asarray(b)
-        b = crs.promote_arg_dtypes(b)
+        b = cnb.promote_arg_dtypes(b)
 
     if A is not None:
         A = jnp.asarray(A)
-        A = crs.promote_arg_dtypes(A)
+        A = cnb.promote_arg_dtypes(A)
 
     # TODO: This creates problems in JIT
     # assert q > 0, ValueError("q must be greater than 0")
@@ -152,8 +152,8 @@ def indicator_l1_ball(q=1., b=None, A=None):
     @jit
     def indicator_q(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
-        invalid = crs.arr_l1norm(x) > q
+        x = cnb.promote_arg_dtypes(x)
+        invalid = cnb.arr_l1norm(x) > q
         return jnp.where(invalid, jnp.inf, 0)
 
     if b is None and A is None:
@@ -164,9 +164,9 @@ def indicator_l1_ball(q=1., b=None, A=None):
     def indicator_q_b(x):
         # compute difference from center
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         r = x - b
-        invalid = crs.arr_l1norm(r) > q
+        invalid = cnb.arr_l1norm(r) > q
         return jnp.where(invalid, jnp.inf, 0)
 
     if A is None:
@@ -180,10 +180,10 @@ def indicator_l1_ball(q=1., b=None, A=None):
     @jit
     def indicator_q_b_A(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         # compute the residual vector
         r = A @ x - b
-        invalid = crs.arr_l1norm(r) > q
+        invalid = cnb.arr_l1norm(r) > q
         return jnp.where(invalid, jnp.inf, 0)
     
     return indicator_q_b_A

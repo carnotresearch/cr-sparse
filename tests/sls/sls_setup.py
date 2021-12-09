@@ -9,14 +9,13 @@ import jax
 import jax.numpy as jnp
 from jax import random, lax, vmap
 
-
+import cr.nimble as cnb
 import cr.sparse as crs
-import cr.sparse.la as la
 import cr.sparse.lop as lop
 import cr.sparse.sls as sls
 import cr.sparse.dict as crdict
 import cr.sparse.geo as geo
-import cr.sparse.la.svd as lasvd
+import cr.nimble.svd as lasvd
 import cr.sparse.sls.svd as crsvd
 
 rtol = 1e-8 if jax.config.jax_enable_x64 else 1e-6

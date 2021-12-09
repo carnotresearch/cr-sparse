@@ -1,6 +1,6 @@
 import jax.numpy as jnp
 
-from cr.sparse.la import rq
+from cr.nimble import rq
 
 A = jnp.array([1, 0, 1, 1, 0, -1, 1, 1, 0], dtype=jnp.float32)
 A = A.reshape([3,3])

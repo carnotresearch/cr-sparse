@@ -2,7 +2,7 @@ import time
 import jax.numpy as jnp
 from jax import random
 
-from cr.sparse.la import rq
+from cr.nimble import rq
 
 def print_duration(duration):
     if duration > 1:

@@ -2,7 +2,7 @@ import time
 import jax.numpy as jnp
 from jax import random
 
-from cr.sparse.la import rq
+from cr.nimble import rq
 
 
 def time_rq_update(seed, m, n):

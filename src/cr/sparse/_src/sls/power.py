@@ -20,7 +20,7 @@ import jax.numpy as jnp
 
 from typing import NamedTuple
 
-from cr.sparse import arr_l2norm, arr_vdot
+from cr.nimble import arr_l2norm, arr_vdot
 
 class PowerIterState(NamedTuple):
     """State for the power iterations algorithm

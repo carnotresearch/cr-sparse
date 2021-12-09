@@ -96,7 +96,7 @@ def test_box_affine(l,u,shape):
     n = a.size
     box = indicator_box_affine(l, u, a, 1)
     x = jnp.ones(shape)
-    x = x / crs.arr_rdot(a, x)
+    x = x / cnb.arr_rdot(a, x)
     assert_array_equal(box(x), 0)
     if l is not None:
         l = jnp.asarray(l)

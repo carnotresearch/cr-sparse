@@ -16,7 +16,7 @@ def test_random_on_rows():
 def test_random_onb():
     T = lop.random_onb_dict(keys[0], 10)
     A  = lop.to_matrix(T)
-    assert crs.has_orthogonal_rows(A)
-    assert crs.has_orthogonal_columns(A)
+    assert cnb.has_orthogonal_rows(A)
+    assert cnb.has_orthogonal_columns(A)
     assert lop.dot_test_real(keys[1], T)
 

@@ -4,7 +4,7 @@ from jax.numpy.linalg import norm
 
 @pytest.mark.parametrize("T", [
     lop.fft(64),
-    lop.circulant(64, random.normal(crs.KEYS[2], (20,))),
+    lop.circulant(64, random.normal(cnb.KEYS[2], (20,))),
     lop.diagonal(jnp.arange(10))
 ])
 def test_fft_norm(T):

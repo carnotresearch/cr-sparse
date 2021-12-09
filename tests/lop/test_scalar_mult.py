@@ -9,7 +9,7 @@ from .lop_setup import *
 def test_scalar_mult(alpha,n):
     T = lop.scalar_mult(alpha, n)
     T = lop.jit(T)
-    x = random.normal(crs.KEYS[1], (n,))
+    x = random.normal(cnb.KEYS[1], (n,))
     y = T.times(x)
     assert_array_equal(y, alpha * x)
     assert lop.dot_test_real(keys[0], T)

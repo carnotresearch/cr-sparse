@@ -17,7 +17,7 @@ from jax import jit, grad, lax
 
 import jax.numpy as jnp
 from jax.numpy.linalg import det, cholesky, inv
-import cr.sparse as crs
+import cr.nimble as cnb
 
 from .smooth import build2
 
@@ -26,24 +26,24 @@ def smooth_logdet(q=1., C=None):
     r"""Log Det function and its gradient :math:`f(X) = -\log( \text{det}( X ) )`
     """
     q = jnp.asarray(q)
-    q = crs.promote_arg_dtypes(q)
+    q = cnb.promote_arg_dtypes(q)
     if C is not None:
         C = jnp.asarray(C)
-        C = crs.promote_arg_dtypes(C)
+        C = cnb.promote_arg_dtypes(C)
 
     @jit
     def func(X):
         X = jnp.asarray(X)
-        X = crs.promote_arg_dtypes(X)
+        X = cnb.promote_arg_dtypes(X)
         v = -2*q*jnp.sum(jnp.log(jnp.diag(cholesky(X))))
         if C is not None:
-            v = v + crs.arr_rdot(C, X)
+            v = v + cnb.arr_rdot(C, X)
         return v
 
     @jit
     def gradient(X):
         X = jnp.asarray(X)
-        X = crs.promote_arg_dtypes(X)
+        X = cnb.promote_arg_dtypes(X)
         g = -q*inv(X)
         if C is not None:
             g = g + C

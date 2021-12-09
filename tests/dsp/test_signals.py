@@ -5,7 +5,7 @@ import jax
 import jax.numpy as jnp
 
 # crs imports
-import cr.sparse as crs
+import cr.nimble as cnb
 from cr.sparse.dsp import signals
 
 

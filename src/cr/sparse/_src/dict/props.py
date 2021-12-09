@@ -15,14 +15,14 @@
 from jax import jit
 import jax.numpy as jnp
 
-from cr.sparse import hermitian
+from cr.nimble import mat_hermitian
 
 def gram(A):
     """Computes the Gram matrix :math:`G = A^T A`
     """
     if jnp.isrealobj(A):
         return A.T @ A
-    G = hermitian(A) @ A
+    G = mat_hermitian(A) @ A
     return G.real
 
 def frame(A):
@@ -30,7 +30,7 @@ def frame(A):
     """
     if jnp.isrealobj(A):
         return A @ A.T
-    F = A @ hermitian(A)
+    F = A @ mat_hermitian(A)
     return F.real
 
 
@@ -96,7 +96,7 @@ def mutual_coherence_with_index(A, B):
     """Mutual coherence between two dictionaries A and B  along with indices of most correlated atoms
     """
     # compute inner products of atoms of A with atoms of B
-    G = hermitian(A) @ B
+    G = mat_hermitian(A) @ B
     # Take absolute values
     G = jnp.abs(G)
     # Find the maximum value and identify its index

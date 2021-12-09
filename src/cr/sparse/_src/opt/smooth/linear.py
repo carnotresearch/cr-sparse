@@ -16,7 +16,7 @@
 from jax import jit, grad, lax
 
 import jax.numpy as jnp
-import cr.sparse as crs
+import cr.nimble as cnb
 
 from .smooth import build2
 
@@ -25,13 +25,13 @@ def smooth_linear(C, D=0.):
     """
     C = jnp.asarray(C)
     D = jnp.asarray(D)
-    C, D = crs.promote_arg_dtypes(C, D)
+    C, D = cnb.promote_arg_dtypes(C, D)
 
     @jit
     def func(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
-        return crs.arr_rdot(C, x) + D
+        x = cnb.promote_arg_dtypes(x)
+        return cnb.arr_rdot(C, x) + D
 
     @jit
     def gradient(x):

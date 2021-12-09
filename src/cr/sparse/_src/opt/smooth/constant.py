@@ -16,7 +16,7 @@
 from jax import jit
 
 import jax.numpy as jnp
-import cr.sparse as crs
+import cr.nimble as cnb
 
 from .smooth import build2
 
@@ -24,7 +24,7 @@ def smooth_constant(c=0.):
     """A constant value function
     """
     c = jnp.asarray(c)
-    c = crs.promote_arg_dtypes(c)
+    c = cnb.promote_arg_dtypes(c)
 
     @jit
     def func(x):
@@ -33,7 +33,7 @@ def smooth_constant(c=0.):
     @jit
     def gradient(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         return 0 * x
 
     return build2(func, gradient)

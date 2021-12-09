@@ -20,8 +20,7 @@ import jax.numpy as jnp
 from jax.numpy.linalg import qr, norm
 from jax.scipy.linalg import cholesky
 
-import cr.sparse as crs
-import cr.sparse.la as crla
+import cr.nimble as cnb
 
 def proj_zero():
     r"""Projects to the zero vector for :math:`\RR^n`
@@ -40,7 +39,7 @@ def proj_identity():
     @jit
     def projector(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         return x
     
     return projector
@@ -48,7 +47,7 @@ def proj_identity():
 def proj_singleton(c):
 
     c = jnp.asarray(c)
-    c = crs.promote_arg_dtypes(c)
+    c = cnb.promote_arg_dtypes(c)
 
     @jit
     def projector(x):
@@ -63,19 +62,19 @@ def proj_affine(A, b=0):
     """
     # A must be specified
     A = jnp.asarray(A)
-    A = crs.promote_arg_dtypes(A)
+    A = cnb.promote_arg_dtypes(A)
     # b by default is 0
     b = jnp.asarray(b)
-    b = crs.promote_arg_dtypes(b)
+    b = cnb.promote_arg_dtypes(b)
     # Compute the QR decomposition of A
     R = qr(A.T, 'r')
     @jit
     def projector(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         r = b - A @ x
-        v = crla.solve_UTx_b(R, r)
-        w = crla.solve_Ux_b(R, v)
+        v = cnb.solve_UTx_b(R, r)
+        w = cnb.solve_Ux_b(R, v)
         h = A.T @ w
         return x + h
 
@@ -89,28 +88,28 @@ def proj_box(l=None, u=None):
         raise ValueError("At least lower or upper bound must be defined.")
     if l is not None:
         l = jnp.asarray(l)
-        l = crs.promote_arg_dtypes(l)
+        l = cnb.promote_arg_dtypes(l)
     if u is not None:
         u = jnp.asarray(u)
-        u = crs.promote_arg_dtypes(u)
+        u = cnb.promote_arg_dtypes(u)
 
     @jit
     def lower_bound(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         return jnp.maximum(x, l)
 
     @jit
     def upper_bound(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         return jnp.minimum(x, u)
 
 
     @jit
     def box_bound(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         x = jnp.maximum(x, l)
         x =  jnp.minimum(x, u)
         return x
@@ -132,7 +131,7 @@ def proj_box_affine(l, u, a, alpha=0., tol=1e-6):
     if a is None:
         raise ValueError("a is required")
     a = jnp.asarray(a)
-    a = crs.promote_arg_dtypes(a)
+    a = cnb.promote_arg_dtypes(a)
     n = a.size
     if l is None:
         l = jnp.full_like(a, -jnp.inf)
@@ -167,7 +166,7 @@ def proj_conic():
     @jit
     def proj(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         x_pre = x[:-1]
         t =  x[-1]
         abs_t = jnp.abs(t)

@@ -7,7 +7,7 @@ from jax import random, jit, grad
 import scipy
 
 import cr.sparse as crs
-import cr.sparse.la as crla
+import cr.nimble as cnb
 from cr.sparse import pursuit
 import cr.sparse.data as crdata
 import cr.sparse.dict as crdict

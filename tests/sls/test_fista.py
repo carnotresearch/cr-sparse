@@ -2,7 +2,7 @@ from sls_setup import *
 
 def test_fista1():
     m, n = shape = (11,11)
-    A = random.normal(crs.KEYS[0], shape)
+    A = random.normal(cnb.KEYS[0], shape)
     Anp = np.array(A)
     T = lop.jit(lop.matrix(A))
     x = jnp.zeros(n)

@@ -15,7 +15,7 @@
 """Total variation linear operator
 """
 import jax.numpy as jnp
-import cr.sparse as crs
+import cr.nimble as cnb
 
 from .lop import Operator
 from .util import apply_along_axis
@@ -40,7 +40,7 @@ def diff_fwd_1d_dirichlet(x):
     return jnp.diff(x, append=append)
 
 def diff_adj_1d_dirichlet(x):
-    x1 = crs.vec_shift_right(x)
+    x1 = cnb.vec_shift_right(x)
     return x1 - x
 
 def diff_fwd_1d_circular(x):
@@ -48,7 +48,7 @@ def diff_fwd_1d_circular(x):
     return jnp.diff(x, append=append)
 
 def diff_adj_1d_circular(x):
-    x1 = crs.vec_rotate_right(x)
+    x1 = cnb.vec_rotate_right(x)
     return x1 - x
 
 def tv(n, kind='regular', axis=0):

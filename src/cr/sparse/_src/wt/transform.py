@@ -35,7 +35,7 @@ from functools import partial
 from jax import jit, lax, vmap
 import jax.numpy as jnp
 
-from cr.sparse import promote_arg_dtypes
+from cr.nimble import promote_arg_dtypes
 
 from .dyad import *
 from .multirate import *

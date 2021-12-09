@@ -23,7 +23,7 @@ import math
 
 from .transform import upcoef_a,  upcoef_d
 
-from cr.sparse import vec_centered_jit
+from cr.nimble import vec_centered_jit
 
 def get_keep_length(level: int, filter_length: int):
     lplus = filter_length  - 2

@@ -16,7 +16,7 @@
 from jax import jit, lax
 
 import jax.numpy as jnp
-import cr.sparse as crs
+import cr.nimble as cnb
 import cr.sparse.opt as opt
 
 from .prox import build, build_from_ind_proj
@@ -34,15 +34,15 @@ def prox_l2(q=1.):
     @jit
     def func(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
-        v = crs.arr_l2norm(x)
+        x = cnb.promote_arg_dtypes(x)
+        v = cnb.arr_l2norm(x)
         return q*v
 
     @jit
     def proximal_op(x, t):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
-        v = crs.arr_l2norm(x)
+        x = cnb.promote_arg_dtypes(x)
+        v = cnb.arr_l2norm(x)
         s = 1 - 1 / jnp.maximum( v / ( t * q ), 1. )
         x = x * s
         return x
@@ -63,14 +63,14 @@ def prox_l1(q=1.):
     @jit
     def func(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
-        v = crs.arr_l1norm(q*x)
+        x = cnb.promote_arg_dtypes(x)
+        v = cnb.arr_l1norm(q*x)
         return v
 
     @jit
     def proximal_op(x, t):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         tq = t * q
         # shrinkage coefficients
         s  = 1 - jnp.minimum( tq/jnp.abs(x), 1 )
@@ -94,20 +94,20 @@ def prox_l1_pos(q=1.):
     @jit
     def func(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         # check if any of the entries in x is negative
         is_invalid = jnp.any(x < 0)
         return lax.cond(is_invalid, 
             # this x is outside the domain
             lambda _: jnp.inf, 
             # x is inside the domain, we compute its l1-norm
-            lambda _: crs.arr_l1norm(q*x),
+            lambda _: cnb.arr_l1norm(q*x),
             None)
 
     @jit
     def proximal_op(x, t):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         tq = t * q
         # shrinkage only applies on the positive side. negative values are mapped to 0
         return jnp.maximum(0, x - tq)

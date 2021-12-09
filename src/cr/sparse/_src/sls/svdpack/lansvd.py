@@ -20,12 +20,12 @@ import jax.numpy as jnp
 from jax.numpy.linalg import norm
 
 
-import cr.sparse as crs
+import cr.nimble as cnb
 
 from .lanbpro import (LanBDOptions, LanBProState, 
     lanbpro_options_init, lanbpro_init, lanbpro_iteration, lanbpro)
 
-from cr.sparse.la.svd import bdsqr, refine_bounds
+from cr.nimble.svd import bdsqr, refine_bounds
 
 class LanSVDState(NamedTuple):
     """State for Lan SVD iterations

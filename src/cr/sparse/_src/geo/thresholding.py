@@ -24,7 +24,7 @@ import numpy as np
 from jax import jit
 import jax.numpy as jnp
 
-from cr.sparse import promote_arg_dtypes
+from cr.nimble import promote_arg_dtypes
 
 def hard_threshold(x, tau):
     """Hard threshold

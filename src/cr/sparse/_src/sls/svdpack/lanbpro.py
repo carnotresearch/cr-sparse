@@ -17,10 +17,10 @@ import jax.numpy as jnp
 from jax.numpy.linalg import norm
 
 
-import cr.sparse as crs
+import cr.nimble as cnb
 
-from cr.sparse.la.svd import reorth_mgs, reorth_noop
-from cr.sparse.la.svd import (
+from cr.nimble.svd import reorth_mgs, reorth_noop
+from cr.nimble.svd import (
     LanBDOptions,
     LanBProState,
     lanbpro_options_init,
@@ -67,7 +67,7 @@ def lanbpro_init(A, k, p0, options: LanBDOptions):
     # beta_0
     beta = beta.at[0].set(p_norm)
     # U_0
-    u = crs.vec_safe_divide_by_scalar(p0, p_norm)
+    u = cnb.vec_safe_divide_by_scalar(p0, p_norm)
     U = U.at[:, 0].set(u)
     # step 2 r update
     r = A.trans(u)
@@ -76,7 +76,7 @@ def lanbpro_init(A, k, p0, options: LanBDOptions):
     alpha = alpha.at[0].set(r_norm)
     anorm = FUDGE * r_norm
     # step 2.1b v update
-    v = crs.vec_safe_divide_by_scalar(r, r_norm)
+    v = cnb.vec_safe_divide_by_scalar(r, r_norm)
     V = V.at[:, 0].set(v)
     # step 2.1b p update
     p = A.times(v) - alpha[0] * u
@@ -152,7 +152,7 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
     # carry out the work for one iteration of lanbpro
     beta_j = beta[j]
     # compute next left singular vector
-    u = crs.vec_safe_divide_by_scalar(p, beta_j)
+    u = cnb.vec_safe_divide_by_scalar(p, beta_j)
     U = U.at[:, j].set(u)
     # once sufficient iterations are completed, we can
     # compute a better estimate of a norm
@@ -246,7 +246,7 @@ def lanbpro_iteration(A, state: LanBProState, options: LanBDOptions):
     # update alpha_j again if required
     alpha = alpha.at[j].set(r_norm)
     # step 2.1b v update
-    v = crs.vec_safe_divide_by_scalar(r, r_norm)
+    v = cnb.vec_safe_divide_by_scalar(r, r_norm)
     V = V.at[:, j].set(v)
     # Lanczos step to generate u_{j+1}
     # step 2.1b p update

@@ -14,7 +14,7 @@
 
 import jax.numpy as jnp
 
-from cr.sparse.la import solve_Lx_b, solve_LTx_b, solve_Ux_b, solve_UTx_b
+from cr.nimble import solve_Lx_b, solve_LTx_b, solve_Ux_b, solve_UTx_b
 
 
 def abs_max_idx(h):

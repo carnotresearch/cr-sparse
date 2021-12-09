@@ -24,7 +24,7 @@ from jax import lax
 from .impl import _hermitian
 from .lop import Operator
 from .util import apply_along_axis
-from cr.sparse import promote_arg_dtypes
+from cr.nimble import promote_arg_dtypes
 
 def convolve(n, h, offset=0, axis=0):
     """Implements a convolution operator with the filter h

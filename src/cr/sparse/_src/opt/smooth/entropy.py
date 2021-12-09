@@ -16,7 +16,7 @@
 from jax import jit, grad, lax
 
 import jax.numpy as jnp
-import cr.sparse as crs
+import cr.nimble as cnb
 
 from .smooth import build2, build3
 
@@ -28,20 +28,20 @@ def smooth_entropy():
     @jit
     def func(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         v = lax.cond(jnp.any(x < 0),
             lambda _: -jnp.inf,
-            lambda _: - jnp.vdot(x, crs.log_pos(x)),
+            lambda _: - jnp.vdot(x, cnb.log_pos(x)),
             None)
         return v
 
     @jit
     def gradient(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         g = lax.cond(jnp.any(x < 0),
             lambda _: jnp.full_like(x, jnp.nan),
-            lambda _: - crs.log_pos(x) - 1,
+            lambda _: - cnb.log_pos(x) - 1,
             None)
         return g
 
@@ -59,7 +59,7 @@ def smooth_entropy_vg():
         return g, v
 
     def in_domain(x):
-        logx = crs.log_pos(x)
+        logx = cnb.log_pos(x)
         g = -logx - 1
         v = - jnp.vdot(x, logx)
         return g, v
@@ -68,7 +68,7 @@ def smooth_entropy_vg():
     @jit
     def grad_val(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         g, v = lax.cond(jnp.any(x < 0),
             lambda x: out_of_domain(x),
             lambda x: in_domain(x),

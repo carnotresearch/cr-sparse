@@ -16,7 +16,7 @@ import jax.numpy as jnp
 norm = jnp.linalg.norm
 
 
-from cr.sparse import norms_l2_cw
+from cr.nimble import norms_l2_cw
 
 def project_to_ball(x, radius=1.0):
     """Projects a vector to the :math:`\\ell_2` ball of a specified radius.

@@ -6,7 +6,7 @@ import jax.numpy as jnp
 from jax import random, lax
 
 # crs imports
-import cr.sparse as crs
+import cr.nimble as cnb
 import cr.sparse.opt.proximal_ops as proximal_ops
 
 atol = 1e-4

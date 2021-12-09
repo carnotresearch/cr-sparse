@@ -19,27 +19,27 @@ def test_resriction_0():
     (20, 10, 5, 4),
 ])
 def test_restriction1(n, k, s, i):
-    I = random.permutation(crs.KEYS[i], n)
+    I = random.permutation(cnb.KEYS[i], n)
     I = I[:k]
     # column-wise work
     T = lop.restriction(n, I, axis=0)
-    x = random.normal(crs.KEYS[i], (n,s))
+    x = random.normal(cnb.KEYS[i], (n,s))
     y = T.times(x)
     y_ref = x[I, :]
     assert_array_equal(y_ref, y)
     y2 = T.trans(y)
     y3 = T.times(y2)
     assert_array_equal(y_ref, y3)
-    assert lop.dot_test_real(crs.KEYS[i+1], T, tol=1e-4)
-    assert lop.dot_test_complex(crs.KEYS[i+1], T, tol=1e-4)
+    assert lop.dot_test_real(cnb.KEYS[i+1], T, tol=1e-4)
+    assert lop.dot_test_complex(cnb.KEYS[i+1], T, tol=1e-4)
     # row-wise work
     T = lop.restriction(n, I, axis=1)
-    x = random.normal(crs.KEYS[i], (s,n))
+    x = random.normal(cnb.KEYS[i], (s,n))
     y = T.times(x)
     y_ref = x[:, I]
     assert_array_equal(y_ref, y)
     y2 = T.trans(y)
     y3 = T.times(y2)
     assert_array_equal(y_ref, y3)
-    assert lop.dot_test_real(crs.KEYS[i+2], T, tol=1e-4)
-    assert lop.dot_test_complex(crs.KEYS[i+2], T, tol=1e-4)
+    assert lop.dot_test_real(cnb.KEYS[i+2], T, tol=1e-4)
+    assert lop.dot_test_complex(cnb.KEYS[i+2], T, tol=1e-4)

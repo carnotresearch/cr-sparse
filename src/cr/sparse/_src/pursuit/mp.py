@@ -17,7 +17,7 @@ import jax.numpy as jnp
 from jax.ops import index, index_add
 from jax.numpy.linalg import norm
 from .defs import SingleRecoverySolution
-from cr.sparse import *
+import cr.nimble as cnb
 
 def solve_smv(dictionary, x, max_iters=None, max_res_norm=None):
     # initialize residual
@@ -80,7 +80,7 @@ def solve_mmv(dictionary, signals, max_iters=None, max_res_norm=None):
     # iteration count
     t = 0
     # compute the norm of original signal
-    x_norms = norms_l2_rw(signals)
+    x_norms = cnb.norms_l2_rw(signals)
     # absolute limit on res norm
     upper_res_norm = jnp.max(x_norms) * 1e-6
     # upper limit on number of iterations
@@ -108,7 +108,7 @@ def solve_mmv(dictionary, signals, max_iters=None, max_res_norm=None):
             residuals = index_add(residuals, index[i, :], -update)
         t += 1
         # compute the updated residual norm
-        r_norms = norms_l2_rw(residuals)
+        r_norms = cnb.norms_l2_rw(residuals)
         max_r_norm = jnp.max(r_norms)
         # print("[{}] norm: {}".format(t, r_norm))
         print('.', end="", flush=True)

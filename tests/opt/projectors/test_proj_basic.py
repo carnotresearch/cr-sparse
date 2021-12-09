@@ -48,7 +48,7 @@ def test_affine_1(x):
 ])
 def test_affine_2(x):
     n = len(x)
-    A = random.normal(crs.KEYS[0], (n,n))
+    A = random.normal(cnb.KEYS[0], (n,n))
     b = 0
     proj = projectors.proj_affine(A, b)
     v = proj(x)

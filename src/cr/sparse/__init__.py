@@ -20,91 +20,6 @@ CR-Sparse
 
 from .version import __version__
 
-from cr.sparse._src.util import (
-    platform,
-    is_cpu,
-    is_gpu,
-    is_tpu,
-    KEY0,
-    KEYS,
-    promote_arg_dtypes,
-    canonicalize_dtype,
-    check_shapes_are_equal,
-    promote_to_complex,
-    promote_to_real,
-    integer_types,
-    integer_ranges,
-    dtype_ranges,
-    nbytes_live_buffers
-)
-
-from cr.sparse._src.matrix import (
-    transpose,
-    hermitian,
-    is_matrix,
-    is_square,
-    is_symmetric,
-    is_hermitian,
-    is_positive_definite,
-    has_orthogonal_columns,
-    has_orthogonal_rows,
-    has_unitary_columns,
-    has_unitary_rows,
-    off_diagonal_elements,
-    off_diagonal_min,
-    off_diagonal_max,
-    off_diagonal_mean,
-    set_diagonal,
-    add_to_diagonal,
-    abs_max_idx_cw,
-    abs_max_idx_rw,
-    diag_premultiply,
-    diag_postmultiply
-)
-
-from cr.sparse._src.norm import (
-    norm_l1,
-    sqr_norm_l2,
-    norm_l2,
-    norm_linf,
-
-    norms_l1_cw,
-    norms_l1_rw,
-    norms_l2_cw,
-    norms_l2_rw,
-    norms_linf_cw,
-    norms_linf_rw,
-    sqr_norms_l2_cw,
-    sqr_norms_l2_rw,
-
-
-    normalize_l1_cw,
-    normalize_l1_rw,
-    normalize_l2_cw,
-    normalize_l2_rw,
-)
-
-from cr.sparse._src.distance import (
-    pairwise_sqr_l2_distances_rw,
-    pairwise_sqr_l2_distances_cw,
-    pairwise_l2_distances_rw,
-    pairwise_l2_distances_cw,
-    pdist_sqr_l2_rw,
-    pdist_sqr_l2_cw,
-    pdist_l2_rw,
-    pdist_l2_cw,
-    # Manhattan distances
-    pairwise_l1_distances_rw,
-    pairwise_l1_distances_cw,
-    pdist_l1_rw,
-    pdist_l1_cw,
-
-    # Chebychev distance
-    pairwise_linf_distances_rw,
-    pairwise_linf_distances_cw,
-    pdist_linf_rw,
-    pdist_linf_cw
-)
 
 from cr.sparse._src.discrete.number import (
     next_pow_of_2,
@@ -118,36 +33,6 @@ from cr.sparse._src.discrete.number import (
     is_power_of_2,
     is_perfect_square,
     integer_factors_close_to_sqr_root
-)
-
-from cr.sparse._src.vector import (
-    is_scalar,
-    is_vec,
-    is_line_vec,
-    is_row_vec,
-    is_col_vec,
-    to_row_vec,
-    to_col_vec,
-    vec_unit,
-    vec_unit_jit,
-    vec_shift_right,
-    vec_rotate_right,
-    vec_shift_left,
-    vec_rotate_left,
-    vec_shift_right_n,
-    vec_rotate_right_n,
-    vec_shift_left_n, 
-    vec_rotate_left_n,   
-    vec_repeat_at_end,
-    vec_repeat_at_end_jit,
-    vec_repeat_at_start,
-    vec_repeat_at_start_jit,
-    vec_centered,
-    vec_centered_jit,
-    vec_convolve,
-    vec_convolve_jit,
-    vec_safe_divide_by_scalar,
-    vec_safe_divide_by_scalar_jit
 )
 
 from cr.sparse._src.signal import (
@@ -184,7 +69,11 @@ from cr.sparse._src.signal import (
     normalize_jit,
 
     # interpolate via fourier transform
-    interpft
+    interpft,
+
+    # convolution
+    vec_convolve,
+    vec_convolve_jit,
 )
 
 from cr.sparse._src.signal import (
@@ -210,28 +99,10 @@ from cr.sparse._src.noise import (
     awgn_at_snr
 )
 
-from cr.sparse._src.special import (
-    pascal,
-    pascal_jit
-)
-
 from cr.sparse._src.types import (
     RecoveryFullSolution
 )
 
-
-from cr.sparse._src.ndarray import (
-    arr_largest_index,
-    arr_l1norm,
-    arr_l2norm,
-    arr_l2norm_sqr,
-    arr_vdot,
-    arr_rdot,
-    arr_rnorm_sqr,
-    arr_rnorm,
-    arr2vec,
-    log_pos,
-)
 
 from cr.sparse._src.similarity import (
     dist_to_gaussian_sim,

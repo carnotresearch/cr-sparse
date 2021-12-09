@@ -18,7 +18,7 @@
 import jax.numpy as jnp
 from jax import random, jit
 
-import cr.sparse as crs
+import cr.nimble as cnb
 
 def random_subspaces(key, N, D, K):
     """Generates a set of orthonormal bases for random low dimensional subspaces
@@ -71,7 +71,7 @@ def uniform_points_on_subspaces(key, bases, n):
         # Generate coefficients for the subspace
         coeffs = random.normal(keys[i], [di, n])
         # Normalize the coefficients
-        coeffs = crs.normalize_l2_cw(coeffs)
+        coeffs = cnb.normalize_l2_cw(coeffs)
         # Compute the points
         points = A @ coeffs
         X = X.at[:, start:start+n].set(points)
@@ -101,7 +101,7 @@ def two_subspaces_at_angle(key, N, D, theta):
         >>> A, B = two_subspaces_at_angle(rkey, N, D, theta)
         >>> print(A.shape, B.shape)
         (20, 4) (20, 4) (20, 4)
-        >>> from cr.sparse.la.subspaces import principal_angles_deg
+        >>> from cr.nimble.subspaces import principal_angles_deg
         >>> print(principal_angles_deg(A, B))
         [15. 90. 90. 90.]
     """
@@ -154,7 +154,7 @@ def three_subspaces_at_angle(key, N, D, theta):
         >>> A, B, C = three_subspaces_at_angle(rkey, N, D, theta)
         >>> print(A.shape, B.shape, C.shape)
         (20, 4) (20, 4) (20, 4)
-        >>> from cr.sparse.la.subspaces import smallest_principal_angles_deg
+        >>> from cr.nimble.subspaces import smallest_principal_angles_deg
         >>> angles = smallest_principal_angles_deg(jnp.array([A, B, C]))
         >>> print(jnp.round(angles, 2))
         [[ 0. 15. 15.]

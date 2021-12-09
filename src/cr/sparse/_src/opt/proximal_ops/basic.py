@@ -16,7 +16,7 @@
 from jax import jit, lax
 
 import jax.numpy as jnp
-import cr.sparse as crs
+import cr.nimble as cnb
 
 
 from .prox import build
@@ -48,7 +48,7 @@ def prox_zero():
     @jit
     def proximal_op(x, t):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         return x
 
     return build(func, proximal_op)

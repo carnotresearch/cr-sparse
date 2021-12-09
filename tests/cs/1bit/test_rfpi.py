@@ -5,9 +5,9 @@ def test_rfpi():
     M, N = 256, 512
     K = 4
     # dictionary
-    Phi = crdict.gaussian_mtx(crs.KEYS[0], M, N, normalize_atoms=False)
+    Phi = crdict.gaussian_mtx(cnb.KEYS[0], M, N, normalize_atoms=False)
     # sparse signal
-    x, omega = crdata.sparse_normal_representations(crs.KEYS[1], N, K)
+    x, omega = crdata.sparse_normal_representations(cnb.KEYS[1], N, K)
     # normalize signal
     x = x / norm(x)
     # frame bound

@@ -21,8 +21,7 @@ from typing import NamedTuple
 from jax import jit, vmap
 import jax.numpy as jnp
 
-
-import cr.sparse as crs
+import cr.nimble as cnb
 import cr.sparse.cluster as crcluster
 from jax.experimental.sparse import BCOO, sparsify
 
@@ -92,7 +91,7 @@ def angles_between_points(X):
     """Returns an SxS matrix of angles between each pair of points
     """
     # make sure that the points are normalized
-    X = crs.normalize_l2_cw(X)
+    X = cnb.normalize_l2_cw(X)
     # Compute gram matrix
     G = X.T @ X
     # Avoid overflow in gram matrix
@@ -104,7 +103,7 @@ def min_angles_inside_cluster(angles, cluster_sizes):
     """Returns the minimum angles for for each point with its neighbors inside the cluster 
     """
     # we have to ignore the diagonal elements
-    angles = crs.set_diagonal(angles, 10000)
+    angles = cnb.set_diagonal(angles, 10000)
     start_indices, end_indices = crcluster.start_end_indices(cluster_sizes)
     K = len(cluster_sizes)
     def min_angles(k):
@@ -138,7 +137,7 @@ def nearest_neighbors_inside_cluster(angles, cluster_sizes):
     """Returns the index of the nearest neighbor for each point inside the cluster 
     """
     # we have to ignore the diagonal elements
-    angles = crs.set_diagonal(angles, 10000)
+    angles = cnb.set_diagonal(angles, 10000)
     start_indices, end_indices = crcluster.start_end_indices(cluster_sizes)
     K = len(cluster_sizes)
     def inn_indices(k):

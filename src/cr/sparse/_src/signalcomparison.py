@@ -16,7 +16,7 @@
 import jax
 import jax.numpy as jnp
 
-from .norm import sqr_norms_l2_cw, sqr_norms_l2_rw, norms_l2_cw, sqr_norm_l2
+from cr.nimble import sqr_norms_l2_cw, sqr_norms_l2_rw, norms_l2_cw, sqr_norm_l2
 
 norm = jnp.linalg.norm
 

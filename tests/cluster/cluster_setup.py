@@ -9,9 +9,8 @@ import jax
 import jax.numpy as jnp
 from jax import random, lax, vmap
 
-
+import cr.nimble as cnb
 import cr.sparse as crs
-import cr.sparse.la as la
 import cr.sparse.lop as lop
 import cr.sparse.sls as sls
 import cr.sparse.dict as crdict

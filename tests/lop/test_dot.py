@@ -11,8 +11,8 @@ from .lop_setup import *
 def test_dot(v):
     v = jnp.asarray(v)
     T = lop.jit(lop.dot(v))
-    x = random.normal(crs.KEYS[1], v.shape)
-    z = crs.arr_rdot(v, x)
+    x = random.normal(cnb.KEYS[1], v.shape)
+    z = cnb.arr_rdot(v, x)
     assert_almost_equal(z, T.times(x))
     assert_allclose(v * z, T.trans(z))
     TH = lop.jit(lop.dot(v, adjoint=True))

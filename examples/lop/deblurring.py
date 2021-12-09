@@ -67,7 +67,7 @@ ax.axis('tight')
 # The linear operator for the blur kernel
 # ''''''''''''''''''''''''''''''''''''''''''''''''''''''
 # Locate the center of the filter
-offset = crs.arr_largest_index(h)
+offset = cnb.arr_largest_index(h)
 print(offset)
 # Construct a 2D convolution operator based on the kernel
 H = lop.convolve2D(image.shape, h, offset=offset)

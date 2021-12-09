@@ -21,7 +21,7 @@ from jax import jit, lax
 import jax.numpy as jnp
 
 from cr.sparse import wt
-from cr.sparse import promote_arg_dtypes
+from cr.nimble import promote_arg_dtypes
 
 from .lop import Operator
 from .util import apply_along_axis

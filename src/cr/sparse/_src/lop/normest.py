@@ -20,7 +20,7 @@ import jax.numpy as jnp
 
 from typing import NamedTuple
 
-import cr.sparse as crs
+import cr.nimble as cnb
 
 class NormEstState(NamedTuple):
     """State for the norm estimation algorithm
@@ -62,12 +62,12 @@ def normest(
     """
     shape = operator.input_shape
     # initial eigen vector
-    b = random.normal(crs.KEYS[0], shape)
+    b = random.normal(cnb.KEYS[0], shape)
     if not operator.real:
-        bi = random.normal(crs.KEYS[1], shape)
+        bi = random.normal(cnb.KEYS[1], shape)
         b = b + bi * 1j
     # normalize it
-    b = b / crs.arr_l2norm(b)
+    b = b / cnb.arr_l2norm(b)
     def init():
         return NormEstState(v=b, old_estimate=-1e20, new_estimate=1e20, iterations=0)
 
@@ -83,7 +83,7 @@ def normest(
         """One step of power iteration."""
         v = state.v
         # normalize
-        v_norm = crs.arr_l2norm(v)
+        v_norm = cnb.arr_l2norm(v)
         v = v / v_norm
         # compute the next vector
         v_new = operator.times(v)

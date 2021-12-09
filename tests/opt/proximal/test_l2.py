@@ -6,10 +6,10 @@ from proximal_setup import *
 ])
 def test_l2(x):
     prox = proximal_ops.prox_l2()
-    assert_array_equal(prox.func(x), crs.arr_l2norm(x))
+    assert_array_equal(prox.func(x), cnb.arr_l2norm(x))
     t = 1. 
     px = prox.prox_op(x, t)
-    assert crs.arr_l2norm(px) <= crs.arr_l2norm(x)
+    assert cnb.arr_l2norm(px) <= cnb.arr_l2norm(x)
     px2, v2 = prox.prox_vec_val(x, t)
     assert_array_equal(px, px2)
     assert_array_equal(v2, prox.func(px2))

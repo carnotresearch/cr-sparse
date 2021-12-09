@@ -18,7 +18,7 @@ from jax import jit
 import jax.numpy as jnp
 from jax.numpy.linalg import qr, norm
 
-import cr.sparse as crs
+import cr.nimble as cnb
 
 def indicator_zero():
     r"""Returns an indicator function for all zero arrays
@@ -49,7 +49,7 @@ def indicator_zero():
     @jit
     def indicator(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         is_nonzero = jnp.any(x != 0)
         return jnp.where(is_nonzero, jnp.inf, 0)
     
@@ -88,11 +88,11 @@ def indicator_singleton(c):
 
     """
     c = jnp.asarray(c)
-    c = crs.promote_arg_dtypes(c)
+    c = cnb.promote_arg_dtypes(c)
     @jit
     def indicator(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         is_nonzero = jnp.any(x - c != 0)
         return jnp.where(is_nonzero, jnp.inf, 0)
 
@@ -125,11 +125,11 @@ def indicator_affine(A, b=0):
     """
     A = jnp.asarray(A)
     b = jnp.asarray(b)
-    A, b = crs.promote_arg_dtypes(A, b)
+    A, b = cnb.promote_arg_dtypes(A, b)
     @jit
     def indicator(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         # compute the residual
         r = A @ x - b
         # compute the strength of residual
@@ -169,22 +169,22 @@ def indicator_box(l=None, u=None):
         raise ValueError("At least lower or upper bound must be defined.")
     if l is not None:
         l = jnp.asarray(l)
-        l = crs.promote_arg_dtypes(l)
+        l = cnb.promote_arg_dtypes(l)
     if u is not None:
         u = jnp.asarray(u)
-        u = crs.promote_arg_dtypes(u)
+        u = cnb.promote_arg_dtypes(u)
 
     @jit
     def lower_bound(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         is_invalid = jnp.any(x < l)
         return jnp.where(is_invalid, jnp.inf, 0)
 
     @jit
     def upper_bound(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         is_invalid = jnp.any(x > u)
         return jnp.where(is_invalid, jnp.inf, 0)
 
@@ -192,7 +192,7 @@ def indicator_box(l=None, u=None):
     @jit
     def box_bound(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         is_invalid = jnp.logical_or(jnp.any(x < l), jnp.any(x > u))
         return jnp.where(is_invalid, jnp.inf, 0)
 
@@ -211,24 +211,24 @@ def indicator_box_affine(l, u, a, alpha=0., tol=1e-6):
     if a is None:
         raise ValueError("a is required")
     a = jnp.asarray(a)
-    a = crs.promote_arg_dtypes(a)
+    a = cnb.promote_arg_dtypes(a)
     n = a.size
     if l is None:
         l = jnp.full_like(a, -jnp.inf)
     else:
         l = jnp.asarray(l)
-        l = crs.promote_arg_dtypes(l)
+        l = cnb.promote_arg_dtypes(l)
     if u is None:
         u = jnp.full_like(a, jnp.inf)
     else:
         u = jnp.asarray(u)
-        u = crs.promote_arg_dtypes(u)
+        u = cnb.promote_arg_dtypes(u)
 
     @jit
     def indicator(x):
         is_invalid = jnp.any(x < l)
         is_invalid = jnp.logical_or(is_invalid, jnp.any(x > u))
-        mismatch = jnp.abs(crs.arr_rdot(a, x) - alpha)
+        mismatch = jnp.abs(cnb.arr_rdot(a, x) - alpha)
         affine_invalid = mismatch > tol
         is_invalid = jnp.logical_or(is_invalid, affine_invalid)
         return jnp.where(is_invalid, jnp.inf, 0)
@@ -259,7 +259,7 @@ def indicator_conic():
     @jit
     def indicator(x):
         x = jnp.asarray(x)
-        x = crs.promote_arg_dtypes(x)
+        x = cnb.promote_arg_dtypes(x)
         x, t = x[:-1], x[-1]
         inside = norm(x) <= t
         return jnp.where(inside, 0, jnp.inf)
