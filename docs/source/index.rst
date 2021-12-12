@@ -13,7 +13,7 @@ API Docs
    pursuit
    cvx_recovery
    opt
-   focs
+   fom
    cs
    cluster
    ssc

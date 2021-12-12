@@ -18,10 +18,10 @@ import cr.sparse.opt as opt
 
 
 from .util import matrix_affine_func
-from .focs import focs
-from .defs import FOCSOptions
+from .fom import fom
+from .defs import FomOptions
 
-def owl1rls(A, b, lambda_, x0, options: FOCSOptions = FOCSOptions()):
+def owl1rls(A, b, lambda_, x0, options: FomOptions = FomOptions()):
     r"""Solver for ordered weighted l1 norm regulated least square problem
 
     Args:
@@ -29,10 +29,10 @@ def owl1rls(A, b, lambda_, x0, options: FOCSOptions = FOCSOptions()):
         b (jax.numpy.ndarray): The measurements :math:`b \approx A x`
         lambda_ (jax.numpy.ndarray): A strictly positive weight vector which is sorted in decreasing order
         x0 (jax.numpy.ndarray): Initial guess for solution vector
-        options (FOCSOptions): Options for configuring the algorithm
+        options (FomOptions): Options for configuring the algorithm
 
     Returns: 
-        FOCSState: Solution of the optimization problem
+        FomState: Solution of the optimization problem
 
 
     The ordered weighted l1 regularized least square problem :cite:`lgorzata2013statistical` is defined as:
@@ -53,7 +53,7 @@ def owl1rls(A, b, lambda_, x0, options: FOCSOptions = FOCSOptions()):
     """
     f = opt.smooth_quad_matrix()
     h = opt.prox_owl1(lambda_)
-    return focs(f, h, A, -b, x0, options)
+    return fom(f, h, A, -b, x0, options)
 
 
 owl1rls_jit = jit(owl1rls, static_argnums=(0, 4))

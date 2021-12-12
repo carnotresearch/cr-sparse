@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .defs import FOCSOptions, FOCSState
+from .defs import FomOptions, FomState
 
 import jax.numpy as jnp
 
 
-def focs_at(f, h, A, b, x0, options: FOCSOptions):
+def focs_at(f, h, A, b, x0, options: FomOptions):
     """First order conic solver Auslender and Teboulle method
     """
     state, = focs_init(f, h, A, b, x0, options)

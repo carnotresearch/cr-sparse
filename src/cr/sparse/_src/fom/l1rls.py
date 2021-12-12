@@ -18,10 +18,10 @@ import cr.sparse.opt as opt
 
 
 from .util import matrix_affine_func
-from .focs import focs
-from .defs import FOCSOptions
+from .fom import fom
+from .defs import FomOptions
 
-def l1rls(A, b, lambda_, x0, options: FOCSOptions = FOCSOptions()):
+def l1rls(A, b, lambda_, x0, options: FomOptions = FomOptions()):
     r"""Solver for l1 regulated least square problem
 
     Args:
@@ -29,10 +29,10 @@ def l1rls(A, b, lambda_, x0, options: FOCSOptions = FOCSOptions()):
         b (jax.numpy.ndarray): The measurements :math:`b \approx A x`
         lambda_ (float): The regularization parameter for the l1 term
         x0 (jax.numpy.ndarray): Initial guess for solution vector
-        options (FOCSOptions): Options for configuring the algorithm
+        options (FomOptions): Options for configuring the algorithm
 
     Returns: 
-        FOCSState: Solution of the optimization problem
+        FomState: Solution of the optimization problem
 
 
     The l1 regularized least square problem is defined as: 
@@ -45,7 +45,7 @@ def l1rls(A, b, lambda_, x0, options: FOCSOptions = FOCSOptions()):
     """
     f = opt.smooth_quad_matrix()
     h = opt.prox_l1(lambda_)
-    return focs(f, h, A, -b, x0, options)
+    return fom(f, h, A, -b, x0, options)
 
 
 l1rls_jit = jit(l1rls, static_argnums=(0, 4))

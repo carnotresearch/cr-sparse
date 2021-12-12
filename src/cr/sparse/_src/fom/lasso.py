@@ -18,10 +18,10 @@ import cr.sparse.opt as opt
 
 
 from .util import matrix_affine_func
-from .focs import focs
-from .defs import FOCSOptions
+from .fom import fom
+from .defs import FomOptions
 
-def lasso(A, b, tau, x0, options: FOCSOptions = FOCSOptions()):
+def lasso(A, b, tau, x0, options: FomOptions = FomOptions()):
     r"""Solver for LASSO problem
 
     Args:
@@ -29,10 +29,10 @@ def lasso(A, b, tau, x0, options: FOCSOptions = FOCSOptions()):
         b (jax.numpy.ndarray): The measurements :math:`b \approx A x`
         tau (float): The radius of the l1-ball constraint
         x0 (jax.numpy.ndarray): Initial guess for solution vector
-        options (FOCSOptions): Options for configuring the algorithm
+        options (FomOptions): Options for configuring the algorithm
 
     Returns: 
-        FOCSState: Solution of the optimization problem
+        FomState: Solution of the optimization problem
 
 
     The LASSO problem is defined as: 
@@ -47,7 +47,7 @@ def lasso(A, b, tau, x0, options: FOCSOptions = FOCSOptions()):
     """
     f = opt.smooth_quad_matrix()
     h = opt.prox_l1_ball(tau)
-    return focs(f, h, A, -b, x0, options)
+    return fom(f, h, A, -b, x0, options)
 
 
 lasso_jit = jit(lasso, static_argnums=(0, 4))

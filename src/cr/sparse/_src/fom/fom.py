@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .defs import FOCSOptions, FOCSState
+from .defs import FomOptions, FomState
 
 import jax.numpy as jnp
 from jax import jit, lax
@@ -46,21 +46,21 @@ def backtrack_L(x, A_x, g_Ax, y, A_y, g_Ay, L, Lexact, beta):
         backtrack2,
         L)
 
-def focs(smooth_f, prox_h, A, b, x0, options: FOCSOptions = FOCSOptions()):
-    r"""First order conic solver driver routine
+def fom(smooth_f, prox_h, A, b, x0, options: FomOptions = FomOptions()):
+    r"""First order methods driver routine
 
     Args:
         smooth_f (cr.sparse.opt.SmoothFunction): A smooth function 
-        prox_h (cr.sparse.opt.ProxCapable): A smooth function 
+        prox_h (cr.sparse.opt.ProxCapable): A prox-capable function 
         A (cr.sparse.lop.Operator): A linear operator 
         b (jax.numpy.ndarray): The translation vector
         x0 (jax.numpy.ndarray): Initial guess for solution vector
-        options (FOCSOptions): Options for configuring the algorithm
+        options (FomOptions): Options for configuring the algorithm
 
     Returns: 
-        FOCSState: Solution of the optimization problem
+        FomState: Solution of the optimization problem
 
-    The function uses first order conic solver algorithms to solve an
+    The function uses first order methods to solve an
     optimization problem of the form:
 
     .. math::
@@ -115,7 +115,7 @@ def focs(smooth_f, prox_h, A, b, x0, options: FOCSOptions = FOCSOptions()):
         norm_x = cnb.arr_rnorm(x)
         norm_dx = norm_x
 
-        state = FOCSState(L=options.L0, theta=jnp.inf,
+        state = FomState(L=options.L0, theta=jnp.inf,
             x=x, A_x=A_x, g_Ax=g_Ax, g_x=g_x, f_x=f_x, C_x=C_x,
             y=y, A_y=A_y, g_Ay=g_Ay, g_y=g_y, f_y=f_y, C_y=C_y,
             z=z, A_z=A_z, g_Az=g_Az, g_z=g_z, f_z=f_z, C_z=C_z,
@@ -162,7 +162,7 @@ def focs(smooth_f, prox_h, A, b, x0, options: FOCSOptions = FOCSOptions()):
         norm_x = cnb.arr_rnorm(x)
         norm_dx = cnb.arr_rnorm(x - state.x)
 
-        state = FOCSState(L=L, theta=theta,
+        state = FomState(L=L, theta=theta,
             x=x, A_x=A_x, g_Ax=g_Ax, g_x=state.g_x, f_x=f_x, C_x=state.C_x,
             y=y, A_y=A_y, g_Ay=g_Ay, g_y=g_y, f_y=f_y, C_y=state.C_y,
             z=z, A_z=A_z, g_Az=state.g_Az, g_z=state.g_z, f_z=state.f_z, C_z=C_z,

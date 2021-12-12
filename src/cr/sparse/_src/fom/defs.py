@@ -18,7 +18,7 @@ from typing import NamedTuple
 
 import jax.numpy as jnp
 
-class FOCSOptions(NamedTuple):
+class FomOptions(NamedTuple):
     """Options for FOCS driver routine
     """
     nonneg : bool = False
@@ -53,7 +53,7 @@ class FOCSOptions(NamedTuple):
         return '\n'.join(s)
 
 
-class FOCSState(NamedTuple):
+class FomState(NamedTuple):
     """
     State of the FOCS method
     """

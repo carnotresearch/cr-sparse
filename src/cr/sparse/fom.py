@@ -13,18 +13,18 @@
 # limitations under the License.
 
 """
-First order conic solvers
+First order methods for sparse signal recovery
 """
-from cr.sparse._src.focs.util import (
+from cr.sparse._src.fom.util import (
     matrix_affine_func
 )
 
-from cr.sparse._src.focs.focs import focs
-from cr.sparse._src.focs.l1rls import (l1rls, l1rls_jit)
-from cr.sparse._src.focs.lasso import (lasso, lasso_jit)
-from cr.sparse._src.focs.owl1rls import (owl1rls, owl1rls_jit)
+from cr.sparse._src.fom.fom import fom
+from cr.sparse._src.fom.l1rls import (l1rls, l1rls_jit)
+from cr.sparse._src.fom.lasso import (lasso, lasso_jit)
+from cr.sparse._src.fom.owl1rls import (owl1rls, owl1rls_jit)
 
-from cr.sparse._src.focs.defs import (
-    FOCSOptions,
-    FOCSState
+from cr.sparse._src.fom.defs import (
+    FomOptions,
+    FomState
 )
