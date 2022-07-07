@@ -14,7 +14,6 @@
 
 
 import jax.numpy as jnp
-from jax.ops import index, index_add
 from jax.numpy.linalg import norm
 from .defs import SingleRecoverySolution
 import cr.nimble as cnb
@@ -47,7 +46,7 @@ def solve_smv(dictionary, x, max_iters=None, max_res_norm=None):
         # pick corresponding correlation value
         coeff = correlations[best_match_index]
         # update the representation
-        z  = index_add(z, index[best_match_index], coeff)
+        z  = z.at[best_match_index].add(coeff)
         # find the best match atom
         atom = dictionary[best_match_index]
         # update the residual
@@ -100,12 +99,13 @@ def solve_mmv(dictionary, signals, max_iters=None, max_res_norm=None):
             # pick corresponding correlation value
             coeff = correlations[best_match_index, i]
             # update the representation
-            z  = index_add(z, index[i, best_match_index], coeff)
+            z  = z.at[i, best_match_index].add(coeff)
+
             # find the best match atom
             atom = dictionary[best_match_index]
             # update the residual
             update = coeff * atom
-            residuals = index_add(residuals, index[i, :], -update)
+            residuals = residuals.at[i, :].add(-update)
         t += 1
         # compute the updated residual norm
         r_norms = cnb.norms_l2_rw(residuals)
