@@ -26,8 +26,7 @@ using `XLA <https://www.tensorflow.org/xla>`_.
 
 For detailed documentation and usage, please visit `online docs <https://cr-sparse.readthedocs.io/en/latest>`_.
 
-For theoretical background, please check the notes at
-`tisp.indigits.com <https://tisp.indigits.com>`
+For theoretical background, please check online notes at `Topics in Signal Processing <https://tisp.indigits.com>`_
 and references therein (still under development).
 
 Supported Platforms
