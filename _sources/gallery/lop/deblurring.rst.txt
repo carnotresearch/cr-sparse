@@ -254,13 +254,13 @@ An initial guess of the deblurred image is all zeros
 
  .. code-block:: none
 
-    Deblurred PSNR:  21.206455209076864 dB
+    Deblurred PSNR:  21.206455209076868 dB
     x: (200, 200)
-    A_norm: 4.94675887578546
-    A_cond: 167.30699088560266
-    x_norm: 34971.667945530295
-    r_norm: 28.394130441228835
-    atr_norm: 3.81619135390483
+    A_norm: 4.946758875785461
+    A_cond: 167.30699088560283
+    x_norm: 34971.66794553033
+    r_norm: 28.39413044122903
+    atr_norm: 3.8161913539048378
     iterations: 50
     n_times: 50
     n_trans: 50
@@ -377,7 +377,7 @@ We combine the convolution operator and the wavelet basis operator
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  17.661 seconds)
+   **Total running time of the script:** ( 0 minutes  15.012 seconds)
 
 
 .. _sphx_glr_download_gallery_lop_deblurring.py:
