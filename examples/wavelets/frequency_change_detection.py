@@ -32,7 +32,7 @@ import jax.numpy as jnp
 import cr.sparse as crs
 import cr.sparse.wt as wt
 # Utilty functions to construct sinusoids
-import cr.sparse.dsp.signals as signals
+import cr.nimble.dsp.signals as signals
 # Plotting
 import matplotlib.pyplot as plt
 

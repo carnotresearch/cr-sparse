@@ -14,7 +14,7 @@ from jax import random, lax
 
 import cr.sparse as crs
 import cr.sparse.wt as wt
-import cr.sparse.dsp.signals as signals
+import cr.nimble.dsp.signals as signals
 
 rtol = 1e-8 if jax.config.jax_enable_x64 else 1e-6
 atol = 1e-7 if jax.config.jax_enable_x64 else 1e-5
