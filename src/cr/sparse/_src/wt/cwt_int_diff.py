@@ -59,7 +59,7 @@ def psi_resample(int_psi, dt, domain, scale):
     int_psi_scale = int_psi[j][::-1]
     return int_psi_scale
 
-psi_resample_jit = jit(psi_resample, static_argnums=(2,3,4))
+psi_resample_jit = jit(psi_resample, static_argnums=(2,3))
 
 def cwt_id_time(data, scales, wavelet, precision, axis):
     """Computes the CWT using time domain convolution
