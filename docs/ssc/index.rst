@@ -1,8 +1,8 @@
- Sparse Subspace Clustering 
- ==================================
+Sparse Subspace Clustering 
+==================================
 
- .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+.. toctree::
+ :maxdepth: 2
+ :caption: Contents:
 
-   intro
+ intro

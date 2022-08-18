@@ -126,7 +126,7 @@ def dwt(n, wavelet="haar", level=1, axis=0, basis=False):
 
     Args:
         n (int): Dimension of the input signal and output coefficients  
-        wavelet (string): Name of the discrete wavelet to be used (see :ref:`api:wavelets`)
+        wavelet (string): Name of the discrete wavelet to be used
         level (int): Number of wavelet decompositions (default 1) 
         axis (int): For multi-dimensional array input, the axis along which
           the linear operator will be applied
@@ -171,7 +171,7 @@ def dwt2D(shape, wavelet="haar", level=1, axes=None, basis=False):
 
     Args:
         shape (tuple): Shape of input image / output coefficients  
-        wavelet (string): Name of the discrete wavelet to be used (see :ref:`api:wavelets`)
+        wavelet (string): Name of the discrete wavelet to be used
         level (int): Number of wavelet decompositions (default 1) 
         axes (tuple): For multi-dimensional array input, the pair of axes along which
           the linear operator will be applied
