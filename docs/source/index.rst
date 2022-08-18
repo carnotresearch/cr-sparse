@@ -5,7 +5,6 @@ API Docs
    :maxdepth: 2
    :caption: Contents:
 
-   dsp
    wavelets
    lop
    sls
@@ -18,7 +17,6 @@ API Docs
    cluster
    ssc
    data
-   util
    geo
    vision
    ef

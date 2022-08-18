@@ -19,7 +19,7 @@ from .impl import _hermitian
 from .lop import Operator
 
 import cr.sparse as crs
-import cr.sparse.dsp as crdsp
+import cr.nimble.dsp as crdsp
 
 def fourier_basis(n):
     """Returns an operator which represents the DFT orthonormal basis

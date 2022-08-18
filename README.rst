@@ -26,14 +26,24 @@ using `XLA <https://www.tensorflow.org/xla>`_.
 
 For detailed documentation and usage, please visit `online docs <https://cr-sparse.readthedocs.io/en/latest>`_.
 
+For theoretical background, please check online notes at `Topics in Signal Processing <https://tisp.indigits.com>`_
+and references therein (still under development).
+
 Supported Platforms
 ----------------------
 
 ``CR-Sparse`` can run on any platform supported by ``JAX``. 
 We have tested ``CR-Sparse`` on Mac and Linux platforms and Google Colaboratory.
 
+* The latest code in the library has been tested against JAX 0.3.14.
+* The last released version of CR-Sparse (0.2.2) was tested against JAX 0.1.55 and later JAX 0.1.x versions. 
+
 ``JAX`` is not officially supported on Windows platforms at the moment. 
 Although, it is possible to build it from source using Windows Subsystems for Linux.
+Alternatively, you can check out the community supported Windows build for JAX
+available from https://github.com/cloudhan/jax-windows-builder.
+This seems to work well and all the unit tests in the library have passed
+on Windows also. 
 
 Installation
 -------------------------------

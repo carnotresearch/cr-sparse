@@ -1,2 +1,0 @@
-Discrete Wavelet Transform
-================================

@@ -20,7 +20,7 @@ import numpy as np
 from jax import jit, lax
 import jax.numpy as jnp
 
-from cr.sparse import wt
+import cr.wavelets as wt
 from cr.nimble import promote_arg_dtypes
 
 from .lop import Operator
