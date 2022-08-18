@@ -8,6 +8,77 @@ All notable changes to this project will be documented in this file.
 
 [Documentation](https://cr-sparse.readthedocs.io/en/latest/)
 
+
+### Added
+
+
+Indicators
+- zero
+- singleton
+- affine
+- box
+- box affine
+- conic
+- l2 ball
+- l1 ball
+
+Projectors
+- zero
+- identity
+- singleton
+- affine
+- box
+- conic
+- l2 ball
+- l1 ball
+
+
+
+Linear operators
+
+
+Proximal operators
+- zero
+- 1l
+- l2
+- l1 positive
+- l1 ball
+- ordered weighted l1
+
+Smooth functions
+- constant
+- entropy
+- huber
+- linear
+- logdet
+- quad matrix
+
+
+First order methods
+- l1 regulated least square
+- smooth conic dual solver
+- lasso
+- ordered weighted l1 regularized least squares
+- dantzig smooth conic dual
+- basis pursuit smooth conic dual
+
+
+
+
+### Removed
+
+- Common utility functions, linear algebra routines
+  and basic signal processing functions have been refactored into a separate
+  library [CR-Nimble](https://github.com/carnotresearch/cr-nimble)
+- Wavelets related functionality has been refactored into a separate
+  library [CR-Wavelets](https://github.com/carnotresearch/cr-wavelets)
+
+
+### Misc
+
+- Support for JAX 0.3.14
+
+
 ## [0.2.2] - 2021-12-02
 
 [Documentation](https://cr-sparse.readthedocs.io/en/v0.2.2/)
