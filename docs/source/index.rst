@@ -17,7 +17,6 @@ API Docs
    cluster
    ssc
    data
-   util
    geo
    vision
    ef
