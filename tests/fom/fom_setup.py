@@ -8,7 +8,7 @@ from jax import random, lax
 # crs imports
 import cr.sparse as crs
 from cr.sparse.opt import *
-from cr.sparse.focs import *
+from cr.sparse.fom import *
 import cr.sparse.lop as lop
 
 atol = 1e-4

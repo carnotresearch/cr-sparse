@@ -39,6 +39,10 @@ class FomOptions(NamedTuple):
     "Backtracking parameter, in (0,1). No line search if >= 1"
     mu: float = 0
     "Strong convexity parameter"
+    maximize : bool = False
+    "By default, we attempt minimization of the objective, otherwise maximize"
+    saddle: bool = False
+    "Indicates if it's a saddle point problem setup by SCD subroutine"
 
     def __str__(self):
         s = []

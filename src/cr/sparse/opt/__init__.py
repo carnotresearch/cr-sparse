@@ -33,3 +33,7 @@ from .indicators import *
 from .projectors import *
 from .proximal_ops import *
 from .smooth import *
+
+from cr.sparse._src.opt.prox_to_smooth import (
+    moreau_envelope
+)

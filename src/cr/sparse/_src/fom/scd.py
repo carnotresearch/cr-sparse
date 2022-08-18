@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-First Order Conic Solver for Smooth Conic Dual Problem
+First Order Solver for Smooth Conic Dual Problem
 """
 
 from .defs import FomOptions, FomState
@@ -26,9 +26,51 @@ import cr.nimble as cnb
 import cr.sparse.opt as opt
 import cr.sparse.lop as lop
 
+from .fom import fom
 
-def focs_scd(prox_f, conj_neg_h, A, b, mu, x0, z0, options: FomOptions = FomOptions()):
-    r"""First order conic solver for smooth conic dual problems driver routine
+def smooth_dual(prox_f: opt.ProxCapable, mu=1, x0=0):
+    """Constructs the smooth dual of a prox capable function
+    """
+
+    @jit
+    def func(x):
+        """Computes the value of the function at x
+        """
+        x = jnp.asarray(x)
+        x = cnb.promote_arg_dtypes(x)
+        px, pv = prox_f.prox_vec_val(x0 + mu * x, mu)
+        v = cnb.arr_rdot(x, px) - pv - (0.5/mu) * cnb.arr_rnorm_sqr(px - x0)
+        return -v
+
+    @jit
+    def grad(x):
+        """Computes the gradient of the smooth function at x"""
+        x = jnp.asarray(x)
+        x = cnb.promote_arg_dtypes(x)
+        px = prox_f.prox_op(x0 + mu * x, mu)
+        return -px
+
+    @jit
+    def grad_val(x):
+        """Computes the gradient as well as the value of the function at x"""
+        x = jnp.asarray(x)
+        x = cnb.promote_arg_dtypes(x)
+        px, pv = prox_f.prox_vec_val(x0 + mu * x, mu)
+        # the gradient
+        g = -px
+        v = cnb.arr_rdot(x, px) - pv - (0.5/mu) * cnb.arr_rnorm_sqr(px - x0)
+        v = -v
+        return g,v
+
+
+
+    return opt.smooth_build3(func, grad, grad_val)
+    
+
+
+def scd(prox_f: opt.ProxCapable, conj_neg_h: opt.ProxCapable, 
+    A: lop.Operator, b, mu, x0, z0, options: FomOptions = FomOptions()):
+    r"""First order solver for smooth conic dual problems driver routine
 
     Args:
         prox_f (cr.sparse.opt.SmoothFunction): A prox-capable objective function 
@@ -45,4 +87,30 @@ def focs_scd(prox_f, conj_neg_h, A, b, mu, x0, z0, options: FomOptions = FomOpti
 
     The function uses first order conic solver algorithms to solve an
     optimization problem of the form:
+
+    .. math::
+
+        \underset{x}{\text{minimize}} 
+        \left [ f(x) + \frac{\mu}{2} \| x - x_0 \|_2^2 
+        + h \left (\AAA(x) + b \right) \right ]
+
+    * Both :math:`f, h` must be convex and prox-capable, although neither needs to be smooth.
+
+    When :math:`h` is an indicator function for a convex cone :math:`\KKK`, this is 
+    equivalent to:
+
+    .. math::
+
+        \begin{split}\begin{aligned}
+        & \underset{x}{\text{minimize}}
+        & &  f(x) + \frac{\mu}{2} \| x - x_0 \|_2^2\\
+        & \text{subject to}
+        & &  \AAA(x) + b \in \KKK
+        \end{aligned}\end{split}
+
+    which is the smooth conic dual (SCD) model discussed in  :cite:`becker2011templates`.
     """
+    smooth_f = smooth_dual(prox_f, mu, x0)
+    options  = options._replace(saddle=True, maximize=True)
+    sol = fom(smooth_f, conj_neg_h, A, b, z0, options)
+    return sol

@@ -24,12 +24,14 @@ API
     :toctree: _autosummary
 
     fom
+    scd
     l1rls
     l1rls_jit
     lasso
     lasso_jit
     owl1rls
     owl1rls_jit
+    dantzig_scd
 
 
 .. rubric:: Data types
@@ -241,6 +243,41 @@ First order methods may be employed to solve this problem with
 provable performance. 
 
 
+The *smoothed conic dual* problem is then given by:
+
+.. math::
+
+  \begin{aligned}
+    & \underset{\lambda}{\text{maximize}} 
+    & & - (f+\mu d)^*(\AAA^*(\lambda)) - \langle b, \lambda \rangle \\
+    & \text{subject to}
+    & &  \lambda \in \KKK^*
+  \end{aligned}
+
+.. rubric:: Composite Forms
+
+Often, it is convenient to split the dual variable
+:math:`\lambda \in \RR^m` as :math:`\lambda=(z, \tau)`
+where :math:`z \in \RR^{m-\bar{m}}` and :math:`\tau \in \RR^{\bar{m}}`.
+For example, if :math:`\KKK^* = \LLL^n_1`, the :math:`\ell_1`  norm cone
+(i.e. the epigraph of the :math:`\ell_1` norm function, then, 
+if we split :math:`\lambda \in \RR^{n+1}` as :math:`\lambda = (z, \tau)`
+where :math:`z \in \RR^n` and :math:`\tau \in \RR`, then:
+
+.. math::
+
+    \lambda \in \LLL^n_{1}  \iff \| z \|_1 \leq \tau
+
+This is particularly useful, if the smoothed dual function 
+:math:`g_{\mu}(\lambda) = g_{\mu}(z, \tau)` is linear in :math:`\tau`.
+Then, we can rewrite :math:`g_{\mu}` as:
+
+.. math:: 
+
+  g_{\mu}(\lambda) = - g_{\text{sm}} (z) - \langle \nu_{\mu}, \tau \rangle
+
+Since :math:`g_{\mu}` is a smooth concave function, 
+:math:`g_{\text{sm}}` will be a smooth convex function.
 
 
 .. rubric:: Problem Instantiations
@@ -351,7 +388,7 @@ We consider the optimization problem
     & \underset{x}{\text{minimize}} 
     & &  \| x \|_1 \\
     & \text{subject to}
-    & &  \| A* (y - A x ) \|_{\infty} \leq \delta
+    & &  \| A^* (y - A x ) \|_{\infty} \leq \delta
   \end{aligned}
 
 * We are minimizing the :math:`\ell_1` norm of the solution (thus promoting sparsity)

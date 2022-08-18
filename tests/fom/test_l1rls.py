@@ -1,4 +1,4 @@
-from focs_setup import *
+from fom_setup import *
 
 
 def test_1():

@@ -19,13 +19,16 @@ import jax.numpy as jnp
 import cr.nimble as cnb
 
 
-from .prox import build
+from .prox import build, build3
 
 def prox_zero():
     r"""Returns a prox-capable wrapper for the function  :math:`f(x)=0`
 
     Returns:
-       ProxCapable: A prox-capable function 
+       ProxCapable: A prox-capable function
+
+
+    The function :math:`f(x)=0` is the indicator function for the vector space :math:`\RR^n`.
 
     The proximal operator
 
@@ -51,4 +54,11 @@ def prox_zero():
         x = cnb.promote_arg_dtypes(x)
         return x
 
-    return build(func, proximal_op)
+    @jit
+    def prox_vec_val(x, t):
+        x = jnp.asarray(x)
+        x = cnb.promote_arg_dtypes(x)
+        return x, 0.
+
+    return build3(func, proximal_op, prox_vec_val)
+

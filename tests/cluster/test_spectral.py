@@ -12,7 +12,7 @@ points = points + means
 true_labels = jnp.repeat(jnp.arange(num_clusters), points_per_set)
 sqr_distances = cnb.pdist_sqr_l2_rw(points[:, jnp.newaxis])
 sigma = .5
-similarity = crs.sqr_dist_to_gaussian_sim(sqr_distances, sigma)
+similarity = cnb.sqr_dist_to_gaussian_sim(sqr_distances, sigma)
 
 def test_spectral1():
     res = spectral.unnormalized(cnb.KEYS[1], similarity)

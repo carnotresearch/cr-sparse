@@ -61,6 +61,20 @@ def build(func, prox_op):
     return ProxCapable(func=func, prox_op=prox_op, 
         prox_vec_val=prox_vec_val)
 
+def build3(func, prox_op, prox_vec_val):
+    r"""Creates a wrapper for a prox capable function
+
+    Args:
+        func: Definition of a a function :math:`f(x)`
+        prox_op: Definition of its proximal operator :math:`p_f(x, t)`
+        prox_vec_val: Combined function for generating both proximal point and value
+
+    Returns:
+       ProxCapable: A prox-capable function 
+    """
+    return ProxCapable(func=func, prox_op=prox_op, 
+        prox_vec_val=prox_vec_val)
+
 def build_from_ind_proj(indicator, projector):
     """Builds a prox capable function wrapper for a convex set indicator function
 

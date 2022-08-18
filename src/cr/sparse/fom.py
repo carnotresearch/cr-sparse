@@ -20,9 +20,12 @@ from cr.sparse._src.fom.util import (
 )
 
 from cr.sparse._src.fom.fom import fom
+from cr.sparse._src.fom.scd import (smooth_dual, scd)
 from cr.sparse._src.fom.l1rls import (l1rls, l1rls_jit)
 from cr.sparse._src.fom.lasso import (lasso, lasso_jit)
 from cr.sparse._src.fom.owl1rls import (owl1rls, owl1rls_jit)
+from cr.sparse._src.fom.dantzig_scd import (dantzig_scd,)
+from cr.sparse._src.fom.bp_scd import (bp_scd,)
 
 from cr.sparse._src.fom.defs import (
     FomOptions,
