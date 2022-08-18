@@ -412,13 +412,8 @@ in CR-Sparse. Let us know if we missed anything.
   in conceptualizing the structure for ``cr.sparse.lop``. 
 * `PyLops <https://github.com/PyLops/pylops>`_: The ``cr.sparse.lop`` library is 
   heavily influenced by it.
-* `PyWavelets <https://github.com/PyWavelets/pywt>`_: The DWT and CWT implementations
-  in ``cr.sparse.wt`` are largely derived from it. The filter coefficients for discrete
-  wavelets have been ported from C to Python from here.
 * `HTP <https://github.com/foucart/HTP>`_ Original implementation of Hard Thresholding
   Pursuit in MATLAB.
-* `WaveLab <https://github.com/gregfreeman/wavelab850>`_ This MATLAB package helped a lot in
-  initial understanding of DWT implementation.
 * `YALL1 <http://yall1.blogs.rice.edu/>`_: This is the original MATLAB implementation of the
   ADMM based sparse recovery algorithm.
 * `L1-LS <https://web.stanford.edu/~boyd/l1_ls/>`_ is the original MATLAB implementation of the
@@ -428,8 +423,6 @@ in CR-Sparse. Let us know if we missed anything.
 * `Sparse and Redundant Representations: <https://elad.cs.technion.ac.il/wp-content/uploads/2018/02/Matlab-Package-Book-1.zip>`_ 
   From Theory to Applications in Signal and Image Processing book code helped a lot in basic understanding
   of sparse representations.
-* `aaren/wavelets <https://github.com/aaren/wavelets>`_ is a decent CWT implementation following
-  :cite:`torrence1998practical`. Influenced: ``cr.sparse.wt``.
   
 
 Further Reading
@@ -437,10 +430,6 @@ Further Reading
 * `Functional programming <https://en.wikipedia.org/wiki/Functional_programming>`_
 * `How to Think in JAX <https://jax.readthedocs.io/en/latest/notebooks/thinking_in_jax.html>`_
 * `JAX - The Sharp Bits <https://jax.readthedocs.io/en/latest/notebooks/Common_Gotchas_in_JAX.html>`_
-
-
-.. bibliography::
-   :filter: docname in docnames
 
 
 `Documentation <https://carnotresearch.github.io/cr-sparse>`_ | 

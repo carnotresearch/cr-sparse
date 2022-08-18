@@ -30,12 +30,6 @@ cr.sparse.lop
 .. automodule:: cr.sparse.lop
     :members:
 
-cr.sparse.wt
------------------
-
-.. automodule:: cr.sparse.wt
-    :members:
-
 cr.sparse.pursuit
 -------------------
 

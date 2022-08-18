@@ -5,7 +5,6 @@ API Docs
    :maxdepth: 2
    :caption: Contents:
 
-   wavelets
    lop
    sls
    dict

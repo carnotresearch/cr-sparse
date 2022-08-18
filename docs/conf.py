@@ -183,7 +183,6 @@ sphinx_gallery_conf = {
         'cr.sparse.data': None,
         'cr.sparse.dict': None,
         'cr.sparse.lop': None,
-        'cr.sparse.wt': None,
     }
 }
 
