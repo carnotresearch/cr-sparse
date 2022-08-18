@@ -21,13 +21,13 @@ import cr.nimble as cnb
 
 
 def dot(v, adjoint=False, axis=0):
-    """Returns a linear operator T such that :math:`T x = \langle v , x \rangle = v^H x`
+    """Returns a linear operator T such that :math:`T x = \\langle v , x \\rangle = v^H x`
 
     Args:
         v (jax.numpy.ndarray): The vector/array with which the inner product will be computed 
         adjoint (bool): Indicates if we need the dot operator or its adjoint
         axis (int): For multi-dimensional array input, the axis along which
-          the linear operator will be applied 
+        the linear operator will be applied 
 
     Note: 
         axis parameter is useful only if v is 1D. 
