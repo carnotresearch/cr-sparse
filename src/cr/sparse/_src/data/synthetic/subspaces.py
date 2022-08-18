@@ -39,7 +39,7 @@ def random_subspaces(key, N, D, K):
         k1, k2 = random.split(key)
         A = random.normal(k1, [N, D])
         Q, _ = jnp.linalg.qr(A)
-        dg = random.bernoulli(k2, shape=(D,)) - 1
+        dg = 2 * random.bernoulli(k2, shape=(D,)) - 1
         # apply the random sign changes
         Q = cnb.diag_postmultiply(Q, dg)
         bases.append(Q)
