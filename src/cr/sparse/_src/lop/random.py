@@ -13,11 +13,13 @@
 # limitations under the License.
 
 import jax.numpy as jnp
+import jax.random
 
 from .impl import _hermitian
 from .lop import Operator
 from .basic import matrix as matrix_op
 import cr.sparse.dict as crdict
+from .util import apply_along_axis
 
 
 def gaussian_dict(key, m, n=None, normalize_atoms=True, axis=0):
@@ -105,3 +107,43 @@ def random_onb_dict(key, n, axis=0):
     """
     Phi = crdict.random_onb(key, n)
     return matrix_op(Phi, axis=axis)
+
+def binary_dict_alg(key, m, n=None, axis=0):
+    """An operator representing a random matrix with 0, 1 entries.
+
+    Args:
+        key: a PRNG key used as the random key.
+        m (int): Number of rows of the sensing matrix 
+        n (int): Number of columns of the sensing matrix
+        axis (int): For multi-dimensional array input, the axis along which
+          the linear operator will be applied 
+
+    Returns:
+        Operator: A linear operator wrapping the sensing matrix
+
+    Notes:
+        It provides an algorithmic implementation of multiplying
+        with a binary sensing matrix.
+        This operator is far less efficient than corresponding
+        matrix multiplication. Hence it is not recommended to
+        be used till we figure out a more optimized implementation.
+    """
+    n = m if n is None else n
+    keys = jax.random.split(key, n)
+
+    def times(x):
+        y = jnp.zeros(m)
+        for i in range(n):
+            v = jax.random.bernoulli(keys[i], shape=(m,))
+            y = y + x[i] * v
+        return y
+
+    def trans(y):
+        x = jnp.zeros(n)
+        for i  in range(n):
+            v = jax.random.bernoulli(keys[i], shape=(m,))
+            x = x.at[i].set(v  @ y)
+        return x
+
+    times, trans = apply_along_axis(times, trans, axis)
+    return Operator(times=times, trans=trans, shape=(n,m), real=False)
