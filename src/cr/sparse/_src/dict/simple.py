@@ -23,7 +23,9 @@ from jax import random
 from jax import jit
 
 
-from cr.nimble import normalize_l2_cw, promote_arg_dtypes, hermitian
+from cr.nimble import (normalize_l2_cw, 
+    promote_arg_dtypes, hermitian,
+    diag_postmultiply)
 
 
 def gaussian_mtx(key, N, D, normalize_atoms=True):
@@ -127,8 +129,12 @@ def random_onb(key, N):
         [ 0.12152  -0.959138 -0.199282 -0.159919]
         [-0.754867 -0.066964 -0.486706  0.434522]]
     """
-    A = random.normal(key, [N, N])
+    k1, k2 = random.split(key)
+    A = random.normal(k1, [N, N])
     Q,R = jnp.linalg.qr(A)
+    dg = 2 * random.bernoulli(k2, shape=(N,)) - 1
+    # apply the random sign changes
+    Q = diag_postmultiply(Q, dg)
     return Q
 
 
@@ -153,8 +159,12 @@ def random_orthonormal_rows(key, M, N):
         [[-0.107175 -0.373504 -0.422407 -0.81889 ]
         [-0.769728 -0.300913  0.560666 -0.051218]]
     """
-    A = random.normal(key, [N, M])
+    k1, k2 = random.split(key)
+    A = random.normal(k1, [N, M])
     Q,R = jnp.linalg.qr(A)
+    dg = 2 * random.bernoulli(k2, shape=(N,)) - 1
+    # apply the random sign changes
+    Q = diag_postmultiply(Q, dg)
     return Q.T
 
 def hadamard(n, dtype=int):
