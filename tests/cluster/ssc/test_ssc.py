@@ -7,7 +7,7 @@ D = 3
 # number of subspaces
 K = 5
 # number of points per subspace   
-S = 20
+S = 25
 
 bases = crdata.random_subspaces_jit(cnb.KEYS[0], N, D, K)
 X = crdata.uniform_points_on_subspaces_jit(cnb.KEYS[1], bases, S)
