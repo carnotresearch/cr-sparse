@@ -106,6 +106,21 @@ class HTPState(NamedTuple):
     x_I_prev: jnp.ndarray
     r_norm_sqr_prev: jnp.ndarray
 
+    def __str__(self):
+        """Returns the string representation of the discrete wavelet object
+        """
+        s = []
+        for x in [
+            u"iterations %s" % self.iterations,
+            u"r_norm_sqr %e" % self.r_norm_sqr,
+            # u"r_norm_sqr_prev %e" % self.r_norm_sqr_prev,
+            # u"I %s" % self.I,
+            # u"I_prev %s" % self.I_prev,
+            ]:
+            s.append(x.rstrip())
+        return u'\n'.join(s)
+
+
 IHTState = HTPState
 
 CoSaMPState = HTPState

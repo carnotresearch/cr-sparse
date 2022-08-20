@@ -131,8 +131,12 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
     K3 = K + K2
     # squared norm of the signal
     y_norm_sqr = y.T @ y
+    y_norm = jnp.sqrt(y_norm_sqr)
+    # scale the signal down.
+    scale = 1.0 / y_norm
+    y = scale * y
 
-    max_r_norm_sqr = y_norm_sqr * (res_norm_rtol ** 2) 
+    max_r_norm_sqr = (res_norm_rtol ** 2)
 
     if max_iters is None:
         max_iters = M 
@@ -143,7 +147,7 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
         # Data for the previous approximation [r = y, x = 0]
         I_prev = jnp.arange(0, K)
         x_I_prev = jnp.zeros(K)
-        r_norm_sqr_prev = y_norm_sqr
+        r_norm_sqr_prev = 1.
         # compute the correlations of atoms with signal y
         h = trans(y)
         # Pick largest 3K indices [this is first iteration]
@@ -205,15 +209,33 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
             )
 
     def cond(state):
+        # print(state)
         # limit on residual norm 
         a = state.r_norm_sqr > max_r_norm_sqr
         # limit on number of iterations
         b = state.iterations < max_iters
         c = jnp.logical_and(a, b)
+        # checking if support is still changing
+        d = jnp.any(jnp.not_equal(state.I, state.I_prev))
+        # consider support change only after some iterations
+        d = jnp.logical_or(state.iterations < min_iters, d)
+        c = jnp.logical_and(c, d)
+        # there should be some reduction in the residual norm
+        # e = state.r_norm_sqr < 0.9 * state.r_norm_sqr_prev
+        # c = jnp.logical_and(c, e)
+        # overall condition
         return c
 
     state = lax.while_loop(cond, body, init())
-    return RecoverySolution(x_I=state.x_I, I=state.I, r=state.r, r_norm_sqr=state.r_norm_sqr,
+    # state = init()
+    # while cond(state):
+    #     state = body(state)
+
+    # scale back the result
+    x_I = y_norm * state.x_I
+    r = y_norm * state.r
+    r_norm_sqr = state.r_norm_sqr * y_norm_sqr
+    return RecoverySolution(x_I=x_I, I=state.I, r=r, r_norm_sqr=r_norm_sqr,
         iterations=state.iterations)
 
 
