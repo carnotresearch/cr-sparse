@@ -155,3 +155,9 @@ from cr.sparse._src.lop.normest import (
     normest,
     normest_jit
 )
+
+
+# Undocumented
+from cr.sparse._src.lop.random import (
+    binary_dict_alg,
+)
