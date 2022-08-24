@@ -18,7 +18,7 @@ from jax import vmap, jit, lax
 
 from .defs import RecoverySolution, HTPState
 
-from cr.sparse import (hard_threshold, 
+from cr.nimble.dsp import (hard_threshold, 
     hard_threshold_sorted,
     build_signal_from_indices_and_values)
 

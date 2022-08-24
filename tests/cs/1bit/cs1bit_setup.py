@@ -12,6 +12,7 @@ import jax.numpy as jnp
 from jax.numpy.linalg import norm
 
 import cr.nimble as cnb
+import cr.nimble.dsp
 import cr.sparse as crs
 import cr.sparse.dict as crdict
 import cr.sparse.data as crdata

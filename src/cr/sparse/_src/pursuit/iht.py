@@ -18,7 +18,8 @@ from jax import vmap, jit, lax
 
 from .defs import RecoverySolution, IHTState
 
-from cr.sparse import hard_threshold, build_signal_from_indices_and_values
+from cr.nimble.dsp import (
+    hard_threshold, build_signal_from_indices_and_values)
 import cr.sparse.dict as crdict
 import cr.sparse.lop as lop
 

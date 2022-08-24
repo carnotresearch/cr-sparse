@@ -1,4 +1,5 @@
 from .lop_setup import *
+from cr.nimble.dsp import energy
 
 
 def test_fourier_basis():
@@ -6,7 +7,7 @@ def test_fourier_basis():
     T = lop.jit(lop.fourier_basis(n))
     x = random.normal(keys[0], (n,))
     f = T.times(x)
-    assert_allclose(cnb.energy(x), cnb.energy(f), atol=atol, rtol=rtol)
+    assert_allclose(energy(x), energy(f), atol=atol, rtol=rtol)
     a = T.trans(f)
     assert_allclose(x, a, atol=atol, rtol=rtol)
     F = lop.to_matrix(T)
@@ -19,7 +20,7 @@ def test_cosine_basis():
     T = lop.jit(lop.cosine_basis(n))
     x = random.normal(keys[0], (n,))
     f = T.times(x)
-    assert_allclose(cnb.energy(x), cnb.energy(f), atol=atol, rtol=rtol)
+    assert_allclose(energy(x), energy(f), atol=atol, rtol=rtol)
     a = T.trans(f)
     assert_allclose(x, a, atol=atol, rtol=rtol)
     F = lop.to_matrix(T)
@@ -32,7 +33,7 @@ def test_wh_basis():
     T = lop.jit(lop.walsh_hadamard_basis(n))
     x = random.normal(keys[0], (n,))
     f = T.times(x)
-    assert_allclose(cnb.energy(x), cnb.energy(f), atol=atol, rtol=rtol)
+    assert_allclose(energy(x), energy(f), atol=atol, rtol=rtol)
     a = T.trans(f)
     assert_allclose(x, a, atol=atol, rtol=rtol)
     F = lop.to_matrix(T)

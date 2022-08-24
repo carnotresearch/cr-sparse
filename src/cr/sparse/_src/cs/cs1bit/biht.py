@@ -19,7 +19,8 @@ import jax.numpy as jnp
 from jax import vmap, jit, lax
 from jax.numpy.linalg import norm
 
-from cr.sparse import hard_threshold, build_signal_from_indices_and_values
+from cr.nimble.dsp import (hard_threshold,
+    build_signal_from_indices_and_values)
 
 
 class BIHTState(NamedTuple):
@@ -90,7 +91,7 @@ def biht(Phi, y, K, tau, max_iters=1000):
         >>> s0 = crdict.upper_frame_bound(Phi)
         >>> tau = 0.98 * s0
         >>> state = cs1bit.biht_jit(Phi, y, K, tau)
-        >>> x_rec = crs.build_signal_from_indices_and_values(N, state.I, state.x_I)
+        >>> x_rec = build_signal_from_indices_and_values(N, state.I, state.x_I)
         >>> x_rec = x_rec / norm(x_rec)
     """
     ## Initialize some constants for the algorithm

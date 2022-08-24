@@ -15,7 +15,8 @@
 
 import jax.numpy as jnp
 
-from cr.sparse import (nonzero_indices, 
+from cr.nimble.dsp import (
+    nonzero_indices, 
     largest_indices, 
     build_signal_from_indices_and_values,
     dynamic_range,

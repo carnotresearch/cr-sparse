@@ -23,7 +23,7 @@ def test_biht():
     # check if the support is recovered correctly
     assert_array_equal(omega, I)
     # reconstructed signal
-    x_rec = crs.build_signal_from_indices_and_values(N, state.I, state.x_I)
+    x_rec = cnb.dsp.build_signal_from_indices_and_values(N, state.I, state.x_I)
     # normalize recovered signal
     x_rec = x_rec / norm(x_rec)
     # assert that recovered signal is close to original

@@ -19,7 +19,7 @@ from jax import vmap, jit, lax
 
 from .defs import RecoverySolution
 
-from cr.sparse import largest_indices
+from cr.nimble.dsp import largest_indices
 
 
 
