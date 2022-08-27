@@ -29,6 +29,15 @@ For detailed documentation and usage, please visit `online docs <https://cr-spar
 For theoretical background, please check online notes at `Topics in Signal Processing <https://tisp.indigits.com>`_
 and references therein (still under development).
 
+``CR-Sparse`` is part of
+`CR-Suite <https://carnotresearch.github.io/cr-suite/>`_.
+
+Related libraries:
+
+* `CR-Nimble <https://cr-nimble.readthedocs.io>`_
+* `CR-Wavelets <https://cr-wavelets.readthedocs.io>`_
+
+
 Supported Platforms
 ----------------------
 
