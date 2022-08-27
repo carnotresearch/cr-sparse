@@ -9,6 +9,10 @@ All notable changes to this project will be documented in this file.
 [Documentation](https://cr-sparse.readthedocs.io/en/latest/)
 
 
+## [0.3.0] - 2022-08-27
+
+[Documentation](https://cr-sparse.readthedocs.io/en/v0.3.0/)
+
 ### Added
 
 
@@ -262,7 +266,8 @@ General stuff
 
 Initial release
 
-[Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.2...HEAD
+[Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.2...v0.3.0
 [0.2.2]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/carnotresearch/cr-sparse/compare/v0.1.6...v0.2.0
