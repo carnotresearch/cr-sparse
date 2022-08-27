@@ -52,6 +52,11 @@ import matplotlib.pyplot as plt
 import cr.sparse as crs
 import cr.sparse.dict as crdict
 import cr.sparse.data as crdata
+from cr.nimble.dsp import (
+    nonzero_indices,
+    nonzero_values,
+    largest_indices
+)
 
 # %%
 # Problem Setup
@@ -147,7 +152,7 @@ h = Phi.T @ r
 
 # %%
 # Pick the indices of 3K atoms with largest matches with the residual
-I_sub =  crs.largest_indices(h, K3)
+I_sub =  largest_indices(h, K3)
 # Update the flags array
 flags = flags.at[I_sub].set(True)
 # Sort the ``I_sub`` array with the help of flags array
@@ -165,7 +170,7 @@ Phi_sub = Phi[:, flags]
 # Compute the least squares solution of ``y`` over this subdictionary
 x_sub, r_sub_norms, rank_sub, s_sub = jnp.linalg.lstsq(Phi_sub, y)
 # Pick the indices of K largest entries in in ``x_sub`` 
-Ia = crs.largest_indices(x_sub, K)
+Ia = largest_indices(x_sub, K)
 print(f"{Ia=}")
 # %%
 # We need to map the indices in ``Ia`` to the actual indices of atoms in ``Phi``
@@ -215,7 +220,7 @@ print("Second iteration:")
 h = Phi.T @ r
 # %%
 # Pick the indices of 2K atoms with largest matches with the residual
-I_2k =  crs.largest_indices(h, K2 if iterations else K3)
+I_2k =  largest_indices(h, K2 if iterations else K3)
 # We can check if these include the atoms missed out in first iteration.
 print(jnp.intersect1d(omega, I_2k))
 # %%
@@ -237,7 +242,7 @@ Phi_sub = Phi[:, flags]
 # Compute the least squares solution of ``y`` over this subdictionary
 x_sub, r_sub_norms, rank_sub, s_sub = jnp.linalg.lstsq(Phi_sub, y)
 # Pick the indices of K largest entries in in ``x_sub`` 
-Ia = crs.largest_indices(x_sub, K)
+Ia = largest_indices(x_sub, K)
 print(Ia)
 # %%
 # We need to map the indices in ``Ia`` to the actual indices of atoms in ``Phi``
