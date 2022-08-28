@@ -20,12 +20,13 @@ import scipy
 
 import jax.numpy as jnp
 from jax import random
-from jax import jit
-
+from jax import jit, vmap
+from jax.experimental import sparse
 
 from cr.nimble import (normalize_l2_cw, 
     promote_arg_dtypes, hermitian,
     diag_postmultiply)
+import cr.wavelets as crwt
 
 
 def gaussian_mtx(key, N, D, normalize_atoms=True):
@@ -106,6 +107,38 @@ def rademacher_mtx(key, M, N, normalize_atoms=True):
         return dict / math.sqrt(M)
     return dict
 
+
+def sparse_binary_mtx(key, M, N, d, normalize_atoms=True, dense=False):
+    """A sensing matrix where exactly d entries are 1 in each column
+
+    Args:
+        key: a PRNG key used as the random key.
+        M (int): Number of rows of the sensing matrix 
+        N (int): Number of columns of the sensing matrix
+        d (int): Number of 1s in each column
+        normalize_atoms (bool): Whether the columns of sensing matrix are normalized 
+          (default True)
+        dense (bool): Whether to return a dense or a sparse matrix
+
+    Returns:
+        (jax.experimental.sparse.bcoo.BCOO): A sparse binary matrix
+        where each column contains exactly d ones and (M-d) zeros.
+
+    Note:
+
+        The resultant matrix is stored in the BCOO format.
+    """
+    # create keys for the N columns
+    keys = random.split(key, N)
+    # indices
+    idx = jnp.arange(M)
+    rc = lambda key : jnp.zeros(M, dtype=int).at[jnp.sort(random.choice(key, idx, (d, ), replace=False))].set(1)
+    dict = vmap(rc, out_axes=1)(keys)
+    if normalize_atoms:
+        dict = dict / math.sqrt(d)
+    if dense:
+        return dict
+    return sparse.BCOO.fromdense(dict)
 
 def random_onb(key, N):
     r"""
@@ -223,3 +256,39 @@ def fourier_basis(n):
     # Perform conjugate transpose
     F = hermitian(F)
     return F
+
+
+def wavelet_basis(n, name, level=None):
+    """Builds a wavelet basis for a given decomposition level
+
+    Note:
+        This function generates orthogonal bases only for orthogonal wavelets.
+        For the biorthogonal wavelets, the generated basis is a basis
+        but not an orthogonal basis.
+    """
+    wavelet = crwt.to_wavelet(name)
+    rec_lo = wavelet.rec_lo
+    rec_hi = wavelet.rec_hi
+    mode = 'periodization'
+    m = crwt.next_pow_of_2(n)
+    assert m == n, f"n={n} must be a power of 2"
+    # We need to verify that the level is not too high
+    max_level = crwt.dwt_max_level(n, wavelet.dec_len)
+    if level is None:
+        level = max_level
+    else:
+        assert level <= max_level, f"Level too high level={level}, max_level={max_level}"
+
+    def waverec(coefs):
+        mid = coefs.shape[0] >> level
+        a = coefs[:mid]
+        end = mid*2
+        for j in range(level):
+            d = coefs[mid:end]
+            a = crwt.idwt_(a, d, rec_lo, rec_hi, 'periodization')
+            mid = end
+            end = mid * 2
+        return a
+    data = jnp.eye(n)
+    basis = jnp.apply_along_axis(waverec, 0, data)
+    return basis

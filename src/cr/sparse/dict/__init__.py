@@ -22,7 +22,9 @@ Sparsifying dictionaries
 from cr.sparse._src.dict.simple import (
     gaussian_mtx,
     rademacher_mtx,
+    sparse_binary_mtx,
     random_onb,
+    random_orthonormal_rows,
     hadamard,
     hadamard_basis,
     dirac_hadamard_basis,
@@ -30,7 +32,7 @@ from cr.sparse._src.dict.simple import (
     dirac_cosine_basis,
     dirac_hadamard_cosine_basis,
     fourier_basis,
-    random_orthonormal_rows
+    wavelet_basis,
 )
 
 from cr.sparse._src.dict.props import (
