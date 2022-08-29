@@ -144,6 +144,7 @@ from cr.sparse._src.lop.special_matrices import (
 from cr.sparse._src.lop.random import (
     gaussian_dict,
     rademacher_dict,
+    sparse_binary_dict,
     random_onb_dict,
     random_orthonormal_rows_dict,
 )
