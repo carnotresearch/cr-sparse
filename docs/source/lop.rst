@@ -203,6 +203,7 @@ Random compressive sensing operators
     rademacher_dict
     random_onb_dict
     random_orthonormal_rows_dict
+    sparse_binary_dict
 
 
 Operators for special matrices

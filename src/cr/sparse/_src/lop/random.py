@@ -67,6 +67,32 @@ def rademacher_dict(key, m, n=None, normalize_atoms=True, axis=0):
     Phi = crdict.rademacher_mtx(key, m, n, normalize_atoms=normalize_atoms)
     return matrix_op(Phi, axis=axis)
 
+def sparse_binary_dict(key, m, n=None, d=None, 
+    normalize_atoms=True, dense=False, axis=0):
+    """An operator which represents a sparse binary sensing matrix
+
+    Args:
+        key: a PRNG key used as the random key.
+        M (int): Number of rows of the sensing matrix 
+        N (int): Number of columns of the sensing matrix
+        d (int): Number of 1s in each column
+        normalize_atoms (bool): Whether the columns of sensing matrix are normalized 
+          (default True)
+        dense (bool): Whether to return a dense or a sparse matrix
+        axis (int): For multi-dimensional array input, the axis along which
+          the linear operator will be applied 
+
+    Returns:
+        Operator: A linear operator wrapping the sensing matrix
+
+    """
+    n = m if n is None else n
+    d = 10 if d is None else d
+    Phi = crdict.sparse_binary_mtx(key, m, n, d=d, 
+        normalize_atoms=normalize_atoms, dense=dense)
+    return matrix_op(Phi, axis=axis)
+
+
 def random_orthonormal_rows_dict(key, m, n=None, axis=0):
     """An operator whose rows are orthonormal (sampled from a random orthonormal basis)
 
