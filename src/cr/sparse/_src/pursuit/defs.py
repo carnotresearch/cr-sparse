@@ -16,6 +16,7 @@ from typing import NamedTuple, List, Dict
 from dataclasses import dataclass
 import jax.numpy as jnp
 from jax.tree_util import register_pytree_node
+from cr.nimble.dsp import build_signal_from_indices_and_values
 
 @dataclass
 class SingleRecoverySolution:
@@ -72,6 +73,13 @@ class RecoverySolution(NamedTuple):
 
     iterations: int
     """The number of iterations it took to complete"""
+
+    length: int
+    """The length of the sparse signal"""
+
+    @property
+    def x(self):
+        return build_signal_from_indices_and_values(self.length, self.I, self.x_I)
 
 
 class PTConfig(NamedTuple):

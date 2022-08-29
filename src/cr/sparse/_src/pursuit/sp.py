@@ -50,7 +50,7 @@ def matrix_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
         # Compute residual norm squared
         r_norm_sqr = r.T @ r
         # Assemble the algorithm state at the end of first iteration
-        return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, iterations=1)
+        return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, iterations=1, length=Phi.shape[1])
 
     def body(state):
         # compute the correlations of dictionary atoms with the residual
@@ -80,7 +80,7 @@ def matrix_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
         r = y - Phi_I @ x_I
         # Compute residual norm squared
         r_norm_sqr = r.T @ r
-        return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, iterations=state.iterations+1)
+        return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, iterations=state.iterations+1, length=Phi.shape[1])
 
     def cond(state):
         # limit on residual norm 
@@ -124,7 +124,7 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
         # Compute residual norm squared
         r_norm_sqr = r.T @ r
         # Assemble the algorithm state at the end of first iteration
-        return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, iterations=1)
+        return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, iterations=1, length=Phi.shape[1])
 
     def body(state):
         # compute the correlations of dictionary atoms with the residual
@@ -154,7 +154,7 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
         r = y - Phi_I @ x_I
         # Compute residual norm squared
         r_norm_sqr = r.T @ r
-        return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, iterations=state.iterations+1)
+        return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, iterations=state.iterations+1, length=Phi.shape[1])
 
     def cond(state):
         # limit on residual norm 

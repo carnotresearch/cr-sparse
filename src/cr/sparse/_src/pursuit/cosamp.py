@@ -116,7 +116,7 @@ def matrix_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
 
     state = lax.while_loop(cond, body, init())
     return RecoverySolution(x_I=state.x_I, I=state.I, r=state.r, r_norm_sqr=state.r_norm_sqr,
-        iterations=state.iterations)
+        iterations=state.iterations, length=Phi.shape[1])
 
 
 matrix_solve_jit = jit(matrix_solve, static_argnums=(2,), static_argnames=("max_iters", "res_norm_rtol"))
@@ -236,7 +236,7 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
     r = y_norm * state.r
     r_norm_sqr = state.r_norm_sqr * y_norm_sqr
     return RecoverySolution(x_I=x_I, I=state.I, r=r, r_norm_sqr=r_norm_sqr,
-        iterations=state.iterations)
+        iterations=state.iterations, length=Phi.shape[1])
 
 
 operator_solve_jit = jit(operator_solve, static_argnums=(0, 2), static_argnames=("max_iters", "res_norm_rtol"))
