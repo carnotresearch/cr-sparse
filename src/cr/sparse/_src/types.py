@@ -16,6 +16,8 @@ A collection of data types useful for various problems.
 """
 import jax.numpy as jnp
 from typing import NamedTuple, List, Dict
+import cr.nimble as crn
+norm = jnp.linalg.norm
 
 
 class RecoveryFullSolution(NamedTuple):
@@ -48,3 +50,17 @@ class RecoveryFullSolution(NamedTuple):
     """Number of times A x computed """
     n_trans : int = 0
     """Number of times A^H b computed """
+
+    def __str__(self):
+        """Returns the string representation of the discrete wavelet object
+        """
+        s = []
+        r_norm = norm(self.r)
+        for x in [
+            u"iterations %d" % self.iterations,
+            u"n_times %d" % self.n_times,
+            u"n_trans %d" % self.n_trans,
+            u"r_norm %e" % r_norm,
+            ]:
+            s.append(x.rstrip())
+        return u'\n'.join(s)
