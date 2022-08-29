@@ -12,11 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import math
 from typing import NamedTuple, List, Dict
 from dataclasses import dataclass
 import jax.numpy as jnp
 from jax.tree_util import register_pytree_node
 from cr.nimble.dsp import build_signal_from_indices_and_values
+norm = jnp.linalg.norm
 
 @dataclass
 class SingleRecoverySolution:
@@ -80,6 +82,21 @@ class RecoverySolution(NamedTuple):
     @property
     def x(self):
         return build_signal_from_indices_and_values(self.length, self.I, self.x_I)
+
+    def __str__(self):
+        """Returns the string representation of the discrete wavelet object
+        """
+        s = []
+        r_norm = math.sqrt(float(self.r_norm_sqr))
+        x_norm = float(norm(self.x_I))
+        for x in [
+            u"iterations %s" % self.iterations,
+            f"m={len(self.r)}, n={self.length}, k={len(self.I)}",
+            u"r_norm %e" % r_norm,
+            u"x_norm %e" % x_norm,
+            ]:
+            s.append(x.rstrip())
+        return u'\n'.join(s)
 
 
 class PTConfig(NamedTuple):
