@@ -8,5 +8,6 @@ from cr.sparse._src.plots.plot_utils import (
 
 from cr.sparse._src.plots.plot_signals import (
     plot_sparse_signal,
-    plot_sparse_signals
+    plot_sparse_signals,
+    plot_signal
 )
