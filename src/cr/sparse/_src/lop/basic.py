@@ -17,6 +17,7 @@ import jax.numpy as jnp
 from .impl import _hermitian
 from .lop import Operator
 from .util import apply_along_axis
+from jax.experimental.sparse import sparsify
 
 ###########################################################################################
 #  Basic operators
@@ -109,6 +110,69 @@ def matrix(A, axis=0):
         return jnp.apply_along_axis(trans1d, axis, x)
 
     return Operator(times=times, trans=trans, shape=(m,n), real=real)
+
+
+def sparse_real_matrix(A, axis=0):
+    """Converts a sparse real matrix into a linear operator
+
+    Args:
+        A (jax.experimental.sparse.BCOO): A real valued sparse matrix in BCOO format 
+
+    Returns:
+        Operator: A linear operator wrapping the matrix
+
+    Forward operation: 
+
+    .. math::
+
+        y  = A x
+
+    Adjoint operation:
+
+    .. math::
+
+        y = A^T x
+    """
+    m, n = A.shape
+
+    @sparsify
+    def times1d(x):
+        return A @ x
+
+    @sparsify
+    def trans1d(x):
+        return x @ A
+        
+
+    @sparsify
+    def times(x):
+        """Forward matrix multiplication
+        """
+        if x.ndim == 1:
+            return A @ x
+        if x.ndim == 2:
+            if axis == 0:
+                return A @ x
+            else:
+                return x @ A.T
+        # general case
+        return jnp.apply_along_axis(times1d, axis, x)
+
+    @sparsify
+    def trans(x):
+        """Adjoint matrix multiplication
+        """
+        if x.ndim == 1:
+            return trans1d(x)
+        if x.ndim == 2:
+            if axis == 0:
+                return A.T @ x
+            else:
+                return x @ A
+        # general case
+        return jnp.apply_along_axis(trans1d, axis, x)
+    return Operator(times=times, trans=trans, shape=(m,n))
+
 
 def diagonal(d, axis=0):
     """Returns a linear operator which mimics multiplication by a diagonal matrix
@@ -246,3 +310,4 @@ def restriction(n, I, axis=0):
         return jnp.apply_along_axis(trans1d, axis, x)
 
     return Operator(times=times, trans=trans, shape=(k,n))
+

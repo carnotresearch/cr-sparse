@@ -18,6 +18,7 @@ import jax.random
 from .impl import _hermitian
 from .lop import Operator
 from .basic import matrix as matrix_op
+from .basic import sparse_real_matrix, real_matrix
 import cr.sparse.dict as crdict
 from .util import apply_along_axis
 
@@ -90,7 +91,10 @@ def sparse_binary_dict(key, m, n=None, d=None,
     d = 10 if d is None else d
     Phi = crdict.sparse_binary_mtx(key, m, n, d=d, 
         normalize_atoms=normalize_atoms, dense=dense)
-    return matrix_op(Phi, axis=axis)
+    if dense:
+        return matrix_op(Phi, axis=axis)
+    else:
+        return sparse_real_matrix(Phi, axis=axis)
 
 
 def random_orthonormal_rows_dict(key, m, n=None, axis=0):

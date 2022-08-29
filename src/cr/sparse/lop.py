@@ -62,6 +62,7 @@ spread_with_table
 from cr.sparse._src.lop.basic import (
     real_matrix,
     matrix,
+    sparse_real_matrix,
     scalar_mult,
     diagonal,
     zero,
