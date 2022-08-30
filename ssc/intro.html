@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -24,14 +24,14 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/custom.js"></script>
     <script src="../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Fourier and Wavelet Representations" href="../fwsp/index.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="index.html" />
+    <link rel="next" title="Acronyms" href="../acronyms.html" />
+    <link rel="prev" title="Sparse Subspace Clustering" href="index.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -60,7 +60,7 @@
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
@@ -70,8 +70,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../theory.html">Theory</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../la/index.html">Linear Algebra</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sls/index.html">Sparse Linear Systems</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Introduction to Sparse Subspace Clustering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../fwsp/index.html">Fourier and Wavelet Representations</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../acronyms.html">Acronyms</a></li>
 </ul>
 </li>
@@ -85,9 +84,9 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="../theory.html">Theory</a><ul>
-  <li><a href="index.html">&lt;no title&gt;</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">&lt;no title&gt;</a></li>
-      <li>Next: <a href="../fwsp/index.html" title="next chapter">Fourier and Wavelet Representations</a></li>
+  <li><a href="index.html">Sparse Subspace Clustering</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Sparse Subspace Clustering</a></li>
+      <li>Next: <a href="../acronyms.html" title="next chapter">Acronyms</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -97,7 +96,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -130,9 +129,9 @@ multiple disjoint subsets (clusters):
 then each subset can be modeled sufficiently well by a low dimensional subspace
 <span class="math notranslate nohighlight">\(\mathbb{R}^D\)</span> where <span class="math notranslate nohighlight">\(D \ll M\)</span>.
 Some of the applications include:
-motion segmentation <span id="id1">[<a class="reference internal" href="../zzzreference.html#id29" title="Terrance E Boult and Lisa Gottesfeld Brown. Factorization-based segmentation of motions. In Visual Motion, 1991., Proceedings of the IEEE Workshop on, 179–186. IEEE, 1991.">BB91</a>, <a class="reference internal" href="../zzzreference.html#id69" title="João Paulo Costeira and Takeo Kanade. A multibody factorization method for independently moving objects. International Journal of Computer Vision, 29(3):159–179, 1998.">CK98</a>, <a class="reference internal" href="../zzzreference.html#id139" title="Charles William Gear. Multibody grouping from motion images. International Journal of Computer Vision, 29(2):133–150, 1998.">Gea98</a>, <a class="reference internal" href="../zzzreference.html#id174" title="Kenichi Kanatani. Motion segmentation by subspace separation and model selection. image, 1:1, 2001.">Kan01</a>, <a class="reference internal" href="../zzzreference.html#id239" title="Conrad J Poelman and Takeo Kanade. A paraperspective factorization method for shape and motion recovery. Pattern Analysis and Machine Intelligence, IEEE Transactions on, 19(3):206–218, 1997.">PK97</a>, <a class="reference internal" href="../zzzreference.html#id287" title="Carlo Tomasi and Takeo Kanade. Detection and tracking of point features. School of Computer Science, Carnegie Mellon Univ. Pittsburgh, 1991.">TK91</a>, <a class="reference internal" href="../zzzreference.html#id288" title="Carlo Tomasi and Takeo Kanade. Shape and motion from image streams under orthography: a factorization method. International Journal of Computer Vision, 9(2):137–154, 1992.">TK92</a>]</span>,
-face clustering <span id="id2">[<a class="reference internal" href="../zzzreference.html#id14" title="Ronen Basri and David W Jacobs. Lambertian reflectance and linear subspaces. Pattern Analysis and Machine Intelligence, IEEE Transactions on, 25(2):218–233, 2003.">BJ03</a>, <a class="reference internal" href="../zzzreference.html#id164" title="Jeffrey Ho, Ming-Hsuan Yang, Jongwoo Lim, Kuang-Chih Lee, and David Kriegman. Clustering appearances of objects under varying illumination conditions. In Computer Vision and Pattern Recognition, 2003. Proceedings. 2003 IEEE Computer Society Conference on, volume 1, I–11. IEEE, 2003.">HYL+03</a>, <a class="reference internal" href="../zzzreference.html#id192" title="Kuang-Chih Lee, Jeffrey Ho, and David Kriegman. Acquiring linear subspaces for face recognition under variable lighting. Pattern Analysis and Machine Intelligence, IEEE Transactions on, 27(5):684–698, 2005.">LHK05</a>]</span>
-and handwritten digit recognition <span id="id3">[<a class="reference internal" href="../zzzreference.html#id340" title="Teng Zhang, Arthur Szlam, Yi Wang, and Gilad Lerman. Hybrid linear modeling via local best-fit flats. International Journal of Computer Vision, 100(3):217–240, 2012.">ZSWL12</a>]</span>.</p>
+motion segmentation <span id="id1">[<a class="reference internal" href="../zzzreference.html#id30" title="Terrance E Boult and Lisa Gottesfeld Brown. Factorization-based segmentation of motions. In Visual Motion, 1991., Proceedings of the IEEE Workshop on, 179–186. IEEE, 1991.">BB91</a>, <a class="reference internal" href="../zzzreference.html#id70" title="João Paulo Costeira and Takeo Kanade. A multibody factorization method for independently moving objects. International Journal of Computer Vision, 29(3):159–179, 1998.">CK98</a>, <a class="reference internal" href="../zzzreference.html#id140" title="Charles William Gear. Multibody grouping from motion images. International Journal of Computer Vision, 29(2):133–150, 1998.">Gea98</a>, <a class="reference internal" href="../zzzreference.html#id175" title="Kenichi Kanatani. Motion segmentation by subspace separation and model selection. image, 1:1, 2001.">Kan01</a>, <a class="reference internal" href="../zzzreference.html#id240" title="Conrad J Poelman and Takeo Kanade. A paraperspective factorization method for shape and motion recovery. Pattern Analysis and Machine Intelligence, IEEE Transactions on, 19(3):206–218, 1997.">PK97</a>, <a class="reference internal" href="../zzzreference.html#id288" title="Carlo Tomasi and Takeo Kanade. Detection and tracking of point features. School of Computer Science, Carnegie Mellon Univ. Pittsburgh, 1991.">TK91</a>, <a class="reference internal" href="../zzzreference.html#id289" title="Carlo Tomasi and Takeo Kanade. Shape and motion from image streams under orthography: a factorization method. International Journal of Computer Vision, 9(2):137–154, 1992.">TK92</a>]</span>,
+face clustering <span id="id2">[<a class="reference internal" href="../zzzreference.html#id14" title="Ronen Basri and David W Jacobs. Lambertian reflectance and linear subspaces. Pattern Analysis and Machine Intelligence, IEEE Transactions on, 25(2):218–233, 2003.">BJ03</a>, <a class="reference internal" href="../zzzreference.html#id165" title="Jeffrey Ho, Ming-Hsuan Yang, Jongwoo Lim, Kuang-Chih Lee, and David Kriegman. Clustering appearances of objects under varying illumination conditions. In Computer Vision and Pattern Recognition, 2003. Proceedings. 2003 IEEE Computer Society Conference on, volume 1, I–11. IEEE, 2003.">HYL+03</a>, <a class="reference internal" href="../zzzreference.html#id193" title="Kuang-Chih Lee, Jeffrey Ho, and David Kriegman. Acquiring linear subspaces for face recognition under variable lighting. Pattern Analysis and Machine Intelligence, IEEE Transactions on, 27(5):684–698, 2005.">LHK05</a>]</span>
+and handwritten digit recognition <span id="id3">[<a class="reference internal" href="../zzzreference.html#id341" title="Teng Zhang, Arthur Szlam, Yi Wang, and Gilad Lerman. Hybrid linear modeling via local best-fit flats. International Journal of Computer Vision, 100(3):217–240, 2012.">ZSWL12</a>]</span>.</p>
 <p><em>Subspace clustering</em> is a clustering framework which assumes
 that the data-set can be segmented into clusters where points in
 different clusters are drawn from different subspaces. Subspace clustering
@@ -140,7 +139,7 @@ algorithms are able to simultaneously segment the data into
 clusters corresponding to different subspaces as well as estimate
 the subspaces from the data itself.
 A comprehensive review of subspace clustering can be found in
-<span id="id4">[<a class="reference internal" href="../zzzreference.html#id317" title="René Vidal. A tutorial on subspace clustering. IEEE Signal Processing Magazine, 28(2):52–68, 2010.">Vid10</a>]</span>.
+<span id="id4">[<a class="reference internal" href="../zzzreference.html#id318" title="René Vidal. A tutorial on subspace clustering. IEEE Signal Processing Magazine, 28(2):52–68, 2010.">Vid10</a>]</span>.
 Several state of the art algorithms are based on building
 subspace preserving representations of individual data points
 by treating the data set itself as a (self expressive) dictionary.
@@ -151,7 +150,7 @@ compressive sensing literature.</p>
 <em>Sparse Subspace Clustering</em> using <span class="math notranslate nohighlight">\(\ell_1\)</span> <em>regularization</em>
 (SSC-<span class="math notranslate nohighlight">\(\ell_1\)</span>):cite:<cite>elhamifar2009sparse, elhamifar2013sparse</cite>
 and <em>Sparse Subspace Clustering using Orthogonal
-Matching Pursuit</em> (SSC-OMP) <span id="id5">[<a class="reference internal" href="../zzzreference.html#id114" title="Eva L Dyer, Aswin C Sankaranarayanan, and Richard G Baraniuk. Greedy feature selection for subspace clustering. The Journal of Machine Learning Research, 14(1):2487–2517, 2013.">DSB13</a>, <a class="reference internal" href="../zzzreference.html#id335" title="Chong You, D Robinson, and René Vidal. Scalable sparse subspace clustering by orthogonal matching pursuit. In IEEE Conference on Computer Vision and Pattern Recognition, volume 1. 2016.">YRV16</a>, <a class="reference internal" href="../zzzreference.html#id334" title="Chong You and René Vidal. Sparse subspace clustering by orthogonal matching pursuit. arXiv preprint arXiv:1507.01238, 2015.">YV15</a>]</span>.
+Matching Pursuit</em> (SSC-OMP) <span id="id5">[<a class="reference internal" href="../zzzreference.html#id115" title="Eva L Dyer, Aswin C Sankaranarayanan, and Richard G Baraniuk. Greedy feature selection for subspace clustering. The Journal of Machine Learning Research, 14(1):2487–2517, 2013.">DSB13</a>, <a class="reference internal" href="../zzzreference.html#id336" title="Chong You, D Robinson, and René Vidal. Scalable sparse subspace clustering by orthogonal matching pursuit. In IEEE Conference on Computer Vision and Pattern Recognition, volume 1. 2016.">YRV16</a>, <a class="reference internal" href="../zzzreference.html#id335" title="Chong You and René Vidal. Sparse subspace clustering by orthogonal matching pursuit. arXiv preprint arXiv:1507.01238, 2015.">YV15</a>]</span>.
 While SSC-<span class="math notranslate nohighlight">\(\ell_1\)</span> is guaranteed to give correct clustering under
 broad conditions (arbitrary subspaces and corrupted data), it
 requires solving a large scale convex optimization problem. On
@@ -250,7 +249,7 @@ hundreds of thousands of points efficiently.</p>
       &copy;2021, CR-Sparse Development Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

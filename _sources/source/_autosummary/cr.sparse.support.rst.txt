@@ -1,6 +1,0 @@
-﻿cr.sparse.support
-=================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: support

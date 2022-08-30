@@ -1,6 +1,0 @@
-﻿cr.sparse.focs.owl1rls
-======================
-
-.. currentmodule:: cr.sparse.focs
-
-.. autofunction:: owl1rls

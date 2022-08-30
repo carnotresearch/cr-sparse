@@ -1,6 +1,0 @@
-﻿cr.sparse.wt.build\_wavelet
-===========================
-
-.. currentmodule:: cr.sparse.wt
-
-.. autofunction:: build_wavelet

@@ -263,6 +263,27 @@ Compressive Sensing
    :hidden:
 
    /gallery/pursuit/cosamp_step_by_step
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip=" A (random) sparse binary sensing matrix has a very simple design. Assume that the signal space...">
+
+.. only:: html
+
+ .. figure:: /gallery/pursuit/images/thumb/sphx_glr_sparse_binary_sensor_thumb.png
+     :alt: Sparse Binary Sensing Matrices
+
+     :ref:`sphx_glr_gallery_pursuit_sparse_binary_sensor.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/pursuit/sparse_binary_sensor
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>
@@ -320,83 +341,6 @@ Sparse Recovery via L1 minimization
    :hidden:
 
    /gallery/rec_l1/spikes_l1ls
-.. raw:: html
-
-    <div class="sphx-glr-clear"></div>
-
-
-
-.. _sphx_glr_gallery_wavelets:
-
-.. _wavelets_gallery:
-
-Wavelets
-------------------------
-
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we analyze a chirp signal with a Ricker (a.k.a. Mexican Hat wavelet)">
-
-.. only:: html
-
- .. figure:: /gallery/wavelets/images/thumb/sphx_glr_chirp_cwt_mexh_thumb.png
-     :alt: Chirp CWT with Ricker
-
-     :ref:`sphx_glr_gallery_wavelets_chirp_cwt_mexh.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /gallery/wavelets/chirp_cwt_mexh
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="This example considers a signal which is a sinusoid whose frequency changes abruptly at a speci...">
-
-.. only:: html
-
- .. figure:: /gallery/wavelets/images/thumb/sphx_glr_frequency_change_detection_thumb.png
-     :alt: Frequency Change Detection
-
-     :ref:`sphx_glr_gallery_wavelets_frequency_change_detection.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /gallery/wavelets/frequency_change_detection
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="This is a simple example which demonstrates how  cr.sparse.wt.dwt2 function can be used to  per...">
-
-.. only:: html
-
- .. figure:: /gallery/wavelets/images/thumb/sphx_glr_cameraman_decomposition_thumb.png
-     :alt: Wavelet Decomposition of an Image
-
-     :ref:`sphx_glr_gallery_wavelets_cameraman_decomposition.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /gallery/wavelets/cameraman_decomposition
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

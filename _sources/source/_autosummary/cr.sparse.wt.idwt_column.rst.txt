@@ -1,6 +1,0 @@
-﻿cr.sparse.wt.idwt\_column
-=========================
-
-.. currentmodule:: cr.sparse.wt
-
-.. autofunction:: idwt_column

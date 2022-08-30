@@ -1,6 +1,0 @@
-﻿cr.sparse.wt.wavedec
-====================
-
-.. currentmodule:: cr.sparse.wt
-
-.. autofunction:: wavedec

@@ -1,6 +1,0 @@
-﻿cr.sparse.wt.families
-=====================
-
-.. currentmodule:: cr.sparse.wt
-
-.. autofunction:: families

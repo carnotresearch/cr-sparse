@@ -1,6 +1,0 @@
-﻿cr.sparse.randomize\_rows
-=========================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: randomize_rows

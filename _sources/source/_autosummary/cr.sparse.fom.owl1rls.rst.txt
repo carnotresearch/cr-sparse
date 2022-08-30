@@ -1,0 +1,6 @@
+﻿cr.sparse.fom.owl1rls
+=====================
+
+.. currentmodule:: cr.sparse.fom
+
+.. autofunction:: owl1rls

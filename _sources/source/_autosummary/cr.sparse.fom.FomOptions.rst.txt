@@ -1,0 +1,27 @@
+﻿cr.sparse.fom.FomOptions
+========================
+
+.. currentmodule:: cr.sparse.fom
+
+.. autoclass:: FomOptions
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FomOptions.L0
+      ~FomOptions.Lexact
+      ~FomOptions.alpha
+      ~FomOptions.beta
+      ~FomOptions.max_iters
+      ~FomOptions.maximize
+      ~FomOptions.mu
+      ~FomOptions.nonneg
+      ~FomOptions.saddle
+      ~FomOptions.solver
+      ~FomOptions.tol
+   
+   

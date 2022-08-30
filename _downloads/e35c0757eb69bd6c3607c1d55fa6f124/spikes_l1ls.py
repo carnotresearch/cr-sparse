@@ -27,6 +27,11 @@ import cr.sparse as crs
 import cr.sparse.data as crdata
 import cr.sparse.lop as lop
 import cr.sparse.cvx.l1ls as l1ls
+from cr.nimble.dsp import (
+  hard_threshold_by,
+  support,
+  largest_indices_by
+)
 
 # %%
 # Setup
@@ -114,7 +119,7 @@ plt.plot(jnp.sort(jnp.abs(sol.x)))
 # %%
 # Thresholding for large values 
 # '''''''''''''''''''''''''''''''''''''
-x = crs.hard_threshold_by(sol.x, 0.5)
+x = hard_threshold_by(sol.x, 0.5)
 plt.figure(figsize=(8,6), dpi= 100, facecolor='w', edgecolor='k')
 plt.subplot(211)
 plt.plot(xs)
@@ -124,8 +129,8 @@ plt.plot(x)
 # %%
 # Verifying the support recovery 
 # '''''''''''''''''''''''''''''''''''''
-support_xs = crs.support(xs)
-support_x = crs.support(x)
+support_xs = support(xs)
+support_x = support(x)
 jnp.all(jnp.equal(support_xs, support_x))
 
 
@@ -134,7 +139,7 @@ jnp.all(jnp.equal(support_xs, support_x))
 # ------------------------------------------------
 
 # Identify the sub-matrix of columns for the support of recovered solution's large entries
-support_x = crs.largest_indices_by(sol.x, 0.5)
+support_x = largest_indices_by(sol.x, 0.5)
 AI = A.columns(support_x)
 print(AI.shape)
 

@@ -1,6 +1,0 @@
-﻿cr.sparse.frequency\_spectrum
-=============================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: frequency_spectrum

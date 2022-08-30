@@ -17,7 +17,9 @@ Functions for constructing sparsying dictionaries and sensing matrices
 
     gaussian_mtx
     rademacher_mtx
+    sparse_binary_mtx
     random_onb
+    random_orthonormal_rows
     hadamard
     hadamard_basis
     dirac_hadamard_basis
@@ -25,7 +27,7 @@ Functions for constructing sparsying dictionaries and sensing matrices
     dirac_cosine_basis
     dirac_hadamard_cosine_basis
     fourier_basis
-    random_orthonormal_rows
+    wavelet_basis
 
 
 

@@ -1,6 +1,0 @@
-﻿cr.sparse.wt.dwt\_row
-=====================
-
-.. currentmodule:: cr.sparse.wt
-
-.. autofunction:: dwt_row

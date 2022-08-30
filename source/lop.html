@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -24,14 +24,14 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/custom.js"></script>
     <script src="../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="cr.sparse.lop.Operator" href="_autosummary/cr.sparse.lop.Operator.html" />
-    <link rel="prev" title="cr.sparse.wt.idwt_axis_" href="_autosummary/cr.sparse.wt.idwt_axis_.html" />
+    <link rel="prev" title="API Docs" href="index.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -60,26 +60,23 @@
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">API Docs</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="dsp.html">Digital Signal Processing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="wavelets.html">Wavelets</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Linear Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sls.html">Sparse Linear Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">L1 Minimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="opt.html">Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="focs.html">First Order Conic Solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fom.html">First Order Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cs.html">Compressive Sensing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="util.html">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vision.html">Computer Vision and Image Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
@@ -97,7 +94,7 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">API Docs</a><ul>
-      <li>Previous: <a href="_autosummary/cr.sparse.wt.idwt_axis_.html" title="previous chapter">cr.sparse.wt.idwt_axis_</a></li>
+      <li>Previous: <a href="index.html" title="previous chapter">API Docs</a></li>
       <li>Next: <a href="_autosummary/cr.sparse.lop.Operator.html" title="next chapter">cr.sparse.lop.Operator</a></li>
   </ul></li>
   </ul></li>
@@ -107,7 +104,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -220,7 +217,7 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 <p>This is based on the convention followed by <code class="docutils literal notranslate"><span class="pre">numpy.apply_along_axis</span></code>.</p>
 <section id="data-types">
 <h2><a class="toc-backref" href="#id1">Data types</a><a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -234,7 +231,7 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 </section>
 <section id="basic-operators">
 <h2><a class="toc-backref" href="#id2">Basic operators</a><a class="headerlink" href="#basic-operators" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -249,37 +246,40 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.real_matrix.html#cr.sparse.lop.real_matrix" title="cr.sparse.lop.real_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">real_matrix</span></code></a>(A)</p></td>
 <td><p>Converts a real matrix into a linear operator</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.scalar_mult.html#cr.sparse.lop.scalar_mult" title="cr.sparse.lop.scalar_mult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scalar_mult</span></code></a>(alpha, n)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.sparse_real_matrix.html#cr.sparse.lop.sparse_real_matrix" title="cr.sparse.lop.sparse_real_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_real_matrix</span></code></a>(A[, axis])</p></td>
+<td><p>Converts a sparse real matrix into a linear operator</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.scalar_mult.html#cr.sparse.lop.scalar_mult" title="cr.sparse.lop.scalar_mult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scalar_mult</span></code></a>(alpha, n)</p></td>
 <td><p>Returns a linear operator T such that <span class="math notranslate nohighlight">\(T v = \alpha v\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.diagonal.html#cr.sparse.lop.diagonal" title="cr.sparse.lop.diagonal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diagonal</span></code></a>(d[, axis])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.diagonal.html#cr.sparse.lop.diagonal" title="cr.sparse.lop.diagonal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diagonal</span></code></a>(d[, axis])</p></td>
 <td><p>Returns a linear operator which mimics multiplication by a diagonal matrix</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.zero.html#cr.sparse.lop.zero" title="cr.sparse.lop.zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero</span></code></a>(in_dim[, out_dim, axis])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.zero.html#cr.sparse.lop.zero" title="cr.sparse.lop.zero"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero</span></code></a>(in_dim[, out_dim, axis])</p></td>
 <td><p>Returns a linear operator which maps everything to 0 vector in data space</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.flipud.html#cr.sparse.lop.flipud" title="cr.sparse.lop.flipud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flipud</span></code></a>(n)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.flipud.html#cr.sparse.lop.flipud" title="cr.sparse.lop.flipud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flipud</span></code></a>(n)</p></td>
 <td><p>Returns an operator which flips the order of entries in input upside down</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.sum.html#cr.sparse.lop.sum" title="cr.sparse.lop.sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sum</span></code></a>(n)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.sum.html#cr.sparse.lop.sum" title="cr.sparse.lop.sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sum</span></code></a>(n)</p></td>
 <td><p>Returns an operator which computes the sum of a vector</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dot.html#cr.sparse.lop.dot" title="cr.sparse.lop.dot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dot</span></code></a>(v[, adjoint, axis])</p></td>
-<td><p>Returns a linear operator T such that <span class="math notranslate nohighlight">\(T x = \langle v , x angle = v^H x\)</span></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.dot.html#cr.sparse.lop.dot" title="cr.sparse.lop.dot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dot</span></code></a>(v[, adjoint, axis])</p></td>
+<td><p>Returns a linear operator T such that <span class="math notranslate nohighlight">\(T x = \langle v , x \rangle = v^H x\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.pad_zeros.html#cr.sparse.lop.pad_zeros" title="cr.sparse.lop.pad_zeros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pad_zeros</span></code></a>(n, before, after)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.pad_zeros.html#cr.sparse.lop.pad_zeros" title="cr.sparse.lop.pad_zeros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pad_zeros</span></code></a>(n, before, after)</p></td>
 <td><p>Adds zeros before and after a vector.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.symmetrize.html#cr.sparse.lop.symmetrize" title="cr.sparse.lop.symmetrize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">symmetrize</span></code></a>(n)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.symmetrize.html#cr.sparse.lop.symmetrize" title="cr.sparse.lop.symmetrize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">symmetrize</span></code></a>(n)</p></td>
 <td><p>An operator which constructs a symmetric vector by pre-pending the input in reversed order</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.restriction.html#cr.sparse.lop.restriction" title="cr.sparse.lop.restriction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">restriction</span></code></a>(n, I[, axis])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.restriction.html#cr.sparse.lop.restriction" title="cr.sparse.lop.restriction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">restriction</span></code></a>(n, I[, axis])</p></td>
 <td><p>An operator which computes y = x[I] over an index set I</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.reshape.html#cr.sparse.lop.reshape" title="cr.sparse.lop.reshape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reshape</span></code></a>(in_shape, out_shape)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.reshape.html#cr.sparse.lop.reshape" title="cr.sparse.lop.reshape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reshape</span></code></a>(in_shape, out_shape)</p></td>
 <td><p>Returns a linear operator which reshapes vectors from model space to data space</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.arr2vec.html#cr.sparse.lop.arr2vec" title="cr.sparse.lop.arr2vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arr2vec</span></code></a>(shape)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.arr2vec.html#cr.sparse.lop.arr2vec" title="cr.sparse.lop.arr2vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arr2vec</span></code></a>(shape)</p></td>
 <td><p>Returns a linear operator which reshapes arrays to vectors</p></td>
 </tr>
 </tbody>
@@ -290,7 +290,7 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 <p>It is possible to combine one or more linear operators
 to create new linear operators. The functions in this
 section provide different ways to combine linear operators.</p>
-<table class="longtable docutils align-default">
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -331,7 +331,7 @@ section provide different ways to combine linear operators.</p>
 </section>
 <section id="signal-processing-operators">
 <h2><a class="toc-backref" href="#id4">Signal processing operators</a><a class="headerlink" href="#signal-processing-operators" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -357,7 +357,7 @@ section provide different ways to combine linear operators.</p>
 </section>
 <section id="orthonormal-transforms-and-bases">
 <h2><a class="toc-backref" href="#id5">Orthonormal transforms and bases</a><a class="headerlink" href="#orthonormal-transforms-and-bases" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -386,7 +386,7 @@ section provide different ways to combine linear operators.</p>
 </section>
 <section id="unions-of-bases">
 <h2><a class="toc-backref" href="#id6">Unions of bases</a><a class="headerlink" href="#unions-of-bases" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -400,7 +400,7 @@ section provide different ways to combine linear operators.</p>
 </section>
 <section id="random-compressive-sensing-operators">
 <h2><a class="toc-backref" href="#id7">Random compressive sensing operators</a><a class="headerlink" href="#random-compressive-sensing-operators" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -409,7 +409,7 @@ section provide different ways to combine linear operators.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.gaussian_dict.html#cr.sparse.lop.gaussian_dict" title="cr.sparse.lop.gaussian_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_dict</span></code></a>(key, m[, n, normalize_atoms, axis])</p></td>
 <td><p>An operator which represents a Gaussian sensix matrix (with normalized columns)</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.rademacher_dict.html#cr.sparse.lop.rademacher_dict" title="cr.sparse.lop.rademacher_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rademacher_dict</span></code></a>(key, m[, n, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.rademacher_dict.html#cr.sparse.lop.rademacher_dict" title="cr.sparse.lop.rademacher_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rademacher_dict</span></code></a>(key, m[, n, ...])</p></td>
 <td><p>An operator which represents a Rademacher sensing matrix</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.random_onb_dict.html#cr.sparse.lop.random_onb_dict" title="cr.sparse.lop.random_onb_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_onb_dict</span></code></a>(key, n[, axis])</p></td>
@@ -418,12 +418,15 @@ section provide different ways to combine linear operators.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.random_orthonormal_rows_dict.html#cr.sparse.lop.random_orthonormal_rows_dict" title="cr.sparse.lop.random_orthonormal_rows_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_orthonormal_rows_dict</span></code></a>(key, m[, n, axis])</p></td>
 <td><p>An operator whose rows are orthonormal (sampled from a random orthonormal basis)</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.sparse_binary_dict.html#cr.sparse.lop.sparse_binary_dict" title="cr.sparse.lop.sparse_binary_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_binary_dict</span></code></a>(key, m[, n, d, ...])</p></td>
+<td><p>An operator which represents a sparse binary sensing matrix</p></td>
+</tr>
 </tbody>
 </table>
 </section>
 <section id="operators-for-special-matrices">
 <h2><a class="toc-backref" href="#id8">Operators for special matrices</a><a class="headerlink" href="#operators-for-special-matrices" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -437,7 +440,7 @@ section provide different ways to combine linear operators.</p>
 </section>
 <section id="derivatives-finite-differences">
 <h2><a class="toc-backref" href="#id9">Derivatives (finite differences)</a><a class="headerlink" href="#derivatives-finite-differences" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -461,7 +464,7 @@ section provide different ways to combine linear operators.</p>
 <section id="convenience-operators">
 <h2><a class="toc-backref" href="#id10">Convenience operators</a><a class="headerlink" href="#convenience-operators" title="Permalink to this headline">¶</a></h2>
 <p>These operators are technically not linear on <span class="math notranslate nohighlight">\(\mathbb{F}^n \to \mathbb{F}^m\)</span></p>
-<table class="longtable docutils align-default">
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -475,7 +478,7 @@ section provide different ways to combine linear operators.</p>
 </section>
 <section id="operator-parts">
 <h2><a class="toc-backref" href="#id11">Operator parts</a><a class="headerlink" href="#operator-parts" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -493,7 +496,7 @@ section provide different ways to combine linear operators.</p>
 <section id="properties-of-a-linear-operator">
 <h2><a class="toc-backref" href="#id12">Properties of a linear operator</a><a class="headerlink" href="#properties-of-a-linear-operator" title="Permalink to this headline">¶</a></h2>
 <p>These are still experimental and not efficient.</p>
-<table class="longtable docutils align-default">
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -502,7 +505,7 @@ section provide different ways to combine linear operators.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.normest.html#cr.sparse.lop.normest" title="cr.sparse.lop.normest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normest</span></code></a>(operator[, max_iters, error_tolerance])</p></td>
 <td><p>Estimates the norm of a linear operator by power method</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.normest_jit.html#cr.sparse.lop.normest_jit" title="cr.sparse.lop.normest_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normest_jit</span></code></a>(operator[, max_iters, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.normest_jit.html#cr.sparse.lop.normest_jit" title="cr.sparse.lop.normest_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normest_jit</span></code></a>(operator[, max_iters, ...])</p></td>
 <td><p>Estimates the norm of a linear operator by power method</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.upper_frame_bound.html#cr.sparse.lop.upper_frame_bound" title="cr.sparse.lop.upper_frame_bound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">upper_frame_bound</span></code></a>(T)</p></td>
@@ -513,7 +516,7 @@ section provide different ways to combine linear operators.</p>
 </section>
 <section id="utilities">
 <h2><a class="toc-backref" href="#id13">Utilities</a><a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -547,7 +550,7 @@ section provide different ways to combine linear operators.</p>
       &copy;2021, CR-Sparse Development Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

@@ -1,6 +1,0 @@
-﻿cr.sparse.wt.up\_sample
-=======================
-
-.. currentmodule:: cr.sparse.wt
-
-.. autofunction:: up_sample

@@ -1,0 +1,564 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>First Order Methods &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/mathconf.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cr.sparse.fom.fom" href="_autosummary/cr.sparse.fom.fom.html" />
+    <link rel="prev" title="cr.sparse.opt.pcg.solve_jit" href="_autosummary/cr.sparse.opt.pcg.solve_jit.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="lop.html">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sls.html">Sparse Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opt.html">Optimization</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">First Order Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cs.html">Compressive Sensing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cluster.html">Data Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ssc.html">Sparse Subspace Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geo.html">Geophysical Signal Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vision.html">Computer Vision and Image Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">API Docs</a><ul>
+      <li>Previous: <a href="_autosummary/cr.sparse.opt.pcg.solve_jit.html" title="previous chapter">cr.sparse.opt.pcg.solve_jit</a></li>
+      <li>Next: <a href="_autosummary/cr.sparse.fom.fom.html" title="next chapter">cr.sparse.fom.fom</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="first-order-methods">
+<h1>First Order Methods<a class="headerlink" href="#first-order-methods" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#api" id="id8">API</a></p></li>
+<li><p><a class="reference internal" href="#id4" id="id9">First Order Methods</a></p></li>
+<li><p><a class="reference internal" href="#smooth-conic-dual-problems" id="id10">Smooth Conic Dual Problems</a></p></li>
+<li><p><a class="reference internal" href="#l1-regularized-least-square-problem" id="id11">L1 regularized least square problem</a></p></li>
+<li><p><a class="reference internal" href="#lasso" id="id12">LASSO</a></p></li>
+<li><p><a class="reference internal" href="#ordered-weighted-l1-regularized-least-square-problem" id="id13">Ordered weighted L1 regularized least square problem</a></p></li>
+<li><p><a class="reference internal" href="#the-dantzig-selector" id="id14">The Dantzig selector</a></p></li>
+</ul>
+</div>
+<p>This module aims to implement the first order methods
+for sparse signal recovery problems proposed in <span id="id1">[<a class="reference internal" href="../zzzreference.html#id17" title="Stephen R Becker, Emmanuel J Candès, and Michael C Grant. Templates for convex cone problems with applications to sparse signal recovery. Mathematical programming computation, 3(3):165, 2011. URL: https://doi.org/10.1007/s12532-011-0029-5, doi:10.1007/s12532-011-0029-5.">BCandesG11</a>]</span>.
+The implementation is adapted from TFOCS <span id="id2">[<a class="reference internal" href="../zzzreference.html#id18" title="Stephen Becker, Emmanuel J Candes, and Michael Grant. Tfocs v1. 2 user guide. 2012.">BCG12</a>]</span>.</p>
+<p>First order methods exploit information n values and gradients/subgradients
+(but not Hessians) of the functions comprising the models under consideration <span id="id3">[<a class="reference internal" href="../zzzreference.html#id16" title="Amir Beck. First-order methods in optimization. SIAM, 2017.">Bec17</a>]</span>.</p>
+<section id="api">
+<h2><a class="toc-backref" href="#id8">API</a><a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<p class="rubric">Solvers</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.fom.fom.html#cr.sparse.fom.fom" title="cr.sparse.fom.fom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fom</span></code></a>(smooth_f, prox_h, A, b, x0[, options])</p></td>
+<td><p>First order methods driver routine</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.fom.scd.html#cr.sparse.fom.scd" title="cr.sparse.fom.scd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scd</span></code></a>(prox_f, conj_neg_h, A, b, mu, x0, z0[, ...])</p></td>
+<td><p>First order solver for smooth conic dual problems driver routine</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.fom.l1rls.html#cr.sparse.fom.l1rls" title="cr.sparse.fom.l1rls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1rls</span></code></a>(A, b, lambda_, x0[, options])</p></td>
+<td><p>Solver for l1 regulated least square problem</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.fom.l1rls_jit.html#cr.sparse.fom.l1rls_jit" title="cr.sparse.fom.l1rls_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1rls_jit</span></code></a>(A, b, lambda_, x0[, options])</p></td>
+<td><p>Solver for l1 regulated least square problem</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.fom.lasso.html#cr.sparse.fom.lasso" title="cr.sparse.fom.lasso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lasso</span></code></a>(A, b, tau, x0[, options])</p></td>
+<td><p>Solver for LASSO problem</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.fom.lasso_jit.html#cr.sparse.fom.lasso_jit" title="cr.sparse.fom.lasso_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lasso_jit</span></code></a>(A, b, tau, x0[, options])</p></td>
+<td><p>Solver for LASSO problem</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.fom.owl1rls.html#cr.sparse.fom.owl1rls" title="cr.sparse.fom.owl1rls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">owl1rls</span></code></a>(A, b, lambda_, x0[, options])</p></td>
+<td><p>Solver for ordered weighted l1 norm regulated least square problem</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.fom.owl1rls_jit.html#cr.sparse.fom.owl1rls_jit" title="cr.sparse.fom.owl1rls_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">owl1rls_jit</span></code></a>(A, b, lambda_, x0[, options])</p></td>
+<td><p>Solver for ordered weighted l1 norm regulated least square problem</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.fom.dantzig_scd.html#cr.sparse.fom.dantzig_scd" title="cr.sparse.fom.dantzig_scd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dantzig_scd</span></code></a>(A, b, delta, mu, x0, z0[, options])</p></td>
+<td><p>Solver for the (smoothed) Dantzig selector problem using smoothed conic dual formulation</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Data types</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.fom.FomOptions.html#cr.sparse.fom.FomOptions" title="cr.sparse.fom.FomOptions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FomOptions</span></code></a></p></td>
+<td><p>Options for FOCS driver routine</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.fom.FomState.html#cr.sparse.fom.FomState" title="cr.sparse.fom.FomState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FomState</span></code></a></p></td>
+<td><p>State of the FOCS method</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Utilities</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.fom.matrix_affine_func.html#cr.sparse.fom.matrix_affine_func" title="cr.sparse.fom.matrix_affine_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matrix_affine_func</span></code></a>([A, b])</p></td>
+<td><p>Returns an affine function for a matrix A and vector b</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id4">
+<h2><a class="toc-backref" href="#id9">First Order Methods</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p><span id="id5">[<a class="reference internal" href="../zzzreference.html#id17" title="Stephen R Becker, Emmanuel J Candès, and Michael C Grant. Templates for convex cone problems with applications to sparse signal recovery. Mathematical programming computation, 3(3):165, 2011. URL: https://doi.org/10.1007/s12532-011-0029-5, doi:10.1007/s12532-011-0029-5.">BCandesG11</a>]</span> considers problems in the unconstrained form:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-source-fom-0" title="Permalink to this equation">¶</a></span>\[\text{minimize } \phi(x) = g( x) + h(x)\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p>Both <span class="math notranslate nohighlight">\(g, h: \RR^n \to (\RR \cup \infty)\)</span> are convex functions.</p></li>
+<li><p><span class="math notranslate nohighlight">\(g : \RR^m \to \RR\)</span> is a <em>smooth</em> convex function.</p></li>
+<li><p><span class="math notranslate nohighlight">\(h : \RR^n \to \RR\)</span> is a non-smooth convex function.</p></li>
+</ul>
+<p>Of particular interest are problems where <span class="math notranslate nohighlight">\(g\)</span> takes a specific form:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-source-fom-1" title="Permalink to this equation">¶</a></span>\[g(x) = f( \AAA(x) + b)\]</div>
+<p>where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\AAA\)</span> is a linear operator from <span class="math notranslate nohighlight">\(\RR^n \to \RR^m\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(b\)</span> is a translation vector</p></li>
+<li><p><span class="math notranslate nohighlight">\(f : \RR^m \to \RR\)</span> is a <em>smooth</em> convex function</p></li>
+</ul>
+<p>and the function <span class="math notranslate nohighlight">\(h\)</span> is a <em>prox-capable</em> convex function (to be described later).</p>
+<p>We can then rewrite <span class="math notranslate nohighlight">\(\phi\)</span> as:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-source-fom-2" title="Permalink to this equation">¶</a></span>\[\text{minimize } \phi(x) = f( \AAA(x) + b) + h(x)\]</div>
+<p>For a smooth function, its gradient <span class="math notranslate nohighlight">\(\nabla f\)</span> must exist and be
+easy to compute.</p>
+<p>For a prox-capable function, it should have an efficient proximal operator:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-3">
+<span class="eqno">(4)<a class="headerlink" href="#equation-source-fom-3" title="Permalink to this equation">¶</a></span>\[p_f(x, t) = \underset{z \in \RR^n}{\text{arg} \min} \left ( f(x) + \frac{1}{2t} \| z - x \|_2^2 \right )\]</div>
+<p>for any <span class="math notranslate nohighlight">\(x \in \RR^n\)</span> and the step size <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.</p>
+<p>See the following sections for details:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="lop.html#api-lop"><span class="std std-ref">Linear Operators</span></a></p></li>
+<li><p><a class="reference internal" href="opt.html#api-opt-smooth"><span class="std std-ref">Smooth Function Generators</span></a></p></li>
+<li><p><a class="reference internal" href="opt.html#api-opt-proximal"><span class="std std-ref">Proximal Operator Generators</span></a></p></li>
+</ul>
+<p>The routine <a class="reference internal" href="_autosummary/cr.sparse.fom.fom.html#cr.sparse.fom.fom" title="cr.sparse.fom.fom"><code class="xref py py-func docutils literal notranslate"><span class="pre">fom()</span></code></a> provides the solver for the minimization
+problem described above.</p>
+<ul class="simple">
+<li><p>Unconstrained smooth minimization problems can be handled by choosing
+<span class="math notranslate nohighlight">\(h(x) = 0\)</span>. See <a class="reference internal" href="_autosummary/cr.sparse.opt.prox_zero.html#cr.sparse.opt.prox_zero" title="cr.sparse.opt.prox_zero"><code class="xref py py-func docutils literal notranslate"><span class="pre">cr.sparse.opt.prox_zero()</span></code></a>.</p></li>
+<li><p>Convex constraints can be handled by adding their indicator functions
+as part of <span class="math notranslate nohighlight">\(h\)</span>.</p></li>
+</ul>
+<p>For solving the minimization problem, an initial solution <span class="math notranslate nohighlight">\(x_0\)</span>
+should be provided. If one is unsure of the initial solution, they can
+provide <span class="math notranslate nohighlight">\(0 \in \RR^n\)</span> as the initial solution.</p>
+</section>
+<section id="smooth-conic-dual-problems">
+<h2><a class="toc-backref" href="#id10">Smooth Conic Dual Problems</a><a class="headerlink" href="#smooth-conic-dual-problems" title="Permalink to this headline">¶</a></h2>
+<p>A number of sparse signal recovery problems can be cast as conic optimization problems. Then
+efficient first order methods can be used to solve the problem. This procedure often involves
+the following steps:</p>
+<ul class="simple">
+<li><p>Cast the sparse recovery problem as a conic optimization problem</p></li>
+<li><p>Augment the objective function with a strongly convex term to make it smooth.</p></li>
+<li><p>Formulate the dual of the smooth problem.</p></li>
+<li><p>Solve the smooth conic dual problem using a first order method.</p></li>
+<li><p>Apply continuation to mitigate the effect of the strongly convex term added to the original objective function.</p></li>
+</ul>
+<p>Our goal is to solve the conic problems of the form <span id="id6">[<a class="reference internal" href="../zzzreference.html#id17" title="Stephen R Becker, Emmanuel J Candès, and Michael C Grant. Templates for convex cone problems with applications to sparse signal recovery. Mathematical programming computation, 3(3):165, 2011. URL: https://doi.org/10.1007/s12532-011-0029-5, doi:10.1007/s12532-011-0029-5.">BCandesG11</a>]</span></p>
+<div class="math notranslate nohighlight" id="equation-source-fom-4">
+<span class="eqno">(5)<a class="headerlink" href="#equation-source-fom-4" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+  &amp; \underset{x}{\text{minimize}}
+  &amp; &amp;  f(x) \\
+  &amp; \text{subject to}
+  &amp; &amp;  \AAA(x) + b \in \KKK
+\end{aligned}\end{split}\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x \in \RR^n\)</span> is the optimization variable</p></li>
+<li><p><span class="math notranslate nohighlight">\(f :\RR^n \to \RR\)</span> is a convex objective function which is possibly
+extended valued but not necessarily smooth</p></li>
+<li><p><span class="math notranslate nohighlight">\(\AAA : \RR^n \to \RR^m\)</span> is a linear operator</p></li>
+<li><p><span class="math notranslate nohighlight">\(b \in \RR^m\)</span> is a translation vector</p></li>
+<li><p><span class="math notranslate nohighlight">\(\KKK \subseteq \RR^m\)</span> is a closed, convex cone</p></li>
+</ul>
+<p class="rubric">Dual Problem</p>
+<p>The Lagrangian associated with the conic problem is given by:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-5">
+<span class="eqno">(6)<a class="headerlink" href="#equation-source-fom-5" title="Permalink to this equation">¶</a></span>\[\LLL(x, \lambda) = f(x)  - \langle \lambda, \AAA(x) + b \rangle\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda \in \RRR^m\)</span> is the Lagrange multiplier which must
+lie in the dual cone <span class="math notranslate nohighlight">\(\KKK^*\)</span>.</p>
+<p>The dual function is:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-6">
+<span class="eqno">(7)<a class="headerlink" href="#equation-source-fom-6" title="Permalink to this equation">¶</a></span>\[g(\lambda) = \underset{x \in \RR^n}{\inf} \LLL(x, \lambda)
+= - f^*(\AAA^*(\lambda)) - \langle b, \lambda \rangle\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\AAA^*: \RR^m \to \RR^n\)</span> is the adjoint of the linear operator <span class="math notranslate nohighlight">\(\AAA\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f^* : \RR^n \to (\RR \cup \infty)\)</span> is the convex conjugate of <span class="math notranslate nohighlight">\(f\)</span> defined by</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-source-fom-7">
+<span class="eqno">(8)<a class="headerlink" href="#equation-source-fom-7" title="Permalink to this equation">¶</a></span>\[f^*(z) = \underset{z}{\sup} \langle z, x \rangle -f(x)\]</div>
+<p>Thus, the dual problem is given by:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-8">
+<span class="eqno">(9)<a class="headerlink" href="#equation-source-fom-8" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+  &amp; \underset{\lambda}{\text{maximize}}
+  &amp; &amp; - f^*(\AAA^*(\lambda)) - \langle b, \lambda \rangle \\
+  &amp; \text{subject to}
+  &amp; &amp;  \lambda \in \KKK^*
+\end{aligned}\end{split}\]</div>
+<p class="rubric">Smoothing</p>
+<p>The dual function <span class="math notranslate nohighlight">\(g\)</span> may not be differentiable (or finite) on
+all of <span class="math notranslate nohighlight">\(\KKK^*\)</span>.</p>
+<p>We perturb the original problem as follows:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-9">
+<span class="eqno">(10)<a class="headerlink" href="#equation-source-fom-9" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+  &amp; \underset{x}{\text{minimize}}
+  &amp; &amp;  f_{\mu} (x) \triangleq f(x) + \mu d (x)\\
+  &amp; \text{subject to}
+  &amp; &amp;  \AAA(x) + b \in \KKK
+\end{aligned}\end{split}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mu &gt; 0\)</span> is a fixed smoothing parameter</p></li>
+<li><p><span class="math notranslate nohighlight">\(d : \RR^n \to \RR\)</span> is a strongly convex function obeying</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-source-fom-10">
+<span class="eqno">(11)<a class="headerlink" href="#equation-source-fom-10" title="Permalink to this equation">¶</a></span>\[d(x) \geq d(x_0) + \frac{1}{2} \| x - x_0 \|_2^2\]</div>
+<p>A specific choice for <span class="math notranslate nohighlight">\(d(x)\)</span> is:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-11">
+<span class="eqno">(12)<a class="headerlink" href="#equation-source-fom-11" title="Permalink to this equation">¶</a></span>\[d(x) = \frac{1}{2} \| x - x_0 \|_2^2\]</div>
+<p>The new objective function <span class="math notranslate nohighlight">\(f_{\mu}\)</span> is strongly convex.</p>
+<p>The Lagrangian becomes:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-12">
+<span class="eqno">(13)<a class="headerlink" href="#equation-source-fom-12" title="Permalink to this equation">¶</a></span>\[\LLL_{\mu}(x, \lambda) = f(x) + \mu d(x)  - \langle \lambda, \AAA(x) + b \rangle\]</div>
+<p>The dual function becomes:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-13">
+<span class="eqno">(14)<a class="headerlink" href="#equation-source-fom-13" title="Permalink to this equation">¶</a></span>\[g_{\mu}(\lambda) = \underset{x \in \RR^n}{\inf} \LLL_{\mu}(x, \lambda)
+= - (f+\mu d)^*(\AAA^*(\lambda)) - \langle b, \lambda \rangle\]</div>
+<p>First order methods may be employed to solve this problem with
+provable performance.</p>
+<p>The <em>smoothed conic dual</em> problem is then given by:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-14">
+<span class="eqno">(15)<a class="headerlink" href="#equation-source-fom-14" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+  &amp; \underset{\lambda}{\text{maximize}}
+  &amp; &amp; - (f+\mu d)^*(\AAA^*(\lambda)) - \langle b, \lambda \rangle \\
+  &amp; \text{subject to}
+  &amp; &amp;  \lambda \in \KKK^*
+\end{aligned}\end{split}\]</div>
+<p class="rubric">Composite Forms</p>
+<p>Often, it is convenient to split the dual variable
+<span class="math notranslate nohighlight">\(\lambda \in \RR^m\)</span> as <span class="math notranslate nohighlight">\(\lambda=(z, \tau)\)</span>
+where <span class="math notranslate nohighlight">\(z \in \RR^{m-\bar{m}}\)</span> and <span class="math notranslate nohighlight">\(\tau \in \RR^{\bar{m}}\)</span>.
+For example, if <span class="math notranslate nohighlight">\(\KKK^* = \LLL^n_1\)</span>, the <span class="math notranslate nohighlight">\(\ell_1\)</span>  norm cone
+(i.e. the epigraph of the <span class="math notranslate nohighlight">\(\ell_1\)</span> norm function, then,
+if we split <span class="math notranslate nohighlight">\(\lambda \in \RR^{n+1}\)</span> as <span class="math notranslate nohighlight">\(\lambda = (z, \tau)\)</span>
+where <span class="math notranslate nohighlight">\(z \in \RR^n\)</span> and <span class="math notranslate nohighlight">\(\tau \in \RR\)</span>, then:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-15">
+<span class="eqno">(16)<a class="headerlink" href="#equation-source-fom-15" title="Permalink to this equation">¶</a></span>\[\lambda \in \LLL^n_{1}  \iff \| z \|_1 \leq \tau\]</div>
+<p>This is particularly useful, if the smoothed dual function
+<span class="math notranslate nohighlight">\(g_{\mu}(\lambda) = g_{\mu}(z, \tau)\)</span> is linear in <span class="math notranslate nohighlight">\(\tau\)</span>.
+Then, we can rewrite <span class="math notranslate nohighlight">\(g_{\mu}\)</span> as:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-16">
+<span class="eqno">(17)<a class="headerlink" href="#equation-source-fom-16" title="Permalink to this equation">¶</a></span>\[g_{\mu}(\lambda) = - g_{\text{sm}} (z) - \langle \nu_{\mu}, \tau \rangle\]</div>
+<p>Since <span class="math notranslate nohighlight">\(g_{\mu}\)</span> is a smooth concave function,
+<span class="math notranslate nohighlight">\(g_{\text{sm}}\)</span> will be a smooth convex function.</p>
+<p class="rubric">Problem Instantiations</p>
+<p>In the rest of the document, we will discuss how specific
+sparse signal recovery problems can be modeled and solved
+using this module as either primal problems or a smooth conic dual problem.</p>
+</section>
+<section id="l1-regularized-least-square-problem">
+<h2><a class="toc-backref" href="#id11">L1 regularized least square problem</a><a class="headerlink" href="#l1-regularized-least-square-problem" title="Permalink to this headline">¶</a></h2>
+<p>We consider the problem:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-17">
+<span class="eqno">(18)<a class="headerlink" href="#equation-source-fom-17" title="Permalink to this equation">¶</a></span>\[\text{minimize} \frac{1}{2} \| \AAA x - b \|_2^2 + \lambda \| x \|_1\]</div>
+<p>Choose:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x) = \frac{1}{2}\| x \|_2^2\)</span>  see <a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_quad_matrix.html#cr.sparse.opt.smooth_quad_matrix" title="cr.sparse.opt.smooth_quad_matrix"><code class="xref py py-func docutils literal notranslate"><span class="pre">cr.sparse.opt.smooth_quad_matrix()</span></code></a></p></li>
+<li><p><span class="math notranslate nohighlight">\(h(x) = \| \lambda x \|_1\)</span> see <a class="reference internal" href="_autosummary/cr.sparse.opt.prox_l1.html#cr.sparse.opt.prox_l1" title="cr.sparse.opt.prox_l1"><code class="xref py py-func docutils literal notranslate"><span class="pre">cr.sparse.opt.prox_l1()</span></code></a></p></li>
+<li><p><span class="math notranslate nohighlight">\(\AAA\)</span> as the linear operator</p></li>
+<li><p><span class="math notranslate nohighlight">\(-b\)</span> as the translate input</p></li>
+</ul>
+<p>With these choices, it is straight-forward to use <a class="reference internal" href="_autosummary/cr.sparse.fom.fom.html#cr.sparse.fom.fom" title="cr.sparse.fom.fom"><code class="xref py py-func docutils literal notranslate"><span class="pre">fom()</span></code></a> to solve
+the L1RLS problem.  This is implemented in the function <a class="reference internal" href="_autosummary/cr.sparse.fom.l1rls.html#cr.sparse.fom.l1rls" title="cr.sparse.fom.l1rls"><code class="xref py py-func docutils literal notranslate"><span class="pre">l1rls()</span></code></a>.</p>
+</section>
+<section id="lasso">
+<h2><a class="toc-backref" href="#id12">LASSO</a><a class="headerlink" href="#lasso" title="Permalink to this headline">¶</a></h2>
+<p>LASSO (least absolute shrinkage and selection operator)
+s a regression analysis method that performs both variable selection
+and regularization in order to enhance the prediction accuracy
+and interpretability of the resulting statistical model.</p>
+<p>We consider the problem:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-18">
+<span class="eqno">(19)<a class="headerlink" href="#equation-source-fom-18" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+\underset{x}{\text{minimize}} \frac{1}{2} \| \AAA x - b \|_2^2\\
+\text{subject to } \| x \|_1 \leq \tau
+\end{aligned}\end{split}\]</div>
+<p>Choose:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x) = \frac{1}{2}\| x \|_2^2\)</span>  see <a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_quad_matrix.html#cr.sparse.opt.smooth_quad_matrix" title="cr.sparse.opt.smooth_quad_matrix"><code class="xref py py-func docutils literal notranslate"><span class="pre">cr.sparse.opt.smooth_quad_matrix()</span></code></a></p></li>
+<li><p><span class="math notranslate nohighlight">\(h(x) = I_C(x)\)</span> as the indicator function for l1-ball <span class="math notranslate nohighlight">\(C = \{x : \| x \|_1 \leq \tau\}\)</span>,
+see <a class="reference internal" href="_autosummary/cr.sparse.opt.prox_l1_ball.html#cr.sparse.opt.prox_l1_ball" title="cr.sparse.opt.prox_l1_ball"><code class="xref py py-func docutils literal notranslate"><span class="pre">cr.sparse.opt.prox_l1_ball()</span></code></a></p></li>
+<li><p><span class="math notranslate nohighlight">\(\AAA\)</span> as the linear operator</p></li>
+<li><p><span class="math notranslate nohighlight">\(-b\)</span> as the translate input</p></li>
+</ul>
+<p>With these choices, it is straight-forward to use <a class="reference internal" href="_autosummary/cr.sparse.fom.fom.html#cr.sparse.fom.fom" title="cr.sparse.fom.fom"><code class="xref py py-func docutils literal notranslate"><span class="pre">fom()</span></code></a> to solve
+the LASSO problem.  This is implemented in the function <a class="reference internal" href="_autosummary/cr.sparse.fom.lasso.html#cr.sparse.fom.lasso" title="cr.sparse.fom.lasso"><code class="xref py py-func docutils literal notranslate"><span class="pre">lasso()</span></code></a>.</p>
+</section>
+<section id="ordered-weighted-l1-regularized-least-square-problem">
+<h2><a class="toc-backref" href="#id13">Ordered weighted L1 regularized least square problem</a><a class="headerlink" href="#ordered-weighted-l1-regularized-least-square-problem" title="Permalink to this headline">¶</a></h2>
+<p>We consider the problem:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-19">
+<span class="eqno">(20)<a class="headerlink" href="#equation-source-fom-19" title="Permalink to this equation">¶</a></span>\[\underset{x \in \RR^n}{\text{minimize}} \frac{1}{2} \| A x - b \|_2^2 + \sum_{i=1}^n \lambda_i | x |_{(i)}\]</div>
+<p>described in <span id="id7">[<a class="reference internal" href="../zzzreference.html#id199" title="Ma lgorzata Bogdana, Ewout van den Bergb, Weijie Suc, and Emmanuel J Candesc. Statistical estimation and testing via the ordered l1 norm. 2013.">lBvdBSC13</a>]</span>.</p>
+<p>Choose:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x) = \frac{1}{2}\| x \|_2^2\)</span>  see <a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_quad_matrix.html#cr.sparse.opt.smooth_quad_matrix" title="cr.sparse.opt.smooth_quad_matrix"><code class="xref py py-func docutils literal notranslate"><span class="pre">cr.sparse.opt.smooth_quad_matrix()</span></code></a></p></li>
+<li><p><span class="math notranslate nohighlight">\(h(x) = \sum_{i=1}^n \lambda_i | x |_{(i)}\)</span> see <a class="reference internal" href="_autosummary/cr.sparse.opt.prox_owl1.html#cr.sparse.opt.prox_owl1" title="cr.sparse.opt.prox_owl1"><code class="xref py py-func docutils literal notranslate"><span class="pre">cr.sparse.opt.prox_owl1()</span></code></a></p></li>
+<li><p><span class="math notranslate nohighlight">\(\AAA\)</span> as the linear operator</p></li>
+<li><p><span class="math notranslate nohighlight">\(-b\)</span> as the translate input</p></li>
+</ul>
+<p>With these choices, it is straight-forward to use <a class="reference internal" href="_autosummary/cr.sparse.fom.fom.html#cr.sparse.fom.fom" title="cr.sparse.fom.fom"><code class="xref py py-func docutils literal notranslate"><span class="pre">fom()</span></code></a> to solve
+the ordered weighted L1 regularized least square problem.  This is implemented in the function <a class="reference internal" href="_autosummary/cr.sparse.fom.owl1rls.html#cr.sparse.fom.owl1rls" title="cr.sparse.fom.owl1rls"><code class="xref py py-func docutils literal notranslate"><span class="pre">owl1rls()</span></code></a>.</p>
+</section>
+<section id="the-dantzig-selector">
+<h2><a class="toc-backref" href="#id14">The Dantzig selector</a><a class="headerlink" href="#the-dantzig-selector" title="Permalink to this headline">¶</a></h2>
+<p>We wish to recover an unknown vector <span class="math notranslate nohighlight">\(x_0 \in \RR^n\)</span> from the
+data <span class="math notranslate nohighlight">\(y \in \RR^m\)</span> and the model:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-20">
+<span class="eqno">(21)<a class="headerlink" href="#equation-source-fom-20" title="Permalink to this equation">¶</a></span>\[y = A x_0 + z\]</div>
+<p>where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A\)</span> is a known <span class="math notranslate nohighlight">\((m, n)\)</span> sized design matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\(z\)</span> is the noise term</p></li>
+<li><p>There are fewer observations/measurements than unknowns (<span class="math notranslate nohighlight">\(m \lt n\)</span>)</p></li>
+</ul>
+<p>We consider the optimization problem</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-21">
+<span class="eqno">(22)<a class="headerlink" href="#equation-source-fom-21" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+  &amp; \underset{x}{\text{minimize}}
+  &amp; &amp;  \| x \|_1 \\
+  &amp; \text{subject to}
+  &amp; &amp;  \| A^* (y - A x ) \|_{\infty} \leq \delta
+\end{aligned}\end{split}\]</div>
+<ul class="simple">
+<li><p>We are minimizing the <span class="math notranslate nohighlight">\(\ell_1\)</span> norm of the solution (thus promoting sparsity)</p></li>
+<li><p>We have an upper bound <span class="math notranslate nohighlight">\(\delta\)</span> on the correlation between the
+residual vector <span class="math notranslate nohighlight">\(r = y - A x\)</span> and the columns/atoms of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ul>
+<p>This formulation is known as <em>the Dantzig selector</em>.</p>
+<p class="rubric">The conic form</p>
+<p>We can rewrite the Dantzig selector problem as:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-22">
+<span class="eqno">(23)<a class="headerlink" href="#equation-source-fom-22" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+  &amp; \underset{x}{\text{minimize}}
+  &amp; &amp;  \| x \|_1 \\
+  &amp; \text{subject to}
+  &amp; &amp;  ( A^* (y - A x ), \delta) \in \LLL^n_{\infty}
+\end{aligned}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\LLL^n_{\infty}\)</span> is the epigraph of the
+<span class="math notranslate nohighlight">\(\ell_{\infty}\)</span>-norm. It is a convex cone.</p>
+<p>Then the Dantzig selector can be modeled as a standard conic form as follows:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x) = \| x \|_1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\AAA(x) = (-A^* A x, 0)\)</span> is a mapping from <span class="math notranslate nohighlight">\(\RR^n \to \RR^{n+1}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(b = (A^* y, \delta)\)</span>; note that <span class="math notranslate nohighlight">\(b \in \RR^{n+1}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\KKK = \LLL^n_{\infty}\)</span></p></li>
+</ul>
+<p>Note carefully that:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-23">
+<span class="eqno">(24)<a class="headerlink" href="#equation-source-fom-23" title="Permalink to this equation">¶</a></span>\[\AAA(x) + b = (-A^* A x, 0) + (A^* y, \delta) = (A^* (y - Ax), \delta)\]</div>
+<p>Thus:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-24">
+<span class="eqno">(25)<a class="headerlink" href="#equation-source-fom-24" title="Permalink to this equation">¶</a></span>\[\AAA(x) + b \in \KKK = \LLL^n_{\infty} \iff \| A^* (y - Ax) \|_{\infty} \leq \delta\]</div>
+<p class="rubric">Dual problem</p>
+<p>The dual of the <span class="math notranslate nohighlight">\(\LLL^n_{\infty}\)</span> cone is the
+<span class="math notranslate nohighlight">\(\LLL^n_{1}\)</span> cone.
+The dual variable <span class="math notranslate nohighlight">\(\lambda\)</span> will lie in the dual cone <span class="math notranslate nohighlight">\(\LLL^n_{1}\)</span>.
+It will be easier to work with defining <span class="math notranslate nohighlight">\(\lambda = (z, \tau)\)</span> such that</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-25">
+<span class="eqno">(26)<a class="headerlink" href="#equation-source-fom-25" title="Permalink to this equation">¶</a></span>\[\lambda \in \LLL^n_{1}  \iff \| z \|_1 \leq \tau\]</div>
+<p>The convex conjugate of the l1 norm function <span class="math notranslate nohighlight">\(f(x) = \| x \|_1\)</span>
+is the indicator function for the <span class="math notranslate nohighlight">\(\ell_{\infty}\)</span> norm ball.</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-26">
+<span class="eqno">(27)<a class="headerlink" href="#equation-source-fom-26" title="Permalink to this equation">¶</a></span>\[\begin{split}  f^*(x) = I_{\ell_{\infty}}(x) =  \begin{cases}
+  0 &amp; \text{if } \| x \|_{\infty} \leq 1 \\
+  \infty       &amp; \text{otherwise}
+\end{cases}\end{split}\]</div>
+<p>The adjoint of the linear operator is given by:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-27">
+<span class="eqno">(28)<a class="headerlink" href="#equation-source-fom-27" title="Permalink to this equation">¶</a></span>\[\AAA^*(\lambda) =  \AAA^*((z, \tau)) = -A^* A z\]</div>
+<p>Plugging into the dual problem definition:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-28">
+<span class="eqno">(29)<a class="headerlink" href="#equation-source-fom-28" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}\begin{aligned}
+&amp; \underset{\lambda}{\text{maximize}}
+&amp; &amp; - f^*(\AAA^*(\lambda)) - \langle b, \lambda \rangle \\
+&amp; \text{subject to}
+&amp; &amp;  \lambda \in \KKK^*
+\end{aligned}\end{split}\end{split}\]</div>
+<p>We get:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-29">
+<span class="eqno">(30)<a class="headerlink" href="#equation-source-fom-29" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{split}\begin{aligned}
+&amp; \underset{z}{\text{maximize}}
+&amp; &amp; - I_{\ell_{\infty}}( -A^* A z) - \langle A^*y, z \rangle - \delta \tau \\
+&amp; \text{subject to}
+&amp; &amp;  (z, \tau) \in \LLL^n_1
+\end{aligned}\end{split}\end{split}\]</div>
+<p>For <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span>, the solution <span class="math notranslate nohighlight">\(\lambda\)</span> will be on the boundary of the
+convex cone <span class="math notranslate nohighlight">\(\LLL^n_1\)</span>, giving us:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-30">
+<span class="eqno">(31)<a class="headerlink" href="#equation-source-fom-30" title="Permalink to this equation">¶</a></span>\[\|z \|_1 = \tau\]</div>
+<p>Plugging this back, we get the unconstrained maximization problem:</p>
+<div class="math notranslate nohighlight" id="equation-source-fom-31">
+<span class="eqno">(32)<a class="headerlink" href="#equation-source-fom-31" title="Permalink to this equation">¶</a></span>\[\underset{z}{\text{maximize}} - I_{\ell_{\infty}}( -A^* A z) - \langle A^*y, z \rangle - \delta \| z \|_1\]</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2021, CR-Sparse Development Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/source/fom.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-214289683-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

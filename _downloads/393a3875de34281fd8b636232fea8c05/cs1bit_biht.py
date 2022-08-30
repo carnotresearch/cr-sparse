@@ -22,6 +22,9 @@ import cr.sparse.dict as crdict
 import cr.sparse.data as crdata
 import cr.sparse.cs.cs1bit as cs1bit
 
+from cr.nimble.dsp import (
+    build_signal_from_indices_and_values
+)
 
 # %%
 # Setup
@@ -76,7 +79,7 @@ tau = 0.98 * s0
 sol = cs1bit.biht_jit(Phi, y, K, tau)
 # %%
 # reconstructed signal
-x_rec = crs.build_signal_from_indices_and_values(N, sol.I, sol.x_I)
+x_rec = build_signal_from_indices_and_values(N, sol.I, sol.x_I)
 
 # %%
 # Verification

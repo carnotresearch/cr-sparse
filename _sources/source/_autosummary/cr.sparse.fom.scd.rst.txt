@@ -1,0 +1,6 @@
+﻿cr.sparse.fom.scd
+=================
+
+.. currentmodule:: cr.sparse.fom
+
+.. autofunction:: scd

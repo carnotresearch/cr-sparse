@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.wavelet\_basis
+=============================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: wavelet_basis

@@ -65,7 +65,7 @@ from cr.sparse import lop
 # Geophysics stuff [Ricker wavelet]
 from cr.sparse import geo
 # DSP utilities
-from cr.sparse import dsp
+from cr.nimble import dsp
 # Solvers for sparse linear systems
 from cr.sparse import sls
 # Configure JAX for 64-bit computing

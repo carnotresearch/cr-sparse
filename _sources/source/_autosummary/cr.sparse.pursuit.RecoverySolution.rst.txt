@@ -14,8 +14,10 @@
    
       ~RecoverySolution.I
       ~RecoverySolution.iterations
+      ~RecoverySolution.length
       ~RecoverySolution.r
       ~RecoverySolution.r_norm_sqr
+      ~RecoverySolution.x
       ~RecoverySolution.x_I
    
    

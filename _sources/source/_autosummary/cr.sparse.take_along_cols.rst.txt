@@ -1,6 +1,0 @@
-﻿cr.sparse.take\_along\_cols
-===========================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: take_along_cols

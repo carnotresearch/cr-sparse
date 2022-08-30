@@ -1,6 +1,0 @@
-﻿cr.sparse.wt.modes
-==================
-
-.. currentmodule:: cr.sparse.wt
-
-.. autodata:: modes

@@ -14,6 +14,10 @@ from jax import random
 import jax.numpy as jnp
 import cr.sparse as crs
 import cr.sparse.data as crdata
+from cr.nimble.dsp import (
+    nonzero_indices,
+    nonzero_values
+)
 
 # %%
 # Let's define the size of model and number of sparse entries
@@ -31,11 +35,11 @@ x = jnp.squeeze(x)
 
 # %% 
 # We can easily find the locations of non-zero entries
-print(crs.nonzero_indices(x))
+print(nonzero_indices(x))
 
 # %%
 # We can  extract corresponding non-zero values in a compact vector
-print(crs.nonzero_values(x))
+print(nonzero_values(x))
 
 # %% 
 # Let's plot the vector to see where the non-zero entries are

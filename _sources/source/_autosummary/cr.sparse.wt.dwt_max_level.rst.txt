@@ -1,6 +1,0 @@
-﻿cr.sparse.wt.dwt\_max\_level
-============================
-
-.. currentmodule:: cr.sparse.wt
-
-.. autofunction:: dwt_max_level

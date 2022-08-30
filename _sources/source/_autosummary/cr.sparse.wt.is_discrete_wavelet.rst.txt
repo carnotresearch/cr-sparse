@@ -1,6 +1,0 @@
-﻿cr.sparse.wt.is\_discrete\_wavelet
-==================================
-
-.. currentmodule:: cr.sparse.wt
-
-.. autofunction:: is_discrete_wavelet

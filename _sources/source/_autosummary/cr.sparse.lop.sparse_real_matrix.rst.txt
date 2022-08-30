@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.sparse\_real\_matrix
+==================================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: sparse_real_matrix

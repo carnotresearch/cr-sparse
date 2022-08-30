@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -55,7 +55,7 @@
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
@@ -81,7 +81,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -126,10 +126,13 @@
 
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">random</span>
-<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">vmap</span>
+<span class="kn">from</span> <span class="nn">jax.experimental</span> <span class="kn">import</span> <span class="n">sparse</span>
 
-
-<span class="kn">from</span> <span class="nn">cr.nimble</span> <span class="kn">import</span> <span class="n">normalize_l2_cw</span><span class="p">,</span> <span class="n">promote_arg_dtypes</span><span class="p">,</span> <span class="n">hermitian</span>
+<span class="kn">from</span> <span class="nn">cr.nimble</span> <span class="kn">import</span> <span class="p">(</span><span class="n">normalize_l2_cw</span><span class="p">,</span> 
+    <span class="n">promote_arg_dtypes</span><span class="p">,</span> <span class="n">hermitian</span><span class="p">,</span>
+    <span class="n">diag_postmultiply</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">cr.wavelets</span> <span class="k">as</span> <span class="nn">crwt</span>
 
 
 <div class="viewcode-block" id="gaussian_mtx"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.gaussian_mtx.html#cr.sparse.dict.gaussian_mtx">[docs]</a><span class="k">def</span> <span class="nf">gaussian_mtx</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -194,22 +197,54 @@
 <span class="sd">        &gt;&gt;&gt; Phi = cr.sparse.dict.rademacher_mtx(random.PRNGKey(0), m, n, </span>
 <span class="sd">              normalize_atoms=False)</span>
 <span class="sd">        &gt;&gt;&gt; print(Phi)</span>
-<span class="sd">        [[ 1.  1.  1. -1. -1.  1. -1. -1.  1.  1.  1. -1.  1.  1. -1.  1.]</span>
-<span class="sd">        [-1.  1.  1.  1. -1.  1.  1.  1. -1. -1. -1.  1. -1. -1. -1.  1.]</span>
-<span class="sd">        [ 1. -1. -1.  1. -1.  1.  1. -1.  1. -1.  1. -1. -1. -1.  1. -1.]</span>
-<span class="sd">        [ 1. -1. -1.  1. -1.  1.  1. -1.  1. -1. -1.  1.  1.  1. -1.  1.]</span>
-<span class="sd">        [-1. -1. -1. -1. -1. -1. -1.  1. -1. -1. -1.  1. -1. -1. -1. -1.]</span>
-<span class="sd">        [-1.  1. -1.  1.  1.  1. -1. -1.  1. -1. -1.  1.  1. -1. -1.  1.]</span>
-<span class="sd">        [-1. -1.  1.  1. -1. -1. -1. -1. -1.  1. -1.  1.  1. -1. -1.  1.]</span>
-<span class="sd">        [ 1. -1.  1.  1.  1.  1.  1.  1. -1. -1.  1. -1. -1.  1.  1.  1.]]</span>
+<span class="sd">        [[ 1  1  1 -1 -1  1 -1 -1  1  1  1 -1  1  1 -1  1]</span>
+<span class="sd">        [-1  1  1  1 -1  1  1  1 -1 -1 -1  1 -1 -1 -1  1]</span>
+<span class="sd">        [ 1 -1 -1  1 -1  1  1 -1  1 -1  1 -1 -1 -1  1 -1]</span>
+<span class="sd">        [ 1 -1 -1  1 -1  1  1 -1  1 -1 -1  1  1  1 -1  1]</span>
+<span class="sd">        [-1 -1 -1 -1 -1 -1 -1  1 -1 -1 -1  1 -1 -1 -1 -1]</span>
+<span class="sd">        [-1  1 -1  1  1  1 -1 -1  1 -1 -1  1  1 -1 -1  1]</span>
+<span class="sd">        [-1 -1  1  1 -1 -1 -1 -1 -1  1 -1  1  1 -1 -1  1]</span>
+<span class="sd">        [ 1 -1  1  1  1  1  1  1 -1 -1  1 -1 -1  1  1  1]]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
     <span class="nb">dict</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">bernoulli</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">)</span>
-    <span class="nb">dict</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="nb">dict</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="nb">dict</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="k">if</span> <span class="n">normalize_atoms</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">dict</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">dict</span></div>
 
+
+<div class="viewcode-block" id="sparse_binary_mtx"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.sparse_binary_mtx.html#cr.sparse.dict.sparse_binary_mtx">[docs]</a><span class="k">def</span> <span class="nf">sparse_binary_mtx</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dense</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A sensing matrix where exactly d entries are 1 in each column</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: a PRNG key used as the random key.</span>
+<span class="sd">        M (int): Number of rows of the sensing matrix </span>
+<span class="sd">        N (int): Number of columns of the sensing matrix</span>
+<span class="sd">        d (int): Number of 1s in each column</span>
+<span class="sd">        normalize_atoms (bool): Whether the columns of sensing matrix are normalized </span>
+<span class="sd">          (default True)</span>
+<span class="sd">        dense (bool): Whether to return a dense or a sparse matrix</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (jax.experimental.sparse.bcoo.BCOO): A sparse binary matrix</span>
+<span class="sd">        where each column contains exactly d ones and (M-d) zeros.</span>
+
+<span class="sd">    Note:</span>
+
+<span class="sd">        The resultant matrix is stored in the BCOO format.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># create keys for the N columns</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+    <span class="c1"># indices</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">rc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">key</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">jnp</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">))]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">dict</span> <span class="o">=</span> <span class="n">vmap</span><span class="p">(</span><span class="n">rc</span><span class="p">,</span> <span class="n">out_axes</span><span class="o">=</span><span class="mi">1</span><span class="p">)(</span><span class="n">keys</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">normalize_atoms</span><span class="p">:</span>
+        <span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dense</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">dict</span>
+    <span class="k">return</span> <span class="n">sparse</span><span class="o">.</span><span class="n">BCOO</span><span class="o">.</span><span class="n">fromdense</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="random_onb"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.random_onb.html#cr.sparse.dict.random_onb">[docs]</a><span class="k">def</span> <span class="nf">random_onb</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -235,6 +270,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">])</span>
     <span class="n">Q</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">dg</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">R</span><span class="p">))</span>
+    <span class="c1"># apply the random sign changes</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">diag_postmultiply</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">dg</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">Q</span></div>
 
 
@@ -261,6 +299,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[</span><span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">])</span>
     <span class="n">Q</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">dg</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">R</span><span class="p">))</span>
+    <span class="c1"># apply the random sign changes</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">diag_postmultiply</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">dg</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">Q</span><span class="o">.</span><span class="n">T</span></div>
 
 <div class="viewcode-block" id="hadamard"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.hadamard.html#cr.sparse.dict.hadamard">[docs]</a><span class="k">def</span> <span class="nf">hadamard</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">):</span>
@@ -321,6 +362,42 @@
     <span class="c1"># Perform conjugate transpose</span>
     <span class="n">F</span> <span class="o">=</span> <span class="n">hermitian</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">F</span></div>
+
+
+<div class="viewcode-block" id="wavelet_basis"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.wavelet_basis.html#cr.sparse.dict.wavelet_basis">[docs]</a><span class="k">def</span> <span class="nf">wavelet_basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Builds a wavelet basis for a given decomposition level</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This function generates orthogonal bases only for orthogonal wavelets.</span>
+<span class="sd">        For the biorthogonal wavelets, the generated basis is a basis</span>
+<span class="sd">        but not an orthogonal basis.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wavelet</span> <span class="o">=</span> <span class="n">crwt</span><span class="o">.</span><span class="n">to_wavelet</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">rec_lo</span> <span class="o">=</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">rec_lo</span>
+    <span class="n">rec_hi</span> <span class="o">=</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">rec_hi</span>
+    <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;periodization&#39;</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">crwt</span><span class="o">.</span><span class="n">next_pow_of_2</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">m</span> <span class="o">==</span> <span class="n">n</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> must be a power of 2&quot;</span>
+    <span class="c1"># We need to verify that the level is not too high</span>
+    <span class="n">max_level</span> <span class="o">=</span> <span class="n">crwt</span><span class="o">.</span><span class="n">dwt_max_level</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">wavelet</span><span class="o">.</span><span class="n">dec_len</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">level</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">level</span> <span class="o">=</span> <span class="n">max_level</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">level</span> <span class="o">&lt;=</span> <span class="n">max_level</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Level too high level=</span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s2">, max_level=</span><span class="si">{</span><span class="n">max_level</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span> <span class="nf">waverec</span><span class="p">(</span><span class="n">coefs</span><span class="p">):</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">coefs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">level</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">coefs</span><span class="p">[:</span><span class="n">mid</span><span class="p">]</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span><span class="o">*</span><span class="mi">2</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">level</span><span class="p">):</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">coefs</span><span class="p">[</span><span class="n">mid</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">crwt</span><span class="o">.</span><span class="n">idwt_</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span><span class="p">,</span> <span class="s1">&#39;periodization&#39;</span><span class="p">)</span>
+            <span class="n">mid</span> <span class="o">=</span> <span class="n">end</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="n">a</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">basis</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="n">waverec</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">basis</span></div>
 </pre></div>
 
           </div>
@@ -333,7 +410,7 @@
       &copy;2021, CR-Sparse Development Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

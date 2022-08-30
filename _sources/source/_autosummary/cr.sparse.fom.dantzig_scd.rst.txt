@@ -1,0 +1,6 @@
+﻿cr.sparse.fom.dantzig\_scd
+==========================
+
+.. currentmodule:: cr.sparse.fom
+
+.. autofunction:: dantzig_scd

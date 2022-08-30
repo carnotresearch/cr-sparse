@@ -1,6 +1,0 @@
-﻿cr.sparse.normalize
-===================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: normalize

@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -55,7 +55,7 @@
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
@@ -81,7 +81,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -119,11 +119,14 @@
 <span class="c1"># limitations under the License.</span>
 
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">import</span> <span class="nn">jax.random</span>
 
 <span class="kn">from</span> <span class="nn">.impl</span> <span class="kn">import</span> <span class="n">_hermitian</span>
 <span class="kn">from</span> <span class="nn">.lop</span> <span class="kn">import</span> <span class="n">Operator</span>
 <span class="kn">from</span> <span class="nn">.basic</span> <span class="kn">import</span> <span class="n">matrix</span> <span class="k">as</span> <span class="n">matrix_op</span>
+<span class="kn">from</span> <span class="nn">.basic</span> <span class="kn">import</span> <span class="n">sparse_real_matrix</span><span class="p">,</span> <span class="n">real_matrix</span>
 <span class="kn">import</span> <span class="nn">cr.sparse.dict</span> <span class="k">as</span> <span class="nn">crdict</span>
+<span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="n">apply_along_axis</span>
 
 
 <div class="viewcode-block" id="gaussian_dict"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.gaussian_dict.html#cr.sparse.lop.gaussian_dict">[docs]</a><span class="k">def</span> <span class="nf">gaussian_dict</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
@@ -171,6 +174,35 @@
     <span class="n">Phi</span> <span class="o">=</span> <span class="n">crdict</span><span class="o">.</span><span class="n">rademacher_mtx</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="n">normalize_atoms</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">matrix_op</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="sparse_binary_dict"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.sparse_binary_dict.html#cr.sparse.lop.sparse_binary_dict">[docs]</a><span class="k">def</span> <span class="nf">sparse_binary_dict</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dense</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An operator which represents a sparse binary sensing matrix</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: a PRNG key used as the random key.</span>
+<span class="sd">        M (int): Number of rows of the sensing matrix </span>
+<span class="sd">        N (int): Number of columns of the sensing matrix</span>
+<span class="sd">        d (int): Number of 1s in each column</span>
+<span class="sd">        normalize_atoms (bool): Whether the columns of sensing matrix are normalized </span>
+<span class="sd">          (default True)</span>
+<span class="sd">        dense (bool): Whether to return a dense or a sparse matrix</span>
+<span class="sd">        axis (int): For multi-dimensional array input, the axis along which</span>
+<span class="sd">          the linear operator will be applied </span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Operator: A linear operator wrapping the sensing matrix</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">m</span> <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">n</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="mi">10</span> <span class="k">if</span> <span class="n">d</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">d</span>
+    <span class="n">Phi</span> <span class="o">=</span> <span class="n">crdict</span><span class="o">.</span><span class="n">sparse_binary_mtx</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> 
+        <span class="n">normalize_atoms</span><span class="o">=</span><span class="n">normalize_atoms</span><span class="p">,</span> <span class="n">dense</span><span class="o">=</span><span class="n">dense</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dense</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">matrix_op</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">sparse_real_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="random_orthonormal_rows_dict"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.random_orthonormal_rows_dict.html#cr.sparse.lop.random_orthonormal_rows_dict">[docs]</a><span class="k">def</span> <span class="nf">random_orthonormal_rows_dict</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;An operator whose rows are orthonormal (sampled from a random orthonormal basis)</span>
 
@@ -211,6 +243,46 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">Phi</span> <span class="o">=</span> <span class="n">crdict</span><span class="o">.</span><span class="n">random_onb</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">matrix_op</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span></div>
+
+<span class="k">def</span> <span class="nf">binary_dict_alg</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An operator representing a random matrix with 0, 1 entries.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key: a PRNG key used as the random key.</span>
+<span class="sd">        m (int): Number of rows of the sensing matrix </span>
+<span class="sd">        n (int): Number of columns of the sensing matrix</span>
+<span class="sd">        axis (int): For multi-dimensional array input, the axis along which</span>
+<span class="sd">          the linear operator will be applied </span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Operator: A linear operator wrapping the sensing matrix</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        It provides an algorithmic implementation of multiplying</span>
+<span class="sd">        with a binary sensing matrix.</span>
+<span class="sd">        This operator is far less efficient than corresponding</span>
+<span class="sd">        matrix multiplication. Hence it is not recommended to</span>
+<span class="sd">        be used till we figure out a more optimized implementation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">m</span> <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">n</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">times</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">bernoulli</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,))</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">v</span>
+        <span class="k">return</span> <span class="n">y</span>
+
+    <span class="k">def</span> <span class="nf">trans</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span>  <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">bernoulli</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,))</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">v</span>  <span class="o">@</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+    <span class="n">times</span><span class="p">,</span> <span class="n">trans</span> <span class="o">=</span> <span class="n">apply_along_axis</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">),</span> <span class="n">real</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
           </div>
@@ -223,7 +295,7 @@
       &copy;2021, CR-Sparse Development Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

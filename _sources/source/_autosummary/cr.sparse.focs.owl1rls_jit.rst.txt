@@ -1,6 +1,0 @@
-﻿cr.sparse.focs.owl1rls\_jit
-===========================
-
-.. currentmodule:: cr.sparse.focs
-
-.. autofunction:: owl1rls_jit

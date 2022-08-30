@@ -1,0 +1,6 @@
+﻿cr.sparse.fom.fom
+=================
+
+.. currentmodule:: cr.sparse.fom
+
+.. autofunction:: fom

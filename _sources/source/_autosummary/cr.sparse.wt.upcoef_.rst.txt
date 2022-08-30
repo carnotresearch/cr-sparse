@@ -1,6 +1,0 @@
-﻿cr.sparse.wt.upcoef\_
-=====================
-
-.. currentmodule:: cr.sparse.wt
-
-.. autofunction:: upcoef_

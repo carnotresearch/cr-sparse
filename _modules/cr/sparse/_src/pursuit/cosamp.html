@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -55,7 +55,7 @@
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../intro.html">Introduction</a></li>
@@ -81,7 +81,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -222,7 +222,7 @@
 
     <span class="n">state</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">init</span><span class="p">())</span>
     <span class="k">return</span> <span class="n">RecoverySolution</span><span class="p">(</span><span class="n">x_I</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">x_I</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="n">r_norm_sqr</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">r_norm_sqr</span><span class="p">,</span>
-        <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="p">)</span></div>
+        <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">Phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
 
 
 <span class="n">matrix_solve_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">matrix_solve</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;max_iters&quot;</span><span class="p">,</span> <span class="s2">&quot;res_norm_rtol&quot;</span><span class="p">))</span>
@@ -237,8 +237,12 @@
     <span class="n">K3</span> <span class="o">=</span> <span class="n">K</span> <span class="o">+</span> <span class="n">K2</span>
     <span class="c1"># squared norm of the signal</span>
     <span class="n">y_norm_sqr</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span>
+    <span class="n">y_norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">y_norm_sqr</span><span class="p">)</span>
+    <span class="c1"># scale the signal down.</span>
+    <span class="n">scale</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">y_norm</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">y</span>
 
-    <span class="n">max_r_norm_sqr</span> <span class="o">=</span> <span class="n">y_norm_sqr</span> <span class="o">*</span> <span class="p">(</span><span class="n">res_norm_rtol</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> 
+    <span class="n">max_r_norm_sqr</span> <span class="o">=</span> <span class="p">(</span><span class="n">res_norm_rtol</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">max_iters</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">max_iters</span> <span class="o">=</span> <span class="n">M</span> 
@@ -249,7 +253,7 @@
         <span class="c1"># Data for the previous approximation [r = y, x = 0]</span>
         <span class="n">I_prev</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
         <span class="n">x_I_prev</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
-        <span class="n">r_norm_sqr_prev</span> <span class="o">=</span> <span class="n">y_norm_sqr</span>
+        <span class="n">r_norm_sqr_prev</span> <span class="o">=</span> <span class="mf">1.</span>
         <span class="c1"># compute the correlations of atoms with signal y</span>
         <span class="n">h</span> <span class="o">=</span> <span class="n">trans</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
         <span class="c1"># Pick largest 3K indices [this is first iteration]</span>
@@ -311,16 +315,34 @@
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">cond</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="c1"># print(state)</span>
         <span class="c1"># limit on residual norm </span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">r_norm_sqr</span> <span class="o">&gt;</span> <span class="n">max_r_norm_sqr</span>
         <span class="c1"># limit on number of iterations</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">max_iters</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="c1"># checking if support is still changing</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">not_equal</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">I_prev</span><span class="p">))</span>
+        <span class="c1"># consider support change only after some iterations</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">min_iters</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+        <span class="c1"># there should be some reduction in the residual norm</span>
+        <span class="c1"># e = state.r_norm_sqr &lt; 0.9 * state.r_norm_sqr_prev</span>
+        <span class="c1"># c = jnp.logical_and(c, e)</span>
+        <span class="c1"># overall condition</span>
         <span class="k">return</span> <span class="n">c</span>
 
     <span class="n">state</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">init</span><span class="p">())</span>
-    <span class="k">return</span> <span class="n">RecoverySolution</span><span class="p">(</span><span class="n">x_I</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">x_I</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="n">r_norm_sqr</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">r_norm_sqr</span><span class="p">,</span>
-        <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="p">)</span></div>
+    <span class="c1"># state = init()</span>
+    <span class="c1"># while cond(state):</span>
+    <span class="c1">#     state = body(state)</span>
+
+    <span class="c1"># scale back the result</span>
+    <span class="n">x_I</span> <span class="o">=</span> <span class="n">y_norm</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">x_I</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">y_norm</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">r</span>
+    <span class="n">r_norm_sqr</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">r_norm_sqr</span> <span class="o">*</span> <span class="n">y_norm_sqr</span>
+    <span class="k">return</span> <span class="n">RecoverySolution</span><span class="p">(</span><span class="n">x_I</span><span class="o">=</span><span class="n">x_I</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">r_norm_sqr</span><span class="o">=</span><span class="n">r_norm_sqr</span><span class="p">,</span>
+        <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">Phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
 
 
 <span class="n">operator_solve_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">operator_solve</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;max_iters&quot;</span><span class="p">,</span> <span class="s2">&quot;res_norm_rtol&quot;</span><span class="p">))</span>
@@ -338,7 +360,7 @@
       &copy;2021, CR-Sparse Development Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

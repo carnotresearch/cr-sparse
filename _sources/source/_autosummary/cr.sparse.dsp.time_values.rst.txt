@@ -1,6 +1,0 @@
-﻿cr.sparse.dsp.time\_values
-==========================
-
-.. currentmodule:: cr.sparse.dsp
-
-.. autofunction:: time_values

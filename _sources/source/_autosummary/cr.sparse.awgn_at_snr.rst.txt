@@ -1,6 +1,0 @@
-﻿cr.sparse.awgn\_at\_snr
-=======================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: awgn_at_snr

@@ -1,6 +1,0 @@
-﻿cr.sparse.hard\_threshold\_by
-=============================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: hard_threshold_by

@@ -1,6 +1,0 @@
-﻿cr.sparse.wt.downcoef\_
-=======================
-
-.. currentmodule:: cr.sparse.wt
-
-.. autofunction:: downcoef_

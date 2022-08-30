@@ -1,0 +1,40 @@
+﻿cr.sparse.fom.FomState
+======================
+
+.. currentmodule:: cr.sparse.fom
+
+.. autoclass:: FomState
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FomState.A_x
+      ~FomState.A_y
+      ~FomState.A_z
+      ~FomState.C_x
+      ~FomState.C_y
+      ~FomState.C_z
+      ~FomState.L
+      ~FomState.at_str
+      ~FomState.f_x
+      ~FomState.f_y
+      ~FomState.f_z
+      ~FomState.g_Ax
+      ~FomState.g_Ay
+      ~FomState.g_Az
+      ~FomState.g_x
+      ~FomState.g_y
+      ~FomState.g_z
+      ~FomState.iterations
+      ~FomState.norm_dx
+      ~FomState.norm_x
+      ~FomState.theta
+      ~FomState.x
+      ~FomState.y
+      ~FomState.z
+   
+   

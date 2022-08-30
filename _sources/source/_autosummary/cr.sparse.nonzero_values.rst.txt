@@ -1,6 +1,0 @@
-﻿cr.sparse.nonzero\_values
-=========================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: nonzero_values

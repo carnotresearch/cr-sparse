@@ -1,6 +1,0 @@
-﻿cr.sparse.dsp.signals.chirp\_centered
-=====================================
-
-.. currentmodule:: cr.sparse.dsp.signals
-
-.. autofunction:: chirp_centered

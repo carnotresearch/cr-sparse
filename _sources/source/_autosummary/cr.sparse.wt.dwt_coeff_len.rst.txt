@@ -1,6 +1,0 @@
-﻿cr.sparse.wt.dwt\_coeff\_len
-============================
-
-.. currentmodule:: cr.sparse.wt
-
-.. autofunction:: dwt_coeff_len

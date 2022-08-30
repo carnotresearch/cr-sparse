@@ -1,0 +1,6 @@
+﻿cr.sparse.fom.matrix\_affine\_func
+==================================
+
+.. currentmodule:: cr.sparse.fom
+
+.. autofunction:: matrix_affine_func

@@ -1,6 +1,0 @@
-﻿cr.sparse.energy
-================
-
-.. currentmodule:: cr.sparse
-
-.. autofunction:: energy

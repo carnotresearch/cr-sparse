@@ -28,7 +28,7 @@ from cr.sparse import lop
 # Sample images
 import skimage.data
 # Utilities
-from cr.sparse.dsp import time_values
+from cr.nimble.dsp import time_values
 # Configure JAX for 64-bit computing
 from jax.config import config
 config.update("jax_enable_x64", True)

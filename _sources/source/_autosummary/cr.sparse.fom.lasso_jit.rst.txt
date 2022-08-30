@@ -1,0 +1,6 @@
+﻿cr.sparse.fom.lasso\_jit
+========================
+
+.. currentmodule:: cr.sparse.fom
+
+.. autofunction:: lasso_jit

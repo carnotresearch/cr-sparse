@@ -1,6 +1,0 @@
-﻿cr.sparse.focs.lasso
-====================
-
-.. currentmodule:: cr.sparse.focs
-
-.. autofunction:: lasso

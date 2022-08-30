@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -24,8 +24,8 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/custom.js"></script>
     <script src="../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -60,26 +60,23 @@
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">API Docs</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="dsp.html">Digital Signal Processing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="wavelets.html">Wavelets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lop.html">Linear Operators</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Sparse Linear Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">L1 Minimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="opt.html">Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="focs.html">First Order Conic Solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fom.html">First Order Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cs.html">Compressive Sensing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="util.html">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geo.html">Geophysical Signal Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vision.html">Computer Vision and Image Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
@@ -107,7 +104,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -141,34 +138,34 @@ providing the matrix multiplication and adjoint
 multiplication functions.</p>
 <section id="solvers">
 <h2>Solvers<a class="headerlink" href="#solvers" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.lsqr.html#cr.sparse.sls.lsqr" title="cr.sparse.sls.lsqr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lsqr</span></code></a>(A, b, x0[, damp, atol, btol, conlim, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.lsqr.html#cr.sparse.sls.lsqr" title="cr.sparse.sls.lsqr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lsqr</span></code></a>(A, b, x0[, damp, atol, btol, conlim, ...])</p></td>
 <td><p>Solves the overdetermined system <span class="math notranslate nohighlight">\(A x = b\)</span> in least square sense using LSQR algorithm.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.lsqr_jit.html#cr.sparse.sls.lsqr_jit" title="cr.sparse.sls.lsqr_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lsqr_jit</span></code></a>(A, b, x0[, damp, atol, btol, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.lsqr_jit.html#cr.sparse.sls.lsqr_jit" title="cr.sparse.sls.lsqr_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lsqr_jit</span></code></a>(A, b, x0[, damp, atol, btol, ...])</p></td>
 <td><p>Solves the overdetermined system <span class="math notranslate nohighlight">\(A x = b\)</span> in least square sense using LSQR algorithm.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.power_iterations.html#cr.sparse.sls.power_iterations" title="cr.sparse.sls.power_iterations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power_iterations</span></code></a>(operator, b[, max_iters, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.power_iterations.html#cr.sparse.sls.power_iterations" title="cr.sparse.sls.power_iterations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power_iterations</span></code></a>(operator, b[, max_iters, ...])</p></td>
 <td><p>Computes the largest eigen value of a (symmetric) linear operator by power method</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.power_iterations_jit.html#cr.sparse.sls.power_iterations_jit" title="cr.sparse.sls.power_iterations_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power_iterations_jit</span></code></a>(operator, b[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.power_iterations_jit.html#cr.sparse.sls.power_iterations_jit" title="cr.sparse.sls.power_iterations_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">power_iterations_jit</span></code></a>(operator, b[, ...])</p></td>
 <td><p>Computes the largest eigen value of a (symmetric) linear operator by power method</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.ista.html#cr.sparse.sls.ista" title="cr.sparse.sls.ista"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ista</span></code></a>(operator, b, x0, step_size[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.ista.html#cr.sparse.sls.ista" title="cr.sparse.sls.ista"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ista</span></code></a>(operator, b, x0, step_size[, ...])</p></td>
 <td><p>Solves the problem <span class="math notranslate nohighlight">\(\widehat{x} = \text{arg} \min_{x} \frac{1}{2}\| b - A x \|_2^2 + \lambda \mathbf{R}(x)\)</span> via iterative shrinkage and thresholding.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.ista_jit.html#cr.sparse.sls.ista_jit" title="cr.sparse.sls.ista_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ista_jit</span></code></a>(operator, b, x0, step_size[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.ista_jit.html#cr.sparse.sls.ista_jit" title="cr.sparse.sls.ista_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ista_jit</span></code></a>(operator, b, x0, step_size[, ...])</p></td>
 <td><p>Solves the problem <span class="math notranslate nohighlight">\(\widehat{x} = \text{arg} \min_{x} \frac{1}{2}\| b - A x \|_2^2 + \lambda \mathbf{R}(x)\)</span> via iterative shrinkage and thresholding.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.fista.html#cr.sparse.sls.fista" title="cr.sparse.sls.fista"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fista</span></code></a>(operator, b, x0, step_size[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.fista.html#cr.sparse.sls.fista" title="cr.sparse.sls.fista"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fista</span></code></a>(operator, b, x0, step_size[, ...])</p></td>
 <td><p>Solves the problem <span class="math notranslate nohighlight">\(\widehat{x} = \text{arg} \min_{x} \frac{1}{2}\| b - A x \|_2^2 + \lambda \mathbf{R}(x)\)</span> via fast iterative shrinkage and thresholding.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.fista_jit.html#cr.sparse.sls.fista_jit" title="cr.sparse.sls.fista_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fista_jit</span></code></a>(operator, b, x0, step_size[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.sls.fista_jit.html#cr.sparse.sls.fista_jit" title="cr.sparse.sls.fista_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fista_jit</span></code></a>(operator, b, x0, step_size[, ...])</p></td>
 <td><p>Solves the problem <span class="math notranslate nohighlight">\(\widehat{x} = \text{arg} \min_{x} \frac{1}{2}\| b - A x \|_2^2 + \lambda \mathbf{R}(x)\)</span> via fast iterative shrinkage and thresholding.</p></td>
 </tr>
 </tbody>
@@ -176,7 +173,7 @@ multiplication functions.</p>
 </section>
 <section id="data-types">
 <h2>Data types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
-<table class="longtable docutils align-default">
+<table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -210,7 +207,7 @@ multiplication functions.</p>
       &copy;2021, CR-Sparse Development Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
