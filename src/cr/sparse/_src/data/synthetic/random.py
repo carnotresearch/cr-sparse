@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+import math
 import jax.numpy as jnp
 from jax import jit, vmap
 from jax import random 
@@ -177,3 +177,78 @@ def points_orthogonal_to(key, x, S):
     correlations = points  @ x
     projections = correlations[:, jnp.newaxis]  * x[jnp.newaxis, :]
     return points - projections
+
+
+########################################################
+#
+# Group/Block Sparsity
+#
+########################################################
+
+def sparse_normal_blocks(key, D: int, K: int, B: int, S: int=1, 
+    cor: float =0.,
+    normalize_blocks=False):
+    """Generates representations where some blocks have normally distributed
+    coefficients while others are zero.
+
+
+    Args:
+        key: a PRNG key used as the random key.
+        D (int): Dimension of the model space
+        K (int): Number of nonzero blocks
+        B (int): Length of each block
+        S (int): Number of sparse model vectors (default 1)
+        cor (float): Intra block correlation under AR-1 model
+        normalize_blocks (bool): Normalize the nonzero coefficients in each block
+
+    Returns:
+        A tuple consisting of
+        (i) a vector/matrix of sparse model vectors
+        (ii) active block numbers
+        (iii) indices corresponding to the locations of nonzero entries
+
+    Notes:
+    - Each active block of samples is normalized to unit norm.
+    """
+    # Compute the number of blocks
+    C = D // B
+    # Make sure that there is nothing left
+    if D != C * B:
+        raise ValueError(f"{D} must be a multiple of {B}.")
+    key = random.split(key)
+    # Identify the blocks which will be activated
+    blocks = random.choice(key[0], C, shape=(K,), replace=False)
+    blocks = jnp.sort(blocks)
+    indices = jnp.arange(B)
+    #+ jnp.broadcast_to(blocks, indices.shape)
+    indices = indices[None, :] + (B * blocks)[:, None]
+    indices = indices.flatten()
+    # number of nonzero coefficients for each vector
+    nv = K*B 
+    # total number of coefficients
+    n = nv*S
+    # total number of blocks
+    nb = K * S
+    vshape = (K*B,S)
+    # random values
+    values = random.normal(key[1], (nb,B))
+    if cor:
+        # We need to enforce correlation
+        # among the coefficients within a block
+        b1 = cor
+        b2 = math.sqrt(1 - b1 **2)
+        for i in range(1, B):
+            cur = values[:, i]
+            prev = values[:, i-1]
+            new = b1 * prev + b2 * cur
+            values = values.at[:, i].set(new)
+    if normalize_blocks:
+        values = cnb.normalize_l2_rw(values)
+    values = jnp.reshape(values, (S, nv)).T
+
+    x = jnp.zeros([D,S])
+    # print(x, len(x), len(indices), len(values))
+    x = x.at[indices, :].set(values)
+    x = jnp.squeeze(x)
+    return x, blocks, indices
+

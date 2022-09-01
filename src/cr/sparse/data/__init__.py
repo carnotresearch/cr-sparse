@@ -36,3 +36,8 @@ from cr.sparse._src.data.synthetic.subspaces import (
     three_subspaces_at_angle,
     three_subspaces_at_angle_jit
 )
+
+# Block sparsity
+from cr.sparse._src.data.synthetic.random import (
+    sparse_normal_blocks
+)
