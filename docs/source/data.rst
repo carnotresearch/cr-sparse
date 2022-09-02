@@ -14,6 +14,7 @@ Sparse Model Vectors
 
   sparse_normal_representations
   sparse_spikes
+  sparse_normal_blocks
 
 
 
