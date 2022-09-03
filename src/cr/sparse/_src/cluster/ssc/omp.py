@@ -22,7 +22,7 @@ submat_solver = vmap(cnb.solve_on_submatrix, (None, 1, 1), (1, 1,))
 
 
 def build_representation_omp(X, K):
-    """Builds K-sparse self-expressive reprsentations of vectors in X in terms of other vectors in X
+    """Builds K-sparse self-expressive representations of vectors in X in terms of other vectors in X
     """
     # Ambient dimension
     D = X.shape[0]
@@ -62,7 +62,7 @@ build_representation_omp_jit = jit(build_representation_omp, static_argnums=(1,)
 
 
 def batch_build_representation_omp(X, K, batch_size):
-    """Builds K-sparse self-expressive reprsentations of vectors in X in terms of other vectors in X
+    """Builds K-sparse self-expressive representations of vectors in X in terms of other vectors in X
     """
     # Ambient dimension
     D = X.shape[0]
