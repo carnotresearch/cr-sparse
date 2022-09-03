@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import math
 import jax.numpy as jnp
 
 from .impl import _hermitian
 from .lop import Operator
 from .util import apply_along_axis
-
 
 
 def circulant(n, c, axis=0):
@@ -26,10 +26,10 @@ def circulant(n, c, axis=0):
     r = len(c)
     assert n >= r
     c_padded = jnp.pad(c, (0, n-r))
-    cf = jnp.fft.rfft(c_padded)
+    cf = jnp.fft.rfft(c_padded, n=n)
     c_j = jnp.roll(c_padded[::-1], 1)
-    cjf = jnp.fft.rfft(c_j)
-    times = lambda x : jnp.fft.irfft(jnp.fft.rfft(x) * cf)
-    trans = lambda x : jnp.fft.irfft(jnp.fft.rfft(x) * cjf)
+    cjf = jnp.fft.rfft(c_j, n=n)
+    times = lambda x : jnp.fft.irfft(jnp.fft.rfft(x, n=n) * cf,  n=n)
+    trans = lambda x : jnp.fft.irfft(jnp.fft.rfft(x, n=n) * cjf, n=n)
     times, trans = apply_along_axis(times, trans, axis)
     return Operator(times=times, trans=trans, shape=(n,n))
