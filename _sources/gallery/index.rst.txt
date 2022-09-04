@@ -245,6 +245,27 @@ Compressive Sensing
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrate the BSBL (Block Sparse Bayesian Learning) algorithm zhang2012re...">
+
+.. only:: html
+
+ .. figure:: /gallery/pursuit/images/thumb/sphx_glr_bsbl_1_thumb.png
+     :alt: Block Sparse Bayesian Learning
+
+     :ref:`sphx_glr_gallery_pursuit_bsbl_1.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/pursuit/bsbl_1
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="This example explains the step by step development of  CoSaMP (Compressive Sensing Matching Pur...">
 
 .. only:: html

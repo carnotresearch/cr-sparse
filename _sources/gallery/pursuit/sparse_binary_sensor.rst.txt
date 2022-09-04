@@ -138,7 +138,7 @@ Creating Sparse Binary Sensing Matrices
 
  .. code-block:: none
 
-    BCOO(int32[10, 16], nse=64)
+    BCOO(int64[10, 16], nse=64)
 
 
 
@@ -418,7 +418,7 @@ We can quickly visualize the sparsity pattern of this sensing matrix
  .. code-block:: none
 
 
-    <matplotlib.image.AxesImage object at 0x000002EFA43B0B80>
+    <matplotlib.image.AxesImage object at 0x0000021BF78B29A0>
 
 
 
@@ -511,11 +511,11 @@ CoSaMP
 
  .. code-block:: none
 
-    iterations 5
+    iterations 7
     m=256, n=1024, k=40
-    r_norm 3.030726e-05
-    x_norm 2.825097e+01
-    SNR: 119.35 dB, PRD: 0 %
+    r_norm 4.450836e-14
+    x_norm 2.590201e+01
+    SNR: 294.31 dB, PRD: 0 %
 
 
 
@@ -558,11 +558,11 @@ Import the algorithm
 
  .. code-block:: none
 
-    iterations 3
+    iterations 6
     m=256, n=1024, k=40
-    r_norm 1.678038e-05
-    x_norm 2.825097e+01
-    SNR: 123.40 dB, PRD: 0 %
+    r_norm 4.062930e-14
+    x_norm 2.590201e+01
+    SNR: 295.36 dB, PRD: 0 %
 
 
 
@@ -607,9 +607,9 @@ Import the algorithm
 
     iterations 20
     m=256, n=1024, k=40
-    r_norm 1.278642e+00
-    x_norm 2.794407e+01
-    SNR: 24.19 dB, PRD: 6 %
+    r_norm 2.904729e-02
+    x_norm 2.590449e+01
+    SNR: 56.77 dB, PRD: 0 %
 
 
 
@@ -652,10 +652,10 @@ Import the algorithm
  .. code-block:: none
 
     iterations 19
-    n_times 1263
-    n_trans 1263
-    r_norm 3.761065e-02
-    SNR: 52.68 dB, PRD: 0 %
+    n_times 1121
+    n_trans 1121
+    r_norm 3.622522e-02
+    SNR: 51.38 dB, PRD: 0 %
 
 
 
@@ -663,7 +663,7 @@ Import the algorithm
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  10.952 seconds)
+   **Total running time of the script:** ( 0 minutes  24.960 seconds)
 
 
 .. _sphx_glr_download_gallery_pursuit_sparse_binary_sensor.py:

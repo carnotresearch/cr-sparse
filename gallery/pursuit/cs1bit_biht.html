@@ -28,7 +28,7 @@
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="CoSaMP step by step" href="cosamp_step_by_step.html" />
+    <link rel="next" title="Block Sparse Bayesian Learning" href="bsbl_1.html" />
     <link rel="prev" title="Wavelet Transform Operators" href="../lop/wt_op.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -84,7 +84,7 @@
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html">Examples Gallery</a><ul>
       <li>Previous: <a href="../lop/wt_op.html" title="previous chapter">Wavelet Transform Operators</a></li>
-      <li>Next: <a href="cosamp_step_by_step.html" title="next chapter">CoSaMP step by step</a></li>
+      <li>Next: <a href="bsbl_1.html" title="next chapter">Block Sparse Bayesian Learning</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -168,7 +168,7 @@ to download the full example code</p>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cs1bit_biht_001.png" srcset="../../_images/sphx_glr_cs1bit_biht_001.png" alt="$\Phi$" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>2.4229314
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>2.4003416483791473
 
 Text(0.5, 1.0, &#39;$\\Phi$&#39;)
 </pre></div>
@@ -202,20 +202,20 @@ Text(0.5, 1.0, &#39;$\\Phi$&#39;)
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cs1bit_biht_003.png" srcset="../../_images/sphx_glr_cs1bit_biht_003.png" alt="cs1bit biht" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[-1.  1.  1. -1. -1.  1. -1.  1. -1.  1. -1.  1. -1. -1. -1. -1. -1. -1.
- -1.  1.  1.  1. -1.  1. -1. -1.  1.  1. -1.  1.  1.  1. -1. -1.  1.  1.
- -1. -1. -1.  1.  1.  1.  1. -1. -1.  1.  1.  1. -1.  1. -1.  1. -1. -1.
- -1. -1. -1. -1.  1.  1. -1.  1.  1.  1.  1. -1.  1.  1.  1. -1. -1.  1.
-  1. -1.  1.  1.  1.  1. -1. -1. -1. -1. -1.  1.  1. -1. -1.  1. -1. -1.
- -1. -1. -1.  1. -1.  1. -1. -1.  1.  1. -1.  1.  1.  1. -1. -1.  1.  1.
-  1.  1. -1.  1.  1.  1.  1.  1. -1.  1.  1. -1.  1. -1. -1. -1.  1. -1.
- -1.  1.  1. -1. -1.  1.  1.  1.  1. -1.  1. -1.  1.  1.  1.  1. -1.  1.
- -1. -1.  1.  1. -1.  1. -1.  1.  1. -1. -1.  1. -1.  1. -1. -1.  1. -1.
-  1.  1. -1. -1.  1.  1. -1.  1.  1. -1. -1.  1. -1.  1. -1.  1.  1.  1.
- -1.  1. -1. -1. -1.  1.  1. -1. -1. -1. -1.  1.  1.  1.  1.  1.  1.  1.
- -1. -1. -1.  1.  1.  1. -1.  1. -1. -1. -1. -1. -1.  1. -1.  1. -1. -1.
-  1.  1. -1. -1. -1.  1.  1.  1.  1.  1. -1. -1. -1.  1. -1.  1.  1. -1.
-  1. -1.  1.  1. -1.  1.  1. -1. -1.  1.  1.  1.  1.  1. -1. -1.  1.  1.
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[-1. -1.  1.  1.  1. -1. -1. -1. -1. -1.  1.  1.  1. -1. -1.  1. -1. -1.
+ -1. -1. -1. -1.  1.  1. -1. -1. -1.  1.  1.  1.  1. -1. -1.  1. -1. -1.
+  1.  1. -1.  1.  1.  1. -1. -1.  1. -1. -1.  1. -1. -1.  1.  1.  1.  1.
+  1. -1. -1. -1. -1. -1. -1. -1.  1.  1. -1. -1.  1.  1. -1.  1. -1.  1.
+  1. -1. -1.  1. -1.  1. -1.  1. -1. -1.  1. -1. -1.  1. -1. -1. -1. -1.
+ -1.  1.  1. -1.  1.  1.  1. -1. -1.  1. -1. -1. -1. -1. -1. -1.  1. -1.
+  1.  1. -1. -1. -1.  1. -1. -1. -1. -1.  1. -1. -1. -1.  1.  1.  1.  1.
+ -1. -1. -1. -1.  1.  1. -1. -1.  1.  1. -1.  1. -1. -1.  1. -1.  1. -1.
+  1. -1.  1.  1. -1. -1. -1. -1.  1. -1. -1. -1.  1. -1.  1. -1.  1.  1.
+  1. -1.  1. -1. -1.  1. -1.  1.  1. -1.  1.  1. -1. -1.  1. -1.  1. -1.
+ -1. -1.  1. -1.  1.  1. -1.  1. -1.  1.  1. -1.  1. -1. -1.  1.  1.  1.
+ -1. -1.  1. -1. -1.  1.  1.  1. -1.  1. -1.  1.  1.  1. -1.  1. -1. -1.
+ -1. -1.  1. -1. -1.  1. -1.  1.  1.  1. -1.  1.  1.  1. -1.  1.  1.  1.
+ -1.  1. -1. -1.  1.  1.  1. -1.  1. -1.  1.  1. -1.  1.  1. -1.  1. -1.
   1. -1. -1.  1.]
 </pre></div>
 </div>
@@ -262,10 +262,10 @@ Text(0.5, 1.0, &#39;$\\Phi$&#39;)
 </div>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>True
-0.024944495
+0.02435299967290454
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.459 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.571 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-pursuit-cs1bit-biht-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/393a3875de34281fd8b636232fea8c05/cs1bit_biht.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">cs1bit_biht.py</span></code></a></p>

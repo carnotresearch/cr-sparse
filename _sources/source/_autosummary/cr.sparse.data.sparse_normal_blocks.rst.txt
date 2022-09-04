@@ -1,0 +1,6 @@
+﻿cr.sparse.data.sparse\_normal\_blocks
+=====================================
+
+.. currentmodule:: cr.sparse.data
+
+.. autofunction:: sparse_normal_blocks

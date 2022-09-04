@@ -28,8 +28,8 @@
     <script src="../../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Random Orthogonal Measurements, Cosine Basis, ADMM" href="../rec_l1/partial_wh_sensor_cosine_basis.html" />
-    <link rel="prev" title="1 bit Compressive Sensing" href="cs1bit_biht.html" />
+    <link rel="next" title="Sparse Binary Sensing Matrices" href="sparse_binary_sensor.html" />
+    <link rel="prev" title="Block Sparse Bayesian Learning" href="bsbl_1.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
@@ -83,8 +83,8 @@
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html">Examples Gallery</a><ul>
-      <li>Previous: <a href="cs1bit_biht.html" title="previous chapter">1 bit Compressive Sensing</a></li>
-      <li>Next: <a href="../rec_l1/partial_wh_sensor_cosine_basis.html" title="next chapter">Random Orthogonal Measurements, Cosine Basis, ADMM</a></li>
+      <li>Previous: <a href="bsbl_1.html" title="previous chapter">Block Sparse Bayesian Learning</a></li>
+      <li>Next: <a href="sparse_binary_sensor.html" title="next chapter">Sparse Binary Sensing Matrices</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -200,7 +200,7 @@ that the energy of the residual <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>0.33975694
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>0.3881940752728321
 </pre></div>
 </div>
 </section>
@@ -212,7 +212,7 @@ that the energy of the residual <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cosamp_step_by_step_001.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_001.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x00000281A395CF40&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x0000021BF90C64C0&gt;]
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">omega</span></code> contains the set of indices at which x is nonzero (support of <code class="docutils literal notranslate"><span class="pre">x</span></code>)</p>
@@ -232,7 +232,7 @@ that the energy of the residual <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cosamp_step_by_step_002.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_002.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x000002819E7E51F0&gt;]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x0000021BF7D7C9D0&gt;]
 </pre></div>
 </div>
 </section>
@@ -262,7 +262,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>r_norm_sqr=11.474074363708496
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>r_norm_sqr=7.401212029141624
 </pre></div>
 </div>
 <p>A boolean array to track the indices selected for least squares steps</p>
@@ -288,7 +288,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>max_r_norm_sqr=1.15e-05
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>max_r_norm_sqr=7.40e-06
 </pre></div>
 </div>
 <section id="first-iteration">
@@ -316,8 +316,8 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>I_sub=DeviceArray([  5,   9,  19,  41,  44,  67,  86,  89,  99, 100, 109, 116,
-             142, 151, 159, 198, 201, 217, 226, 232, 239, 241, 244, 255],            dtype=int32)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>I_sub=DeviceArray([ 14,  30,  44,  60,  64,  78,  84,  89,  99, 116, 118, 127,
+             128, 149, 157, 158, 162, 168, 184, 192, 198, 203, 232, 244],            dtype=int64)
 </pre></div>
 </div>
 <p>Check which indices from <code class="docutils literal notranslate"><span class="pre">omega</span></code> are there in <code class="docutils literal notranslate"><span class="pre">I_sub</span></code>.</p>
@@ -325,7 +325,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[ 41  89  99 198 232 244]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[ 60  89  99 198 232 244]
 </pre></div>
 </div>
 <p>Select the subdictionary of <code class="docutils literal notranslate"><span class="pre">Phi</span></code> consisting of atoms indexed by I_sub</p>
@@ -340,7 +340,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Ia=DeviceArray([15,  7,  8, 22, 19, 11,  3, 20], dtype=int32)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Ia=DeviceArray([ 3,  7, 23, 20, 22,  8, 15, 18], dtype=int64)
 </pre></div>
 </div>
 <p>We need to map the indices in <code class="docutils literal notranslate"><span class="pre">Ia</span></code> to the actual indices of atoms in <code class="docutils literal notranslate"><span class="pre">Phi</span></code></p>
@@ -349,7 +349,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>I=DeviceArray([198,  89,  99, 244, 232, 116,  41, 239], dtype=int32)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>I=DeviceArray([ 60,  89, 244, 198, 232,  99, 158, 184], dtype=int64)
 </pre></div>
 </div>
 <p>Select the corresponding values from the LS solution</p>
@@ -365,7 +365,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cosamp_step_by_step_003.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_003.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x00000281A3E99730&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x0000021BF90C01C0&gt;
 </pre></div>
 </div>
 <p>We can check how good we were in picking the correct indices from the actual support of the signal</p>
@@ -374,7 +374,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Found indices:  [ 41  89  99 198 232 244]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Found indices:  [ 60  89  99 198 232 244]
 </pre></div>
 </div>
 <p>We found 6 out of 8 indices in the support. Here are the remaining.</p>
@@ -383,7 +383,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Missing indices:  [60 68]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Missing indices:  [41 68]
 </pre></div>
 </div>
 <p>It is time to compute the residual after the first iteration</p>
@@ -397,7 +397,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>r_norm_sqr=2.51e-01 &gt; max_r_norm_sqr=1.15e-05
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>r_norm_sqr=8.28e-02 &gt; max_r_norm_sqr=7.40e-06
 </pre></div>
 </div>
 <p>Store the selected K indices in the flags array</p>
@@ -407,7 +407,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(DeviceArray([ 41,  89,  99, 116, 198, 232, 239, 244], dtype=int32),)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(DeviceArray([ 60,  89,  99, 158, 184, 198, 232, 244], dtype=int64),)
 </pre></div>
 </div>
 <p>Mark the completion of the iteration</p>
@@ -435,7 +435,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[60 68]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[41 68]
 </pre></div>
 </div>
 <p>Merge (union) the set of previous K indices with the new 2K indices</p>
@@ -445,8 +445,8 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>I_sub=DeviceArray([  4,  34,  41,  56,  59,  60,  68,  73,  89,  99, 103, 105,
-             116, 137, 155, 160, 178, 198, 209, 232, 233, 239, 244, 245],            dtype=int32)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>I_sub=DeviceArray([  8,  25,  41,  42,  60,  66,  67,  68,  72,  89,  99, 111,
+             129, 158, 164, 184, 190, 195, 198, 216, 220, 232, 233, 244],            dtype=int64)
 </pre></div>
 </div>
 <p>We can check if we found all the actual atoms</p>
@@ -477,7 +477,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[17  8  9 22 19  5  6  2]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[ 4  9 23 18 21 10  7  2]
 </pre></div>
 </div>
 <p>We need to map the indices in <code class="docutils literal notranslate"><span class="pre">Ia</span></code> to the actual indices of atoms in <code class="docutils literal notranslate"><span class="pre">Phi</span></code></p>
@@ -486,7 +486,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[198  89  99 244 232  60  68  41]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[ 60  89 244 198 232  99  68  41]
 </pre></div>
 </div>
 <p>Check if the final K indices in <code class="docutils literal notranslate"><span class="pre">I</span></code> include all the indices in <code class="docutils literal notranslate"><span class="pre">omega</span></code></p>
@@ -494,7 +494,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>DeviceArray([], dtype=int32)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>DeviceArray([], dtype=int64)
 </pre></div>
 </div>
 <p>Select the corresponding values from the LS solution</p>
@@ -510,7 +510,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cosamp_step_by_step_004.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_004.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x00000281A54FE3D0&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x0000021BF640D910&gt;
 </pre></div>
 </div>
 <p>The algorithm has no direct way of knowing that it indeed found the solution
@@ -526,7 +526,7 @@ It is time to compute the residual after the second iteration</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>r_norm_sqr=6.06e-12 &lt; max_r_norm_sqr=1.15e-05
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>r_norm_sqr=6.56e-30 &lt; max_r_norm_sqr=7.40e-06
 </pre></div>
 </div>
 <p>We have completed the signal recovery. We can stop iterating now.</p>
@@ -551,7 +551,7 @@ It is time to compute the residual after the second iteration</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[198  89  99 244 232  60  68  41]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[ 60  89 244 198 232  99  68  41]
 </pre></div>
 </div>
 <p>The non-zero values on the support</p>
@@ -560,8 +560,8 @@ It is time to compute the residual after the second iteration</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[ 2.1192017   1.6689739  -1.2758206   1.1305927  -0.85821277 -0.38624814
- -0.37565643  0.08086797]
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[ 1.9097652   1.12094818  1.04348768 -0.82606793  0.64812788  0.33432345
+  0.29561749  0.08482584]
 </pre></div>
 </div>
 <p>Verify that we successfully recovered the support</p>
@@ -577,7 +577,7 @@ It is time to compute the residual after the second iteration</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>4.54868e-12 3
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>9.055664693657061e-30 3
 </pre></div>
 </div>
 <p>Let’s plot the solution</p>
@@ -589,10 +589,10 @@ It is time to compute the residual after the second iteration</p>
 </pre></div>
 </div>
 <img src="../../_images/sphx_glr_cosamp_step_by_step_005.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_005.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x00000281A69AF160&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x0000021BF78C93A0&gt;
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  4.521 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.908 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-pursuit-cosamp-step-by-step-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/7cece7d024bda50295b7a347f4f2a669/cosamp_step_by_step.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">cosamp_step_by_step.py</span></code></a></p>

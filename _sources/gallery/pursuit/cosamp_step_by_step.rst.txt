@@ -160,7 +160,7 @@ Coherence of atoms in the sensing matrix
 
  .. code-block:: none
 
-    0.33975694
+    0.3881940752728321
 
 
 
@@ -194,7 +194,7 @@ A sparse model vector
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x00000281A395CF40>]
+    [<matplotlib.lines.Line2D object at 0x0000021BF90C64C0>]
 
 
 
@@ -252,7 +252,7 @@ Compressive measurements
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x000002819E7E51F0>]
+    [<matplotlib.lines.Line2D object at 0x0000021BF7D7C9D0>]
 
 
 
@@ -322,7 +322,7 @@ Squared norm/energy of the residual
 
  .. code-block:: none
 
-    r_norm_sqr=11.474074363708496
+    r_norm_sqr=7.401212029141624
 
 
 
@@ -416,7 +416,7 @@ A limit on the maximum tolerance for residual norm
 
  .. code-block:: none
 
-    max_r_norm_sqr=1.15e-05
+    max_r_norm_sqr=7.40e-06
 
 
 
@@ -489,8 +489,8 @@ Pick the indices of 3K atoms with largest matches with the residual
 
  .. code-block:: none
 
-    I_sub=DeviceArray([  5,   9,  19,  41,  44,  67,  86,  89,  99, 100, 109, 116,
-                 142, 151, 159, 198, 201, 217, 226, 232, 239, 241, 244, 255],            dtype=int32)
+    I_sub=DeviceArray([ 14,  30,  44,  60,  64,  78,  84,  89,  99, 116, 118, 127,
+                 128, 149, 157, 158, 162, 168, 184, 192, 198, 203, 232, 244],            dtype=int64)
 
 
 
@@ -514,7 +514,7 @@ Check which indices from ``omega`` are there in ``I_sub``.
 
  .. code-block:: none
 
-    [ 41  89  99 198 232 244]
+    [ 60  89  99 198 232 244]
 
 
 
@@ -557,7 +557,7 @@ Compute the least squares solution of ``y`` over this subdictionary
 
  .. code-block:: none
 
-    Ia=DeviceArray([15,  7,  8, 22, 19, 11,  3, 20], dtype=int32)
+    Ia=DeviceArray([ 3,  7, 23, 20, 22,  8, 15, 18], dtype=int64)
 
 
 
@@ -582,7 +582,7 @@ We need to map the indices in ``Ia`` to the actual indices of atoms in ``Phi``
 
  .. code-block:: none
 
-    I=DeviceArray([198,  89,  99, 244, 232, 116,  41, 239], dtype=int32)
+    I=DeviceArray([ 60,  89, 244, 198, 232,  99, 158, 184], dtype=int64)
 
 
 
@@ -632,7 +632,7 @@ We now have our first estimate of the solution
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x00000281A3E99730>
+    <matplotlib.legend.Legend object at 0x0000021BF90C01C0>
 
 
 
@@ -656,7 +656,7 @@ We can check how good we were in picking the correct indices from the actual sup
 
  .. code-block:: none
 
-    Found indices:  [ 41  89  99 198 232 244]
+    Found indices:  [ 60  89  99 198 232 244]
 
 
 
@@ -681,7 +681,7 @@ We found 6 out of 8 indices in the support. Here are the remaining.
 
  .. code-block:: none
 
-    Missing indices:  [60 68]
+    Missing indices:  [41 68]
 
 
 
@@ -723,7 +723,7 @@ Compute the residual and verify that it is still larger than the allowed toleran
 
  .. code-block:: none
 
-    r_norm_sqr=2.51e-01 > max_r_norm_sqr=1.15e-05
+    r_norm_sqr=8.28e-02 > max_r_norm_sqr=7.40e-06
 
 
 
@@ -749,7 +749,7 @@ Store the selected K indices in the flags array
 
  .. code-block:: none
 
-    (DeviceArray([ 41,  89,  99, 116, 198, 232, 239, 244], dtype=int32),)
+    (DeviceArray([ 60,  89,  99, 158, 184, 198, 232, 244], dtype=int64),)
 
 
 
@@ -833,7 +833,7 @@ Pick the indices of 2K atoms with largest matches with the residual
 
  .. code-block:: none
 
-    [60 68]
+    [41 68]
 
 
 
@@ -859,8 +859,8 @@ Merge (union) the set of previous K indices with the new 2K indices
 
  .. code-block:: none
 
-    I_sub=DeviceArray([  4,  34,  41,  56,  59,  60,  68,  73,  89,  99, 103, 105,
-                 116, 137, 155, 160, 178, 198, 209, 232, 233, 239, 244, 245],            dtype=int32)
+    I_sub=DeviceArray([  8,  25,  41,  42,  60,  66,  67,  68,  72,  89,  99, 111,
+                 129, 158, 164, 184, 190, 195, 198, 216, 220, 232, 233, 244],            dtype=int64)
 
 
 
@@ -952,7 +952,7 @@ Compute the least squares solution of ``y`` over this subdictionary
 
  .. code-block:: none
 
-    [17  8  9 22 19  5  6  2]
+    [ 4  9 23 18 21 10  7  2]
 
 
 
@@ -977,7 +977,7 @@ We need to map the indices in ``Ia`` to the actual indices of atoms in ``Phi``
 
  .. code-block:: none
 
-    [198  89  99 244 232  60  68  41]
+    [ 60  89 244 198 232  99  68  41]
 
 
 
@@ -1002,7 +1002,7 @@ Check if the final K indices in ``I`` include all the indices in ``omega``
  .. code-block:: none
 
 
-    DeviceArray([], dtype=int32)
+    DeviceArray([], dtype=int64)
 
 
 
@@ -1051,7 +1051,7 @@ Here is our updated estimate of the solution
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x00000281A54FE3D0>
+    <matplotlib.legend.Legend object at 0x0000021BF640D910>
 
 
 
@@ -1094,7 +1094,7 @@ Compute the residual and verify that it is now below the allowed tolerance
 
  .. code-block:: none
 
-    r_norm_sqr=6.06e-12 < max_r_norm_sqr=1.15e-05
+    r_norm_sqr=6.56e-30 < max_r_norm_sqr=7.40e-06
 
 
 
@@ -1161,7 +1161,7 @@ Run the solver
 
  .. code-block:: none
 
-    [198  89  99 244 232  60  68  41]
+    [ 60  89 244 198 232  99  68  41]
 
 
 
@@ -1186,8 +1186,8 @@ The non-zero values on the support
 
  .. code-block:: none
 
-    [ 2.1192017   1.6689739  -1.2758206   1.1305927  -0.85821277 -0.38624814
-     -0.37565643  0.08086797]
+    [ 1.9097652   1.12094818  1.04348768 -0.82606793  0.64812788  0.33432345
+      0.29561749  0.08482584]
 
 
 
@@ -1235,7 +1235,7 @@ Print the residual energy and the number of iterations when the algorithm conver
 
  .. code-block:: none
 
-    4.54868e-12 3
+    9.055664693657061e-30 3
 
 
 
@@ -1269,14 +1269,14 @@ Let's plot the solution
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x00000281A69AF160>
+    <matplotlib.legend.Legend object at 0x0000021BF78C93A0>
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  4.521 seconds)
+   **Total running time of the script:** ( 0 minutes  6.908 seconds)
 
 
 .. _sphx_glr_download_gallery_pursuit_cosamp_step_by_step.py:
