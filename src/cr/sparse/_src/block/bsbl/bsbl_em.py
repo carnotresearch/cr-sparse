@@ -23,14 +23,17 @@ Some key assumptions in this design
 - Signal is either noisy or noiseless
 """
 
+import math
 
 from jax import jit, lax
 import jax.numpy as jnp
-
+norm = jnp.linalg.norm
 
 from typing import NamedTuple
 
 import cr.nimble as crn
+import cr.sparse.plots as crplot
+from .bsbl import *
 
 
 class BSBL_EM_Options(NamedTuple):
@@ -47,21 +50,48 @@ class BSBL_EM_Options(NamedTuple):
 class BSBL_EM_State(NamedTuple):
     """Sparse Bayesian Learning algorithm state
     """
-    x: jnp.ndarray
-    "Solution model vector"
-    active_blocks: jnp.ndarray
-    "Locations of active blocks"
-    gamma_est : jnp.ndarray
-    "Estimated values for gamma for active blocks"
-    B : jnp.ndarray
-    "Estimate value of the correlation matrix"
+    mu_x: jnp.ndarray
+    "Mean vectors for each block"
+    r: jnp.ndarray
+    "The residuals"
+    r_norm_sqr: jnp.ndarray
+    "The residual norm squared"
+    gammas : jnp.ndarray
+    "Estimated values for gamma for each block"
+    Sigma0: jnp.ndarray
+    "Prior correlation matrices for each block"    
+    lambda_val : float
+    "Estimated value of the noise variance"
+    dmu: float
+    "Maximum absolute difference between two iterations for means"
     iterations: int
     "Number of iterations"
-    lambda_est : float
-    "Estimated value of the noise variance"
 
 
-def bsbl_em_solve(Phi, y, blk_starts, 
+    @property
+    def x(self):
+        return self.mu_x.flatten()
+
+    def __str__(self):
+        """Returns the string representation
+        """
+        s = []
+        r_norm = math.sqrt(float(self.r_norm_sqr))
+        x_norm = float(norm(self.x))
+        n_blocks, blk_size, _ = self.Sigma0.shape
+        for x in [
+            u"iterations %s" % self.iterations,
+            f"blocks={n_blocks}, block size={blk_size}",
+            u"r_norm %e" % r_norm,
+            u"x_norm %e" % x_norm,
+            u"lambda %e" % self.lambda_val,
+            u"dmu %e" % float(self.dmu),
+            ]:
+            s.append(x.rstrip())
+        return u'\n'.join(s)
+
+
+def bsbl_em(Phi, y, blk_len, 
     options: BSBL_EM_Options = BSBL_EM_Options()):
     
     # options
@@ -71,33 +101,90 @@ def bsbl_em_solve(Phi, y, blk_starts,
     lambda_val = options.lambda_val
     max_iters = options.max_iters
     epsilon = options.epsilon
-
+    # measurement and model space dimensions
     m, n = Phi.shape
+    # length of each block
+    b = blk_len
     # number of blocks
-    nb = len(blk_starts)
-    # identify the length of each block
-    blk_lens = jnp.diff(blk_starts)
-    blk_lens = jnp.append(blk_lens, n - blk_starts[-1])
-    max_len = jnp.max(blk_lens)
-    b_equal_blocks = crn.has_equal_values_vec(blk_lens)
-    Bs = dict((i, jnp.eye(length)) for i, length in enumerate(blk_lens))
-    gammas = jnp.ones(nb)
-    # The blocks to keep
-    keep_list = jnp.arange(nb)
-    n_used = nb
-    iterations = 0
+    nb = n // b
+    # split Phi into blocks
+    Subdicts = get_subdicts(Phi, nb)
 
-    while iterations < max_iters:
-        iterations += 1
-        min_gammas = jnp.min(gammas)
-        if min_gammas < prune_gamma:
-            ...
+    # y scaling
+    y_norm_sqr = crn.sqr_norm_l2(y)
+
+    # start solving
+
+    def init_func():
+        # initialize posterior means for each block
+        mu_x = jnp.zeros((nb, b))
+        # initialize correlation matrices
+        Sigma0 = init_sigmas(n, b)
+        # initialize block correlation scalars
+        gammas = init_gammas(nb)
+        state = BSBL_EM_State(
+            mu_x=mu_x,
+            r=y,
+            r_norm_sqr=y_norm_sqr,
+            gammas=gammas,
+            Sigma0=Sigma0,
+            lambda_val=lambda_val,
+            dmu=1.,
+            iterations=0)
+        return state
+
+    def body_func(state):
+        # active_blocks = gammas > prune_gamma
+        PhiBPhi = cum_phi_b_phi(Subdicts, state.Sigma0)
+        H = compute_h(Phi, PhiBPhi, state.lambda_val)
+        # posterior block means
+        mu_x = compute_mu_x(state.Sigma0, H, y)
+        # posterior block covariances
+        Sigma_x = compute_sigma_x(Phi, state.Sigma0, H)
+        Cov_x = compute_cov_x(Sigma_x, mu_x)
+        Bi_sum = compute_cov_x_sum(Cov_x, state.gammas)
+        B, B_inv = compute_B_B_inv(Bi_sum)
+        # flattened signal
+        x_hat = mu_x.flatten()
+        # residual
+        res = y - Phi @ x_hat
+        # residual norm squared
+        r_norm_sqr = crn.sqr_norm_l2(res)
+        # print(f'r_norm_sqr: {r_norm_sqr:e}')
+        # update lambda
+        lambda_val = state.lambda_val
+        # update gamma
+        gammas = update_gammas(Cov_x, B_inv)
+        # update sigma
+        Sigma0 = update_sigma_0(gammas, B)
+
+        # convergence criterion
+        mu_diff = jnp.abs(mu_x - state.mu_x)
+        dmu = jnp.max(mu_diff)
+
+        state = BSBL_EM_State(
+            mu_x=mu_x,
+            r=res,
+            r_norm_sqr=r_norm_sqr,
+            gammas=gammas,
+            Sigma0=Sigma0,
+            lambda_val=lambda_val,
+            dmu=dmu,
+            iterations=state.iterations + 1)
+        return state
 
 
+    def cond_func(state):
+        a = state.dmu > epsilon
+        b = state.iterations < max_iters
+        c = jnp.logical_and(a, b)
+        return c
 
-    z = jnp.zeros(4)
-    state  = BSBL_EM_State(x=z, active_blocks=z, gamma_est=z,
-        B=z, iterations=0, lambda_est=0)
-    return z
+    state = lax.while_loop(cond_func, body_func, init_func())
+    # state = init_func()
+    # while cond_func(state):
+    #     state = body_func(state)
+    return state
 
 
+bsbl_em_jit = jit(bsbl_em, static_argnums=(2,))

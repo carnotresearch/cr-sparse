@@ -26,3 +26,11 @@ def start_locations(n, b):
 def end_locations(n, b):
     starts = start_locations(n, b)
     return starts + b - 1
+
+
+def block_lens_from_start_locs(blk_starts, n):
+    # identify the length of each block
+    blk_lens = jnp.diff(blk_starts)
+    blk_lens = jnp.append(blk_lens, n - blk_starts[-1])
+    return blk_lens
+    

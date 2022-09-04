@@ -16,5 +16,6 @@
 from cr.sparse._src.block.bsbl.bsbl_em import (
     BSBL_EM_Options,
     BSBL_EM_State,
-    bsbl_em_solve
+    bsbl_em,
+    bsbl_em_jit
 )
