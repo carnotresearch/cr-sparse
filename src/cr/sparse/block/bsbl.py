@@ -13,9 +13,11 @@
 # limitations under the License.
 
 
-from cr.sparse._src.block.bsbl.bsbl_em import (
-    BSBL_EM_Options,
-    BSBL_EM_State,
+from cr.sparse._src.block.bsbl import (
+    BSBL_Options,
+    BSBL_State,
     bsbl_em,
-    bsbl_em_jit
+    bsbl_em_jit,
+    bsbl_bo,
+    bsbl_bo_jit,
 )
