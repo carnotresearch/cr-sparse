@@ -80,23 +80,18 @@ def cum_phi_b_phi(Subdicts, Sigma0):
         in_axes=(0, 0))(Subdicts, Sigma0)
     return jnp.sum(phi_b_phis, axis=0)
 
-def cum_phi_b_phi_pruned(Phi, Sigma0, active_blocks):
-    n_blocks = len(Sigma0)
-    m, n = Phi.shape
-    # block length
-    b = n // n_blocks
-    starts = [i*b for i in range(n_blocks)]
-
+def cum_phi_b_phi_pruned(Subdicts, Sigma0, active_blocks):
+    m = Subdicts.shape[1]
     result = jnp.zeros((m, m))
     # zero value
     z = result
-    for i in range(n_blocks):
-        result += lax.cond(active_blocks[i],
-            lambda _: phi_b_phi(Phi, starts[i], b, Sigma0[i]),
+    phi_b_phis = vmap(
+        lambda subdict, s, active:  lax.cond(active,
+            lambda _: subdict @ s @ subdict.T,
             lambda _: z,
-            None)
-    return result
-
+            None),
+        in_axes=(0, 0, 0))(Subdicts, Sigma0, active_blocks)
+    return jnp.sum(phi_b_phis, axis=0)
 
 def compute_h(Phi, PhiBPhi, lambda_val):
     n = PhiBPhi.shape[0]
@@ -115,6 +110,25 @@ def compute_mu_x(Sigma0, H, y):
     mu_x = vmap(lambda a, y: a @ y, in_axes=(0, 0))(Sigma0, Hy)
     return mu_x, Hy
 
+
+def compute_mu_x_pruned(Sigma0, H, y, active_blocks):
+    Hy = H @ y
+    n_blocks, blk_size, _ = Sigma0.shape
+    # split Hy into blocks
+    Hy = jnp.reshape(Hy, (n_blocks, -1))
+    # zero mean for inactive blocks
+    z = jnp.zeros(blk_size)
+    # compute x means
+    mu_x = vmap(
+        lambda a, y, active: lax.cond(active,
+            lambda _ : a @ y,
+            lambda _ : z,
+            None), 
+        in_axes=(0, 0, 0)
+        )(Sigma0, Hy, active_blocks)
+    return mu_x, Hy
+
+
 def compute_sigma_x(Phi, Sigma0, H):
     # block length
     b = Sigma0.shape[1]
@@ -124,6 +138,21 @@ def compute_sigma_x(Phi, Sigma0, H):
     Sigma_x = vmap(
         lambda A, B: A - A  @ B @ A,
         in_axes=(0, 0))(Sigma0, HPhi_blocks)
+    return Sigma_x, HPhi_blocks
+
+def compute_sigma_x_pruned(Phi, Sigma0, H, active_blocks):
+    n_blocks, blk_size, _ = Sigma0.shape
+    HPhi = H @ Phi
+    # Extract the block diagonals
+    HPhi_blocks = crn.block_diag(HPhi, blk_size)
+    # zero valued blocks
+    z = jnp.zeros((blk_size, blk_size))
+    Sigma_x = vmap(
+        lambda A, B, active: lax.cond(active,
+            lambda _ : A - A  @ B @ A,
+            lambda _ : z,
+            None),
+        in_axes=(0, 0, 0))(Sigma0, HPhi_blocks, active_blocks)
     return Sigma_x, HPhi_blocks
 
 def compute_cov_x(Sigma_x, mu_x):
@@ -137,6 +166,16 @@ def compute_cov_x_sum(Cov_x, gammas):
     B_i = vmap(
         lambda cx, g: cx / g,
         in_axes=(0, 0))(Cov_x, gammas)
+    return jnp.sum(B_i, axis=0)
+
+
+def compute_cov_x_sum_pruned(Cov_x, gammas, active_blocks):
+    B_i = vmap(
+        lambda cx, g, active: lax.cond(active,
+            lambda _: cx / g,
+            lambda _ : cx,
+            None),
+        in_axes=(0, 0, 0))(Cov_x, gammas, active_blocks)
     return jnp.sum(B_i, axis=0)
 
 def compute_B_B_inv(B0):
@@ -204,6 +243,18 @@ def update_gammas_em(Cov_x, B_inv):
     return gammas
 
 
+def update_gammas_em_pruned(Cov_x, B_inv, active_blocks):
+    n_blocks, blk_size, _ = Cov_x.shape
+    gammas = vmap(
+        lambda cx, active: lax.cond(active,
+            lambda _: jnp.trace(B_inv @ cx),
+            lambda _: 0., 
+            None),
+        in_axes=(0, 0)
+        )(Cov_x, active_blocks)
+    gammas = gammas / blk_size
+    return gammas
+
 def update_gammas_bo(old_gammas, B, Hy, HPhi):
     n_blocks = len(old_gammas)
     blk_size = B.shape[0]
@@ -240,6 +291,44 @@ class BSBL_Options(NamedTuple):
     lambda_val: float = 1e-12
     max_iters: int = 800
     epsilon : float = 1e-8
+
+
+
+def bsbl_em_options(y, 
+    learn_type=None,
+    learn_lambda=None,
+    prune_gamma=None,
+    lambda_val=None, max_iters=None,
+    epsilon=None):
+    # default values of options
+    opt  = BSBL_Options()
+    # customize them
+    learn_type = opt.learn_type if learn_type is None else learn_type
+    learn_lambda = opt.learn_lambda if learn_lambda is None else learn_lambda
+    epsilon = opt.epsilon if epsilon is None else epsilon
+    max_iters = opt.max_iters if max_iters is None else max_iters
+
+    if learn_lambda == 0:
+        # Noise-less
+        lambda_val_ = 1e-12
+        prune_gamma_ = 1e-3
+    elif learn_lambda == 1:
+        # Low SNR
+        lambda_val_ = 1e-3
+        prune_gamma_ = 1e-2
+    else:
+        # High SNR
+        lambda_val_ = 1e-3
+        prune_gamma_ = 1e-2
+    prune_gamma = prune_gamma_ if prune_gamma is None else prune_gamma
+    lambda_val = lambda_val_ if lambda_val is None else lambda_val
+
+    return BSBL_Options(learn_type=learn_type,
+        learn_lambda=learn_lambda,
+        prune_gamma=prune_gamma,
+        lambda_val=lambda_val,
+        max_iters=max_iters,
+        epsilon=epsilon)
 
 
 def bsbl_bo_options(y, 
@@ -375,15 +464,15 @@ def bsbl_em(Phi, y, blk_len,
         return state
 
     def body_func(state):
-        # active_blocks = gammas > prune_gamma
-        PhiBPhi = cum_phi_b_phi(Subdicts, state.Sigma0)
+        active_blocks = state.gammas > prune_gamma
+        PhiBPhi = cum_phi_b_phi_pruned(Subdicts, state.Sigma0, active_blocks)
         H = compute_h(Phi, PhiBPhi, state.lambda_val)
         # posterior block means
-        mu_x, _ = compute_mu_x(state.Sigma0, H, y)
+        mu_x, _ = compute_mu_x_pruned(state.Sigma0, H, y, active_blocks)
         # posterior block covariances
-        Sigma_x, _ = compute_sigma_x(Phi, state.Sigma0, H)
+        Sigma_x, _ = compute_sigma_x_pruned(Phi, state.Sigma0, H, active_blocks)
         Cov_x = compute_cov_x(Sigma_x, mu_x)
-        Bi_sum = compute_cov_x_sum(Cov_x, state.gammas)
+        Bi_sum = compute_cov_x_sum_pruned(Cov_x, state.gammas, active_blocks)
         B, B_inv = compute_B_B_inv(Bi_sum)
         # flattened signal
         x_hat = mu_x.flatten()
@@ -399,7 +488,7 @@ def bsbl_em(Phi, y, blk_len,
             state.lambda_val, Subdicts, state.gammas, Sigma_x,
             B_inv, r_norm_sqr, m)
         # update gamma
-        gammas = update_gammas_em(Cov_x, B_inv)
+        gammas = update_gammas_em_pruned(Cov_x, B_inv, active_blocks)
         # update sigma
         Sigma0 = update_sigma_0(gammas, B)
 
