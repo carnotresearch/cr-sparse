@@ -269,6 +269,24 @@ def update_gammas_bo(old_gammas, B, Hy, HPhi):
     gammas = vmap(mapper, in_axes=(0, 0, 0))(old_gammas, Hy, HPhi)
     return gammas
 
+def update_gammas_bo_pruned(old_gammas, B, Hy, HPhi, active_blocks):
+    n_blocks = len(old_gammas)
+    blk_size = B.shape[0]
+    B_root = sqrtm(B)
+
+    def mapper(g, hy, hphi):
+        numer = norm(B_root @ hy)
+        denom = jnp.sqrt(jnp.trace(hphi @ B))
+        result =  g * numer / denom
+        return result
+
+    gammas = vmap(
+        lambda g, hy, hphi, active: lax.cond(active,
+            lambda _: mapper(g, hy, hphi),
+            lambda _: 0.,
+            None), 
+        in_axes=(0, 0, 0, 0))(old_gammas, Hy, HPhi, active_blocks)
+    return gammas
 
 
 def update_sigma_0(gammas, B):
@@ -344,7 +362,7 @@ def bsbl_bo_options(y,
     learn_type = opt.learn_type if learn_type is None else learn_type
     learn_lambda = opt.learn_lambda if learn_lambda is None else learn_lambda
     epsilon = opt.epsilon if epsilon is None else epsilon
-    max_iters = opt.max_iters if max_iters is None else max_iters
+    max_iters = 300 if max_iters is None else max_iters
 
     if learn_lambda == 0:
         # Noise-less
@@ -572,15 +590,15 @@ def bsbl_bo(Phi, y, blk_len,
         return state
 
     def body_func(state):
-        # active_blocks = gammas > prune_gamma
-        PhiBPhi = cum_phi_b_phi(Subdicts, state.Sigma0)
+        active_blocks = state.gammas > prune_gamma
+        PhiBPhi = cum_phi_b_phi_pruned(Subdicts, state.Sigma0, active_blocks)
         H = compute_h(Phi, PhiBPhi, state.lambda_val)
         # posterior block means
-        mu_x, Hy = compute_mu_x(state.Sigma0, H, y)
+        mu_x, Hy = compute_mu_x_pruned(state.Sigma0, H, y, active_blocks)
         # posterior block covariances
-        Sigma_x, HPhi = compute_sigma_x(Phi, state.Sigma0, H)
+        Sigma_x, HPhi = compute_sigma_x_pruned(Phi, state.Sigma0, H, active_blocks)
         Cov_x = compute_cov_x(Sigma_x, mu_x)
-        Bi_sum = compute_cov_x_sum(Cov_x, state.gammas)
+        Bi_sum = compute_cov_x_sum_pruned(Cov_x, state.gammas, active_blocks)
         B, B_inv = compute_B_B_inv(Bi_sum)
         # flattened signal
         x_hat = mu_x.flatten()
@@ -596,7 +614,7 @@ def bsbl_bo(Phi, y, blk_len,
             state.lambda_val, Subdicts, state.gammas, Sigma_x,
             B_inv, r_norm_sqr, m)
         # update gamma
-        gammas = update_gammas_bo(state.gammas, B, Hy, HPhi)
+        gammas = update_gammas_bo_pruned(state.gammas, B, Hy, HPhi, active_blocks)
         # update sigma
         Sigma0 = update_sigma_0(gammas, B)
 
