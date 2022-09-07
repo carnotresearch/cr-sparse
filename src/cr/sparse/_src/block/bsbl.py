@@ -14,13 +14,15 @@
 
 
 """
-Block Sparse Bayesian Learning-Expectation Maximization
+Block Sparse Bayesian Learning
+
+* Expectation Maximization
+* Bound Optimization
 
 
-Some key assumptions in this design
-- block sizes are equal and fixed
-- No pruning is done
-- Signal is either noisy or noiseless
+Some assumptions in this design
+
+* block sizes are equal and user defined
 """
 
 import math
@@ -301,27 +303,49 @@ def update_sigma_0(gammas, B):
 ##################################################
 
 class BSBL_Options(NamedTuple):
-    """Options for the BSBL EM algorithm
+    """Options for the BSBL algorithm
     """
-    learn_type: int = 1
+    learn_block_corr: int = 1
+    """Indicates whether intra block correlations are to
+    be learned or ignored.
+
+    * 0: Ignore intra block correlation
+    * 1: Learn intra block correlation
+    """
     learn_lambda: int = 1
+    """Indicates if the variance of noise is to be estimated from data
+
+    * 0: Do not learn lambda. Use the input or default value.
+    * 1: Use the lambda learning rule for noisy cases [SNR <= 20 dB]
+    * 1: Use the lambda learning rule for high SNR cases[SNR > 20 dB]
+    """
     prune_gamma: float = 1e-3
+    """Threshold for pruning small values of gamma_i
+    """
     lambda_val: float = 1e-12
+    """User defined value for lambda [if provided by user]
+    """
     max_iters: int = 800
+    """Maximum number of iterations for the BSBL algorithm
+    """
     epsilon : float = 1e-8
+    """Solution accuracy tolerance parameter
+    """
 
 
 
 def bsbl_em_options(y, 
-    learn_type=None,
+    learn_block_corr=None,
     learn_lambda=None,
     prune_gamma=None,
     lambda_val=None, max_iters=None,
     epsilon=None):
+    """Helper function to initialize options for the BSBL-EM algorithm
+    """
     # default values of options
     opt  = BSBL_Options()
     # customize them
-    learn_type = opt.learn_type if learn_type is None else learn_type
+    learn_block_corr = opt.learn_block_corr if learn_block_corr is None else learn_block_corr
     learn_lambda = opt.learn_lambda if learn_lambda is None else learn_lambda
     epsilon = opt.epsilon if epsilon is None else epsilon
     max_iters = opt.max_iters if max_iters is None else max_iters
@@ -341,7 +365,7 @@ def bsbl_em_options(y,
     prune_gamma = prune_gamma_ if prune_gamma is None else prune_gamma
     lambda_val = lambda_val_ if lambda_val is None else lambda_val
 
-    return BSBL_Options(learn_type=learn_type,
+    return BSBL_Options(learn_block_corr=learn_block_corr,
         learn_lambda=learn_lambda,
         prune_gamma=prune_gamma,
         lambda_val=lambda_val,
@@ -350,16 +374,18 @@ def bsbl_em_options(y,
 
 
 def bsbl_bo_options(y, 
-    learn_type=None,
+    learn_block_corr=None,
     learn_lambda=None,
     prune_gamma=None,
     lambda_val=None, max_iters=None,
     epsilon=None):
+    """Helper function to initialize options for the BSBL-BO algorithm
+    """
     scale = jnp.std(y)
     # default values of options
     opt  = BSBL_Options()
     # customize them
-    learn_type = opt.learn_type if learn_type is None else learn_type
+    learn_block_corr = opt.learn_block_corr if learn_block_corr is None else learn_block_corr
     learn_lambda = opt.learn_lambda if learn_lambda is None else learn_lambda
     epsilon = opt.epsilon if epsilon is None else epsilon
     max_iters = 300 if max_iters is None else max_iters
@@ -379,7 +405,7 @@ def bsbl_bo_options(y,
     prune_gamma = prune_gamma_ if prune_gamma is None else prune_gamma
     lambda_val = lambda_val_ if lambda_val is None else lambda_val
 
-    return BSBL_Options(learn_type=learn_type,
+    return BSBL_Options(learn_block_corr=learn_block_corr,
         learn_lambda=learn_lambda,
         prune_gamma=prune_gamma,
         lambda_val=lambda_val,
@@ -414,6 +440,7 @@ class BSBL_State(NamedTuple):
 
     @property
     def x(self):
+        "Solution vector"
         return self.mu_x.flatten()
 
     def __str__(self):
@@ -423,13 +450,15 @@ class BSBL_State(NamedTuple):
         r_norm = math.sqrt(float(self.r_norm_sqr))
         x_norm = float(norm(self.x))
         n_blocks, blk_size, _ = self.Sigma0.shape
+        n_active = jnp.sum(self.gammas > 0)
         for x in [
-            u"iterations %s" % self.iterations,
-            f"blocks={n_blocks}, block size={blk_size}",
-            u"r_norm %e" % r_norm,
-            u"x_norm %e" % x_norm,
-            u"lambda %e" % self.lambda_val,
-            u"dmu %e" % float(self.dmu),
+            f"iterations={self.iterations}",
+            f'block size={blk_size}',
+            f"blocks={n_blocks}, nonzero={n_active}",
+            u"r_norm=%.2e" % r_norm,
+            u"x_norm=%.2e" % x_norm,
+            u"lambda=%.2e" % self.lambda_val,
+            u"dmu=%.2e" % float(self.dmu),
             ]:
             s.append(x.rstrip())
         return u'\n'.join(s)
@@ -441,10 +470,30 @@ class BSBL_State(NamedTuple):
 
 def bsbl_em(Phi, y, blk_len, 
     options: BSBL_Options = BSBL_Options()):
+    """Reconstructs a block sparse signal using BSBL-EM algorithm
+
+    Args:
+        Phi (jax.numpy.ndarray): Sensing matrix
+        y (jax.numpy.ndarray): Measurement vector
+        blk_len (int): Length/size of each block
+        options (BSBL_Options): Options for algorithm execution
+
+    Returns:
+        BSBL_State: Solution of the sparse recovery problem
+
+    Note:
+        * Phi must be a matrix. Linear operators are not supported
+          since we need to break Phi down into submatrices for each block.
+        * Use :py:func:`bsbl_em_options` to initialize options for
+          the algorithm.
+
+    Examples:
+        - :ref:`gallery:cs:bsbl:1`
+    """
     
     # options
     learn_lambda = options.learn_lambda
-    learn_type = options.learn_type
+    learn_block_corr = options.learn_block_corr
     prune_gamma = options.prune_gamma
     lambda_val = options.lambda_val
     max_iters = options.max_iters
@@ -549,10 +598,30 @@ bsbl_em_jit = jit(bsbl_em, static_argnums=(2,))
 
 def bsbl_bo(Phi, y, blk_len, 
     options: BSBL_Options = BSBL_Options()):
+    """Reconstructs a block sparse signal using BSBL-BO algorithm
+
+    Args:
+        Phi (jax.numpy.ndarray): Sensing matrix
+        y (jax.numpy.ndarray): Measurement vector
+        blk_len (int): Length/size of each block
+        options (BSBL_Options): Options for algorithm execution
+
+    Returns:
+        BSBL_State: Solution of the sparse recovery problem
+
+    Note:
+        * Phi must be a matrix. Linear operators are not supported
+          since we need to break Phi down into submatrices for each block.
+        * Use :py:func:`bsbl_bo_options` to initialize options for
+          the algorithm.
+
+    Examples:
+        - :ref:`gallery:cs:bsbl:1`
+    """
     
     # options
     learn_lambda = options.learn_lambda
-    learn_type = options.learn_type
+    learn_block_corr = options.learn_block_corr
     prune_gamma = options.prune_gamma
     lambda_val = options.lambda_val
     max_iters = options.max_iters
