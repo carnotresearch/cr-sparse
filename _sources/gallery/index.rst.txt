@@ -287,6 +287,27 @@ Compressive Sensing
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrate the compressive sensing of ECG data and reconstruction using Bl...">
+
+.. only:: html
+
+ .. figure:: /gallery/pursuit/images/thumb/sphx_glr_ecg_cs_bsbl_thumb.png
+     :alt: ECG Data Compressive Sensing
+
+     :ref:`sphx_glr_gallery_pursuit_ecg_cs_bsbl.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/pursuit/ecg_cs_bsbl
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip=" A (random) sparse binary sensing matrix has a very simple design. Assume that the signal space...">
 
 .. only:: html
