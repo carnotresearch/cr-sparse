@@ -1,0 +1,150 @@
+Block Sparsity
+========================
+
+
+.. contents::
+    :depth: 2
+    :local:
+
+
+This section covers algorithms for recovery of
+block sparse signals from compressive measurements.
+
+.. rubric:: Related Examples
+
+#. :ref:`gallery:cs:bsbl:1` 
+
+
+Problem Formulations
+--------------------------
+
+
+The basic compressive sensing model is given by
+
+.. math::
+
+    \by = \Phi \bx + \be
+
+where :math:`\by` is a known measurement vector,
+:math:`\Phi` is a known sensing matrix and
+:math:`\bx` is a sparse signal to be recovered
+from the measurements.
+
+We introduce the block/group structure on :math:`\bx`
+as
+
+.. math::
+
+    \bx = \begin{pmatrix}
+    \bx_1 & \bx_2 & \dots & \bx_g
+    \end{pmatrix}
+
+where each :math:`\bx_i` is a block of :math:`b`
+values. The signal :math:`\bx` consists of :math:`g`
+such blocks/groups.
+Under the block sparsity model, only a few
+:math:`k \ll g` blocks are nonzero (active)
+in the signal :math:`\bx` however, the locations
+of these blocks are unknown.
+
+We can rewrite the sensing equation as:
+
+.. math::
+
+    \by = \sum_{i=1}^g \Phi_i \bx_i + \be
+
+by splitting the sensing matrix into blocks of columns appropriately.
+
+
+Following possibilities are there:
+
+Block Sizes:
+
+#. All blocks have same size.
+#. Different blocks have different sizes.
+#. Block sizes are known.
+#. Block sizes are unknown.
+
+Intra Block Correlation:
+
+#. Nonzero coefficients in each active block are independent of each other.
+#. Nonzero coefficients in each active block exhibit some correlation.
+
+Measurements
+
+#. Measurements are noiseless.
+#. Measurements have some noise at high SNR.
+#. Measurements have high amount of noise with low SNR.
+#. Measurements are real valued.
+#. Measurements are quantized and hence integer valued introducing quantization noise.
+
+
+Different block sparse recovery algorithms exhibit different
+capabilities along these choices.
+
+
+.. rubric:: Intra Block Correlation
+
+We can model the correlation among the values
+within each active block as an AR-1 process. Under this
+assumption the matrices :math:`\bB_i` of intra block covariance
+take the form of a Toeplitz matrix
+
+.. math::
+
+    \bB = \begin{bmatrix}
+    1 & r & \dots & r^{b-1}\\
+    r & 1 & \dots & r^{b-2}\\
+    \vdots &  & \ddots & \vdots\\
+    r^{b-1} & r^{b-2} & \dots & 1
+    \end{bmatrix}
+
+where :math:`r` is the AR-1 model coefficient.
+
+
+
+Block Sparse Bayesian Learning
+----------------------------------
+
+The Block Sparse Bayesian Learning (BSBL) algorithm
+and its extensions are described in
+:cite:`zhang2012recovery,zhang2013extension`.
+
+Our implementation is restricted to the case of
+blocks with identical sizes which are known a priori.
+This is done to take advantage of JIT (just in time)
+compilation abilities of JAX that require sizes of
+arrays to be statically determined.
+
+Following extensions of BSBL algorithm have been
+implemented:
+
+- BSBL-EM (Expectation Maximization)
+- BSBL-BO (Bound Optimization)
+
+.. currentmodule:: cr.sparse.block.bsbl
+
+
+.. rubric:: Methods
+
+.. autosummary::
+    :nosignatures:
+    :toctree: _autosummary
+
+    bsbl_em
+    bsbl_em_jit
+    bsbl_bo
+    bsbl_bo_jit
+    bsbl_em_options
+    bsbl_bo_options
+
+
+.. rubric:: Data Types
+
+.. autosummary::
+    :nosignatures:
+    :toctree: _autosummary
+    :template: namedtuple.rst
+
+    BSBL_Options
+    BSBL_State
