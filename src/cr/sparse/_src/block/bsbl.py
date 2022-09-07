@@ -723,3 +723,126 @@ def bsbl_bo(Phi, y, blk_len,
     return state
 
 bsbl_bo_jit = jit(bsbl_bo, static_argnums=(2,))
+
+
+
+
+def bsbl_bo_np(Phi, y, blk_len, 
+    options: BSBL_Options = BSBL_Options()):
+    """Reconstructs a block sparse signal using BSBL-BO algorithm
+
+    Args:
+        Phi (jax.numpy.ndarray): Sensing matrix
+        y (jax.numpy.ndarray): Measurement vector
+        blk_len (int): Length/size of each block
+        options (BSBL_Options): Options for algorithm execution
+
+    Returns:
+        BSBL_State: Solution of the sparse recovery problem
+
+    Note:
+        * Phi must be a matrix. Linear operators are not supported
+          since we need to break Phi down into submatrices for each block.
+        * Use :py:func:`bsbl_bo_options` to initialize options for
+          the algorithm.
+
+    Examples:
+        - :ref:`gallery:cs:bsbl:1`
+    """
+    
+    # options
+    learn_lambda = options.learn_lambda
+    learn_block_corr = options.learn_block_corr
+    prune_gamma = options.prune_gamma
+    lambda_val = options.lambda_val
+    max_iters = options.max_iters
+    epsilon = options.epsilon
+    # measurement and model space dimensions
+    m, n = Phi.shape
+    # length of each block
+    b = blk_len
+    # number of blocks
+    nb = n // b
+    # split Phi into blocks
+    Subdicts = get_subdicts(Phi, nb)
+
+    # y scaling
+    y_norm_sqr = crn.sqr_norm_l2(y)
+
+    # start solving
+
+    def init_func():
+        # initialize posterior means for each block
+        mu_x = jnp.zeros((nb, b))
+        # initialize correlation matrices
+        Sigma0 = init_sigmas(n, b)
+        # initialize block correlation scalars
+        gammas = init_gammas(nb)
+        state = BSBL_State(
+            mu_x=mu_x,
+            r=y,
+            r_norm_sqr=y_norm_sqr,
+            gammas=gammas,
+            Sigma0=Sigma0,
+            lambda_val=lambda_val,
+            dmu=1.,
+            iterations=0)
+        return state
+
+    def body_func(state):
+        PhiBPhi = cum_phi_b_phi(Subdicts, state.Sigma0)
+        H = compute_h(Phi, PhiBPhi, state.lambda_val)
+        # posterior block means
+        mu_x, Hy = compute_mu_x(state.Sigma0, H, y)
+        # posterior block covariances
+        Sigma_x, HPhi = compute_sigma_x(Phi, state.Sigma0, H)
+        Cov_x = compute_cov_x(Sigma_x, mu_x)
+        Bi_sum = compute_cov_x_sum(Cov_x, state.gammas)
+        B, B_inv = compute_B_B_inv(Bi_sum)
+        # flattened signal
+        x_hat = mu_x.flatten()
+        # residual
+        res = y - Phi @ x_hat
+        # residual norm squared
+        r_norm_sqr = crn.sqr_norm_l2(res)
+        # update lambda
+        # lambda_val = update_lambda_rule_nojit(learn_lambda,
+        #     state.lambda_val, Subdicts, state.gammas, Sigma_x,
+        #     B_inv, r_norm_sqr, m)
+        lambda_val = update_lambda_rule_jittable(learn_lambda,
+            state.lambda_val, Subdicts, state.gammas, Sigma_x,
+            B_inv, r_norm_sqr, m)
+        # update gamma
+        gammas = update_gammas_bo(state.gammas, B, Hy, HPhi)
+        # update sigma
+        Sigma0 = update_sigma_0(gammas, B)
+
+        # convergence criterion
+        mu_diff = jnp.abs(mu_x - state.mu_x)
+        dmu = jnp.max(mu_diff)
+
+        state = BSBL_State(
+            mu_x=mu_x,
+            r=res,
+            r_norm_sqr=r_norm_sqr,
+            gammas=gammas,
+            Sigma0=Sigma0,
+            lambda_val=lambda_val,
+            dmu=dmu,
+            iterations=state.iterations + 1)
+        return state
+
+
+    def cond_func(state):
+        a = state.dmu > epsilon
+        b = state.iterations < max_iters
+        c = jnp.logical_and(a, b)
+        return c
+
+    state = lax.while_loop(cond_func, body_func, init_func())
+    # state = init_func()
+    # while cond_func(state):
+    #     state = body_func(state)
+    return state
+
+bsbl_bo_np_jit = jit(bsbl_bo_np, static_argnums=(2,))

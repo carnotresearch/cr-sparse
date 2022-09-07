@@ -20,6 +20,8 @@ from cr.sparse._src.block.bsbl import (
     bsbl_em_jit,
     bsbl_bo,
     bsbl_bo_jit,
+    bsbl_bo_np,
+    bsbl_bo_np_jit,
     bsbl_em_options,
     bsbl_bo_options
 )
