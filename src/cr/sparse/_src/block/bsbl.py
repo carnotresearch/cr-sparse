@@ -40,6 +40,13 @@ import cr.sparse.block.block as crblock
 import cr.sparse.plots as crplot
 
 
+def sqrtm_svd(B):
+    """Square root of a symmetric matrix using its SVD
+    """
+    u, s, vh = jnp.linalg.svd(B)
+    s = jnp.sqrt(s)
+    return u @ jnp.diag(s) @ vh
+
 def init_sigmas(n, b):
     n_blocks = n // b
     I = jnp.eye(b)
@@ -260,7 +267,7 @@ def update_gammas_em_pruned(Cov_x, B_inv, active_blocks):
 def update_gammas_bo(old_gammas, B, Hy, HPhi):
     n_blocks = len(old_gammas)
     blk_size = B.shape[0]
-    B_root = sqrtm(B)
+    B_root = sqrtm_svd(B)
 
     def mapper(g, hy, hphi):
         numer = norm(B_root @ hy)
@@ -274,7 +281,7 @@ def update_gammas_bo(old_gammas, B, Hy, HPhi):
 def update_gammas_bo_pruned(old_gammas, B, Hy, HPhi, active_blocks):
     n_blocks = len(old_gammas)
     blk_size = B.shape[0]
-    B_root = sqrtm(B)
+    B_root = sqrtm_svd(B)
 
     def mapper(g, hy, hphi):
         numer = norm(B_root @ hy)
