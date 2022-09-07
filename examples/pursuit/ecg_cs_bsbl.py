@@ -27,6 +27,7 @@ import jax.numpy as jnp
 import cr.nimble as crn
 import cr.nimble.dsp as crdsp
 import cr.sparse.dict as crdict
+import cr.sparse.plots as crplot
 import cr.sparse.block.bsbl as bsbl
 
 # Sample data
@@ -56,6 +57,7 @@ ax.plot(t, x);
 
 # %% 
 # Preprocessing
+# '''''''''''''''''''''''''''''''''''''''
 
 # Remove the linear trend from the signal
 x = detrend(x)
@@ -89,6 +91,7 @@ Phi = crdict.gaussian_mtx(crn.KEY0, M, N)
 
 # %%
 # Measurements
+# '''''''''''''''''''''''''''''''''''''''
 y = Phi @ x
 fig, ax = plt.subplots(figsize=(16, 4))
 ax.plot(y);
@@ -96,7 +99,7 @@ ax.plot(y);
 
 # %% 
 # Sparse Recovery with BSBL
-# ------------------------------
+# '''''''''''''''''''''''''''''''''''''''
 options = bsbl.bsbl_bo_options(y, max_iters=20)
 start = timeit.default_timer()
 sol = bsbl.bsbl_bo_np_jit(Phi, y, 25, options=options)
@@ -111,7 +114,7 @@ print(f'SNR: {crn.signal_noise_ratio(x, x_hat):.2f} dB, PRD: {crn.percent_rms_di
 
 # %%
 # Plot the original and recovered signals
-fig, ax = plt.subplots(2, 1, figsize=(16, 4))
+ax = crplot.h_plots(2)
 ax[0].plot(x)
 ax[1].plot(x_hat)
 
@@ -130,6 +133,7 @@ Phi = crdict.gaussian_mtx(crn.KEY0, M, N)
 
 # %%
 # Measurements
+# '''''''''''''''''''''''''''''
 y = Phi @ x
 fig, ax = plt.subplots(figsize=(16, 4))
 ax.plot(y);
@@ -137,7 +141,7 @@ ax.plot(y);
 
 # %% 
 # Sparse Recovery with BSBL
-# ------------------------------
+# '''''''''''''''''''''''''''''''''''''''
 options = bsbl.bsbl_bo_options(y, max_iters=20)
 start = timeit.default_timer()
 sol = bsbl.bsbl_bo_np_jit(Phi, y, 25, options=options)
@@ -152,6 +156,6 @@ print(f'SNR: {crn.signal_noise_ratio(x, x_hat):.2f} dB, PRD: {crn.percent_rms_di
 
 # %%
 # Plot the original and recovered signals
-fig, ax = plt.subplots(2, 1, figsize=(16, 4))
+ax = crplot.h_plots(2)
 ax[0].plot(x)
 ax[1].plot(x_hat)
