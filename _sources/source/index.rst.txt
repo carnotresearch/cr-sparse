@@ -12,12 +12,11 @@ API Docs
    cvx_recovery
    opt
    fom
-   cs
+   block
    cluster
    ssc
    data
-   geo
-   vision
+   misc
    ef
 
 .. ::

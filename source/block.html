@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Block Sparsity &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/mathconf.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cr.sparse.block.bsbl.bsbl_em" href="_autosummary/cr.sparse.block.bsbl.bsbl_em.html" />
+    <link rel="prev" title="cr.sparse.fom.matrix_affine_func" href="_autosummary/cr.sparse.fom.matrix_affine_func.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="lop.html">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sls.html">Sparse Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opt.html">Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fom.html">First Order Methods</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Block Sparsity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cluster.html">Data Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ssc.html">Sparse Subspace Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc.html">Miscellaneous Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">API Docs</a><ul>
+      <li>Previous: <a href="_autosummary/cr.sparse.fom.matrix_affine_func.html" title="previous chapter">cr.sparse.fom.matrix_affine_func</a></li>
+      <li>Next: <a href="_autosummary/cr.sparse.block.bsbl.bsbl_em.html" title="next chapter">cr.sparse.block.bsbl.bsbl_em</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="block-sparsity">
+<h1>Block Sparsity<a class="headerlink" href="#block-sparsity" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#problem-formulations" id="id2">Problem Formulations</a></p></li>
+<li><p><a class="reference internal" href="#block-sparse-bayesian-learning" id="id3">Block Sparse Bayesian Learning</a></p></li>
+</ul>
+</div>
+<p>This section covers algorithms for recovery of
+block sparse signals from compressive measurements.</p>
+<p class="rubric">Related Examples</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="../gallery/pursuit/bsbl_1.html#gallery-cs-bsbl-1"><span class="std std-ref">Block Sparse Bayesian Learning</span></a></p></li>
+</ol>
+<section id="problem-formulations">
+<h2><a class="toc-backref" href="#id2">Problem Formulations</a><a class="headerlink" href="#problem-formulations" title="Permalink to this headline">¶</a></h2>
+<p>The basic compressive sensing model is given by</p>
+<div class="math notranslate nohighlight" id="equation-source-block-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-source-block-0" title="Permalink to this equation">¶</a></span>\[\by = \Phi \bx + \be\]</div>
+<p>where <span class="math notranslate nohighlight">\(\by\)</span> is a known measurement vector,
+<span class="math notranslate nohighlight">\(\Phi\)</span> is a known sensing matrix and
+<span class="math notranslate nohighlight">\(\bx\)</span> is a sparse signal to be recovered
+from the measurements.</p>
+<p>We introduce the block/group structure on <span class="math notranslate nohighlight">\(\bx\)</span>
+as</p>
+<div class="math notranslate nohighlight" id="equation-source-block-1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-source-block-1" title="Permalink to this equation">¶</a></span>\[\bx = \begin{pmatrix}
+\bx_1 &amp; \bx_2 &amp; \dots &amp; \bx_g
+\end{pmatrix}\]</div>
+<p>where each <span class="math notranslate nohighlight">\(\bx_i\)</span> is a block of <span class="math notranslate nohighlight">\(b\)</span>
+values. The signal <span class="math notranslate nohighlight">\(\bx\)</span> consists of <span class="math notranslate nohighlight">\(g\)</span>
+such blocks/groups.
+Under the block sparsity model, only a few
+<span class="math notranslate nohighlight">\(k \ll g\)</span> blocks are nonzero (active)
+in the signal <span class="math notranslate nohighlight">\(\bx\)</span> however, the locations
+of these blocks are unknown.</p>
+<p>We can rewrite the sensing equation as:</p>
+<div class="math notranslate nohighlight" id="equation-source-block-2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-source-block-2" title="Permalink to this equation">¶</a></span>\[\by = \sum_{i=1}^g \Phi_i \bx_i + \be\]</div>
+<p>by splitting the sensing matrix into blocks of columns appropriately.</p>
+<p>Following possibilities are there:</p>
+<p>Block Sizes:</p>
+<ol class="arabic simple">
+<li><p>All blocks have same size.</p></li>
+<li><p>Different blocks have different sizes.</p></li>
+<li><p>Block sizes are known.</p></li>
+<li><p>Block sizes are unknown.</p></li>
+</ol>
+<p>Intra Block Correlation:</p>
+<ol class="arabic simple">
+<li><p>Nonzero coefficients in each active block are independent of each other.</p></li>
+<li><p>Nonzero coefficients in each active block exhibit some correlation.</p></li>
+</ol>
+<p>Measurements</p>
+<ol class="arabic simple">
+<li><p>Measurements are noiseless.</p></li>
+<li><p>Measurements have some noise at high SNR.</p></li>
+<li><p>Measurements have high amount of noise with low SNR.</p></li>
+<li><p>Measurements are real valued.</p></li>
+<li><p>Measurements are quantized and hence integer valued introducing quantization noise.</p></li>
+</ol>
+<p>Different block sparse recovery algorithms exhibit different
+capabilities along these choices.</p>
+<p class="rubric">Intra Block Correlation</p>
+<p>We can model the correlation among the values
+within each active block as an AR-1 process. Under this
+assumption the matrices <span class="math notranslate nohighlight">\(\bB_i\)</span> of intra block covariance
+take the form of a Toeplitz matrix</p>
+<div class="math notranslate nohighlight" id="equation-source-block-3">
+<span class="eqno">(4)<a class="headerlink" href="#equation-source-block-3" title="Permalink to this equation">¶</a></span>\[\begin{split}\bB = \begin{bmatrix}
+1 &amp; r &amp; \dots &amp; r^{b-1}\\
+r &amp; 1 &amp; \dots &amp; r^{b-2}\\
+\vdots &amp;  &amp; \ddots &amp; \vdots\\
+r^{b-1} &amp; r^{b-2} &amp; \dots &amp; 1
+\end{bmatrix}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(r\)</span> is the AR-1 model coefficient.</p>
+</section>
+<section id="block-sparse-bayesian-learning">
+<h2><a class="toc-backref" href="#id3">Block Sparse Bayesian Learning</a><a class="headerlink" href="#block-sparse-bayesian-learning" title="Permalink to this headline">¶</a></h2>
+<p>The Block Sparse Bayesian Learning (BSBL) algorithm
+and its extensions are described in
+<span id="id1">[<a class="reference internal" href="../zzzreference.html#id343" title="Zhilin Zhang and Bhaskar D Rao. Recovery of block sparse signals using the framework of block sparse bayesian learning. In 2012 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 3345–3348. IEEE, 2012.">ZR12</a>, <a class="reference internal" href="../zzzreference.html#id344" title="Zhilin Zhang and Bhaskar D Rao. Extension of sbl algorithms for the recovery of block sparse signals with intra-block correlation. IEEE Transactions on Signal Processing, 61(8):2009–2015, 2013.">ZR13</a>]</span>.</p>
+<p>Our implementation is restricted to the case of
+blocks with identical sizes which are known a priori.
+This is done to take advantage of JIT (just in time)
+compilation abilities of JAX that require sizes of
+arrays to be statically determined.</p>
+<p>Following extensions of BSBL algorithm have been
+implemented:</p>
+<ul class="simple">
+<li><p>BSBL-EM (Expectation Maximization)</p></li>
+<li><p>BSBL-BO (Bound Optimization)</p></li>
+</ul>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.block.bsbl.bsbl_em.html#cr.sparse.block.bsbl.bsbl_em" title="cr.sparse.block.bsbl.bsbl_em"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bsbl_em</span></code></a></p></td>
+<td><p>Reconstructs a block sparse signal using BSBL-EM algorithm</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.block.bsbl.bsbl_em_jit.html#cr.sparse.block.bsbl.bsbl_em_jit" title="cr.sparse.block.bsbl.bsbl_em_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bsbl_em_jit</span></code></a></p></td>
+<td><p>Reconstructs a block sparse signal using BSBL-EM algorithm</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.block.bsbl.bsbl_bo.html#cr.sparse.block.bsbl.bsbl_bo" title="cr.sparse.block.bsbl.bsbl_bo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bsbl_bo</span></code></a></p></td>
+<td><p>Reconstructs a block sparse signal using BSBL-BO algorithm</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.block.bsbl.bsbl_bo_jit.html#cr.sparse.block.bsbl.bsbl_bo_jit" title="cr.sparse.block.bsbl.bsbl_bo_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bsbl_bo_jit</span></code></a></p></td>
+<td><p>Reconstructs a block sparse signal using BSBL-BO algorithm</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.block.bsbl.bsbl_em_options.html#cr.sparse.block.bsbl.bsbl_em_options" title="cr.sparse.block.bsbl.bsbl_em_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bsbl_em_options</span></code></a></p></td>
+<td><p>Helper function to initialize options for the BSBL-EM algorithm</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.block.bsbl.bsbl_bo_options.html#cr.sparse.block.bsbl.bsbl_bo_options" title="cr.sparse.block.bsbl.bsbl_bo_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bsbl_bo_options</span></code></a></p></td>
+<td><p>Helper function to initialize options for the BSBL-BO algorithm</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Data Types</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.block.bsbl.BSBL_Options.html#cr.sparse.block.bsbl.BSBL_Options" title="cr.sparse.block.bsbl.BSBL_Options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BSBL_Options</span></code></a></p></td>
+<td><p>Options for the BSBL algorithm</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.block.bsbl.BSBL_State.html#cr.sparse.block.bsbl.BSBL_State" title="cr.sparse.block.bsbl.BSBL_State"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BSBL_State</span></code></a></p></td>
+<td><p>Sparse Bayesian Learning algorithm state</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2021, CR-Sparse Development Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/source/block.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-214289683-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

@@ -20,7 +20,9 @@ we show
 - Creation of block sparse signals with intra-block correlation
 - Compressive sampling of the signal with Gaussian and sparse
   binary sensing matrices.
-- Reconstruction using BSBL EM algorithm.
+- Reconstruction using BSBL EM algorithm (Expectation Maximization).
+- Reconstruction using BSBL BO algorithm (Bound Optimization).
+- Reconstruction in the presence of high measurement noise
 
 
 Our implementation of BSBL is fully JIT compilable.
@@ -97,7 +99,7 @@ where
 
 We also model the correlation among the values
 within each active block as an AR-1 process. Under this
-assumption the matrix :math:`\bB_i` take the form of a Toeplitz
+assumption the matrices :math:`\bB_i` take the form of a Toeplitz
 matrix
 
 .. math::
@@ -148,6 +150,7 @@ import jax.numpy as jnp
 from jax import random, jit
 # cr-suite imports
 import cr.nimble as crn
+import cr.nimble.dsp as crdsp
 import cr.sparse as crs
 import cr.sparse.dict as crdict
 import cr.sparse.data as crdata
@@ -200,17 +203,18 @@ crplot.plot_signal(ax, y)
 
 # %% 
 # Reconstruction using BSBL EM
-# ------------------------------
+# '''''''''''''''''''''''''''''''''''
 # We need to provide the sensing matrix, measurements
 # and the block size as parameters to the
 # reconstruction algorithm
-sol = bsbl.bsbl_em_jit(Phi, y, b)
+options = bsbl.bsbl_em_options(y, learn_lambda=0)
+sol = bsbl.bsbl_em_jit(Phi, y, b, options)
 print(sol)
 
 # %% 
 # Reconstructed signal
 x_hat = sol.x
-print(f'PRD: {crn.prd(x, x_hat):.1f} %, SNR: {crn.signal_noise_ratio(x, x_hat)} dB.' )
+print(f'BSBL-EM: PRD: {crn.prd(x, x_hat):.1f} %, SNR: {crn.signal_noise_ratio(x, x_hat):.2f} dB.' )
 
 
 # %% 
@@ -219,6 +223,42 @@ ax = crplot.h_plots(2)
 ax[0].stem(x)
 ax[1].stem(x_hat)
 
+
+# %% 
+# Reconstruction using BSBL BO
+# '''''''''''''''''''''''''''''''''''
+# We need to provide the sensing matrix, measurements
+# and the block size as parameters to the
+# reconstruction algorithm
+options = bsbl.bsbl_bo_options(y, learn_lambda=0)
+sol = bsbl.bsbl_bo_jit(Phi, y, b, options)
+print(sol)
+
+# %% 
+# Reconstructed signal
+x_hat = sol.x
+print(f'BSBL-BO: PRD: {crn.prd(x, x_hat):.1f} %, SNR: {crn.signal_noise_ratio(x, x_hat):.2f} dB.' )
+
+
+# %% 
+# Plot the original and reconstructed signal
+ax = crplot.h_plots(2)
+ax[0].stem(x)
+ax[1].stem(x_hat)
+
+
+# %%
+# Observations:
+#
+# * We specified ``learn_lambda=0`` since we knew that this is a noiseless problem.
+# * Note the nonzero blocks count. They have been identified correctly.
+# * Recovery is perfect for both algorithms. In other words, both the
+#   nonzero coefficient values and locations have been
+#   correctly estimated and identified respectively.
+# * BSBL-BO is faster compared to BSBL-EM.
+#   See how it finished in far less number of iterations.
+#   This is on expected lines as BSBL-BO accelerates the convergence
+#   using bound optimization a.k.a. majorization-minimization.
 
 # %% 
 # Sparse Binary Sensing
@@ -241,17 +281,15 @@ crplot.plot_signal(ax, y)
 
 # %% 
 # Reconstruction using BSBL EM
-# ------------------------------
-# We need to provide the sensing matrix, measurements
-# and the block size as parameters to the
-# reconstruction algorithm
-sol = bsbl.bsbl_em_jit(Phi, y, b)
+# '''''''''''''''''''''''''''''''''''
+options = bsbl.bsbl_em_options(y, learn_lambda=0)
+sol = bsbl.bsbl_em_jit(Phi, y, b, options)
 print(sol)
 
 # %% 
 # Reconstructed signal
 x_hat = sol.x
-print(f'PRD: {crn.prd(x, x_hat):.1f} %, SNR: {crn.signal_noise_ratio(x, x_hat)} dB.' )
+print(f'BSBL-EM: PRD: {crn.prd(x, x_hat):.1f} %, SNR: {crn.signal_noise_ratio(x, x_hat):.2f} dB.' )
 
 
 # %% 
@@ -259,3 +297,161 @@ print(f'PRD: {crn.prd(x, x_hat):.1f} %, SNR: {crn.signal_noise_ratio(x, x_hat)} 
 ax = crplot.h_plots(2)
 ax[0].stem(x)
 ax[1].stem(x_hat)
+
+
+# %% 
+# Reconstruction using BSBL BO
+# '''''''''''''''''''''''''''''''''''
+options = bsbl.bsbl_bo_options(y, learn_lambda=0)
+sol = bsbl.bsbl_bo_jit(Phi, y, b, options)
+print(sol)
+
+# %% 
+# Reconstructed signal
+x_hat = sol.x
+print(f'BSBL-BO: PRD: {crn.prd(x, x_hat):.1f} %, SNR: {crn.signal_noise_ratio(x, x_hat):.2f} dB.' )
+
+
+# %% 
+# Plot the original and reconstructed signal
+ax = crplot.h_plots(2)
+ax[0].stem(x)
+ax[1].stem(x_hat)
+
+# %%
+# Observations:
+#
+# * Recovery is perfect for both algorithms.
+# * BSBL-BO is much faster.
+# * Both algorithms are converging in same number of iterations
+#   as Gaussian sensing matrices.
+
+# %% 
+# Noisy Measurements
+# ------------------------------
+# We now consider an example where compressive measurements
+# are corrupted with significant amount of noise.
+
+# rows (measurements)
+m = 80
+# columns (signal space)
+n = 162
+# block length
+b = 6
+# number of nonzero blocks
+k = 5
+# number of signals
+s = 1
+# number of blocks
+nb = n // b
+# Signal to Noise Ratio in DB
+snr = 15
+
+
+# %% 
+# generate block sparse signal with high intra block correlation
+x, blocks, indices  = crdata.sparse_normal_blocks(
+    crn.KEYS[1], n, k, b, s, cor=0.95, normalize_blocks=True)
+
+ax = crplot.one_plot()
+ax.stem(x)
+
+# %% 
+# Sensing matrix
+Phi = crdict.gaussian_mtx(crn.KEYS[2], m, n)
+
+# %% 
+# Noiseless measurements
+y0 = Phi @ x
+
+# %%
+# Noise at an SNR of 15 dB
+noise = crdsp.awgn_at_snr_std(crn.KEYS[3], y0, snr)
+
+# %%
+# Addition of noise to measurements
+y = y0 + noise
+print(f'measurement SNR: {crn.signal_noise_ratio(y0, y):.2f} dB')
+
+# %%
+# Plot the noiseless and noisy measurements
+ax = crplot.h_plots(2)
+ax[0].plot(y0)
+ax[1].plot(y)
+
+
+# %% 
+# Reconstruction Benchmark
+# ''''''''''''''''''''''''''''''''''
+# An oracle reconstruction is possible if one knows the
+# nonzero indices of x. One can then compute a least
+# square solution over these indices.
+# The reconstruction SNR of this solution gives us
+# a good benchmark against which we can evaluate
+# the quality of reconstruction by any other algorithm.
+
+# Find the least square solution
+x_ls_coeffs = jnp.linalg.pinv(Phi[:, indices]) @ y
+x_ls = crdsp.build_signal_from_indices_and_values(n, indices, x_ls_coeffs)
+print(f'Benchmark rec: PRD: {crn.prd(x, x_ls):.1f} %, SNR: {crn.signal_noise_ratio(x, x_ls):.2f} dB')
+
+# %%
+# Plot the oracle reconstruction
+ax = crplot.h_plots(2)
+ax[0].stem(x)
+ax[1].stem(x_ls)
+
+
+# %% 
+# Reconstruction using BSBL EM
+# '''''''''''''''''''''''''''''''''''
+options = bsbl.bsbl_em_options(y)
+sol = bsbl.bsbl_em_jit(Phi, y, b, options)
+print(sol)
+
+# %% 
+# Reconstructed signal
+x_hat = sol.x
+print(f'BSBL-EM: PRD: {crn.prd(x, x_hat):.1f} %, SNR: {crn.signal_noise_ratio(x, x_hat):.2f} dB.' )
+
+
+# %% 
+# Plot the original and reconstructed signal
+ax = crplot.h_plots(2)
+ax[0].stem(x)
+ax[1].stem(x_hat)
+
+
+# %% 
+# Reconstruction using BSBL BO
+# '''''''''''''''''''''''''''''''''''
+options = bsbl.bsbl_bo_options(y)
+sol = bsbl.bsbl_bo_jit(Phi, y, b, options)
+print(sol)
+
+# %% 
+# Reconstructed signal
+x_hat = sol.x
+print(f'BSBL-BO: PRD: {crn.prd(x, x_hat):.1f} %, SNR: {crn.signal_noise_ratio(x, x_hat):.2f} dB.' )
+
+
+# %% 
+# Plot the original and reconstructed signal
+ax = crplot.h_plots(2)
+ax[0].stem(x)
+ax[1].stem(x_hat)
+
+
+# %%
+# Observations:
+#
+# * Benchmark SNR is slightly better than measurement SNR.
+#   This is due to the fact that we are using our knowledge of
+#   support for x.
+# * Both BSBL-EM and BSBL-BO are able to detect the correct support of x.
+# * SNR for both BSBL-EM and BSBL-BO is better than the benchmark SNR.
+#   This is due to the fact that BSBL is exploiting the intra-block correlation
+#   modeled as an AR-1 process.
+# * The ordinary least squares solution is not attempting to exploit the
+#   intra block correlation structure at all.
+# * In this example BSBL-BO is somewhat faster than BSBL-EM but not by much.

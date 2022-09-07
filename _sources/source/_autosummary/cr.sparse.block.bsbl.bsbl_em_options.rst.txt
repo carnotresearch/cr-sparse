@@ -1,0 +1,6 @@
+﻿cr.sparse.block.bsbl.bsbl\_em\_options
+======================================
+
+.. currentmodule:: cr.sparse.block.bsbl
+
+.. autofunction:: bsbl_em_options

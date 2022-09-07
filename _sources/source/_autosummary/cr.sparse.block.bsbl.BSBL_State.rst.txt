@@ -1,0 +1,25 @@
+﻿cr.sparse.block.bsbl.BSBL\_State
+================================
+
+.. currentmodule:: cr.sparse.block.bsbl
+
+.. autoclass:: BSBL_State
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BSBL_State.Sigma0
+      ~BSBL_State.dmu
+      ~BSBL_State.gammas
+      ~BSBL_State.iterations
+      ~BSBL_State.lambda_val
+      ~BSBL_State.mu_x
+      ~BSBL_State.r
+      ~BSBL_State.r_norm_sqr
+      ~BSBL_State.x
+   
+   

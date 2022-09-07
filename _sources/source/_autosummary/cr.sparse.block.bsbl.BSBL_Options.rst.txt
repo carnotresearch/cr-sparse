@@ -1,0 +1,22 @@
+﻿cr.sparse.block.bsbl.BSBL\_Options
+==================================
+
+.. currentmodule:: cr.sparse.block.bsbl
+
+.. autoclass:: BSBL_Options
+
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BSBL_Options.epsilon
+      ~BSBL_Options.lambda_val
+      ~BSBL_Options.learn_block_corr
+      ~BSBL_Options.learn_lambda
+      ~BSBL_Options.max_iters
+      ~BSBL_Options.prune_gamma
+   
+   
