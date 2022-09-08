@@ -341,7 +341,7 @@ class BSBL_Options(NamedTuple):
 
 
 
-def bsbl_em_options(y, 
+def bsbl_em_options(y=None, 
     learn_block_corr=None,
     learn_lambda=None,
     prune_gamma=None,
@@ -380,7 +380,7 @@ def bsbl_em_options(y,
         epsilon=epsilon)
 
 
-def bsbl_bo_options(y, 
+def bsbl_bo_options(y=None, 
     learn_block_corr=None,
     learn_lambda=None,
     prune_gamma=None,
@@ -388,7 +388,7 @@ def bsbl_bo_options(y,
     epsilon=None):
     """Helper function to initialize options for the BSBL-BO algorithm
     """
-    scale = jnp.std(y)
+    scale = jnp.std(y) if y is not None else 1.
     # default values of options
     opt  = BSBL_Options()
     # customize them
