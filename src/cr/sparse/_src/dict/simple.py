@@ -132,7 +132,7 @@ def sparse_binary_mtx(key, M, N, d, normalize_atoms=True, dense=False):
     keys = random.split(key, N)
     # indices
     idx = jnp.arange(M)
-    rc = lambda key : jnp.zeros(M, dtype=int).at[jnp.sort(random.choice(key, idx, (d, ), replace=False))].set(1)
+    rc = lambda key : jnp.zeros(M, dtype=jnp.uint8).at[jnp.sort(random.choice(key, idx, (d, ), replace=False))].set(1)
     dict = vmap(rc, out_axes=1)(keys)
     if normalize_atoms:
         dict = dict / math.sqrt(d)
