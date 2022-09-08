@@ -35,3 +35,10 @@ def plot_sparse_n_signals(ax, x):
 def plot_signal(ax, x):
     x = np.asarray(x)
     ax.plot(x)
+
+
+def plot_n_signals(ax, x):
+    # Assume that each row is a signal
+    s, n = x.shape
+    for i in range(s):
+        ax[i].plot(x[i, :])
