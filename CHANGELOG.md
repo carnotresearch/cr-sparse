@@ -9,6 +9,66 @@ All notable changes to this project will be documented in this file.
 [Documentation](https://cr-sparse.readthedocs.io/en/latest/)
 
 
+## [0.3.1] - 2022-09-10
+
+[Documentation](https://cr-sparse.readthedocs.io/en/v0.3.1/)
+
+### Added
+
+Block Sparse Bayesian Learning
+
+- Expectation Maximization version
+- Bound Optimization version
+
+Dictionaries
+
+- sparse_binary_mtx
+- wavelet_basis
+
+
+Linear operators
+
+- sparse_real_matrix
+- sparse_binary_dict
+
+
+Test data
+
+- sparse_normal_blocks
+
+Miscellaneous
+
+- Some plotting utilities
+
+
+Examples
+
+- ECG Data Compressive Sensing
+- Block Sparse Bayesian Learning
+- Sparse Binary Sensing Matrices
+
+
+### Improvements
+
+- Fixed some issues in the circulant linear operator
+- Removed unnecessary `__init__` files
+- Removed `bio` module which was empty
+- Resolved some warnings related to incorrect static argument names or numbers
+- Added `__str__` to several named tuples for debugging purposes
+- ADMM tutorial updated to align with 0.3.x changes
+- Added `length` and `x` properties in RecoverySolution
+- 
+
+
+
+### Others
+
+- Changed copyright to CR-Suite Development Team
+
+
+
+
+
 ## [0.3.0] - 2022-08-27
 
 [Documentation](https://cr-sparse.readthedocs.io/en/v0.3.0/)
@@ -17,6 +77,7 @@ All notable changes to this project will be documented in this file.
 
 
 Indicators
+
 - zero
 - singleton
 - affine
@@ -27,6 +88,7 @@ Indicators
 - l1 ball
 
 Projectors
+
 - zero
 - identity
 - singleton
@@ -38,10 +100,8 @@ Projectors
 
 
 
-Linear operators
-
-
 Proximal operators
+
 - zero
 - 1l
 - l2
@@ -50,6 +110,7 @@ Proximal operators
 - ordered weighted l1
 
 Smooth functions
+
 - constant
 - entropy
 - huber
@@ -59,14 +120,13 @@ Smooth functions
 
 
 First order methods
+
 - l1 regulated least square
 - smooth conic dual solver
 - lasso
 - ordered weighted l1 regularized least squares
 - dantzig smooth conic dual
 - basis pursuit smooth conic dual
-
-
 
 
 ### Removed
@@ -266,7 +326,8 @@ General stuff
 
 Initial release
 
-[Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/carnotresearch/cr-sparse/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.2...v0.3.0
 [0.2.2]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.0...v0.2.1
