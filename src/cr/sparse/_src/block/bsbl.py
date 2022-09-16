@@ -324,7 +324,7 @@ class BSBL_Options(NamedTuple):
 
     * 0: Do not learn lambda. Use the input or default value.
     * 1: Use the lambda learning rule for noisy cases [SNR <= 20 dB]
-    * 1: Use the lambda learning rule for high SNR cases[SNR > 20 dB]
+    * 2: Use the lambda learning rule for high SNR cases[SNR > 20 dB]
     """
     prune_gamma: float = 1e-3
     """Threshold for pruning small values of gamma_i
