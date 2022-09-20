@@ -51,3 +51,9 @@ from cr.sparse._src.dict.props import (
 from cr.sparse._src.dict.comparison import (
     matching_atoms_ratio
 )
+
+
+from cr.sparse._src.dict.grass import (
+    build_grassmannian_frame,
+    minimum_coherence
+)

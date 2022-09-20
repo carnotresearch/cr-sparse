@@ -61,3 +61,13 @@ during the dictionary learning process.
     mutual_coherence_with_index
     mutual_coherence
     matching_atoms_ratio
+
+Grassmannian frames
+-------------------------
+
+.. autosummary::
+  :toctree: _autosummary
+
+  minimum_coherence
+  build_grassmannian_frame
+
