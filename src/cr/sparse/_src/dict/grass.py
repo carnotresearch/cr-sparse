@@ -53,8 +53,8 @@ def build_grassmannian_frame(init,
 
     # number of off diagonal entries in the Gram matrix
     n_off = n**2 - n
-    upper_ind = round(frac * n_off) + 1
-    lower_ind = round((1-frac)*n_off) + 1
+    upper_ind = round(frac * n_off) - 1
+    lower_ind = round((1-frac)*n_off) - 1
 
     # indices for off diagonal entries
     off_ind = jnp.abs(g.ravel()-1) > 1e-6
