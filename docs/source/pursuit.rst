@@ -48,6 +48,13 @@ Different algorithms have different requirements on the dictionaries or sensing 
 Basic Matching Pursuit Based Algorithms
 ------------------------------------------
 
+.. rubric:: Matching Pursuit
+
+.. autosummary::
+  :toctree: _autosummary
+
+    mp.solve
+
 .. rubric:: Orthogonal Matching Pursuit
 
 .. autosummary::
