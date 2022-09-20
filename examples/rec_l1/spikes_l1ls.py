@@ -78,7 +78,7 @@ plt.plot(b)
 # Recovery using TNIPM
 # ------------------------------------------------
 
-# We need to estimate the regularization paramter
+# We need to estimate the regularization parameter
 Atb = A.trans(b)
 tau = float(0.1 * jnp.max(jnp.abs(Atb)))
 print(f'{tau=}')
