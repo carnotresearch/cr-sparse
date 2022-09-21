@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Kumar
+    given-names: Shailesh
+    orcid: https://orcid.org/0000-0003-2217-4768
+title: "CR-Sparse: Hardware accelerated functional algorithms for sparse signal processing in Python using JAX"
+doi: 10.21105/joss.03917
+url: https://doi.org/10.21105/joss.03917
+journal: Journal of Open Source Software
+year: 2021
