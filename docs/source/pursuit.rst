@@ -54,6 +54,7 @@ Basic Matching Pursuit Based Algorithms
   :toctree: _autosummary
 
     mp.solve
+    mp.matrix_solve
 
 .. rubric:: Orthogonal Matching Pursuit
 

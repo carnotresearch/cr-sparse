@@ -21,5 +21,6 @@ Matching Pursuit
 
 from cr.sparse._src.pursuit.mp import (
     solve,
+    matrix_solve,
     MPState
 )
