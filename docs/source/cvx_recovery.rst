@@ -1,6 +1,6 @@
 .. _api:l1min:
 
-L1 Minimization
+Convex Relaxation
 =============================================================================
 
 .. contents::
@@ -80,3 +80,21 @@ specific types of problems.
     yall1.solve_l1_l2_jit
     yall1.solve_l1_l2con
     yall1.solve_l1_l2con_jit
+
+
+FOcal Underdetermined System Solver (FOCUSS)
+-----------------------------------------------
+
+This is based on :cite:`elad2010sparse` (section 3.2.1).
+
+.. currentmodule:: cr.sparse.cvx
+
+.. autosummary::
+    :toctree: _autosummary
+
+    focuss.matrix_solve_noiseless
+    focuss.step_noiseless
+
+Example:
+
+* :ref:`gallery:focuss:1`
