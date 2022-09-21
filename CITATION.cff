@@ -4,8 +4,22 @@ authors:
   - family-names: Kumar
     given-names: Shailesh
     orcid: https://orcid.org/0000-0003-2217-4768
-title: "CR-Sparse: Hardware accelerated functional algorithms for sparse signal processing in Python using JAX"
-doi: 10.21105/joss.03917
-url: https://doi.org/10.21105/joss.03917
-journal: Journal of Open Source Software
-year: 2021
+title: "CR-Sparse: Functional Models and Algorithms for Sparse Signal Processing"
+doi: 10.5281/zenodo.7066359
+url: https://github.com/carnotresearch/cr-sparse
+year: 2022
+version: 0.3.1
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Kumar"
+    given-names: "Shailesh"
+    orcid: "https://orcid.org/0000-0003-2217-4768"
+  doi: "10.21105/joss.03917"
+  journal: "Journal of Open Source Software"
+  publisher: "The Open Journal"
+  url: "https://doi.org/10.21105/joss.03917"
+  pages: 3917
+  title: "CR-Sparse: Hardware accelerated functional algorithms for sparse signal processing in Python using JAX"
+  volume: 6
+  year: 2021
