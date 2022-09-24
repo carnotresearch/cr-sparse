@@ -19,7 +19,7 @@ import jax.numpy as jnp
 from jax.numpy.linalg import det, cholesky, inv
 import cr.nimble as cnb
 
-from .smooth import build2
+from .smooth import build2, build3
 
 def smooth_quad_matrix(P=None, q=None, r=None):
     r"""Quadratic function and its gradient :math:`f(x) = \frac{1}{2} x^T P x + \langle q, x \rangle + r`
@@ -60,3 +60,35 @@ def smooth_quad_matrix(P=None, q=None, r=None):
 
     return build2(func, gradient)
 
+
+def smooth_quad_error(A, b):
+    r"""Quadratic error function and its gradient :math:`f(x) = \frac{1}{2} \| A x - b \|_2^2`
+    """
+
+    @jit
+    def func(x):
+        x = jnp.asarray(x)
+        x = cnb.promote_arg_dtypes(x)
+        r = A @ x - b
+        return 0.5 * jnp.dot(r, r)
+
+
+    @jit
+    def gradient(x):
+        x = jnp.asarray(x)
+        x = cnb.promote_arg_dtypes(x)
+        r = A @ x - b
+        g = r.T @ A
+        return g
+
+
+    @jit
+    def grad_val(x):
+        x = jnp.asarray(x)
+        x = cnb.promote_arg_dtypes(x)
+        r = A @ x - b
+        v = 0.5 * jnp.dot(r, r)
+        g = r.T @ A
+        return g, v
+
+    return build3(func, gradient, grad_val)

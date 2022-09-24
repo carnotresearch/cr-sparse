@@ -174,6 +174,7 @@ Available smooth function generators:
   smooth_entropy
   smooth_logdet
   smooth_quad_matrix
+  smooth_quad_error
 
 Operations on smooth functions:
 
