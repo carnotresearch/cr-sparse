@@ -66,7 +66,7 @@ class FocussState(NamedTuple):
         return self.x[I]
 
     def __str__(self):
-        """Returns the string representation of the discrete wavelet object
+        """Returns the string representation
         """
         s = []
         r_norm = math.sqrt(float(self.r_norm_sqr))

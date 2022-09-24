@@ -84,7 +84,7 @@ class RecoverySolution(NamedTuple):
         return build_signal_from_indices_and_values(self.length, self.I, self.x_I)
 
     def __str__(self):
-        """Returns the string representation of the discrete wavelet object
+        """Returns the string representation
         """
         s = []
         r_norm = math.sqrt(float(self.r_norm_sqr))
@@ -132,7 +132,7 @@ class HTPState(NamedTuple):
     r_norm_sqr_prev: jnp.ndarray
 
     def __str__(self):
-        """Returns the string representation of the discrete wavelet object
+        """Returns the string representation
         """
         s = []
         for x in [

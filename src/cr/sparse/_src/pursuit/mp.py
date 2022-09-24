@@ -45,7 +45,7 @@ class MPState(NamedTuple):
         return self.x.size
 
     def __str__(self):
-        """Returns the string representation of the discrete wavelet object
+        """Returns the string representation of the state
         """
         s = []
         r_norm = math.sqrt(float(self.r_norm_sqr))

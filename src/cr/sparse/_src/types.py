@@ -52,7 +52,7 @@ class RecoveryFullSolution(NamedTuple):
     """Number of times A^H b computed """
 
     def __str__(self):
-        """Returns the string representation of the discrete wavelet object
+        """Returns the string representation
         """
         s = []
         r_norm = norm(self.r)
