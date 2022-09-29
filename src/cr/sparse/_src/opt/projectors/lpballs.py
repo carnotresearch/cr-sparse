@@ -141,6 +141,11 @@ def proj_l2_ball(q=1., b=None, A=None):
 
 def proj_l1_ball(q=1., b=None):
     r"""Projector functions for || x - b ||_1 <= q
+
+
+    Algorithm 2 in Probing the Pareto frontier is a variant
+    of this algorithm based on heap data structure and partial
+    cumulative sums.
     """
 
     if b is not None:
@@ -157,7 +162,7 @@ def proj_l1_ball(q=1., b=None):
         u = jnp.sort(jnp.abs(y))[::-1]
         # compute the cumulative sums
         cu = jnp.cumsum(u)
-        # find the index where the cumulative some is below the threshold
+        # find the index where the cumulative sum is below the threshold
         cu_diff = cu - q
         u_scaled = u*jnp.arange(1, 1+len(u))
         flags = cu_diff > u_scaled
