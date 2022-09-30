@@ -71,53 +71,6 @@ class SPGL1Options(NamedTuple):
     max_iters: int = 100
 
 
-class SPGL1State(NamedTuple):
-    """Solution state of the SPGL1 algorithm
-    """
-    x: jnp.ndarray
-    "Solution vector"
-    g : jnp.ndarray
-    "Gradient vector"
-    r : jnp.ndarray
-    "residual vector"
-    f_past: jnp.ndarray
-    "Past function values"
-    r_norm: float
-    "Residual norm"
-    r_gap: float
-    "Relative duality gap"
-    alpha: float
-    "Step size in the current iteration"
-    alpha_next: float
-    "Step size for the next iteration"
-    # counters
-    iterations: int
-    n_times: int
-    "Number of multiplications with A"
-    n_trans: int
-    "Number of multiplications with A^T"
-    n_newton: int
-    "Number of newton steps"
-    n_ls_iters: int
-    "Number of line search iterations in the current iteration"
-
-    def __str__(self):
-        """Returns the string representation of the state
-        """
-        s = []
-        f_val = self.f_past[0]
-        g_norm = norm(self.g)
-        for x in [
-            f'[{self.iterations}] ',
-            f'f_val:{f_val:.3f} r_gap: {self.r_gap:.3f}',
-            f'g_norm:{g_norm:.3f} r_norm: {self.r_norm:.3f}',
-            f'lsi:{self.n_ls_iters}, alpha: {self.alpha:.3f}, alpha_n: {self.alpha_next:.3f}',
-            # f'x: {format(self.x)}',
-            # f'g: {format(self.g)}',
-            ]:
-            s.append(x.rstrip())
-        return u' '.join(s)
-
 
 ############################################################################
 #  L1-Ball Projections
@@ -183,9 +136,8 @@ def obj_val(r):
     return 0.5 * jnp.vdot(r, r)
 
 ############################################################################
-#  SPG-L1 Solver
+#  Curvilinear line search
 ############################################################################
-
 
 class CurvyLineSearchState(NamedTuple):
     alpha: float
@@ -283,6 +235,71 @@ def curvy_line_search(A, b, x, g, alpha0, f_max, proj, tau, gamma):
     return state
 
 
+############################################################################
+#  SPG-L1 Solver for LASSO problem
+############################################################################
+
+def lasso_metrics(x, g, r, f):
+    # dual norm of the gradient
+    g_dnorm = dual_norm(g)
+    # norm of the residual
+    r_norm = norm(r)
+    # duality gap
+    gap = jnp.dot(jnp.conj(r), r - b) + tau * g_dnorm
+    # relative duality gap
+    f_m = jnp.maximum(1, f)
+    r_gap = jnp.abs(gap) / f_m
+    return r_norm, r_gap
+
+
+class SPGL1LassoState(NamedTuple):
+    """Solution state of the SPGL1 algorithm for LASSO problem
+    """
+    x: jnp.ndarray
+    "Solution vector"
+    g : jnp.ndarray
+    "Gradient vector"
+    r : jnp.ndarray
+    "residual vector"
+    f_past: jnp.ndarray
+    "Past function values"
+    r_norm: float
+    "Residual norm"
+    r_gap: float
+    "Relative duality gap"
+    alpha: float
+    "Step size in the current iteration"
+    alpha_next: float
+    "Step size for the next iteration"
+    # counters
+    iterations: int
+    n_times: int
+    "Number of multiplications with A"
+    n_trans: int
+    "Number of multiplications with A^T"
+    n_newton: int
+    "Number of newton steps"
+    n_ls_iters: int
+    "Number of line search iterations in the current iteration"
+
+    def __str__(self):
+        """Returns the string representation of the state
+        """
+        s = []
+        f_val = self.f_past[0]
+        g_norm = norm(self.g)
+        for x in [
+            f'[{self.iterations}] ',
+            f'f_val:{f_val:.3f} r_gap: {self.r_gap:.3f}',
+            f'g_norm:{g_norm:.3f} r_norm: {self.r_norm:.3f}',
+            f'lsi:{self.n_ls_iters}, alpha: {self.alpha:.3f}, alpha_n: {self.alpha_next:.3f}',
+            # f'x: {format(self.x)}',
+            # f'g: {format(self.g)}',
+            ]:
+            s.append(x.rstrip())
+        return u' '.join(s)
+
+
 def solve_lasso_from(A,
     b: jnp.ndarray, 
     tau: float, 
@@ -295,17 +312,6 @@ def solve_lasso_from(A,
     opt_tol = options.opt_tol
     b_norm = norm(b)
 
-    def metrics(x, g, r, f):
-        # dual norm of the gradient
-        g_dnorm = dual_norm(g)
-        # norm of the residual
-        r_norm = norm(r)
-        # duality gap
-        gap = jnp.dot(jnp.conj(r), r - b) + tau * g_dnorm
-        # relative duality gap
-        f_m = jnp.maximum(1, f)
-        r_gap = jnp.abs(gap) / f_m
-        return r_norm, r_gap
 
     def init():
         x = jnp.asarray(x0)
@@ -324,8 +330,8 @@ def solve_lasso_from(A,
         d_norm = crn.norm_linf(d)
         alpha =  1. / d_norm
         alpha = jnp.clip(alpha, alpha_min, alpha_max)
-        r_norm, r_gap = metrics(x, g, r, f)
-        return SPGL1State(x=x, g=g, r=r, 
+        r_norm, r_gap = lasso_metrics(x, g, r, f)
+        return SPGL1LassoState(x=x, g=g, r=r, 
             f_past=f_past,
             r_norm=r_norm, r_gap=r_gap, alpha=alpha,
             alpha_next=alpha,
@@ -348,7 +354,7 @@ def solve_lasso_from(A,
         f = lsearch.f_val
         # update past values
         f_past = crn.cbuf_push_left(state.f_past, f)
-        r_norm, r_gap = metrics(x, g, r, f)
+        r_norm, r_gap = lasso_metrics(x, g, r, f)
         s = x - state.x
         y = g - state.g
         sts = jnp.dot(jnp.conj(s), s)
@@ -357,7 +363,7 @@ def solve_lasso_from(A,
             lambda _: alpha_max,
             lambda _: jnp.clip(sts / sty, alpha_min, alpha_max),
             None)
-        return SPGL1State(x=x, g=g, r=r, 
+        return SPGL1LassoState(x=x, g=g, r=r, 
             f_past=f_past,
             r_norm=r_norm, r_gap=r_gap, 
             alpha=lsearch.alpha,
@@ -390,3 +396,288 @@ def solve_lasso(A,
     m, n = A.shape
     x0 = jnp.zeros(n)
     return solve_lasso_from(A, b, tau, x0, options)
+
+solve_lasso_jit = jit(solve_lasso, static_argnames=("A", ))
+
+
+############################################################################
+#  SPG-L1 Solver for BPIC problem
+############################################################################
+
+class SPGL1BPState(NamedTuple):
+    """Solution state of the SPGL1 algorithm for BPIC problem
+    """
+    x: jnp.ndarray
+    "Solution vector"
+    g : jnp.ndarray
+    "Gradient vector"
+    r : jnp.ndarray
+    "residual vector"
+    f_past: jnp.ndarray
+    "Past function values"
+    tau: float
+    "The limit on the l1-norm"
+    r_norm: float
+    "Residual norm"
+    r_gap: float
+    "Relative duality gap"
+    r_res_error: float
+    "Relative error of residual norm from sigma"
+    r_f_error: float
+    "Relative error of objective value from sigma^2/2"
+    alpha: float
+    "Step size in the current iteration"
+    alpha_next: float
+    "Step size for the next iteration"
+    # counters
+    iterations: int
+    n_times: int
+    "Number of multiplications with A"
+    n_trans: int
+    "Number of multiplications with A^T"
+    n_newton: int
+    "Number of newton steps"
+    n_ls_iters: int
+    "Number of line search iterations in the current iteration"
+
+    def __str__(self):
+        """Returns the string representation of the state
+        """
+        s = []
+        f_val = self.f_past[0]
+        g_norm = norm(self.g)
+        for x in [
+            f'[{self.iterations}] ',
+            f'tau: {self.tau:.2e}, f_val:{f_val:.4f} r_gap: {self.r_gap:.2e}',
+            f'g_norm:{g_norm:.2e} r_norm: {self.r_norm:.2e}',
+            f'lsi:{self.n_ls_iters}, alpha: {self.alpha:.3f}, alpha_n: {self.alpha_next:.3f}',
+            # f'x: {format(self.x)}',
+            # f'g: {format(self.g)}',
+            ]:
+            s.append(x.rstrip())
+        return u' '.join(s)
+
+
+def bpic_metrics(b, x, g, r, f, sigma, tau):
+    # dual norm of the gradient
+    g_dnorm = dual_norm(g)
+    # norm of the residual
+    r_norm = norm(r)
+    # duality gap
+    gap = jnp.dot(jnp.conj(r), r - b) + tau * g_dnorm
+    # relative duality gap
+    f_m = jnp.maximum(1, f)
+    r_m = jnp.maximum(1., r_norm)
+    r_gap = jnp.abs(gap) / f_m
+
+    res_error = r_norm - sigma
+    f_error = f - sigma**2 / 2.0
+    r_res_error = jnp.abs(res_error) / r_m
+    r_f_error = jnp.abs(f_error) / f_m
+
+    return g_dnorm, r_norm, r_gap, r_res_error, r_f_error
+
+
+def tau_change(A, r, r_norm, sigma):
+    y = r / r_norm
+    lambda_ = crn.norm_linf(A.trans(y))
+    phi = r_norm
+    phi_d = -lambda_
+    change = (sigma - phi) / phi_d
+    return change
+
+def compute_rgf(A, b, x):
+    # update residual
+    r = b - A.times(x)
+    # compute gradient
+    g = -A.trans(r)
+    # objective value
+    f = obj_val(r)
+    return r, g, f
+
+def update_xrgf(A, b, x, tau):
+    # bring x to this ball
+    x = project_to_l1_ball(x, tau)
+    # update residual
+    r = b - A.times(x)
+    # compute gradient
+    g = -A.trans(r)
+    # objective value
+    f = obj_val(r)
+    return x, r, g, f
+
+def solve_bpic_from(A,
+    b: jnp.ndarray, 
+    sigma: float, 
+    x0: jnp.ndarray,
+    options: SPGL1Options = SPGL1Options()):
+    # shape of the linear operator
+    m, n = A.shape
+    alpha_min = options.alpha_min
+    alpha_max = options.alpha_max
+    opt_tol = options.opt_tol
+    b_norm = norm(b)
+
+    def init():
+        x = jnp.asarray(x0)
+        # initial value of tau
+        tau = crn.norm_l1(x)
+        # compute initial residual gradient etc.
+        x, r, g, f = update_xrgf(A, b, x, tau)
+        # compute all the metrics
+        g_dnorm, r_norm, r_gap, r_res_error, r_f_error = bpic_metrics(b, x, g, r, f, sigma, tau)
+        tau = jnp.maximum(0, tau + (r_norm * (r_norm - sigma) ) / g_dnorm)
+
+        # update x as per the new value of tau
+        x, r, g, f = update_xrgf(A, b, x, tau)
+        # update the metrics
+        g_dnorm, r_norm, r_gap, r_res_error, r_f_error = bpic_metrics(b, x, g, r, f, sigma, tau)
+
+        # projected gradient direction
+        d = project_to_l1_ball(x - g, tau) - x
+        # initial step length calculation
+        d_norm = crn.norm_linf(d)
+        alpha =  1. / d_norm
+        alpha = jnp.clip(alpha, alpha_min, alpha_max)
+
+        # prepare the memory of past function values
+        f_past = jnp.full(options.memory, f)
+
+        return SPGL1BPState(x=x, g=g, r=r, 
+            f_past=f_past,
+            tau=tau,
+            r_norm=r_norm, r_gap=r_gap, 
+            r_res_error=r_res_error, r_f_error=r_f_error,
+            alpha=alpha,
+            alpha_next=alpha,
+            iterations=1, n_times=2, n_trans=2,
+            n_newton=0, n_ls_iters=0)
+
+    @jit
+    def body_func(state):
+        f_max = jnp.max(state.f_past)
+        # perform line search
+        lsearch = curvy_line_search(A, b, state.x, 
+            state.g, state.alpha_next, f_max, 
+            project_to_l1_ball, state.tau,
+            options.gamma)
+        # new x value
+        x = lsearch.x_new
+        # new residual
+        r = lsearch.r_new
+        # new gradient
+        g = -A.trans(r)
+        # new function value
+        f = lsearch.f_val
+        # compute various metrics
+        g_dnorm, r_norm, r_gap, r_res_error, r_f_error = bpic_metrics(b, x, g, r, f, sigma, state.tau)
+        # checks if we need to update tau
+        f_change = jnp.abs(f- state.f_past[0])
+        flag_c = jnp.logical_or(
+            jnp.logical_and(
+                f_change <= options.dec_tol * f, 
+                r_norm > 2 * sigma),
+            jnp.logical_and(
+                f_change <= 1e-1 * f * jnp.abs(r_norm - sigma), 
+                r_norm <= 2 * sigma),
+            )
+        
+        # print(f'{f_change:.1e}, {f_change/ f:.2f}, {r_norm:.1e}, {2 * sigma:.1f}, {r_norm - sigma:.2f}, {flag_c}') 
+        # update tau if necessary
+        tau = lax.cond(flag_c,
+            lambda _ : jnp.maximum(0, state.tau + (r_norm * (r_norm - sigma) ) / g_dnorm),
+            lambda _: state.tau,
+            None)
+        # update the solution to be consistent with new tau value if necessary
+        x, r, g, f = lax.cond(tau < state.tau,
+            lambda _: update_xrgf(A, b, x, tau),
+            lambda _: (x, r, g, f),
+            None)
+        # update past objective values with the new objective value
+        f_past = crn.cbuf_push_left(state.f_past, f)
+        # compute the new step size
+        s = x - state.x
+        y = g - state.g
+        sts = jnp.dot(jnp.conj(s), s)
+        sty = jnp.dot(jnp.conj(s), y)
+        alpha_next = lax.cond(sty <= 0,
+            lambda _: alpha_max,
+            lambda _: jnp.clip(sts / sty, alpha_min, alpha_max),
+            None)
+        return SPGL1BPState(x=x, g=g, r=r, 
+            f_past=f_past,
+            tau=tau,
+            r_norm=r_norm, r_gap=r_gap, 
+            r_res_error=r_res_error, r_f_error=r_f_error,
+            alpha=lsearch.alpha,
+            alpha_next=alpha_next,
+            iterations=state.iterations+1,
+            n_times=2, n_trans=2, 
+            n_newton=state.n_newton,
+            n_ls_iters=lsearch.n_iters)
+
+
+    @jit
+    def cond_func(state):
+        a = state.r_gap > jnp.maximum(opt_tol, state.r_f_error)
+        b = state.r_res_error > opt_tol
+
+        u = state.r_norm > sigma
+        v = state.r_res_error > opt_tol
+        w = state.r_norm > options.bp_tol * b_norm
+        x = jnp.all(jnp.array([u, v, w]))
+
+        cont = jnp.logical_or(jnp.logical_and(a, b), x)
+        cont = jnp.logical_and(cont, state.iterations < options.max_iters)
+        return cont
+
+    state = init()
+    # state = lax.while_loop(cond_func, body_func, state)
+    while cond_func(state):
+        print(state)
+        state = body_func(state)
+    print(state)
+    return state
+
+def solve_bpic(A,
+    b: jnp.ndarray, 
+    sigma: float, 
+    options: SPGL1Options = SPGL1Options()):
+    m, n = A.shape
+    x0 = jnp.zeros(n)
+    return solve_bpic_from(A, b, sigma, x0, options)
+
+solve_bpic_jit = jit(solve_bpic, static_argnames=("A", ))
+
+
+def analyze_bpic_state(A, b, sigma, options, state, x0):
+    m, n = A.shape
+    x = state.x
+    r = state.r
+    g = state.g
+    print(f'm={m}, n={n}, sigma: {sigma:.2f}, b_norm: {norm(b):.2f}')
+    snr  = crn.signal_noise_ratio(x0, x)
+    prd = crn.percent_rms_diff(x0, x)
+    print(f'SNR: {snr:.2f} dB, PRD: {prd:.1f} %')
+    print(f'x0: l1: {crn.norm_l1(x0):.3f}, l2: {crn.norm_l2(x0):.3f}, linf: {crn.norm_linf(x0):.3f}')
+    print(f'x : l1: {crn.norm_l1(x):.3f}, l2: {crn.norm_l2(x):.3f}, linf: {crn.norm_linf(x):.3f}')
+
+
+    r_norm = state.r_norm
+    rs = r_norm / sigma
+    print(f'r_norm: {r_norm:.4f} r/sigma: {rs:.3f}')
+
+    print(f'tau: {state.tau:.2e}, alpha: {state.alpha:.3f}, alpha_n: {state.alpha_next:.3f}')
+
+    f_past = state.f_past
+    f = f_past[0]
+    f_prev = f_past[1]
+    f_change = jnp.abs(f - f_prev)
+    rel_f_change = f_change / f
+    print(f'f_val:{f:.2e} f_prev: {f_prev:.2e}, change: {f_change:.2e}, rel change: {rel_f_change * 100:.2f}%')
+    print(f'g_norm:{norm(g):.2e} g_dnorm: {crn.norm_linf(g):.2e}')
+   
+    if state.r_gap <= jnp.maximum(options.opt_tol, state.r_f_error):
+        print(f'Relative gap {state.r_gap:.2e} is below optimality tolerance')
+    if state.r_res_error <= options.opt_tol:
+        print(f'Relative residual error {state.r_res_error:.2e} is below optimality tolerance')
