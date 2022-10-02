@@ -64,9 +64,9 @@ class SPGL1Options(NamedTuple):
     "Minimum spectral step"
     alpha_max: float = 1e5
     "Maximum spectral step"
-    memory: int = 10
+    memory: int = 3
     "Number of past objective values to be retained"
-    max_matvec: int = jnp.inf
+    max_matvec: int = 100000
     "Maximum number of A x and A^T x to be computed"
     max_iters: int = 100
 
@@ -160,11 +160,12 @@ class CurvyLineSearchState(NamedTuple):
         r_norm = norm(self.r_new)
         d_norm = norm(self.d_new)
         for x in [
-            f'n_iters: {self.n_iters}, n_safe: {self.n_safe}',
-            f'alpha: {self.alpha:.4f}, scale: {self.scale:.4f}',
+            f'step: {self.alpha}, scale: {self.scale}',
+            f'gtd: {self.gtd}',
             f'f_val: {self.f_val:.2f}, f_lim: {self.f_lim:.2f}',
-            f'x_norm: {x_norm:.2f}, r_norm: {r_norm:.2f}',
-            f', d_norm:{d_norm:.2f}'
+            # f'x_norm: {x_norm:.2f}, r_norm: {r_norm:.2f}',
+            # f'd_norm:{d_norm:.2f}',
+            # f'n_iters: {self.n_iters}, n_safe: {self.n_safe}',
             ]:
             s.append(x.rstrip())
         return u' '.join(s)
@@ -172,8 +173,9 @@ class CurvyLineSearchState(NamedTuple):
 def curvy_line_search(A, b, x, g, alpha0, f_max, proj, tau, gamma):
     """curvilinear line search
     """
-    m, n = A.shape
     max_iters = 10
+    g = alpha0 * g
+    n = x.size
     n2 = math.sqrt(n)
     g_norm = norm(g) / n2
 
@@ -188,28 +190,28 @@ def curvy_line_search(A, b, x, g, alpha0, f_max, proj, tau, gamma):
         return x_new, r_new, d_new, gtd, f_val, f_lim
 
     def init():
-        alpha = alpha0
+        alpha = 1.
         scale = 1.
         x_new, r_new, d_new, gtd, f_val, f_lim = candidate(alpha, scale)
         return CurvyLineSearchState(alpha=alpha, scale=scale,
             x_new=x_new, r_new=r_new, d_new=d_new,
             gtd=gtd, d_norm_old=0.,
-            f_val=f_val, f_lim=f_max,
-            n_iters=1, n_safe=0)
+            f_val=f_val, f_lim=f_lim,
+            n_iters=0, n_safe=0)
 
     def next_func(state):
         alpha = state.alpha
         # reduce alpha size
         alpha /= 2.
         # check if the scale needs to be reduced
-        d_norm = norm(state.d_new)
+        d_norm = norm(state.d_new) / n2
         d_norm_old = state.d_norm_old
         # check if the iterates of x are too close to each other
         too_close = jnp.abs(d_norm - d_norm_old) <= 1e-6 * d_norm
         scale = state.scale
         n_safe = state.n_safe
         scale, n_safe = lax.cond(too_close,
-            lambda _:  (d_norm / g_norm / (1 << n_safe), n_safe + 1),
+            lambda _:  ((d_norm / g_norm / (2. ** n_safe)), n_safe + 1),
             lambda _: (scale, n_safe),
             None)
         x_new, r_new, d_new, gtd, f_val, f_lim = candidate(alpha, scale)       
@@ -230,8 +232,10 @@ def curvy_line_search(A, b, x, g, alpha0, f_max, proj, tau, gamma):
 
     state = init()
     state = lax.while_loop(cond_func, next_func, state)
+    # print(state)
     # while cond_func(state):
     #     state = next_func(state)
+    #     print(state)
     return state
 
 
@@ -277,8 +281,6 @@ class SPGL1LassoState(NamedTuple):
     "Number of multiplications with A"
     n_trans: int
     "Number of multiplications with A^T"
-    n_newton: int
-    "Number of newton steps"
     n_ls_iters: int
     "Number of line search iterations in the current iteration"
 
@@ -336,7 +338,7 @@ def solve_lasso_from(A,
             r_norm=r_norm, r_gap=r_gap, alpha=alpha,
             alpha_next=alpha,
             iterations=1, n_times=2, n_trans=2,
-            n_newton=0, n_ls_iters=0)
+            n_ls_iters=0)
 
     def body_func(state):
         f_max = jnp.max(state.f_past)
@@ -370,7 +372,6 @@ def solve_lasso_from(A,
             alpha_next=alpha_next,
             iterations=state.iterations+1,
             n_times=2, n_trans=2, 
-            n_newton=state.n_newton,
             n_ls_iters=lsearch.n_iters)
 
     def cond_func(state):
@@ -417,6 +418,8 @@ class SPGL1BPState(NamedTuple):
     "Past function values"
     tau: float
     "The limit on the l1-norm"
+    tau_changed: bool
+    "Flag indicating if tau was changed"
     r_norm: float
     "Residual norm"
     r_gap: float
@@ -446,13 +449,16 @@ class SPGL1BPState(NamedTuple):
         s = []
         f_val = self.f_past[0]
         g_norm = norm(self.g)
+        ch = ' C ' if self.tau_changed else ""
         for x in [
             f'[{self.iterations}] ',
-            f'tau: {self.tau:.2e}, f_val:{f_val:.4f} r_gap: {self.r_gap:.2e}',
-            f'g_norm:{g_norm:.2e} r_norm: {self.r_norm:.2e}',
-            f'lsi:{self.n_ls_iters}, alpha: {self.alpha:.3f}, alpha_n: {self.alpha_next:.3f}',
-            # f'x: {format(self.x)}',
-            # f'g: {format(self.g)}',
+            f'r_norm: {self.r_norm:.6f}',
+            f'r_gap: {self.r_gap:.2e}',
+            f'g_norm:{g_norm:.3f}',
+            f'f_val:{f_val:.4f} ',
+            f'alpha: {self.alpha:.3f}',
+            f'lsi:{self.n_ls_iters}',
+            f'tau: {self.tau:.4f}{ch}',
             ]:
             s.append(x.rstrip())
         return u' '.join(s)
@@ -528,13 +534,13 @@ def solve_bpic_from(A,
         g_dnorm, r_norm, r_gap, r_res_error, r_f_error = bpic_metrics(b, x, g, r, f, sigma, tau)
         tau = jnp.maximum(0, tau + (r_norm * (r_norm - sigma) ) / g_dnorm)
 
-        # update x as per the new value of tau
-        x, r, g, f = update_xrgf(A, b, x, tau)
-        # update the metrics
-        g_dnorm, r_norm, r_gap, r_res_error, r_f_error = bpic_metrics(b, x, g, r, f, sigma, tau)
+        # # update x as per the new value of tau
+        # x, r, g, f = update_xrgf(A, b, x, tau)
+        # # update the metrics
+        # g_dnorm, r_norm, r_gap, r_res_error, r_f_error = bpic_metrics(b, x, g, r, f, sigma, tau)
 
         # projected gradient direction
-        d = project_to_l1_ball(x - g, tau) - x
+        d = project_to_l1_ball(x - g, 0.) - x
         # initial step length calculation
         d_norm = crn.norm_linf(d)
         alpha =  1. / d_norm
@@ -545,15 +551,15 @@ def solve_bpic_from(A,
 
         return SPGL1BPState(x=x, g=g, r=r, 
             f_past=f_past,
-            tau=tau,
+            tau=tau, tau_changed=True,
             r_norm=r_norm, r_gap=r_gap, 
             r_res_error=r_res_error, r_f_error=r_f_error,
             alpha=alpha,
             alpha_next=alpha,
             iterations=1, n_times=2, n_trans=2,
-            n_newton=0, n_ls_iters=0)
+            n_newton=1, n_ls_iters=0)
 
-    @jit
+    #@jit
     def body_func(state):
         f_max = jnp.max(state.f_past)
         # perform line search
@@ -561,38 +567,47 @@ def solve_bpic_from(A,
             state.g, state.alpha_next, f_max, 
             project_to_l1_ball, state.tau,
             options.gamma)
+        n_times = state.n_times + lsearch.n_iters + 1
         # new x value
         x = lsearch.x_new
         # new residual
         r = lsearch.r_new
         # new gradient
         g = -A.trans(r)
+        n_trans = state.n_trans + 1
         # new function value
         f = lsearch.f_val
         # compute various metrics
         g_dnorm, r_norm, r_gap, r_res_error, r_f_error = bpic_metrics(b, x, g, r, f, sigma, state.tau)
         # checks if we need to update tau
-        f_change = jnp.abs(f- state.f_past[0])
+        f_old = state.f_past[0]
+        f_change = jnp.abs(f- f_old)
+        tc_a = f_change <= options.dec_tol * f
+        tc_b = f_change <= 1e-1 * f * jnp.abs(r_norm - sigma)
         flag_c = jnp.logical_or(
             jnp.logical_and(
-                f_change <= options.dec_tol * f, 
+                tc_a, 
                 r_norm > 2 * sigma),
             jnp.logical_and(
-                f_change <= 1e-1 * f * jnp.abs(r_norm - sigma), 
+                tc_b, 
                 r_norm <= 2 * sigma),
             )
-        
-        # print(f'{f_change:.1e}, {f_change/ f:.2f}, {r_norm:.1e}, {2 * sigma:.1f}, {r_norm - sigma:.2f}, {flag_c}') 
+        # print(f'f:{f}, f_old: {f_old}, fc:{f_change} a: {tc_a}, b: {tc_b}, tc: {flag_c}')
+        # we shall change tau only if it didn't change in the last iteration
+        change_tau = jnp.logical_and(flag_c, jnp.logical_not(state.tau_changed))        
         # update tau if necessary
-        tau = lax.cond(flag_c,
+        tau = lax.cond(change_tau,
             lambda _ : jnp.maximum(0, state.tau + (r_norm * (r_norm - sigma) ) / g_dnorm),
             lambda _: state.tau,
             None)
         # update the solution to be consistent with new tau value if necessary
-        x, r, g, f = lax.cond(tau < state.tau,
+        tau_reduced = tau < state.tau
+        x, r, g, f = lax.cond(tau_reduced,
             lambda _: update_xrgf(A, b, x, tau),
             lambda _: (x, r, g, f),
             None)
+        n_times, n_trans = n_times + tau_reduced, n_trans + tau_reduced
+        n_newton = state.n_newton + change_tau
         # update past objective values with the new objective value
         f_past = crn.cbuf_push_left(state.f_past, f)
         # compute the new step size
@@ -606,37 +621,43 @@ def solve_bpic_from(A,
             None)
         return SPGL1BPState(x=x, g=g, r=r, 
             f_past=f_past,
-            tau=tau,
+            tau=tau, tau_changed=change_tau,
             r_norm=r_norm, r_gap=r_gap, 
             r_res_error=r_res_error, r_f_error=r_f_error,
             alpha=lsearch.alpha,
             alpha_next=alpha_next,
             iterations=state.iterations+1,
-            n_times=2, n_trans=2, 
-            n_newton=state.n_newton,
-            n_ls_iters=lsearch.n_iters)
+            n_times=n_times, n_trans=n_trans, 
+            n_newton=n_newton,
+            n_ls_iters=state.n_ls_iters + lsearch.n_iters)
 
 
     @jit
     def cond_func(state):
+        # if a and b are true then we continue. Otherwise we check more conditions
         a = state.r_gap > jnp.maximum(opt_tol, state.r_f_error)
         b = state.r_res_error > opt_tol
 
+        # we check the following three conditions if either a or b is false
         u = state.r_norm > sigma
         v = state.r_res_error > opt_tol
         w = state.r_norm > options.bp_tol * b_norm
         x = jnp.all(jnp.array([u, v, w]))
 
         cont = jnp.logical_or(jnp.logical_and(a, b), x)
+        # check on maximum number of iterations
         cont = jnp.logical_and(cont, state.iterations < options.max_iters)
+        # check on maximum number of matrix vector products
+        f = state.n_times + state.n_trans < options.max_matvec
+        cont = jnp.logical_and(cont, f)
         return cont
 
     state = init()
-    # state = lax.while_loop(cond_func, body_func, state)
-    while cond_func(state):
-        print(state)
-        state = body_func(state)
-    print(state)
+    state = lax.while_loop(cond_func, body_func, state)
+    # while cond_func(state):
+    #     print(state)
+    #     state = body_func(state)
+    # print(state)
     return state
 
 def solve_bpic(A,
@@ -647,7 +668,7 @@ def solve_bpic(A,
     x0 = jnp.zeros(n)
     return solve_bpic_from(A, b, sigma, x0, options)
 
-solve_bpic_jit = jit(solve_bpic, static_argnames=("A", ))
+solve_bpic_jit = jit(solve_bpic, static_argnames=("A", "options"))
 
 
 def analyze_bpic_state(A, b, sigma, options, state, x0):
@@ -656,6 +677,8 @@ def analyze_bpic_state(A, b, sigma, options, state, x0):
     r = state.r
     g = state.g
     print(f'm={m}, n={n}, sigma: {sigma:.2f}, b_norm: {norm(b):.2f}')
+    print(f'iterations={state.iterations}, times={state.n_times},' +
+        f' trans={state.n_trans}, newton={state.n_newton}, line search={state.n_ls_iters}')
     snr  = crn.signal_noise_ratio(x0, x)
     prd = crn.percent_rms_diff(x0, x)
     print(f'SNR: {snr:.2f} dB, PRD: {prd:.1f} %')
