@@ -16,12 +16,15 @@
 from cr.sparse._src.cvx.spgl1 import (
     SPGL1Options,
     SPGL1LassoState,
+    SPGL1BPState,
     solve_lasso_from,
     solve_lasso,
     solve_lasso_jit,
-    analyze_lasso_state,
     solve_bpic,
     solve_bpic_jit,
+    solve_bp,
+    solve_bp_jit,
+    compute_rgf,
+    analyze_lasso_state,
     analyze_bpic_state,
-    compute_rgf
 )

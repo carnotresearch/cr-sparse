@@ -735,3 +735,14 @@ def analyze_bpic_state(A, b, sigma, options, state, x0):
         print(f'Relative gap {state.r_gap:.2e} is below optimality tolerance')
     if state.r_res_error <= options.opt_tol:
         print(f'Relative residual error {state.r_res_error:.2e} is below optimality tolerance')
+
+
+def solve_bp(A,
+    b: jnp.ndarray, 
+    options: SPGL1Options = SPGL1Options()):
+    m, n = A.shape
+    x0 = jnp.zeros(n)
+    sigma = 0.
+    return solve_bpic_from(A, b, sigma, x0, options)
+
+solve_bp_jit = jit(solve_bp, static_argnames=("A", "options"))
