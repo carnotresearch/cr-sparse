@@ -243,7 +243,7 @@ def curvy_line_search(A, b, x, g, alpha0, f_max, proj, tau, gamma):
 #  SPG-L1 Solver for LASSO problem
 ############################################################################
 
-def lasso_metrics(x, g, r, f):
+def lasso_metrics(b, x, g, r, f, tau):
     # dual norm of the gradient
     g_dnorm = dual_norm(g)
     # norm of the residual
@@ -332,12 +332,12 @@ def solve_lasso_from(A,
         d_norm = crn.norm_linf(d)
         alpha =  1. / d_norm
         alpha = jnp.clip(alpha, alpha_min, alpha_max)
-        r_norm, r_gap = lasso_metrics(x, g, r, f)
+        r_norm, r_gap = lasso_metrics(b, x, g, r, f, tau)
         return SPGL1LassoState(x=x, g=g, r=r, 
             f_past=f_past,
             r_norm=r_norm, r_gap=r_gap, alpha=alpha,
             alpha_next=alpha,
-            iterations=1, n_times=2, n_trans=2,
+            iterations=1, n_times=1, n_trans=1,
             n_ls_iters=0)
 
     def body_func(state):
@@ -346,17 +346,19 @@ def solve_lasso_from(A,
             state.g, state.alpha_next, f_max, 
             project_to_l1_ball, tau,
             options.gamma)
+        n_times = state.n_times + lsearch.n_iters + 1
         # new x value
         x = lsearch.x_new
         # new residual
         r = lsearch.r_new
         # new gradient
         g = -A.trans(r)
+        n_trans = state.n_trans + 1
         # new function value
         f = lsearch.f_val
         # update past values
         f_past = crn.cbuf_push_left(state.f_past, f)
-        r_norm, r_gap = lasso_metrics(x, g, r, f)
+        r_norm, r_gap = lasso_metrics(b, x, g, r, f, tau)
         s = x - state.x
         y = g - state.g
         sts = jnp.dot(jnp.conj(s), s)
@@ -371,8 +373,8 @@ def solve_lasso_from(A,
             alpha=lsearch.alpha,
             alpha_next=alpha_next,
             iterations=state.iterations+1,
-            n_times=2, n_trans=2, 
-            n_ls_iters=lsearch.n_iters)
+            n_times=n_times, n_trans=n_times, 
+            n_ls_iters=state.n_ls_iters + lsearch.n_iters)
 
     def cond_func(state):
         # print(state)
@@ -400,6 +402,35 @@ def solve_lasso(A,
 
 solve_lasso_jit = jit(solve_lasso, static_argnames=("A", ))
 
+
+def analyze_lasso_state(A, b, tau, options, state, x0):
+    m, n = A.shape
+    x = state.x
+    r = state.r
+    g = state.g
+    print(f'm={m}, n={n}, tau: {tau:.2f}, b_norm: {norm(b):.2f}')
+    print(f'iterations={state.iterations}, times={state.n_times},' +
+        f' trans={state.n_trans}, line search={state.n_ls_iters}')
+    snr  = crn.signal_noise_ratio(x0, x)
+    prd = crn.percent_rms_diff(x0, x)
+    print(f'SNR: {snr:.2f} dB, PRD: {prd:.1f} %')
+    print(f'x0: l1: {crn.norm_l1(x0):.3f}, l2: {crn.norm_l2(x0):.3f}, linf: {crn.norm_linf(x0):.3f}')
+    print(f'x : l1: {crn.norm_l1(x):.3f}, l2: {crn.norm_l2(x):.3f}, linf: {crn.norm_linf(x):.3f}')
+
+
+    r_norm = state.r_norm
+    print(f'r_norm: {r_norm:.4f}')
+
+    print(f'alpha: {state.alpha:.3f}, alpha_n: {state.alpha_next:.3f}')
+
+    f_past = state.f_past
+    f = f_past[0]
+    f_prev = f_past[1]
+    f_change = jnp.abs(f - f_prev)
+    rel_f_change = f_change / f
+    print(f'f_val:{f:.2e} f_prev: {f_prev:.2e}, change: {f_change:.2e}, rel change: {rel_f_change * 100:.2f}%')
+    print(f'g_norm:{norm(g):.2e} g_dnorm: {crn.norm_linf(g):.2e}')
+   
 
 ############################################################################
 #  SPG-L1 Solver for BPIC problem
