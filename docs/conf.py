@@ -26,8 +26,8 @@ sys.path.append(os.path.abspath('extensions'))
 # -- Project information -----------------------------------------------------
 
 project = 'cr-sparse'
-copyright = '2021, CR-Sparse Development Team'
-author = 'CR-Sparse Development Team'
+copyright = '2021, CR-Suite Development Team'
+author = 'CR-Suite Development Team'
 
 # The short X.Y version
 version = ""
