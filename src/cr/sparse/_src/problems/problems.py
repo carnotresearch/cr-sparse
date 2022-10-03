@@ -18,6 +18,7 @@ import importlib
 PROBLEM_MAP = {
     'blocks-haar': 'prob002',
     'cosine-spikes-dirac-dct' : 'prob003',
+    'complex-sinusoid-spikes-dirac-fourier' : 'prob004',
 }
 
 import cr.nimble as crn
