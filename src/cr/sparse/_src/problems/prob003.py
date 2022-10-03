@@ -29,7 +29,7 @@ from .spec import Problem
 
 
 def generate(key, c=2, k=120, n=1024):
-    name = 'cosine-spikes-dirac-dct'
+    name = 'cosine-spikes:dirac-dct'
     t = jnp.arange(n)/n
     keys = random.split(key, 4)
 

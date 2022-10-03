@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-"""A port of problem 004 from Sparco
+"""A port of problem 003 from Sparco
 """
 
 from jax import random
@@ -23,64 +23,67 @@ import jax.numpy as jnp
 import cr.nimble as crn
 import cr.sparse as crs
 import cr.sparse.lop as crlop
+import cr.sparse.data as crdata
 
 from .spec import Problem
 
 
-def generate(key, c=2, k=120, n=1024):
-    name = 'complex:sinusoid-spikes:dirac-fourier'
+def generate(key, c=2, k=60, m=300, n=1024):
+    name = 'cosine-spikes:dirac-dct:gaussian'
     t = jnp.arange(n)/n
-    keys = random.split(key, 4)
+    keys = random.split(key, 5)
 
-    fourier_basis = crlop.fourier_basis(n)
+    cosine_basis = crlop.cosine_basis(n)
     dirac_basis = crlop.identity(n)
-    dirac_fourier_basis = crlop.hcat(dirac_basis, fourier_basis)
-    dirac_fourier_basis = crlop.jit(dirac_fourier_basis)
+    dirac_cosine_basis = crlop.hcat(dirac_basis, cosine_basis)
+    dirac_cosine_basis = crlop.jit(dirac_cosine_basis)
 
     # cosine part of the signal
     indices = random.choice(keys[0], n, shape=(c,), replace=False)
-    coeffs = jnp.zeros(n, dtype=jnp.complex128)
-    rkey, ikey = random.split(keys[1])
-    rc = random.normal(rkey, shape=(c,))
-    ic = random.normal(ikey, shape=(c,))
-    cc = rc + 1j * ic
-    coeffs = coeffs.at[indices].set(cc)
+    coeffs = jnp.zeros(n)
+    coeffs = coeffs.at[indices].set(random.normal(keys[1], shape=(c,)))
     coeffs = coeffs * jnp.sqrt(n/2)
-    sinusoid = fourier_basis.times(coeffs)
+    cosine = cosine_basis.times(coeffs)
 
     # spike part of the signal
     indices = random.choice(keys[2], n, shape=(k,), replace=False)
-    spikes = jnp.zeros(n, dtype=jnp.complex128)
-    rkey, ikey = random.split(keys[3])
-    rc = random.normal(rkey, shape=(k,))
-    ic = random.normal(ikey, shape=(k,))
-    cc = rc + 1j * ic
-    spikes = spikes.at[indices].set(cc)
+    spikes = jnp.zeros(n)
+    spikes = spikes.at[indices].set(random.normal(keys[3], shape=(k,)))
 
     # combined signal
-    b = sinusoid + spikes
+    y = cosine + spikes
+    # full sparse representation
     x = jnp.concatenate([spikes, coeffs])
-    Phi = dirac_basis
-    Psi = dirac_fourier_basis
-    A = dirac_fourier_basis
-    reconstruct = lambda x : A.times(x)
+    # sensing matrix
+    Phi = crlop.gaussian_dict(keys[4], m, n)
+    # measurements
+    b = Phi.times(y)
+    # sparsifying basis
+    Psi = dirac_cosine_basis
+    # combined operator
+    A = crlop.compose(Phi, Psi)
+    # function to construct the signal from representation
+    reconstruct = lambda x : Psi.times(x)
 
     # Number of figures
-    figures = ['Real part of the signal', 'Imaginary part of the signal', 
-    'Real part of the coefficients', 'Imaginary part of the coefficients']
+    figures = ['Cosine with spikes', 'Cosine part of signal', 
+    'Spikes part of signal', 'Dirac DCT Model', 'Measurements']
     def plot(i, ax):
         ax.set_title(figures[i])
         if i == 0:
-            ax.plot(t, jnp.real(b), 'b-')
+            ax.plot(t, y, 'b-')
             return
         if i == 1:
-            ax.plot(t, jnp.imag(b), 'b-')
+            ax.plot(t, cosine, 'b-')
             return
         if i == 2:
-            ax.plot(jnp.real(x), 'b-')
+            ax.plot(t, spikes, 'b-')
             return
         if i == 3:
-            ax.plot(jnp.imag(x), 'b-')
+            ax.plot(x, 'b-')
+            return
+        if i == 4:
+            ax.plot(b, 'b-')
             return
 
     return Problem(name=name, Phi=Phi, Psi=Psi, A=A, b=b,

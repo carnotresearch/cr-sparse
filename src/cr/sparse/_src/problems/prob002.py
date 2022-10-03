@@ -29,7 +29,7 @@ from .spec import Problem
 
 
 def generate(key, n=1024):
-    name = 'blocks-haar'
+    name = 'blocks:haar'
     # time domain signal
     t, b = signals.blocks(n)
     # haar wavelet basis operator
