@@ -92,8 +92,10 @@ def _project_to_l1_ball(x, q):
     # compute the shrinkage threshold
     kappa = (cu[K-1] - q)/K
     # perform shrinkage
-    return jnp.maximum(0, x - kappa) + jnp.minimum(0, x + kappa)
-
+    if jnp.iscomplexobj(x):
+        return jnp.maximum(jnp.abs(x) - kappa, 0.) * jnp.exp(1j * jnp.angle(x))
+    else:
+        return jnp.maximum(0, x - kappa) + jnp.minimum(0, x + kappa)
 
 def project_to_l1_ball(x, q=1.):
     """Projects a vector inside an l1 norm ball
@@ -361,8 +363,8 @@ def solve_lasso_from(A,
         r_norm, r_gap = lasso_metrics(b, x, g, r, f, tau)
         s = x - state.x
         y = g - state.g
-        sts = jnp.dot(jnp.conj(s), s)
-        sty = jnp.dot(jnp.conj(s), y)
+        sts = jnp.real(jnp.dot(jnp.conj(s), s))
+        sty = jnp.real(jnp.dot(jnp.conj(s), y))
         alpha_next = lax.cond(sty <= 0,
             lambda _: alpha_max,
             lambda _: jnp.clip(sts / sty, alpha_min, alpha_max),
@@ -644,8 +646,8 @@ def solve_bpic_from(A,
         # compute the new step size
         s = x - state.x
         y = g - state.g
-        sts = jnp.dot(jnp.conj(s), s)
-        sty = jnp.dot(jnp.conj(s), y)
+        sts = jnp.real(jnp.dot(jnp.conj(s), s))
+        sty = jnp.real(jnp.dot(jnp.conj(s), y))
         alpha_next = lax.cond(sty <= 0,
             lambda _: alpha_max,
             lambda _: jnp.clip(sts / sty, alpha_min, alpha_max),
@@ -696,7 +698,7 @@ def solve_bpic(A,
     sigma: float, 
     options: SPGL1Options = SPGL1Options()):
     m, n = A.shape
-    x0 = jnp.zeros(n)
+    x0 = jnp.zeros(n, dtype=b.dtype)
     return solve_bpic_from(A, b, sigma, x0, options)
 
 solve_bpic_jit = jit(solve_bpic, static_argnames=("A", "options"))
@@ -741,7 +743,7 @@ def solve_bp(A,
     b: jnp.ndarray, 
     options: SPGL1Options = SPGL1Options()):
     m, n = A.shape
-    x0 = jnp.zeros(n)
+    x0 = jnp.zeros(n, dtype=b.dtype)
     sigma = 0.
     return solve_bpic_from(A, b, sigma, x0, options)
 
