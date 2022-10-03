@@ -72,6 +72,9 @@ from cr.sparse._src.lop.basic import (
     symmetrize,
     restriction,
     heaviside,
+    inv_heaviside,
+    cumsum,
+    diff,
 )
 from cr.sparse._src.lop.reshape import (
     reshape,
