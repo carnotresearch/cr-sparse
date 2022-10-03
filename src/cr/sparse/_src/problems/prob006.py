@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-"""A port of problem 005 from Sparco
+"""A port of problem 006 from Sparco
 """
 
 from jax import random
@@ -28,61 +28,61 @@ import cr.sparse.data as crdata
 from .spec import Problem
 
 
-def generate(key, c=2, k=60, m=300, n=1024):
-    name = 'cosine-spikes:dirac-dct:gaussian'
+def piecewise_polynomial(key, n, p):
+    keys = random.split(key, 2)
+    pp = random.uniform(keys[0], shape=(p-1,))
+    pp = jnp.append(jnp.insert(pp, 0, 0), 1)
+    pp = jnp.sort(pp)
+    idx = jnp.round(pp * n).astype(int)
+    signal = jnp.zeros(n)
+    subkeys = random.split(keys[1], p)
+    for i in range(p):
+        a = idx[i]
+        b = idx[i+1]
+        x = jnp.linspace(-3,3, b -a)
+        c = jnp.round(random.normal(subkeys[i], shape=(4,)) * 100) / 100
+        y = c[0] + c[1] * x + c[2] * x**2 + c[3] * x**3
+        signal = signal.at[a:b].set(y)
+    return signal
+
+
+def generate(key, p=5, m=600, n=2048):
+    name = 'piecewise-cubic-poly:daubechies:gaussian'
     t = jnp.arange(n)/n
-    keys = random.split(key, 5)
+    keys = random.split(key, 2)
+    # piece wise polynomial signal
+    y = piecewise_polynomial(keys[0], n, p)
 
-    cosine_basis = crlop.cosine_basis(n)
-    dirac_basis = crlop.identity(n)
-    dirac_cosine_basis = crlop.hcat(dirac_basis, cosine_basis)
-    dirac_cosine_basis = crlop.jit(dirac_cosine_basis)
+    # Daubechies basis
+    db_basis = crlop.dwt(n, wavelet='db8', level=5, basis=True)
+    db_basis = crlop.jit(db_basis)
 
-    # cosine part of the signal
-    indices = random.choice(keys[0], n, shape=(c,), replace=False)
-    coeffs = jnp.zeros(n)
-    coeffs = coeffs.at[indices].set(random.normal(keys[1], shape=(c,)))
-    coeffs = coeffs * jnp.sqrt(n/2)
-    cosine = cosine_basis.times(coeffs)
 
-    # spike part of the signal
-    indices = random.choice(keys[2], n, shape=(k,), replace=False)
-    spikes = jnp.zeros(n)
-    spikes = spikes.at[indices].set(random.normal(keys[3], shape=(k,)))
-
-    # combined signal
-    y = cosine + spikes
-    # full sparse representation
-    x = jnp.concatenate([spikes, coeffs])
+    # wavelet representation
+    x = db_basis.trans(y)
     # sensing matrix
-    Phi = crlop.gaussian_dict(keys[4], m, n)
+    Phi = crlop.gaussian_dict(keys[1], m, n)
     # measurements
     b = Phi.times(y)
     # sparsifying basis
-    Psi = dirac_cosine_basis
+    Psi = db_basis
     # combined operator
     A = crlop.compose(Phi, Psi)
     # function to construct the signal from representation
     reconstruct = lambda x : Psi.times(x)
 
     # Number of figures
-    figures = ['Cosine with spikes', 'Cosine part of signal', 
-    'Spikes part of signal', 'Dirac DCT Model', 'Measurements']
+    figures = ['Piecewise cubic polynomial', 'Wavelet coefficients', 
+    'Measurements']
     def plot(i, ax):
         ax.set_title(figures[i])
         if i == 0:
-            ax.plot(t, y, 'b-')
+            ax.plot(y, 'b-')
             return
         if i == 1:
-            ax.plot(t, cosine, 'b-')
-            return
-        if i == 2:
-            ax.plot(t, spikes, 'b-')
-            return
-        if i == 3:
             ax.plot(x, 'b-')
             return
-        if i == 4:
+        if i == 2:
             ax.plot(b, 'b-')
             return
 

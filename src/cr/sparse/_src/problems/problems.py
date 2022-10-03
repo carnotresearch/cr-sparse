@@ -21,6 +21,7 @@ PROBLEM_MAP = {
     'cosine-spikes:dirac-dct' : 'prob003',
     'complex:sinusoid-spikes:dirac-fourier' : 'prob004',
     'cosine-spikes:dirac-dct:gaussian' : 'prob005',
+    'piecewise-cubic-poly:daubechies:gaussian': 'prob006'
 }
 
 import cr.nimble as crn
