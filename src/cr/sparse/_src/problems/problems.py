@@ -16,6 +16,7 @@ import importlib
 
 
 PROBLEM_MAP = {
+    'heavi-sine:fourier:heavi-side': 'prob001',
     'blocks:haar': 'prob002',
     'cosine-spikes:dirac-dct' : 'prob003',
     'complex:sinusoid-spikes:dirac-fourier' : 'prob004',
