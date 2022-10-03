@@ -138,6 +138,7 @@ Basic operators
     reshape
     arr2vec
     heaviside
+    inv_heaviside
 
 Operator calculus
 ------------------

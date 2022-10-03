@@ -311,14 +311,14 @@ def restriction(n, I, axis=0):
 
     return Operator(times=times, trans=trans, shape=(k,n))
 
-def heaviside(n, axis=0):
+def heaviside(n, axis=0, normalized=True):
     """Returns a linear operator implements the Heaviside step function
 
     Args:
         n (int): Dimension of the model space 
-        out_dim (int): Dimension of the data space (default in_dim)
         axis (int): For multi-dimensional array input, the axis along which
-          the linear operator will be applied 
+          the linear operator will be applied
+        normalized: If False, then simple cumsum, otherwise, apply on weighted x 
 
     Returns:
         Operator: A Heaviside linear operator
@@ -330,11 +330,57 @@ def heaviside(n, axis=0):
     An n x n Heaviside matrix has ones below and on
     the diagonal and zeros elsewhere.
     """
-    times = lambda x: jnp.cumsum(x)
+    w = jnp.sqrt(jnp.arange(n, 0, -1))
+    wi = 1/w
 
-    def trans(x):
+    times_u = lambda x: jnp.cumsum(x)
+
+    def trans_u(x):
         y = jnp.cumsum(x)
         ym = y[-1]
         return jnp.insert(ym - y[:-1], 0, ym)
+
+    times_n = lambda x: jnp.cumsum(x * wi)
+
+    def trans_n(x):
+        y = jnp.cumsum(x)
+        ym = y[-1]
+        return jnp.insert(ym - y[:-1], 0, ym) * wi
+    
+    times, trans = (times_n, trans_n) if normalized else (times_u, trans_u)    
     times, trans = apply_along_axis(times, trans, axis)
     return Operator(times=times, trans=trans, shape=(n, n))
+
+def cumsum(n, axis=0):
+    return heaviside(n, axis, normalized=False)
+
+def inv_heaviside(n, axis=0, normalized=True):
+    """Returns a linear operator that computes the inverse of Heaviside/cumsum on input
+
+    Args:
+        n (int): Dimension of the model space 
+        axis (int): For multi-dimensional array input, the axis along which
+          the linear operator will be applied
+        normalized(bool): Indicates if the Heaviside operator was normalized 
+
+    Returns:
+        Operator: An inverse of Heaviside linear operator
+
+    Recall that Heaviside operate computes the cumulative sum.
+    This operator computes the reverse of cumulative sum which
+    is the difference of consecutive values.
+    """
+    w = jnp.sqrt(jnp.arange(n, 0, -1))
+
+    times_u = lambda x: jnp.diff(x, prepend=0)
+    trans_u = lambda x: -jnp.diff(x, append=0)
+
+    times_n = lambda x: jnp.diff(x, prepend=0) * w
+    trans_n = lambda x: -jnp.diff(x * w, append=0)
+
+    times, trans = (times_n, trans_n) if normalized else (times_u, trans_u)    
+    times, trans = apply_along_axis(times, trans, axis)
+    return Operator(times=times, trans=trans, shape=(n, n))
+
+def diff(n, axis=0):
+    return inv_heaviside(n, axis, normalized=False)
