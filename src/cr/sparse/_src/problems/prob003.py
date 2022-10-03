@@ -56,7 +56,6 @@ def generate(key, c=2, k=120, n=1024):
     Phi = dirac_basis
     Psi = dirac_cosine_basis
     A = dirac_cosine_basis
-    shapeA = A.shape
     reconstruct = lambda x : A.times(x)
 
     # Number of figures

@@ -16,7 +16,8 @@ import importlib
 
 
 PROBLEM_MAP = {
-    'cosine-spikes-dirac-dct' : 'prob003'
+    'blocks-haar': 'prob002',
+    'cosine-spikes-dirac-dct' : 'prob003',
 }
 
 import cr.nimble as crn
