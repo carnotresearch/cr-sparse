@@ -71,6 +71,7 @@ from cr.sparse._src.lop.basic import (
     pad_zeros,
     symmetrize,
     restriction,
+    heaviside,
 )
 from cr.sparse._src.lop.reshape import (
     reshape,

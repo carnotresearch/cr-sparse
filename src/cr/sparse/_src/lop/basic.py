@@ -311,3 +311,30 @@ def restriction(n, I, axis=0):
 
     return Operator(times=times, trans=trans, shape=(k,n))
 
+def heaviside(n, axis=0):
+    """Returns a linear operator implements the Heaviside step function
+
+    Args:
+        n (int): Dimension of the model space 
+        out_dim (int): Dimension of the data space (default in_dim)
+        axis (int): For multi-dimensional array input, the axis along which
+          the linear operator will be applied 
+
+    Returns:
+        Operator: A Heaviside linear operator
+
+    Heaviside function is also known as the step function.
+    In discrete domain, it is implemented as a cumulative sum
+    operation. 
+
+    An n x n Heaviside matrix has ones below and on
+    the diagonal and zeros elsewhere.
+    """
+    times = lambda x: jnp.cumsum(x)
+
+    def trans(x):
+        y = jnp.cumsum(x)
+        ym = y[-1]
+        return jnp.insert(ym - y[:-1], 0, ym)
+    times, trans = apply_along_axis(times, trans, axis)
+    return Operator(times=times, trans=trans, shape=(n, n))

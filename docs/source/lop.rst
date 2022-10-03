@@ -137,6 +137,7 @@ Basic operators
     restriction
     reshape
     arr2vec
+    heaviside
 
 Operator calculus
 ------------------
