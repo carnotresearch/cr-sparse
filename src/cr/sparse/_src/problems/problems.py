@@ -26,7 +26,8 @@ PROBLEM_MAP = {
     'signed-spikes:dirac:gaussian': 'prob007',
     'complex:signed-spikes:dirac:gaussian': 'prob008',
     'blocks:heavi-side': 'prob009',
-    'blocks:normalized-heavi-side': 'prob010'
+    'blocks:normalized-heavi-side': 'prob010',
+    'gaussian-spikes:dirac:gaussian': 'prob011',
 }
 
 import cr.nimble as crn
