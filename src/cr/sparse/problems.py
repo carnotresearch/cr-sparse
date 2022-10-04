@@ -19,5 +19,7 @@ from cr.sparse._src.problems.spec import (
 
 from cr.sparse._src.problems.problems import (
     PROBLEM_MAP,
-    generate
+    names,
+    generate,
+    plot
 )
