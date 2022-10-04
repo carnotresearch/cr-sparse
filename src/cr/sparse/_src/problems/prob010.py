@@ -28,13 +28,13 @@ import cr.sparse.lop as crlop
 from .spec import Problem
 
 
-def generate(key, n=128):
-    name = 'blocks:heavi-side'
+def generate(key, n=1024):
+    name = 'blocks:normalized-heavi-side'
     # time domain signal
     t, b = signals.blocks(n)
     # haar wavelet basis operator
-    heaviside = crlop.heaviside(n, normalized=False)
-    inv_heaviside = crlop.inv_heaviside(n, normalized=False)
+    heaviside = crlop.heaviside(n, normalized=True)
+    inv_heaviside = crlop.inv_heaviside(n, normalized=True)
     # Heaviside basis coefficients
     x = inv_heaviside.times(b)
     # identity basis
@@ -44,7 +44,7 @@ def generate(key, n=128):
     A = heaviside
     reconstruct = lambda x : A.times(x)
 
-    figures = ['Block signal', 'Heaviside basis representation']
+    figures = ['Block signal', 'Normalized Heaviside basis representation']
     def plot(i, ax):
         ax.set_title(figures[i])
         if i == 0:

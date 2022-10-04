@@ -25,7 +25,8 @@ PROBLEM_MAP = {
     'piecewise-cubic-poly:daubechies:gaussian': 'prob006',
     'signed-spikes:dirac:gaussian': 'prob007',
     'complex:signed-spikes:dirac:gaussian': 'prob008',
-    'blocks:heavi-side': 'prob009'
+    'blocks:heavi-side': 'prob009',
+    'blocks:normalized-heavi-side': 'prob010'
 }
 
 import cr.nimble as crn
