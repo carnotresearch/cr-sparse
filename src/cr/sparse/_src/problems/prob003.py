@@ -23,7 +23,6 @@ import jax.numpy as jnp
 import cr.nimble as crn
 import cr.sparse as crs
 import cr.sparse.lop as crlop
-import cr.sparse.data as crdata
 
 from .spec import Problem
 
