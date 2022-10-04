@@ -24,7 +24,8 @@ PROBLEM_MAP = {
     'cosine-spikes:dirac-dct:gaussian' : 'prob005',
     'piecewise-cubic-poly:daubechies:gaussian': 'prob006',
     'signed-spikes:dirac:gaussian': 'prob007',
-    'complex:signed-spikes:dirac:gaussian': 'prob008'
+    'complex:signed-spikes:dirac:gaussian': 'prob008',
+    'blocks:heavi-side': 'prob009'
 }
 
 import cr.nimble as crn
