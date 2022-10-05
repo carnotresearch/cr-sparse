@@ -144,6 +144,8 @@ def obj_val(r):
 ############################################################################
 
 class CurvyLineSearchState(NamedTuple):
+    """State for the line search algorithm
+    """
     alpha: float
     scale: float
     x_new: jnp.ndarray
@@ -311,6 +313,8 @@ def solve_lasso_from(A,
     tau: float, 
     x0: jnp.ndarray,
     options: SPGL1Options = SPGL1Options()):
+    """Solves the LASSO problem using SPGL1 algorithm with an initial solution
+    """
     # shape of the linear operator
     m, n = A.shape
     alpha_min = options.alpha_min
@@ -400,6 +404,8 @@ def solve_lasso(A,
     b: jnp.ndarray, 
     tau: float, 
     options: SPGL1Options = SPGL1Options()):
+    """Solves the LASSO problem using SPGL1 algorithm
+    """
     m, n = A.shape
     x0 = jnp.zeros(n)
     return solve_lasso_from(A, b, tau, x0, options)
@@ -552,6 +558,8 @@ def solve_bpic_from(A,
     sigma: float, 
     x0: jnp.ndarray,
     options: SPGL1Options = SPGL1Options()):
+    """Solves the BPIC problem using SPGL1 algorithm with an initial solution
+    """
     # shape of the linear operator
     m, n = A.shape
     alpha_min = options.alpha_min
@@ -701,6 +709,8 @@ def solve_bpic(A,
     b: jnp.ndarray, 
     sigma: float, 
     options: SPGL1Options = SPGL1Options()):
+    """Solves the BPIC problem using SPGL1 algorithm
+    """
     m, n = A.shape
     x0 = jnp.zeros(n, dtype=b.dtype)
     return solve_bpic_from(A, b, sigma, x0, options)
@@ -746,6 +756,8 @@ def analyze_bpic_state(A, b, sigma, options, state, x0):
 def solve_bp(A,
     b: jnp.ndarray, 
     options: SPGL1Options = SPGL1Options()):
+    """Solves the Basis Pursuit problem using SPGL1 algorithm
+    """
     m, n = A.shape
     x0 = jnp.zeros(n, dtype=b.dtype)
     sigma = 0.

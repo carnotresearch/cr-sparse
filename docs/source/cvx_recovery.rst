@@ -98,3 +98,47 @@ This is based on :cite:`elad2010sparse` (section 3.2.1).
 Example:
 
 * :ref:`gallery:focuss:1`
+
+
+
+Spectral Projected Gradient L1 (SPGL1)
+------------------------------------------
+
+Berg and Friedlander proposed the spectral
+projected gradient l1 (SPGL1) algorithm
+in :cite:`BergFriedlander:2008`.
+They provide a MATLAB package implementing
+the algorithm in :cite:`spgl1site`.
+A NumPy based Python port is also available
+`here <https://pypi.org/project/spgl1/>`_.
+We have implemented the algorithm with JAX.
+
+.. autosummary::
+    :toctree: _autosummary
+
+    spgl1.solve_lasso_from
+    spgl1.solve_lasso
+    spgl1.solve_lasso_jit
+    spgl1.solve_bpic_from
+    spgl1.solve_bpic_from_jit
+    spgl1.solve_bpic
+    spgl1.solve_bpic_jit
+    spgl1.solve_bp
+    spgl1.solve_bp_jit
+
+.. rubric:: Associated data types
+
+.. autosummary::
+    :toctree: _autosummary
+
+    spgl1.SPGL1Options
+    spgl1.SPGL1LassoState
+    spgl1.SPGL1BPState
+
+.. rubric:: Examples
+
+
+Theory
+''''''''''''
+
+
