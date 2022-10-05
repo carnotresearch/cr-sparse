@@ -357,17 +357,20 @@ def subtract(A, B):
     return Operator(times=times, trans=trans, shape=A.shape, jit_safe=jit_safe, matrix_safe=matrix_safe, real=real)
 
 
-def compose(A, B):
+def compose(A, B, ignore_compatibility=False, shape=None):
     """Returns the composite linear operator :math:`T = AB` such that :math:`T(x)= A(B(x))`"""
     ma, na = A.shape
     mb, nb = B.shape
-    assert na == mb, "Input shape of A must match the output shape of B"
+    if not ignore_compatibility:
+        assert na == mb, "Input shape of A must match the output shape of B"
     jit_safe = A.jit_safe and B.jit_safe
     matrix_safe = A.matrix_safe and B.matrix_safe
     real = A.real and B.real
     times = lambda x: A.times(B.times(x))
     trans = lambda x: B.trans(A.trans(x))
-    return Operator(times=times, trans=trans, shape=(ma, nb), real=real)
+    if shape is None:
+        shape = (ma, nb)
+    return Operator(times=times, trans=trans, shape=shape, real=real)
 
 
 def hcat(A, B):
