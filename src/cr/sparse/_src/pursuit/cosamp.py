@@ -130,11 +130,13 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
     K2 = EXTRA_FACTOR * K
     K3 = K + K2
     # squared norm of the signal
-    y_norm_sqr = y.T @ y
+    y_norm_sqr = jnp.abs(jnp.vdot(y, y))
     y_norm = jnp.sqrt(y_norm_sqr)
     # scale the signal down.
     scale = 1.0 / y_norm
     y = scale * y
+
+    dtype = jnp.float64 if Phi.real else jnp.complex128
 
     max_r_norm_sqr = (res_norm_rtol ** 2)
 
@@ -146,7 +148,7 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
     def init():
         # Data for the previous approximation [r = y, x = 0]
         I_prev = jnp.arange(0, K)
-        x_I_prev = jnp.zeros(K)
+        x_I_prev = jnp.zeros(K, dtype=dtype)
         r_norm_sqr_prev = 1.
         # compute the correlations of atoms with signal y
         h = trans(y)
@@ -167,7 +169,7 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
         # Compute new residual
         r = y - Phi_I @ x_I
         # Compute residual norm squared
-        r_norm_sqr = r.T @ r
+        r_norm_sqr = jnp.abs(jnp.vdot(r, r))
         # Assemble the algorithm state at the end of first iteration
         return CoSaMPState(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, 
             iterations=1,
@@ -202,14 +204,13 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
         # Compute new residual
         r = y - Phi_I @ x_I
         # Compute residual norm squared
-        r_norm_sqr = r.T @ r
+        r_norm_sqr = jnp.abs(jnp.vdot(r, r))
         return CoSaMPState(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, 
             iterations=state.iterations+1,
             I_prev=I_prev, x_I_prev=x_I_prev, r_norm_sqr_prev=r_norm_sqr_prev
             )
 
     def cond(state):
-        # print(state)
         # limit on residual norm 
         a = state.r_norm_sqr > max_r_norm_sqr
         # limit on number of iterations
@@ -226,8 +227,8 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
         # overall condition
         return c
 
-    state = lax.while_loop(cond, body, init())
-    # state = init()
+    state = init()
+    state = lax.while_loop(cond, body, state)
     # while cond(state):
     #     state = body(state)
 

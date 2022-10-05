@@ -103,7 +103,7 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
     ## Initialize some constants for the algorithm
     M = y.shape[0]
     # squared norm of the signal
-    y_norm_sqr = y.T @ y
+    y_norm_sqr = jnp.abs(jnp.vdot(y, y))
 
     max_r_norm_sqr = y_norm_sqr * (res_norm_rtol ** 2) 
 
@@ -122,7 +122,7 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
         # Compute new residual
         r = y - Phi_I @ x_I
         # Compute residual norm squared
-        r_norm_sqr = r.T @ r
+        r_norm_sqr = jnp.abs(jnp.vdot(r, r))
         # Assemble the algorithm state at the end of first iteration
         return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, iterations=1, length=Phi.shape[1])
 
@@ -153,7 +153,7 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
         # Compute new residual
         r = y - Phi_I @ x_I
         # Compute residual norm squared
-        r_norm_sqr = r.T @ r
+        r_norm_sqr = jnp.abs(jnp.vdot(r, r))
         return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, iterations=state.iterations+1, length=Phi.shape[1])
 
     def cond(state):
@@ -167,6 +167,6 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
     state = lax.while_loop(cond, body, init())
     return state
 
-operator_solve_jit = jit(operator_solve, static_argnums=(0, 2), static_argnames=("max_iters", "res_norm_rtol"))
+operator_solve_jit = jit(operator_solve, static_argnames=("Phi", "K"))
 
 solve = operator_solve_jit
