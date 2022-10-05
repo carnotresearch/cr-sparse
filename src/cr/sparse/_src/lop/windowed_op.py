@@ -17,10 +17,9 @@ import math
 from jax import lax
 import jax.numpy as jnp
 from .lop import Operator
+from .util import apply_along_axis
 
-
-
-def windowed_op(m, T, overlap=0):
+def windowed_op(m, T, overlap=0, axis=0):
     """A wrapper to convert an operator into an overcomplete windowed operator
 
     Args:
@@ -62,7 +61,7 @@ def windowed_op(m, T, overlap=0):
     # initial value of y for trans operation
     ya = jnp.zeros(tn * n_blocks)
 
-    def times(x):
+    def times1d(x):
         def body_func(i, y):            
             xw = x[i*tn + n_range]
             idx = i * offset + m_range
@@ -71,7 +70,7 @@ def windowed_op(m, T, overlap=0):
         return y[:m]
 
 
-    def trans(x):
+    def trans1d(x):
         # pad x with zeros
         x = jnp.concatenate([x, xz])
         def body_func(i, y):
@@ -79,5 +78,6 @@ def windowed_op(m, T, overlap=0):
             return y.at[i*tn + n_range].set(T.trans(xw))
         return lax.fori_loop(0, n_blocks, body_func, ya)
 
+    times, trans = apply_along_axis(times1d, trans1d, axis)
 
     return Operator(times=times, trans=trans, shape=(m,n), real=real)
