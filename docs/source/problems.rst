@@ -1,0 +1,226 @@
+.. _api:problems:
+
+Test Problems
+====================
+
+.. contents::
+    :depth: 2
+    :local:
+
+.. currentmodule:: cr.sparse.problems
+
+
+Introduction
+----------------
+
+The ``cr.sparse.problems`` module contains a number of test
+problems which can be used to quickly evaluate the correctness
+and performance of a sparse recovery algorithm. The design of
+these test problems is heavily influenced by Sparco \cite{sparco:2007}.
+We have ported several synthetic and real life problems from Sparco
+to ``CR-Sparse``.
+
+
+The sparse recovery problems can be modeled as (underdetermined)
+linear systems:
+
+.. math::
+
+    \bb = \bA \bx + \br
+
+where :math:`\bA` is an :math:`m \times n` linear operator (real or complex),
+:math:`\bb` is an observed measurement vector of length :math:`m` and :math:`\br`
+is an unknown measurement noise vector.
+Our goal is to reconstruct :math:`\bx` from the observed :math:`\bb`. We
+have access to the linear operator :math:`\bA`.
+
+Under compressive sensing paradigm, we may have signals :math:`\by` which
+have a sparse representation in some sparsifying basis (or dictionary)
+:math:`\Psi` and we sample :math:`\by` via a measurement matrix :math:`\Phi`
+given by the equation:
+
+.. math::
+
+    \bb = \Phi \by.
+
+
+Expanding :math:`\by`, we get:
+
+.. math::
+
+    \bb = \Phi \Psi \bx
+
+By letting :math:`\bA = \Phi \Psi`, we go back to the original formulation
+:math:`\bb = \bA \bx` (assuming no noise).
+
+:math:`\bb` belongs to the measurement space.
+:math:`\by` belongs to the signal space.
+:math:`\bx` belongs to the representation space (or model space).
+
+
+This module provides a ``generate`` function which can be used to generate
+specific test problems. Each problem has been given a name and you will need
+to pass the name to the generate function (along with other problem specific
+parameters) to generate an instance of a problem. 
+The list of problems is provided below.
+
+An instance of a problem is described by a named tuple
+``Problem``.  This tuple has following attributes:
+
+.. list-table::
+    :widths: 20 80
+    :header-rows: 1
+
+    * - Attribute
+      - Description
+    * - name
+      - Name of the test problem
+    * - Phi
+      - A linear operator :math:`\Phi` representing the
+        compressive sensing process.
+        It may be identity operator if no sensing is involved.
+    * - Psi
+      - A linear operator :math:`\Psi` representing the sparsifying basis.
+        It may be identity operator if the signal is sparse in itself.
+    * - A
+      - The combined linear operator :math:`\bA = \Phi \Psi`.
+        If either :math:`\Phi` or :math:`\Psi` are identity, then
+        :math:`\bA` bypasses them.
+    * - b
+      - An array :math:`\bb` representing observed measurements.
+        For simple problems, it is a vector (1D array). For more
+        advanced problems, it may be an nd array (e.g. an image).
+    * - reconstruct
+      - A function to construct :math:`\by` from :math:`\bx`.
+        Typically, it is the application of the sparsifying basis
+        operator :math:`\Psi`.
+    * - x
+      - The sparse representation vector :math:`\bx` used to construct
+        the problem. This may not be available for all problems.
+        If available, it can be used to assess the quality of reconstruction.
+    * - y
+      - The signal :math:`\by` which is being sampled by compressive sensing.
+        This may not be available for every problem. If available, it can
+        be used for comparing the reconstructed signal with the original
+        signal.
+    * - figures
+      - Titles of a list of figures associated with the problem.
+    * - plot
+      - A function to plot individual figures associated with the problem.
+        The figures are useful in visualizing the problem.
+
+
+.. note::
+
+    While the equation :math:`\bb  = \bA \bx` looks like a matrix
+    vector equation, we should treat it as the application of
+    a linear operator :math:`\bA` on the data :math:`bx`.
+    The data may be a vector or an image or a multi-channel audio
+    signal. The implementation of the linear operator :math:`\bA`
+    would know how to handle the data layout.
+    One can flatten
+    the arrays :math:`\bx` and :math:`\bb` to construct the corresponding
+    matrix vector linear system.
+    However, the matrices for the flattened systems tend to be
+    quite sparse and hence not very efficient computationally. 
+
+
+
+Problems API
+------------------
+
+
+.. rubric:: Data Types
+
+.. autosummary::
+    :toctree: _autosummary
+    :nosignatures:
+
+    Problem
+
+
+.. rubric:: API
+
+.. autosummary::
+    :toctree: _autosummary
+
+    names
+    generate
+    plot
+
+
+List of Problems
+------------------
+
+Look at the associated examples to see these
+test problems in action.
+
+.. list-table::
+    :widths: 35 20 10 10 25
+    :header-rows: 1
+
+    * - Name
+      - Signal
+      - Dictionary
+      - Measurements
+      - Examples
+    * - heavi-sine:fourier:heavi-side
+      - HeaviSine
+      - Fourier-Heaviside
+      - Identity
+      -
+    * - blocks:haar 
+      - Blocks
+      - Haar Wavelet
+      - Identity
+      -
+    * - cosine-spikes:dirac-dct
+      - Real Cosines + Real Spikes
+      - Dirac-Cosine 
+      - Identity
+      -
+    * - complex:sinusoid-spikes
+      - Complex Sinusoids+Complex Spikes
+      - Dirac-Fourier
+      - Identity
+      -
+    * - cosine-spikes:dirac-dct:gaussian
+      - Real Cosines + Real Spikes
+      - Dirac-Cosine
+      - Gaussian
+      -
+    * - piecewise-cubic-poly:daubechies:gaussian
+      - Piecewise Cubic Polynomial
+      - Daubechies Wavelet
+      - Gaussian
+      -
+    * - signed-spikes:dirac:gaussian
+      - Real Signed Spikes
+      - Identity
+      - Gaussian
+      -
+    * - complex:signed-spikes:dirac:gaussian
+      - Complex Signed Spikes
+      - Identity
+      - Gaussian
+      -
+    * - blocks:heavi-side
+      - Blocks
+      - HeaviSide (Unnormalized)
+      - Identity
+      -
+    * - blocks:normalized-heavi-side
+      - Blocks
+      - HeaviSide (Normalized)
+      - Identity
+      -
+    * - gaussian-spikes:dirac:gaussian
+      - Gaussian Spikes
+      - Identity
+      - Gaussian
+      -
+    * - src-sep-1
+      - Mixture of Guitar and Piano Sounds
+      - Windowed Discrete Cosine
+      - Mixing Matrix
+      -
