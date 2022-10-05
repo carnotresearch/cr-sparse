@@ -31,6 +31,18 @@ import cr.sparse.lop as crlop
 
 class Problem(NamedTuple):
     r"""A sparse signal recovery problem
+
+    The problem is given by
+    :math:`\bb = \Phi \by`
+    where :math:`\by = \Psi \bx`.
+    This can written as :math:`\bb = \Phi \Psi \bx`.
+    We shorten :math:`\bA = \Phi \Psi` and
+    reformulate the problem as `\bb = \bA \bx`.
+    In the sparse reconstruction problem, we have
+    access to :math:`\bb` and :math:`\bA`
+    and we attempt to recover :math:`\bx`.
+    We can reconstruct :math:`\by` from :math:`\bx`
+    by using the ``reconstruct`` function provided.
     """
     name: str
     "Name of the problem"
@@ -46,6 +58,8 @@ class Problem(NamedTuple):
     "Function handle to reconstruct a signal from coefficients in x"
     x: jnp.ndarray = None
     "Expected sparse representation (if available for synthetic problems)"
+    y: jnp.ndarray = None
+    "Original signal"
     figures : List[str] = []
     "Titles of figures associated with the problem"
     plot: Callable = None
