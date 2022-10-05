@@ -31,9 +31,9 @@ from typing import NamedTuple, Callable
 from numpy import array_str
 from jax import lax, jit, device_get
 import jax.numpy as jnp
-from jax.numpy.linalg import norm
 
 import cr.nimble as crn
+norm = crn.arr_l2norm
 
 ############################################################################
 #  Constants
@@ -101,13 +101,15 @@ def project_to_l1_ball(x, q=1.):
     """Projects a vector inside an l1 norm ball
     """
     x = jnp.asarray(x)
+    shape = x.shape
+    x = jnp.ravel(x)
     invalid = crn.arr_l1norm(x) > q
     return lax.cond(invalid, 
         # find the shrinkage threshold and shrink
         lambda x: _project_to_l1_ball(x, q),
         # no changes necessary
         lambda x : x, 
-        x)
+        x).reshape(shape)
 
 def project_to_l1_ball_at(x, b, q=1.):
     """Projects a vector inside an l1 norm ball centered at b
@@ -123,7 +125,7 @@ def project_to_l1_ball_at(x, b, q=1.):
 #  Weighted and unweighted primal and dual norms
 ############################################################################
 
-primal_norm = crn.norm_l1
+primal_norm = crn.arr_l1norm
 dual_norm = crn.norm_linf
 
 def weighted_primal_l1_norm(x, w):
@@ -186,7 +188,7 @@ def curvy_line_search(A, b, x, g, alpha0, f_max, proj, tau, gamma):
         x_new = proj(x - alpha * scale * g, tau)
         r_new = b - A.times(x_new)
         d_new = x_new - x
-        gtd = scale * jnp.real(jnp.dot(jnp.conj(g), d_new))
+        gtd = scale * jnp.real(jnp.vdot(jnp.conj(g), d_new))
         f_val = obj_val(r_new)
         f_lim = f_max + gamma * alpha * gtd
         return x_new, r_new, d_new, gtd, f_val, f_lim
@@ -503,7 +505,7 @@ def bpic_metrics(b, x, g, r, f, sigma, tau):
     # norm of the residual
     r_norm = norm(r)
     # duality gap
-    gap = jnp.dot(jnp.conj(r), r - b) + tau * g_dnorm
+    gap = jnp.vdot(jnp.conj(r), r - b) + tau * g_dnorm
     # relative duality gap
     f_m = jnp.maximum(1, f)
     r_m = jnp.maximum(1., r_norm)
@@ -646,8 +648,8 @@ def solve_bpic_from(A,
         # compute the new step size
         s = x - state.x
         y = g - state.g
-        sts = jnp.real(jnp.dot(jnp.conj(s), s))
-        sty = jnp.real(jnp.dot(jnp.conj(s), y))
+        sts = jnp.real(jnp.vdot(jnp.conj(s), s))
+        sty = jnp.real(jnp.vdot(jnp.conj(s), y))
         alpha_next = lax.cond(sty <= 0,
             lambda _: alpha_max,
             lambda _: jnp.clip(sts / sty, alpha_min, alpha_max),
@@ -692,6 +694,8 @@ def solve_bpic_from(A,
     #     state = body_func(state)
     # print(state)
     return state
+
+solve_bpic_from_jit = jit(solve_bpic_from, static_argnames=("A", "options"))
 
 def solve_bpic(A,
     b: jnp.ndarray, 

@@ -20,6 +20,8 @@ from cr.sparse._src.cvx.spgl1 import (
     solve_lasso_from,
     solve_lasso,
     solve_lasso_jit,
+    solve_bpic_from,
+    solve_bpic_from_jit,
     solve_bpic,
     solve_bpic_jit,
     solve_bp,
