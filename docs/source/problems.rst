@@ -168,7 +168,7 @@ test problems in action.
       - HeaviSine
       - Fourier-Heaviside
       - Identity
-      -
+      - :ref:`gallery:0001`
     * - blocks:haar 
       - Blocks
       - Haar Wavelet

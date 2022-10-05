@@ -52,7 +52,7 @@ def generate(key, n=1024):
     Phi = dirac_basis
     Psi = dictionary
     A = dictionary
-    reconstruct = lambda x : Psi.times(x)
+    reconstruct = lambda x : jnp.real(Psi.times(x))
 
     # Number of figures
     figures = ['HeaviSine signal', 'Sine part of signal', 
@@ -64,22 +64,22 @@ def generate(key, n=1024):
     def plot(i, ax):
         ax.set_title(figures[i])
         if i == 0:
-            ax.plot(t, b, 'b-')
+            ax.plot(t, b)
             return
         if i == 1:
-            ax.plot(t, sig_sine, 'b-')
+            ax.plot(t, sig_sine)
             return
         if i == 2:
-            ax.plot(t, sig_jump, 'b-')
+            ax.plot(t, sig_jump)
             return
         if i == 3:
-            ax.plot(jnp.real(x0), 'b-')
+            ax.stem(jnp.real(x0))
             return
         if i == 4:
-            ax.plot(jnp.imag(x0), 'b-')
+            ax.plot(jnp.imag(x0))
             return
         if i == 5:
-            ax.plot(x1, 'b-')
+            ax.stem(x1)
             return
 
     return Problem(name=name, Phi=Phi, Psi=Psi, A=A, b=b,
