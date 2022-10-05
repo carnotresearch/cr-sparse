@@ -28,6 +28,7 @@ PROBLEM_MAP = {
     'blocks:heavi-side': 'prob009',
     'blocks:normalized-heavi-side': 'prob010',
     'gaussian-spikes:dirac:gaussian': 'prob011',
+    'src-sep-1': 'prob401'
 }
 
 import cr.nimble as crn
