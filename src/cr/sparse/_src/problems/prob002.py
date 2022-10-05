@@ -41,7 +41,7 @@ def generate(key, n=1024):
     Phi = dirac_basis
     Psi = haar
     A = haar
-    reconstruct = lambda x : A.times(x)
+    reconstruct = lambda x : Psi.times(x)
 
     figures = ['Block signal', 'Haar coefficients of the blocks signal']
     def plot(i, ax):

@@ -15,6 +15,7 @@
 import importlib
 import matplotlib.pyplot as plt
 
+from typing import Callable,Tuple, List
 
 PROBLEM_MAP = {
     'heavi-sine:fourier:heavi-side': 'prob001',
@@ -33,13 +34,26 @@ PROBLEM_MAP = {
 
 import cr.nimble as crn
 
+from .spec import Problem
 
-def names():
-    "Returns the names of available problems"
+def names() -> List[str]:
+    """Returns the names of available problems
+    """
     return sorted(PROBLEM_MAP.keys())
 
-def generate(name, key=crn.KEY0, **args):
-    "Generates a test problem by its name and problem specific arguments"
+def generate(name:str, key=crn.KEY0, **args) -> Problem:
+    """Generates a test problem by its name and problem specific arguments
+
+    Args:
+        name (str): The name of the problem to be instantiated.
+        key: A PRNG key to be used if the problem requires randomized data
+        args (dict): The list of keyword parameters to be passed to the
+          problem generation code 
+
+    Returns:
+        Problem: An instance of a problem
+    """
+    assert name in PROBLEM_MAP, "Unrecognized problem"
     problem_id = PROBLEM_MAP[name]
     module = importlib.import_module('.' + problem_id,
         'cr.sparse._src.problems')
@@ -48,7 +62,13 @@ def generate(name, key=crn.KEY0, **args):
 
 
 def plot(problem, height=4):
-    "Plots the figures associated with a problem"
+    """Plots the figures associated with a problem
+
+    This is just a utility function to quickly draw
+    all the figures in one shot. You may be interested
+    in drawing specific individual figures associated
+    with a problem.
+    """
     nf = len(problem.figures)
     fig, ax = plt.subplots(nf, 1, figsize=(15, height*nf), 
         constrained_layout = True)

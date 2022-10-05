@@ -86,7 +86,7 @@ def generate(key, p=5, m=600, n=2048):
             return
 
     return Problem(name=name, Phi=Phi, Psi=Psi, A=A, b=b,
-        reconstruct=reconstruct, x=x,
+        reconstruct=reconstruct, x=x, y=y,
         figures=figures, plot=plot)
 
 

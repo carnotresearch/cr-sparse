@@ -42,7 +42,7 @@ def generate(key, n=128):
     Phi = dirac_basis
     Psi = heaviside
     A = heaviside
-    reconstruct = lambda x : A.times(x)
+    reconstruct = lambda x : Psi.times(x)
 
     figures = ['Block signal', 'Heaviside basis representation']
     def plot(i, ax):
