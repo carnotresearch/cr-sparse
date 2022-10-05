@@ -160,6 +160,7 @@ section provide different ways to combine linear operators.
     hcat
     power
     block_diag
+    windowed_op
 
 Signal processing operators
 ------------------------------------

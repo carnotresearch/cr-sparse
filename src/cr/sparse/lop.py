@@ -42,6 +42,10 @@ from cr.sparse._src.lop.lop import (
     gram,
     frame,
 )
+from cr.sparse._src.lop.windowed_op import (
+    windowed_op
+)
+
 from cr.sparse._src.lop.block_diag import (
     block_diag
 )
