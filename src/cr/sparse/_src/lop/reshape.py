@@ -18,12 +18,15 @@ import jax.numpy as jnp
 from .lop import Operator
 
 
-def reshape(in_shape, out_shape):
+def reshape(in_shape, out_shape, order='C'):
     """Returns a linear operator which reshapes vectors from model space to data space
 
     Args:
         in_shape (int): Shape of vectors in the model space 
         out_shape (int): Shape of vectors in the data space
+        order: Specifies index order of data layout ['C', 'F', 'A']
+            C means C-like index order (default). F means Fortran
+            like order. This is the order in MATLAB arrays also.
 
     Returns:
         (Operator): A reshaping linear operator
@@ -31,9 +34,10 @@ def reshape(in_shape, out_shape):
     in_size = jnp.prod(jnp.array(in_shape))
     out_size = jnp.prod(jnp.array(out_shape))
     assert in_size == out_size, "Input and output size must be equal"
+    assert order in ['C', 'F', 'A'], "Invalid order"
 
-    times = lambda x:  jnp.reshape(x, out_shape)
-    trans = lambda x : jnp.reshape(x, in_shape)
+    times = lambda x:  jnp.reshape(x, out_shape, order=order)
+    trans = lambda x : jnp.reshape(x, in_shape, order=order)
     return Operator(times=times, trans=trans, shape=(out_shape,in_shape))
 
 
