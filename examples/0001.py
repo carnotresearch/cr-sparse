@@ -1,8 +1,8 @@
 r"""
 .. _gallery:0001:
 
-HeaviSine Signal in Dirac-Fourier Basis
-===========================================
+HeaviSine Signal in Fourier-HeaviSide Basis
+============================================
 
 .. contents::
     :depth: 2
@@ -127,3 +127,32 @@ import cr.sparse.plots as crplot
 ax = crplot.h_plots(2)
 ax[0].plot(b0)
 ax[1].plot(b)
+
+# %% 
+# Sparse Recovery using SPGL1
+# ---------------------------------------------------------------
+import cr.sparse.cvx.spgl1 as crspgl1
+options = crspgl1.SPGL1Options(max_iters=2000)
+sol = crspgl1.solve_bp_jit(A, b0, options=options)
+problems.analyze_solution(prob, sol)
+
+# %% 
+# The estimated sparse representation
+x = sol.x
+# %%
+# Let us reconstruct the signal from this sparse representation
+b = prob.reconstruct(x)
+
+# %%
+# Let us visualize the original and reconstructed signal
+ax = crplot.h_plots(2)
+ax[0].plot(b0)
+ax[1].plot(b)
+
+# %%
+# Comments
+# ---------
+# 
+# * Subspace Pursuit converges very fast in 4 iterations.
+# * SPGL1 takes 1600+ iterations to converge. Still it is inaccurate.
+# * The HeaviSide basis is highly coherent. It doesn't satisfy RIP guarantees.
