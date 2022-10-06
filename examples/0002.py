@@ -38,6 +38,11 @@ depends on the expected sparsity of the
 signal (typically a parameter K in greedy algorithms),
 the reconstruction would fail if K is specified below
 the actual number of significant components of :math:`\bx`.
+
+See also:
+
+* :ref:`api:problems`
+* :ref:`api:lop`
 """
 
 # Configure JAX to work with 64-bit floating point precision. 

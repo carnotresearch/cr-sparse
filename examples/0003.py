@@ -26,6 +26,11 @@ Note that the spikes are normally distributed.
 Some of the spikes have extremely low amplitudes.
 They may be missed by a recovery algorithm depending
 on convergence thresholds.
+
+See also:
+
+* :ref:`api:problems`
+* :ref:`api:lop`
 """
 
 
