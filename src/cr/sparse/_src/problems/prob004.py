@@ -63,7 +63,7 @@ def generate(key, c=2, k=120, n=1024):
     Phi = dirac_basis
     Psi = dirac_fourier_basis
     A = dirac_fourier_basis
-    reconstruct = lambda x : A.times(x)
+    reconstruct = lambda x : Psi.times(x)
 
     # Number of figures
     figures = ['Real part of the signal', 'Imaginary part of the signal', 
@@ -71,20 +71,20 @@ def generate(key, c=2, k=120, n=1024):
     def plot(i, ax):
         ax.set_title(figures[i])
         if i == 0:
-            ax.plot(t, jnp.real(b), 'b-')
+            ax.plot(t, jnp.real(b))
             return
         if i == 1:
-            ax.plot(t, jnp.imag(b), 'b-')
+            ax.plot(t, jnp.imag(b))
             return
         if i == 2:
-            ax.plot(jnp.real(x), 'b-')
+            ax.stem(jnp.real(x), markerfmt='.')
             return
         if i == 3:
-            ax.plot(jnp.imag(x), 'b-')
+            ax.stem(jnp.imag(x), markerfmt='.')
             return
 
     return Problem(name=name, Phi=Phi, Psi=Psi, A=A, b=b,
-        reconstruct=reconstruct, x=x,
+        reconstruct=reconstruct, x=x, y=b,
         figures=figures, plot=plot)
 
 

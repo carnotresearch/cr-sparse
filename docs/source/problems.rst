@@ -180,11 +180,11 @@ test problems in action.
       - Dirac-Cosine 
       - Identity
       - :ref:`gallery:0003`
-    * - complex:sinusoid-spikes
+    * - complex:sinusoid-spikes:dirac-fourier
       - Complex Sinusoids+Complex Spikes
       - Dirac-Fourier
       - Identity
-      -
+      - :ref:`gallery:0004`
     * - cosine-spikes:dirac-dct:gaussian
       - Real Cosines + Real Spikes
       - Dirac-Cosine
