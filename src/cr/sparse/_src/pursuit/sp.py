@@ -17,7 +17,7 @@ import jax.numpy as jnp
 from jax import vmap, jit, lax
 
 
-from .defs import RecoverySolution
+from .defs import RecoverySolution, SPState
 
 from cr.nimble.dsp import largest_indices
 
@@ -109,13 +109,24 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
     M = y.shape[0]
     # squared norm of the signal
     y_norm_sqr = jnp.abs(jnp.vdot(y, y))
+    y_norm = jnp.sqrt(y_norm_sqr)
+    # scale the signal down.
+    scale = 1.0 / y_norm
+    y = scale * y
 
-    max_r_norm_sqr = y_norm_sqr * (res_norm_rtol ** 2) 
+    dtype = jnp.float64 if Phi.real else jnp.complex128
+    max_r_norm_sqr = (res_norm_rtol ** 2) 
 
     if max_iters is None:
         max_iters = M 
 
+    min_iters = min(3*K, 20) 
+
     def init():
+        # Data for the previous approximation [r = y, x = 0]
+        I_prev = jnp.arange(0, K)
+        x_I_prev = jnp.zeros(K, dtype=dtype)
+        r_norm_sqr_prev = 1.
         # compute the correlations of atoms with signal y
         h = trans(y)
         # Pick largest K indices [this is first iteration]
@@ -129,9 +140,14 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
         # Compute residual norm squared
         r_norm_sqr = jnp.abs(jnp.vdot(r, r))
         # Assemble the algorithm state at the end of first iteration
-        return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, iterations=1, length=Phi.shape[1])
+        return SPState(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, 
+            iterations=1,
+            I_prev=I_prev, x_I_prev=x_I_prev, r_norm_sqr_prev=r_norm_sqr_prev)
 
     def body(state):
+        I_prev = state.I
+        x_I_prev = state.x_I
+        r_norm_sqr_prev = state.r_norm_sqr
         # compute the correlations of dictionary atoms with the residual
         h = trans(state.r)
         # Ignore the previously selected atoms
@@ -159,7 +175,10 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
         r = y - Phi_I @ x_I
         # Compute residual norm squared
         r_norm_sqr = jnp.abs(jnp.vdot(r, r))
-        return RecoverySolution(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, iterations=state.iterations+1, length=Phi.shape[1])
+        return SPState(x_I=x_I, I=I, r=r, r_norm_sqr=r_norm_sqr, 
+            iterations=state.iterations+1,
+            I_prev=I_prev, x_I_prev=x_I_prev, r_norm_sqr_prev=r_norm_sqr_prev
+            )
 
     def cond(state):
         # limit on residual norm 
@@ -167,10 +186,20 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
         # limit on number of iterations
         b = state.iterations < max_iters
         c = jnp.logical_and(a, b)
+        # checking if support is still changing
+        d = jnp.any(jnp.not_equal(state.I, state.I_prev))
+        # consider support change only after some iterations
+        d = jnp.logical_or(state.iterations < min_iters, d)
+        c = jnp.logical_and(c, d)
         return c
 
     state = lax.while_loop(cond, body, init())
-    return state
+    # scale back the result
+    x_I = y_norm * state.x_I
+    r = y_norm * state.r
+    r_norm_sqr = state.r_norm_sqr * y_norm_sqr
+    return RecoverySolution(x_I=x_I, I=state.I, r=r, r_norm_sqr=r_norm_sqr,
+        iterations=state.iterations, length=Phi.shape[1])
 
 operator_solve_jit = jit(operator_solve, static_argnames=("Phi", "K"))
 

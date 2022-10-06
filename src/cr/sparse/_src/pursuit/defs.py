@@ -149,3 +149,5 @@ class HTPState(NamedTuple):
 IHTState = HTPState
 
 CoSaMPState = HTPState
+
+SPState = HTPState
