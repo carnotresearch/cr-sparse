@@ -137,7 +137,7 @@ def weighted_dual_linf_norm(x, w):
 def obj_val(r):
     """ Objective value is half of squared norm of the residual
     """
-    return 0.5 * jnp.vdot(r, r)
+    return 0.5 * jnp.abs(jnp.vdot(r, r))
 
 ############################################################################
 #  Curvilinear line search
@@ -190,7 +190,7 @@ def curvy_line_search(A, b, x, g, alpha0, f_max, proj, tau, gamma):
         x_new = proj(x - alpha * scale * g, tau)
         r_new = b - A.times(x_new)
         d_new = x_new - x
-        gtd = scale * jnp.real(jnp.vdot(jnp.conj(g), d_new))
+        gtd = scale * jnp.real(jnp.vdot(g, d_new))
         f_val = obj_val(r_new)
         f_lim = f_max + gamma * alpha * gtd
         return x_new, r_new, d_new, gtd, f_val, f_lim
@@ -511,7 +511,7 @@ def bpic_metrics(b, x, g, r, f, sigma, tau):
     # norm of the residual
     r_norm = norm(r)
     # duality gap
-    gap = jnp.vdot(jnp.conj(r), r - b) + tau * g_dnorm
+    gap = jnp.vdot(r, r - b) + tau * g_dnorm
     # relative duality gap
     f_m = jnp.maximum(1, f)
     r_m = jnp.maximum(1., r_norm)
@@ -656,8 +656,8 @@ def solve_bpic_from(A,
         # compute the new step size
         s = x - state.x
         y = g - state.g
-        sts = jnp.real(jnp.vdot(jnp.conj(s), s))
-        sty = jnp.real(jnp.vdot(jnp.conj(s), y))
+        sts = jnp.real(jnp.vdot(s, s))
+        sty = jnp.real(jnp.vdot(s, y))
         alpha_next = lax.cond(sty <= 0,
             lambda _: alpha_max,
             lambda _: jnp.clip(sts / sty, alpha_min, alpha_max),
