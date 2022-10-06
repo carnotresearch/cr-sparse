@@ -33,6 +33,8 @@ PROBLEM_MAP = {
 }
 
 import cr.nimble as crn
+import jax.numpy as jnp
+from cr.nimble.dsp import largest_indices
 
 from .spec import Problem
 
@@ -75,3 +77,35 @@ def plot(problem, height=4):
     for i in range(nf):
         problem.plot(i, ax[i])
     return fig, ax
+
+
+def analyze_solution(problem, solution, perc=99.9):
+    """Provides a quick analysis of sparse recovery by one of
+    the algorithms in CR-Sparse
+    """
+    A = problem.A
+    b0 = problem.b
+    x0 = problem.x
+    m, n = A.shape
+    x = solution.x
+    b = A.times(x)
+    print(f'm: {m}, n: {n}')
+    print(f'b_norm: original: {crn.arr_l2norm(b0):.3f} reconstruction: {crn.arr_l2norm(b):.3f}'
+        + f' SNR: {crn.signal_noise_ratio(b0, b)} dB')
+    if x0 is not None:
+        print(f'x_norm: original: {crn.arr_l2norm(x0):.3f} reconstruction: {crn.arr_l2norm(x0):.3f}'
+            + f'SNR: {crn.signal_noise_ratio(x0, x)} dB')
+        k1 = crn.num_largest_coeffs_for_energy_percent(x0, perc)
+        s1 = largest_indices(x0, k1)
+        k2 = crn.num_largest_coeffs_for_energy_percent(x, perc)
+        s2 = largest_indices(x, k2)
+        overlap = jnp.intersect1d(s1, s2)
+        correct = overlap.size
+        ratio = correct / max(k1, k2)
+        print(f'Sparsity: original: {k1}, reconstructed: {k2}, overlap: {correct}, ratio: {ratio}')
+    if hasattr(solution, 'iterations'):
+        print(f'Iterations: {solution.iterations} ', end='')
+    if hasattr(solution, 'n_times'):
+        print(f'n_times: {solution.n_times}, n_trans: {solution.n_trans}', end='')
+    print('\n')
+

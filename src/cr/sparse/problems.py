@@ -21,5 +21,6 @@ from cr.sparse._src.problems.problems import (
     PROBLEM_MAP,
     names,
     generate,
-    plot
+    plot,
+    analyze_solution
 )
