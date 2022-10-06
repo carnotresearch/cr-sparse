@@ -63,16 +63,16 @@ def generate(key, c=2, k=120, n=1024):
     def plot(i, ax):
         ax.set_title(figures[i])
         if i == 0:
-            ax.plot(t, b, 'b-')
+            ax.plot(t, b)
             return
         if i == 1:
-            ax.plot(t, cosine, 'b-')
+            ax.plot(t, cosine)
             return
         if i == 2:
-            ax.plot(t, spikes, 'b-')
+            ax.stem(t, spikes, markerfmt='.')
             return
         if i == 3:
-            ax.plot(x, 'b-')
+            ax.stem(x, markerfmt='.')
             return
 
     return Problem(name=name, Phi=Phi, Psi=Psi, A=A, b=b,

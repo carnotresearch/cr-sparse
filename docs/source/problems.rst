@@ -179,7 +179,7 @@ test problems in action.
       - Real Cosines + Real Spikes
       - Dirac-Cosine 
       - Identity
-      -
+      - :ref:`gallery:0003`
     * - complex:sinusoid-spikes
       - Complex Sinusoids+Complex Spikes
       - Dirac-Fourier

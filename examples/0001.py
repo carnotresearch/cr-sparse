@@ -82,8 +82,8 @@ x0 = prob.x
 
 # %% 
 # Check how many coefficients in the sparse representation
-# are sufficient to capture 99% of the energy of the signal
-print(crn.num_largest_coeffs_for_energy_percent(x0, 99))
+# are sufficient to capture 99.9% of the energy of the signal
+print(crn.num_largest_coeffs_for_energy_percent(x0, 99.9))
 
 # %% 
 # Sparse Recovery using Subspace Pursuit

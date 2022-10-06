@@ -91,10 +91,10 @@ def analyze_solution(problem, solution, perc=99.9):
     b = A.times(x)
     print(f'm: {m}, n: {n}')
     print(f'b_norm: original: {crn.arr_l2norm(b0):.3f} reconstruction: {crn.arr_l2norm(b):.3f}'
-        + f' SNR: {crn.signal_noise_ratio(b0, b)} dB')
+        + f' SNR: {crn.signal_noise_ratio(b0, b):.2f} dB')
     if x0 is not None:
         print(f'x_norm: original: {crn.arr_l2norm(x0):.3f} reconstruction: {crn.arr_l2norm(x0):.3f}'
-            + f'SNR: {crn.signal_noise_ratio(x0, x)} dB')
+            + f' SNR: {crn.signal_noise_ratio(x0, x):.2f} dB')
         k1 = crn.num_largest_coeffs_for_energy_percent(x0, perc)
         s1 = largest_indices(x0, k1)
         k2 = crn.num_largest_coeffs_for_energy_percent(x, perc)

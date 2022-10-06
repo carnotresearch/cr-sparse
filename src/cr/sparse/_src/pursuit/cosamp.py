@@ -127,6 +127,7 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
     Examples:
 
     - :ref:`gallery:0002`
+    - :ref:`gallery:0003`
     """
     trans = Phi.trans
     M = y.shape[0]

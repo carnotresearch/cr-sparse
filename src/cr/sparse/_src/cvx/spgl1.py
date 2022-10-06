@@ -757,6 +757,11 @@ def solve_bp(A,
     b: jnp.ndarray, 
     options: SPGL1Options = SPGL1Options()):
     """Solves the Basis Pursuit problem using SPGL1 algorithm
+
+    Examples:
+
+    * :ref:`gallery:0002`
+    * :ref:`gallery:0003`
     """
     m, n = A.shape
     x0 = jnp.zeros(n, dtype=b.dtype)
