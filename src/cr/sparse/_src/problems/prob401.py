@@ -59,9 +59,6 @@ def generate(key, mixing=MIXING_DEFAULT):
     # prepare the mixture
     mixture = signal @ mixing.T
 
-    # measurements
-    b = mixture
-
     wlen = 512
     overlap = 256
     # Windowed DCT basis operator
@@ -78,23 +75,23 @@ def generate(key, mixing=MIXING_DEFAULT):
     A = crlop.jit(A)
 
     # Number of figures
-    figures = ['Audio signal 1', 'Audio signal 2',
+    figures = ['Audio signal 1 (Guitar)', 'Audio signal 2 (Piano)',
     'Mixed audio signal 1', 'Mixed audio signal 2']
     def plot(i, ax):
         ax.set_title(figures[i])
         if i == 0:
-            ax.plot(signal[:, 0], 'b-')
+            ax.plot(signal[:, 0])
             return
         if i == 1:
-            ax.plot(signal[:, 1], 'b-')
+            ax.plot(signal[:, 1])
             return
         if i == 2:
-            ax.plot(mixture[:, 0], 'b-')
+            ax.plot(mixture[:, 0])
             return
         if i == 3:
-            ax.plot(mixture[:, 1], 'b-')
+            ax.plot(mixture[:, 1])
             return
 
-    return Problem(name=name, Phi=Phi, Psi=Psi, A=A, b=b,
+    return Problem(name=name, Phi=Phi, Psi=Psi, A=A, b=mixture,
         reconstruct=reconstruct, y=signal,
         figures=figures, plot=plot)

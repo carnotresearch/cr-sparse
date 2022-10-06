@@ -224,4 +224,4 @@ test problems in action.
       - Mixture of Guitar and Piano Sounds
       - Windowed Discrete Cosine
       - Mixing Matrix
-      -
+      - :ref:`gallery:0401`

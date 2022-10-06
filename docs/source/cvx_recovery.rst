@@ -141,6 +141,7 @@ We have implemented the algorithm with JAX.
 * :ref:`gallery:0002`
 * :ref:`gallery:0003`
 * :ref:`gallery:0004`
+* :ref:`gallery:0401`
 
 Theory
 ''''''''''''

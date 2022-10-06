@@ -59,9 +59,9 @@ fig, ax = problems.plot(prob)
 
 # The sparsifying basis linear operator
 A = prob.A
-# The Blocks signal
+# The Cosine+Spikes signal
 b0 = prob.b
-# The sparse representation of the Blocks signal in the dictionary
+# The sparse representation of the signal in the dictionary
 x0 = prob.x
 
 
