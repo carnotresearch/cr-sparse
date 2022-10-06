@@ -764,7 +764,8 @@ def solve_bp(A,
     * :ref:`gallery:0003`
     """
     m, n = A.shape
-    x0 = jnp.zeros(n, dtype=b.dtype)
+    dtype = jnp.complex128 if not A.real else b.dtype
+    x0 = jnp.zeros(n, dtype=dtype)
     sigma = 0.
     return solve_bpic_from(A, b, sigma, x0, options)
 
