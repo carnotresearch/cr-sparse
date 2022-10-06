@@ -77,7 +77,10 @@ class RecoveryPerformance:
         # Shape of the dictionary/sensing matrix
         M, N = Phi.shape
         if sol is not None:
-            x_hat = build_signal_from_indices_and_values(N, sol.I, sol.x_I) 
+            if 'x' in sol:
+                x_hat = sol.x
+            else:
+                x_hat = build_signal_from_indices_and_values(N, sol.I, sol.x_I) 
         self.T0 = nonzero_indices(x)
         K = self.T0.size
         self.M = M
@@ -130,18 +133,19 @@ class RecoveryPerformance:
         # Ratio between the norm of recovery error and measurement error
         self.h_by_r_norms = self.h_norm / self.r_norm
 
-    def print(self):
+    def print(self, details=False):
         """Prints metrics related to reconstruction quality"""
         print(f'M: {self.M}, N: {self.N}, K: {self.K}')
         print(f'x_norm: {self.x_norm:.3f}, y_norm: {self.y_norm:.3f}')
         print(f'x_hat_norm: {self.x_hat_norm:.3f}, h_norm: {self.h_norm:.2e}, r_norm: {self.r_norm:.2e}')
         print(f'recovery_snr: {self.recovery_snr:.2f} dB, measurement_snr: {self.measurement_snr:.2f} dB')
         print(f'x_dr: {self.x_dr:.2f} dB, y_dr: {self.y_dr:.2f} dB, x_hat_dr: {self.x_hat_dr:.3f} dB')
-        print(f'T0: {self.T0}')
-        print(f'R0: {self.R0}')
-        print(f'Overlap: {self.overlap}')
         print(f'Correct atoms: {self.num_correct_atoms}. Ratio: {self.support_recovery_ratio:.2f}, perfect_support_recovery: {self.perfect_support_recovery}')
         print(f'success: {self.success}')
+        if details:
+            print(f'T0: {self.T0}')
+            print(f'R0: {self.R0}')
+            print(f'Overlap: {self.overlap}')
 
     @property
     def support_recovery_ratio(self):
