@@ -70,24 +70,24 @@ def generate(key, c=2, k=60, m=300, n=1024):
     def plot(i, ax):
         ax.set_title(figures[i])
         if i == 0:
-            ax.plot(t, y, 'b-')
+            ax.plot(t, y)
             return
         if i == 1:
-            ax.plot(t, cosine, 'b-')
+            ax.plot(t, cosine)
             return
         if i == 2:
-            ax.plot(t, spikes, 'b-')
+            ax.stem(t, spikes, markerfmt='.')
             return
         if i == 3:
-            ax.plot(x, 'b-')
+            ax.stem(x, markerfmt='.')
             return
         if i == 4:
-            ax.plot(b, 'b-')
+            ax.plot(b)
             return
 
     return Problem(name=name, Phi=Phi, Psi=Psi, A=A, b=b,
-        reconstruct=reconstruct, x=x,
-        figures=figures, plot=plot)
+        reconstruct=reconstruct, x=x, y=y,
+        figures=figures, plot=plot, both=True)
 
 
 

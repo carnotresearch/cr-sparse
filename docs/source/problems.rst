@@ -189,7 +189,7 @@ test problems in action.
       - Real Cosines + Real Spikes
       - Dirac-Cosine
       - Gaussian
-      -
+      - :ref:`gallery:0005`
     * - piecewise-cubic-poly:daubechies:gaussian
       - Piecewise Cubic Polynomial
       - Daubechies Wavelet

@@ -96,6 +96,11 @@ def analyze_solution(problem, solution, perc=99.9):
     if x0 is not None:
         print(f'x_norm: original: {crn.arr_l2norm(x0):.3f} reconstruction: {crn.arr_l2norm(x):.3f}'
             + f' SNR: {crn.signal_noise_ratio(x0, x):.2f} dB')
+    if y0 is not None and (problem.both or x0 is None):
+        y = problem.reconstruct(x)
+        print(f'y_norm: original: {crn.arr_l2norm(y0):.3f} reconstruction: {crn.arr_l2norm(y):.3f}'
+            + f' SNR: {crn.signal_noise_ratio(y0, y):.2f} dB')
+    if x0 is not None:
         k1 = crn.num_largest_coeffs_for_energy_percent(x0, perc)
         s1 = largest_indices(x0, k1)
         k2 = crn.num_largest_coeffs_for_energy_percent(x, perc)
@@ -103,11 +108,7 @@ def analyze_solution(problem, solution, perc=99.9):
         overlap = jnp.intersect1d(s1, s2)
         correct = overlap.size
         ratio = correct / max(k1, k2)
-        print(f'Sparsity: original: {k1}, reconstructed: {k2}, overlap: {correct}, ratio: {ratio}')
-    elif y0 is not None:
-        y = problem.reconstruct(x)
-        print(f'y_norm: original: {crn.arr_l2norm(y0):.3f} reconstruction: {crn.arr_l2norm(y):.3f}'
-            + f' SNR: {crn.signal_noise_ratio(y0, y):.2f} dB')
+        print(f'Sparsity: original: {k1}, reconstructed: {k2}, overlap: {correct}, ratio: {ratio:.3f}')
     if hasattr(solution, 'iterations'):
         print(f'Iterations: {solution.iterations} ', end='')
     if hasattr(solution, 'n_times'):

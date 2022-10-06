@@ -64,5 +64,7 @@ class Problem(NamedTuple):
     "Titles of figures associated with the problem"
     plot: Callable = None
     "A function to plot specific figures associated with the problem"
+    both: bool = False
+    "A flag to indicate if both Phi and Psi are non-trivial"
 
 
