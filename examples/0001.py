@@ -4,6 +4,9 @@ r"""
 HeaviSine Signal in Dirac-Fourier Basis
 ===========================================
 
+.. contents::
+    :depth: 2
+    :local:
 
 A HeaviSine signal as proposed by Donoho et al.
 in Wavelab :cite:`buckheit1995wavelab` is a sign
@@ -49,6 +52,10 @@ See also:
 * :ref:`api:l1min`
 """
 
+# Configure JAX to work with 64-bit floating point precision. 
+from jax.config import config
+config.update("jax_enable_x64", True)
+
 import jax.numpy as jnp
 import cr.nimble as crn
 
@@ -60,7 +67,7 @@ import cr.nimble as crn
 
 from cr.sparse import problems
 prob = problems.generate('heavi-sine:fourier:heavi-side')
-problems.plot(prob);
+fig, ax = problems.plot(prob)
 
 # %% 
 # Let us access the relevant parts of our test problem

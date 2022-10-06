@@ -24,7 +24,7 @@ from cr.nimble.dsp import largest_indices
 
 
 def matrix_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
-    """Solves the sparse recovery problem :math:`y = \Phi x + e` using Subspace Pursuit for matrices
+    r"""Solves the sparse recovery problem :math:`y = \Phi x + e` using Subspace Pursuit for matrices
     """
     ## Initialize some constants for the algorithm
     M, N = Phi.shape
@@ -97,7 +97,12 @@ matrix_solve_jit = jit(matrix_solve, static_argnums=(2), static_argnames=("max_i
 
 
 def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
-    """Solves the sparse recovery problem :math:`y = \Phi x + e` using Subspace Pursuit for linear operators
+    r"""Solves the sparse recovery problem :math:`y = \Phi x + e` using Subspace Pursuit for linear operators
+
+    Examples:
+
+    - :ref:`gallery:0001`
+    - :ref:`gallery:0002`
     """
     trans = Phi.trans
     ## Initialize some constants for the algorithm

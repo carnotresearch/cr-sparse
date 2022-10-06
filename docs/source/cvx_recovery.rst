@@ -137,6 +137,7 @@ We have implemented the algorithm with JAX.
 
 .. rubric:: Examples
 
+* :ref:`gallery:0002`
 
 Theory
 ''''''''''''

@@ -147,6 +147,7 @@ Problems API
     names
     generate
     plot
+    analyze_solution
 
 
 List of Problems
@@ -173,7 +174,7 @@ test problems in action.
       - Blocks
       - Haar Wavelet
       - Identity
-      -
+      - :ref:`gallery:0002`
     * - cosine-spikes:dirac-dct
       - Real Cosines + Real Spikes
       - Dirac-Cosine 
