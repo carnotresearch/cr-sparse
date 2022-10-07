@@ -194,7 +194,7 @@ test problems in action.
       - Piecewise Cubic Polynomial
       - Daubechies Wavelet
       - Gaussian
-      -
+      - :ref:`gallery:0006`
     * - signed-spikes:dirac:gaussian
       - Real Signed Spikes
       - Identity

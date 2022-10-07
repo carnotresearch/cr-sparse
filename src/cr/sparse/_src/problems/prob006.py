@@ -45,7 +45,7 @@ def piecewise_polynomial(key, n, p):
     return signal
 
 
-def generate(key, p=5, m=600, n=2048):
+def generate(key, p=5, m=600, n=2048, level=5):
     name = 'piecewise-cubic-poly:daubechies:gaussian'
     t = jnp.arange(n)/n
     keys = random.split(key, 2)
@@ -53,7 +53,7 @@ def generate(key, p=5, m=600, n=2048):
     y = piecewise_polynomial(keys[0], n, p)
 
     # Daubechies basis
-    db_basis = crlop.dwt(n, wavelet='db8', level=5, basis=True)
+    db_basis = crlop.dwt(n, wavelet='db8', level=level, basis=True)
     db_basis = crlop.jit(db_basis)
 
 
@@ -76,18 +76,18 @@ def generate(key, p=5, m=600, n=2048):
     def plot(i, ax):
         ax.set_title(figures[i])
         if i == 0:
-            ax.plot(y, 'b-')
+            ax.plot(y)
             return
         if i == 1:
-            ax.plot(x, 'b-')
+            ax.stem(x, markerfmt='.')
             return
         if i == 2:
-            ax.plot(b, 'b-')
+            ax.plot(b)
             return
 
     return Problem(name=name, Phi=Phi, Psi=Psi, A=A, b=b,
         reconstruct=reconstruct, x=x, y=y,
-        figures=figures, plot=plot)
+        figures=figures, plot=plot, both=True)
 
 
 
