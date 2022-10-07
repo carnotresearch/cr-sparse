@@ -19,6 +19,7 @@ In this example we have
    entries (corresponding to the spikes and the amplitudes of the cosine waves).
 #. A Gaussian sensing matrix :math:`\Phi` of shape  600x2048 making
    600 random measurements in a vector :math:`\bb`.
+   The columns of the sensing matrix are unit normalized.
 #. We are given :math:`\bb` and :math:`\bA = \Phi \Psi` and
    have to reconstruct :math:`\bx` using it.
 #. Then we can use :math:`\Psi` to compute :math:`\by = \Psi \bx`.

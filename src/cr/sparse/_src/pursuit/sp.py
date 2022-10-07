@@ -105,6 +105,8 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
     - :ref:`gallery:0002`
     - :ref:`gallery:0003`
     - :ref:`gallery:0004`
+    - :ref:`gallery:0006`
+    - :ref:`gallery:0007`
     """
     trans = Phi.trans
     ## Initialize some constants for the algorithm

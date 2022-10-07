@@ -199,7 +199,7 @@ test problems in action.
       - Real Signed Spikes
       - Identity
       - Gaussian
-      -
+      - :ref:`gallery:0007`
     * - complex:signed-spikes:dirac:gaussian
       - Complex Signed Spikes
       - Identity

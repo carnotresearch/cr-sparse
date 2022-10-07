@@ -56,10 +56,10 @@ def generate(key, k=20, m=600, n=2560, scale=1):
     def plot(i, ax):
         ax.set_title(figures[i])
         if i == 0:
-            ax.plot(x, 'b-')
+            ax.stem(x, markerfmt='.')
             return
         if i == 1:
-            ax.plot(b, 'b-')
+            ax.plot(b)
             return
 
     return Problem(name=name, Phi=Phi, Psi=Psi, A=A, b=b,
