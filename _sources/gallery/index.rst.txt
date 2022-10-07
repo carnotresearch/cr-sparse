@@ -161,6 +161,48 @@ Examples Gallery
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example we have">
+
+.. only:: html
+
+ .. figure:: /gallery/images/thumb/sphx_glr_0006_thumb.png
+     :alt: Piecewise Cubic, Daubechies Basis, Gaussian Measurements
+
+     :ref:`sphx_glr_gallery_0006.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/0006
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example we have">
+
+.. only:: html
+
+ .. figure:: /gallery/images/thumb/sphx_glr_0007_thumb.png
+     :alt: Signed Spikes, Gaussian Measurements
+
+     :ref:`sphx_glr_gallery_0007.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/0007
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip=" In audio signal processing, source separation is the process of isolating individual sounds in...">
 
 .. only:: html

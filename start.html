@@ -24,6 +24,8 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/custom.js"></script>
     <script src="_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -61,9 +63,8 @@
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#platform-support">Platform Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
@@ -114,15 +115,25 @@
   <section id="quick-start">
 <h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://badge.fury.io/py/cr-sparse"><img alt="PyPI cr-sparse" src="https://badge.fury.io/py/cr-sparse.svg" /></a> <a class="reference external" href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a> <a class="reference external" href="https://zenodo.org/badge/latestdoi/323566858"><img alt="DOI" src="https://zenodo.org/badge/323566858.svg" /></a> <a class="reference external" href="https://cr-sparse.readthedocs.io/en/latest/?badge=latest"><img alt="Documentation Status" src="https://readthedocs.org/projects/cr-sparse/badge/?version=latest" /></a> <a class="reference external" href="https://github.com/carnotresearch/cr-sparse/actions/workflows/ci.yml"><img alt="Unit Tests" src="https://github.com/carnotresearch/cr-sparse/actions/workflows/ci.yml/badge.svg" /></a> <a class="reference external" href="https://codecov.io/gh/carnotresearch/cr-sparse"><img alt="Coverage" src="https://codecov.io/gh/carnotresearch/cr-sparse/branch/master/graph/badge.svg?token=JZQW6QU3S4" /></a> <a class="reference external" href="https://joss.theoj.org/papers/ebd4e5ca27a5db705b1dc382b64e0bed"><img alt="JOSS" src="https://joss.theoj.org/papers/ebd4e5ca27a5db705b1dc382b64e0bed/status.svg" /></a></p>
-<section id="platform-support">
-<h2>Platform Support<a class="headerlink" href="#platform-support" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">cr-sparse</span></code> can run on any platform supported by <code class="docutils literal notranslate"><span class="pre">JAX</span></code>.
-We have tested <code class="docutils literal notranslate"><span class="pre">cr-sparse</span></code> on Mac and Linux platforms and Google Colaboratory.</p>
-<p><code class="docutils literal notranslate"><span class="pre">JAX</span></code> is not officially supported on Windows platforms at the moment.
-Although, it is possible to build it from source using Windows Subsystems for Linux.</p>
-</section>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#installation" id="id2">Installation</a></p>
+<ul>
+<li><p><a class="reference internal" href="#platform-support" id="id3">Platform Support</a></p></li>
+<li><p><a class="reference internal" href="#dependencies" id="id4">Dependencies</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#usage" id="id5">Usage</a></p>
+<ul>
+<li><p><a class="reference internal" href="#examples" id="id6">Examples</a></p></li>
+<li><p><a class="reference internal" href="#common-workflows" id="id7">Common Workflows</a></p></li>
+<li><p><a class="reference internal" href="#common-tasks" id="id8">Common Tasks</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>Installation from PyPI:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m pip install cr-sparse
 </pre></div>
@@ -131,6 +142,12 @@ Although, it is possible to build it from source using Windows Subsystems for Li
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m pip install git+https://github.com/carnotresearch/cr-sparse.git
 </pre></div>
 </div>
+<section id="platform-support">
+<h3><a class="toc-backref" href="#id3">Platform Support</a><a class="headerlink" href="#platform-support" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">cr-sparse</span></code> can run on any platform supported by <code class="docutils literal notranslate"><span class="pre">JAX</span></code>.
+We have tested <code class="docutils literal notranslate"><span class="pre">cr-sparse</span></code> on Mac and Linux platforms and Google Colaboratory.</p>
+<p><code class="docutils literal notranslate"><span class="pre">JAX</span></code> is not officially supported on Windows platforms at the moment.
+Although, it is possible to build it from source using Windows Subsystems for Linux.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you are on Windows, JAX is not yet officially supported.
@@ -139,22 +156,237 @@ from <a class="reference external" href="https://github.com/cloudhan/jax-windows
 This works quite well for development purposes.</p>
 </div>
 </section>
+<section id="dependencies">
+<h3><a class="toc-backref" href="#id4">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">cr-sparse</span></code> depends on its sister libraries</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://github.com/carnotresearch/cr-nimble">cr-nimble</a></p></li>
+<li><p><a class="reference external" href="https://github.com/carnotresearch/cr-wavelets">cr-wavelets</a></p></li>
+</ol>
+<p>Normally, they would be installed automatically as a dependency.
+You may want to install them directly from GITHUB
+if you need access to the latest code.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m pip install git+https://github.com/carnotresearch/cr-nimble.git
+python -m pip install git+https://github.com/carnotresearch/cr-wavelets.git
+</pre></div>
+</div>
+</section>
+</section>
+<section id="usage">
+<h2><a class="toc-backref" href="#id5">Usage</a><a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id6">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>See the <a class="reference internal" href="gallery/index.html#gallery"><span class="std std-ref">examples gallery</span></a>.</p></li>
 <li><p>A more extensive collection of example notebooks is available in the <a class="reference external" href="https://github.com/carnotresearch/cr-sparse-companion">companion repository</a>.</p></li>
 <li><p>Some micro-benchmarks are reported <a class="reference external" href="https://github.com/carnotresearch/cr-sparse/blob/master/paper/paper.md#runtime-comparisons">here</a>.</p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">cr-sparse</span></code> depends on its sister library <a class="reference external" href="https://github.com/carnotresearch/cr-nimble">cr-nimble</a>.
-Normally, it would be installed automatically as a dependency.
-You may want to install it directly from GITHUB if you need access to the latest code.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python -m pip install git+https://github.com/carnotresearch/cr-nimble.git
+</section>
+<section id="common-workflows">
+<h3><a class="toc-backref" href="#id7">Common Workflows</a><a class="headerlink" href="#common-workflows" title="Permalink to this headline">¶</a></h3>
+<p class="rubric">Compressive Sensing</p>
+<ol class="arabic simple">
+<li><p>Select/Load/Generate a signal to be compressive sampled.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="source/data.html#api-data"><span class="std std-ref">Sample Data Generation Utilities</span></a></p></li>
+<li><p><a class="reference internal" href="source/problems.html#api-problems"><span class="std std-ref">Test Problems</span></a></p></li>
+</ul>
+</li>
+<li><p>Select a sensing matrix/operator.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="source/dict.html#api-dict"><span class="std std-ref">Sparsifying Dictionaries and Sensing Matrices</span></a></p></li>
+<li><p><a class="reference internal" href="source/lop.html#api-lop"><span class="std std-ref">Linear Operators</span></a></p></li>
+<li><p><a class="reference internal" href="source/problems.html#api-problems"><span class="std std-ref">Test Problems</span></a></p></li>
+</ul>
+</li>
+<li><p>Compute the measurements.</p></li>
+<li><p>Select a sparsifying basis under which the signal has a sparse representation.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="source/dict.html#api-dict"><span class="std std-ref">Sparsifying Dictionaries and Sensing Matrices</span></a></p></li>
+<li><p><a class="reference internal" href="source/lop.html#api-lop"><span class="std std-ref">Linear Operators</span></a></p></li>
+<li><p><a class="reference internal" href="source/problems.html#api-problems"><span class="std std-ref">Test Problems</span></a></p></li>
+<li><p><a class="reference external" href="https://github.com/carnotresearch/cr-wavelets">cr-wavelets</a></p></li>
+</ul>
+</li>
+<li><p>Combine the sensing matrix and sparsifying basis to generate a linear
+operator which will be used for solving the sparse reconstruction problem.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">compose</span></code> in <a class="reference internal" href="source/lop.html#api-lop"><span class="std std-ref">Linear Operators</span></a></p></li>
+</ul>
+</li>
+<li><p>Use a sparse recovery algorithm to solve the sparse recovery problem.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="algorithms.html#sec-algorithms"><span class="std std-ref">Algorithms</span></a></p></li>
+<li><p><a class="reference internal" href="source/pursuit.html#api-pursuit"><span class="std std-ref">Greedy Sparse Recovery</span></a></p></li>
+<li><p><a class="reference internal" href="source/cvx_recovery.html#api-l1min"><span class="std std-ref">Convex Relaxation</span></a></p></li>
+</ul>
+</li>
+<li><p>Use the sparse representation so constructed to generate the approximation
+of the original signal using the sparsifying basis.</p></li>
+<li><p>Measure the quality of reconstruction.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cr.nimble.metrics</span></code></p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="common-tasks">
+<h3><a class="toc-backref" href="#id8">Common Tasks</a><a class="headerlink" href="#common-tasks" title="Permalink to this headline">¶</a></h3>
+<p>Make sure to configure JAX for 64-bit numbers:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax.config</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;jax_enable_x64&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Essential library imports:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># jax numpy</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="c1"># cr-nimble library</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">crn</span>
+<span class="c1"># cr-sparse library</span>
+<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+</pre></div>
 </div>
+<p>You will often need PRNG (Pseudorandom) keys:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># you can put any integer as seed</span>
+</pre></div>
+</div>
+<p class="rubric">Sample data</p>
+<p>A sparse signal with normal distributed nonzero values:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cr.sparse.data</span> <span class="k">as</span> <span class="nn">crdata</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">crdata</span><span class="o">.</span><span class="n">sparse_normal_representations</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A sparse signal consisting of signed spikes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">crdata</span><span class="o">.</span><span class="n">sparse_spikes</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Block sparse signal with intra block correlation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">blocks</span><span class="p">,</span> <span class="n">indices</span>  <span class="o">=</span> <span class="n">crdata</span><span class="o">.</span><span class="n">sparse_normal_blocks</span><span class="p">(</span>
+    <span class="n">key</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">blk_size</span><span class="p">,</span> <span class="n">cor</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Some standard signals based on Wavelab:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cr.nimble.dsp.signals</span> <span class="k">as</span> <span class="nn">signals</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">signals</span><span class="o">.</span><span class="n">heavi_sine</span><span class="p">()</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">signals</span><span class="o">.</span><span class="n">bumps</span><span class="p">()</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">signals</span><span class="o">.</span><span class="n">blocks</span><span class="p">()</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">signals</span><span class="o">.</span><span class="n">ramp</span><span class="p">()</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">signals</span><span class="o">.</span><span class="n">cusp</span><span class="p">()</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">signals</span><span class="o">.</span><span class="n">sing</span><span class="p">()</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">signals</span><span class="o">.</span><span class="n">hi_sine</span><span class="p">()</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">signals</span><span class="o">.</span><span class="n">lo_sine</span><span class="p">()</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">signals</span><span class="o">.</span><span class="n">lin_chirp</span><span class="p">()</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">signals</span><span class="o">.</span><span class="n">two_chirp</span><span class="p">()</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">signals</span><span class="o">.</span><span class="n">quad_chirp</span><span class="p">()</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">signals</span><span class="o">.</span><span class="n">mish_mash</span><span class="p">()</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">signals</span><span class="o">.</span><span class="n">werner_sorrows</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="rubric">Sensing Matrices</p>
+<p>A Gaussian sensing matrix:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cr.sparse.dict</span> <span class="k">as</span> <span class="nn">crdict</span>
+<span class="n">Phi</span> <span class="o">=</span> <span class="n">crdict</span><span class="o">.</span><span class="n">gaussian_mtx</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A Gaussian sensing matrix operator:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cr.sparse.lop</span> <span class="k">as</span> <span class="nn">crlop</span>
+<span class="n">Phi</span> <span class="o">=</span> <span class="n">crlop</span><span class="o">.</span><span class="n">gaussian_dict</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Computing measurements:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">Phi</span> <span class="o">@</span> <span class="n">x</span> <span class="c1"># for matrices</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># for operators</span>
+</pre></div>
+</div>
+<p>Haar wavelet basis:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cr.sparse.lop</span> <span class="k">as</span> <span class="nn">crlop</span>
+<span class="n">Psi</span> <span class="o">=</span> <span class="n">crlop</span><span class="o">.</span><span class="n">dwt</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">wavelet</span><span class="o">=</span><span class="s1">&#39;haar&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Computing the representation of a signal in an orthonormal basis:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="n">Psi</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Constructing a signal from its representation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">Psi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Creating a composite linear operator of a sensing matrix and a basis:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">crlop</span><span class="o">.</span><span class="n">compose</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">Psi</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finding how many large coefficients are sufficient to capture
+most of the energy in a signal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">crn</span><span class="o">.</span><span class="n">num_largest_coeffs_for_energy_percent</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">99</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">More Dictionaries</p>
+<p>Fourier Heaviside dictionary:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cr.sparse.lop</span> <span class="k">as</span> <span class="nn">crlop</span>
+<span class="n">heaviside</span> <span class="o">=</span> <span class="n">crlop</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">fourier_basis</span> <span class="o">=</span> <span class="n">crlop</span><span class="o">.</span><span class="n">fourier_basis</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">dictionary</span> <span class="o">=</span> <span class="n">crlop</span><span class="o">.</span><span class="n">hcat</span><span class="p">(</span><span class="n">fourier_basis</span><span class="p">,</span> <span class="n">heaviside</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Dirac Cosine dictionary:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dirac_basis</span> <span class="o">=</span> <span class="n">crlop</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">cosine_basis</span> <span class="o">=</span> <span class="n">crlop</span><span class="o">.</span><span class="n">cosine_basis</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">dirac_cosine_basis</span> <span class="o">=</span> <span class="n">crlop</span><span class="o">.</span><span class="n">hcat</span><span class="p">(</span><span class="n">dirac_basis</span><span class="p">,</span> <span class="n">cosine_basis</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Dirac Fourier dictionary:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dirac_basis</span> <span class="o">=</span> <span class="n">crlop</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">fourier_basis</span> <span class="o">=</span> <span class="n">crlop</span><span class="o">.</span><span class="n">fourier_basis</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">dirac_fourier_basis</span> <span class="o">=</span> <span class="n">crlop</span><span class="o">.</span><span class="n">hcat</span><span class="p">(</span><span class="n">dirac_basis</span><span class="p">,</span> <span class="n">fourier_basis</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Daubechies basis:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db_basis</span> <span class="o">=</span> <span class="n">crlop</span><span class="o">.</span><span class="n">dwt</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">wavelet</span><span class="o">=</span><span class="s1">&#39;db8&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Sparse Recovery</p>
+<p>Solving a sparse representation problem <span class="math notranslate nohighlight">\(\bb = \bA \bx\)</span>
+using subspace pursuit:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cr.sparse.pursuit.sp</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+<p>Solving using Compressive Sampling Matching Pursuit:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cr.sparse.pursuit.cosamp</span> <span class="k">as</span> <span class="nn">cosamp</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">cosamp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Solving using Iterative Hard Thresholding:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cr.sparse.pursuit</span> <span class="kn">import</span> <span class="n">iht</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">iht</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Solving using Hard Thresholding Pursuit:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cr.sparse.pursuit</span> <span class="kn">import</span> <span class="n">iht</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">htp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Solving using SPGL1 algorithm:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cr.sparse.cvx.spgl1</span> <span class="k">as</span> <span class="nn">crspgl1</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">crspgl1</span><span class="o">.</span><span class="n">SPGL1Options</span><span class="p">()</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">crspgl1</span><span class="o">.</span><span class="n">solve_bp</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">crspgl1</span><span class="o">.</span><span class="n">solve_bpic</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">crspgl1</span><span class="o">.</span><span class="n">solve_lasso</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Solving using L1LS algorithm:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cr.sparse.cvx.l1ls</span> <span class="k">as</span> <span class="nn">l1ls</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">l1ls</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Solving using FOCUSS algorithm (only matrix based dictionaries supported):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cr.sparse.cvx.focuss</span> <span class="k">as</span> <span class="nn">focuss</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">focuss</span><span class="o">.</span><span class="n">matrix_solve_noiseless</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 
