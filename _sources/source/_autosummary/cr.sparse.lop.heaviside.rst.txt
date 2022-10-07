@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.heaviside
+=======================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: heaviside

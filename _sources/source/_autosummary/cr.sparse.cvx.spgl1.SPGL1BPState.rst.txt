@@ -1,0 +1,46 @@
+﻿cr.sparse.cvx.spgl1.SPGL1BPState
+================================
+
+.. currentmodule:: cr.sparse.cvx.spgl1
+
+.. autoclass:: SPGL1BPState
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SPGL1BPState.__init__
+      ~SPGL1BPState.count
+      ~SPGL1BPState.index
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SPGL1BPState.alpha
+      ~SPGL1BPState.alpha_next
+      ~SPGL1BPState.f_past
+      ~SPGL1BPState.g
+      ~SPGL1BPState.iterations
+      ~SPGL1BPState.n_ls_iters
+      ~SPGL1BPState.n_newton
+      ~SPGL1BPState.n_times
+      ~SPGL1BPState.n_trans
+      ~SPGL1BPState.r
+      ~SPGL1BPState.r_f_error
+      ~SPGL1BPState.r_gap
+      ~SPGL1BPState.r_norm
+      ~SPGL1BPState.r_res_error
+      ~SPGL1BPState.tau
+      ~SPGL1BPState.tau_changed
+      ~SPGL1BPState.x
+   
+   

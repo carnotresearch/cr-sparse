@@ -68,13 +68,14 @@
 <li class="toctree-l2"><a class="reference internal" href="sls.html">Sparse Linear Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">Convex Relaxation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fom.html">First Order Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="block.html">Block Sparsity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems.html">Test Problems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="misc.html">Miscellaneous Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
 </ul>
@@ -151,6 +152,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dict.html#functions-for-constructing-sparsying-dictionaries-and-sensing-matrices">Functions for constructing sparsying dictionaries and sensing matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dict.html#dictionary-properties">Dictionary properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dict.html#dictionary-comparison">Dictionary comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dict.html#grassmannian-frames">Grassmannian frames</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery</a><ul>
@@ -161,9 +163,11 @@
 <li class="toctree-l2"><a class="reference internal" href="pursuit.html#using-the-greedy-algorithms">Using the greedy algorithms</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="cvx_recovery.html">L1 Minimization</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="cvx_recovery.html">Convex Relaxation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html#truncated-newton-interior-points-method-tnipm">Truncated Newton Interior Points Method (TNIPM)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html#alternating-directions-methods">Alternating Directions Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html#focal-underdetermined-system-solver-focuss">FOcal Underdetermined System Solver (FOCUSS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html#spectral-projected-gradient-l1-spgl1">Spectral Projected Gradient L1 (SPGL1)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="opt.html">Optimization</a><ul>
@@ -209,6 +213,12 @@
 <li class="toctree-l2"><a class="reference internal" href="data.html#subspaces">Subspaces</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="problems.html">Test Problems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="problems.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems.html#problems-api">Problems API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems.html#list-of-problems">List of Problems</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="misc.html">Miscellaneous Algorithms</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="misc.html#bit-compressive-sensing">1-Bit Compressive Sensing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="misc.html#geophysical-signal-processing">Geophysical Signal Processing</a></li>
@@ -231,7 +241,7 @@
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>

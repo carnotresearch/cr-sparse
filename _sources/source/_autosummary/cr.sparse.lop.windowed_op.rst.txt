@@ -1,0 +1,6 @@
+﻿cr.sparse.lop.windowed\_op
+==========================
+
+.. currentmodule:: cr.sparse.lop
+
+.. autofunction:: windowed_op

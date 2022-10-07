@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Source Separation I &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/mathconf.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="A matrix backed linear operator" href="0100_lop/matrix_operator.html" />
+    <link rel="prev" title="HeaviSine Signal in Fourier-HeaviSide Basis" href="0001.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/index.html">API Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples Gallery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sparse_vector_normals.html">A sparse model vector generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0002.html">Blocks Signal in Haar Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0004.html">Complex Sinusoids+Complex-Spikes in Dirac-Fourier Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0003.html">Cosine+Spikes in Dirac-Cosine Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grass.html">Grassmannian Frames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0001.html">HeaviSine Signal in Fourier-HeaviSide Basis</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Source Separation I</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#linear-operators">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#compressive-sensing">Compressive Sensing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#convex-relaxation-techniques">Convex Relaxation Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#data-clustering">Data Clustering</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Examples Gallery</a><ul>
+      <li>Previous: <a href="0001.html" title="previous chapter">HeaviSine Signal in Fourier-HeaviSide Basis</a></li>
+      <li>Next: <a href="0100_lop/matrix_operator.html" title="next chapter">A matrix backed linear operator</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-gallery-0401-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="source-separation-i">
+<span id="gallery-0401"></span><span id="sphx-glr-gallery-0401-py"></span><h1>Source Separation I<a class="headerlink" href="#source-separation-i" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#modeling-the-source-separation-problem" id="id1">Modeling the Source Separation Problem</a></p>
+<ul>
+<li><p><a class="reference internal" href="#the-sensor" id="id2">The Sensor</a></p></li>
+<li><p><a class="reference internal" href="#the-sparsifying-basis" id="id3">The Sparsifying Basis</a></p></li>
+<li><p><a class="reference internal" href="#the-sparse-recovery-problem" id="id4">The Sparse Recovery Problem</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#setup" id="id5">Setup</a></p></li>
+<li><p><a class="reference internal" href="#sparse-reconstruction-using-spgl1" id="id6">Sparse Reconstruction using SPGL1</a></p></li>
+</ul>
+</div>
+<p>In audio signal processing,
+source separation is the process of isolating individual sounds
+in an auditory mixture of multiple sounds.</p>
+<section id="modeling-the-source-separation-problem">
+<h2><a class="toc-backref" href="#id1">Modeling the Source Separation Problem</a><a class="headerlink" href="#modeling-the-source-separation-problem" title="Permalink to this headline">¶</a></h2>
+<p>In this example we consider the problem
+of separating two sources which have been
+mixed together.
+One is the sound of a guitar,
+and another is the sound of piano.
+The mixture is being sensor from two
+different places with different mixing
+weights at each sensor. For each time
+instant, the mixing process can be
+described by the equation:</p>
+<div class="math notranslate nohighlight" id="equation-gallery-0401-0">
+<span class="eqno">(1)<a class="headerlink" href="#equation-gallery-0401-0" title="Permalink to this equation">¶</a></span>\[\bv = \bM \bu\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bu\)</span> is a 2-vector containing
+one sample each from the guitar and piano
+sounds and <span class="math notranslate nohighlight">\(\bv\)</span> is a 2-vector containing
+the samples from the two different listening sensors.
+The matrix <span class="math notranslate nohighlight">\(\bM\)</span> is a <span class="math notranslate nohighlight">\(2 \times 2\)</span>
+mixing matrix.
+The mixing matrix
+is known to us in this problem.</p>
+<p>Assume that the audio has been captured for <span class="math notranslate nohighlight">\(m\)</span>
+samples. We can put together the source audio in
+a <span class="math notranslate nohighlight">\(m \times 2\)</span> matrix <span class="math notranslate nohighlight">\(\by\)</span> and the captured
+audio from the two sensors as a <span class="math notranslate nohighlight">\(m \times 2\)</span>
+matrix <span class="math notranslate nohighlight">\(\bb\)</span> with the mixing relationship given by</p>
+<div class="math notranslate nohighlight" id="equation-gallery-0401-1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-gallery-0401-1" title="Permalink to this equation">¶</a></span>\[\bb = \by \bM^T\]</div>
+<p>Here the post multiplication by the matrix
+<span class="math notranslate nohighlight">\(\bM^T\)</span> is equality to processing each
+row of input <span class="math notranslate nohighlight">\(\by\)</span> by the mixing process
+to generate a row of output.</p>
+<section id="the-sensor">
+<h3><a class="toc-backref" href="#id2">The Sensor</a><a class="headerlink" href="#the-sensor" title="Permalink to this headline">¶</a></h3>
+<p>From the perspective of sparse reconstruction,
+we treat the mixing process as compressive sampling.
+Then we can write the mixing equation as the application
+of a linear operator <span class="math notranslate nohighlight">\(\Phi\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-gallery-0401-2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-gallery-0401-2" title="Permalink to this equation">¶</a></span>\[\bb = \Phi (\by).\]</div>
+<p>Beware that this linear operator processes the input
+<span class="math notranslate nohighlight">\(\by\)</span> row by row to generate the output <span class="math notranslate nohighlight">\(\bb\)</span>.
+Fortunately, the CR-Sparse linear operator architecture allows
+us to process input data along any axis of choice. By default
+all linear operators process data column by column, which
+is akin to a matrix pre-multiplication. However, in this
+problem, we will use a simple <span class="math notranslate nohighlight">\(2 \times 2\)</span> matrix
+post-multiplication as our linear operator for representing
+the sensing process.</p>
+<p>An alternative design (as used in SPARCO) would have been
+to flatten <span class="math notranslate nohighlight">\(\by\)</span> to a vector of length <span class="math notranslate nohighlight">\(2 m\)</span>
+and then use a <span class="math notranslate nohighlight">\(2 m \times 2 m\)</span> sensing matrix <span class="math notranslate nohighlight">\(\Phi\)</span>
+(obtained by computing the Kronecker product of <span class="math notranslate nohighlight">\(\bM\)</span>
+with an identity matrix <span class="math notranslate nohighlight">\(\bI_m\)</span>) to construct a flattened
+version of <span class="math notranslate nohighlight">\(\bb\)</span>. Our post-multiplication version of
+linear operator is a more efficient implementation.</p>
+</section>
+<section id="the-sparsifying-basis">
+<h3><a class="toc-backref" href="#id3">The Sparsifying Basis</a><a class="headerlink" href="#the-sparsifying-basis" title="Permalink to this headline">¶</a></h3>
+<p>To create a suitable sparsifying basis for this signal,
+we will first consider a forward transform as defined below:</p>
+<ol class="arabic simple">
+<li><p>Split the signal into overlapping windows of length <span class="math notranslate nohighlight">\(w\)</span>
+samples each.</p></li>
+<li><p>Let the overlap between windows be of <span class="math notranslate nohighlight">\(l = w/2\)</span>
+samples (50%) overlap.</p></li>
+<li><p>For the last partial window, pad it with zeros as needed.</p></li>
+<li><p>Compute the DCT transform of each window.</p></li>
+<li><p>Concatenate the transforms together to form a representation
+of the signal.</p></li>
+</ol>
+<p>Let there be <span class="math notranslate nohighlight">\(b\)</span> such
+overlapping windows over a signal of length <span class="math notranslate nohighlight">\(m\)</span>. Then
+the shape of this forward transform operator is <span class="math notranslate nohighlight">\(w b \times m\)</span>.</p>
+<p>We define the adjoint (transpose) of the above forward transform as
+the Windowed Discrete Cosine Basis for our music sounds. We denote
+this basis by <span class="math notranslate nohighlight">\(\Psi\)</span>. The representation equation is given by</p>
+<div class="math notranslate nohighlight" id="equation-gallery-0401-3">
+<span class="eqno">(4)<a class="headerlink" href="#equation-gallery-0401-3" title="Permalink to this equation">¶</a></span>\[\by = \Psi (\bx).\]</div>
+<p>Here <span class="math notranslate nohighlight">\(\bx\)</span> is an <span class="math notranslate nohighlight">\(w b \times 2\)</span> representation matrix
+where each column is a representation of each column in <span class="math notranslate nohighlight">\(\by\)</span>.
+In other words, the first column of <span class="math notranslate nohighlight">\(\bx\)</span> is a <span class="math notranslate nohighlight">\(wb\)</span> length
+representation of the guitar signal and the second column is the
+representation of the piano signal. This is an overcomplete
+basis (processing input data column by column). Note that by design,
+each column of <span class="math notranslate nohighlight">\(\Psi\)</span> is unit length.</p>
+<p>CR-Sparse includes an operator called <code class="docutils literal notranslate"><span class="pre">windowed_op</span></code> which can
+transform any linear operator <span class="math notranslate nohighlight">\(T\)</span> into a windowed operator
+as per description above. Starting from the <code class="docutils literal notranslate"><span class="pre">cosine_basis</span></code>
+operator, we construct our sparsifying basis <span class="math notranslate nohighlight">\(\Psi\)</span>
+using <code class="docutils literal notranslate"><span class="pre">windowed_op</span></code>. In particular we will be using
+512 length windows with overlaps of 256 samples.
+The details of the construction of the sensing operator
+and the sparsifying basis can be seen in the <code class="docutils literal notranslate"><span class="pre">prob401.py</span></code>
+file in the source code.</p>
+</section>
+<section id="the-sparse-recovery-problem">
+<h3><a class="toc-backref" href="#id4">The Sparse Recovery Problem</a><a class="headerlink" href="#the-sparse-recovery-problem" title="Permalink to this headline">¶</a></h3>
+<p>We now combine the operators <span class="math notranslate nohighlight">\(\Phi\)</span> and <span class="math notranslate nohighlight">\(\Psi\)</span>
+to construct the operator <span class="math notranslate nohighlight">\(\bA = \Phi \Psi\)</span> and form
+the linear equation:</p>
+<div class="math notranslate nohighlight" id="equation-gallery-0401-4">
+<span class="eqno">(5)<a class="headerlink" href="#equation-gallery-0401-4" title="Permalink to this equation">¶</a></span>\[\bb = \bA (\bx).\]</div>
+<p>We can now use a suitable sparse recovery algorithm to
+recover <span class="math notranslate nohighlight">\(\bx\)</span> from <span class="math notranslate nohighlight">\(\bb\)</span>. We shall do
+that using SPGL1 (Spectral Gradient Descent for L1)
+in this example.</p>
+<p>See also:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../source/problems.html#api-problems"><span class="std std-ref">Test Problems</span></a></p></li>
+<li><p><a class="reference internal" href="../source/lop.html#api-lop"><span class="std std-ref">Linear Operators</span></a></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure JAX to work with 64-bit floating point precision.</span>
+<span class="kn">from</span> <span class="nn">jax.config</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;jax_enable_x64&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">crn</span>
+<span class="kn">import</span> <span class="nn">cr.sparse.plots</span> <span class="k">as</span> <span class="nn">crplot</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="setup">
+<h2><a class="toc-backref" href="#id5">Setup</a><a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>We shall construct our test signal and dictionary
+using our test problems module.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">problems</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">problems</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="s1">&#39;src-sep-1&#39;</span><span class="p">)</span>
+<a href="https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a></a></a></a></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a></a></a></a></a> <span class="o">=</span> <span class="n">problems</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_0401_001.png" srcset="../_images/sphx_glr_0401_001.png" alt="Audio signal 1 (Guitar), Audio signal 2 (Piano), Mixed audio signal 1, Mixed audio signal 2" class = "sphx-glr-single-img"/><p>Let us access the relevant parts of our test problem</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The sparsifying basis linear operator</span>
+<span class="n">Psi</span> <span class="o">=</span> <span class="n">prob</span><span class="o">.</span><span class="n">Psi</span>
+<span class="c1"># The combined operator for the linear equation :math:`\bb = \bA \bx`</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">prob</span><span class="o">.</span><span class="n">A</span>
+<span class="c1"># Mixture signals</span>
+<span class="n">b0</span> <span class="o">=</span> <span class="n">prob</span><span class="o">.</span><span class="n">b</span>
+<span class="c1"># Original signals</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="n">prob</span><span class="o">.</span><span class="n">y</span>
+<span class="c1"># The sparse representation of the signal in the dictionary</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">prob</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+</section>
+<section id="sparse-reconstruction-using-spgl1">
+<h2><a class="toc-backref" href="#id6">Sparse Reconstruction using SPGL1</a><a class="headerlink" href="#sparse-reconstruction-using-spgl1" title="Permalink to this headline">¶</a></h2>
+<p>The shape of mixed signal</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">bm</span></a></a></a></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nc</span></a></a></a></a></a> <span class="o">=</span> <span class="n">b0</span><span class="o">.</span><span class="n">shape</span>
+<span class="c1"># The shape of sparsifying basis</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">tm</span></a></a></a></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">tn</span></a></a></a></a></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/stdtypes.html#tuple" title="builtins.tuple" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#tuple" title="builtins.tuple" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#tuple" title="builtins.tuple" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#tuple" title="builtins.tuple" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#tuple" title="builtins.tuple" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">prob</span><span class="o">.</span><span class="n">Psi</span><span class="o">.</span><span class="n">shape</span></a></a></a></a></a>
+<span class="nb">print</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">bm</span></a></a></a></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nc</span></a></a></a></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">tm</span></a></a></a></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">tn</span></a></a></a></a></a><span class="p">)</span>
+<span class="c1"># Prepare an initial (zero) estimate of the model</span>
+<span class="n">x_init</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.zeros.html#jax.numpy.zeros" title="jax.numpy.zeros" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.zeros.html#jax.numpy.zeros" title="jax.numpy.zeros" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.zeros.html#jax.numpy.zeros" title="jax.numpy.zeros" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.zeros.html#jax.numpy.zeros" title="jax.numpy.zeros" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.zeros.html#jax.numpy.zeros" title="jax.numpy.zeros" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span></a></a></a></a></a><span class="p">((</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">tn</span></a></a></a></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nc</span></a></a></a></a></a><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>14583 2 14583 28672
+</pre></div>
+</div>
+<p>Run SPGL1 algorithm</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cr.sparse.cvx.spgl1</span> <span class="k">as</span> <span class="nn">crspgl1</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sigma</span></a></a></a></a></a><span class="o">=</span><span class="mf">0.</span>
+<span class="n">options</span> <span class="o">=</span> <a href="https://docs.python.org/3/library/stdtypes.html#tuple" title="builtins.tuple" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class"><a href="https://docs.python.org/3/library/stdtypes.html#tuple" title="builtins.tuple" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class"><a href="https://docs.python.org/3/library/stdtypes.html#tuple" title="builtins.tuple" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class"><a href="https://docs.python.org/3/library/stdtypes.html#tuple" title="builtins.tuple" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class"><a href="https://docs.python.org/3/library/stdtypes.html#tuple" title="builtins.tuple" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class"><span class="n">crspgl1</span><span class="o">.</span><span class="n">SPGL1Options</span></a></a></a></a></a><span class="p">(</span><span class="n">max_iters</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">crspgl1</span><span class="o">.</span><span class="n">solve_bpic_from_jit</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sigma</span></a></a></a></a></a><span class="p">,</span>
+    <span class="n">x_init</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+<span class="n">problems</span><span class="o">.</span><span class="n">analyze_solution</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">sol</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>m: 2, n: 28672
+b_norm: original: 677817.092 reconstruction: 677454.881 SNR: 53.50 dB
+y_norm: original: 677851.111 reconstruction: 677054.148 SNR: 47.70 dB
+Iterations: 300 n_times: 460, n_trans: 301
+</pre></div>
+</div>
+<p>The estimated sparse representation</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+<p>Let us reconstruct the signal from this sparse representation</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">prob</span><span class="o">.</span><span class="n">reconstruct</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a></a></a></a></a> <span class="o">=</span> <span class="n">crplot</span><span class="o">.</span><span class="n">h_plots</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a></a></a></a></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y0</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a></a></a></a></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Original audio 1 (Guitar)&quot;</span><span class="p">)</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a></a></a></a></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a></a></a></a></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Reconstructed audio 1 (Guitar)&quot;</span><span class="p">)</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a></a></a></a></a><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y0</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a></a></a></a></a><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Original audio 2 (Piano)&quot;</span><span class="p">)</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a></a></a></a></a><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a></a></a></a></a><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Reconstructed audio 2 (Piano)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_0401_002.png" srcset="../_images/sphx_glr_0401_002.png" alt="Original audio 1 (Guitar), Reconstructed audio 1 (Guitar), Original audio 2 (Piano), Reconstructed audio 2 (Piano)" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Reconstructed audio 2 (Piano)&#39;)
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  13.266 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-0401-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/eb0a920a9ea300d6025d6c2809d08256/0401.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">0401.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/2204fdc45efb33b935916988d5e6cf87/0401.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">0401.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2021, CR-Suite Development Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/gallery/0401.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-214289683-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

@@ -16,6 +16,7 @@ API Docs
    cluster
    ssc
    data
+   problems
    misc
    ef
 

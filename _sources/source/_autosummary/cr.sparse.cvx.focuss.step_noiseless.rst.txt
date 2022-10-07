@@ -1,0 +1,6 @@
+﻿cr.sparse.cvx.focuss.step\_noiseless
+====================================
+
+.. currentmodule:: cr.sparse.cvx.focuss
+
+.. autofunction:: step_noiseless

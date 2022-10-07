@@ -30,8 +30,8 @@
     <script src="../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cr.sparse.pursuit.omp.solve" href="_autosummary/cr.sparse.pursuit.omp.solve.html" />
-    <link rel="prev" title="cr.sparse.dict.matching_atoms_ratio" href="_autosummary/cr.sparse.dict.matching_atoms_ratio.html" />
+    <link rel="next" title="cr.sparse.pursuit.mp.solve" href="_autosummary/cr.sparse.pursuit.mp.solve.html" />
+    <link rel="prev" title="cr.sparse.dict.build_grassmannian_frame" href="_autosummary/cr.sparse.dict.build_grassmannian_frame.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -70,13 +70,14 @@
 <li class="toctree-l2"><a class="reference internal" href="sls.html">Sparse Linear Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Greedy Sparse Recovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">Convex Relaxation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fom.html">First Order Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="block.html">Block Sparsity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems.html">Test Problems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="misc.html">Miscellaneous Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
 </ul>
@@ -93,8 +94,8 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">API Docs</a><ul>
-      <li>Previous: <a href="_autosummary/cr.sparse.dict.matching_atoms_ratio.html" title="previous chapter">cr.sparse.dict.matching_atoms_ratio</a></li>
-      <li>Next: <a href="_autosummary/cr.sparse.pursuit.omp.solve.html" title="next chapter">cr.sparse.pursuit.omp.solve</a></li>
+      <li>Previous: <a href="_autosummary/cr.sparse.dict.build_grassmannian_frame.html" title="previous chapter">cr.sparse.dict.build_grassmannian_frame</a></li>
+      <li>Next: <a href="_autosummary/cr.sparse.pursuit.mp.solve.html" title="next chapter">cr.sparse.pursuit.mp.solve</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -167,6 +168,21 @@ simultaneously. The recovery problem <span class="math notranslate nohighlight">
 </ul>
 <section id="basic-matching-pursuit-based-algorithms">
 <span id="api-pursuit-matching"></span><h2><a class="toc-backref" href="#id1">Basic Matching Pursuit Based Algorithms</a><a class="headerlink" href="#basic-matching-pursuit-based-algorithms" title="Permalink to this headline">¶</a></h2>
+<p class="rubric">Matching Pursuit</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.mp.solve.html#cr.sparse.pursuit.mp.solve" title="cr.sparse.pursuit.mp.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mp.solve</span></code></a>(Phi, y[, max_iters, res_norm_rtol])</p></td>
+<td><p>Solves the sparse recovery problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using matching pursuit algorithm</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.mp.matrix_solve.html#cr.sparse.pursuit.mp.matrix_solve" title="cr.sparse.pursuit.mp.matrix_solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mp.matrix_solve</span></code></a>(Phi, y[, max_iters, ...])</p></td>
+<td><p>Solves the sparse recovery problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using matching pursuit algorithm</p></td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Orthogonal Matching Pursuit</p>
 <table class="autosummary longtable docutils align-default">
 <colgroup>
@@ -402,7 +418,7 @@ sparse representation as follows:</p>
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>

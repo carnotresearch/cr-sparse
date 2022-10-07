@@ -68,13 +68,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../sls.html">Sparse Linear Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pursuit.html">Greedy Sparse Recovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">Convex Relaxation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fom.html">First Order Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../block.html">Block Sparsity</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems.html">Test Problems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc.html">Miscellaneous Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
 </ul>
@@ -134,8 +135,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>assignment</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – current assignment of each point to a specific cluster</p></li>
-<li><p><strong>points</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Each row of the points matrix is a point.</p></li>
+<li><p><strong>assignment</strong> (<em>jax.numpy.ndarray</em>) – current assignment of each point to a specific cluster</p></li>
+<li><p><strong>points</strong> (<em>jax.numpy.ndarray</em>) – Each row of the points matrix is a point.</p></li>
 <li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of clusters</p></li>
 </ul>
 </dd>
@@ -152,7 +153,7 @@
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>

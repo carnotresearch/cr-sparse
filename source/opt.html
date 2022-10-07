@@ -31,7 +31,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="cr.sparse.opt.indicator_zero" href="_autosummary/cr.sparse.opt.indicator_zero.html" />
-    <link rel="prev" title="cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit.html" />
+    <link rel="prev" title="cr.sparse.cvx.spgl1.SPGL1BPState" href="_autosummary/cr.sparse.cvx.spgl1.SPGL1BPState.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -70,13 +70,14 @@
 <li class="toctree-l2"><a class="reference internal" href="sls.html">Sparse Linear Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">Convex Relaxation</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fom.html">First Order Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="block.html">Block Sparsity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems.html">Test Problems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="misc.html">Miscellaneous Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
 </ul>
@@ -93,7 +94,7 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">API Docs</a><ul>
-      <li>Previous: <a href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit.html" title="previous chapter">cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit</a></li>
+      <li>Previous: <a href="_autosummary/cr.sparse.cvx.spgl1.SPGL1BPState.html" title="previous chapter">cr.sparse.cvx.spgl1.SPGL1BPState</a></li>
       <li>Next: <a href="_autosummary/cr.sparse.opt.indicator_zero.html" title="next chapter">cr.sparse.opt.indicator_zero</a></li>
   </ul></li>
   </ul></li>
@@ -329,6 +330,9 @@ on the specification of the smooth function <span class="math notranslate nohigh
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_quad_matrix.html#cr.sparse.opt.smooth_quad_matrix" title="cr.sparse.opt.smooth_quad_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_quad_matrix</span></code></a>([P, q, r])</p></td>
 <td><p>Quadratic function and its gradient <span class="math notranslate nohighlight">\(f(x) = \frac{1}{2} x^T P x + \langle q, x \rangle + r\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.opt.smooth_quad_error.html#cr.sparse.opt.smooth_quad_error" title="cr.sparse.opt.smooth_quad_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">smooth_quad_error</span></code></a>(A, b)</p></td>
+<td><p>Quadratic error function and its gradient <span class="math notranslate nohighlight">\(f(x) = \frac{1}{2} \| A x - b \|_2^2\)</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -566,7 +570,7 @@ proximal operator <span class="math notranslate nohighlight">\(p_f(x, t)\)</span
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>

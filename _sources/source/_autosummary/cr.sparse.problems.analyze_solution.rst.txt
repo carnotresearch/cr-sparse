@@ -1,0 +1,6 @@
+﻿cr.sparse.problems.analyze\_solution
+====================================
+
+.. currentmodule:: cr.sparse.problems
+
+.. autofunction:: analyze_solution

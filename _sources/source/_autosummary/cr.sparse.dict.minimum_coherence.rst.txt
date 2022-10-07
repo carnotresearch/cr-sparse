@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.minimum\_coherence
+=================================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: minimum_coherence

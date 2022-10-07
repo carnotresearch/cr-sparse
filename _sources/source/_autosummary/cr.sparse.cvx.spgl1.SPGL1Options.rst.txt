@@ -1,0 +1,39 @@
+﻿cr.sparse.cvx.spgl1.SPGL1Options
+================================
+
+.. currentmodule:: cr.sparse.cvx.spgl1
+
+.. autoclass:: SPGL1Options
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SPGL1Options.__init__
+      ~SPGL1Options.count
+      ~SPGL1Options.index
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SPGL1Options.alpha_max
+      ~SPGL1Options.alpha_min
+      ~SPGL1Options.bp_tol
+      ~SPGL1Options.dec_tol
+      ~SPGL1Options.gamma
+      ~SPGL1Options.ls_tol
+      ~SPGL1Options.max_iters
+      ~SPGL1Options.max_matvec
+      ~SPGL1Options.memory
+      ~SPGL1Options.opt_tol
+   
+   

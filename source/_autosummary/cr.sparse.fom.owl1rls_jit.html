@@ -70,13 +70,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../sls.html">Sparse Linear Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pursuit.html">Greedy Sparse Recovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">Convex Relaxation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../fom.html">First Order Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../block.html">Block Sparsity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems.html">Test Problems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc.html">Miscellaneous Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
 </ul>
@@ -137,9 +138,9 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>A</strong> (<a class="reference internal" href="cr.sparse.lop.Operator.html#cr.sparse.lop.Operator" title="cr.sparse.lop.Operator"><em>cr.sparse.lop.Operator</em></a>) – A linear operator</p></li>
-<li><p><strong>b</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – The measurements <span class="math notranslate nohighlight">\(b \approx A x\)</span></p></li>
-<li><p><strong>lambda</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – A strictly positive weight vector which is sorted in decreasing order</p></li>
-<li><p><strong>x0</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Initial guess for solution vector</p></li>
+<li><p><strong>b</strong> (<em>jax.numpy.ndarray</em>) – The measurements <span class="math notranslate nohighlight">\(b \approx A x\)</span></p></li>
+<li><p><strong>lambda</strong> (<em>jax.numpy.ndarray</em>) – A strictly positive weight vector which is sorted in decreasing order</p></li>
+<li><p><strong>x0</strong> (<em>jax.numpy.ndarray</em>) – Initial guess for solution vector</p></li>
 <li><p><strong>options</strong> (<a class="reference internal" href="cr.sparse.fom.FomOptions.html#cr.sparse.fom.FomOptions" title="cr.sparse.fom.FomOptions"><em>FomOptions</em></a>) – Options for configuring the algorithm</p></li>
 </ul>
 </dd>
@@ -150,7 +151,7 @@
 <dd class="field-odd"><p><a class="reference internal" href="cr.sparse.fom.FomState.html#cr.sparse.fom.FomState" title="cr.sparse.fom.FomState">FomState</a></p>
 </dd>
 </dl>
-<p>The ordered weighted l1 regularized least square problem <span id="id1">[<a class="reference internal" href="../../zzzreference.html#id199" title="Ma lgorzata Bogdana, Ewout van den Bergb, Weijie Suc, and Emmanuel J Candesc. Statistical estimation and testing via the ordered l1 norm. 2013.">lBvdBSC13</a>]</span> is defined as:</p>
+<p>The ordered weighted l1 regularized least square problem <span id="id1">[<a class="reference internal" href="../../zzzreference.html#id201" title="Ma lgorzata Bogdana, Ewout van den Bergb, Weijie Suc, and Emmanuel J Candesc. Statistical estimation and testing via the ordered l1 norm. 2013.">lBvdBSC13</a>]</span> is defined as:</p>
 <div class="math notranslate nohighlight" id="equation-source-autosummary-cr-sparse-fom-owl1rls-jit-0">
 <span class="eqno">(1)<a class="headerlink" href="#equation-source-autosummary-cr-sparse-fom-owl1rls-jit-0" title="Permalink to this equation">¶</a></span>\[\underset{x \in \RR^n}{\text{minimize}} \frac{1}{2} \| A x - b \|_2^2 + \sum_{i=1}^n \lambda_i | x |_{(i)}\]</div>
 <p>The ordered weighted <span class="math notranslate nohighlight">\(\ell_1\)</span> norm of <span class="math notranslate nohighlight">\(x\)</span> w.r.t. the weight vector <span class="math notranslate nohighlight">\(\lambda\)</span> is defined as:</p>
@@ -172,7 +173,7 @@
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>

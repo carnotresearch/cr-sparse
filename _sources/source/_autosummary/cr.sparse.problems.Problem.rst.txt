@@ -1,0 +1,40 @@
+﻿cr.sparse.problems.Problem
+==========================
+
+.. currentmodule:: cr.sparse.problems
+
+.. autoclass:: Problem
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Problem.__init__
+      ~Problem.count
+      ~Problem.index
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Problem.A
+      ~Problem.Phi
+      ~Problem.Psi
+      ~Problem.b
+      ~Problem.both
+      ~Problem.figures
+      ~Problem.name
+      ~Problem.plot
+      ~Problem.reconstruct
+      ~Problem.x
+      ~Problem.y
+   
+   

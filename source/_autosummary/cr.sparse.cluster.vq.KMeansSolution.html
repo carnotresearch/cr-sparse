@@ -68,13 +68,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../sls.html">Sparse Linear Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pursuit.html">Greedy Sparse Recovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">Convex Relaxation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fom.html">First Order Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../block.html">Block Sparsity</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems.html">Test Problems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc.html">Miscellaneous Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
 </ul>
@@ -129,7 +130,7 @@
 <h1>cr.sparse.cluster.vq.KMeansSolution<a class="headerlink" href="#cr-sparse-cluster-vq-kmeanssolution" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="cr.sparse.cluster.vq.KMeansSolution">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cr.sparse.cluster.vq.</span></span><span class="sig-name descname"><span class="pre">KMeansSolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">centroids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><span class="pre">jax._src.numpy.ndarray.ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">assignment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><span class="pre">jax._src.numpy.ndarray.ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">distortion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><span class="pre">jax._src.numpy.ndarray.ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/cluster/kmeans.html#KMeansSolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.cluster.vq.KMeansSolution" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cr.sparse.cluster.vq.</span></span><span class="sig-name descname"><span class="pre">KMeansSolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">centroids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax._src.numpy.ndarray.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assignment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax._src.numpy.ndarray.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distortion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">jax._src.numpy.ndarray.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/cluster/kmeans.html#KMeansSolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.cluster.vq.KMeansSolution" title="Permalink to this definition">¶</a></dt>
 <dd><p>The solution for K-means algorithm</p>
 <p class="rubric">Attributes</p>
 <table class="autosummary longtable docutils align-default">
@@ -167,7 +168,7 @@
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>

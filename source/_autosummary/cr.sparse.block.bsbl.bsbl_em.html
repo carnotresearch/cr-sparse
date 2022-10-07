@@ -68,13 +68,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../sls.html">Sparse Linear Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pursuit.html">Greedy Sparse Recovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">Convex Relaxation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fom.html">First Order Methods</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../block.html">Block Sparsity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems.html">Test Problems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc.html">Miscellaneous Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
 </ul>
@@ -134,8 +135,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>Phi</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Sensing matrix</p></li>
-<li><p><strong>y</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Measurement vector</p></li>
+<li><p><strong>Phi</strong> (<em>jax.numpy.ndarray</em>) – Sensing matrix</p></li>
+<li><p><strong>y</strong> (<em>jax.numpy.ndarray</em>) – Measurement vector</p></li>
 <li><p><strong>blk_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Length/size of each block</p></li>
 <li><p><strong>options</strong> (<a class="reference internal" href="cr.sparse.block.bsbl.BSBL_Options.html#cr.sparse.block.bsbl.BSBL_Options" title="cr.sparse.block.bsbl.BSBL_Options"><em>BSBL_Options</em></a>) – Options for algorithm execution</p></li>
 </ul>
@@ -158,7 +159,7 @@ the algorithm.</p></li>
 </div>
 <p class="rubric">Examples</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../../gallery/pursuit/bsbl_1.html#gallery-cs-bsbl-1"><span class="std std-ref">Block Sparse Bayesian Learning</span></a></p></li>
+<li><p><a class="reference internal" href="../../gallery/0200_cs/bsbl_1.html#gallery-cs-bsbl-1"><span class="std std-ref">Block Sparse Bayesian Learning</span></a></p></li>
 </ul>
 </dd></dl>
 
@@ -172,7 +173,7 @@ the algorithm.</p></li>
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>

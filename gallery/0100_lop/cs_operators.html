@@ -1,0 +1,991 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Compressive Sensing Operators &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/custom.js"></script>
+    <script src="../../_static/js/mathconf.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Deconvolution" href="deconvolution.html" />
+    <link rel="prev" title="A matrix backed linear operator" href="matrix_operator.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/index.html">API Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">Theory</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples Gallery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sparse_vector_normals.html">A sparse model vector generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0002.html">Blocks Signal in Haar Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0004.html">Complex Sinusoids+Complex-Spikes in Dirac-Fourier Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0003.html">Cosine+Spikes in Dirac-Cosine Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass.html">Grassmannian Frames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0001.html">HeaviSine Signal in Fourier-HeaviSide Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0401.html">Source Separation I</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#linear-operators">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compressive-sensing">Compressive Sensing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#convex-relaxation-techniques">Convex Relaxation Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#data-clustering">Data Clustering</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Examples Gallery</a><ul>
+      <li>Previous: <a href="matrix_operator.html" title="previous chapter">A matrix backed linear operator</a></li>
+      <li>Next: <a href="deconvolution.html" title="next chapter">Deconvolution</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-gallery-0100-lop-cs-operators-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="compressive-sensing-operators">
+<span id="gallery-lop-cs-operators"></span><span id="sphx-glr-gallery-0100-lop-cs-operators-py"></span><h1>Compressive Sensing Operators<a class="headerlink" href="#compressive-sensing-operators" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#rademacher-sensing-operators" id="id6">Rademacher sensing operators</a></p>
+<ul>
+<li><p><a class="reference internal" href="#unnormalized-atoms-columns" id="id7">Unnormalized atoms / columns</a></p></li>
+<li><p><a class="reference internal" href="#normalized-atoms-columns" id="id8">Normalized atoms / columns</a></p></li>
+<li><p><a class="reference internal" href="#column-wise-application-on-input" id="id9">Column wise application on input</a></p></li>
+<li><p><a class="reference internal" href="#row-wise-application-on-input" id="id10">Row wise application on input</a></p></li>
+<li><p><a class="reference internal" href="#square-sensing-matrix" id="id11">Square sensing matrix</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#gaussian-sensing-operators" id="id12">Gaussian sensing operators</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id13">Unnormalized atoms / columns</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id14">Normalized atoms / columns</a></p></li>
+<li><p><a class="reference internal" href="#id3" id="id15">Column wise application on input</a></p></li>
+<li><p><a class="reference internal" href="#id4" id="id16">Row wise application on input</a></p></li>
+<li><p><a class="reference internal" href="#id5" id="id17">Square sensing matrix</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#random-matrix-with-orthonormal-rows" id="id18">Random matrix with orthonormal rows</a></p></li>
+<li><p><a class="reference internal" href="#random-orthonormal-basis-operator" id="id19">Random orthonormal basis operator</a></p></li>
+</ul>
+</div>
+<p>Let’s import necessary libraries</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="c1"># Random numbers</span>
+<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="c1"># For plotting diagrams</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1">## CR-Sparse modules</span>
+<span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
+<span class="c1"># Linear operators</span>
+<span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">lop</span>
+<span class="c1"># Some random number seeds</span>
+<span class="n">key</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.PRNGKey.html#jax.random.PRNGKey" title="jax.random.PRNGKey" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.PRNGKey.html#jax.random.PRNGKey" title="jax.random.PRNGKey" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.PRNGKey.html#jax.random.PRNGKey" title="jax.random.PRNGKey" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.PRNGKey.html#jax.random.PRNGKey" title="jax.random.PRNGKey" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.PRNGKey.html#jax.random.PRNGKey" title="jax.random.PRNGKey" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span></a></a></a></a></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">keys</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.split.html#jax.random.split" title="jax.random.split" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.split.html#jax.random.split" title="jax.random.split" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.split.html#jax.random.split" title="jax.random.split" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.split.html#jax.random.split" title="jax.random.split" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.split.html#jax.random.split" title="jax.random.split" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><span class="n">random</span><span class="o">.</span><span class="n">split</span></a></a></a></a></a><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="rademacher-sensing-operators">
+<h2><a class="toc-backref" href="#id6">Rademacher sensing operators</a><a class="headerlink" href="#rademacher-sensing-operators" title="Permalink to this headline">¶</a></h2>
+<p>Size of the sensing matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">m</span></a></a></a></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a></a></a></a></a> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span>
+</pre></div>
+</div>
+<section id="unnormalized-atoms-columns">
+<h3><a class="toc-backref" href="#id7">Unnormalized atoms / columns</a><a class="headerlink" href="#unnormalized-atoms-columns" title="Permalink to this headline">¶</a></h3>
+<p>Construct the operator wrapping the sensing matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">rademacher_dict</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">m</span></a></a></a></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a></a></a></a></a><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s print the contents of the matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-1.  1. -1. -1.  1. -1. -1.  1.]
+ [ 1. -1. -1. -1.  1. -1.  1.  1.]
+ [-1. -1. -1. -1. -1.  1. -1. -1.]
+ [ 1. -1. -1.  1.  1. -1.  1. -1.]]
+</pre></div>
+</div>
+<p>Let’s print the contents of the adjoint matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_adjoint_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-1.  1. -1.  1.]
+ [ 1. -1. -1. -1.]
+ [-1. -1. -1. -1.]
+ [-1. -1. -1.  1.]
+ [ 1.  1. -1.  1.]
+ [-1. -1.  1. -1.]
+ [-1.  1. -1.  1.]
+ [ 1.  1. -1. -1.]]
+</pre></div>
+</div>
+<p>Let’s apply the forward operator</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">array</span></a></a></a></a></a><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[-24  -2 -18  16]
+</pre></div>
+</div>
+<p>Let’s apply the adjoint operator</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[ 56 -20  28  60   8  -8  56 -24]
+</pre></div>
+</div>
+<p>Let’s JIT compile the trans and times functions</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">Phi</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s verify the forward operator after JIT compile</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">array</span></a></a></a></a></a><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[-24  -2 -18  16]
+</pre></div>
+</div>
+<p>Let’s verify the adjoint operator after JIT compile</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[ 56 -20  28  60   8  -8  56 -24]
+</pre></div>
+</div>
+</section>
+<section id="normalized-atoms-columns">
+<h3><a class="toc-backref" href="#id8">Normalized atoms / columns</a><a class="headerlink" href="#normalized-atoms-columns" title="Permalink to this headline">¶</a></h3>
+<p>Construct the operator wrapping the sensing matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">rademacher_dict</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">m</span></a></a></a></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a></a></a></a></a><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s print the contents of the matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-0.5  0.5 -0.5 -0.5  0.5 -0.5 -0.5  0.5]
+ [ 0.5 -0.5 -0.5 -0.5  0.5 -0.5  0.5  0.5]
+ [-0.5 -0.5 -0.5 -0.5 -0.5  0.5 -0.5 -0.5]
+ [ 0.5 -0.5 -0.5  0.5  0.5 -0.5  0.5 -0.5]]
+</pre></div>
+</div>
+<p>Check the column wise norms</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">norms_l2_cw</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[1. 1. 1. 1. 1. 1. 1. 1.]
+</pre></div>
+</div>
+<p>Let’s print the contents of the adjoint matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_adjoint_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-0.5  0.5 -0.5  0.5]
+ [ 0.5 -0.5 -0.5 -0.5]
+ [-0.5 -0.5 -0.5 -0.5]
+ [-0.5 -0.5 -0.5  0.5]
+ [ 0.5  0.5 -0.5  0.5]
+ [-0.5 -0.5  0.5 -0.5]
+ [-0.5  0.5 -0.5  0.5]
+ [ 0.5  0.5 -0.5 -0.5]]
+</pre></div>
+</div>
+<p>Let’s apply the forward operator</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">array</span></a></a></a></a></a><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[-12.  -1.  -9.   8.]
+</pre></div>
+</div>
+<p>Let’s apply the adjoint operator</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[14. -5.  7. 15.  2. -2. 14. -6.]
+</pre></div>
+</div>
+<p>Let’s JIT compile the trans and times functions</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">Phi</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s verify the forward operator after JIT compile</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[-12.  -1.  -9.   8.]
+</pre></div>
+</div>
+<p>Let’s verify the adjoint operator after JIT compile</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[14. -5.  7. 15.  2. -2. 14. -6.]
+</pre></div>
+</div>
+</section>
+<section id="column-wise-application-on-input">
+<h3><a class="toc-backref" href="#id9">Column wise application on input</a><a class="headerlink" href="#column-wise-application-on-input" title="Permalink to this headline">¶</a></h3>
+<p>Number of signals</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a></a></a></a></a> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>Prepare a signal matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.randint.html#jax.random.randint" title="jax.random.randint" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.randint.html#jax.random.randint" title="jax.random.randint" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.randint.html#jax.random.randint" title="jax.random.randint" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.randint.html#jax.random.randint" title="jax.random.randint" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.randint.html#jax.random.randint" title="jax.random.randint" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><span class="n">random</span><span class="o">.</span><span class="n">randint</span></a></a></a></a></a><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a></a></a></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a></a></a></a></a><span class="p">),</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-4 -5 -2 -4  2]
+ [ 0  2 -2  1  3]
+ [ 2 -2  4 -4 -2]
+ [ 2  4 -5  1 -1]
+ [ 2 -5 -2 -2 -4]
+ [-4  2 -3 -1 -4]
+ [-1 -1 -1  4  1]
+ [-3 -4 -1 -4  1]]
+</pre></div>
+</div>
+<p>Let’s apply the forward operator column wise</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[  2.   -2.5   1.   -0.5   2. ]
+ [ -3.  -10.5   0.   -1.5   2. ]
+ [ -1.    6.5   3.    3.5  -2. ]
+ [  2.   -2.5  -4.    3.5   0. ]]
+</pre></div>
+</div>
+<p>Let’s apply the adjoint operator column wise</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Z</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[ -1.   -8.5  -4.   -0.5   1. ]
+ [  2.    2.    1.   -3.    1. ]
+ [  0.    4.5   0.   -2.5  -1. ]
+ [  2.    2.   -4.    1.   -1. ]
+ [  1.  -11.   -3.   -1.    3. ]
+ [ -1.   11.    3.    1.   -3. ]
+ [ -1.   -8.5  -4.   -0.5   1. ]
+ [ -1.   -8.5   1.   -4.5   3. ]]
+</pre></div>
+</div>
+</section>
+<section id="row-wise-application-on-input">
+<h3><a class="toc-backref" href="#id10">Row wise application on input</a><a class="headerlink" href="#row-wise-application-on-input" title="Permalink to this headline">¶</a></h3>
+<p>Construct the operator wrapping the sensing matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">rademacher_dict</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">m</span></a></a></a></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a></a></a></a></a><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Prepare a signal matrix with each signal along a row</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">XT</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+<p>Let’s apply the forward operator column wise</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">XT</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[  2.   -3.   -1.    2. ]
+ [ -2.5 -10.5   6.5  -2.5]
+ [  1.    0.    3.   -4. ]
+ [ -0.5  -1.5   3.5   3.5]
+ [  2.    2.   -2.    0. ]]
+</pre></div>
+</div>
+<p>Let’s apply the adjoint operator column wise</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Z</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[ -1.    2.    0.    2.    1.   -1.   -1.   -1. ]
+ [ -8.5   2.    4.5   2.  -11.   11.   -8.5  -8.5]
+ [ -4.    1.    0.   -4.   -3.    3.   -4.    1. ]
+ [ -0.5  -3.   -2.5   1.   -1.    1.   -0.5  -4.5]
+ [  1.    1.   -1.   -1.    3.   -3.    1.    3. ]]
+</pre></div>
+</div>
+</section>
+<section id="square-sensing-matrix">
+<h3><a class="toc-backref" href="#id11">Square sensing matrix</a><a class="headerlink" href="#square-sensing-matrix" title="Permalink to this headline">¶</a></h3>
+<p>Construct the operator wrapping the sensing matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">rademacher_dict</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a></a></a></a></a><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s print the contents of the matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 1.  1. -1. -1. -1. -1.  1.  1.]
+ [-1.  1.  1.  1. -1. -1. -1. -1.]
+ [-1. -1.  1.  1.  1. -1.  1. -1.]
+ [ 1. -1.  1. -1.  1.  1.  1. -1.]
+ [-1.  1. -1.  1.  1.  1. -1. -1.]
+ [-1.  1. -1.  1.  1. -1.  1.  1.]
+ [ 1. -1.  1. -1. -1. -1. -1.  1.]
+ [-1. -1.  1. -1.  1. -1.  1. -1.]]
+</pre></div>
+</div>
+</section>
+</section>
+<section id="gaussian-sensing-operators">
+<h2><a class="toc-backref" href="#id12">Gaussian sensing operators</a><a class="headerlink" href="#gaussian-sensing-operators" title="Permalink to this headline">¶</a></h2>
+<section id="id1">
+<h3><a class="toc-backref" href="#id13">Unnormalized atoms / columns</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Construct the operator wrapping the sensing matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">gaussian_dict</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">m</span></a></a></a></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a></a></a></a></a><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s print the contents of the matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-0.76261741 -0.54906996  0.35375743  0.44785326  0.20306852  0.4002937
+  -0.10082346 -1.38919403]
+ [ 0.68214811 -0.73785154 -0.31989581 -0.37379108  0.02430423  0.60747778
+   0.24837508  0.39562076]
+ [ 0.08833386  0.49151262 -0.45341975 -0.63881669 -0.23097626  0.10892717
+  -0.75912382  0.09899961]
+ [-0.97121466  0.38958316 -0.38142231  1.05170598 -0.59028129 -0.18775354
+  -0.78933777  0.06830431]]
+</pre></div>
+</div>
+<p>Let’s print the contents of the adjoint matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_adjoint_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-0.76261741  0.68214811  0.08833386 -0.97121466]
+ [-0.54906996 -0.73785154  0.49151262  0.38958316]
+ [ 0.35375743 -0.31989581 -0.45341975 -0.38142231]
+ [ 0.44785326 -0.37379108 -0.63881669  1.05170598]
+ [ 0.20306852  0.02430423 -0.23097626 -0.59028129]
+ [ 0.4002937   0.60747778  0.10892717 -0.18775354]
+ [-0.10082346  0.24837508 -0.75912382 -0.78933777]
+ [-1.38919403  0.39562076  0.09899961  0.06830431]]
+</pre></div>
+</div>
+<p>Let’s apply the forward operator</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">array</span></a></a></a></a></a><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[  5.79912122   1.61042927 -12.54007687  -3.16525231]
+</pre></div>
+</div>
+<p>Let’s apply the adjoint operator</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[ -1.3575335  -11.76911601   8.42952898   6.67708692   5.98160846
+   2.52798389  11.83322722  -8.87664847]
+</pre></div>
+</div>
+<p>Let’s JIT compile the trans and times functions</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">Phi</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s verify the forward operator after JIT compile</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">array</span></a></a></a></a></a><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[  5.79912122   1.61042927 -12.54007687  -3.16525231]
+</pre></div>
+</div>
+<p>Let’s verify the adjoint operator after JIT compile</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[ -1.3575335  -11.76911601   8.42952898   6.67708692   5.98160846
+   2.52798389  11.83322722  -8.87664847]
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3><a class="toc-backref" href="#id14">Normalized atoms / columns</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Construct the operator wrapping the sensing matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">gaussian_dict</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">m</span></a></a></a></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a></a></a></a></a><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s print the contents of the matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-0.53952553 -0.4932261   0.46508795  0.32887168  0.30488928  0.52725899
+  -0.08942487 -0.95844277]
+ [ 0.48259628 -0.6628074  -0.42056978 -0.27448567  0.03649064  0.80015779
+   0.22029504  0.27294953]
+ [ 0.06249316  0.4415227  -0.59611486 -0.46910168 -0.34679027  0.14347673
+  -0.6733011   0.06830253]
+ [-0.6871009   0.34996011 -0.50145921  0.77229829 -0.88625475 -0.24730527
+  -0.70009922  0.047125  ]]
+</pre></div>
+</div>
+<p>Check the column wise norms</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">norms_l2_cw</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[1. 1. 1. 1. 1. 1. 1. 1.]
+</pre></div>
+</div>
+<p>Let’s print the contents of the adjoint matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_adjoint_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-0.53952553  0.48259628  0.06249316 -0.6871009 ]
+ [-0.4932261  -0.6628074   0.4415227   0.34996011]
+ [ 0.46508795 -0.42056978 -0.59611486 -0.50145921]
+ [ 0.32887168 -0.27448567 -0.46910168  0.77229829]
+ [ 0.30488928  0.03649064 -0.34679027 -0.88625475]
+ [ 0.52725899  0.80015779  0.14347673 -0.24730527]
+ [-0.08942487  0.22029504 -0.6733011  -0.70009922]
+ [-0.95844277  0.27294953  0.06830253  0.047125  ]]
+</pre></div>
+</div>
+<p>Let’s apply the forward operator</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">array</span></a></a></a></a></a><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[  5.94539092   1.61735679 -11.34757498  -5.10351374]
+</pre></div>
+</div>
+<p>Let’s apply the adjoint operator</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[  0.37032318 -10.80065612  11.40858028   2.89306098  10.32994614
+   4.06291433  11.0379306   -6.27243136]
+</pre></div>
+</div>
+<p>Let’s JIT compile the trans and times functions</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">Phi</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s verify the forward operator after JIT compile</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[  5.94539092   1.61735679 -11.34757498  -5.10351374]
+</pre></div>
+</div>
+<p>Let’s verify the adjoint operator after JIT compile</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[  0.37032318 -10.80065612  11.40858028   2.89306098  10.32994614
+   4.06291433  11.0379306   -6.27243136]
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3><a class="toc-backref" href="#id15">Column wise application on input</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Number of signals</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a></a></a></a></a> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>Prepare a signal matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.randint.html#jax.random.randint" title="jax.random.randint" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.randint.html#jax.random.randint" title="jax.random.randint" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.randint.html#jax.random.randint" title="jax.random.randint" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.randint.html#jax.random.randint" title="jax.random.randint" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.randint.html#jax.random.randint" title="jax.random.randint" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><span class="n">random</span><span class="o">.</span><span class="n">randint</span></a></a></a></a></a><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a></a></a></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a></a></a></a></a><span class="p">),</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-4 -5 -2 -4  2]
+ [ 0  2 -2  1  3]
+ [ 2 -2  4 -4 -2]
+ [ 2  4 -5  1 -1]
+ [ 2 -5 -2 -2 -4]
+ [-4  2 -3 -1 -4]
+ [-1 -1 -1  4  1]
+ [-3 -4 -1 -4  1]]
+</pre></div>
+</div>
+<p>Let’s apply the forward operator column wise</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 5.21151717  5.54975384  1.13780878  2.47243    -8.19423762]
+ [-7.48728951 -3.88963009 -2.91612777 -2.26915609 -2.76095358]
+ [-3.17949966  2.30739835 -0.17883383 -0.30940293  3.31914138]
+ [ 3.06551754 12.67579867 -2.02564721  4.9074167   3.78756451]]
+</pre></div>
+</div>
+<p>Let’s apply the adjoint operator column wise</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Z</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[ -8.73010144 -13.43671088  -0.64054117  -5.82025136   0.69355917]
+ [  2.06116221   5.29558478   0.58377917   1.86533811   8.66256504]
+ [  5.93085649  -3.51488594   2.87800132  -0.17219376  -6.52776613]
+ [  7.62807664  11.59989779  -0.30588428   5.371094    -0.5688957 ]
+ [ -0.29849024 -10.48404468   2.0977516   -3.57090899  -7.10687709]
+ [ -4.45749663  -2.98989408  -1.25814771  -1.77009412  -6.99014907]
+ [ -2.12085781 -11.7810428    0.79440614  -3.94833782  -4.76190827]
+ [ -7.11129849  -5.62584597  -1.99415376  -2.77891873   7.50530159]]
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h3><a class="toc-backref" href="#id16">Row wise application on input</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>Construct the operator wrapping the sensing matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">gaussian_dict</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">m</span></a></a></a></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a></a></a></a></a><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Prepare a signal matrix with each signal along a row</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">XT</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+<p>Let’s apply the forward operator column wise</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">XT</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 5.21151717 -7.48728951 -3.17949966  3.06551754]
+ [ 5.54975384 -3.88963009  2.30739835 12.67579867]
+ [ 1.13780878 -2.91612777 -0.17883383 -2.02564721]
+ [ 2.47243    -2.26915609 -0.30940293  4.9074167 ]
+ [-8.19423762 -2.76095358  3.31914138  3.78756451]]
+</pre></div>
+</div>
+<p>Let’s apply the adjoint operator column wise</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Z</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[ -8.73010144   2.06116221   5.93085649   7.62807664  -0.29849024
+   -4.45749663  -2.12085781  -7.11129849]
+ [-13.43671088   5.29558478  -3.51488594  11.59989779 -10.48404468
+   -2.98989408 -11.7810428   -5.62584597]
+ [ -0.64054117   0.58377917   2.87800132  -0.30588428   2.0977516
+   -1.25814771   0.79440614  -1.99415376]
+ [ -5.82025136   1.86533811  -0.17219376   5.371094    -3.57090899
+   -1.77009412  -3.94833782  -2.77891873]
+ [  0.69355917   8.66256504  -6.52776613  -0.5688957   -7.10687709
+   -6.99014907  -4.76190827   7.50530159]]
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3><a class="toc-backref" href="#id17">Square sensing matrix</a><a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>Construct the operator wrapping the sensing matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">gaussian_dict</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a></a></a></a></a><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s print the contents of the matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-5.06479786e-01 -1.76665935e-01  2.54534851e-01 -5.06364763e-01
+  -1.96507134e-01  1.79333415e-01  6.42379919e-01  2.10040808e-01]
+ [ 1.07240051e-01 -5.94812765e-01  1.25249038e-01  1.14459574e-01
+  -2.02012833e-01 -4.09751511e-01 -4.33936884e-01 -1.34516542e-01]
+ [ 1.11053768e-01  3.48672071e-01  3.68653905e-01  9.45349248e-02
+  -3.29041791e-01 -1.77899332e-01 -4.04006639e-01 -1.00726911e-01]
+ [ 1.33743289e-01 -5.08041866e-01 -4.99556060e-01  1.33236537e-01
+  -1.68340852e-01 -2.78095509e-01 -9.48804677e-02 -3.28437869e-01]
+ [-1.03963687e-03 -5.37674760e-02 -2.64978470e-01 -5.69247421e-01
+  -2.17436962e-01 -3.91220044e-01 -2.19387753e-01 -2.30803981e-01]
+ [ 1.71456228e-01  1.59848991e-01 -2.55230677e-01 -2.51277665e-01
+   2.37702097e-02 -3.31785957e-01 -1.86295948e-01  9.79684620e-01]
+ [-4.17172092e-02  2.52724150e-01  2.02487423e-01 -3.80860117e-01
+  -2.98349811e-01 -1.20580149e-01  8.39526917e-01 -2.28584283e-01]
+ [ 2.06869121e-01  1.04520297e+00  8.87791963e-01  2.20836838e-01
+   1.17742766e-01 -1.85396223e-01  4.36565908e-03 -2.27983571e-01]]
+</pre></div>
+</div>
+</section>
+</section>
+<section id="random-matrix-with-orthonormal-rows">
+<h2><a class="toc-backref" href="#id18">Random matrix with orthonormal rows</a><a class="headerlink" href="#random-matrix-with-orthonormal-rows" title="Permalink to this headline">¶</a></h2>
+<p>Construct the operator wrapping the sensing matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">random_orthonormal_rows_dict</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">m</span></a></a></a></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a></a></a></a></a><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s print the contents of the matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-0.48805761  0.12995918  0.4365591   0.01555415  0.05653164 -0.14781949
+  -0.62155505 -0.37776645]
+ [-0.46559454  0.31376094 -0.50148534  0.45550458  0.37354653  0.06455508
+   0.2203263  -0.18318237]
+ [ 0.34953016 -0.08652247 -0.37115078  0.21179339 -0.33253457 -0.53588747
+  -0.13369294 -0.52163662]
+ [-0.34327893 -0.77342544  0.15727696  0.3162613  -0.21117691  0.13210122
+   0.2701341  -0.15555246]]
+</pre></div>
+</div>
+<p>Check the row wise norms</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">norms_l2_rw</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[1. 1. 1. 1.]
+</pre></div>
+</div>
+<p>Let’s apply the forward operator column wise</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 5.3156526   3.44362845  3.71437922 -0.58889084 -2.10908012]
+ [ 2.58851023  4.55426428 -4.95769928  5.43997158 -1.15770268]
+ [ 1.46024812  2.47991672 -0.14152435  2.96448472  3.78835967]
+ [ 1.56595683  2.79219775  1.19267863  2.27984255 -3.206765  ]]
+</pre></div>
+</div>
+<p>Let’s apply the adjoint operator column wise</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Z</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-3.82670014 -3.8928266   0.03655821 -1.9918535   3.99333346]
+ [ 0.16549613 -0.49764393 -1.98301766 -0.38946395  1.51507918]
+ [ 0.72681332 -1.26182404  4.3478673  -3.72685574 -2.2505701 ]
+ [ 2.06628118  3.53634503 -1.85325656  3.81765653 -0.77196994]
+ [ 0.45115468  0.48159786 -1.84675587  0.53154779 -1.13425141]
+ [-1.19431947 -1.17513811 -0.63570689 -0.84923291 -2.21672446]
+ [-2.50586037 -0.71426    -3.05989872  1.7841294  -0.31689645]
+ [-3.48755201 -3.86309685 -0.60670455 -2.67506262 -0.46851652]]
+</pre></div>
+</div>
+<p>The frame operator</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">Phi</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Check that it’s close to identity matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.round.html#jax.numpy.round" title="jax.numpy.round" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.round.html#jax.numpy.round" title="jax.numpy.round" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.round.html#jax.numpy.round" title="jax.numpy.round" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.round.html#jax.numpy.round" title="jax.numpy.round" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.round.html#jax.numpy.round" title="jax.numpy.round" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">round</span></a></a></a></a></a><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">F</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+</pre></div>
+</div>
+</section>
+<section id="random-orthonormal-basis-operator">
+<h2><a class="toc-backref" href="#id19">Random orthonormal basis operator</a><a class="headerlink" href="#random-orthonormal-basis-operator" title="Permalink to this headline">¶</a></h2>
+<p>Construct the operator wrapping the sensing matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Phi</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">random_onb_dict</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a></a></a></a></a><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s print the contents of the matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-0.83021008  0.10099603  0.1924291  -0.18709837 -0.05440769 -0.42034524
+   0.05004106  0.21531801]
+ [ 0.17578544 -0.49159467  0.73866229 -0.34880127  0.22399819  0.03967139
+  -0.03076634  0.08633818]
+ [ 0.1820368   0.2083679   0.2342978  -0.08887811 -0.75177769 -0.00617792
+  -0.49250229  0.22996581]
+ [ 0.21922894 -0.43921983 -0.12485129  0.04649406 -0.44739928 -0.55798428
+   0.46709786 -0.10762012]
+ [-0.00170415 -0.03951229 -0.294542   -0.6724019   0.03554208 -0.17193851
+  -0.34738298 -0.55502752]
+ [ 0.28104713  0.04021688 -0.36937749 -0.38856286  0.23274741 -0.19465774
+   0.00554408  0.73476564]
+ [-0.06838189  0.20710371  0.01707164 -0.47829639 -0.29978828  0.51519234
+   0.60668761 -0.00266108]
+ [ 0.33909513  0.6824461   0.35125433 -0.0373899   0.19031866 -0.4212764
+   0.21687527 -0.18377793]]
+</pre></div>
+</div>
+<p>Check the row wise norms</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">norms_l2_rw</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[1. 1. 1. 1. 1. 1. 1. 1.]
+</pre></div>
+</div>
+<p>Check the column wise norms</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cnb</span><span class="o">.</span><span class="n">norms_l2_cw</span><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">Phi</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[1. 1. 1. 1. 1. 1. 1. 1.]
+</pre></div>
+</div>
+<p>Let’s apply the forward operator column wise</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">times</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 4.20807229  1.73982564  4.26812837  2.33307439  0.60917887]
+ [ 0.13764291 -6.08988076  4.70769159 -5.45427267 -3.25084291]
+ [-2.11354663  2.00161547  2.38539797 -2.92598768  3.37874579]
+ [ 0.15927087 -0.45449504  1.91737998  2.9814184   3.7050189 ]
+ [ 0.84423256 -0.12512179  3.61341624  1.4045029   0.78271592]
+ [-3.60578444 -6.63795754 -0.79905496 -3.18274785  2.3980138 ]
+ [-3.90797221  0.74207081  0.63229793  2.4558273   0.67111076]
+ [ 1.67154977 -2.45856137  0.39897891 -0.4730898   3.0173381 ]]
+</pre></div>
+</div>
+<p>Let’s apply the adjoint operator column wise</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Z</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[-4.00000000e+00 -5.00000000e+00 -2.00000000e+00 -4.00000000e+00
+   2.00000000e+00]
+ [-2.22044605e-16  2.00000000e+00 -2.00000000e+00  1.00000000e+00
+   3.00000000e+00]
+ [ 2.00000000e+00 -2.00000000e+00  4.00000000e+00 -4.00000000e+00
+  -2.00000000e+00]
+ [ 2.00000000e+00  4.00000000e+00 -5.00000000e+00  1.00000000e+00
+  -1.00000000e+00]
+ [ 2.00000000e+00 -5.00000000e+00 -2.00000000e+00 -2.00000000e+00
+  -4.00000000e+00]
+ [-4.00000000e+00  2.00000000e+00 -3.00000000e+00 -1.00000000e+00
+  -4.00000000e+00]
+ [-1.00000000e+00 -1.00000000e+00 -1.00000000e+00  4.00000000e+00
+   1.00000000e+00]
+ [-3.00000000e+00 -4.00000000e+00 -1.00000000e+00 -4.00000000e+00
+   1.00000000e+00]]
+</pre></div>
+</div>
+<p>The gram operator</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">gram</span><span class="p">(</span><span class="n">Phi</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Check that it’s close to identity matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.round.html#jax.numpy.round" title="jax.numpy.round" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.round.html#jax.numpy.round" title="jax.numpy.round" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.round.html#jax.numpy.round" title="jax.numpy.round" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.round.html#jax.numpy.round" title="jax.numpy.round" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.round.html#jax.numpy.round" title="jax.numpy.round" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">round</span></a></a></a></a></a><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">G</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[1. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 1. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 1. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 1. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 1. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 1. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 1. 0.]
+ [0. 0. 0. 0. 0. 0. 0. 1.]]
+</pre></div>
+</div>
+<p>The frame operator</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="n">lop</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">Phi</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Check that it’s close to identity matrix</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.round.html#jax.numpy.round" title="jax.numpy.round" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.round.html#jax.numpy.round" title="jax.numpy.round" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.round.html#jax.numpy.round" title="jax.numpy.round" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.round.html#jax.numpy.round" title="jax.numpy.round" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.round.html#jax.numpy.round" title="jax.numpy.round" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">round</span></a></a></a></a></a><span class="p">(</span><span class="n">lop</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(</span><span class="n">F</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[1. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 1. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 1. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 1. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 1. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 1. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 1. 0.]
+ [0. 0. 0. 0. 0. 0. 0. 1.]]
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.121 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-0100-lop-cs-operators-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/bbf3ea2723a3365808222209b64e657f/cs_operators.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">cs_operators.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/67456bb4b4f782aa9c3038c6382aeaa8/cs_operators.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">cs_operators.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2021, CR-Suite Development Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/gallery/0100_lop/cs_operators.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-214289683-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

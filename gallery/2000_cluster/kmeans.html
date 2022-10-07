@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>K-means Clustering &#8212; cr-sparse  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/custom.js"></script>
+    <script src="../../_static/js/mathconf.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Sparse Subspace Clustering - OMP" href="ssc_omp.html" />
+    <link rel="prev" title="Recovering spikes via TNIPM" href="../0300_cvx/spikes_l1ls.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">cr-sparse</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=carnotresearch&repo=cr-sparse&type=star&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/index.html">API Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../theory.html">Theory</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples Gallery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../sparse_vector_normals.html">A sparse model vector generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0002.html">Blocks Signal in Haar Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0004.html">Complex Sinusoids+Complex-Spikes in Dirac-Fourier Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0003.html">Cosine+Spikes in Dirac-Cosine Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass.html">Grassmannian Frames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0001.html">HeaviSine Signal in Fourier-HeaviSide Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../0401.html">Source Separation I</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#linear-operators">Linear Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#compressive-sensing">Compressive Sensing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#convex-relaxation-techniques">Convex Relaxation Techniques</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#data-clustering">Data Clustering</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../zzzreference.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Examples Gallery</a><ul>
+      <li>Previous: <a href="../0300_cvx/spikes_l1ls.html" title="previous chapter">Recovering spikes via TNIPM</a></li>
+      <li>Next: <a href="ssc_omp.html" title="next chapter">Sparse Subspace Clustering - OMP</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-gallery-2000-cluster-kmeans-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="k-means-clustering">
+<span id="sphx-glr-gallery-2000-cluster-kmeans-py"></span><h1>K-means Clustering<a class="headerlink" href="#k-means-clustering" title="Permalink to this headline">¶</a></h1>
+<p>CR-Sparse includes a K-means implementation as
+part of its sparse subspace clustering module.</p>
+<p>Configure JAX to work with 64-bit floating point precision.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax.config</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;jax_enable_x64&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s import necessary libraries</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="c1"># vector quantization</span>
+<span class="kn">import</span> <span class="nn">cr.sparse.cluster.vq</span> <span class="k">as</span> <span class="nn">vq</span>
+<span class="c1"># Plotting</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1"># Some PRNGKeys for later use</span>
+<span class="n">key</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.PRNGKey.html#jax.random.PRNGKey" title="jax.random.PRNGKey" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.PRNGKey.html#jax.random.PRNGKey" title="jax.random.PRNGKey" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.PRNGKey.html#jax.random.PRNGKey" title="jax.random.PRNGKey" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.PRNGKey.html#jax.random.PRNGKey" title="jax.random.PRNGKey" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.PRNGKey.html#jax.random.PRNGKey" title="jax.random.PRNGKey" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span></a></a></a></a></a><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">keys</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.split.html#jax.random.split" title="jax.random.split" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.split.html#jax.random.split" title="jax.random.split" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.split.html#jax.random.split" title="jax.random.split" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.split.html#jax.random.split" title="jax.random.split" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.split.html#jax.random.split" title="jax.random.split" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><span class="n">random</span><span class="o">.</span><span class="n">split</span></a></a></a></a></a><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Prepare sample data</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of points for each cluster</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pts</span></a></a></a></a></a> <span class="o">=</span> <span class="mi">50</span>
+<span class="c1"># Mean vector for first cluster</span>
+<span class="n">mu_a</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">array</span></a></a></a></a></a><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="c1"># Covariance matrix for first cluster</span>
+<span class="n">cov_a</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">array</span></a></a></a></a></a><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="c1"># Sampled points for the first cluster</span>
+<span class="n">a</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.multivariate_normal.html#jax.random.multivariate_normal" title="jax.random.multivariate_normal" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.multivariate_normal.html#jax.random.multivariate_normal" title="jax.random.multivariate_normal" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.multivariate_normal.html#jax.random.multivariate_normal" title="jax.random.multivariate_normal" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.multivariate_normal.html#jax.random.multivariate_normal" title="jax.random.multivariate_normal" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.multivariate_normal.html#jax.random.multivariate_normal" title="jax.random.multivariate_normal" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span></a></a></a></a></a><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mu_a</span><span class="p">,</span> <span class="n">cov_a</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pts</span></a></a></a></a></a><span class="p">,))</span>
+<span class="c1"># Mean vector for second cluster</span>
+<span class="n">mu_b</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">array</span></a></a></a></a></a><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="c1"># Covariance matrix for second cluster</span>
+<span class="n">cov_b</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">array</span></a></a></a></a></a><span class="p">([[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="c1"># Sampled points for the second cluster</span>
+<span class="n">b</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.multivariate_normal.html#jax.random.multivariate_normal" title="jax.random.multivariate_normal" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.multivariate_normal.html#jax.random.multivariate_normal" title="jax.random.multivariate_normal" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.multivariate_normal.html#jax.random.multivariate_normal" title="jax.random.multivariate_normal" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.multivariate_normal.html#jax.random.multivariate_normal" title="jax.random.multivariate_normal" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.random.multivariate_normal.html#jax.random.multivariate_normal" title="jax.random.multivariate_normal" class="sphx-glr-backref-module-jax-random sphx-glr-backref-type-py-function"><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span></a></a></a></a></a><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">mu_b</span><span class="p">,</span> <span class="n">cov_b</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pts</span></a></a></a></a></a><span class="p">,))</span>
+<span class="c1"># combined points</span>
+<span class="n">features</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.concatenate.html#jax.numpy.concatenate" title="jax.numpy.concatenate" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.concatenate.html#jax.numpy.concatenate" title="jax.numpy.concatenate" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.concatenate.html#jax.numpy.concatenate" title="jax.numpy.concatenate" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.concatenate.html#jax.numpy.concatenate" title="jax.numpy.concatenate" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.concatenate.html#jax.numpy.concatenate" title="jax.numpy.concatenate" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span></a></a></a></a></a><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="c1"># plot the points</span>
+<a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html#matplotlib.pyplot.scatter" title="matplotlib.pyplot.scatter" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html#matplotlib.pyplot.scatter" title="matplotlib.pyplot.scatter" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html#matplotlib.pyplot.scatter" title="matplotlib.pyplot.scatter" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html#matplotlib.pyplot.scatter" title="matplotlib.pyplot.scatter" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html#matplotlib.pyplot.scatter" title="matplotlib.pyplot.scatter" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span></a></a></a></a></a><span class="p">(</span><span class="n">features</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">features</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_kmeans_001.png" srcset="../../_images/sphx_glr_kmeans_001.png" alt="kmeans" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection object at 0x00000289633F0820&gt;
+</pre></div>
+</div>
+<section id="id1">
+<h2>K-means clustering<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># number of clusters</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a></a></a></a></a><span class="o">=</span><span class="mi">2</span>
+<span class="c1"># Perform K-means clustering</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">vq</span><span class="o">.</span><span class="n">kmeans_jit</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">features</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a></a></a></a></a><span class="p">)</span>
+<span class="n">centroids</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">centroids</span>
+<span class="n">assignment</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">assignment</span>
+<span class="k">for</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a></a></a></a></a> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a></a></a></a></a><span class="p">):</span>
+    <span class="c1"># points for the k-th cluster</span>
+    <span class="n">cluster</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">assignment</span> <span class="o">==</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a></a></a></a></a><span class="p">]</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a></a></a></a></a><span class="p">(</span><span class="n">cluster</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">cluster</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="c1"># plot the centroids</span>
+<a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html#matplotlib.pyplot.scatter" title="matplotlib.pyplot.scatter" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html#matplotlib.pyplot.scatter" title="matplotlib.pyplot.scatter" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html#matplotlib.pyplot.scatter" title="matplotlib.pyplot.scatter" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html#matplotlib.pyplot.scatter" title="matplotlib.pyplot.scatter" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html#matplotlib.pyplot.scatter" title="matplotlib.pyplot.scatter" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span></a></a></a></a></a><span class="p">(</span><span class="n">centroids</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">centroids</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_kmeans_002.png" srcset="../../_images/sphx_glr_kmeans_002.png" alt="kmeans" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection object at 0x000002896A00D580&gt;
+</pre></div>
+</div>
+<p>Let’s print the assignment to verify that points have
+indeed been assigned to respective clusters</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">assignment</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1]
+</pre></div>
+</div>
+<p>Let’s print the number of points for each cluster</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">vq</span><span class="o">.</span><span class="n">assignment_counts</span><span class="p">(</span><span class="n">assignment</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a></a></a></a></a><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[[50]
+ [50]]
+</pre></div>
+</div>
+<p>Let’s print the number of iterations taken to converge</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">iterations</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+<p>If we have points and centroids, we can compute the assignments</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">assignment</span><span class="p">,</span> <span class="n">distances</span> <span class="o">=</span> <span class="n">vq</span><span class="o">.</span><span class="n">find_assignment_jit</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">centroids</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">assignment</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1]
+</pre></div>
+</div>
+<p>For any new point, it is easy to find the index of nearest centroid</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pt</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.array.html#jax.numpy.array" title="jax.numpy.array" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">array</span></a></a></a></a></a><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">vq</span><span class="o">.</span><span class="n">find_nearest_jit</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span> <span class="n">centroids</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">centroids</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[-0.39618243 -0.09914168]
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.350 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-2000-cluster-kmeans-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/d8dcd0bb9ba83b95c8fa55c4c2522264/kmeans.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">kmeans.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/220cfa1945bd29b8ab71a2b3e2b68191/kmeans.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">kmeans.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2021, CR-Suite Development Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/gallery/2000_cluster/kmeans.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/carnotresearch/cr-sparse" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-214289683-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>

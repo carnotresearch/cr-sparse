@@ -1,0 +1,6 @@
+﻿cr.sparse.cvx.focuss.matrix\_solve\_noiseless
+=============================================
+
+.. currentmodule:: cr.sparse.cvx.focuss
+
+.. autofunction:: matrix_solve_noiseless

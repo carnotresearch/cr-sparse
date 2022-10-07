@@ -1,0 +1,6 @@
+﻿cr.sparse.dict.build\_grassmannian\_frame
+=========================================
+
+.. currentmodule:: cr.sparse.dict
+
+.. autofunction:: build_grassmannian_frame

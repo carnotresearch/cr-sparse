@@ -1,0 +1,6 @@
+﻿cr.sparse.problems.plot
+=======================
+
+.. currentmodule:: cr.sparse.problems
+
+.. autofunction:: plot

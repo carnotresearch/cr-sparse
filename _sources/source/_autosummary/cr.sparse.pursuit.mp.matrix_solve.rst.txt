@@ -1,0 +1,6 @@
+﻿cr.sparse.pursuit.mp.matrix\_solve
+==================================
+
+.. currentmodule:: cr.sparse.pursuit.mp
+
+.. autofunction:: matrix_solve

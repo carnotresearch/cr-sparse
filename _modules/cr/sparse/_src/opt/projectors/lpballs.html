@@ -247,6 +247,11 @@
 
 <div class="viewcode-block" id="proj_l1_ball"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.proj_l1_ball.html#cr.sparse.opt.proj_l1_ball">[docs]</a><span class="k">def</span> <span class="nf">proj_l1_ball</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Projector functions for || x - b ||_1 &lt;= q</span>
+
+
+<span class="sd">    Algorithm 2 in Probing the Pareto frontier is a variant</span>
+<span class="sd">    of this algorithm based on heap data structure and partial</span>
+<span class="sd">    cumulative sums.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -263,7 +268,7 @@
         <span class="n">u</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="p">))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="c1"># compute the cumulative sums</span>
         <span class="n">cu</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-        <span class="c1"># find the index where the cumulative some is below the threshold</span>
+        <span class="c1"># find the index where the cumulative sum is below the threshold</span>
         <span class="n">cu_diff</span> <span class="o">=</span> <span class="n">cu</span> <span class="o">-</span> <span class="n">q</span>
         <span class="n">u_scaled</span> <span class="o">=</span> <span class="n">u</span><span class="o">*</span><span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
         <span class="n">flags</span> <span class="o">=</span> <span class="n">cu_diff</span> <span class="o">&gt;</span> <span class="n">u_scaled</span>
@@ -320,7 +325,7 @@
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>

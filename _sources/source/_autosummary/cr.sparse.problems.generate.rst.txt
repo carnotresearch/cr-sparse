@@ -1,0 +1,6 @@
+﻿cr.sparse.problems.generate
+===========================
+
+.. currentmodule:: cr.sparse.problems
+
+.. autofunction:: generate

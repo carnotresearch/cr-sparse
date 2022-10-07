@@ -1,0 +1,6 @@
+﻿cr.sparse.cvx.spgl1.solve\_bpic\_from\_jit
+==========================================
+
+.. currentmodule:: cr.sparse.cvx.spgl1
+
+.. autofunction:: solve_bpic_from_jit

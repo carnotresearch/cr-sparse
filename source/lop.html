@@ -70,13 +70,14 @@
 <li class="toctree-l2"><a class="reference internal" href="sls.html">Sparse Linear Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">Convex Relaxation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fom.html">First Order Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="block.html">Block Sparsity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems.html">Test Problems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="misc.html">Miscellaneous Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
 </ul>
@@ -275,11 +276,17 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.restriction.html#cr.sparse.lop.restriction" title="cr.sparse.lop.restriction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">restriction</span></code></a>(n, I[, axis])</p></td>
 <td><p>An operator which computes y = x[I] over an index set I</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.reshape.html#cr.sparse.lop.reshape" title="cr.sparse.lop.reshape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reshape</span></code></a>(in_shape, out_shape)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.reshape.html#cr.sparse.lop.reshape" title="cr.sparse.lop.reshape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reshape</span></code></a>(in_shape, out_shape[, order])</p></td>
 <td><p>Returns a linear operator which reshapes vectors from model space to data space</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.arr2vec.html#cr.sparse.lop.arr2vec" title="cr.sparse.lop.arr2vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">arr2vec</span></code></a>(shape)</p></td>
 <td><p>Returns a linear operator which reshapes arrays to vectors</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.heaviside.html#cr.sparse.lop.heaviside" title="cr.sparse.lop.heaviside"><code class="xref py py-obj docutils literal notranslate"><span class="pre">heaviside</span></code></a>(n[, axis, normalized])</p></td>
+<td><p>Returns a linear operator implements the Heaviside step function</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.inv_heaviside.html#cr.sparse.lop.inv_heaviside" title="cr.sparse.lop.inv_heaviside"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inv_heaviside</span></code></a>(n[, axis, normalized])</p></td>
+<td><p>Returns a linear operator that computes the inverse of Heaviside/cumsum on input</p></td>
 </tr>
 </tbody>
 </table>
@@ -307,7 +314,7 @@ section provide different ways to combine linear operators.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.subtract.html#cr.sparse.lop.subtract" title="cr.sparse.lop.subtract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subtract</span></code></a>(A, B)</p></td>
 <td><p>Returns a linear operator <span class="math notranslate nohighlight">\(T  = A - B\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.compose.html#cr.sparse.lop.compose" title="cr.sparse.lop.compose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose</span></code></a>(A, B)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.compose.html#cr.sparse.lop.compose" title="cr.sparse.lop.compose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose</span></code></a>(A, B[, ignore_compatibility, shape])</p></td>
 <td><p>Returns the composite linear operator <span class="math notranslate nohighlight">\(T = AB\)</span> such that <span class="math notranslate nohighlight">\(T(x)= A(B(x))\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.transpose.html#cr.sparse.lop.transpose" title="cr.sparse.lop.transpose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transpose</span></code></a>(A)</p></td>
@@ -324,6 +331,9 @@ section provide different ways to combine linear operators.</p>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.block_diag.html#cr.sparse.lop.block_diag" title="cr.sparse.lop.block_diag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">block_diag</span></code></a>(operators[, axis])</p></td>
 <td><p>Returns a block diagonal operator from 2 or more operators</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.windowed_op.html#cr.sparse.lop.windowed_op" title="cr.sparse.lop.windowed_op"><code class="xref py py-obj docutils literal notranslate"><span class="pre">windowed_op</span></code></a>(m, T[, overlap, axis])</p></td>
+<td><p>A wrapper to convert an operator into an overcomplete windowed operator</p></td>
 </tr>
 </tbody>
 </table>
@@ -546,7 +556,7 @@ section provide different ways to combine linear operators.</p>
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>

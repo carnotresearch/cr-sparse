@@ -123,14 +123,14 @@
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">vmap</span><span class="p">,</span> <span class="n">jit</span><span class="p">,</span> <span class="n">lax</span>
 
 
-<span class="kn">from</span> <span class="nn">.defs</span> <span class="kn">import</span> <span class="n">RecoverySolution</span>
+<span class="kn">from</span> <span class="nn">.defs</span> <span class="kn">import</span> <span class="n">RecoverySolution</span><span class="p">,</span> <span class="n">SPState</span>
 
 <span class="kn">from</span> <span class="nn">cr.nimble.dsp</span> <span class="kn">import</span> <span class="n">largest_indices</span>
 
 
 
 <div class="viewcode-block" id="matrix_solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.sp.matrix_solve.html#cr.sparse.pursuit.sp.matrix_solve">[docs]</a><span class="k">def</span> <span class="nf">matrix_solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">res_norm_rtol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem :math:`y = \Phi x + e` using Subspace Pursuit for matrices</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem :math:`y = \Phi x + e` using Subspace Pursuit for matrices</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">## Initialize some constants for the algorithm</span>
     <span class="n">M</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">shape</span>
@@ -203,20 +203,38 @@
 
 
 <div class="viewcode-block" id="operator_solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.sp.operator_solve.html#cr.sparse.pursuit.sp.operator_solve">[docs]</a><span class="k">def</span> <span class="nf">operator_solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">res_norm_rtol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem :math:`y = \Phi x + e` using Subspace Pursuit for linear operators</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem :math:`y = \Phi x + e` using Subspace Pursuit for linear operators</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    - :ref:`gallery:0001`</span>
+<span class="sd">    - :ref:`gallery:0002`</span>
+<span class="sd">    - :ref:`gallery:0003`</span>
+<span class="sd">    - :ref:`gallery:0004`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">trans</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">trans</span>
     <span class="c1">## Initialize some constants for the algorithm</span>
     <span class="n">M</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="c1"># squared norm of the signal</span>
-    <span class="n">y_norm_sqr</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span>
+    <span class="n">y_norm_sqr</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+    <span class="n">y_norm</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">y_norm_sqr</span><span class="p">)</span>
+    <span class="c1"># scale the signal down.</span>
+    <span class="n">scale</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">y_norm</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">y</span>
 
-    <span class="n">max_r_norm_sqr</span> <span class="o">=</span> <span class="n">y_norm_sqr</span> <span class="o">*</span> <span class="p">(</span><span class="n">res_norm_rtol</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> 
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float64</span> <span class="k">if</span> <span class="n">Phi</span><span class="o">.</span><span class="n">real</span> <span class="k">else</span> <span class="n">jnp</span><span class="o">.</span><span class="n">complex128</span>
+    <span class="n">max_r_norm_sqr</span> <span class="o">=</span> <span class="p">(</span><span class="n">res_norm_rtol</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> 
 
     <span class="k">if</span> <span class="n">max_iters</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">max_iters</span> <span class="o">=</span> <span class="n">M</span> 
 
+    <span class="n">min_iters</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">K</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> 
+
     <span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
+        <span class="c1"># Data for the previous approximation [r = y, x = 0]</span>
+        <span class="n">I_prev</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+        <span class="n">x_I_prev</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">r_norm_sqr_prev</span> <span class="o">=</span> <span class="mf">1.</span>
         <span class="c1"># compute the correlations of atoms with signal y</span>
         <span class="n">h</span> <span class="o">=</span> <span class="n">trans</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
         <span class="c1"># Pick largest K indices [this is first iteration]</span>
@@ -228,11 +246,16 @@
         <span class="c1"># Compute new residual</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">Phi_I</span> <span class="o">@</span> <span class="n">x_I</span>
         <span class="c1"># Compute residual norm squared</span>
-        <span class="n">r_norm_sqr</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">r</span>
+        <span class="n">r_norm_sqr</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
         <span class="c1"># Assemble the algorithm state at the end of first iteration</span>
-        <span class="k">return</span> <span class="n">RecoverySolution</span><span class="p">(</span><span class="n">x_I</span><span class="o">=</span><span class="n">x_I</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">r_norm_sqr</span><span class="o">=</span><span class="n">r_norm_sqr</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">Phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">SPState</span><span class="p">(</span><span class="n">x_I</span><span class="o">=</span><span class="n">x_I</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">r_norm_sqr</span><span class="o">=</span><span class="n">r_norm_sqr</span><span class="p">,</span> 
+            <span class="n">iterations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">I_prev</span><span class="o">=</span><span class="n">I_prev</span><span class="p">,</span> <span class="n">x_I_prev</span><span class="o">=</span><span class="n">x_I_prev</span><span class="p">,</span> <span class="n">r_norm_sqr_prev</span><span class="o">=</span><span class="n">r_norm_sqr_prev</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="n">I_prev</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">I</span>
+        <span class="n">x_I_prev</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">x_I</span>
+        <span class="n">r_norm_sqr_prev</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">r_norm_sqr</span>
         <span class="c1"># compute the correlations of dictionary atoms with the residual</span>
         <span class="n">h</span> <span class="o">=</span> <span class="n">trans</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
         <span class="c1"># Ignore the previously selected atoms</span>
@@ -259,8 +282,11 @@
         <span class="c1"># Compute new residual</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">Phi_I</span> <span class="o">@</span> <span class="n">x_I</span>
         <span class="c1"># Compute residual norm squared</span>
-        <span class="n">r_norm_sqr</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">r</span>
-        <span class="k">return</span> <span class="n">RecoverySolution</span><span class="p">(</span><span class="n">x_I</span><span class="o">=</span><span class="n">x_I</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">r_norm_sqr</span><span class="o">=</span><span class="n">r_norm_sqr</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">Phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">r_norm_sqr</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">SPState</span><span class="p">(</span><span class="n">x_I</span><span class="o">=</span><span class="n">x_I</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">r_norm_sqr</span><span class="o">=</span><span class="n">r_norm_sqr</span><span class="p">,</span> 
+            <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">I_prev</span><span class="o">=</span><span class="n">I_prev</span><span class="p">,</span> <span class="n">x_I_prev</span><span class="o">=</span><span class="n">x_I_prev</span><span class="p">,</span> <span class="n">r_norm_sqr_prev</span><span class="o">=</span><span class="n">r_norm_sqr_prev</span>
+            <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">cond</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
         <span class="c1"># limit on residual norm </span>
@@ -268,12 +294,22 @@
         <span class="c1"># limit on number of iterations</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">max_iters</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="c1"># checking if support is still changing</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">not_equal</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">I_prev</span><span class="p">))</span>
+        <span class="c1"># consider support change only after some iterations</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">min_iters</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">c</span>
 
     <span class="n">state</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">while_loop</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">init</span><span class="p">())</span>
-    <span class="k">return</span> <span class="n">state</span></div>
+    <span class="c1"># scale back the result</span>
+    <span class="n">x_I</span> <span class="o">=</span> <span class="n">y_norm</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">x_I</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">y_norm</span> <span class="o">*</span> <span class="n">state</span><span class="o">.</span><span class="n">r</span>
+    <span class="n">r_norm_sqr</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">r_norm_sqr</span> <span class="o">*</span> <span class="n">y_norm_sqr</span>
+    <span class="k">return</span> <span class="n">RecoverySolution</span><span class="p">(</span><span class="n">x_I</span><span class="o">=</span><span class="n">x_I</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">r_norm_sqr</span><span class="o">=</span><span class="n">r_norm_sqr</span><span class="p">,</span>
+        <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="n">Phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
 
-<span class="n">operator_solve_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">operator_solve</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;max_iters&quot;</span><span class="p">,</span> <span class="s2">&quot;res_norm_rtol&quot;</span><span class="p">))</span>
+<span class="n">operator_solve_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">operator_solve</span><span class="p">,</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Phi&quot;</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">))</span>
 
 <span class="n">solve</span> <span class="o">=</span> <span class="n">operator_solve_jit</span>
 </pre></div>
@@ -285,7 +321,7 @@
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>

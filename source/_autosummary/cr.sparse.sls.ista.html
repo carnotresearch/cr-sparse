@@ -70,13 +70,14 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../sls.html">Sparse Linear Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pursuit.html">Greedy Sparse Recovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">Convex Relaxation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fom.html">First Order Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../block.html">Block Sparsity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems.html">Test Problems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc.html">Miscellaneous Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
 </ul>
@@ -141,8 +142,8 @@ via iterative shrinkage and thresholding.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>operator</strong> (<a class="reference internal" href="cr.sparse.lop.Operator.html#cr.sparse.lop.Operator" title="cr.sparse.lop.Operator"><em>cr.sparse.lop.Operator</em></a>) – A linear operator <span class="math notranslate nohighlight">\(A\)</span></p></li>
-<li><p><strong>b</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Data vector</p></li>
-<li><p><strong>x0</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – An initial estimate <span class="math notranslate nohighlight">\(x_0\)</span> of the model vector <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p><strong>b</strong> (<em>jax.numpy.ndarray</em>) – Data vector</p></li>
+<li><p><strong>x0</strong> (<em>jax.numpy.ndarray</em>) – An initial estimate <span class="math notranslate nohighlight">\(x_0\)</span> of the model vector <span class="math notranslate nohighlight">\(x\)</span></p></li>
 <li><p><strong>step_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Step size for ISTA iteration</p></li>
 <li><p><strong>threshold_func</strong> (<em>Function</em>) – A user defined thresholding function. See <a class="reference internal" href="../../sls/thresholding.html#sls-thresholding"><span class="std std-ref">Thresholding</span></a> for details.</p></li>
 <li><p><strong>basis</strong> (<a class="reference internal" href="cr.sparse.lop.Operator.html#cr.sparse.lop.Operator" title="cr.sparse.lop.Operator"><em>cr.sparse.lop.Operator</em></a>) – A sparsifying basis <span class="math notranslate nohighlight">\(B\)</span> for <span class="math notranslate nohighlight">\(x\)</span></p></li>
@@ -173,7 +174,7 @@ and other details.</p>
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>

@@ -1,0 +1,41 @@
+﻿cr.sparse.cvx.spgl1.SPGL1LassoState
+===================================
+
+.. currentmodule:: cr.sparse.cvx.spgl1
+
+.. autoclass:: SPGL1LassoState
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SPGL1LassoState.__init__
+      ~SPGL1LassoState.count
+      ~SPGL1LassoState.index
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SPGL1LassoState.alpha
+      ~SPGL1LassoState.alpha_next
+      ~SPGL1LassoState.f_past
+      ~SPGL1LassoState.g
+      ~SPGL1LassoState.iterations
+      ~SPGL1LassoState.n_ls_iters
+      ~SPGL1LassoState.n_times
+      ~SPGL1LassoState.n_trans
+      ~SPGL1LassoState.r
+      ~SPGL1LassoState.r_gap
+      ~SPGL1LassoState.r_norm
+      ~SPGL1LassoState.x
+   
+   

@@ -70,13 +70,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../sls.html">Sparse Linear Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pursuit.html">Greedy Sparse Recovery</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../cvx_recovery.html">Convex Relaxation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fom.html">First Order Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../block.html">Block Sparsity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems.html">Test Problems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc.html">Miscellaneous Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
 </ul>
@@ -93,7 +94,7 @@
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html">API Docs</a><ul>
-  <li><a href="../cvx_recovery.html">L1 Minimization</a><ul>
+  <li><a href="../cvx_recovery.html">Convex Relaxation</a><ul>
       <li>Previous: <a href="cr.sparse.cvx.l1ls.solve_jit.html" title="previous chapter">cr.sparse.cvx.l1ls.solve_jit</a></li>
       <li>Next: <a href="cr.sparse.cvx.adm.yall1.solve_bp.html" title="next chapter">cr.sparse.cvx.adm.yall1.solve_bp</a></li>
   </ul></li>
@@ -136,13 +137,13 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>A</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Sensing matrix/dictionary</p></li>
-<li><p><strong>b</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Signal being approximated</p></li>
-<li><p><strong>x0</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Initial value of solution (primary variable) <span class="math notranslate nohighlight">\(x\)</span></p></li>
-<li><p><strong>z0</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – Initial value of dual variable <span class="math notranslate nohighlight">\(z\)</span></p></li>
+<li><p><strong>A</strong> (<em>jax.numpy.ndarray</em>) – Sensing matrix/dictionary</p></li>
+<li><p><strong>b</strong> (<em>jax.numpy.ndarray</em>) – Signal being approximated</p></li>
+<li><p><strong>x0</strong> (<em>jax.numpy.ndarray</em>) – Initial value of solution (primary variable) <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p><strong>z0</strong> (<em>jax.numpy.ndarray</em>) – Initial value of dual variable <span class="math notranslate nohighlight">\(z\)</span></p></li>
 <li><p><strong>nonneg</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Flag to indicate if values in the solution are all non-negative</p></li>
-<li><p><strong>W</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – The sparsifying orthonormal basis such that <span class="math notranslate nohighlight">\(W x\)</span> is sparse</p></li>
-<li><p><strong>weights</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – The weights for individual entries in <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p><strong>W</strong> (<em>jax.numpy.ndarray</em>) – The sparsifying orthonormal basis such that <span class="math notranslate nohighlight">\(W x\)</span> is sparse</p></li>
+<li><p><strong>weights</strong> (<em>jax.numpy.ndarray</em>) – The weights for individual entries in <span class="math notranslate nohighlight">\(x\)</span></p></li>
 <li><p><strong>rho</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – weight for the quadratic penalty term</p></li>
 <li><p><strong>delta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – constraint on the residual norm</p></li>
 <li><p><strong>gamma</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – ADMM update parameter for <span class="math notranslate nohighlight">\(x\)</span></p></li>
@@ -156,7 +157,7 @@
 <dd class="field-odd"><p>RecoveryFullSolution</p>
 </dd>
 </dl>
-<p>This function is based on <span id="id1">[<a class="reference internal" href="../../zzzreference.html#id333" title="Junfeng Yang and Yin Zhang. Alternating direction algorithms for l_1-problems in compressive sensing. SIAM journal on scientific computing, 33(1):250–278, 2011. URL: https://doi.org/10.1137/090777761, doi:10.1137/090777761.">YZ11</a>]</span>.
+<p>This function is based on <span id="id1">[<a class="reference internal" href="../../zzzreference.html#id336" title="Junfeng Yang and Yin Zhang. Alternating direction algorithms for l_1-problems in compressive sensing. SIAM journal on scientific computing, 33(1):250–278, 2011. URL: https://doi.org/10.1137/090777761, doi:10.1137/090777761.">YZ11</a>]</span>.
 It implements eq 2.25 of the paper.</p>
 </dd></dl>
 
@@ -170,7 +171,7 @@ It implements eq 2.25 of the paper.</p>
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>

@@ -1,0 +1,6 @@
+﻿cr.sparse.problems.names
+========================
+
+.. currentmodule:: cr.sparse.problems
+
+.. autofunction:: names

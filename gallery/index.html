@@ -68,10 +68,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Examples Gallery</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="sparse_vector_normals.html">A sparse model vector generator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data-clustering">Data Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0002.html">Blocks Signal in Haar Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0004.html">Complex Sinusoids+Complex-Spikes in Dirac-Fourier Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0003.html">Cosine+Spikes in Dirac-Cosine Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0005.html">Cosine+Spikes, Dirac-Cosine Basis, Gaussian Measurements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grass.html">Grassmannian Frames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0001.html">HeaviSine Signal in Fourier-HeaviSide Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0401.html">Source Separation I</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#linear-operators">Linear Operators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#compressive-sensing">Compressive Sensing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sparse-recovery-via-l1-minimization">Sparse Recovery via L1 minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#convex-relaxation-techniques">Convex Relaxation Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-clustering">Data Clustering</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../zzzreference.html">References</a></li>
@@ -123,125 +130,197 @@
 </figure>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-clear"></div><section id="data-clustering">
-<span id="cluster-gallery"></span><span id="sphx-glr-gallery-cluster"></span><h2>Data Clustering<a class="headerlink" href="#data-clustering" title="Permalink to this headline">¶</a></h2>
-<div class="sphx-glr-thumbcontainer" tooltip="CR-Sparse includes a K-means implementation as part of its sparse subspace clustering module."><figure class="align-default" id="id2">
-<img alt="K-means Clustering" src="../_images/sphx_glr_kmeans_thumb.png" />
+<div class="sphx-glr-thumbcontainer" tooltip="A Blocks signal as proposed by Donoho et al. in Wavelab buckheit1995wavelab is a concatenation ..."><figure class="align-default" id="id2">
+<img alt="Blocks Signal in Haar Basis" src="../_images/sphx_glr_0002_thumb.png" />
 <figcaption>
-<p><span class="caption-text"><a class="reference internal" href="cluster/kmeans.html#sphx-glr-gallery-cluster-kmeans-py"><span class="std std-ref">K-means Clustering</span></a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text"><a class="reference internal" href="0002.html#sphx-glr-gallery-0002-py"><span class="std std-ref">Blocks Signal in Haar Basis</span></a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the sparse subspace clustering algorithm via orthogonal matching purs..."><figure class="align-default" id="id3">
-<img alt="Sparse Subspace Clustering - OMP" src="../_images/sphx_glr_ssc_omp_thumb.png" />
+<div class="sphx-glr-thumbcontainer" tooltip="The Complex Sinusoids+Spikes signal in this example consists of a mixture of 3 different comple..."><figure class="align-default" id="id3">
+<img alt="Complex Sinusoids+Complex-Spikes in Dirac-Fourier Basis" src="../_images/sphx_glr_0004_thumb.png" />
 <figcaption>
-<p><span class="caption-text"><a class="reference internal" href="cluster/ssc_omp.html#sphx-glr-gallery-cluster-ssc-omp-py"><span class="std std-ref">Sparse Subspace Clustering - OMP</span></a></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text"><a class="reference internal" href="0004.html#sphx-glr-gallery-0004-py"><span class="std std-ref">Complex Sinusoids+Complex-Spikes in Dirac-Fourier Basis</span></a></span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-clear"></div></section>
-<section id="linear-operators">
-<span id="lop-gallery"></span><span id="sphx-glr-gallery-lop"></span><h2>Linear Operators<a class="headerlink" href="#linear-operators" title="Permalink to this headline">¶</a></h2>
-<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to construct a linear operator from an ordinary matrix."><figure class="align-default" id="id4">
+<div class="sphx-glr-thumbcontainer" tooltip="The Cosine+Spikes signal in this example consists of a mixture of 3 different cosine waves with..."><figure class="align-default" id="id4">
+<img alt="Cosine+Spikes in Dirac-Cosine Basis" src="../_images/sphx_glr_0003_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="0003.html#sphx-glr-gallery-0003-py"><span class="std std-ref">Cosine+Spikes in Dirac-Cosine Basis</span></a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="In this example we have"><figure class="align-default" id="id5">
+<img alt="Cosine+Spikes, Dirac-Cosine Basis, Gaussian Measurements" src="../_images/sphx_glr_0005_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="0005.html#sphx-glr-gallery-0005-py"><span class="std std-ref">Cosine+Spikes, Dirac-Cosine Basis, Gaussian Measurements</span></a></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="A Grassmannian (real) frame \Phi is an m \times n matrix (dictionary) with unit norm columns su..."><figure class="align-default" id="id6">
+<img alt="Grassmannian Frames" src="../_images/sphx_glr_grass_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="grass.html#sphx-glr-gallery-grass-py"><span class="std std-ref">Grassmannian Frames</span></a></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="A HeaviSine signal as proposed by Donoho et al. in Wavelab buckheit1995wavelab is a sign wave w..."><figure class="align-default" id="id7">
+<img alt="HeaviSine Signal in Fourier-HeaviSide Basis" src="../_images/sphx_glr_0001_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="0001.html#sphx-glr-gallery-0001-py"><span class="std std-ref">HeaviSine Signal in Fourier-HeaviSide Basis</span></a></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip=" In audio signal processing, source separation is the process of isolating individual sounds in..."><figure class="align-default" id="id8">
+<img alt="Source Separation I" src="../_images/sphx_glr_0401_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="0401.html#sphx-glr-gallery-0401-py"><span class="std std-ref">Source Separation I</span></a></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div><section id="linear-operators">
+<span id="lop-gallery"></span><span id="sphx-glr-gallery-0100-lop"></span><h2>Linear Operators<a class="headerlink" href="#linear-operators" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to construct a linear operator from an ordinary matrix."><figure class="align-default" id="id9">
 <img alt="A matrix backed linear operator" src="../_images/sphx_glr_matrix_operator_thumb.png" />
 <figcaption>
-<p><span class="caption-text"><a class="reference internal" href="lop/matrix_operator.html#sphx-glr-gallery-lop-matrix-operator-py"><span class="std std-ref">A matrix backed linear operator</span></a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text"><a class="reference internal" href="0100_lop/matrix_operator.html#sphx-glr-gallery-0100-lop-matrix-operator-py"><span class="std std-ref">A matrix backed linear operator</span></a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="Compressive Sensing Operators"><figure class="align-default" id="id5">
+<div class="sphx-glr-thumbcontainer" tooltip="Compressive Sensing Operators"><figure class="align-default" id="id10">
 <img alt="Compressive Sensing Operators" src="../_images/sphx_glr_cs_operators_thumb.png" />
 <figcaption>
-<p><span class="caption-text"><a class="reference internal" href="lop/cs_operators.html#sphx-glr-gallery-lop-cs-operators-py"><span class="std std-ref">Compressive Sensing Operators</span></a></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text"><a class="reference internal" href="0100_lop/cs_operators.html#sphx-glr-gallery-0100-lop-cs-operators-py"><span class="std std-ref">Compressive Sensing Operators</span></a></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates following features:"><figure class="align-default" id="id6">
+<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates following features:"><figure class="align-default" id="id11">
 <img alt="Deconvolution" src="../_images/sphx_glr_deconvolution_thumb.png" />
 <figcaption>
-<p><span class="caption-text"><a class="reference internal" href="lop/deconvolution.html#sphx-glr-gallery-lop-deconvolution-py"><span class="std std-ref">Deconvolution</span></a></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text"><a class="reference internal" href="0100_lop/deconvolution.html#sphx-glr-gallery-0100-lop-deconvolution-py"><span class="std std-ref">Deconvolution</span></a></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates following features:"><figure class="align-default" id="id7">
+<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates following features:"><figure class="align-default" id="id12">
 <img alt="Image Deblurring" src="../_images/sphx_glr_deblurring_thumb.png" />
 <figcaption>
-<p><span class="caption-text"><a class="reference internal" href="lop/deblurring.html#sphx-glr-gallery-lop-deblurring-py"><span class="std std-ref">Image Deblurring</span></a></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text"><a class="reference internal" href="0100_lop/deblurring.html#sphx-glr-gallery-0100-lop-deblurring-py"><span class="std std-ref">Image Deblurring</span></a></span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates following features:"><figure class="align-default" id="id8">
+<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates following features:"><figure class="align-default" id="id13">
 <img alt="Wavelet Transform Operators" src="../_images/sphx_glr_wt_op_thumb.png" />
 <figcaption>
-<p><span class="caption-text"><a class="reference internal" href="lop/wt_op.html#sphx-glr-gallery-lop-wt-op-py"><span class="std std-ref">Wavelet Transform Operators</span></a></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text"><a class="reference internal" href="0100_lop/wt_op.html#sphx-glr-gallery-0100-lop-wt-op-py"><span class="std std-ref">Wavelet Transform Operators</span></a></span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-clear"></div></section>
 <section id="compressive-sensing">
-<span id="cs-gallery"></span><span id="sphx-glr-gallery-pursuit"></span><h2>Compressive Sensing<a class="headerlink" href="#compressive-sensing" title="Permalink to this headline">¶</a></h2>
-<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates following features - Making 1-bit quantized compressive measurements ..."><figure class="align-default" id="id9">
+<span id="cs-gallery"></span><span id="sphx-glr-gallery-0200-cs"></span><h2>Compressive Sensing<a class="headerlink" href="#compressive-sensing" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates following features - Making 1-bit quantized compressive measurements ..."><figure class="align-default" id="id14">
 <img alt="1 bit Compressive Sensing" src="../_images/sphx_glr_cs1bit_biht_thumb.png" />
 <figcaption>
-<p><span class="caption-text"><a class="reference internal" href="pursuit/cs1bit_biht.html#sphx-glr-gallery-pursuit-cs1bit-biht-py"><span class="std std-ref">1 bit Compressive Sensing</span></a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text"><a class="reference internal" href="0200_cs/cs1bit_biht.html#sphx-glr-gallery-0200-cs-cs1bit-biht-py"><span class="std std-ref">1 bit Compressive Sensing</span></a></span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrate the BSBL (Block Sparse Bayesian Learning) algorithm zhang2012re..."><figure class="align-default" id="id10">
+<div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrate the BSBL (Block Sparse Bayesian Learning) algorithm zhang2012re..."><figure class="align-default" id="id15">
 <img alt="Block Sparse Bayesian Learning" src="../_images/sphx_glr_bsbl_1_thumb.png" />
 <figcaption>
-<p><span class="caption-text"><a class="reference internal" href="pursuit/bsbl_1.html#sphx-glr-gallery-pursuit-bsbl-1-py"><span class="std std-ref">Block Sparse Bayesian Learning</span></a></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text"><a class="reference internal" href="0200_cs/bsbl_1.html#sphx-glr-gallery-0200-cs-bsbl-1-py"><span class="std std-ref">Block Sparse Bayesian Learning</span></a></span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This example explains the step by step development of  CoSaMP (Compressive Sensing Matching Pur..."><figure class="align-default" id="id11">
+<div class="sphx-glr-thumbcontainer" tooltip="This example explains the step by step development of  CoSaMP (Compressive Sensing Matching Pur..."><figure class="align-default" id="id16">
 <img alt="CoSaMP step by step" src="../_images/sphx_glr_cosamp_step_by_step_thumb.png" />
 <figcaption>
-<p><span class="caption-text"><a class="reference internal" href="pursuit/cosamp_step_by_step.html#sphx-glr-gallery-pursuit-cosamp-step-by-step-py"><span class="std std-ref">CoSaMP step by step</span></a></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text"><a class="reference internal" href="0200_cs/cosamp_step_by_step.html#sphx-glr-gallery-0200-cs-cosamp-step-by-step-py"><span class="std std-ref">CoSaMP step by step</span></a></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrate the compressive sensing of ECG data and reconstruction using Bl..."><figure class="align-default" id="id12">
+<div class="sphx-glr-thumbcontainer" tooltip="In this example, we demonstrate the compressive sensing of ECG data and reconstruction using Bl..."><figure class="align-default" id="id17">
 <img alt="ECG Data Compressive Sensing" src="../_images/sphx_glr_ecg_cs_bsbl_thumb.png" />
 <figcaption>
-<p><span class="caption-text"><a class="reference internal" href="pursuit/ecg_cs_bsbl.html#sphx-glr-gallery-pursuit-ecg-cs-bsbl-py"><span class="std std-ref">ECG Data Compressive Sensing</span></a></span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text"><a class="reference internal" href="0200_cs/ecg_cs_bsbl.html#sphx-glr-gallery-0200-cs-ecg-cs-bsbl-py"><span class="std std-ref">ECG Data Compressive Sensing</span></a></span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip=" A (random) sparse binary sensing matrix has a very simple design. Assume that the signal space..."><figure class="align-default" id="id13">
+<div class="sphx-glr-thumbcontainer" tooltip="This is a very simple example of using the matching pursuit algorithm."><figure class="align-default" id="id18">
+<img alt="Matching Pursuit" src="../_images/sphx_glr_matching_pursuit_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="0200_cs/matching_pursuit.html#sphx-glr-gallery-0200-cs-matching-pursuit-py"><span class="std std-ref">Matching Pursuit</span></a></span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip=" A (random) sparse binary sensing matrix has a very simple design. Assume that the signal space..."><figure class="align-default" id="id19">
 <img alt="Sparse Binary Sensing Matrices" src="../_images/sphx_glr_sparse_binary_sensor_thumb.png" />
 <figcaption>
-<p><span class="caption-text"><a class="reference internal" href="pursuit/sparse_binary_sensor.html#sphx-glr-gallery-pursuit-sparse-binary-sensor-py"><span class="std std-ref">Sparse Binary Sensing Matrices</span></a></span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text"><a class="reference internal" href="0200_cs/sparse_binary_sensor.html#sphx-glr-gallery-0200-cs-sparse-binary-sensor-py"><span class="std std-ref">Sparse Binary Sensing Matrices</span></a></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-clear"></div></section>
-<section id="sparse-recovery-via-l1-minimization">
-<span id="recovery-l1-gallery"></span><span id="sphx-glr-gallery-rec-l1"></span><h2>Sparse Recovery via L1 minimization<a class="headerlink" href="#sparse-recovery-via-l1-minimization" title="Permalink to this headline">¶</a></h2>
-<div class="sphx-glr-thumbcontainer" tooltip="This example has following features:"><figure class="align-default" id="id14">
-<img alt="Random Orthogonal Measurements, Cosine Basis, ADMM" src="../_images/sphx_glr_partial_wh_sensor_cosine_basis_thumb.png" />
+<section id="convex-relaxation-techniques">
+<span id="recovery-l1-gallery"></span><span id="sphx-glr-gallery-0300-cvx"></span><h2>Convex Relaxation Techniques<a class="headerlink" href="#convex-relaxation-techniques" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="This is a simple example of using the FOcal Underdetermined System Solver (FOCUSS)."><figure class="align-default" id="id20">
+<img alt="FOcal Underdetermined System Solver (FOCUSS)" src="../_images/sphx_glr_focuss_1_thumb.png" />
 <figcaption>
-<p><span class="caption-text"><a class="reference internal" href="rec_l1/partial_wh_sensor_cosine_basis.html#sphx-glr-gallery-rec-l1-partial-wh-sensor-cosine-basis-py"><span class="std std-ref">Random Orthogonal Measurements, Cosine Basis, ADMM</span></a></span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text"><a class="reference internal" href="0300_cvx/focuss_1.html#sphx-glr-gallery-0300-cvx-focuss-1-py"><span class="std std-ref">FOcal Underdetermined System Solver (FOCUSS)</span></a></span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This example has following features:"><figure class="align-default" id="id15">
+<div class="sphx-glr-thumbcontainer" tooltip="This example has following features:"><figure class="align-default" id="id21">
+<img alt="Random Orthogonal Measurements, Cosine Basis, ADMM" src="../_images/sphx_glr_partial_wh_sensor_cosine_basis_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="0300_cvx/partial_wh_sensor_cosine_basis.html#sphx-glr-gallery-0300-cvx-partial-wh-sensor-cosine-basis-py"><span class="std std-ref">Random Orthogonal Measurements, Cosine Basis, ADMM</span></a></span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This example has following features:"><figure class="align-default" id="id22">
 <img alt="Recovering spikes via TNIPM" src="../_images/sphx_glr_spikes_l1ls_thumb.png" />
 <figcaption>
-<p><span class="caption-text"><a class="reference internal" href="rec_l1/spikes_l1ls.html#sphx-glr-gallery-rec-l1-spikes-l1ls-py"><span class="std std-ref">Recovering spikes via TNIPM</span></a></span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+<p><span class="caption-text"><a class="reference internal" href="0300_cvx/spikes_l1ls.html#sphx-glr-gallery-0300-cvx-spikes-l1ls-py"><span class="std std-ref">Recovering spikes via TNIPM</span></a></span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-clear"></div></section>
+<section id="data-clustering">
+<span id="cluster-gallery"></span><span id="sphx-glr-gallery-2000-cluster"></span><h2>Data Clustering<a class="headerlink" href="#data-clustering" title="Permalink to this headline">¶</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="CR-Sparse includes a K-means implementation as part of its sparse subspace clustering module."><figure class="align-default" id="id23">
+<img alt="K-means Clustering" src="../_images/sphx_glr_kmeans_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="2000_cluster/kmeans.html#sphx-glr-gallery-2000-cluster-kmeans-py"><span class="std std-ref">K-means Clustering</span></a></span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the sparse subspace clustering algorithm via orthogonal matching purs..."><figure class="align-default" id="id24">
+<img alt="Sparse Subspace Clustering - OMP" src="../_images/sphx_glr_ssc_omp_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="2000_cluster/ssc_omp.html#sphx-glr-gallery-2000-cluster-ssc-omp-py"><span class="std std-ref">Sparse Subspace Clustering - OMP</span></a></span><a class="headerlink" href="#id24" title="Permalink to this image">¶</a></p>
 </figcaption>
 </figure>
 </div><div class="toctree-wrapper compound">
@@ -258,7 +337,7 @@
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>

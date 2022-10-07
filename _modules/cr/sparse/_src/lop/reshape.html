@@ -124,12 +124,15 @@
 <span class="kn">from</span> <span class="nn">.lop</span> <span class="kn">import</span> <span class="n">Operator</span>
 
 
-<div class="viewcode-block" id="reshape"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.reshape.html#cr.sparse.lop.reshape">[docs]</a><span class="k">def</span> <span class="nf">reshape</span><span class="p">(</span><span class="n">in_shape</span><span class="p">,</span> <span class="n">out_shape</span><span class="p">):</span>
+<div class="viewcode-block" id="reshape"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.reshape.html#cr.sparse.lop.reshape">[docs]</a><span class="k">def</span> <span class="nf">reshape</span><span class="p">(</span><span class="n">in_shape</span><span class="p">,</span> <span class="n">out_shape</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns a linear operator which reshapes vectors from model space to data space</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        in_shape (int): Shape of vectors in the model space </span>
 <span class="sd">        out_shape (int): Shape of vectors in the data space</span>
+<span class="sd">        order: Specifies index order of data layout [&#39;C&#39;, &#39;F&#39;, &#39;A&#39;]</span>
+<span class="sd">            C means C-like index order (default). F means Fortran</span>
+<span class="sd">            like order. This is the order in MATLAB arrays also.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        (Operator): A reshaping linear operator</span>
@@ -137,9 +140,10 @@
     <span class="n">in_size</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">in_shape</span><span class="p">))</span>
     <span class="n">out_size</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">out_shape</span><span class="p">))</span>
     <span class="k">assert</span> <span class="n">in_size</span> <span class="o">==</span> <span class="n">out_size</span><span class="p">,</span> <span class="s2">&quot;Input and output size must be equal&quot;</span>
+    <span class="k">assert</span> <span class="n">order</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">],</span> <span class="s2">&quot;Invalid order&quot;</span>
 
-    <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>  <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">out_shape</span><span class="p">)</span>
-    <span class="n">trans</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">in_shape</span><span class="p">)</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>  <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">out_shape</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">in_shape</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">out_shape</span><span class="p">,</span><span class="n">in_shape</span><span class="p">))</span></div>
 
 
@@ -167,7 +171,7 @@
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>

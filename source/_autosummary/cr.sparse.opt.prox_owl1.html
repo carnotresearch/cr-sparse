@@ -70,13 +70,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../sls.html">Sparse Linear Systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../dict.html">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pursuit.html">Greedy Sparse Recovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cvx_recovery.html">Convex Relaxation</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fom.html">First Order Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../block.html">Block Sparsity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../problems.html">Test Problems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../misc.html">Miscellaneous Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ef.html">Evaluation Framework</a></li>
 </ul>
@@ -135,7 +136,7 @@
 <dd><p>Returns a prox-capable wrapper for the ordered and weighted l1-norm function <code class="docutils literal notranslate"><span class="pre">f(x)</span> <span class="pre">=</span> <span class="pre">sum(lambda</span> <span class="pre">*</span> <span class="pre">sort(abs(x),</span> <span class="pre">'descend'))</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>lambda</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.ndarray.html#jax.numpy.ndarray" title="(in JAX)"><em>jax.numpy.ndarray</em></a>) – A strictly positive vector which is sorted in decreasing order</p>
+<dd class="field-odd"><p><strong>lambda</strong> (<em>jax.numpy.ndarray</em>) – A strictly positive vector which is sorted in decreasing order</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>A prox-capable function</p>
@@ -161,7 +162,7 @@ not all entries in <span class="math notranslate nohighlight">\(\lambda\)</span>
 <li><p>Multiply the sorted entries with entries in lambda (component wise)</p></li>
 <li><p>Compute the sum of the entries</p></li>
 </ul>
-<p>For the derivation of the proximal operator for the ordered and weighted l1 norm, see <span id="id1">[<a class="reference internal" href="../../zzzreference.html#id199" title="Ma lgorzata Bogdana, Ewout van den Bergb, Weijie Suc, and Emmanuel J Candesc. Statistical estimation and testing via the ordered l1 norm. 2013.">lBvdBSC13</a>]</span>.</p>
+<p>For the derivation of the proximal operator for the ordered and weighted l1 norm, see <span id="id1">[<a class="reference internal" href="../../zzzreference.html#id201" title="Ma lgorzata Bogdana, Ewout van den Bergb, Weijie Suc, and Emmanuel J Candesc. Statistical estimation and testing via the ordered l1 norm. 2013.">lBvdBSC13</a>]</span>.</p>
 </dd></dl>
 
 </section>
@@ -174,7 +175,7 @@ not all entries in <span class="math notranslate nohighlight">\(\lambda\)</span>
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>

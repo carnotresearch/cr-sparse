@@ -430,7 +430,7 @@
 
 <span class="sd">    * 0: Do not learn lambda. Use the input or default value.</span>
 <span class="sd">    * 1: Use the lambda learning rule for noisy cases [SNR &lt;= 20 dB]</span>
-<span class="sd">    * 1: Use the lambda learning rule for high SNR cases[SNR &gt; 20 dB]</span>
+<span class="sd">    * 2: Use the lambda learning rule for high SNR cases[SNR &gt; 20 dB]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">prune_gamma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-3</span>
     <span class="sd">&quot;&quot;&quot;Threshold for pruning small values of gamma_i</span>
@@ -447,7 +447,7 @@
 
 
 
-<div class="viewcode-block" id="bsbl_em_options"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.block.bsbl.bsbl_em_options.html#cr.sparse.block.bsbl.bsbl_em_options">[docs]</a><span class="k">def</span> <span class="nf">bsbl_em_options</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> 
+<div class="viewcode-block" id="bsbl_em_options"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.block.bsbl.bsbl_em_options.html#cr.sparse.block.bsbl.bsbl_em_options">[docs]</a><span class="k">def</span> <span class="nf">bsbl_em_options</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
     <span class="n">learn_block_corr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">learn_lambda</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">prune_gamma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -486,7 +486,7 @@
         <span class="n">epsilon</span><span class="o">=</span><span class="n">epsilon</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="bsbl_bo_options"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.block.bsbl.bsbl_bo_options.html#cr.sparse.block.bsbl.bsbl_bo_options">[docs]</a><span class="k">def</span> <span class="nf">bsbl_bo_options</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> 
+<div class="viewcode-block" id="bsbl_bo_options"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.block.bsbl.bsbl_bo_options.html#cr.sparse.block.bsbl.bsbl_bo_options">[docs]</a><span class="k">def</span> <span class="nf">bsbl_bo_options</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
     <span class="n">learn_block_corr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">learn_lambda</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">prune_gamma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -494,7 +494,7 @@
     <span class="n">epsilon</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Helper function to initialize options for the BSBL-BO algorithm</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">scale</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">scale</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">1.</span>
     <span class="c1"># default values of options</span>
     <span class="n">opt</span>  <span class="o">=</span> <span class="n">BSBL_Options</span><span class="p">()</span>
     <span class="c1"># customize them</span>
@@ -961,7 +961,7 @@
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>

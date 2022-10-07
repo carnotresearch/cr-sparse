@@ -70,13 +70,14 @@
 <li class="toctree-l2"><a class="reference internal" href="sls.html">Sparse Linear Systems</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Sparsifying Dictionaries and Sensing Matrices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pursuit.html">Greedy Sparse Recovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">L1 Minimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cvx_recovery.html">Convex Relaxation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="opt.html">Optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fom.html">First Order Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="block.html">Block Sparsity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cluster.html">Data Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ssc.html">Sparse Subspace Clustering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data.html">Sample Data Generation Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="problems.html">Test Problems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="misc.html">Miscellaneous Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ef.html">Evaluation Framework</a></li>
 </ul>
@@ -234,6 +235,23 @@ during the dictionary learning process.</p>
 </tbody>
 </table>
 </section>
+<section id="grassmannian-frames">
+<h2>Grassmannian frames<a class="headerlink" href="#grassmannian-frames" title="Permalink to this headline">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.minimum_coherence.html#cr.sparse.dict.minimum_coherence" title="cr.sparse.dict.minimum_coherence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimum_coherence</span></code></a>(m, n)</p></td>
+<td><p>Minimum achievable coherence for a Grassmannian frame</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.build_grassmannian_frame.html#cr.sparse.dict.build_grassmannian_frame" title="cr.sparse.dict.build_grassmannian_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_grassmannian_frame</span></code></a>(init[, frac, ...])</p></td>
+<td><p>Builds a Grassmannian frame starting from a random matrix</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 
 
@@ -244,7 +262,7 @@ during the dictionary learning process.</p>
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2021, CR-Sparse Development Team.
+      &copy;2021, CR-Suite Development Team.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
