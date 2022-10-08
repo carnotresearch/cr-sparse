@@ -8,6 +8,84 @@ All notable changes to this project will be documented in this file.
 
 [Documentation](https://cr-sparse.readthedocs.io/en/latest/)
 
+## [0.3.2] - 2022-10-08
+
+[Documentation](https://cr-sparse.readthedocs.io/en/v0.3.2/)
+
+
+### Added
+
+
+Dictionaries
+
+- Grassmannian frames
+- 
+
+Linear operators
+
+- windowed_op
+
+Sparse Recovery algorithms
+
+- FOCUSS
+- SPGL1 (Spectral Projected Gradient L1)
+
+Optimization : Smooth functions
+
+- smooth_quad_error 
+
+Optimization algorithms
+
+- Spectral projected gradient
+
+Test Problems
+
+- New test problems module introduced
+- heavi-sine:fourier:heavi-side
+- blocks:haar
+- cosine-spikes:dirac-dct
+- complex:sinusoid-spikes:dirac-fourier
+- cosine-spikes:dirac-dct:gaussian
+- piecewise-cubic-poly:daubechies:gaussian
+- signed-spikes:dirac:gaussian
+- complex:signed-spikes:dirac:gaussian
+- blocks:heavi-side
+- blocks:normalized-heavi-side
+- gaussian-spikes:dirac:gaussian
+- src-sep-1
+
+
+
+Examples
+
+- Matching pursuit demo
+- Grassmannian frames demo
+- Several examples based on the test problems
+
+Documentation
+
+- Thinking in JAX tutorial added
+- Quick start expanded
+- Test problems documentation linked with examples
+
+### Changed
+
+- Matching pursuit implementation revamped
+
+### Fixed
+
+- Handling of complex signals in Subspace Pursuit
+- Handling of complex signals in Compressive Sampling Matching Pursuit
+
+### Improved
+
+- Support change condition added in convergence criteria for Subspace Pursuit
+- order attribute in reshape linear operator
+
+
+### Removed
+
+- `cr.sparse.io` moved to `cr-nimble` project
 
 ## [0.3.1] - 2022-09-10
 
@@ -326,7 +404,8 @@ General stuff
 
 Initial release
 
-[Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.3.2...HEAD
+[0.3.2]: https://github.com/carnotresearch/cr-sparse/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/carnotresearch/cr-sparse/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.2...v0.3.0
 [0.2.2]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.1...v0.2.2
