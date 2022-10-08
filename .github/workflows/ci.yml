@@ -3,13 +3,13 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - master
+      - main
     paths:
       - 'tests/**'
       - 'src/**'
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build:
