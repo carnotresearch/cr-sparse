@@ -1,0 +1,80 @@
+
+
+.. _sphx_glr_gallery_0300_cvx:
+
+.. _recovery_l1_gallery:
+
+Convex Relaxation Techniques
+-----------------------------------------------
+
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This is a simple example of using the FOcal Underdetermined System Solver (FOCUSS).">
+
+.. only:: html
+
+  .. image:: /gallery/0300_cvx/images/thumb/sphx_glr_focuss_1_thumb.png
+    :alt: FOcal Underdetermined System Solver (FOCUSS)
+
+  :ref:`sphx_glr_gallery_0300_cvx_focuss_1.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">FOcal Underdetermined System Solver (FOCUSS)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example has following features:">
+
+.. only:: html
+
+  .. image:: /gallery/0300_cvx/images/thumb/sphx_glr_partial_wh_sensor_cosine_basis_thumb.png
+    :alt: Random Orthogonal Measurements, Cosine Basis, ADMM
+
+  :ref:`sphx_glr_gallery_0300_cvx_partial_wh_sensor_cosine_basis.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Random Orthogonal Measurements, Cosine Basis, ADMM</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example has following features:">
+
+.. only:: html
+
+  .. image:: /gallery/0300_cvx/images/thumb/sphx_glr_spikes_l1ls_thumb.png
+    :alt: Recovering spikes via TNIPM
+
+  :ref:`sphx_glr_gallery_0300_cvx_spikes_l1ls.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Recovering spikes via TNIPM</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/0300_cvx/focuss_1
+   /gallery/0300_cvx/partial_wh_sensor_cosine_basis
+   /gallery/0300_cvx/spikes_l1ls
+

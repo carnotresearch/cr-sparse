@@ -24,8 +24,8 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/custom.js"></script>
     <script src="../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -60,7 +60,7 @@
 
 
 <h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
@@ -104,7 +104,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -130,7 +130,7 @@
 <span id="api-dict"></span><h1>Sparsifying Dictionaries and Sensing Matrices<a class="headerlink" href="#sparsifying-dictionaries-and-sensing-matrices" title="Permalink to this headline">¶</a></h1>
 <section id="functions-for-constructing-sparsying-dictionaries-and-sensing-matrices">
 <h2>Functions for constructing sparsying dictionaries and sensing matrices<a class="headerlink" href="#functions-for-constructing-sparsying-dictionaries-and-sensing-matrices" title="Permalink to this headline">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -142,7 +142,7 @@
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.rademacher_mtx.html#cr.sparse.dict.rademacher_mtx" title="cr.sparse.dict.rademacher_mtx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rademacher_mtx</span></code></a>(key, M, N[, normalize_atoms])</p></td>
 <td><p>A dictionary/sensing matrix where entries are drawn independently from Rademacher distribution.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.sparse_binary_mtx.html#cr.sparse.dict.sparse_binary_mtx" title="cr.sparse.dict.sparse_binary_mtx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_binary_mtx</span></code></a>(key, M, N, d[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.sparse_binary_mtx.html#cr.sparse.dict.sparse_binary_mtx" title="cr.sparse.dict.sparse_binary_mtx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_binary_mtx</span></code></a>(key, M, N, d[, …])</p></td>
 <td><p>A sensing matrix where exactly d entries are 1 in each column</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.random_onb.html#cr.sparse.dict.random_onb" title="cr.sparse.dict.random_onb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_onb</span></code></a>(key, N)</p></td>
@@ -180,7 +180,7 @@
 </section>
 <section id="dictionary-properties">
 <h2>Dictionary properties<a class="headerlink" href="#dictionary-properties" title="Permalink to this headline">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -217,7 +217,7 @@
 <h2>Dictionary comparison<a class="headerlink" href="#dictionary-comparison" title="Permalink to this headline">¶</a></h2>
 <p>These functions are useful for comparing dictionaries
 during the dictionary learning process.</p>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -227,7 +227,7 @@ during the dictionary learning process.</p>
 <td><p>Mutual coherence between two dictionaries A and B  along with indices of most correlated atoms</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.mutual_coherence.html#cr.sparse.dict.mutual_coherence" title="cr.sparse.dict.mutual_coherence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutual_coherence</span></code></a>(A, B)</p></td>
-<td><p>&quot;Mutual coherence between two dictionaries A and B</p></td>
+<td><p>“Mutual coherence between two dictionaries A and B</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.matching_atoms_ratio.html#cr.sparse.dict.matching_atoms_ratio" title="cr.sparse.dict.matching_atoms_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matching_atoms_ratio</span></code></a>(A, B[, distance_threshold])</p></td>
 <td><p>Identifies how many atoms are very close between dictionaries A and B</p></td>
@@ -237,7 +237,7 @@ during the dictionary learning process.</p>
 </section>
 <section id="grassmannian-frames">
 <h2>Grassmannian frames<a class="headerlink" href="#grassmannian-frames" title="Permalink to this headline">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -246,7 +246,7 @@ during the dictionary learning process.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.minimum_coherence.html#cr.sparse.dict.minimum_coherence" title="cr.sparse.dict.minimum_coherence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimum_coherence</span></code></a>(m, n)</p></td>
 <td><p>Minimum achievable coherence for a Grassmannian frame</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.build_grassmannian_frame.html#cr.sparse.dict.build_grassmannian_frame" title="cr.sparse.dict.build_grassmannian_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_grassmannian_frame</span></code></a>(init[, frac, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.dict.build_grassmannian_frame.html#cr.sparse.dict.build_grassmannian_frame" title="cr.sparse.dict.build_grassmannian_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_grassmannian_frame</span></code></a>(init[, frac, …])</p></td>
 <td><p>Builds a Grassmannian frame starting from a random matrix</p></td>
 </tr>
 </tbody>
@@ -265,7 +265,7 @@ during the dictionary learning process.</p>
       &copy;2021, CR-Suite Development Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

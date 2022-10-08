@@ -1,0 +1,61 @@
+
+
+.. _sphx_glr_gallery_2000_cluster:
+
+.. _cluster_gallery:
+
+Data Clustering
+------------------------
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="CR-Sparse includes a K-means implementation as part of its sparse subspace clustering module.">
+
+.. only:: html
+
+  .. image:: /gallery/2000_cluster/images/thumb/sphx_glr_kmeans_thumb.png
+    :alt: K-means Clustering
+
+  :ref:`sphx_glr_gallery_2000_cluster_kmeans.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">K-means Clustering</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates the sparse subspace clustering algorithm via orthogonal matching purs...">
+
+.. only:: html
+
+  .. image:: /gallery/2000_cluster/images/thumb/sphx_glr_ssc_omp_thumb.png
+    :alt: Sparse Subspace Clustering - OMP
+
+  :ref:`sphx_glr_gallery_2000_cluster_ssc_omp.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Sparse Subspace Clustering - OMP</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/2000_cluster/kmeans
+   /gallery/2000_cluster/ssc_omp
+

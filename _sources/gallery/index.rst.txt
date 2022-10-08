@@ -1,9 +1,5 @@
 :orphan:
 
-
-
-.. _sphx_glr_gallery:
-
 .. _gallery:
 
 Examples Gallery
@@ -14,14 +10,178 @@ Examples Gallery
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip=" Demonstrates how to create sparse model vectors with small number of non-zero entries sampled ...">
 
 .. only:: html
 
- .. figure:: /gallery/images/thumb/sphx_glr_sparse_vector_normals_thumb.png
-     :alt: A sparse model vector generator
+  .. image:: /gallery/images/thumb/sphx_glr_sparse_vector_normals_thumb.png
+    :alt: A sparse model vector generator
 
-     :ref:`sphx_glr_gallery_sparse_vector_normals.py`
+  :ref:`sphx_glr_gallery_sparse_vector_normals.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">A sparse model vector generator</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A Blocks signal as proposed by Donoho et al. in Wavelab buckheit1995wavelab is a concatenation ...">
+
+.. only:: html
+
+  .. image:: /gallery/images/thumb/sphx_glr_0002_thumb.png
+    :alt: Blocks Signal in Haar Basis
+
+  :ref:`sphx_glr_gallery_0002.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Blocks Signal in Haar Basis</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The Complex Sinusoids+Spikes signal in this example consists of a mixture of 3 different comple...">
+
+.. only:: html
+
+  .. image:: /gallery/images/thumb/sphx_glr_0004_thumb.png
+    :alt: Complex Sinusoids+Complex-Spikes in Dirac-Fourier Basis
+
+  :ref:`sphx_glr_gallery_0004.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Complex Sinusoids+Complex-Spikes in Dirac-Fourier Basis</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The Cosine+Spikes signal in this example consists of a mixture of 3 different cosine waves with...">
+
+.. only:: html
+
+  .. image:: /gallery/images/thumb/sphx_glr_0003_thumb.png
+    :alt: Cosine+Spikes in Dirac-Cosine Basis
+
+  :ref:`sphx_glr_gallery_0003.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Cosine+Spikes in Dirac-Cosine Basis</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example we have">
+
+.. only:: html
+
+  .. image:: /gallery/images/thumb/sphx_glr_0005_thumb.png
+    :alt: Cosine+Spikes, Dirac-Cosine Basis, Gaussian Measurements
+
+  :ref:`sphx_glr_gallery_0005.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Cosine+Spikes, Dirac-Cosine Basis, Gaussian Measurements</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A Grassmannian (real) frame \Phi is an m \times n matrix (dictionary) with unit norm columns su...">
+
+.. only:: html
+
+  .. image:: /gallery/images/thumb/sphx_glr_grass_thumb.png
+    :alt: Grassmannian Frames
+
+  :ref:`sphx_glr_gallery_grass.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Grassmannian Frames</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="A HeaviSine signal as proposed by Donoho et al. in Wavelab buckheit1995wavelab is a sign wave w...">
+
+.. only:: html
+
+  .. image:: /gallery/images/thumb/sphx_glr_0001_thumb.png
+    :alt: HeaviSine Signal in Fourier-HeaviSide Basis
+
+  :ref:`sphx_glr_gallery_0001.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">HeaviSine Signal in Fourier-HeaviSide Basis</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example we have">
+
+.. only:: html
+
+  .. image:: /gallery/images/thumb/sphx_glr_0006_thumb.png
+    :alt: Piecewise Cubic, Daubechies Basis, Gaussian Measurements
+
+  :ref:`sphx_glr_gallery_0006.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Piecewise Cubic, Daubechies Basis, Gaussian Measurements</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example we have">
+
+.. only:: html
+
+  .. image:: /gallery/images/thumb/sphx_glr_0007_thumb.png
+    :alt: Signed Spikes, Gaussian Measurements
+
+  :ref:`sphx_glr_gallery_0007.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Signed Spikes, Gaussian Measurements</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip=" In audio signal processing, source separation is the process of isolating individual sounds in...">
+
+.. only:: html
+
+  .. image:: /gallery/images/thumb/sphx_glr_0401_thumb.png
+    :alt: Source Separation I
+
+  :ref:`sphx_glr_gallery_0401.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Source Separation I</div>
+    </div>
+
 
 .. raw:: html
 
@@ -32,204 +192,16 @@ Examples Gallery
    :hidden:
 
    /gallery/sparse_vector_normals
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="A Blocks signal as proposed by Donoho et al. in Wavelab buckheit1995wavelab is a concatenation ...">
-
-.. only:: html
-
- .. figure:: /gallery/images/thumb/sphx_glr_0002_thumb.png
-     :alt: Blocks Signal in Haar Basis
-
-     :ref:`sphx_glr_gallery_0002.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
    /gallery/0002
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="The Complex Sinusoids+Spikes signal in this example consists of a mixture of 3 different comple...">
-
-.. only:: html
-
- .. figure:: /gallery/images/thumb/sphx_glr_0004_thumb.png
-     :alt: Complex Sinusoids+Complex-Spikes in Dirac-Fourier Basis
-
-     :ref:`sphx_glr_gallery_0004.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
    /gallery/0004
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="The Cosine+Spikes signal in this example consists of a mixture of 3 different cosine waves with...">
-
-.. only:: html
-
- .. figure:: /gallery/images/thumb/sphx_glr_0003_thumb.png
-     :alt: Cosine+Spikes in Dirac-Cosine Basis
-
-     :ref:`sphx_glr_gallery_0003.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
    /gallery/0003
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="In this example we have">
-
-.. only:: html
-
- .. figure:: /gallery/images/thumb/sphx_glr_0005_thumb.png
-     :alt: Cosine+Spikes, Dirac-Cosine Basis, Gaussian Measurements
-
-     :ref:`sphx_glr_gallery_0005.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
    /gallery/0005
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="A Grassmannian (real) frame \Phi is an m \times n matrix (dictionary) with unit norm columns su...">
-
-.. only:: html
-
- .. figure:: /gallery/images/thumb/sphx_glr_grass_thumb.png
-     :alt: Grassmannian Frames
-
-     :ref:`sphx_glr_gallery_grass.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
    /gallery/grass
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="A HeaviSine signal as proposed by Donoho et al. in Wavelab buckheit1995wavelab is a sign wave w...">
-
-.. only:: html
-
- .. figure:: /gallery/images/thumb/sphx_glr_0001_thumb.png
-     :alt: HeaviSine Signal in Fourier-HeaviSide Basis
-
-     :ref:`sphx_glr_gallery_0001.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
    /gallery/0001
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="In this example we have">
-
-.. only:: html
-
- .. figure:: /gallery/images/thumb/sphx_glr_0006_thumb.png
-     :alt: Piecewise Cubic, Daubechies Basis, Gaussian Measurements
-
-     :ref:`sphx_glr_gallery_0006.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
    /gallery/0006
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="In this example we have">
-
-.. only:: html
-
- .. figure:: /gallery/images/thumb/sphx_glr_0007_thumb.png
-     :alt: Signed Spikes, Gaussian Measurements
-
-     :ref:`sphx_glr_gallery_0007.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
    /gallery/0007
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip=" In audio signal processing, source separation is the process of isolating individual sounds in...">
-
-.. only:: html
-
- .. figure:: /gallery/images/thumb/sphx_glr_0401_thumb.png
-     :alt: Source Separation I
-
-     :ref:`sphx_glr_gallery_0401.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
    /gallery/0401
-.. raw:: html
 
-    <div class="sphx-glr-clear"></div>
-
-
-
-.. _sphx_glr_gallery_0100_lop:
-
-.. _lop_gallery:
 
 Linear Operators
 -----------------------------------------------
@@ -238,24 +210,25 @@ Linear Operators
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to construct a linear operator from an ordinary matrix.">
 
 .. only:: html
 
- .. figure:: /gallery/0100_lop/images/thumb/sphx_glr_matrix_operator_thumb.png
-     :alt: A matrix backed linear operator
+  .. image:: /gallery/0100_lop/images/thumb/sphx_glr_matrix_operator_thumb.png
+    :alt: A matrix backed linear operator
 
-     :ref:`sphx_glr_gallery_0100_lop_matrix_operator.py`
+  :ref:`sphx_glr_gallery_0100_lop_matrix_operator.py`
 
 .. raw:: html
 
+      <div class="sphx-glr-thumbnail-title">A matrix backed linear operator</div>
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /gallery/0100_lop/matrix_operator
 
 .. raw:: html
 
@@ -263,20 +236,16 @@ Linear Operators
 
 .. only:: html
 
- .. figure:: /gallery/0100_lop/images/thumb/sphx_glr_cs_operators_thumb.png
-     :alt: Compressive Sensing Operators
+  .. image:: /gallery/0100_lop/images/thumb/sphx_glr_cs_operators_thumb.png
+    :alt: Compressive Sensing Operators
 
-     :ref:`sphx_glr_gallery_0100_lop_cs_operators.py`
+  :ref:`sphx_glr_gallery_0100_lop_cs_operators.py`
 
 .. raw:: html
 
+      <div class="sphx-glr-thumbnail-title">Compressive Sensing Operators</div>
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /gallery/0100_lop/cs_operators
 
 .. raw:: html
 
@@ -284,20 +253,16 @@ Linear Operators
 
 .. only:: html
 
- .. figure:: /gallery/0100_lop/images/thumb/sphx_glr_deconvolution_thumb.png
-     :alt: Deconvolution
+  .. image:: /gallery/0100_lop/images/thumb/sphx_glr_deconvolution_thumb.png
+    :alt: Deconvolution
 
-     :ref:`sphx_glr_gallery_0100_lop_deconvolution.py`
+  :ref:`sphx_glr_gallery_0100_lop_deconvolution.py`
 
 .. raw:: html
 
+      <div class="sphx-glr-thumbnail-title">Deconvolution</div>
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /gallery/0100_lop/deconvolution
 
 .. raw:: html
 
@@ -305,20 +270,16 @@ Linear Operators
 
 .. only:: html
 
- .. figure:: /gallery/0100_lop/images/thumb/sphx_glr_deblurring_thumb.png
-     :alt: Image Deblurring
+  .. image:: /gallery/0100_lop/images/thumb/sphx_glr_deblurring_thumb.png
+    :alt: Image Deblurring
 
-     :ref:`sphx_glr_gallery_0100_lop_deblurring.py`
+  :ref:`sphx_glr_gallery_0100_lop_deblurring.py`
 
 .. raw:: html
 
+      <div class="sphx-glr-thumbnail-title">Image Deblurring</div>
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /gallery/0100_lop/deblurring
 
 .. raw:: html
 
@@ -326,29 +287,21 @@ Linear Operators
 
 .. only:: html
 
- .. figure:: /gallery/0100_lop/images/thumb/sphx_glr_wt_op_thumb.png
-     :alt: Wavelet Transform Operators
+  .. image:: /gallery/0100_lop/images/thumb/sphx_glr_wt_op_thumb.png
+    :alt: Wavelet Transform Operators
 
-     :ref:`sphx_glr_gallery_0100_lop_wt_op.py`
+  :ref:`sphx_glr_gallery_0100_lop_wt_op.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Wavelet Transform Operators</div>
+    </div>
+
 
 .. raw:: html
 
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /gallery/0100_lop/wt_op
-.. raw:: html
-
-    <div class="sphx-glr-clear"></div>
-
-
-
-.. _sphx_glr_gallery_0200_cs:
-
-.. _cs_gallery:
 
 Compressive Sensing
 -----------------------------------
@@ -357,24 +310,25 @@ Compressive Sensing
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates following features - Making 1-bit quantized compressive measurements ...">
 
 .. only:: html
 
- .. figure:: /gallery/0200_cs/images/thumb/sphx_glr_cs1bit_biht_thumb.png
-     :alt: 1 bit Compressive Sensing
+  .. image:: /gallery/0200_cs/images/thumb/sphx_glr_cs1bit_biht_thumb.png
+    :alt: 1 bit Compressive Sensing
 
-     :ref:`sphx_glr_gallery_0200_cs_cs1bit_biht.py`
+  :ref:`sphx_glr_gallery_0200_cs_cs1bit_biht.py`
 
 .. raw:: html
 
+      <div class="sphx-glr-thumbnail-title">1 bit Compressive Sensing</div>
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /gallery/0200_cs/cs1bit_biht
 
 .. raw:: html
 
@@ -382,20 +336,16 @@ Compressive Sensing
 
 .. only:: html
 
- .. figure:: /gallery/0200_cs/images/thumb/sphx_glr_bsbl_1_thumb.png
-     :alt: Block Sparse Bayesian Learning
+  .. image:: /gallery/0200_cs/images/thumb/sphx_glr_bsbl_1_thumb.png
+    :alt: Block Sparse Bayesian Learning
 
-     :ref:`sphx_glr_gallery_0200_cs_bsbl_1.py`
+  :ref:`sphx_glr_gallery_0200_cs_bsbl_1.py`
 
 .. raw:: html
 
+      <div class="sphx-glr-thumbnail-title">Block Sparse Bayesian Learning</div>
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /gallery/0200_cs/bsbl_1
 
 .. raw:: html
 
@@ -403,20 +353,16 @@ Compressive Sensing
 
 .. only:: html
 
- .. figure:: /gallery/0200_cs/images/thumb/sphx_glr_cosamp_step_by_step_thumb.png
-     :alt: CoSaMP step by step
+  .. image:: /gallery/0200_cs/images/thumb/sphx_glr_cosamp_step_by_step_thumb.png
+    :alt: CoSaMP step by step
 
-     :ref:`sphx_glr_gallery_0200_cs_cosamp_step_by_step.py`
+  :ref:`sphx_glr_gallery_0200_cs_cosamp_step_by_step.py`
 
 .. raw:: html
 
+      <div class="sphx-glr-thumbnail-title">CoSaMP step by step</div>
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /gallery/0200_cs/cosamp_step_by_step
 
 .. raw:: html
 
@@ -424,20 +370,16 @@ Compressive Sensing
 
 .. only:: html
 
- .. figure:: /gallery/0200_cs/images/thumb/sphx_glr_ecg_cs_bsbl_thumb.png
-     :alt: ECG Data Compressive Sensing
+  .. image:: /gallery/0200_cs/images/thumb/sphx_glr_ecg_cs_bsbl_thumb.png
+    :alt: ECG Data Compressive Sensing
 
-     :ref:`sphx_glr_gallery_0200_cs_ecg_cs_bsbl.py`
+  :ref:`sphx_glr_gallery_0200_cs_ecg_cs_bsbl.py`
 
 .. raw:: html
 
+      <div class="sphx-glr-thumbnail-title">ECG Data Compressive Sensing</div>
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /gallery/0200_cs/ecg_cs_bsbl
 
 .. raw:: html
 
@@ -445,20 +387,16 @@ Compressive Sensing
 
 .. only:: html
 
- .. figure:: /gallery/0200_cs/images/thumb/sphx_glr_matching_pursuit_thumb.png
-     :alt: Matching Pursuit
+  .. image:: /gallery/0200_cs/images/thumb/sphx_glr_matching_pursuit_thumb.png
+    :alt: Matching Pursuit
 
-     :ref:`sphx_glr_gallery_0200_cs_matching_pursuit.py`
+  :ref:`sphx_glr_gallery_0200_cs_matching_pursuit.py`
 
 .. raw:: html
 
+      <div class="sphx-glr-thumbnail-title">Matching Pursuit</div>
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /gallery/0200_cs/matching_pursuit
 
 .. raw:: html
 
@@ -466,29 +404,21 @@ Compressive Sensing
 
 .. only:: html
 
- .. figure:: /gallery/0200_cs/images/thumb/sphx_glr_sparse_binary_sensor_thumb.png
-     :alt: Sparse Binary Sensing Matrices
+  .. image:: /gallery/0200_cs/images/thumb/sphx_glr_sparse_binary_sensor_thumb.png
+    :alt: Sparse Binary Sensing Matrices
 
-     :ref:`sphx_glr_gallery_0200_cs_sparse_binary_sensor.py`
+  :ref:`sphx_glr_gallery_0200_cs_sparse_binary_sensor.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Sparse Binary Sensing Matrices</div>
+    </div>
+
 
 .. raw:: html
 
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /gallery/0200_cs/sparse_binary_sensor
-.. raw:: html
-
-    <div class="sphx-glr-clear"></div>
-
-
-
-.. _sphx_glr_gallery_0300_cvx:
-
-.. _recovery_l1_gallery:
 
 Convex Relaxation Techniques
 -----------------------------------------------
@@ -498,24 +428,25 @@ Convex Relaxation Techniques
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="This is a simple example of using the FOcal Underdetermined System Solver (FOCUSS).">
 
 .. only:: html
 
- .. figure:: /gallery/0300_cvx/images/thumb/sphx_glr_focuss_1_thumb.png
-     :alt: FOcal Underdetermined System Solver (FOCUSS)
+  .. image:: /gallery/0300_cvx/images/thumb/sphx_glr_focuss_1_thumb.png
+    :alt: FOcal Underdetermined System Solver (FOCUSS)
 
-     :ref:`sphx_glr_gallery_0300_cvx_focuss_1.py`
+  :ref:`sphx_glr_gallery_0300_cvx_focuss_1.py`
 
 .. raw:: html
 
+      <div class="sphx-glr-thumbnail-title">FOcal Underdetermined System Solver (FOCUSS)</div>
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /gallery/0300_cvx/focuss_1
 
 .. raw:: html
 
@@ -523,20 +454,16 @@ Convex Relaxation Techniques
 
 .. only:: html
 
- .. figure:: /gallery/0300_cvx/images/thumb/sphx_glr_partial_wh_sensor_cosine_basis_thumb.png
-     :alt: Random Orthogonal Measurements, Cosine Basis, ADMM
+  .. image:: /gallery/0300_cvx/images/thumb/sphx_glr_partial_wh_sensor_cosine_basis_thumb.png
+    :alt: Random Orthogonal Measurements, Cosine Basis, ADMM
 
-     :ref:`sphx_glr_gallery_0300_cvx_partial_wh_sensor_cosine_basis.py`
+  :ref:`sphx_glr_gallery_0300_cvx_partial_wh_sensor_cosine_basis.py`
 
 .. raw:: html
 
+      <div class="sphx-glr-thumbnail-title">Random Orthogonal Measurements, Cosine Basis, ADMM</div>
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /gallery/0300_cvx/partial_wh_sensor_cosine_basis
 
 .. raw:: html
 
@@ -544,29 +471,21 @@ Convex Relaxation Techniques
 
 .. only:: html
 
- .. figure:: /gallery/0300_cvx/images/thumb/sphx_glr_spikes_l1ls_thumb.png
-     :alt: Recovering spikes via TNIPM
+  .. image:: /gallery/0300_cvx/images/thumb/sphx_glr_spikes_l1ls_thumb.png
+    :alt: Recovering spikes via TNIPM
 
-     :ref:`sphx_glr_gallery_0300_cvx_spikes_l1ls.py`
+  :ref:`sphx_glr_gallery_0300_cvx_spikes_l1ls.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Recovering spikes via TNIPM</div>
+    </div>
+
 
 .. raw:: html
 
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /gallery/0300_cvx/spikes_l1ls
-.. raw:: html
-
-    <div class="sphx-glr-clear"></div>
-
-
-
-.. _sphx_glr_gallery_2000_cluster:
-
-.. _cluster_gallery:
 
 Data Clustering
 ------------------------
@@ -575,24 +494,25 @@ Data Clustering
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="CR-Sparse includes a K-means implementation as part of its sparse subspace clustering module.">
 
 .. only:: html
 
- .. figure:: /gallery/2000_cluster/images/thumb/sphx_glr_kmeans_thumb.png
-     :alt: K-means Clustering
+  .. image:: /gallery/2000_cluster/images/thumb/sphx_glr_kmeans_thumb.png
+    :alt: K-means Clustering
 
-     :ref:`sphx_glr_gallery_2000_cluster_kmeans.py`
+  :ref:`sphx_glr_gallery_2000_cluster_kmeans.py`
 
 .. raw:: html
 
+      <div class="sphx-glr-thumbnail-title">K-means Clustering</div>
     </div>
 
-
-.. toctree::
-   :hidden:
-
-   /gallery/2000_cluster/kmeans
 
 .. raw:: html
 
@@ -600,10 +520,16 @@ Data Clustering
 
 .. only:: html
 
- .. figure:: /gallery/2000_cluster/images/thumb/sphx_glr_ssc_omp_thumb.png
-     :alt: Sparse Subspace Clustering - OMP
+  .. image:: /gallery/2000_cluster/images/thumb/sphx_glr_ssc_omp_thumb.png
+    :alt: Sparse Subspace Clustering - OMP
 
-     :ref:`sphx_glr_gallery_2000_cluster_ssc_omp.py`
+  :ref:`sphx_glr_gallery_2000_cluster_ssc_omp.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Sparse Subspace Clustering - OMP</div>
+    </div>
+
 
 .. raw:: html
 
@@ -612,11 +538,12 @@ Data Clustering
 
 .. toctree::
    :hidden:
+   :includehidden:
 
-   /gallery/2000_cluster/ssc_omp
-.. raw:: html
-
-    <div class="sphx-glr-clear"></div>
+   /gallery/0100_lop/index.rst
+   /gallery/0200_cs/index.rst
+   /gallery/0300_cvx/index.rst
+   /gallery/2000_cluster/index.rst
 
 
 

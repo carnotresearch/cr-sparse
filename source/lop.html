@@ -24,8 +24,8 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/custom.js"></script>
     <script src="../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -60,7 +60,7 @@
 
 
 <h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
@@ -104,7 +104,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -217,7 +217,7 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 <p>This is based on the convention followed by <code class="docutils literal notranslate"><span class="pre">numpy.apply_along_axis</span></code>.</p>
 <section id="data-types">
 <h2><a class="toc-backref" href="#id1">Data types</a><a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -231,7 +231,7 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 </section>
 <section id="basic-operators">
 <h2><a class="toc-backref" href="#id2">Basic operators</a><a class="headerlink" href="#basic-operators" title="Permalink to this headline">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -296,7 +296,7 @@ axis and the linear operator will be applied separately to each slice.</p></li>
 <p>It is possible to combine one or more linear operators
 to create new linear operators. The functions in this
 section provide different ways to combine linear operators.</p>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -340,7 +340,7 @@ section provide different ways to combine linear operators.</p>
 </section>
 <section id="signal-processing-operators">
 <h2><a class="toc-backref" href="#id4">Signal processing operators</a><a class="headerlink" href="#signal-processing-operators" title="Permalink to this headline">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -366,7 +366,7 @@ section provide different ways to combine linear operators.</p>
 </section>
 <section id="orthonormal-transforms-and-bases">
 <h2><a class="toc-backref" href="#id5">Orthonormal transforms and bases</a><a class="headerlink" href="#orthonormal-transforms-and-bases" title="Permalink to this headline">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -395,7 +395,7 @@ section provide different ways to combine linear operators.</p>
 </section>
 <section id="unions-of-bases">
 <h2><a class="toc-backref" href="#id6">Unions of bases</a><a class="headerlink" href="#unions-of-bases" title="Permalink to this headline">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -409,7 +409,7 @@ section provide different ways to combine linear operators.</p>
 </section>
 <section id="random-compressive-sensing-operators">
 <h2><a class="toc-backref" href="#id7">Random compressive sensing operators</a><a class="headerlink" href="#random-compressive-sensing-operators" title="Permalink to this headline">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -418,7 +418,7 @@ section provide different ways to combine linear operators.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.gaussian_dict.html#cr.sparse.lop.gaussian_dict" title="cr.sparse.lop.gaussian_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian_dict</span></code></a>(key, m[, n, normalize_atoms, axis])</p></td>
 <td><p>An operator which represents a Gaussian sensix matrix (with normalized columns)</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.rademacher_dict.html#cr.sparse.lop.rademacher_dict" title="cr.sparse.lop.rademacher_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rademacher_dict</span></code></a>(key, m[, n, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.rademacher_dict.html#cr.sparse.lop.rademacher_dict" title="cr.sparse.lop.rademacher_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rademacher_dict</span></code></a>(key, m[, n, …])</p></td>
 <td><p>An operator which represents a Rademacher sensing matrix</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.random_onb_dict.html#cr.sparse.lop.random_onb_dict" title="cr.sparse.lop.random_onb_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_onb_dict</span></code></a>(key, n[, axis])</p></td>
@@ -427,7 +427,7 @@ section provide different ways to combine linear operators.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.random_orthonormal_rows_dict.html#cr.sparse.lop.random_orthonormal_rows_dict" title="cr.sparse.lop.random_orthonormal_rows_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_orthonormal_rows_dict</span></code></a>(key, m[, n, axis])</p></td>
 <td><p>An operator whose rows are orthonormal (sampled from a random orthonormal basis)</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.sparse_binary_dict.html#cr.sparse.lop.sparse_binary_dict" title="cr.sparse.lop.sparse_binary_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_binary_dict</span></code></a>(key, m[, n, d, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.sparse_binary_dict.html#cr.sparse.lop.sparse_binary_dict" title="cr.sparse.lop.sparse_binary_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_binary_dict</span></code></a>(key, m[, n, d, …])</p></td>
 <td><p>An operator which represents a sparse binary sensing matrix</p></td>
 </tr>
 </tbody>
@@ -435,7 +435,7 @@ section provide different ways to combine linear operators.</p>
 </section>
 <section id="operators-for-special-matrices">
 <h2><a class="toc-backref" href="#id8">Operators for special matrices</a><a class="headerlink" href="#operators-for-special-matrices" title="Permalink to this headline">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -449,7 +449,7 @@ section provide different ways to combine linear operators.</p>
 </section>
 <section id="derivatives-finite-differences">
 <h2><a class="toc-backref" href="#id9">Derivatives (finite differences)</a><a class="headerlink" href="#derivatives-finite-differences" title="Permalink to this headline">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -473,7 +473,7 @@ section provide different ways to combine linear operators.</p>
 <section id="convenience-operators">
 <h2><a class="toc-backref" href="#id10">Convenience operators</a><a class="headerlink" href="#convenience-operators" title="Permalink to this headline">¶</a></h2>
 <p>These operators are technically not linear on <span class="math notranslate nohighlight">\(\mathbb{F}^n \to \mathbb{F}^m\)</span></p>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -487,7 +487,7 @@ section provide different ways to combine linear operators.</p>
 </section>
 <section id="operator-parts">
 <h2><a class="toc-backref" href="#id11">Operator parts</a><a class="headerlink" href="#operator-parts" title="Permalink to this headline">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -505,7 +505,7 @@ section provide different ways to combine linear operators.</p>
 <section id="properties-of-a-linear-operator">
 <h2><a class="toc-backref" href="#id12">Properties of a linear operator</a><a class="headerlink" href="#properties-of-a-linear-operator" title="Permalink to this headline">¶</a></h2>
 <p>These are still experimental and not efficient.</p>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -514,7 +514,7 @@ section provide different ways to combine linear operators.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.normest.html#cr.sparse.lop.normest" title="cr.sparse.lop.normest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normest</span></code></a>(operator[, max_iters, error_tolerance])</p></td>
 <td><p>Estimates the norm of a linear operator by power method</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.normest_jit.html#cr.sparse.lop.normest_jit" title="cr.sparse.lop.normest_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normest_jit</span></code></a>(operator[, max_iters, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.normest_jit.html#cr.sparse.lop.normest_jit" title="cr.sparse.lop.normest_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normest_jit</span></code></a>(operator[, max_iters, …])</p></td>
 <td><p>Estimates the norm of a linear operator by power method</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.lop.upper_frame_bound.html#cr.sparse.lop.upper_frame_bound" title="cr.sparse.lop.upper_frame_bound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">upper_frame_bound</span></code></a>(T)</p></td>
@@ -525,7 +525,7 @@ section provide different ways to combine linear operators.</p>
 </section>
 <section id="utilities">
 <h2><a class="toc-backref" href="#id13">Utilities</a><a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -559,7 +559,7 @@ section provide different ways to combine linear operators.</p>
       &copy;2021, CR-Suite Development Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

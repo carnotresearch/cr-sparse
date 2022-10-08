@@ -254,7 +254,7 @@ Daubechies basis::
 
 
 Solving a sparse representation problem :math:`\bb = \bA \bx`
-using subspace pursuit::
+using Subspace Pursuit::
 
     import cr.sparse.pursuit.sp as sp
     sol = sp.solve(A, b, k)

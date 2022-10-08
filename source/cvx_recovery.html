@@ -24,8 +24,8 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/custom.js"></script>
     <script src="../_static/js/mathconf.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -60,7 +60,7 @@
 
 
 <h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
@@ -104,7 +104,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -167,27 +167,27 @@ transformed into a convex quadratic program with linear inequality constraints.<
 The <code class="docutils literal notranslate"><span class="pre">solve</span></code> versions are more directly applicable when solution is not known.
 Both <code class="docutils literal notranslate"><span class="pre">solve_from</span></code> and <code class="docutils literal notranslate"><span class="pre">solve</span></code> are available as regular and JIT-compiled
 versions.</p>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve_from.html#cr.sparse.cvx.l1ls.solve_from" title="cr.sparse.cvx.l1ls.solve_from"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1ls.solve_from</span></code></a>(A, y, lambda_, x0, u0[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve_from.html#cr.sparse.cvx.l1ls.solve_from" title="cr.sparse.cvx.l1ls.solve_from"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1ls.solve_from</span></code></a>(A, y, lambda_, x0, u0[, …])</p></td>
 <td><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve_from_jit.html#cr.sparse.cvx.l1ls.solve_from_jit" title="cr.sparse.cvx.l1ls.solve_from_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1ls.solve_from_jit</span></code></a>(A, y, lambda_, x0, u0[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve_from_jit.html#cr.sparse.cvx.l1ls.solve_from_jit" title="cr.sparse.cvx.l1ls.solve_from_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1ls.solve_from_jit</span></code></a>(A, y, lambda_, x0, u0[, …])</p></td>
 <td><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve.html#cr.sparse.cvx.l1ls.solve" title="cr.sparse.cvx.l1ls.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1ls.solve</span></code></a>(A, y, lambda_[, x0, u0, tol, xi, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve.html#cr.sparse.cvx.l1ls.solve" title="cr.sparse.cvx.l1ls.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1ls.solve</span></code></a>(A, y, lambda_[, x0, u0, tol, xi, …])</p></td>
 <td><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve_jit.html#cr.sparse.cvx.l1ls.solve_jit" title="cr.sparse.cvx.l1ls.solve_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1ls.solve_jit</span></code></a>(A, y, lambda_[, x0, u0, tol, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve_jit.html#cr.sparse.cvx.l1ls.solve_jit" title="cr.sparse.cvx.l1ls.solve_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1ls.solve_jit</span></code></a>(A, y, lambda_[, x0, u0, tol, …])</p></td>
 <td><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p></td>
 </tr>
 </tbody>
 </table>
-<p>An example is provided in <a class="reference internal" href="../gallery/index.html#recovery-l1-gallery"><span class="std std-ref">Convex Relaxation Techniques</span></a>.</p>
+<p>An example is provided in <a class="reference internal" href="../gallery/0300_cvx/index.html#recovery-l1-gallery"><span class="std std-ref">Convex Relaxation Techniques</span></a>.</p>
 </section>
 <section id="alternating-directions-methods">
 <span id="api-l1min-admmm"></span><h2><a class="toc-backref" href="#id6">Alternating Directions Methods</a><a class="headerlink" href="#alternating-directions-methods" title="Permalink to this headline">¶</a></h2>
@@ -198,31 +198,31 @@ The <code class="docutils literal notranslate"><span class="pre">yall1.solve</sp
 for solving different types of <span class="math notranslate nohighlight">\(\ell_1\)</span> minimization
 problems. It in turn calls the lower level methods for solving
 specific types of problems.</p>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve.html#cr.sparse.cvx.adm.yall1.solve" title="cr.sparse.cvx.adm.yall1.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve</span></code></a>(A, b[, x0, z0, W, weights, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve.html#cr.sparse.cvx.adm.yall1.solve" title="cr.sparse.cvx.adm.yall1.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve</span></code></a>(A, b[, x0, z0, W, weights, …])</p></td>
 <td><p>Wrapper method to solve a variety of l1 minimization problems using ADMM</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_bp.html#cr.sparse.cvx.adm.yall1.solve_bp" title="cr.sparse.cvx.adm.yall1.solve_bp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_bp</span></code></a>(A, b, x0, z0, w, nonneg, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_bp.html#cr.sparse.cvx.adm.yall1.solve_bp" title="cr.sparse.cvx.adm.yall1.solve_bp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_bp</span></code></a>(A, b, x0, z0, w, nonneg, …)</p></td>
 <td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1 \, \text{s.t.}\, A x = b\)</span> using ADMM</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_bp_jit.html#cr.sparse.cvx.adm.yall1.solve_bp_jit" title="cr.sparse.cvx.adm.yall1.solve_bp_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_bp_jit</span></code></a>(A, b, x0, z0, w, nonneg, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_bp_jit.html#cr.sparse.cvx.adm.yall1.solve_bp_jit" title="cr.sparse.cvx.adm.yall1.solve_bp_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_bp_jit</span></code></a>(A, b, x0, z0, w, nonneg, …)</p></td>
 <td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1 \, \text{s.t.}\, A x = b\)</span> using ADMM</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2.html#cr.sparse.cvx.adm.yall1.solve_l1_l2" title="cr.sparse.cvx.adm.yall1.solve_l1_l2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_l1_l2</span></code></a>(A, b, x0, z0, w, nonneg, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2.html#cr.sparse.cvx.adm.yall1.solve_l1_l2" title="cr.sparse.cvx.adm.yall1.solve_l1_l2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_l1_l2</span></code></a>(A, b, x0, z0, w, nonneg, …)</p></td>
 <td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1  + \frac{1}{2 \rho} \| A x - b \|_2^2\)</span> using ADMM</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2_jit.html#cr.sparse.cvx.adm.yall1.solve_l1_l2_jit" title="cr.sparse.cvx.adm.yall1.solve_l1_l2_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_l1_l2_jit</span></code></a>(A, b, x0, z0, w, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2_jit.html#cr.sparse.cvx.adm.yall1.solve_l1_l2_jit" title="cr.sparse.cvx.adm.yall1.solve_l1_l2_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_l1_l2_jit</span></code></a>(A, b, x0, z0, w, …)</p></td>
 <td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1  + \frac{1}{2 \rho} \| A x - b \|_2^2\)</span> using ADMM</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2con.html#cr.sparse.cvx.adm.yall1.solve_l1_l2con" title="cr.sparse.cvx.adm.yall1.solve_l1_l2con"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_l1_l2con</span></code></a>(A, b, x0, z0, w, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2con.html#cr.sparse.cvx.adm.yall1.solve_l1_l2con" title="cr.sparse.cvx.adm.yall1.solve_l1_l2con"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_l1_l2con</span></code></a>(A, b, x0, z0, w, …)</p></td>
 <td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1  \text{s.t.} \| A x - b \|_2 \leq \delta\)</span> using ADMM</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit.html#cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit" title="cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_l1_l2con_jit</span></code></a>(A, b, x0, z0, w, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit.html#cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit" title="cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_l1_l2con_jit</span></code></a>(A, b, x0, z0, w, …)</p></td>
 <td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1  \text{s.t.} \| A x - b \|_2 \leq \delta\)</span> using ADMM</p></td>
 </tr>
 </tbody>
@@ -231,13 +231,13 @@ specific types of problems.</p>
 <section id="focal-underdetermined-system-solver-focuss">
 <h2><a class="toc-backref" href="#id7">FOcal Underdetermined System Solver (FOCUSS)</a><a class="headerlink" href="#focal-underdetermined-system-solver-focuss" title="Permalink to this headline">¶</a></h2>
 <p>This is based on <span id="id2">[<a class="reference internal" href="../zzzreference.html#id121" title="Michael Elad. Sparse and redundant representations. Springer, 2010.">Ela10</a>]</span> (section 3.2.1).</p>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.focuss.matrix_solve_noiseless.html#cr.sparse.cvx.focuss.matrix_solve_noiseless" title="cr.sparse.cvx.focuss.matrix_solve_noiseless"><code class="xref py py-obj docutils literal notranslate"><span class="pre">focuss.matrix_solve_noiseless</span></code></a>(Phi, y[, p, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.focuss.matrix_solve_noiseless.html#cr.sparse.cvx.focuss.matrix_solve_noiseless" title="cr.sparse.cvx.focuss.matrix_solve_noiseless"><code class="xref py py-obj docutils literal notranslate"><span class="pre">focuss.matrix_solve_noiseless</span></code></a>(Phi, y[, p, …])</p></td>
 <td><p>Solves the sparse recovery problem using FOCUSS.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.focuss.step_noiseless.html#cr.sparse.cvx.focuss.step_noiseless" title="cr.sparse.cvx.focuss.step_noiseless"><code class="xref py py-obj docutils literal notranslate"><span class="pre">focuss.step_noiseless</span></code></a>(Phi, y, x[, p])</p></td>
@@ -260,7 +260,7 @@ the algorithm in <span id="id4">[<a class="reference internal" href="../zzzrefer
 A NumPy based Python port is also available
 <a class="reference external" href="https://pypi.org/project/spgl1/">here</a>.
 We have implemented the algorithm with JAX.</p>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -278,7 +278,7 @@ We have implemented the algorithm with JAX.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.spgl1.solve_bpic_from.html#cr.sparse.cvx.spgl1.solve_bpic_from" title="cr.sparse.cvx.spgl1.solve_bpic_from"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spgl1.solve_bpic_from</span></code></a>(A, b, sigma, x0[, options])</p></td>
 <td><p>Solves the BPIC problem using SPGL1 algorithm with an initial solution</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.spgl1.solve_bpic_from_jit.html#cr.sparse.cvx.spgl1.solve_bpic_from_jit" title="cr.sparse.cvx.spgl1.solve_bpic_from_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spgl1.solve_bpic_from_jit</span></code></a>(A, b, sigma, x0[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.spgl1.solve_bpic_from_jit.html#cr.sparse.cvx.spgl1.solve_bpic_from_jit" title="cr.sparse.cvx.spgl1.solve_bpic_from_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spgl1.solve_bpic_from_jit</span></code></a>(A, b, sigma, x0[, …])</p></td>
 <td><p>Solves the BPIC problem using SPGL1 algorithm with an initial solution</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.spgl1.solve_bpic.html#cr.sparse.cvx.spgl1.solve_bpic" title="cr.sparse.cvx.spgl1.solve_bpic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spgl1.solve_bpic</span></code></a>(A, b, sigma[, options])</p></td>
@@ -296,19 +296,19 @@ We have implemented the algorithm with JAX.</p>
 </tbody>
 </table>
 <p class="rubric">Associated data types</p>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.spgl1.SPGL1Options.html#cr.sparse.cvx.spgl1.SPGL1Options" title="cr.sparse.cvx.spgl1.SPGL1Options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spgl1.SPGL1Options</span></code></a>([bp_tol, ls_tol, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.spgl1.SPGL1Options.html#cr.sparse.cvx.spgl1.SPGL1Options" title="cr.sparse.cvx.spgl1.SPGL1Options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spgl1.SPGL1Options</span></code></a>(bp_tol, ls_tol, opt_tol, …)</p></td>
 <td><p>Options for the SPGL1 algorithm</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.spgl1.SPGL1LassoState.html#cr.sparse.cvx.spgl1.SPGL1LassoState" title="cr.sparse.cvx.spgl1.SPGL1LassoState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spgl1.SPGL1LassoState</span></code></a>(x, g, r, f_past, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.spgl1.SPGL1LassoState.html#cr.sparse.cvx.spgl1.SPGL1LassoState" title="cr.sparse.cvx.spgl1.SPGL1LassoState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spgl1.SPGL1LassoState</span></code></a>(x, g, r, f_past, …)</p></td>
 <td><p>Solution state of the SPGL1 algorithm for LASSO problem</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.spgl1.SPGL1BPState.html#cr.sparse.cvx.spgl1.SPGL1BPState" title="cr.sparse.cvx.spgl1.SPGL1BPState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spgl1.SPGL1BPState</span></code></a>(x, g, r, f_past, tau, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.spgl1.SPGL1BPState.html#cr.sparse.cvx.spgl1.SPGL1BPState" title="cr.sparse.cvx.spgl1.SPGL1BPState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spgl1.SPGL1BPState</span></code></a>(x, g, r, f_past, tau, …)</p></td>
 <td><p>Solution state of the SPGL1 algorithm for BPIC problem</p></td>
 </tr>
 </tbody>
@@ -341,7 +341,7 @@ We have implemented the algorithm with JAX.</p>
       &copy;2021, CR-Suite Development Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

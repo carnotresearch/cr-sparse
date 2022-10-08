@@ -5,18 +5,18 @@
 
 Computation times
 =================
-**00:31.926** total execution time for **gallery_0200_cs** files:
+**00:46.717** total execution time for **gallery_0200_cs** files:
 
 +---------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_0200_cs_bsbl_1.py` (``bsbl_1.py``)                             | 00:11.734 | 0.0 MB |
+| :ref:`sphx_glr_gallery_0200_cs_sparse_binary_sensor.py` (``sparse_binary_sensor.py``) | 00:17.367 | 0.0 MB |
 +---------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_0200_cs_sparse_binary_sensor.py` (``sparse_binary_sensor.py``) | 00:10.532 | 0.0 MB |
+| :ref:`sphx_glr_gallery_0200_cs_bsbl_1.py` (``bsbl_1.py``)                             | 00:16.122 | 0.0 MB |
 +---------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_0200_cs_ecg_cs_bsbl.py` (``ecg_cs_bsbl.py``)                   | 00:03.625 | 0.0 MB |
+| :ref:`sphx_glr_gallery_0200_cs_ecg_cs_bsbl.py` (``ecg_cs_bsbl.py``)                   | 00:05.211 | 0.0 MB |
 +---------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_0200_cs_cosamp_step_by_step.py` (``cosamp_step_by_step.py``)   | 00:03.183 | 0.0 MB |
+| :ref:`sphx_glr_gallery_0200_cs_cosamp_step_by_step.py` (``cosamp_step_by_step.py``)   | 00:04.244 | 0.0 MB |
 +---------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_0200_cs_matching_pursuit.py` (``matching_pursuit.py``)         | 00:01.522 | 0.0 MB |
+| :ref:`sphx_glr_gallery_0200_cs_matching_pursuit.py` (``matching_pursuit.py``)         | 00:01.922 | 0.0 MB |
 +---------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_0200_cs_cs1bit_biht.py` (``cs1bit_biht.py``)                   | 00:01.330 | 0.0 MB |
+| :ref:`sphx_glr_gallery_0200_cs_cs1bit_biht.py` (``cs1bit_biht.py``)                   | 00:01.851 | 0.0 MB |
 +---------------------------------------------------------------------------------------+-----------+--------+

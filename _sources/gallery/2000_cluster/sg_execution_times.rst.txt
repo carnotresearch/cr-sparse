@@ -5,10 +5,10 @@
 
 Computation times
 =================
-**00:06.039** total execution time for **gallery_2000_cluster** files:
+**00:08.183** total execution time for **gallery_2000_cluster** files:
 
 +------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_2000_cluster_ssc_omp.py` (``ssc_omp.py``) | 00:04.689 | 0.0 MB |
+| :ref:`sphx_glr_gallery_2000_cluster_ssc_omp.py` (``ssc_omp.py``) | 00:06.315 | 0.0 MB |
 +------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_2000_cluster_kmeans.py` (``kmeans.py``)   | 00:01.350 | 0.0 MB |
+| :ref:`sphx_glr_gallery_2000_cluster_kmeans.py` (``kmeans.py``)   | 00:01.868 | 0.0 MB |
 +------------------------------------------------------------------+-----------+--------+

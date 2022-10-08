@@ -58,7 +58,7 @@
 
 
 <h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
@@ -102,7 +102,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -128,7 +128,7 @@
 <h1>Sparse Subspace Clustering<a class="headerlink" href="#sparse-subspace-clustering" title="Permalink to this headline">¶</a></h1>
 <section id="ssc-omp">
 <h2>SSC-OMP<a class="headerlink" href="#ssc-omp" title="Permalink to this headline">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -143,13 +143,13 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.batch_build_representation_omp.html#cr.sparse.cluster.ssc.batch_build_representation_omp" title="cr.sparse.cluster.ssc.batch_build_representation_omp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">batch_build_representation_omp</span></code></a>(X, K, batch_size)</p></td>
 <td><p>Builds K-sparse self-expressive representations of vectors in X in terms of other vectors in X</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.batch_build_representation_omp_jit.html#cr.sparse.cluster.ssc.batch_build_representation_omp_jit" title="cr.sparse.cluster.ssc.batch_build_representation_omp_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">batch_build_representation_omp_jit</span></code></a>(X, K, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.batch_build_representation_omp_jit.html#cr.sparse.cluster.ssc.batch_build_representation_omp_jit" title="cr.sparse.cluster.ssc.batch_build_representation_omp_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">batch_build_representation_omp_jit</span></code></a>(X, K, …)</p></td>
 <td><p>Builds K-sparse self-expressive representations of vectors in X in terms of other vectors in X</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Utility functions</p>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -159,7 +159,7 @@
 <td><p>Combines values and indices arrays to sparse representations</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.sparse_to_bcoo.html#cr.sparse.cluster.ssc.sparse_to_bcoo" title="cr.sparse.cluster.ssc.sparse_to_bcoo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_to_bcoo</span></code></a>(X, I)</p></td>
-<td><p>&quot;Combines values and indices arrays to a BCOO formatted sparse matrix</p></td>
+<td><p>“Combines values and indices arrays to a BCOO formatted sparse matrix</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.bcoo_to_sparse.html#cr.sparse.cluster.ssc.bcoo_to_sparse" title="cr.sparse.cluster.ssc.bcoo_to_sparse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bcoo_to_sparse</span></code></a>(C, k)</p></td>
 <td><p>Converts it back to values and indices (column-wise) format</p></td>
@@ -175,7 +175,7 @@
 </section>
 <section id="metrics-for-quality-of-sparse-subspace-clustering">
 <h2>Metrics for quality of sparse subspace clustering<a class="headerlink" href="#metrics-for-quality-of-sparse-subspace-clustering" title="Permalink to this headline">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -190,7 +190,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.sparse_subspace_preservation_stats.html#cr.sparse.cluster.ssc.sparse_subspace_preservation_stats" title="cr.sparse.cluster.ssc.sparse_subspace_preservation_stats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_subspace_preservation_stats</span></code></a>(Z, I, labels)</p></td>
 <td><p>Returns the statistics for subspace preservation from sparse representations</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.sparse_subspace_preservation_stats_jit.html#cr.sparse.cluster.ssc.sparse_subspace_preservation_stats_jit" title="cr.sparse.cluster.ssc.sparse_subspace_preservation_stats_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_subspace_preservation_stats_jit</span></code></a>(Z, I, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.sparse_subspace_preservation_stats_jit.html#cr.sparse.cluster.ssc.sparse_subspace_preservation_stats_jit" title="cr.sparse.cluster.ssc.sparse_subspace_preservation_stats_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparse_subspace_preservation_stats_jit</span></code></a>(Z, I, …)</p></td>
 <td><p>Returns the statistics for subspace preservation from sparse representations</p></td>
 </tr>
 </tbody>
@@ -198,7 +198,7 @@
 </section>
 <section id="tools-for-analyzing-data-with-ground-truth">
 <h2>Tools for analyzing data (with ground truth)<a class="headerlink" href="#tools-for-analyzing-data-with-ground-truth" title="Permalink to this headline">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
+<table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
@@ -213,10 +213,10 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.min_angles_outside_cluster.html#cr.sparse.cluster.ssc.min_angles_outside_cluster" title="cr.sparse.cluster.ssc.min_angles_outside_cluster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">min_angles_outside_cluster</span></code></a>(angles, cluster_sizes)</p></td>
 <td><p>Returns the minimum angles for each point with its neighbors from all other clusters</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.nearest_neighbors_inside_cluster.html#cr.sparse.cluster.ssc.nearest_neighbors_inside_cluster" title="cr.sparse.cluster.ssc.nearest_neighbors_inside_cluster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nearest_neighbors_inside_cluster</span></code></a>(angles, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.nearest_neighbors_inside_cluster.html#cr.sparse.cluster.ssc.nearest_neighbors_inside_cluster" title="cr.sparse.cluster.ssc.nearest_neighbors_inside_cluster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nearest_neighbors_inside_cluster</span></code></a>(angles, …)</p></td>
 <td><p>Returns the index of the nearest neighbor for each point inside the cluster</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.nearest_neighbors_outside_cluster.html#cr.sparse.cluster.ssc.nearest_neighbors_outside_cluster" title="cr.sparse.cluster.ssc.nearest_neighbors_outside_cluster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nearest_neighbors_outside_cluster</span></code></a>(angles, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.nearest_neighbors_outside_cluster.html#cr.sparse.cluster.ssc.nearest_neighbors_outside_cluster" title="cr.sparse.cluster.ssc.nearest_neighbors_outside_cluster"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nearest_neighbors_outside_cluster</span></code></a>(angles, …)</p></td>
 <td><p>Returns index of the nearest neighbor for each point with its neighbors from all other clusters</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cluster.ssc.sorted_neighbors.html#cr.sparse.cluster.ssc.sorted_neighbors" title="cr.sparse.cluster.ssc.sorted_neighbors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sorted_neighbors</span></code></a>(angles)</p></td>
@@ -247,7 +247,7 @@
       &copy;2021, CR-Suite Development Team.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

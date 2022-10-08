@@ -5,12 +5,12 @@
 
 Computation times
 =================
-**00:12.322** total execution time for **gallery_0300_cvx** files:
+**00:18.187** total execution time for **gallery_0300_cvx** files:
 
 +------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_0300_cvx_spikes_l1ls.py` (``spikes_l1ls.py``)                                       | 00:05.670 | 0.0 MB |
+| :ref:`sphx_glr_gallery_0300_cvx_spikes_l1ls.py` (``spikes_l1ls.py``)                                       | 00:08.222 | 0.0 MB |
 +------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_0300_cvx_partial_wh_sensor_cosine_basis.py` (``partial_wh_sensor_cosine_basis.py``) | 00:03.848 | 0.0 MB |
+| :ref:`sphx_glr_gallery_0300_cvx_partial_wh_sensor_cosine_basis.py` (``partial_wh_sensor_cosine_basis.py``) | 00:05.618 | 0.0 MB |
 +------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_0300_cvx_focuss_1.py` (``focuss_1.py``)                                             | 00:02.805 | 0.0 MB |
+| :ref:`sphx_glr_gallery_0300_cvx_focuss_1.py` (``focuss_1.py``)                                             | 00:04.348 | 0.0 MB |
 +------------------------------------------------------------------------------------------------------------+-----------+--------+

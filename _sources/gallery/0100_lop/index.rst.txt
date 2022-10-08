@@ -1,0 +1,115 @@
+
+
+.. _sphx_glr_gallery_0100_lop:
+
+.. _lop_gallery:
+
+Linear Operators
+-----------------------------------------------
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to construct a linear operator from an ordinary matrix.">
+
+.. only:: html
+
+  .. image:: /gallery/0100_lop/images/thumb/sphx_glr_matrix_operator_thumb.png
+    :alt: A matrix backed linear operator
+
+  :ref:`sphx_glr_gallery_0100_lop_matrix_operator.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">A matrix backed linear operator</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Compressive Sensing Operators">
+
+.. only:: html
+
+  .. image:: /gallery/0100_lop/images/thumb/sphx_glr_cs_operators_thumb.png
+    :alt: Compressive Sensing Operators
+
+  :ref:`sphx_glr_gallery_0100_lop_cs_operators.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Compressive Sensing Operators</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates following features:">
+
+.. only:: html
+
+  .. image:: /gallery/0100_lop/images/thumb/sphx_glr_deconvolution_thumb.png
+    :alt: Deconvolution
+
+  :ref:`sphx_glr_gallery_0100_lop_deconvolution.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Deconvolution</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates following features:">
+
+.. only:: html
+
+  .. image:: /gallery/0100_lop/images/thumb/sphx_glr_deblurring_thumb.png
+    :alt: Image Deblurring
+
+  :ref:`sphx_glr_gallery_0100_lop_deblurring.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Image Deblurring</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates following features:">
+
+.. only:: html
+
+  .. image:: /gallery/0100_lop/images/thumb/sphx_glr_wt_op_thumb.png
+    :alt: Wavelet Transform Operators
+
+  :ref:`sphx_glr_gallery_0100_lop_wt_op.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Wavelet Transform Operators</div>
+    </div>
+
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /gallery/0100_lop/matrix_operator
+   /gallery/0100_lop/cs_operators
+   /gallery/0100_lop/deconvolution
+   /gallery/0100_lop/deblurring
+   /gallery/0100_lop/wt_op
+
