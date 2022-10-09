@@ -62,6 +62,7 @@ Basic Matching Pursuit Based Algorithms
   :toctree: _autosummary
 
     omp.solve
+    omp.operator_solve
     omp.matrix_solve
     omp.matrix_solve_jit
     omp.matrix_solve_multi

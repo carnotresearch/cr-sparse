@@ -23,4 +23,5 @@ from cr.sparse._src.pursuit.omp import (
     matrix_solve,
     matrix_solve_jit,
     matrix_solve_multi,
+    operator_solve,
 )
