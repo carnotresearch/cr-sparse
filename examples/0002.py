@@ -51,6 +51,7 @@ config.update("jax_enable_x64", True)
 
 import jax.numpy as jnp
 import cr.nimble as crn
+import cr.sparse as crs
 import cr.sparse.plots as crplot
 
 
@@ -155,8 +156,15 @@ ax[1].plot(b)
 # ---------------------------------------------------------------
 import cr.sparse.cvx.spgl1 as crspgl1
 options = crspgl1.SPGL1Options()
-sol = crspgl1.solve_bp_jit(A, b0, options=options)
+tracker = crs.ProgressTracker(x0=x0)
+sol = crspgl1.solve_bp_jit(A, b0, options=options, tracker=tracker)
+# %% 
+# Let's analyze the solution quality
 problems.analyze_solution(prob, sol)
+
+# %% 
+# Let's plot the progress of SPGL1 over different iterations
+tracker.plot_progress()
 
 # %% 
 # The estimated sparse representation

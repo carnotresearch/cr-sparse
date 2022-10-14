@@ -29,9 +29,11 @@ import math
 from typing import NamedTuple, Callable
 
 from numpy import array_str
+import jax
 from jax import lax, jit, device_get
 import jax.numpy as jnp
 
+import cr.sparse as crs
 import cr.nimble as crn
 norm = crn.arr_l2norm
 
@@ -312,7 +314,8 @@ def solve_lasso_from(A,
     b: jnp.ndarray, 
     tau: float, 
     x0: jnp.ndarray,
-    options: SPGL1Options = SPGL1Options()):
+    options: SPGL1Options = SPGL1Options(),
+    tracker=crs.noop_tracker):
     """Solves the LASSO problem using SPGL1 algorithm with an initial solution
     """
     # shape of the linear operator
@@ -385,6 +388,7 @@ def solve_lasso_from(A,
             n_ls_iters=state.n_ls_iters + lsearch.n_iters)
 
     def cond_func(state):
+        jax.debug.callback(tracker, state)
         # print(state)
         a = state.iterations < options.max_iters
         b = state.r_gap > opt_tol
@@ -403,14 +407,15 @@ def solve_lasso_from(A,
 def solve_lasso(A,
     b: jnp.ndarray, 
     tau: float, 
-    options: SPGL1Options = SPGL1Options()):
+    options: SPGL1Options = SPGL1Options(),
+    tracker=crs.noop_tracker):
     """Solves the LASSO problem using SPGL1 algorithm
     """
     m, n = A.shape
     x0 = jnp.zeros(n)
-    return solve_lasso_from(A, b, tau, x0, options)
+    return solve_lasso_from(A, b, tau, x0, options=options, tracker=tracker)
 
-solve_lasso_jit = jit(solve_lasso, static_argnames=("A", ))
+solve_lasso_jit = jit(solve_lasso, static_argnames=("A", "tracker"))
 
 
 def analyze_lasso_state(A, b, tau, options, state, x0):
@@ -557,7 +562,8 @@ def solve_bpic_from(A,
     b: jnp.ndarray, 
     sigma: float, 
     x0: jnp.ndarray,
-    options: SPGL1Options = SPGL1Options()):
+    options: SPGL1Options = SPGL1Options(),
+    tracker=crs.noop_tracker):
     """Solves the BPIC problem using SPGL1 algorithm with an initial solution
     """
     # shape of the linear operator
@@ -677,6 +683,7 @@ def solve_bpic_from(A,
 
     @jit
     def cond_func(state):
+        jax.debug.callback(tracker, state)
         # if a and b are true then we continue. Otherwise we check more conditions
         a = state.r_gap > jnp.maximum(opt_tol, state.r_f_error)
         b = state.r_res_error > opt_tol
@@ -703,19 +710,20 @@ def solve_bpic_from(A,
     # print(state)
     return state
 
-solve_bpic_from_jit = jit(solve_bpic_from, static_argnames=("A", "options"))
+solve_bpic_from_jit = jit(solve_bpic_from, static_argnames=("A", "options", "tracker"))
 
 def solve_bpic(A,
     b: jnp.ndarray, 
     sigma: float, 
-    options: SPGL1Options = SPGL1Options()):
+    options: SPGL1Options = SPGL1Options(),
+    tracker=crs.noop_tracker):
     """Solves the BPIC problem using SPGL1 algorithm
     """
     m, n = A.shape
     x0 = jnp.zeros(n, dtype=b.dtype)
-    return solve_bpic_from(A, b, sigma, x0, options)
+    return solve_bpic_from(A, b, sigma, x0, options=options, tracker=tracker)
 
-solve_bpic_jit = jit(solve_bpic, static_argnames=("A", "options"))
+solve_bpic_jit = jit(solve_bpic, static_argnames=("A", "options", "tracker"))
 
 
 def analyze_bpic_state(A, b, sigma, options, state, x0):
@@ -755,7 +763,8 @@ def analyze_bpic_state(A, b, sigma, options, state, x0):
 
 def solve_bp(A,
     b: jnp.ndarray, 
-    options: SPGL1Options = SPGL1Options()):
+    options: SPGL1Options = SPGL1Options(),
+    tracker=crs.noop_tracker):
     """Solves the Basis Pursuit problem using SPGL1 algorithm
 
     Examples:
@@ -767,6 +776,6 @@ def solve_bp(A,
     dtype = jnp.complex128 if not A.real else b.dtype
     x0 = jnp.zeros(n, dtype=dtype)
     sigma = 0.
-    return solve_bpic_from(A, b, sigma, x0, options)
+    return solve_bpic_from(A, b, sigma, x0, options=options, tracker=tracker)
 
-solve_bp_jit = jit(solve_bp, static_argnames=("A", "options"))
+solve_bp_jit = jit(solve_bp, static_argnames=("A", "options", "tracker"))
