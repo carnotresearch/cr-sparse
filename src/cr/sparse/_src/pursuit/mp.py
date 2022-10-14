@@ -13,10 +13,12 @@
 # limitations under the License.
 
 import math
+import jax
 from jax import lax
 from typing import NamedTuple, List, Dict
 import jax.numpy as jnp
 from jax.numpy.linalg import norm
+import cr.sparse as crs
 import cr.nimble as cnb
 import cr.nimble.dsp as crdsp
 
@@ -60,7 +62,7 @@ class MPState(NamedTuple):
         return u'\n'.join(s)
 
 
-def solve(Phi, y, max_iters=100, res_norm_rtol=1e-4):
+def solve(Phi, y, max_iters=100, res_norm_rtol=1e-4, tracker=crs.noop_tracker):
     r"""Solves the sparse recovery problem :math:`y = \Phi x + e`
     using matching pursuit algorithm
 
@@ -121,6 +123,7 @@ def solve(Phi, y, max_iters=100, res_norm_rtol=1e-4):
             iterations=state.iterations+1)
 
     def cond_func(state):
+        jax.debug.callback(tracker, state)
         # limit on residual norm 
         a = state.r_norm_sqr > max_r_norm_sqr
         # limit on number of iterations
@@ -135,7 +138,7 @@ def solve(Phi, y, max_iters=100, res_norm_rtol=1e-4):
     return state
 
 
-def matrix_solve(Phi, y, max_iters=100, res_norm_rtol=1e-4):
+def matrix_solve(Phi, y, max_iters=100, res_norm_rtol=1e-4, tracker=crs.noop_tracker):
     r"""Solves the sparse recovery problem :math:`y = \Phi x + e`
     using matching pursuit algorithm
 
@@ -196,6 +199,7 @@ def matrix_solve(Phi, y, max_iters=100, res_norm_rtol=1e-4):
             iterations=state.iterations+1)
 
     def cond_func(state):
+        jax.debug.callback(tracker, state)
         # limit on residual norm 
         a = state.r_norm_sqr > max_r_norm_sqr
         # limit on number of iterations
