@@ -37,3 +37,12 @@ from cr.sparse._src.tools.performance import (
 from cr.sparse._src.tools.trials_at_fixed_m_n import (
     RecoveryTrialsAtFixed_M_N
 )
+
+# Algorithm tracking
+
+from cr.sparse._src.tracker import (
+    noop_tracker,
+    norm_tracker,
+    print_tracker,
+    ProgressTracker,
+)
