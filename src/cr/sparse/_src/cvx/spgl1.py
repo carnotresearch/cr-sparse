@@ -388,13 +388,13 @@ def solve_lasso_from(A,
             n_ls_iters=state.n_ls_iters + lsearch.n_iters)
 
     def cond_func(state):
-        jax.debug.callback(tracker, state)
         # print(state)
         a = state.iterations < options.max_iters
         b = state.r_gap > opt_tol
         c = state.r_norm >= opt_tol * b_norm
         a = jnp.logical_and(a, b)
         a = jnp.logical_and(a, c)
+        jax.debug.callback(tracker, state, more=a)
         return a
 
     state = init()
@@ -683,7 +683,6 @@ def solve_bpic_from(A,
 
     @jit
     def cond_func(state):
-        jax.debug.callback(tracker, state)
         # if a and b are true then we continue. Otherwise we check more conditions
         a = state.r_gap > jnp.maximum(opt_tol, state.r_f_error)
         b = state.r_res_error > opt_tol
@@ -700,6 +699,7 @@ def solve_bpic_from(A,
         # check on maximum number of matrix vector products
         f = state.n_times + state.n_trans < options.max_matvec
         cont = jnp.logical_and(cont, f)
+        jax.debug.callback(tracker, state, more=cont)
         return cont
 
     state = init()

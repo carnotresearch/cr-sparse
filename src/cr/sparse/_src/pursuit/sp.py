@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+import jax
 import jax.numpy as jnp
 from jax import vmap, jit, lax
 
@@ -20,6 +21,7 @@ from jax import vmap, jit, lax
 from .defs import RecoverySolution, SPState
 
 from cr.nimble.dsp import largest_indices
+import cr.sparse as crs
 
 
 
@@ -96,7 +98,8 @@ def matrix_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
 matrix_solve_jit = jit(matrix_solve, static_argnums=(2), static_argnames=("max_iters", "res_norm_rtol"))
 
 
-def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
+def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4,
+    tracker=crs.noop_tracker):
     r"""Solves the sparse recovery problem :math:`y = \Phi x + e` using Subspace Pursuit for linear operators
 
     Examples:
@@ -195,6 +198,7 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
         # consider support change only after some iterations
         d = jnp.logical_or(state.iterations < min_iters, d)
         c = jnp.logical_and(c, d)
+        jax.debug.callback(tracker, state, more=c)
         return c
 
     state = lax.while_loop(cond, body, init())
@@ -205,6 +209,6 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
     return RecoverySolution(x_I=x_I, I=state.I, r=r, r_norm_sqr=r_norm_sqr,
         iterations=state.iterations, length=Phi.shape[1])
 
-operator_solve_jit = jit(operator_solve, static_argnames=("Phi", "K"))
+operator_solve_jit = jit(operator_solve, static_argnames=("Phi", "K", "tracker"))
 
 solve = operator_solve_jit

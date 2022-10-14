@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+import jax
 import jax.numpy as jnp
 from jax import vmap, jit, lax
 
@@ -20,6 +21,7 @@ from jax import vmap, jit, lax
 from .defs import RecoverySolution, CoSaMPState
 
 from .util import largest_indices
+import cr.sparse as crs
 
 EXTRA_FACTOR = 2
 
@@ -121,7 +123,8 @@ def matrix_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
 
 matrix_solve_jit = jit(matrix_solve, static_argnums=(2,), static_argnames=("max_iters", "res_norm_rtol"))
 
-def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
+def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4,
+    tracker=crs.noop_tracker):
     r"""Solves the sparse recovery problem :math:`y = \Phi x + e` using Compressive Sampling Matching Pursuit for linear operators
 
     Examples:
@@ -232,6 +235,7 @@ def operator_solve(Phi, y, K, max_iters=None, res_norm_rtol=1e-4):
         # e = state.r_norm_sqr < 0.9 * state.r_norm_sqr_prev
         # c = jnp.logical_and(c, e)
         # overall condition
+        jax.debug.callback(tracker, state, more=c)
         return c
 
     state = init()

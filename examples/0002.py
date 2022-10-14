@@ -164,7 +164,8 @@ problems.analyze_solution(prob, sol)
 
 # %% 
 # Let's plot the progress of SPGL1 over different iterations
-tracker.plot_progress()
+ax = crplot.one_plot(height=6)
+tracker.plot_progress(ax)
 
 # %% 
 # The estimated sparse representation
