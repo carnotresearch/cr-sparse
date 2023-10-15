@@ -21,7 +21,7 @@ Data Clustering
 .. only:: html
 
   .. image:: /gallery/2000_cluster/images/thumb/sphx_glr_kmeans_thumb.png
-    :alt: K-means Clustering
+    :alt:
 
   :ref:`sphx_glr_gallery_2000_cluster_kmeans.py`
 
@@ -38,7 +38,7 @@ Data Clustering
 .. only:: html
 
   .. image:: /gallery/2000_cluster/images/thumb/sphx_glr_ssc_omp_thumb.png
-    :alt: Sparse Subspace Clustering - OMP
+    :alt:
 
   :ref:`sphx_glr_gallery_2000_cluster_ssc_omp.py`
 

@@ -22,7 +22,7 @@ Convex Relaxation Techniques
 .. only:: html
 
   .. image:: /gallery/0300_cvx/images/thumb/sphx_glr_focuss_1_thumb.png
-    :alt: FOcal Underdetermined System Solver (FOCUSS)
+    :alt:
 
   :ref:`sphx_glr_gallery_0300_cvx_focuss_1.py`
 
@@ -39,7 +39,7 @@ Convex Relaxation Techniques
 .. only:: html
 
   .. image:: /gallery/0300_cvx/images/thumb/sphx_glr_partial_wh_sensor_cosine_basis_thumb.png
-    :alt: Random Orthogonal Measurements, Cosine Basis, ADMM
+    :alt:
 
   :ref:`sphx_glr_gallery_0300_cvx_partial_wh_sensor_cosine_basis.py`
 
@@ -56,7 +56,7 @@ Convex Relaxation Techniques
 .. only:: html
 
   .. image:: /gallery/0300_cvx/images/thumb/sphx_glr_spikes_l1ls_thumb.png
-    :alt: Recovering spikes via TNIPM
+    :alt:
 
   :ref:`sphx_glr_gallery_0300_cvx_spikes_l1ls.py`
 

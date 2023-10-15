@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -125,7 +125,7 @@
 <span class="kn">from</span> <span class="nn">cr.nimble</span> <span class="kn">import</span> <span class="n">norms_l2_cw</span>
 
 <div class="viewcode-block" id="project_to_ball"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.opt.project_to_ball.html#cr.sparse.opt.project_to_ball">[docs]</a><span class="k">def</span> <span class="nf">project_to_ball</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Projects a vector to the :math:`\\ell_2` ball of a specified radius.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Projects a vector to the :math:`\\ell_2` ball of a specified radius.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x_norm</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">factor</span> <span class="o">=</span> <span class="n">radius</span> <span class="o">/</span> <span class="n">x_norm</span>
@@ -133,7 +133,7 @@
 
 
 <div class="viewcode-block" id="project_to_box"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.opt.project_to_box.html#cr.sparse.opt.project_to_box">[docs]</a><span class="k">def</span> <span class="nf">project_to_box</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Projects a vector to the box (:math:`\\ell_{\\infty}` ball) of a specified radius.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Projects a vector to the box (:math:`\\ell_{\\infty}` ball) of a specified radius.</span>
 <span class="sd">     &quot;&quot;&quot;</span>
     <span class="n">abs_x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">factors</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">abs_x</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
@@ -142,7 +142,7 @@
 
 
 <div class="viewcode-block" id="project_to_real_upper_limit"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.opt.project_to_real_upper_limit.html#cr.sparse.opt.project_to_real_upper_limit">[docs]</a><span class="k">def</span> <span class="nf">project_to_real_upper_limit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Projects a (possibly complex) vector to its real part with an upper limit on each entry.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Projects a (possibly complex) vector to its real part with an upper limit on each entry.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">limit</span><span class="p">)</span></div>
 </pre></div>
@@ -158,7 +158,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

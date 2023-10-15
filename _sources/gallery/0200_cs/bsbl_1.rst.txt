@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_0200_cs_bsbl_1.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_0200_cs_bsbl_1.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -297,7 +297,7 @@ Sensing matrix
  .. code-block:: none
 
 
-    <matplotlib.image.AxesImage object at 0x7fc05c380160>
+    <matplotlib.image.AxesImage object at 0x7fc2f2bfe760>
 
 
 
@@ -568,7 +568,7 @@ Build the sensing matrix
  .. code-block:: none
 
 
-    <matplotlib.image.AxesImage object at 0x7fc047ade400>
+    <matplotlib.image.AxesImage object at 0x7fc2f0b3dee0>
 
 
 
@@ -623,7 +623,7 @@ Reconstruction using BSBL EM
     r_norm=2.12e-10
     x_norm=2.45e+00
     lambda=1.00e-12
-    dmu=1.14e-10
+    dmu=1.15e-10
 
 
 
@@ -736,7 +736,7 @@ Reconstructed signal
 
  .. code-block:: none
 
-    BSBL-BO: PRD: 0.0 %, SNR: 200.74 dB.
+    BSBL-BO: PRD: 0.0 %, SNR: 200.75 dB.
 
 
 
@@ -949,7 +949,7 @@ Plot the noiseless and noisy measurements
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc05cfb5fa0>]
+    [<matplotlib.lines.Line2D object at 0x7fc2f0750940>]
 
 
 
@@ -1212,7 +1212,7 @@ Observations:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  16.122 seconds)
+   **Total running time of the script:** (0 minutes 14.323 seconds)
 
 
 .. _sphx_glr_download_gallery_0200_cs_bsbl_1.py:
@@ -1220,6 +1220,8 @@ Observations:
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

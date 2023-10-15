@@ -21,7 +21,7 @@ Compressive Sensing
 .. only:: html
 
   .. image:: /gallery/0200_cs/images/thumb/sphx_glr_cs1bit_biht_thumb.png
-    :alt: 1 bit Compressive Sensing
+    :alt:
 
   :ref:`sphx_glr_gallery_0200_cs_cs1bit_biht.py`
 
@@ -38,7 +38,7 @@ Compressive Sensing
 .. only:: html
 
   .. image:: /gallery/0200_cs/images/thumb/sphx_glr_bsbl_1_thumb.png
-    :alt: Block Sparse Bayesian Learning
+    :alt:
 
   :ref:`sphx_glr_gallery_0200_cs_bsbl_1.py`
 
@@ -55,7 +55,7 @@ Compressive Sensing
 .. only:: html
 
   .. image:: /gallery/0200_cs/images/thumb/sphx_glr_cosamp_step_by_step_thumb.png
-    :alt: CoSaMP step by step
+    :alt:
 
   :ref:`sphx_glr_gallery_0200_cs_cosamp_step_by_step.py`
 
@@ -72,7 +72,7 @@ Compressive Sensing
 .. only:: html
 
   .. image:: /gallery/0200_cs/images/thumb/sphx_glr_ecg_cs_bsbl_thumb.png
-    :alt: ECG Data Compressive Sensing
+    :alt:
 
   :ref:`sphx_glr_gallery_0200_cs_ecg_cs_bsbl.py`
 
@@ -89,7 +89,7 @@ Compressive Sensing
 .. only:: html
 
   .. image:: /gallery/0200_cs/images/thumb/sphx_glr_matching_pursuit_thumb.png
-    :alt: Matching Pursuit
+    :alt:
 
   :ref:`sphx_glr_gallery_0200_cs_matching_pursuit.py`
 
@@ -106,7 +106,7 @@ Compressive Sensing
 .. only:: html
 
   .. image:: /gallery/0200_cs/images/thumb/sphx_glr_sparse_binary_sensor_thumb.png
-    :alt: Sparse Binary Sensing Matrices
+    :alt:
 
   :ref:`sphx_glr_gallery_0200_cs_sparse_binary_sensor.py`
 

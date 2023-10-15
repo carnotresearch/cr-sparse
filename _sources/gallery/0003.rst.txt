@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_0003.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_0003.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -359,7 +359,7 @@ Let us visualize the original and reconstructed signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc0548abac0>]
+    [<matplotlib.lines.Line2D object at 0x7fc2fb4cadc0>]
 
 
 
@@ -488,7 +488,7 @@ Let us visualize the original and reconstructed signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc0540ba490>]
+    [<matplotlib.lines.Line2D object at 0x7fc31dde0fd0>]
 
 
 
@@ -616,7 +616,7 @@ Let us visualize the original and reconstructed signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc05c191f10>]
+    [<matplotlib.lines.Line2D object at 0x7fc30c78ae50>]
 
 
 
@@ -635,7 +635,7 @@ Comments
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  10.530 seconds)
+   **Total running time of the script:** (0 minutes 9.186 seconds)
 
 
 .. _sphx_glr_download_gallery_0003.py:
@@ -643,6 +643,8 @@ Comments
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

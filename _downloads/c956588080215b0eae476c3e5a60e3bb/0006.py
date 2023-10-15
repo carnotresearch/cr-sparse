@@ -41,6 +41,7 @@ config.update("jax_enable_x64", True)
 
 import jax.numpy as jnp
 import cr.nimble as crn
+import cr.sparse as crs
 import cr.sparse.plots as crplot
 
 
@@ -115,7 +116,14 @@ problems.analyze_solution(prob, sol, perc=100)
 
 # %%
 # We will now try to estimate a 250-sparse representation
-sol = sp.solve(A, b0, 250)
+tracker = crs.ProgressTracker(x0=x0)
+sol = sp.solve(A, b0, 250, tracker=tracker)
+
+# %% 
+# Let us plot the progress of subspace pursuit over different iterations
+ax = crplot.one_plot(height=6)
+tracker.plot_progress(ax)
+
 # %%
 # Let us check if we correctly decoded all the nonzero entries
 # in the sparse representation x
@@ -179,14 +187,29 @@ problems.analyze_solution(prob, sol, perc=100)
 import cr.sparse.cvx.spgl1 as crspgl1
 sigma = 0.01 * jnp.linalg.norm(b0)
 options = crspgl1.SPGL1Options(max_iters=1000)
-sol = crspgl1.solve_bpic_jit(A, b0, sigma, options=options)
+tracker = crs.ProgressTracker(x0=x0, every=5)
+sol = crspgl1.solve_bpic_jit(A, b0, sigma, 
+    options=options, tracker=tracker)
+# %%
+# Analyze the solution
 problems.analyze_solution(prob, sol, perc=100)
 
 # %%
 # Try with lower threshold on allowed noise
 sigma = 0.001 * jnp.linalg.norm(b0)
 options = crspgl1.SPGL1Options(max_iters=1000)
-sol = crspgl1.solve_bpic_jit(A, b0, sigma, options=options)
+tracker = crs.ProgressTracker(x0=x0, every=20)
+sol = crspgl1.solve_bpic_jit(A, b0, sigma, 
+    options=options, tracker=tracker)
+
+# %% 
+# Let us plot the progress of SPGL1 over different iterations
+ax = crplot.one_plot(height=6)
+tracker.plot_progress(ax)
+
+
+# %%
+# Analyze the solution
 problems.analyze_solution(prob, sol, perc=100)
 
 # %% 
@@ -212,7 +235,6 @@ plot_signals(y0, y)
 # %%
 # Let us visualize the original and reconstructed measurements
 plot_measurments(b0, b)
-
 
 # %% 
 # Comments

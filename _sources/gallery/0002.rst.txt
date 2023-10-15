@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_0002.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_0002.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -63,7 +63,7 @@ See also:
 * :ref:`api:problems`
 * :ref:`api:lop`
 
-.. GENERATED FROM PYTHON SOURCE LINES 47-57
+.. GENERATED FROM PYTHON SOURCE LINES 47-58
 
 .. code-block:: default
 
@@ -74,6 +74,7 @@ See also:
 
     import jax.numpy as jnp
     import cr.nimble as crn
+    import cr.sparse as crs
     import cr.sparse.plots as crplot
 
 
@@ -84,14 +85,14 @@ See also:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 58-62
+.. GENERATED FROM PYTHON SOURCE LINES 59-63
 
 Setup
 ------------------------------
 We shall construct our test signal and dictionary
 using our test problems module.
 
-.. GENERATED FROM PYTHON SOURCE LINES 62-68
+.. GENERATED FROM PYTHON SOURCE LINES 63-69
 
 .. code-block:: default
 
@@ -113,11 +114,11 @@ using our test problems module.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 69-70
+.. GENERATED FROM PYTHON SOURCE LINES 70-71
 
 Let us access the relevant parts of our test problem
 
-.. GENERATED FROM PYTHON SOURCE LINES 70-79
+.. GENERATED FROM PYTHON SOURCE LINES 71-80
 
 .. code-block:: default
 
@@ -137,12 +138,12 @@ Let us access the relevant parts of our test problem
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 80-82
+.. GENERATED FROM PYTHON SOURCE LINES 81-83
 
 Check how many coefficients in the sparse representation
 are sufficient to capture 99.9% of the energy of the signal
 
-.. GENERATED FROM PYTHON SOURCE LINES 82-84
+.. GENERATED FROM PYTHON SOURCE LINES 83-85
 
 .. code-block:: default
 
@@ -161,18 +162,18 @@ are sufficient to capture 99.9% of the energy of the signal
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 85-87
+.. GENERATED FROM PYTHON SOURCE LINES 86-88
 
 This number gives us an idea about the required sparsity
 to be configured for greedy pursuit algorithms.
 
-.. GENERATED FROM PYTHON SOURCE LINES 89-92
+.. GENERATED FROM PYTHON SOURCE LINES 90-93
 
 Sparse Recovery using Subspace Pursuit
 -------------------------------------------
 We shall use subspace pursuit to reconstruct the signal.
 
-.. GENERATED FROM PYTHON SOURCE LINES 92-95
+.. GENERATED FROM PYTHON SOURCE LINES 93-96
 
 .. code-block:: default
 
@@ -186,11 +187,11 @@ We shall use subspace pursuit to reconstruct the signal.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 96-97
+.. GENERATED FROM PYTHON SOURCE LINES 97-98
 
 This utility function helps us quickly analyze the quality of reconstruction
 
-.. GENERATED FROM PYTHON SOURCE LINES 97-99
+.. GENERATED FROM PYTHON SOURCE LINES 98-100
 
 .. code-block:: default
 
@@ -214,11 +215,11 @@ This utility function helps us quickly analyze the quality of reconstruction
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 100-101
+.. GENERATED FROM PYTHON SOURCE LINES 101-102
 
 The estimated sparse representation
 
-.. GENERATED FROM PYTHON SOURCE LINES 101-102
+.. GENERATED FROM PYTHON SOURCE LINES 102-103
 
 .. code-block:: default
 
@@ -230,11 +231,11 @@ The estimated sparse representation
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 103-104
+.. GENERATED FROM PYTHON SOURCE LINES 104-105
 
 Let us reconstruct the signal from this sparse representation
 
-.. GENERATED FROM PYTHON SOURCE LINES 104-106
+.. GENERATED FROM PYTHON SOURCE LINES 105-107
 
 .. code-block:: default
 
@@ -247,11 +248,11 @@ Let us reconstruct the signal from this sparse representation
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 107-108
+.. GENERATED FROM PYTHON SOURCE LINES 108-109
 
 Let us visualize the original and reconstructed representation
 
-.. GENERATED FROM PYTHON SOURCE LINES 108-114
+.. GENERATED FROM PYTHON SOURCE LINES 109-115
 
 .. code-block:: default
 
@@ -279,11 +280,11 @@ Let us visualize the original and reconstructed representation
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 115-116
+.. GENERATED FROM PYTHON SOURCE LINES 116-117
 
 Let us visualize the original and reconstructed signal
 
-.. GENERATED FROM PYTHON SOURCE LINES 116-122
+.. GENERATED FROM PYTHON SOURCE LINES 117-123
 
 .. code-block:: default
 
@@ -307,17 +308,17 @@ Let us visualize the original and reconstructed signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc05c27be50>]
+    [<matplotlib.lines.Line2D object at 0x7fc30c351fa0>]
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 123-126
+.. GENERATED FROM PYTHON SOURCE LINES 124-127
 
 Sparse Recovery using Compressive Sampling Matching Pursuit
 ---------------------------------------------------------------
 We shall now use compressive sampling matching pursuit to reconstruct the signal.
 
-.. GENERATED FROM PYTHON SOURCE LINES 126-131
+.. GENERATED FROM PYTHON SOURCE LINES 127-132
 
 .. code-block:: default
 
@@ -344,11 +345,11 @@ We shall now use compressive sampling matching pursuit to reconstruct the signal
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 132-133
+.. GENERATED FROM PYTHON SOURCE LINES 133-134
 
 The estimated sparse representation
 
-.. GENERATED FROM PYTHON SOURCE LINES 133-134
+.. GENERATED FROM PYTHON SOURCE LINES 134-135
 
 .. code-block:: default
 
@@ -360,11 +361,11 @@ The estimated sparse representation
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 135-136
+.. GENERATED FROM PYTHON SOURCE LINES 136-137
 
 Let us reconstruct the signal from this sparse representation
 
-.. GENERATED FROM PYTHON SOURCE LINES 136-139
+.. GENERATED FROM PYTHON SOURCE LINES 137-140
 
 .. code-block:: default
 
@@ -378,11 +379,11 @@ Let us reconstruct the signal from this sparse representation
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 140-141
+.. GENERATED FROM PYTHON SOURCE LINES 141-142
 
 Let us visualize the original and reconstructed representation
 
-.. GENERATED FROM PYTHON SOURCE LINES 141-146
+.. GENERATED FROM PYTHON SOURCE LINES 142-147
 
 .. code-block:: default
 
@@ -409,11 +410,11 @@ Let us visualize the original and reconstructed representation
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 147-148
+.. GENERATED FROM PYTHON SOURCE LINES 148-149
 
 Let us visualize the original and reconstructed signal
 
-.. GENERATED FROM PYTHON SOURCE LINES 148-153
+.. GENERATED FROM PYTHON SOURCE LINES 149-154
 
 .. code-block:: default
 
@@ -436,22 +437,51 @@ Let us visualize the original and reconstructed signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc05c178820>]
+    [<matplotlib.lines.Line2D object at 0x7fc30c4ad7f0>]
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 154-156
+.. GENERATED FROM PYTHON SOURCE LINES 155-157
 
 Sparse Recovery using SPGL1
 ---------------------------------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 156-161
+.. GENERATED FROM PYTHON SOURCE LINES 157-161
 
 .. code-block:: default
 
     import cr.sparse.cvx.spgl1 as crspgl1
     options = crspgl1.SPGL1Options()
-    sol = crspgl1.solve_bp_jit(A, b0, options=options)
+    tracker = crs.ProgressTracker(x0=x0)
+    sol = crspgl1.solve_bp_jit(A, b0, options=options, tracker=tracker)
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    [1] x_norm: 0.00e+00, r_norm: 7.89e+01, SNR: 0.00 dB
+    [2] x_norm: 3.05e+01, r_norm: 4.84e+01, SNR: 4.25 dB
+    [3] x_norm: 5.74e+01, r_norm: 3.08e+01, SNR: 8.17 dB
+    [4] x_norm: 5.74e+01, r_norm: 3.08e+01, SNR: 8.17 dB
+    [5] x_norm: 7.61e+01, r_norm: 4.28e+00, SNR: 25.30 dB
+    [6] x_norm: 7.61e+01, r_norm: 4.28e+00, SNR: 25.30 dB
+    [7] x_norm: 7.89e+01, r_norm: 2.48e-07, SNR: 135.63 dB
+    Algorithm converged in 7 iterations.
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 162-163
+
+Let's analyze the solution quality
+
+.. GENERATED FROM PYTHON SOURCE LINES 163-165
+
+.. code-block:: default
+
     problems.analyze_solution(prob, sol)
 
 
@@ -472,11 +502,34 @@ Sparse Recovery using SPGL1
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 162-163
+.. GENERATED FROM PYTHON SOURCE LINES 166-167
+
+Let's plot the progress of SPGL1 over different iterations
+
+.. GENERATED FROM PYTHON SOURCE LINES 167-170
+
+.. code-block:: default
+
+    ax = crplot.one_plot(height=6)
+    tracker.plot_progress(ax)
+
+
+
+
+.. image-sg:: /gallery/images/sphx_glr_0002_006.png
+   :alt: 0002
+   :srcset: /gallery/images/sphx_glr_0002_006.png
+   :class: sphx-glr-single-img
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 171-172
 
 The estimated sparse representation
 
-.. GENERATED FROM PYTHON SOURCE LINES 163-164
+.. GENERATED FROM PYTHON SOURCE LINES 172-173
 
 .. code-block:: default
 
@@ -488,11 +541,11 @@ The estimated sparse representation
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 165-166
+.. GENERATED FROM PYTHON SOURCE LINES 174-175
 
 Let us reconstruct the signal from this sparse representation
 
-.. GENERATED FROM PYTHON SOURCE LINES 166-169
+.. GENERATED FROM PYTHON SOURCE LINES 175-178
 
 .. code-block:: default
 
@@ -506,48 +559,17 @@ Let us reconstruct the signal from this sparse representation
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 170-171
+.. GENERATED FROM PYTHON SOURCE LINES 179-180
 
 Let us visualize the original and reconstructed representation
 
-.. GENERATED FROM PYTHON SOURCE LINES 171-176
+.. GENERATED FROM PYTHON SOURCE LINES 180-185
 
 .. code-block:: default
 
     ax = crplot.h_plots(2)
     ax[0].stem(x0, markerfmt='.')
     ax[1].stem(x, markerfmt='.')
-
-
-
-
-
-.. image-sg:: /gallery/images/sphx_glr_0002_006.png
-   :alt: 0002
-   :srcset: /gallery/images/sphx_glr_0002_006.png
-   :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    <StemContainer object of 3 artists>
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 177-178
-
-Let us visualize the original and reconstructed signal
-
-.. GENERATED FROM PYTHON SOURCE LINES 178-183
-
-.. code-block:: default
-
-    ax = crplot.h_plots(2)
-    ax[0].plot(b0)
-    ax[1].plot(b)
 
 
 
@@ -564,11 +586,42 @@ Let us visualize the original and reconstructed signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc05c688340>]
+    <StemContainer object of 3 artists>
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 184-188
+.. GENERATED FROM PYTHON SOURCE LINES 186-187
+
+Let us visualize the original and reconstructed signal
+
+.. GENERATED FROM PYTHON SOURCE LINES 187-192
+
+.. code-block:: default
+
+    ax = crplot.h_plots(2)
+    ax[0].plot(b0)
+    ax[1].plot(b)
+
+
+
+
+
+.. image-sg:: /gallery/images/sphx_glr_0002_008.png
+   :alt: 0002
+   :srcset: /gallery/images/sphx_glr_0002_008.png
+   :class: sphx-glr-single-img
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+
+    [<matplotlib.lines.Line2D object at 0x7fc2fba1eeb0>]
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 193-197
 
 Comments
 ---------
@@ -579,7 +632,7 @@ while SPGL1 takes 9 iterations to converge.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  22.891 seconds)
+   **Total running time of the script:** (0 minutes 14.431 seconds)
 
 
 .. _sphx_glr_download_gallery_0002.py:
@@ -587,6 +640,8 @@ while SPGL1 takes 9 iterations to converge.
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

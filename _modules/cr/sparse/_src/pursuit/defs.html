@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -121,6 +121,7 @@
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span> <span class="nn">jax</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">from</span> <span class="nn">jax.tree_util</span> <span class="kn">import</span> <span class="n">register_pytree_node</span>
 <span class="kn">from</span> <span class="nn">cr.nimble.dsp</span> <span class="kn">import</span> <span class="n">build_signal_from_indices_and_values</span>
@@ -128,15 +129,15 @@
 
 <span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">SingleRecoverySolution</span><span class="p">:</span>
-    <span class="n">signals</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">representations</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">residuals</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span> <span class="o">=</span>  <span class="kc">None</span>
-    <span class="n">residual_norms</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">signals</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">representations</span> <span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">residuals</span> <span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span> <span class="o">=</span>  <span class="kc">None</span>
+    <span class="n">residual_norms</span> <span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">support</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">support</span> <span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="RecoverySolution"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.RecoverySolution.html#cr.sparse.pursuit.RecoverySolution">[docs]</a><span class="k">class</span> <span class="nc">RecoverySolution</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents the solution of a sparse recovery problem</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents the solution of a sparse recovery problem</span>
 
 <span class="sd">    Consider a sparse recovery problem :math:`y=\Phi x + e`.</span>
 <span class="sd">    Assume that :math:`x` is supported on an index set :math:`I`</span>
@@ -169,28 +170,28 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># The non-zero values</span>
     <span class="n">x_I</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;Non-zero values&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Non-zero values&quot;&quot;&quot;</span>
 
     <span class="n">I</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;The support for non-zero values&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The support for non-zero values&quot;&quot;&quot;</span>
 
     <span class="n">r</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;The residuals&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The residuals&quot;&quot;&quot;</span>
     <span class="n">r_norm_sqr</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;The residual norm squared&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The residual norm squared&quot;&quot;&quot;</span>
 
     <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span>
 
     <span class="n">length</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="sd">&quot;&quot;&quot;The length of the sparse signal&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The length of the sparse signal&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">x</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">build_signal_from_indices_and_values</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_I</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the string representation</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the string representation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">r_norm</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_norm_sqr</span><span class="p">))</span>
@@ -214,31 +215,31 @@
 <span class="k">class</span> <span class="nc">PTConfigurations</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="n">N</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">configurations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">PTConfig</span><span class="p">]</span>
-    <span class="n">Ms</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span>
-    <span class="n">etas</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span>
-    <span class="n">rhos</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">DeviceArray</span>
+    <span class="n">Ms</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span>
+    <span class="n">etas</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span>
+    <span class="n">rhos</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">Array</span>
     <span class="n">reverse_map</span><span class="p">:</span> <span class="n">Dict</span>
 
 
 <span class="k">class</span> <span class="nc">HTPState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="c1"># The non-zero values</span>
     <span class="n">x_I</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;Non-zero values&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Non-zero values&quot;&quot;&quot;</span>
     <span class="n">I</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;The support for non-zero values&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The support for non-zero values&quot;&quot;&quot;</span>
     <span class="n">r</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;The residuals&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The residuals&quot;&quot;&quot;</span>
     <span class="n">r_norm_sqr</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;The residual norm squared&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The residual norm squared&quot;&quot;&quot;</span>
     <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span>
     <span class="c1"># Information from previous iteration</span>
     <span class="n">I_prev</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">x_I_prev</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">r_norm_sqr_prev</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the string representation</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the string representation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span>
@@ -270,7 +271,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

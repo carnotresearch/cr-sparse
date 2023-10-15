@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -133,20 +133,21 @@
 <p>Our description is based on <span id="id1">[<a class="reference internal" href="../zzzreference.html#id84" title="Ingrid Daubechies, Michel Defrise, and Christine De Mol. An iterative thresholding algorithm for linear inverse problems with a sparsity constraint. Communications on pure and applied mathematics, 57(11):1413–1457, 2004.">DDDM04</a>, <a class="reference internal" href="../zzzreference.html#id121" title="Michael Elad. Sparse and redundant representations. Springer, 2010.">Ela10</a>, <a class="reference internal" href="../zzzreference.html#id348" title="Michael Zibulevsky and Michael Elad. L1-l2 optimization in signal and image processing. IEEE Signal Processing Magazine, 27(3):76–88, 2010.">ZE10</a>]</span>.</p>
 <p>ISTA can be used to solve problems of the form:</p>
 <div class="math notranslate nohighlight" id="equation-ista-l1-l2-minimization">
-<span class="eqno">(1)<a class="headerlink" href="#equation-ista-l1-l2-minimization" title="Permalink to this equation">¶</a></span>\[\widehat{x} = \text{arg} \min_{x} \frac{1}{2}\| b - A x \|_2^2 + \lambda \| x \|_1\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-ista-l1-l2-minimization" title="Permalink to this equation">¶</a></span>\[\widehat{\bx} = \text{arg} \min_{x} \frac{1}{2}\| \bb - \bA \bx \|_2^2 + \lambda \| \bx \|_1\]</div>
 <p>and its variants (with different regularizations).</p>
 <p>Here the objective function is:</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-0">
-<span class="eqno">(2)<a class="headerlink" href="#equation-sls-ista-0" title="Permalink to this equation">¶</a></span>\[f(x) = \frac{1}{2}\| b - A x \|_2^2 + \lambda \| x \|_1\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-sls-ista-0" title="Permalink to this equation">¶</a></span>\[f(\bx) = \frac{1}{2}\| \bb - \bA \bx \|_2^2 + \lambda \| \bx \|_1\]</div>
 <section id="derivation">
 <h2><a class="toc-backref" href="#id4">Derivation</a><a class="headerlink" href="#derivation" title="Permalink to this headline">¶</a></h2>
-<p>For an identity <span class="math notranslate nohighlight">\(A\)</span>, the problem reduces to:</p>
+<p>For an identity <span class="math notranslate nohighlight">\(\bA\)</span>, the problem reduces to:</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-1">
-<span class="eqno">(3)<a class="headerlink" href="#equation-sls-ista-1" title="Permalink to this equation">¶</a></span>\[\widehat{x} = \text{arg} \min_{x} \frac{1}{2}\| b - x \|_2^2 + \lambda \| x \|_1\]</div>
+<span class="eqno">(3)<a class="headerlink" href="#equation-sls-ista-1" title="Permalink to this equation">¶</a></span>\[\widehat{\bx} = \text{arg} \min_{x} \frac{1}{2}\| \bb - \bx \|_2^2 + \lambda \| \bx \|_1\]</div>
 <p>The term on the R.H.S. :</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-2">
-<span class="eqno">(4)<a class="headerlink" href="#equation-sls-ista-2" title="Permalink to this equation">¶</a></span>\[f(x) = \frac{1}{2}\| b - x \|_2^2 + \lambda \| x \|_1  = \sum_{i=1}^n \left [\frac{1}{2} | b_i - x_i|^2  + \lambda |x_i| \right ]\]</div>
-<p>is separable in the components of <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<span class="eqno">(4)<a class="headerlink" href="#equation-sls-ista-2" title="Permalink to this equation">¶</a></span>\[f(\bx) = \frac{1}{2}\| \bb - \bx \|_2^2 + \lambda \| \bx \|_1
+= \sum_{i=1}^n \left [\frac{1}{2} | b_i - x_i|^2  + \lambda |x_i| \right ]\]</div>
+<p>is separable in the components of <span class="math notranslate nohighlight">\(\bx\)</span>.</p>
 <p>The scalar function</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-3">
 <span class="eqno">(5)<a class="headerlink" href="#equation-sls-ista-3" title="Permalink to this equation">¶</a></span>\[g(\tau) = \frac{1}{2} | \gamma - \tau|^2  + \lambda |\tau|\]</div>
@@ -156,73 +157,96 @@
  \gamma\left ( 1 -  \frac{\lambda}{|\gamma|} \right ) &amp; \text{for} &amp; |\gamma| \gt \lambda\\
  0 &amp; \text{for} &amp; |\gamma| \le \lambda
 \end{cases}\end{split}\]</div>
-<p><span id="id2">[<a class="reference internal" href="../zzzreference.html#id348" title="Michael Zibulevsky and Michael Elad. L1-l2 optimization in signal and image processing. IEEE Signal Processing Magazine, 27(3):76–88, 2010.">ZE10</a>]</span> show that a similar solution emerges when <span class="math notranslate nohighlight">\(A\)</span> is unitary too.</p>
-<p><span id="id3">[<a class="reference internal" href="../zzzreference.html#id84" title="Ingrid Daubechies, Michel Defrise, and Christine De Mol. An iterative thresholding algorithm for linear inverse problems with a sparsity constraint. Communications on pure and applied mathematics, 57(11):1413–1457, 2004.">DDDM04</a>]</span> introduced a surrogate term:</p>
+<p>Zibulevsky and Elad in <span id="id2">[<a class="reference internal" href="../zzzreference.html#id348" title="Michael Zibulevsky and Michael Elad. L1-l2 optimization in signal and image processing. IEEE Signal Processing Magazine, 27(3):76–88, 2010.">ZE10</a>]</span>
+show that a similar solution emerges when <span class="math notranslate nohighlight">\(\bA\)</span> is unitary also.</p>
+<p>Daubechies et al. in <span id="id3">[<a class="reference internal" href="../zzzreference.html#id84" title="Ingrid Daubechies, Michel Defrise, and Christine De Mol. An iterative thresholding algorithm for linear inverse problems with a sparsity constraint. Communications on pure and applied mathematics, 57(11):1413–1457, 2004.">DDDM04</a>]</span>
+introduced a surrogate term:</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-5">
-<span class="eqno">(7)<a class="headerlink" href="#equation-sls-ista-5" title="Permalink to this equation">¶</a></span>\[\text{dist}(x, x_0) = \frac{c}{2} \| x  - x_0 \|_2^2 - \frac{1}{2} \| A x - A x_0 \|_2^2\]</div>
-<p>For this function to be strictly convex w.r.t. <span class="math notranslate nohighlight">\(x\)</span>, its Hessian must be positive definite.
+<span class="eqno">(7)<a class="headerlink" href="#equation-sls-ista-5" title="Permalink to this equation">¶</a></span>\[\text{dist}(\bx, \bx_0)
+= \frac{c}{2} \| \bx  - \bx_0 \|_2^2 - \frac{1}{2} \| \bA \bx - \bA \bx_0 \|_2^2\]</div>
+<p>For this function to be strictly convex w.r.t. <span class="math notranslate nohighlight">\(\bx\)</span>, its Hessian must be positive definite.
 This holds if:</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-6">
-<span class="eqno">(8)<a class="headerlink" href="#equation-sls-ista-6" title="Permalink to this equation">¶</a></span>\[c &gt; \| A^H A \|_2 = \lambda_{\max}(A^H A)\]</div>
-<p>the largest eigen value <span class="math notranslate nohighlight">\(A^H A\)</span>.</p>
+<span class="eqno">(8)<a class="headerlink" href="#equation-sls-ista-6" title="Permalink to this equation">¶</a></span>\[c &gt; \| \bA^H \bA \|_2 = \lambda_{\max}(\bA^H \bA)\]</div>
+<p>the largest eigen value <span class="math notranslate nohighlight">\(\bA^H \bA\)</span>.</p>
 <p>The new surrogate objective function is defined as:</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-7">
-<span class="eqno">(9)<a class="headerlink" href="#equation-sls-ista-7" title="Permalink to this equation">¶</a></span>\[\widetilde{f}(x, x_0) = f(x) + \text{dist}(x, x_0)
-= \frac{1}{2}\| b - A x \|_2^2 + \lambda \| x \|_1 + \frac{c}{2} \| x  - x_0 \|_2^2 - \frac{1}{2} \| A x - A x_0 \|_2^2\]</div>
+<span class="eqno">(9)<a class="headerlink" href="#equation-sls-ista-7" title="Permalink to this equation">¶</a></span>\[\widetilde{f}(\bx, \bx_0)
+= f(\bx) + \text{dist}(\bx, \bx_0)
+= \frac{1}{2}\| \bb - \bA \bx \|_2^2
++ \lambda \| \bx \|_1 + \frac{c}{2} \| \bx  - \bx_0 \|_2^2
+- \frac{1}{2} \| \bA \bx - \bA \bx_0 \|_2^2\]</div>
 <p>Introducing:</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-8">
-<span class="eqno">(10)<a class="headerlink" href="#equation-sls-ista-8" title="Permalink to this equation">¶</a></span>\[\nu_0 = x_0 + \frac{1}{c} A^H (b - A x_0)\]</div>
-<p>We can rewrite the surrogate objective as:</p>
+<span class="eqno">(10)<a class="headerlink" href="#equation-sls-ista-8" title="Permalink to this equation">¶</a></span>\[\nu_0 = \bx_0 + \frac{1}{c} \bA^H (\bb - \bA \bx_0)\]</div>
+<p>we can rewrite the surrogate objective as:</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-9">
-<span class="eqno">(11)<a class="headerlink" href="#equation-sls-ista-9" title="Permalink to this equation">¶</a></span>\[\widetilde{f}(x, x_0) = \text{Const} + \lambda \| x \|_1 + \frac{c}{2} \| x - \nu_0 \|_2^2\]</div>
-<p>As discussed above, this surrogate objective can be minimized using the soft thresholding operator:</p>
+<span class="eqno">(11)<a class="headerlink" href="#equation-sls-ista-9" title="Permalink to this equation">¶</a></span>\[\widetilde{f}(\bx, \bx_0)
+= \text{Const} + \lambda \| \bx \|_1 + \frac{c}{2} \| \bx - \nu_0 \|_2^2\]</div>
+<p>As discussed above, this surrogate objective can be
+minimized using the soft thresholding operator:</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-10">
-<span class="eqno">(12)<a class="headerlink" href="#equation-sls-ista-10" title="Permalink to this equation">¶</a></span>\[x^* = \mathbf{ST}_{\frac{\lambda}{c} }(\nu_0) = \mathbf{ST}_{\frac{\lambda}{c} }\left (x_0 + \frac{1}{c} A^H (b - A x_0) \right )\]</div>
-<p>Starting with some <span class="math notranslate nohighlight">\(x_0\)</span>, we can propose an itarative method over a sequence
-<span class="math notranslate nohighlight">\(x_i = \{x_0, x_1, x_2, \dots \}\)</span> as:</p>
+<span class="eqno">(12)<a class="headerlink" href="#equation-sls-ista-10" title="Permalink to this equation">¶</a></span>\[\bx^* = \mathbf{ST}_{\frac{\lambda}{c} }(\nu_0)
+= \mathbf{ST}_{\frac{\lambda}{c} }\left (\bx_0 + \frac{1}{c} \bA^H (\bb - \bA \bx_0) \right )\]</div>
+<p>Starting with some <span class="math notranslate nohighlight">\(\bx_0\)</span>, we can propose
+an iterative method over a sequence
+<span class="math notranslate nohighlight">\(\{ \bx_i \} = \{\bx_0, \bx_1, \bx_2, \dots \}\)</span> as:</p>
 <div class="math notranslate nohighlight" id="equation-ista-iteration-soft-thresholding">
-<span class="eqno">(13)<a class="headerlink" href="#equation-ista-iteration-soft-thresholding" title="Permalink to this equation">¶</a></span>\[x_{i+1} = \mathbf{ST}_{\frac{\lambda}{c} }\left (x_i + \frac{1}{c} A^H (b - A x_i)\right )\]</div>
+<span class="eqno">(13)<a class="headerlink" href="#equation-ista-iteration-soft-thresholding" title="Permalink to this equation">¶</a></span>\[\bx_{i+1} = \mathbf{ST}_{\frac{\lambda}{c} }\left (\bx_i + \frac{1}{c} \bA^H (\bb - \bA \bx_i)\right )\]</div>
 <p>This is the IST algorithm.</p>
-<p>By changing the regularization in <a class="reference internal" href="#equation-ista-l1-l2-minimization">(1)</a>, we can derive different IST algorithms with different thresholding
-functions. The version below considers a generalized thresholding function which depends on the regularizer.</p>
+<p>By changing the regularization in <a class="reference internal" href="#equation-ista-l1-l2-minimization">(1)</a>,
+we can derive different IST algorithms with different thresholding
+functions.
+The version below considers a generalized thresholding function which depends on the regularizer.</p>
 <div class="math notranslate nohighlight" id="equation-ista-iteration-thresholding">
-<span class="eqno">(14)<a class="headerlink" href="#equation-ista-iteration-thresholding" title="Permalink to this equation">¶</a></span>\[x_{i+1} = \mathbf{T}_{\frac{\lambda}{c} }\left (x_i + \frac{1}{c} A^H (b - A x_i)\right )\]</div>
+<span class="eqno">(14)<a class="headerlink" href="#equation-ista-iteration-thresholding" title="Permalink to this equation">¶</a></span>\[\bx_{i+1} = \mathbf{T}_{\frac{\lambda}{c} }\left (\bx_i + \frac{1}{c} \bA^H (\bb - \bA \bx_i)\right )\]</div>
 <section id="sparsifying-basis">
 <h3><a class="toc-backref" href="#id5">Sparsifying Basis</a><a class="headerlink" href="#sparsifying-basis" title="Permalink to this headline">¶</a></h3>
-<p>Often, the signal <span class="math notranslate nohighlight">\(x\)</span> (e.g. an image) may not be sparse or compressible
-but it has a sparse representation in some basis <span class="math notranslate nohighlight">\(B\)</span>. We have</p>
+<p>Often, the signal <span class="math notranslate nohighlight">\(\bx\)</span> (e.g. an image) may not be sparse or compressible
+but it has a sparse representation in some basis <span class="math notranslate nohighlight">\(\bB\)</span>.
+We have</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-11">
-<span class="eqno">(15)<a class="headerlink" href="#equation-sls-ista-11" title="Permalink to this equation">¶</a></span>\[\alpha  = B^H x\]</div>
-<p>as the representation of <span class="math notranslate nohighlight">\(x\)</span> in the basis <span class="math notranslate nohighlight">\(B\)</span>.</p>
-<p>The regularization is then applied to the representation <span class="math notranslate nohighlight">\(\alpha\)</span>.
+<span class="eqno">(15)<a class="headerlink" href="#equation-sls-ista-11" title="Permalink to this equation">¶</a></span>\[\ba  = \bB^H \bx\]</div>
+<p>as the representation of <span class="math notranslate nohighlight">\(\bx\)</span> in the basis <span class="math notranslate nohighlight">\(\bB\)</span>.</p>
+<p>The regularization is then applied to the representation <span class="math notranslate nohighlight">\(\ba\)</span>.
 <a class="reference internal" href="#equation-ista-l1-l2-minimization">(1)</a> becomes:</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-12">
-<span class="eqno">(16)<a class="headerlink" href="#equation-sls-ista-12" title="Permalink to this equation">¶</a></span>\[\widehat{x} = \text{arg} \min_{x} \frac{1}{2}\| b - A x \|_2^2 + \lambda \| B^H x \|_1\]</div>
+<span class="eqno">(16)<a class="headerlink" href="#equation-sls-ista-12" title="Permalink to this equation">¶</a></span>\[\widehat{\bx} = \text{arg} \min_{\bx} \frac{1}{2}\| \bb - \bA \bx \|_2^2
++ \lambda \| \bB^H \bx \|_1\]</div>
 <p>We can rewrite this as:</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-13">
-<span class="eqno">(17)<a class="headerlink" href="#equation-sls-ista-13" title="Permalink to this equation">¶</a></span>\[\widehat{\alpha} = \text{arg} \min_{\alpha} \frac{1}{2}\| b - A B \alpha \|_2^2 + \lambda \| \alpha \|_1\]</div>
+<span class="eqno">(17)<a class="headerlink" href="#equation-sls-ista-13" title="Permalink to this equation">¶</a></span>\[\widehat{\ba}
+= \text{arg} \min_{\ba} \frac{1}{2}\| \bb - \bA \bB \ba \|_2^2
++ \lambda \| \ba \|_1\]</div>
 <p><a class="reference internal" href="#equation-ista-iteration-thresholding">(14)</a> changes to:</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-14">
-<span class="eqno">(18)<a class="headerlink" href="#equation-sls-ista-14" title="Permalink to this equation">¶</a></span>\[\alpha_{i+1} = \mathbf{T}_{\frac{\lambda}{c} }\left (\alpha_i + \frac{1}{c} B^H A^H (b - A B \alpha_i)\right )\]</div>
-<p>By substituting <span class="math notranslate nohighlight">\(\alpha = B^H x\)</span> and <span class="math notranslate nohighlight">\(x = B \alpha\)</span>, we get:</p>
+<span class="eqno">(18)<a class="headerlink" href="#equation-sls-ista-14" title="Permalink to this equation">¶</a></span>\[\ba_{i+1} = \mathbf{T}_{\frac{\lambda}{c} }\left (\ba_i
++ \frac{1}{c} \bB^H \bA^H (\bb - \bA \bB \ba_i)\right )\]</div>
+<p>By substituting <span class="math notranslate nohighlight">\(\ba = \bB^H \bx\)</span> and
+<span class="math notranslate nohighlight">\(\bx = \bB \ba\)</span>, we get:</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-15">
-<span class="eqno">(19)<a class="headerlink" href="#equation-sls-ista-15" title="Permalink to this equation">¶</a></span>\[\alpha_{i+1} = \mathbf{T}_{\frac{\lambda}{c} }\left (B^H x_i + \frac{1}{c} B^H A^H (b - A x_i)\right )\]</div>
+<span class="eqno">(19)<a class="headerlink" href="#equation-sls-ista-15" title="Permalink to this equation">¶</a></span>\[\ba_{i+1} = \mathbf{T}_{\frac{\lambda}{c} }\left (\bB^H \bx_i
++ \frac{1}{c} \bB^H \bA^H (\bb - \bA \bx_i)\right )\]</div>
 <p>Simplifying further:</p>
 <div class="math notranslate nohighlight" id="equation-ista-iteration-thresholding-basis">
-<span class="eqno">(20)<a class="headerlink" href="#equation-ista-iteration-thresholding-basis" title="Permalink to this equation">¶</a></span>\[x_{i+1} = B \mathbf{T}_{\frac{\lambda}{c} }\left ( B^H  \left (x_i + \frac{1}{c} A^H (b - A x_i)\right ) \right )\]</div>
-<p>This is the version of IST algorithm with an operator <span class="math notranslate nohighlight">\(A\)</span> and a basis <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<span class="eqno">(20)<a class="headerlink" href="#equation-ista-iteration-thresholding-basis" title="Permalink to this equation">¶</a></span>\[\bx_{i+1} = \bB \mathbf{T}_{\frac{\lambda}{c} }
+\left ( \bB^H  \left (\bx_i + \frac{1}{c} \bA^H (\bb - \bA \bx_i)\right ) \right )\]</div>
+<p>This is the version of IST algorithm with an operator
+<span class="math notranslate nohighlight">\(\bA\)</span> and a sparsifying basis <span class="math notranslate nohighlight">\(\bB\)</span>.</p>
 </section>
 </section>
 <section id="implementation">
 <h2><a class="toc-backref" href="#id6">Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
 <p>We introduce the current residual:</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-16">
-<span class="eqno">(21)<a class="headerlink" href="#equation-sls-ista-16" title="Permalink to this equation">¶</a></span>\[r = b - A x\]</div>
+<span class="eqno">(21)<a class="headerlink" href="#equation-sls-ista-16" title="Permalink to this equation">¶</a></span>\[\br = \bb - \bA \bx\]</div>
 <p>and a step size parameter <span class="math notranslate nohighlight">\(\alpha = \frac{1}{c}\)</span>.
-We also assume that a thresholding function <span class="math notranslate nohighlight">\(\mathbf{T}\)</span> will be user defined.</p>
+We also assume that a thresholding function
+<span class="math notranslate nohighlight">\(\mathbf{T}\)</span> will be user defined.</p>
 <p>This simplifies the iteration to:</p>
 <div class="math notranslate nohighlight" id="equation-sls-ista-17">
-<span class="eqno">(22)<a class="headerlink" href="#equation-sls-ista-17" title="Permalink to this equation">¶</a></span>\[x_{i+1} = B \mathbf{T}\left ( B^H \left (x_i + \alpha A^H r_i \right ) \right )\]</div>
+<span class="eqno">(22)<a class="headerlink" href="#equation-sls-ista-17" title="Permalink to this equation">¶</a></span>\[\bx_{i+1} = \bB \mathbf{T}\left ( \bB^H
+\left (\bx_i + \alpha \bA^H \br_i \right ) \right )\]</div>
 <p class="rubric">Algorithm state</p>
 <p>Current state of the algorithm is described by following quantities:</p>
 <table class="docutils align-default">
@@ -237,16 +261,16 @@ We also assume that a thresholding function <span class="math notranslate nohigh
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x</span></code></p></td>
-<td><p>Current estimate of <span class="math notranslate nohighlight">\(x\)</span></p></td>
+<td><p>Current estimate of <span class="math notranslate nohighlight">\(\bx\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">r</span></code></p></td>
-<td><p>Current residual <span class="math notranslate nohighlight">\(r\)</span></p></td>
+<td><p>Current residual <span class="math notranslate nohighlight">\(\br\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">r_norm_sqr</span></code></p></td>
-<td><p>Squared norm of the residual <span class="math notranslate nohighlight">\(\| r \|_2^2\)</span></p></td>
+<td><p>Squared norm of the residual <span class="math notranslate nohighlight">\(\| \br \|_2^2\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">x_change_norm</span></code></p></td>
-<td><p>Change in the norm of <span class="math notranslate nohighlight">\(x\)</span> given by <span class="math notranslate nohighlight">\(\|x_{i+1} - x_{i} \|_2\)</span></p></td>
+<td><p>Change in the norm of <span class="math notranslate nohighlight">\(x\)</span> given by <span class="math notranslate nohighlight">\(\|\bx_{i+1} - \bx_{i} \|_2\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">iterations</span></code></p></td>
 <td><p>Number of iterations of algorithm run so far</p></td>
@@ -256,23 +280,23 @@ We also assume that a thresholding function <span class="math notranslate nohigh
 <p class="rubric">Algorithm initialization</p>
 <p>We initialize the algorithm with:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(x \leftarrow x_0\)</span> an initial estimate of solution given by user.
-It can be 0.</p></li>
-<li><p><span class="math notranslate nohighlight">\(r \leftarrow b - A x_0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\bx \leftarrow \bx_0\)</span> an initial estimate of solution given by user.
+It can be <span class="math notranslate nohighlight">\(\bzero\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\br \leftarrow \bb - \bA \bx_0\)</span></p></li>
 <li><p>Compute <code class="docutils literal notranslate"><span class="pre">r_norm_sqr</span></code></p></li>
-<li><p>Give a very high value to <code class="docutils literal notranslate"><span class="pre">x_change_norm</span></code> (since there is no <span class="math notranslate nohighlight">\(x_{-1}\)</span>).</p></li>
+<li><p>Give a very high value to <code class="docutils literal notranslate"><span class="pre">x_change_norm</span></code> (since there is no <span class="math notranslate nohighlight">\(\bx_{-1}\)</span>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">iterations</span> <span class="pre">=</span> <span class="pre">0</span></code></p></li>
 </ul>
 <p class="rubric">Algorithm iteration</p>
 <p>Following steps are involved in each iteration. These are
 directly based on <a class="reference internal" href="#equation-ista-iteration-thresholding-basis">(20)</a>.</p>
 <ul class="simple">
-<li><p>Compute gradient:  <span class="math notranslate nohighlight">\(g \leftarrow \alpha A^H r\)</span></p></li>
-<li><p>Update estimate: <span class="math notranslate nohighlight">\(x \leftarrow x + g\)</span></p></li>
-<li><p>Transform <span class="math notranslate nohighlight">\(\alpha \leftarrow B^H x\)</span></p></li>
+<li><p>Compute gradient:  <span class="math notranslate nohighlight">\(\bg \leftarrow \alpha \bA^H \br\)</span></p></li>
+<li><p>Update estimate: <span class="math notranslate nohighlight">\(\bx \leftarrow \bx + \bg\)</span></p></li>
+<li><p>Transform <span class="math notranslate nohighlight">\(\alpha \leftarrow \bB^H \bx\)</span></p></li>
 <li><p>Threshold: <span class="math notranslate nohighlight">\(\alpha \leftarrow \mathbf{T} (\alpha)\)</span></p></li>
-<li><p>Inverse transform <span class="math notranslate nohighlight">\(x \leftarrow B \alpha\)</span></p></li>
-<li><p>Update residual: <span class="math notranslate nohighlight">\(r \leftarrow b - A x\)</span></p></li>
+<li><p>Inverse transform <span class="math notranslate nohighlight">\(\bx \leftarrow \bB \alpha\)</span></p></li>
+<li><p>Update residual: <span class="math notranslate nohighlight">\(\br \leftarrow \bb - \bA \bx\)</span></p></li>
 </ul>
 </section>
 </section>
@@ -289,7 +313,7 @@ directly based on <a class="reference internal" href="#equation-ista-iteration-t
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="../_sources/sls/ista.rst.txt"

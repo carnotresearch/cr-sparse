@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
@@ -134,7 +134,7 @@
 
 <div class="viewcode-block" id="sparse_to_full_rep"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.sparse_to_full_rep.html#cr.sparse.cluster.ssc.sparse_to_full_rep">[docs]</a><span class="nd">@jit</span>
 <span class="k">def</span> <span class="nf">sparse_to_full_rep</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">I</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Combines values and indices arrays to sparse representations</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Combines values and indices arrays to sparse representations</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># number of signals</span>
     <span class="n">n</span>  <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -143,7 +143,7 @@
 
 <div class="viewcode-block" id="sparse_to_bcoo"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.sparse_to_bcoo.html#cr.sparse.cluster.ssc.sparse_to_bcoo">[docs]</a><span class="nd">@jit</span>
 <span class="k">def</span> <span class="nf">sparse_to_bcoo</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">I</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;&quot;Combines values and indices arrays to a BCOO formatted sparse matrix</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;&quot;Combines values and indices arrays to a BCOO formatted sparse matrix</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># number of signals</span>
     <span class="n">n</span>  <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -169,7 +169,7 @@
     <span class="k">return</span> <span class="n">Y</span></div>
 
 <div class="viewcode-block" id="bcoo_to_sparse"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.bcoo_to_sparse.html#cr.sparse.cluster.ssc.bcoo_to_sparse">[docs]</a><span class="k">def</span> <span class="nf">bcoo_to_sparse</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Converts it back to values and indices (column-wise) format</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts it back to values and indices (column-wise) format</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">T</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">data</span>
@@ -187,14 +187,14 @@
 
 <div class="viewcode-block" id="rep_to_affinity"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.rep_to_affinity.html#cr.sparse.cluster.ssc.rep_to_affinity">[docs]</a><span class="nd">@sparsify</span>
 <span class="k">def</span> <span class="nf">rep_to_affinity</span><span class="p">(</span><span class="n">Z</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Converts sparse representations to symmetric affinity matrix</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts sparse representations to symmetric affinity matrix</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">Z</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
     <span class="n">affinity</span> <span class="o">=</span> <span class="n">Z</span> <span class="o">+</span> <span class="n">Z</span><span class="o">.</span><span class="n">T</span>
     <span class="k">return</span> <span class="n">affinity</span></div>
 
 <div class="viewcode-block" id="angles_between_points"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.angles_between_points.html#cr.sparse.cluster.ssc.angles_between_points">[docs]</a><span class="k">def</span> <span class="nf">angles_between_points</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns an SxS matrix of angles between each pair of points</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns an SxS matrix of angles between each pair of points</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># make sure that the points are normalized</span>
     <span class="n">X</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">normalize_l2_cw</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -206,7 +206,7 @@
 
 
 <div class="viewcode-block" id="min_angles_inside_cluster"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.min_angles_inside_cluster.html#cr.sparse.cluster.ssc.min_angles_inside_cluster">[docs]</a><span class="k">def</span> <span class="nf">min_angles_inside_cluster</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">cluster_sizes</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the minimum angles for for each point with its neighbors inside the cluster </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the minimum angles for for each point with its neighbors inside the cluster </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># we have to ignore the diagonal elements</span>
     <span class="n">angles</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">set_diagonal</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
@@ -222,7 +222,7 @@
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">mins</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="min_angles_outside_cluster"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.min_angles_outside_cluster.html#cr.sparse.cluster.ssc.min_angles_outside_cluster">[docs]</a><span class="k">def</span> <span class="nf">min_angles_outside_cluster</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">cluster_sizes</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the minimum angles for each point with its neighbors from all other clusters </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the minimum angles for each point with its neighbors from all other clusters </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">start_indices</span><span class="p">,</span> <span class="n">end_indices</span> <span class="o">=</span> <span class="n">crcluster</span><span class="o">.</span><span class="n">start_end_indices</span><span class="p">(</span><span class="n">cluster_sizes</span><span class="p">)</span>
     <span class="n">K</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cluster_sizes</span><span class="p">)</span>
@@ -240,7 +240,7 @@
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">mins</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="nearest_neighbors_inside_cluster"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.nearest_neighbors_inside_cluster.html#cr.sparse.cluster.ssc.nearest_neighbors_inside_cluster">[docs]</a><span class="k">def</span> <span class="nf">nearest_neighbors_inside_cluster</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">cluster_sizes</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the index of the nearest neighbor for each point inside the cluster </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the index of the nearest neighbor for each point inside the cluster </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># we have to ignore the diagonal elements</span>
     <span class="n">angles</span> <span class="o">=</span> <span class="n">cnb</span><span class="o">.</span><span class="n">set_diagonal</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
@@ -256,7 +256,7 @@
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">mins</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="nearest_neighbors_outside_cluster"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.nearest_neighbors_outside_cluster.html#cr.sparse.cluster.ssc.nearest_neighbors_outside_cluster">[docs]</a><span class="k">def</span> <span class="nf">nearest_neighbors_outside_cluster</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">cluster_sizes</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns index of the nearest neighbor for each point with its neighbors from all other clusters </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns index of the nearest neighbor for each point with its neighbors from all other clusters </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">start_indices</span><span class="p">,</span> <span class="n">end_indices</span> <span class="o">=</span> <span class="n">crcluster</span><span class="o">.</span><span class="n">start_end_indices</span><span class="p">(</span><span class="n">cluster_sizes</span><span class="p">)</span>
     <span class="n">K</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cluster_sizes</span><span class="p">)</span>
@@ -275,7 +275,7 @@
 
 
 <div class="viewcode-block" id="sorted_neighbors"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.sorted_neighbors.html#cr.sparse.cluster.ssc.sorted_neighbors">[docs]</a><span class="k">def</span> <span class="nf">sorted_neighbors</span><span class="p">(</span><span class="n">angles</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the neighbor indices sorted by angle between points</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the neighbor indices sorted by angle between points</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># sort the angle row-wise (along the column axis)</span>
     <span class="n">indices</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span>
@@ -285,7 +285,7 @@
 
 
 <div class="viewcode-block" id="inn_positions"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.inn_positions.html#cr.sparse.cluster.ssc.inn_positions">[docs]</a><span class="k">def</span> <span class="nf">inn_positions</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">sorted_neighbor_labels</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the position of a neighbor inside the cluster for each point in </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the position of a neighbor inside the cluster for each point in </span>
 <span class="sd">    its list of sorted neighbors across all clusters</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">inn_pos</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">sorted_neighbor_labels</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="p">:]</span> <span class="o">==</span> <span class="n">labels</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
@@ -293,7 +293,7 @@
 
 
 <span class="k">class</span> <span class="nc">SubspacePreservationStats</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Statistics for subspace preserving representations</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Statistics for subspace preserving representations</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">spr_errors</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">spr_flags</span> <span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
@@ -307,7 +307,7 @@
         <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
 <div class="viewcode-block" id="subspace_preservation_stats"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.subspace_preservation_stats.html#cr.sparse.cluster.ssc.subspace_preservation_stats">[docs]</a><span class="k">def</span> <span class="nf">subspace_preservation_stats</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the statistics for subspace preservation</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the statistics for subspace preservation</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">shape</span>
     <span class="k">assert</span> <span class="n">m</span> <span class="o">==</span> <span class="n">n</span><span class="p">,</span> <span class="s2">&quot;C must be a square representation matrix&quot;</span>
@@ -346,7 +346,7 @@
 
 
 <div class="viewcode-block" id="sparse_subspace_preservation_stats"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cluster.ssc.sparse_subspace_preservation_stats.html#cr.sparse.cluster.ssc.sparse_subspace_preservation_stats">[docs]</a><span class="k">def</span> <span class="nf">sparse_subspace_preservation_stats</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the statistics for subspace preservation from sparse representations</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the statistics for subspace preservation from sparse representations</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># subpsace dimension and number of signals</span>
     <span class="n">d</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">Z</span><span class="o">.</span><span class="n">shape</span>
@@ -395,7 +395,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

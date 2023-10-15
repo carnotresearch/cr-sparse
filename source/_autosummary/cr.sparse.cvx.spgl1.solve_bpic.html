@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -130,13 +130,13 @@
 <h1>cr.sparse.cvx.spgl1.solve_bpic<a class="headerlink" href="#cr-sparse-cvx-spgl1-solve-bpic" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="cr.sparse.cvx.spgl1.solve_bpic">
-<span class="sig-prename descclassname"><span class="pre">cr.sparse.cvx.spgl1.</span></span><span class="sig-name descname"><span class="pre">solve_bpic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">SPGL1Options(bp_tol=1e-06,</span> <span class="pre">ls_tol=1e-06,</span> <span class="pre">opt_tol=0.0001,</span> <span class="pre">dec_tol=0.0001,</span> <span class="pre">gamma=0.0001,</span> <span class="pre">alpha_min=1e-16,</span> <span class="pre">alpha_max=100000.0,</span> <span class="pre">memory=3,</span> <span class="pre">max_matvec=100000,</span> <span class="pre">max_iters=100)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/cvx/spgl1.html#solve_bpic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.cvx.spgl1.solve_bpic" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">cr.sparse.cvx.spgl1.</span></span><span class="sig-name descname"><span class="pre">solve_bpic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">A</span></em>, <em class="sig-param"><span class="pre">b</span></em>, <em class="sig-param"><span class="pre">sigma</span></em>, <em class="sig-param"><span class="pre">options=SPGL1Options(bp_tol=1e-06</span></em>, <em class="sig-param"><span class="pre">ls_tol=1e-06</span></em>, <em class="sig-param"><span class="pre">opt_tol=0.0001</span></em>, <em class="sig-param"><span class="pre">dec_tol=0.0001</span></em>, <em class="sig-param"><span class="pre">gamma=0.0001</span></em>, <em class="sig-param"><span class="pre">alpha_min=1e-16</span></em>, <em class="sig-param"><span class="pre">alpha_max=100000.0</span></em>, <em class="sig-param"><span class="pre">memory=3</span></em>, <em class="sig-param"><span class="pre">max_matvec=100000</span></em>, <em class="sig-param"><span class="pre">max_iters=100)</span></em>, <em class="sig-param"><span class="pre">tracker=&lt;function</span> <span class="pre">noop_tracker&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/cr/sparse/_src/cvx/spgl1.html#solve_bpic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cr.sparse.cvx.spgl1.solve_bpic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solves the BPIC problem using SPGL1 algorithm</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>b</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code>) – </p></li>
-<li><p><strong>sigma</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – </p></li>
+<li><p><strong>b</strong> (<a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.Array.html#jax.Array" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>) – </p></li>
+<li><p><strong>sigma</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – </p></li>
 <li><p><strong>options</strong> (<a class="reference internal" href="cr.sparse.cvx.spgl1.SPGL1Options.html#cr.sparse.cvx.spgl1.SPGL1Options" title="cr.sparse._src.cvx.spgl1.SPGL1Options"><code class="xref py py-class docutils literal notranslate"><span class="pre">SPGL1Options</span></code></a>) – </p></li>
 </ul>
 </dd>
@@ -157,7 +157,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="../../_sources/source/_autosummary/cr.sparse.cvx.spgl1.solve_bpic.rst.txt"

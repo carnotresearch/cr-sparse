@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -128,7 +128,7 @@
             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-gallery-0200-cs-cosamp-step-by-step-py"><span class="std std-ref">here</span></a>
+<p><a class="reference internal" href="#sphx-glr-download-gallery-0200-cs-cosamp-step-by-step-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="cosamp-step-by-step">
@@ -220,7 +220,7 @@ that the energy of the residual <code class="docutils literal notranslate"><span
 <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_cosamp_step_by_step_001.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_001.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc04739b370&gt;]
+<img src="../../_images/sphx_glr_cosamp_step_by_step_001.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_001.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc2f1045040&gt;]
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">omega</span></code> contains the set of indices at which x is nonzero (support of <code class="docutils literal notranslate"><span class="pre">x</span></code>)</p>
@@ -238,7 +238,7 @@ that the energy of the residual <code class="docutils literal notranslate"><span
 <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="matplotlib.pyplot.plot" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_cosamp_step_by_step_002.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_002.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc046f3ba30&gt;]
+<img src="../../_images/sphx_glr_cosamp_step_by_step_002.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_002.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc2f10617c0&gt;]
 </pre></div>
 </div>
 </section>
@@ -318,8 +318,8 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">I_sub</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>I_sub=DeviceArray([ 14,  30,  44,  60,  64,  78,  84,  89,  99, 116, 118, 127,
-             128, 149, 157, 158, 162, 168, 184, 192, 198, 203, 232, 244],            dtype=int64)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>I_sub=Array([ 14,  30,  44,  60,  64,  78,  84,  89,  99, 116, 118, 127, 128,
+       149, 157, 158, 162, 168, 184, 192, 198, 203, 232, 244],      dtype=int64)
 </pre></div>
 </div>
 <p>Check which indices from <code class="docutils literal notranslate"><span class="pre">omega</span></code> are there in <code class="docutils literal notranslate"><span class="pre">I_sub</span></code>.</p>
@@ -340,7 +340,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">Ia</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Ia=DeviceArray([ 3,  7, 23, 20, 22,  8, 15, 18], dtype=int64)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Ia=Array([ 3,  7, 23, 20, 22,  8, 15, 18], dtype=int64)
 </pre></div>
 </div>
 <p>We need to map the indices in <code class="docutils literal notranslate"><span class="pre">Ia</span></code> to the actual indices of atoms in <code class="docutils literal notranslate"><span class="pre">Phi</span></code></p>
@@ -348,7 +348,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">I</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>I=DeviceArray([ 60,  89, 244, 198, 232,  99, 158, 184], dtype=int64)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>I=Array([ 60,  89, 244, 198, 232,  99, 158, 184], dtype=int64)
 </pre></div>
 </div>
 <p>Select the corresponding values from the LS solution</p>
@@ -363,7 +363,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html#matplotlib.pyplot.legend" title="matplotlib.pyplot.legend" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_cosamp_step_by_step_003.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_003.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7fc05467ba60&gt;
+<img src="../../_images/sphx_glr_cosamp_step_by_step_003.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_003.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7fc2f028e6a0&gt;
 </pre></div>
 </div>
 <p>We can check how good we were in picking the correct indices from the actual support of the signal</p>
@@ -401,7 +401,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 <span class="nb">print</span><span class="p">(</span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.where.html#jax.numpy.where" title="jax.numpy.where" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">where</span></a><span class="p">(</span><span class="n">flags</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(DeviceArray([ 60,  89,  99, 158, 184, 198, 232, 244], dtype=int64),)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(Array([ 60,  89,  99, 158, 184, 198, 232, 244], dtype=int64),)
 </pre></div>
 </div>
 <p>Mark the completion of the iteration</p>
@@ -436,8 +436,8 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">I_sub</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>I_sub=DeviceArray([  8,  25,  41,  42,  60,  66,  67,  68,  72,  89,  99, 111,
-             129, 158, 164, 184, 190, 195, 198, 216, 220, 232, 233, 244],            dtype=int64)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>I_sub=Array([  8,  25,  41,  42,  60,  66,  67,  68,  72,  89,  99, 111, 129,
+       158, 164, 184, 190, 195, 198, 216, 220, 232, 233, 244],      dtype=int64)
 </pre></div>
 </div>
 <p>We can check if we found all the actual atoms</p>
@@ -480,7 +480,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.setdiff1d.html#jax.numpy.setdiff1d" title="jax.numpy.setdiff1d" class="sphx-glr-backref-module-jax-numpy sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">setdiff1d</span></a><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>DeviceArray([], dtype=int64)
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Array([], dtype=int64)
 </pre></div>
 </div>
 <p>Select the corresponding values from the LS solution</p>
@@ -495,7 +495,7 @@ the residual <code class="docutils literal notranslate"><span class="pre">r</spa
 <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html#matplotlib.pyplot.legend" title="matplotlib.pyplot.legend" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_cosamp_step_by_step_004.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_004.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7fc05ced12e0&gt;
+<img src="../../_images/sphx_glr_cosamp_step_by_step_004.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_004.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7fc30c42d790&gt;
 </pre></div>
 </div>
 <p>The algorithm has no direct way of knowing that it indeed found the solution
@@ -568,10 +568,10 @@ It is time to compute the residual after the second iteration</p>
 <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html#matplotlib.pyplot.legend" title="matplotlib.pyplot.legend" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_cosamp_step_by_step_005.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_005.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7fc05c218f10&gt;
+<img src="../../_images/sphx_glr_cosamp_step_by_step_005.png" srcset="../../_images/sphx_glr_cosamp_step_by_step_005.png" alt="cosamp step by step" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend object at 0x7fc2f0c74880&gt;
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  4.244 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 3.552 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-0200-cs-cosamp-step-by-step-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/1f911be87f9d20a0ce57c43ab637b249/cosamp_step_by_step.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">cosamp_step_by_step.py</span></code></a></p>
@@ -596,7 +596,7 @@ It is time to compute the residual after the second iteration</p>
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="../../_sources/gallery/0200_cs/cosamp_step_by_step.rst.txt"

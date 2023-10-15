@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -158,7 +158,7 @@
     <span class="k">return</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">x</span>
 
 <div class="viewcode-block" id="tv"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.tv.html#cr.sparse.lop.tv">[docs]</a><span class="k">def</span> <span class="nf">tv</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;regular&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns a total variation linear operator for 1D signals</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns a total variation linear operator for 1D signals</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        n (int): Dimension of the model space</span>
@@ -189,7 +189,7 @@
     <span class="k">return</span> <span class="n">Operator</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="tv2D"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.tv2D.html#cr.sparse.lop.tv2D">[docs]</a><span class="k">def</span> <span class="nf">tv2D</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;regular&#39;</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns a total variation linear operator for 2D images</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns a total variation linear operator for 2D images</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        shape (int): Shape of the input images (model space)</span>
@@ -220,7 +220,7 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The kind </span><span class="si">{</span><span class="n">kind</span><span class="si">}</span><span class="s2"> is not supported&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">times</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Forward total variation</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Forward total variation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># horizontal variation</span>
         <span class="n">Dh</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="n">times1d</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
@@ -230,7 +230,7 @@
         <span class="k">return</span> <span class="n">Dh</span> <span class="o">+</span> <span class="n">Dv</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
 
     <span class="k">def</span> <span class="nf">trans</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Adjoint total variation</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adjoint total variation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># horizontal variation</span>
         <span class="n">Dh</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="n">trans1d</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
@@ -253,7 +253,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

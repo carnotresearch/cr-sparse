@@ -159,6 +159,7 @@ config.update("jax_enable_x64", True)
 
 import jax.numpy as jnp
 import cr.nimble as crn
+import cr.sparse as crs
 import cr.sparse.plots as crplot
 
 # %% 
@@ -204,9 +205,17 @@ x_init = jnp.zeros((tn, nc))
 import cr.sparse.cvx.spgl1 as crspgl1
 sigma=0.
 options = crspgl1.SPGL1Options(max_iters=300)
+tracker = crs.ProgressTracker(every=10)
 sol = crspgl1.solve_bpic_from_jit(A, b0, sigma, 
-    x_init, options=options)
+    x_init, options=options, tracker=tracker)
+# %%
+# Let us check the quality of reconstruction
 problems.analyze_solution(prob, sol)
+
+# %% 
+# Let's plot the progress of SPGL1 over different iterations
+ax = crplot.one_plot(height=6)
+tracker.plot_progress(ax)
 
 # %% 
 # The estimated sparse representation
@@ -214,8 +223,13 @@ x = sol.x
 # %%
 # Let us reconstruct the signal from this sparse representation
 y = prob.reconstruct(x)
+# Compare the original
+snr = crn.signal_noise_ratio(y0, y)
+print(f'SNR: {snr:.2f} dB')
 
 
+# %% 
+# Let us visually compare original signal with the reconstructed one
 ax = crplot.h_plots(4)
 ax[0].plot(y0[:, 0])
 ax[0].set_title("Original audio 1 (Guitar)")

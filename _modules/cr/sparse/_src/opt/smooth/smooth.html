@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
@@ -131,7 +131,7 @@
 
 
 <div class="viewcode-block" id="SmoothFunction"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.SmoothFunction.html#cr.sparse.opt.SmoothFunction">[docs]</a><span class="k">class</span> <span class="nc">SmoothFunction</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents a smooth function</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents a smooth function</span>
 
 <span class="sd">    Let `op` be a variable of type `SmoothFunction`</span>
 <span class="sd">    which represents some smooth function :math:`f`. Then:</span>
@@ -141,14 +141,14 @@
 <span class="sd">    * `op.grad_val(x)` returns the pair :math:`(g(x), f(x))`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span>
-    <span class="sd">&quot;&quot;&quot;Definition of a smooth function&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Definition of a smooth function&quot;&quot;&quot;</span>
     <span class="n">grad</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
-    <span class="sd">&quot;&quot;&quot;Definition of a gradient the function&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Definition of a gradient the function&quot;&quot;&quot;</span>
     <span class="n">grad_val</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]</span>
     <span class="s2">&quot;A wrapper to evaluate the gradient vector and the function value together&quot;</span></div>
 
 <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Creates a smooth function based on function definition :math:`f(x)`</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Creates a smooth function based on function definition :math:`f(x)`</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        func: Definition of the smooth function :math:`f : \RR^n \to \RR`</span>
@@ -164,7 +164,7 @@
         <span class="n">grad_val</span><span class="o">=</span><span class="n">grad_val</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">build2</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">grad</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Creates a smooth function with user defined :math:`f(x)` and gradient :math:`g(x)`</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Creates a smooth function with user defined :math:`f(x)` and gradient :math:`g(x)`</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        func: Definition of the smooth function :math:`f : \RR^n \to \RR`</span>
@@ -180,7 +180,7 @@
         <span class="n">grad_val</span><span class="o">=</span><span class="n">grad_val</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">build3</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">grad_val</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Creates a a smooth function with user defined grad and grad_val functions</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Creates a a smooth function with user defined grad and grad_val functions</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        func: Definition of the smooth function :math:`f : \RR^n \to \RR`</span>
@@ -198,7 +198,7 @@
 
 
 <div class="viewcode-block" id="build_grad_val_func"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.build_grad_val_func.html#cr.sparse.opt.build_grad_val_func">[docs]</a><span class="k">def</span> <span class="nf">build_grad_val_func</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">grad</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Constructs a `grad_val` function from the definitions of function :math:`f(x)` and gradient :math:`g(x)`</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Constructs a `grad_val` function from the definitions of function :math:`f(x)` and gradient :math:`g(x)`</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        func: Definition of the smooth function :math:`f : \RR^n \to \RR`</span>
@@ -216,7 +216,7 @@
 
 
 <div class="viewcode-block" id="smooth_func_translate"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.smooth_func_translate.html#cr.sparse.opt.smooth_func_translate">[docs]</a><span class="k">def</span> <span class="nf">smooth_func_translate</span><span class="p">(</span><span class="n">smooth_func</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns a smooth function :math:`g` for a smooth function :math:`f` s.t. :math:`g(x) = f(x + b)`</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns a smooth function :math:`g` for a smooth function :math:`f` s.t. :math:`g(x) = f(x + b)`</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        smooth_func (SmoothFunction): Wrapper for smooth function :math:`f : \RR^n \to \RR`</span>
@@ -259,7 +259,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

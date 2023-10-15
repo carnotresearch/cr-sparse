@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -128,7 +128,7 @@
             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-gallery-0006-py"><span class="std std-ref">here</span></a>
+<p><a class="reference internal" href="#sphx-glr-download-gallery-0006-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="piecewise-cubic-daubechies-basis-gaussian-measurements">
@@ -170,6 +170,7 @@ have to reconstruct <span class="math notranslate nohighlight">\(\bx\)</span> us
 
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">crn</span>
+<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
 <span class="kn">import</span> <span class="nn">cr.sparse.plots</span> <span class="k">as</span> <span class="nn">crplot</span>
 </pre></div>
 </div>
@@ -179,7 +180,7 @@ have to reconstruct <span class="math notranslate nohighlight">\(\bx\)</span> us
 using our test problems module.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cr.sparse</span> <span class="kn">import</span> <span class="n">problems</span>
 <span class="n">prob</span> <span class="o">=</span> <span class="n">problems</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="s1">&#39;piecewise-cubic-poly:daubechies:gaussian&#39;</span><span class="p">)</span>
-<a href="https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a> <span class="o">=</span> <span class="n">problems</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
+<a href="https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a><span class="p">,</span> <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a> <span class="o">=</span> <span class="n">problems</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
 </pre></div>
 </div>
 <img src="../_images/sphx_glr_0006_001.png" srcset="../_images/sphx_glr_0006_001.png" alt="Piecewise cubic polynomial, Wavelet coefficients, Measurements" class = "sphx-glr-single-img"/><p>Let us access the relevant parts of our test problem</p>
@@ -271,10 +272,38 @@ Iterations: 20
 </pre></div>
 </div>
 <p>We will now try to estimate a 250-sparse representation</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tracker</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">ProgressTracker</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="n">tracker</span><span class="o">=</span><span class="n">tracker</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Let us check if we correctly decoded all the nonzero entries
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[1] x_norm: 9.02e-01, r_norm: 2.17e-01, SNR: 0.01 dB
+[2] x_norm: 9.95e-01, r_norm: 6.92e-02, SNR: 0.01 dB
+[3] x_norm: 1.01e+00, r_norm: 4.00e-02, SNR: 0.01 dB
+[4] x_norm: 1.01e+00, r_norm: 3.15e-02, SNR: 0.01 dB
+[5] x_norm: 1.02e+00, r_norm: 2.22e-02, SNR: 0.01 dB
+[6] x_norm: 1.02e+00, r_norm: 1.81e-02, SNR: 0.01 dB
+[7] x_norm: 1.02e+00, r_norm: 1.69e-02, SNR: 0.01 dB
+[8] x_norm: 1.02e+00, r_norm: 1.56e-02, SNR: 0.01 dB
+[9] x_norm: 1.02e+00, r_norm: 1.53e-02, SNR: 0.01 dB
+[10] x_norm: 1.03e+00, r_norm: 1.51e-02, SNR: 0.01 dB
+[11] x_norm: 1.03e+00, r_norm: 1.48e-02, SNR: 0.01 dB
+[12] x_norm: 1.03e+00, r_norm: 1.37e-02, SNR: 0.01 dB
+[13] x_norm: 1.03e+00, r_norm: 1.09e-02, SNR: 0.01 dB
+[14] x_norm: 1.03e+00, r_norm: 6.98e-03, SNR: 0.01 dB
+[15] x_norm: 1.03e+00, r_norm: 3.38e-03, SNR: 0.01 dB
+[16] x_norm: 1.03e+00, r_norm: 1.18e-03, SNR: 0.01 dB
+[17] x_norm: 1.03e+00, r_norm: 5.14e-04, SNR: 0.01 dB
+[18] x_norm: 1.03e+00, r_norm: 1.14e-04, SNR: 0.01 dB
+[19] x_norm: 1.03e+00, r_norm: 3.93e-05, SNR: 0.01 dB
+Algorithm converged in 19 iterations.
+</pre></div>
+</div>
+<p>Let us plot the progress of subspace pursuit over different iterations</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a> <span class="o">=</span> <span class="n">crplot</span><span class="o">.</span><span class="n">one_plot</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">tracker</span><span class="o">.</span><span class="n">plot_progress</span><span class="p">(</span><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_0006_002.png" srcset="../_images/sphx_glr_0006_002.png" alt="0006" class = "sphx-glr-single-img"/><p>Let us check if we correctly decoded all the nonzero entries
 in the sparse representation x</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">problems</span><span class="o">.</span><span class="n">analyze_solution</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">sol</span><span class="p">,</span> <span class="n">perc</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
@@ -301,35 +330,35 @@ Iterations: 19
 </div>
 <p>Let us visualize the original and reconstructed representation</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_representations</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a> <span class="o">=</span> <span class="n">crplot</span><span class="o">.</span><span class="n">h_plots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">markerfmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
-    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original representation&#39;</span><span class="p">)</span>
-    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">markerfmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
-    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Reconstructed representation&#39;</span><span class="p">)</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a> <span class="o">=</span> <span class="n">crplot</span><span class="o">.</span><span class="n">h_plots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">markerfmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original representation&#39;</span><span class="p">)</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">markerfmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Reconstructed representation&#39;</span><span class="p">)</span>
 <span class="n">plot_representations</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_0006_002.png" srcset="../_images/sphx_glr_0006_002.png" alt="Original representation, Reconstructed representation" class = "sphx-glr-single-img"/><p>Let us visualize the original and reconstructed signal</p>
+<img src="../_images/sphx_glr_0006_003.png" srcset="../_images/sphx_glr_0006_003.png" alt="Original representation, Reconstructed representation" class = "sphx-glr-single-img"/><p>Let us visualize the original and reconstructed signal</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_signals</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a> <span class="o">=</span> <span class="n">crplot</span><span class="o">.</span><span class="n">h_plots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>
-    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original signal&#39;</span><span class="p">)</span>
-    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Reconstructed signal&#39;</span><span class="p">)</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a> <span class="o">=</span> <span class="n">crplot</span><span class="o">.</span><span class="n">h_plots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original signal&#39;</span><span class="p">)</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Reconstructed signal&#39;</span><span class="p">)</span>
 <span class="n">plot_signals</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_0006_003.png" srcset="../_images/sphx_glr_0006_003.png" alt="Original signal, Reconstructed signal" class = "sphx-glr-single-img"/><p>Let us visualize the original and reconstructed measurements</p>
+<img src="../_images/sphx_glr_0006_004.png" srcset="../_images/sphx_glr_0006_004.png" alt="Original signal, Reconstructed signal" class = "sphx-glr-single-img"/><p>Let us visualize the original and reconstructed measurements</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_measurments</span><span class="p">(</span><span class="n">b0</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a> <span class="o">=</span> <span class="n">crplot</span><span class="o">.</span><span class="n">h_plots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">b0</span><span class="p">)</span>
-    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original measurements&#39;</span><span class="p">)</span>
-    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-    <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Reconstructed measurements&#39;</span><span class="p">)</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a> <span class="o">=</span> <span class="n">crplot</span><span class="o">.</span><span class="n">h_plots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">b0</span><span class="p">)</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original measurements&#39;</span><span class="p">)</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Reconstructed measurements&#39;</span><span class="p">)</span>
 <span class="n">plot_measurments</span><span class="p">(</span><span class="n">b0</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_0006_004.png" srcset="../_images/sphx_glr_0006_004.png" alt="Original measurements, Reconstructed measurements" class = "sphx-glr-single-img"/><p>We will now try to estimate a 278-sparse representation</p>
+<img src="../_images/sphx_glr_0006_005.png" srcset="../_images/sphx_glr_0006_005.png" alt="Original measurements, Reconstructed measurements" class = "sphx-glr-single-img"/><p>We will now try to estimate a 278-sparse representation</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="mi">278</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -352,8 +381,38 @@ Iterations: 18
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cr.sparse.cvx.spgl1</span> <span class="k">as</span> <span class="nn">crspgl1</span>
 <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="o">*</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.linalg.norm.html#jax.numpy.linalg.norm" title="jax.numpy.linalg.norm" class="sphx-glr-backref-module-jax-numpy-linalg sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">b0</span><span class="p">)</span>
 <span class="n">options</span> <span class="o">=</span> <a href="https://docs.python.org/3/library/stdtypes.html#tuple" title="builtins.tuple" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class"><span class="n">crspgl1</span><span class="o">.</span><span class="n">SPGL1Options</span></a><span class="p">(</span><span class="n">max_iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">sol</span> <span class="o">=</span> <span class="n">crspgl1</span><span class="o">.</span><span class="n">solve_bpic_jit</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
-<span class="n">problems</span><span class="o">.</span><span class="n">analyze_solution</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">sol</span><span class="p">,</span> <span class="n">perc</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">tracker</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">ProgressTracker</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">every</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">crspgl1</span><span class="o">.</span><span class="n">solve_bpic_jit</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span>
+    <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">tracker</span><span class="o">=</span><span class="n">tracker</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[5] x_norm: 4.51e+02, r_norm: 3.46e+02, SNR: 6.15 dB
+[10] x_norm: 5.92e+02, r_norm: 1.25e+02, SNR: 10.58 dB
+[15] x_norm: 6.67e+02, r_norm: 1.04e+02, SNR: 15.33 dB
+[20] x_norm: 6.72e+02, r_norm: 8.73e+01, SNR: 16.29 dB
+[25] x_norm: 6.92e+02, r_norm: 2.75e+01, SNR: 18.33 dB
+[30] x_norm: 7.00e+02, r_norm: 2.26e+01, SNR: 20.01 dB
+[35] x_norm: 7.08e+02, r_norm: 2.12e+01, SNR: 22.07 dB
+[40] x_norm: 7.12e+02, r_norm: 2.00e+01, SNR: 23.03 dB
+[45] x_norm: 7.14e+02, r_norm: 1.97e+01, SNR: 23.85 dB
+[50] x_norm: 7.14e+02, r_norm: 1.97e+01, SNR: 23.99 dB
+[55] x_norm: 7.17e+02, r_norm: 8.20e+00, SNR: 24.59 dB
+[60] x_norm: 7.18e+02, r_norm: 6.87e+00, SNR: 24.91 dB
+[65] x_norm: 7.19e+02, r_norm: 6.95e+00, SNR: 25.32 dB
+[70] x_norm: 7.19e+02, r_norm: 6.97e+00, SNR: 25.58 dB
+[75] x_norm: 7.20e+02, r_norm: 7.06e+00, SNR: 25.91 dB
+[80] x_norm: 7.20e+02, r_norm: 7.05e+00, SNR: 26.28 dB
+[85] x_norm: 7.21e+02, r_norm: 7.07e+00, SNR: 26.65 dB
+[90] x_norm: 7.21e+02, r_norm: 7.08e+00, SNR: 26.87 dB
+[95] x_norm: 7.22e+02, r_norm: 7.09e+00, SNR: 27.12 dB
+[100] x_norm: 7.22e+02, r_norm: 7.08e+00, SNR: 27.41 dB
+[105] x_norm: 7.22e+02, r_norm: 7.09e+00, SNR: 27.59 dB
+[109] x_norm: 7.22e+02, r_norm: 7.09e+00, SNR: 27.61 dB
+Algorithm converged in 109 iterations.
+</pre></div>
+</div>
+<p>Analyze the solution</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">problems</span><span class="o">.</span><span class="n">analyze_solution</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">sol</span><span class="p">,</span> <span class="n">perc</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>m: 600, n: 2048
@@ -367,16 +426,51 @@ Iterations: 109 n_times: 169, n_trans: 126
 <p>Try with lower threshold on allowed noise</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.001</span> <span class="o">*</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.linalg.norm.html#jax.numpy.linalg.norm" title="jax.numpy.linalg.norm" class="sphx-glr-backref-module-jax-numpy-linalg sphx-glr-backref-type-py-function"><span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span></a><span class="p">(</span><span class="n">b0</span><span class="p">)</span>
 <span class="n">options</span> <span class="o">=</span> <a href="https://docs.python.org/3/library/stdtypes.html#tuple" title="builtins.tuple" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class"><span class="n">crspgl1</span><span class="o">.</span><span class="n">SPGL1Options</span></a><span class="p">(</span><span class="n">max_iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">sol</span> <span class="o">=</span> <span class="n">crspgl1</span><span class="o">.</span><span class="n">solve_bpic_jit</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
-<span class="n">problems</span><span class="o">.</span><span class="n">analyze_solution</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">sol</span><span class="p">,</span> <span class="n">perc</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">tracker</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">ProgressTracker</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">every</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">crspgl1</span><span class="o">.</span><span class="n">solve_bpic_jit</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span>
+    <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">tracker</span><span class="o">=</span><span class="n">tracker</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[20] x_norm: 6.75e+02, r_norm: 8.29e+01, SNR: 16.64 dB
+[40] x_norm: 7.12e+02, r_norm: 1.56e+01, SNR: 22.89 dB
+[60] x_norm: 7.17e+02, r_norm: 1.49e+01, SNR: 25.14 dB
+[80] x_norm: 7.21e+02, r_norm: 2.82e+00, SNR: 26.06 dB
+[100] x_norm: 7.21e+02, r_norm: 2.52e+00, SNR: 26.56 dB
+[120] x_norm: 7.23e+02, r_norm: 2.37e+00, SNR: 27.18 dB
+[140] x_norm: 7.23e+02, r_norm: 2.28e+00, SNR: 27.86 dB
+[160] x_norm: 7.24e+02, r_norm: 2.25e+00, SNR: 28.33 dB
+[180] x_norm: 7.25e+02, r_norm: 7.61e-01, SNR: 28.60 dB
+[200] x_norm: 7.25e+02, r_norm: 6.95e-01, SNR: 28.66 dB
+[220] x_norm: 7.25e+02, r_norm: 7.09e-01, SNR: 28.73 dB
+[240] x_norm: 7.25e+02, r_norm: 7.08e-01, SNR: 28.79 dB
+[260] x_norm: 7.25e+02, r_norm: 7.02e-01, SNR: 28.94 dB
+[280] x_norm: 7.25e+02, r_norm: 7.08e-01, SNR: 29.06 dB
+[300] x_norm: 7.26e+02, r_norm: 7.08e-01, SNR: 29.21 dB
+[320] x_norm: 7.26e+02, r_norm: 7.08e-01, SNR: 29.27 dB
+[340] x_norm: 7.26e+02, r_norm: 7.08e-01, SNR: 29.32 dB
+[360] x_norm: 7.26e+02, r_norm: 7.09e-01, SNR: 29.40 dB
+[380] x_norm: 7.26e+02, r_norm: 7.08e-01, SNR: 29.48 dB
+[400] x_norm: 7.26e+02, r_norm: 7.09e-01, SNR: 29.55 dB
+[420] x_norm: 7.26e+02, r_norm: 7.09e-01, SNR: 29.63 dB
+[423] x_norm: 7.26e+02, r_norm: 7.09e-01, SNR: 29.64 dB
+Algorithm converged in 423 iterations.
+</pre></div>
+</div>
+<p>Let us plot the progress of SPGL1 over different iterations</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a> <span class="o">=</span> <span class="n">crplot</span><span class="o">.</span><span class="n">one_plot</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">tracker</span><span class="o">.</span><span class="n">plot_progress</span><span class="p">(</span><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_0006_006.png" srcset="../_images/sphx_glr_0006_006.png" alt="0006" class = "sphx-glr-single-img"/><p>Analyze the solution</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">problems</span><span class="o">.</span><span class="n">analyze_solution</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">sol</span><span class="p">,</span> <span class="n">perc</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>m: 600, n: 2048
-b_norm: original: 709.229 reconstruction: 708.995 SNR: 60.00 dB
-x_norm: original: 733.968 reconstruction: 725.669 SNR: 29.33 dB
-y_norm: original: 733.967 reconstruction: 725.669 SNR: 29.33 dB
-Sparsity: original: 278, reconstructed: 615, overlap: 196, ratio: 0.319
-Iterations: 469 n_times: 847, n_trans: 510
+b_norm: original: 709.229 reconstruction: 708.996 SNR: 60.00 dB
+x_norm: original: 733.968 reconstruction: 725.987 SNR: 29.64 dB
+y_norm: original: 733.967 reconstruction: 725.988 SNR: 29.64 dB
+Sparsity: original: 278, reconstructed: 612, overlap: 198, ratio: 0.324
+Iterations: 423 n_times: 755, n_trans: 454
 </pre></div>
 </div>
 <p>The estimated sparse representation</p>
@@ -395,15 +489,15 @@ Iterations: 469 n_times: 847, n_trans: 510
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot_representations</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_0006_005.png" srcset="../_images/sphx_glr_0006_005.png" alt="Original representation, Reconstructed representation" class = "sphx-glr-single-img"/><p>Let us visualize the original and reconstructed signal</p>
+<img src="../_images/sphx_glr_0006_007.png" srcset="../_images/sphx_glr_0006_007.png" alt="Original representation, Reconstructed representation" class = "sphx-glr-single-img"/><p>Let us visualize the original and reconstructed signal</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot_signals</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_0006_006.png" srcset="../_images/sphx_glr_0006_006.png" alt="Original signal, Reconstructed signal" class = "sphx-glr-single-img"/><p>Let us visualize the original and reconstructed measurements</p>
+<img src="../_images/sphx_glr_0006_008.png" srcset="../_images/sphx_glr_0006_008.png" alt="Original signal, Reconstructed signal" class = "sphx-glr-single-img"/><p>Let us visualize the original and reconstructed measurements</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot_measurments</span><span class="p">(</span><span class="n">b0</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_0006_007.png" srcset="../_images/sphx_glr_0006_007.png" alt="Original measurements, Reconstructed measurements" class = "sphx-glr-single-img"/></section>
+<img src="../_images/sphx_glr_0006_009.png" srcset="../_images/sphx_glr_0006_009.png" alt="Original measurements, Reconstructed measurements" class = "sphx-glr-single-img"/></section>
 <section id="comments">
 <h2><a class="toc-backref" href="#id4">Comments</a><a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -441,7 +535,7 @@ by a factor of 10), the improvement in signal SNR is not that good.
 Having a tighter bound on residual norm doesn’t lead significantly better
 reconstruction.</p></li>
 </ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  58.967 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 53.470 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-0006-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/c956588080215b0eae476c3e5a60e3bb/0006.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">0006.py</span></code></a></p>
@@ -466,7 +560,7 @@ reconstruction.</p></li>
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="../_sources/gallery/0006.rst.txt"

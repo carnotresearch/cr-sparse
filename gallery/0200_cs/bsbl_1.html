@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -130,7 +130,7 @@
             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-gallery-0200-cs-bsbl-1-py"><span class="std std-ref">here</span></a>
+<p><a class="reference internal" href="#sphx-glr-download-gallery-0200-cs-bsbl-1-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="block-sparse-bayesian-learning">
@@ -308,7 +308,7 @@ by the authors of the original algorithm for further information.</p>
 <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span><span class="o">.</span><span class="n">imshow</span></a><span class="p">(</span><span class="n">Phi</span><span class="p">);</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_bsbl_1_002.png" srcset="../../_images/sphx_glr_bsbl_1_002.png" alt="bsbl 1" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage object at 0x7fc05c380160&gt;
+<img src="../../_images/sphx_glr_bsbl_1_002.png" srcset="../../_images/sphx_glr_bsbl_1_002.png" alt="bsbl 1" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage object at 0x7fc2f2bfe760&gt;
 </pre></div>
 </div>
 <p>Measurements</p>
@@ -338,7 +338,7 @@ dmu=1.33e-10
 </div>
 <p>Reconstructed signal</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_hat</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;BSBL-EM: PRD: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">prd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> %, SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB.&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;BSBL-EM: PRD: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">prd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> %, SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB.&#39;</span> <span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>BSBL-EM: PRD: 0.0 %, SNR: 198.62 dB.
@@ -375,7 +375,7 @@ dmu=1.14e-10
 </div>
 <p>Reconstructed signal</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_hat</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;BSBL-BO: PRD: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">prd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> %, SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB.&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;BSBL-BO: PRD: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">prd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> %, SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB.&#39;</span> <span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>BSBL-BO: PRD: 0.0 %, SNR: 199.47 dB.
@@ -417,7 +417,7 @@ using bound optimization a.k.a. majorization-minimization.</p></li>
 <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span><span class="o">.</span><span class="n">spy</span></a><span class="p">(</span><span class="n">Phi</span><span class="p">);</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_bsbl_1_006.png" srcset="../../_images/sphx_glr_bsbl_1_006.png" alt="bsbl 1" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage object at 0x7fc047ade400&gt;
+<img src="../../_images/sphx_glr_bsbl_1_006.png" srcset="../../_images/sphx_glr_bsbl_1_006.png" alt="bsbl 1" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage object at 0x7fc2f0b3dee0&gt;
 </pre></div>
 </div>
 <p>Measurements</p>
@@ -439,12 +439,12 @@ blocks=75, nonzero=6
 r_norm=2.12e-10
 x_norm=2.45e+00
 lambda=1.00e-12
-dmu=1.14e-10
+dmu=1.15e-10
 </pre></div>
 </div>
 <p>Reconstructed signal</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_hat</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;BSBL-EM: PRD: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">prd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> %, SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB.&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;BSBL-EM: PRD: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">prd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> %, SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB.&#39;</span> <span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>BSBL-EM: PRD: 0.0 %, SNR: 199.70 dB.
@@ -478,10 +478,10 @@ dmu=9.35e-11
 </div>
 <p>Reconstructed signal</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_hat</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;BSBL-BO: PRD: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">prd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> %, SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB.&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;BSBL-BO: PRD: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">prd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> %, SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB.&#39;</span> <span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>BSBL-BO: PRD: 0.0 %, SNR: 200.74 dB.
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>BSBL-BO: PRD: 0.0 %, SNR: 200.75 dB.
 </pre></div>
 </div>
 <p>Plot the original and reconstructed signal</p>
@@ -547,7 +547,7 @@ are corrupted with significant amount of noise.</p>
 </div>
 <p>Addition of noise to measurements</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">y0</span> <span class="o">+</span> <span class="n">noise</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;measurement SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;measurement SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>measurement SNR: 15.96 dB
@@ -559,7 +559,7 @@ are corrupted with significant amount of noise.</p>
 <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_bsbl_1_011.png" srcset="../../_images/sphx_glr_bsbl_1_011.png" alt="bsbl 1" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc05cfb5fa0&gt;]
+<img src="../../_images/sphx_glr_bsbl_1_011.png" srcset="../../_images/sphx_glr_bsbl_1_011.png" alt="bsbl 1" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc2f0750940&gt;]
 </pre></div>
 </div>
 <section id="reconstruction-benchmark">
@@ -573,7 +573,7 @@ the quality of reconstruction by any other algorithm.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find the least square solution</span>
 <span class="n">x_ls_coeffs</span> <span class="o">=</span> <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.custom_jvp.html#jax.custom_jvp" title="jax._src.custom_derivatives.custom_jvp" class="sphx-glr-backref-module-jax-_src-custom_derivatives sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span></a><span class="p">(</span><span class="n">Phi</span><span class="p">[:,</span> <span class="n">indices</span><span class="p">])</span> <span class="o">@</span> <span class="n">y</span>
 <span class="n">x_ls</span> <span class="o">=</span> <span class="n">crdsp</span><span class="o">.</span><span class="n">build_signal_from_indices_and_values</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">n</span></a><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">x_ls_coeffs</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Benchmark rec: PRD: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">prd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_ls</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> %, SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_ls</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Benchmark rec: PRD: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">prd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_ls</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> %, SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_ls</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Benchmark rec: PRD: 13.3 %, SNR: 17.55 dB
@@ -607,7 +607,7 @@ dmu=7.40e-09
 </div>
 <p>Reconstructed signal</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_hat</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;BSBL-EM: PRD: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">prd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> %, SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB.&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;BSBL-EM: PRD: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">prd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> %, SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB.&#39;</span> <span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>BSBL-EM: PRD: 11.0 %, SNR: 19.16 dB.
@@ -641,7 +641,7 @@ dmu=9.77e-09
 </div>
 <p>Reconstructed signal</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_hat</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;BSBL-BO: PRD: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">prd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> %, SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB.&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;BSBL-BO: PRD: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">prd</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> %, SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x_hat</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> dB.&#39;</span> <span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>BSBL-BO: PRD: 10.6 %, SNR: 19.45 dB.
@@ -669,7 +669,7 @@ modeled as an AR-1 process.</p></li>
 intra block correlation structure at all.</p></li>
 <li><p>In this example BSBL-BO is somewhat faster than BSBL-EM but not by much.</p></li>
 </ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  16.122 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 14.323 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-0200-cs-bsbl-1-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/c08e561210b900705a06031680f060e1/bsbl_1.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">bsbl_1.py</span></code></a></p>
@@ -695,7 +695,7 @@ intra block correlation structure at all.</p></li>
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="../../_sources/gallery/0200_cs/bsbl_1.rst.txt"

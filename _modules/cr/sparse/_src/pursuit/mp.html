@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -119,23 +119,25 @@
 <span class="c1"># limitations under the License.</span>
 
 <span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">jax</span>
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">lax</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">from</span> <span class="nn">jax.numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
 <span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
 <span class="kn">import</span> <span class="nn">cr.nimble.dsp</span> <span class="k">as</span> <span class="nn">crdsp</span>
 
 <span class="k">class</span> <span class="nc">MPState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;State of matching pursuit algorithm</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;State of matching pursuit algorithm</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># The non-zero values</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;Non-zero values&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Non-zero values&quot;&quot;&quot;</span>
     <span class="n">r</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;The residuals&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The residuals&quot;&quot;&quot;</span>
     <span class="n">r_norm_sqr</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="sd">&quot;&quot;&quot;The residual norm squared&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The residual norm squared&quot;&quot;&quot;</span>
     <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
 
     <span class="nd">@property</span>
@@ -151,7 +153,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">size</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the string representation of the state</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the string representation of the state</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">r_norm</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_norm_sqr</span><span class="p">))</span>
@@ -166,8 +168,8 @@
         <span class="k">return</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.mp.solve.html#cr.sparse.pursuit.mp.solve">[docs]</a><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">res_norm_rtol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem :math:`y = \Phi x + e`</span>
+<div class="viewcode-block" id="solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.mp.solve.html#cr.sparse.pursuit.mp.solve">[docs]</a><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">res_norm_rtol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">tracker</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">noop_tracker</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem :math:`y = \Phi x + e`</span>
 <span class="sd">    using matching pursuit algorithm</span>
 
 <span class="sd">    Args:</span>
@@ -227,6 +229,7 @@
             <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">cond_func</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
         <span class="c1"># limit on residual norm </span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">r_norm_sqr</span> <span class="o">&gt;</span> <span class="n">max_r_norm_sqr</span>
         <span class="c1"># limit on number of iterations</span>
@@ -241,8 +244,8 @@
     <span class="k">return</span> <span class="n">state</span></div>
 
 
-<div class="viewcode-block" id="matrix_solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.mp.matrix_solve.html#cr.sparse.pursuit.mp.matrix_solve">[docs]</a><span class="k">def</span> <span class="nf">matrix_solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">res_norm_rtol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem :math:`y = \Phi x + e`</span>
+<div class="viewcode-block" id="matrix_solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.mp.matrix_solve.html#cr.sparse.pursuit.mp.matrix_solve">[docs]</a><span class="k">def</span> <span class="nf">matrix_solve</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">res_norm_rtol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">tracker</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">noop_tracker</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem :math:`y = \Phi x + e`</span>
 <span class="sd">    using matching pursuit algorithm</span>
 
 <span class="sd">    Args:</span>
@@ -302,6 +305,7 @@
             <span class="n">iterations</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">cond_func</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+        <span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
         <span class="c1"># limit on residual norm </span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">r_norm_sqr</span> <span class="o">&gt;</span> <span class="n">max_r_norm_sqr</span>
         <span class="c1"># limit on number of iterations</span>
@@ -327,7 +331,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

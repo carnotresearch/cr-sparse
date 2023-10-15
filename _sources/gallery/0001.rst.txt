@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_0001.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_0001.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -314,7 +314,7 @@ Let us visualize the original and reconstructed signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc04bfa7b50>]
+    [<matplotlib.lines.Line2D object at 0x7fc2fb023dc0>]
 
 
 
@@ -341,10 +341,10 @@ Sparse Recovery using SPGL1
  .. code-block:: none
 
     m: 1024, n: 2048
-    b_norm: original: 75.465 reconstruction: 75.465 SNR: 117.56 dB
-    x_norm: original: 127.687 reconstruction: 71.466 SNR: 2.33 dB
-    Sparsity: original: 5, reconstructed: 282, overlap: 4, ratio: 0.014
-    Iterations: 1508 n_times: 2636, n_trans: 1509
+    b_norm: original: 75.465 reconstruction: 75.465 SNR: 118.08 dB
+    x_norm: original: 127.687 reconstruction: 70.851 SNR: 2.30 dB
+    Sparsity: original: 5, reconstructed: 301, overlap: 4, ratio: 0.013
+    Iterations: 1668 n_times: 2917, n_trans: 1669
 
 
 
@@ -409,7 +409,7 @@ Let us visualize the original and reconstructed signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc04bdece20>]
+    [<matplotlib.lines.Line2D object at 0x7fc2fa557d00>]
 
 
 
@@ -425,7 +425,7 @@ Comments
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  12.432 seconds)
+   **Total running time of the script:** (0 minutes 10.752 seconds)
 
 
 .. _sphx_glr_download_gallery_0001.py:
@@ -433,6 +433,8 @@ Comments
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

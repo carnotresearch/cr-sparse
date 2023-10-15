@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -188,18 +188,18 @@
 
 
 <span class="k">class</span> <span class="nc">State</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;State of the TNIPM algorithm</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;State of the TNIPM algorithm</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;Primal variable&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Primal variable&quot;&quot;&quot;</span>
     <span class="n">u</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;Auxiliary Primal variable&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Auxiliary Primal variable&quot;&quot;&quot;</span>
     <span class="n">z</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;Primal residual z = A x - y&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Primal residual z = A x - y&quot;&quot;&quot;</span>
     <span class="n">nu</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;Dual variable&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Dual variable&quot;&quot;&quot;</span>
     <span class="n">dxu</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot; Delta in x and u, the result of PCG step&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Delta in x and u, the result of PCG step&quot;&quot;&quot;</span>
     <span class="n">primal_obj</span><span class="p">:</span> <span class="nb">float</span>
     <span class="s2">&quot;Primal objective function value&quot;</span>
     <span class="n">dual_obj</span><span class="p">:</span> <span class="nb">float</span>
@@ -209,20 +209,20 @@
     <span class="n">rel_gap</span> <span class="p">:</span> <span class="nb">float</span>
     <span class="s2">&quot;relative gap&quot;</span>
     <span class="n">s</span> <span class="p">:</span> <span class="nb">float</span>
-    <span class="sd">&quot;&quot;&quot; Step size for line search&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Step size for line search&quot;&quot;&quot;</span>
     <span class="n">t</span> <span class="p">:</span> <span class="nb">float</span> 
-    <span class="sd">&quot;&quot;&quot; Central path parameter&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Central path parameter&quot;&quot;&quot;</span>
     <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span>
     <span class="n">n_times</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="sd">&quot;&quot;&quot;Number of times A x computed &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Number of times A x computed &quot;&quot;&quot;</span>
     <span class="n">n_trans</span> <span class="p">:</span> <span class="nb">int</span>
-    <span class="sd">&quot;&quot;&quot;Number of times A.T b computed &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Number of times A.T b computed &quot;&quot;&quot;</span>
 
 
 <div class="viewcode-block" id="solve_from"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cvx.l1ls.solve_from.html#cr.sparse.cvx.l1ls.solve_from">[docs]</a><span class="k">def</span> <span class="nf">solve_from</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">xi</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">t0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">max_iters</span><span class="o">=</span><span class="n">MAX_ITERS</span><span class="p">,</span> <span class="n">pcg_max_iters</span><span class="o">=</span><span class="n">PCG_MAX_ITERS</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves :math:`\min \| A x - b \|_2^2 + \\lambda \| x \|_1` using the Truncated Newton Interior Point Method</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">trans</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">trans</span>
@@ -240,17 +240,17 @@
     <span class="n">diag_AtA</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_primal_obj</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Computes the primal objective from primal variables&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the primal objective from primal variables&quot;&quot;&quot;</span>
         <span class="c1"># eq 7</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="o">+</span> <span class="n">lambda_</span><span class="o">*</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">get_dual_obj</span><span class="p">(</span><span class="n">nu</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Computes dual objective from dual variables&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes dual objective from dual variables&quot;&quot;&quot;</span>
         <span class="c1"># Eq 10</span>
         <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.25</span><span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">nu</span><span class="p">)</span> <span class="o">-</span> <span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">get_nu</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Computes the dual variable nu from primal residual z&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the dual variable nu from primal residual z&quot;&quot;&quot;</span>
         <span class="n">nu</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">z</span> <span class="c1"># eq 11</span>
         <span class="n">Atnu</span> <span class="o">=</span> <span class="n">trans</span><span class="p">(</span><span class="n">nu</span><span class="p">)</span>
         <span class="n">Atnu_max</span>  <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">Atnu</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
@@ -260,7 +260,7 @@
         <span class="k">return</span> <span class="n">nu</span>
 
     <span class="k">def</span> <span class="nf">get_phi</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the log barrier Phi_t Sec IV.A [scaled by 1/t]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">z</span><span class="p">)</span> <span class="o">+</span> <span class="n">lambda_</span><span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="o">-</span><span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="n">f</span><span class="p">))</span><span class="o">/</span><span class="n">t</span>
@@ -317,7 +317,7 @@
         <span class="c1"># Hessian operator IV.B</span>
         <span class="c1">#--------------------------------------------------------------------------------</span>
         <span class="k">def</span> <span class="nf">hessian</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Computes the Hessian of Phi for a given x : y = H x&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Computes the Hessian of Phi for a given x : y = H x&quot;&quot;&quot;</span>
             <span class="c1"># split x into upper and lower parts</span>
             <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
             <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">:]</span>
@@ -340,7 +340,7 @@
         <span class="n">p3</span> <span class="o">=</span> <span class="n">prb</span> <span class="o">/</span> <span class="n">prs</span>
 
         <span class="k">def</span> <span class="nf">preconditioner</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Computes the inverse y = M \ x where M is the preconditioner operator&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Computes the inverse y = M \ x where M is the preconditioner operator&quot;&quot;&quot;</span>
             <span class="n">x1</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
             <span class="n">x2</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">:]</span>
             <span class="n">upper</span> <span class="o">=</span>  <span class="n">p1</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">p2</span> <span class="o">*</span> <span class="n">x2</span>
@@ -458,7 +458,7 @@
             <span class="n">n_trans</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">n_trans</span><span class="o">+</span><span class="n">n_trans</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">cond</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Condition for continuing the iterations TNIPM step 6</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Condition for continuing the iterations TNIPM step 6</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#print(f&#39;[{state.iterations}] primal:{float(state.primal_obj):.3e} dual:{float(state.dual_obj):.3e} gap:{float(state.gap):.3e} rel:{float(state.rel_gap):.2f}&#39;)</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">rel_gap</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">max_iters</span><span class="p">)</span>
@@ -477,7 +477,7 @@
 
 <div class="viewcode-block" id="solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cvx.l1ls.solve.html#cr.sparse.cvx.l1ls.solve">[docs]</a><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">xi</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">t0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">max_iters</span><span class="o">=</span><span class="n">MAX_ITERS</span><span class="p">,</span> <span class="n">pcg_max_iters</span><span class="o">=</span><span class="n">PCG_MAX_ITERS</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves :math:`\min \| A x - b \|_2^2 + \\lambda \| x \|_1` using the Truncated Newton Interior Point Method</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
@@ -500,7 +500,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

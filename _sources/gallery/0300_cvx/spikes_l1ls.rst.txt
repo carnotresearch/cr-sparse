@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_0300_cvx_spikes_l1ls.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_0300_cvx_spikes_l1ls.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -124,7 +124,7 @@ The Spikes
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc046ff2c40>]
+    [<matplotlib.lines.Line2D object at 0x7fc2efd52b50>]
 
 
 
@@ -180,7 +180,7 @@ Measurement process
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc047406670>]
+    [<matplotlib.lines.Line2D object at 0x7fc30c419490>]
 
 
 
@@ -262,7 +262,7 @@ Solution
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc05c1257c0>]
+    [<matplotlib.lines.Line2D object at 0x7fc2ef9b77f0>]
 
 
 
@@ -292,7 +292,7 @@ The magnitudes of non-zero values
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc05c292190>]
+    [<matplotlib.lines.Line2D object at 0x7fc2eea53ac0>]
 
 
 
@@ -326,7 +326,7 @@ Thresholding for large values
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc046380970>]
+    [<matplotlib.lines.Line2D object at 0x7fc2ee940280>]
 
 
 
@@ -353,7 +353,7 @@ Verifying the support recovery
  .. code-block:: none
 
 
-    DeviceArray(True, dtype=bool)
+    Array(True, dtype=bool)
 
 
 
@@ -403,14 +403,14 @@ Improvement using least squares over support
     (1024, 160)
     ls_rel_error=2.070e-02
 
-    [<matplotlib.lines.Line2D object at 0x7fc047879a60>]
+    [<matplotlib.lines.Line2D object at 0x7fc2ee907250>]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  8.222 seconds)
+   **Total running time of the script:** (0 minutes 6.018 seconds)
 
 
 .. _sphx_glr_download_gallery_0300_cvx_spikes_l1ls.py:
@@ -418,6 +418,8 @@ Improvement using least squares over support
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

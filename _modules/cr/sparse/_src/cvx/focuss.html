@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -128,7 +128,7 @@
 
 
 <div class="viewcode-block" id="step_noiseless"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cvx.focuss.step_noiseless.html#cr.sparse.cvx.focuss.step_noiseless">[docs]</a><span class="k">def</span> <span class="nf">step_noiseless</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A step in the FOCUSS algorithm</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A step in the FOCUSS algorithm</span>
 
 <span class="sd">    FOCUSS (FOcal Underdetermined System Solver)</span>
 <span class="sd">    uses an iterated reweighted least squares method.</span>
@@ -145,7 +145,7 @@
     <span class="k">return</span> <span class="n">x</span></div>
 
 <span class="k">class</span> <span class="nc">FocussState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;State of iterative reweighted least squares algorithm</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;State of iterative reweighted least squares algorithm</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># The non-zero values</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
@@ -172,7 +172,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">I</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the string representation</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the string representation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">r_norm</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r_norm_sqr</span><span class="p">))</span>
@@ -189,7 +189,7 @@
 
 
 <div class="viewcode-block" id="matrix_solve_noiseless"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cvx.focuss.matrix_solve_noiseless.html#cr.sparse.cvx.focuss.matrix_solve_noiseless">[docs]</a><span class="k">def</span> <span class="nf">matrix_solve_noiseless</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem using FOCUSS.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Solves the sparse recovery problem using FOCUSS.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        Phi(jax.numpy.ndarray): A sensing matrix / dictionary</span>
@@ -253,7 +253,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

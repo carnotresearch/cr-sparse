@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
@@ -127,7 +127,7 @@
 <span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
 
 <div class="viewcode-block" id="indicator_zero"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.indicator_zero.html#cr.sparse.opt.indicator_zero">[docs]</a><span class="k">def</span> <span class="nf">indicator_zero</span><span class="p">():</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns an indicator function for all zero arrays</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns an indicator function for all zero arrays</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        An indicator function</span>
@@ -163,7 +163,7 @@
 
 
 <div class="viewcode-block" id="indicator_singleton"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.indicator_singleton.html#cr.sparse.opt.indicator_singleton">[docs]</a><span class="k">def</span> <span class="nf">indicator_singleton</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns an indicator function for a singleton set :math:`C = \{c\}`</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns an indicator function for a singleton set :math:`C = \{c\}`</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        c (jax.numpy.ndarray): An array</span>
@@ -206,7 +206,7 @@
 
 
 <div class="viewcode-block" id="indicator_affine"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.indicator_affine.html#cr.sparse.opt.indicator_affine">[docs]</a><span class="k">def</span> <span class="nf">indicator_affine</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns an indicator function for the linear system  :math:`A x = b`</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns an indicator function for the linear system  :math:`A x = b`</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        A (jax.numpy.ndarray): A matrix :math:`A \in \RR^{m \times n}`</span>
@@ -246,7 +246,7 @@
 
 
 <div class="viewcode-block" id="indicator_box"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.indicator_box.html#cr.sparse.opt.indicator_box">[docs]</a><span class="k">def</span> <span class="nf">indicator_box</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns an indicator function for the box :math:`l \preceq  x \preceq u`</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns an indicator function for the box :math:`l \preceq  x \preceq u`</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        l (jax.numpy.ndarray): Element wise lower bound :math:`l \in \RR^{n}`</span>
@@ -312,7 +312,7 @@
 
 
 <div class="viewcode-block" id="indicator_box_affine"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.indicator_box_affine.html#cr.sparse.opt.indicator_box_affine">[docs]</a><span class="k">def</span> <span class="nf">indicator_box_affine</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns indicator function for the constraints l &lt;= x &lt;= u and a&#39; x = alpha</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns indicator function for the constraints l &lt;= x &lt;= u and a&#39; x = alpha</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;a is required&quot;</span><span class="p">)</span>
@@ -343,7 +343,7 @@
 
 
 <div class="viewcode-block" id="indicator_conic"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.opt.indicator_conic.html#cr.sparse.opt.indicator_conic">[docs]</a><span class="k">def</span> <span class="nf">indicator_conic</span><span class="p">():</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns an indicator function for Lorentz/ice-cream cone :math:`{(x,t): \| x \|_2 \leq t}`</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns an indicator function for Lorentz/ice-cream cone :math:`{(x,t): \| x \|_2 \leq t}`</span>
 
 <span class="sd">    Let :math:`y \in \RR^{n+1}`. Split :math:`y` as :math:`y = (x, t)` where</span>
 <span class="sd">    :math:`x \in \RR^n` and :math:`t` is the last (scalar) entry in :math:`y`.</span>
@@ -384,7 +384,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -134,7 +134,7 @@
 
 <span class="nd">@partial</span><span class="p">(</span><span class="n">jit</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,))</span>
 <span class="k">def</span> <span class="nf">wavedec</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute multilevel wavelet decomposition</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute multilevel wavelet decomposition</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span> <span class="o">=</span> <span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">)</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="n">wt</span><span class="o">.</span><span class="n">dwt_</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="s1">&#39;periodization&#39;</span><span class="p">)</span>
@@ -146,7 +146,7 @@
 
 <span class="nd">@partial</span><span class="p">(</span><span class="n">jit</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,))</span>
 <span class="k">def</span> <span class="nf">waverec</span><span class="p">(</span><span class="n">coefs</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute multilevel wavelet reconstruction</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute multilevel wavelet reconstruction</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">coefs</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span> <span class="o">=</span> <span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">coefs</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span><span class="p">)</span>
     <span class="n">mid</span> <span class="o">=</span> <span class="n">coefs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">level</span>
@@ -161,7 +161,7 @@
 
 <span class="nd">@partial</span><span class="p">(</span><span class="n">jit</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="k">def</span> <span class="nf">wavedec2</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">axes</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute multilevel wavelet decomposition of 2D images</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute multilevel wavelet decomposition of 2D images</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">image</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span> <span class="o">=</span> <span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">dec_lo</span><span class="p">,</span> <span class="n">dec_hi</span><span class="p">)</span>
     <span class="n">ax0</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -186,7 +186,7 @@
 
 <span class="nd">@partial</span><span class="p">(</span><span class="n">jit</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="k">def</span> <span class="nf">waverec2</span><span class="p">(</span><span class="n">coefs</span><span class="p">,</span> <span class="n">rec_lo</span><span class="p">,</span> <span class="n">rec_hi</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">axes</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute multilevel wavelet reconstruction for 2D images</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute multilevel wavelet reconstruction for 2D images</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">coefs</span> <span class="o">=</span> <span class="n">promote_arg_dtypes</span><span class="p">(</span><span class="n">coefs</span><span class="p">)</span>
     <span class="n">ax0</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -228,7 +228,7 @@
 
 
 <div class="viewcode-block" id="dwt"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.dwt.html#cr.sparse.lop.dwt">[docs]</a><span class="k">def</span> <span class="nf">dwt</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">wavelet</span><span class="o">=</span><span class="s2">&quot;haar&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns a 1D Discrete Wavelet Transform operator</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a 1D Discrete Wavelet Transform operator</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        n (int): Dimension of the input signal and output coefficients  </span>
@@ -273,7 +273,7 @@
 
 
 <div class="viewcode-block" id="dwt2D"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.dwt2D.html#cr.sparse.lop.dwt2D">[docs]</a><span class="k">def</span> <span class="nf">dwt2D</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">wavelet</span><span class="o">=</span><span class="s2">&quot;haar&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns a 2D Discrete Wavelet Transform operator</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a 2D Discrete Wavelet Transform operator</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        shape (tuple): Shape of input image / output coefficients  </span>
@@ -346,7 +346,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

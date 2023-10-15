@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -128,7 +128,7 @@
             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-gallery-0002-py"><span class="std std-ref">here</span></a>
+<p><a class="reference internal" href="#sphx-glr-download-gallery-0002-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="blocks-signal-in-haar-basis">
@@ -179,6 +179,7 @@ the actual number of significant components of <span class="math notranslate noh
 
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">crn</span>
+<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
 <span class="kn">import</span> <span class="nn">cr.sparse.plots</span> <span class="k">as</span> <span class="nn">crplot</span>
 </pre></div>
 </div>
@@ -253,7 +254,7 @@ Iterations: 1
 <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_0002_003.png" srcset="../_images/sphx_glr_0002_003.png" alt="0002" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc05c27be50&gt;]
+<img src="../_images/sphx_glr_0002_003.png" srcset="../_images/sphx_glr_0002_003.png" alt="0002" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc30c351fa0&gt;]
 </pre></div>
 </div>
 </section>
@@ -296,7 +297,7 @@ Iterations: 2
 <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_0002_005.png" srcset="../_images/sphx_glr_0002_005.png" alt="0002" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc05c178820&gt;]
+<img src="../_images/sphx_glr_0002_005.png" srcset="../_images/sphx_glr_0002_005.png" alt="0002" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc30c4ad7f0&gt;]
 </pre></div>
 </div>
 </section>
@@ -304,8 +305,22 @@ Iterations: 2
 <h2><a class="toc-backref" href="#id5">Sparse Recovery using SPGL1</a><a class="headerlink" href="#sparse-recovery-using-spgl1" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cr.sparse.cvx.spgl1</span> <span class="k">as</span> <span class="nn">crspgl1</span>
 <span class="n">options</span> <span class="o">=</span> <a href="https://docs.python.org/3/library/stdtypes.html#tuple" title="builtins.tuple" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class"><span class="n">crspgl1</span><span class="o">.</span><span class="n">SPGL1Options</span></a><span class="p">()</span>
-<span class="n">sol</span> <span class="o">=</span> <span class="n">crspgl1</span><span class="o">.</span><span class="n">solve_bp_jit</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
-<span class="n">problems</span><span class="o">.</span><span class="n">analyze_solution</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">sol</span><span class="p">)</span>
+<span class="n">tracker</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">ProgressTracker</span><span class="p">(</span><span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">)</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">crspgl1</span><span class="o">.</span><span class="n">solve_bp_jit</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">tracker</span><span class="o">=</span><span class="n">tracker</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[1] x_norm: 0.00e+00, r_norm: 7.89e+01, SNR: 0.00 dB
+[2] x_norm: 3.05e+01, r_norm: 4.84e+01, SNR: 4.25 dB
+[3] x_norm: 5.74e+01, r_norm: 3.08e+01, SNR: 8.17 dB
+[4] x_norm: 5.74e+01, r_norm: 3.08e+01, SNR: 8.17 dB
+[5] x_norm: 7.61e+01, r_norm: 4.28e+00, SNR: 25.30 dB
+[6] x_norm: 7.61e+01, r_norm: 4.28e+00, SNR: 25.30 dB
+[7] x_norm: 7.89e+01, r_norm: 2.48e-07, SNR: 135.63 dB
+Algorithm converged in 7 iterations.
+</pre></div>
+</div>
+<p>Let’s analyze the solution quality</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">problems</span><span class="o">.</span><span class="n">analyze_solution</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">sol</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>m: 1024, n: 1024
@@ -315,7 +330,12 @@ Sparsity: original: 64, reconstructed: 64, overlap: 64, ratio: 1.000
 Iterations: 7 n_times: 10, n_trans: 8
 </pre></div>
 </div>
-<p>The estimated sparse representation</p>
+<p>Let’s plot the progress of SPGL1 over different iterations</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a> <span class="o">=</span> <span class="n">crplot</span><span class="o">.</span><span class="n">one_plot</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">tracker</span><span class="o">.</span><span class="n">plot_progress</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_0002_006.png" srcset="../_images/sphx_glr_0002_006.png" alt="0002" class = "sphx-glr-single-img"/><p>The estimated sparse representation</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span>
 </pre></div>
 </div>
@@ -329,7 +349,7 @@ Iterations: 7 n_times: 10, n_trans: 8
 <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">markerfmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_0002_006.png" srcset="../_images/sphx_glr_0002_006.png" alt="0002" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;StemContainer object of 3 artists&gt;
+<img src="../_images/sphx_glr_0002_007.png" srcset="../_images/sphx_glr_0002_007.png" alt="0002" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;StemContainer object of 3 artists&gt;
 </pre></div>
 </div>
 <p>Let us visualize the original and reconstructed signal</p>
@@ -338,7 +358,7 @@ Iterations: 7 n_times: 10, n_trans: 8
 <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_0002_007.png" srcset="../_images/sphx_glr_0002_007.png" alt="0002" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc05c688340&gt;]
+<img src="../_images/sphx_glr_0002_008.png" srcset="../_images/sphx_glr_0002_008.png" alt="0002" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc2fba1eeb0&gt;]
 </pre></div>
 </div>
 </section>
@@ -347,7 +367,7 @@ Iterations: 7 n_times: 10, n_trans: 8
 <p>We note that SP converges in a single iteration,
 CoSaMP takes two iterations,
 while SPGL1 takes 9 iterations to converge.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  22.891 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 14.431 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-0002-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/4a4c5474281bb0154c722b2fe4bc515b/0002.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">0002.py</span></code></a></p>
@@ -372,7 +392,7 @@ while SPGL1 takes 9 iterations to converge.</p>
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="../_sources/gallery/0002.rst.txt"

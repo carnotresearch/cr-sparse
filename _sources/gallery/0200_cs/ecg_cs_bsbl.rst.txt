@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_0200_cs_ecg_cs_bsbl.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_0200_cs_ecg_cs_bsbl.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -117,8 +117,10 @@ sampled at 360 Hz.
 
  .. code-block:: none
 
+    /home/runner/work/cr-sparse/cr-sparse/examples/0200_cs/ecg_cs_bsbl.py:48: DeprecationWarning: scipy.misc.electrocardiogram has been deprecated in SciPy v1.10.0; and will be completely removed in SciPy v1.12.0. Dataset methods have moved into the scipy.datasets module. Use scipy.datasets.electrocardiogram instead.
+      ecg = electrocardiogram()
 
-    [<matplotlib.lines.Line2D object at 0x7fc047116f70>]
+    [<matplotlib.lines.Line2D object at 0x7fc2f49d0bb0>]
 
 
 
@@ -164,7 +166,7 @@ Preprocessing
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc05c2b2940>]
+    [<matplotlib.lines.Line2D object at 0x7fc2f099beb0>]
 
 
 
@@ -240,7 +242,7 @@ Measurements
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc05c2ef1f0>]
+    [<matplotlib.lines.Line2D object at 0x7fc2f097c280>]
 
 
 
@@ -268,7 +270,7 @@ Sparse Recovery with BSBL
 
  .. code-block:: none
 
-    Reconstruction time: 1.65 sec
+    Reconstruction time: 1.44 sec
     iterations=20
     block size=25
     blocks=16, nonzero=16
@@ -331,7 +333,7 @@ Plot the original and recovered signals
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc05ca63be0>]
+    [<matplotlib.lines.Line2D object at 0x7fc2f0b0d940>]
 
 
 
@@ -407,7 +409,7 @@ Measurements
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc054b12a30>]
+    [<matplotlib.lines.Line2D object at 0x7fc2f0509c70>]
 
 
 
@@ -435,7 +437,7 @@ Sparse Recovery with BSBL
 
  .. code-block:: none
 
-    Reconstruction time: 1.49 sec
+    Reconstruction time: 1.17 sec
     iterations=20
     block size=25
     blocks=16, nonzero=16
@@ -496,14 +498,14 @@ Plot the original and recovered signals
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc04b4cedf0>]
+    [<matplotlib.lines.Line2D object at 0x7fc2f0c92820>]
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  5.211 seconds)
+   **Total running time of the script:** (0 minutes 4.620 seconds)
 
 
 .. _sphx_glr_download_gallery_0200_cs_ecg_cs_bsbl.py:
@@ -511,6 +513,8 @@ Plot the original and recovered signals
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

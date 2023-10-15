@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -124,7 +124,7 @@
 <span class="kn">from</span> <span class="nn">cr.nimble</span> <span class="kn">import</span> <span class="n">mat_hermitian</span>
 
 <div class="viewcode-block" id="gram"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.gram.html#cr.sparse.dict.gram">[docs]</a><span class="k">def</span> <span class="nf">gram</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Computes the Gram matrix :math:`G = A^T A`</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the Gram matrix :math:`G = A^T A`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">jnp</span><span class="o">.</span><span class="n">isrealobj</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">A</span>
@@ -132,7 +132,7 @@
     <span class="k">return</span> <span class="n">G</span><span class="o">.</span><span class="n">real</span></div>
 
 <div class="viewcode-block" id="frame"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.frame.html#cr.sparse.dict.frame">[docs]</a><span class="k">def</span> <span class="nf">frame</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Computes the frame matrix :math:`G = A A^T`</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the frame matrix :math:`G = A A^T`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">jnp</span><span class="o">.</span><span class="n">isrealobj</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">A</span> <span class="o">@</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span>
@@ -141,7 +141,7 @@
 
 
 <div class="viewcode-block" id="coherence_with_index"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.coherence_with_index.html#cr.sparse.dict.coherence_with_index">[docs]</a><span class="k">def</span> <span class="nf">coherence_with_index</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the coherence of a dictionary A along with indices of most correlated atoms</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the coherence of a dictionary A along with indices of most correlated atoms</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">gram</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
@@ -154,26 +154,26 @@
 
 <div class="viewcode-block" id="coherence"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.coherence.html#cr.sparse.dict.coherence">[docs]</a><span class="nd">@jit</span>
 <span class="k">def</span> <span class="nf">coherence</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Computes the coherence of a dictionary</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the coherence of a dictionary</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">max_val</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">coherence_with_index</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">max_val</span></div>
 
 <div class="viewcode-block" id="frame_bounds"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.frame_bounds.html#cr.sparse.dict.frame_bounds">[docs]</a><span class="k">def</span> <span class="nf">frame_bounds</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Computes the frame bounds (largest and smallest singular valuee)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the frame bounds (largest and smallest singular valuee)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
     <span class="n">indices</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="upper_frame_bound"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.upper_frame_bound.html#cr.sparse.dict.upper_frame_bound">[docs]</a><span class="k">def</span> <span class="nf">upper_frame_bound</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Computes the upper frame bound for a dictionary</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the upper frame bound for a dictionary</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="lower_frame_bound"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.lower_frame_bound.html#cr.sparse.dict.lower_frame_bound">[docs]</a><span class="k">def</span> <span class="nf">lower_frame_bound</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Computes the lower frame bound for a dictionary</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the lower frame bound for a dictionary</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
@@ -181,7 +181,7 @@
 
 <div class="viewcode-block" id="babel"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.babel.html#cr.sparse.dict.babel">[docs]</a><span class="nd">@jit</span>
 <span class="k">def</span> <span class="nf">babel</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Computes the babel function for a dictionary (generalized coherence)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the babel function for a dictionary (generalized coherence)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># compute gram matrix</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">gram</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -199,7 +199,7 @@
 
 
 <div class="viewcode-block" id="mutual_coherence_with_index"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.mutual_coherence_with_index.html#cr.sparse.dict.mutual_coherence_with_index">[docs]</a><span class="k">def</span> <span class="nf">mutual_coherence_with_index</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Mutual coherence between two dictionaries A and B  along with indices of most correlated atoms</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mutual coherence between two dictionaries A and B  along with indices of most correlated atoms</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># compute inner products of atoms of A with atoms of B</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">mat_hermitian</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">@</span> <span class="n">B</span>
@@ -212,7 +212,7 @@
     <span class="k">return</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">index</span></div>
 
 <div class="viewcode-block" id="mutual_coherence"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.mutual_coherence.html#cr.sparse.dict.mutual_coherence">[docs]</a><span class="k">def</span> <span class="nf">mutual_coherence</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;&quot;Mutual coherence between two dictionaries A and B </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;&quot;Mutual coherence between two dictionaries A and B </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">max_val</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">mutual_coherence_with_index</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">max_val</span></div>
@@ -229,7 +229,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

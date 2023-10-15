@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -125,7 +125,7 @@
 <span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">cnb</span>
 
 <div class="viewcode-block" id="to_matrix"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.to_matrix.html#cr.sparse.lop.to_matrix">[docs]</a><span class="k">def</span> <span class="nf">to_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Converts a linear operator to a matrix&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts a linear operator to a matrix&quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">input_size</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">A</span><span class="o">.</span><span class="n">linear</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;This operator is not linear.&quot;</span><span class="p">)</span>
@@ -136,7 +136,7 @@
     <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">))(</span><span class="n">I</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="to_adjoint_matrix"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.to_adjoint_matrix.html#cr.sparse.lop.to_adjoint_matrix">[docs]</a><span class="k">def</span> <span class="nf">to_adjoint_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Converts the adjoint of a linear operator to a matrix&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts the adjoint of a linear operator to a matrix&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">A</span><span class="o">.</span><span class="n">linear</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;This operator is not linear.&quot;</span><span class="p">)</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">output_size</span>
@@ -148,7 +148,7 @@
 
 
 <div class="viewcode-block" id="to_complex_matrix"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.lop.to_complex_matrix.html#cr.sparse.lop.to_complex_matrix">[docs]</a><span class="k">def</span> <span class="nf">to_complex_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Converts a linear operator to a matrix in complex numbers&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts a linear operator to a matrix in complex numbers&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">A</span><span class="o">.</span><span class="n">linear</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;This operator is not linear.&quot;</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -158,7 +158,7 @@
 
 
 <span class="k">def</span> <span class="nf">dot_test_real</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Performs a dot test on the linear operator A&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Performs a dot test on the linear operator A&quot;&quot;&quot;</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
     <span class="c1">#print(f&quot;{m=}, {n=}&quot;)</span>
     <span class="n">keys</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
@@ -192,7 +192,7 @@
     <span class="k">return</span> <span class="n">real_flag</span> <span class="o">&amp;</span> <span class="n">imag_flag</span>
 
 <span class="k">def</span> <span class="nf">rdot_test_complex</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Performs a dot test on the linear operator A with complex inputs where the inner produt is Re(y^H x)&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Performs a dot test on the linear operator A with complex inputs where the inner produt is Re(y^H x)&quot;&quot;&quot;</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">keys</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
     <span class="n">u</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A</span><span class="o">.</span><span class="n">input_shape</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">A</span><span class="o">.</span><span class="n">input_shape</span><span class="p">)</span>
@@ -207,7 +207,7 @@
 
 
 <span class="k">def</span> <span class="nf">apply_along_axis</span><span class="p">(</span><span class="n">times1d</span><span class="p">,</span> <span class="n">trans1d</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts the definitions of operator times and trans functions </span>
 <span class="sd">    so that they can apply along a specific axis of an n-dim array</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -235,7 +235,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_0401.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_0401.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -171,7 +171,7 @@ See also:
 * :ref:`api:problems`
 * :ref:`api:lop`
 
-.. GENERATED FROM PYTHON SOURCE LINES 155-164
+.. GENERATED FROM PYTHON SOURCE LINES 155-165
 
 .. code-block:: default
 
@@ -182,6 +182,7 @@ See also:
 
     import jax.numpy as jnp
     import cr.nimble as crn
+    import cr.sparse as crs
     import cr.sparse.plots as crplot
 
 
@@ -191,14 +192,14 @@ See also:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 165-169
+.. GENERATED FROM PYTHON SOURCE LINES 166-170
 
 Setup
 ------------------------------
 We shall construct our test signal and dictionary
 using our test problems module.
 
-.. GENERATED FROM PYTHON SOURCE LINES 169-174
+.. GENERATED FROM PYTHON SOURCE LINES 170-175
 
 .. code-block:: default
 
@@ -228,11 +229,11 @@ using our test problems module.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 175-176
+.. GENERATED FROM PYTHON SOURCE LINES 176-177
 
 Let us access the relevant parts of our test problem
 
-.. GENERATED FROM PYTHON SOURCE LINES 176-188
+.. GENERATED FROM PYTHON SOURCE LINES 177-189
 
 .. code-block:: default
 
@@ -255,16 +256,16 @@ Let us access the relevant parts of our test problem
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 189-191
+.. GENERATED FROM PYTHON SOURCE LINES 190-192
 
 Sparse Reconstruction using SPGL1
 -------------------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 194-195
+.. GENERATED FROM PYTHON SOURCE LINES 195-196
 
 The shape of mixed signal 
 
-.. GENERATED FROM PYTHON SOURCE LINES 195-202
+.. GENERATED FROM PYTHON SOURCE LINES 196-203
 
 .. code-block:: default
 
@@ -288,19 +289,71 @@ The shape of mixed signal
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 203-204
+.. GENERATED FROM PYTHON SOURCE LINES 204-205
 
 Run SPGL1 algorithm
 
-.. GENERATED FROM PYTHON SOURCE LINES 204-211
+.. GENERATED FROM PYTHON SOURCE LINES 205-211
 
 .. code-block:: default
 
     import cr.sparse.cvx.spgl1 as crspgl1
     sigma=0.
     options = crspgl1.SPGL1Options(max_iters=300)
+    tracker = crs.ProgressTracker(every=10)
     sol = crspgl1.solve_bpic_from_jit(A, b0, sigma, 
-        x_init, options=options)
+        x_init, options=options, tracker=tracker)
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    [10] x_norm: 2.97e+05, r_norm: 4.45e+05
+    [20] x_norm: 4.58e+05, r_norm: 1.69e+05
+    [30] x_norm: 4.97e+05, r_norm: 1.56e+05
+    [40] x_norm: 5.54e+05, r_norm: 4.39e+04
+    [50] x_norm: 5.55e+05, r_norm: 3.79e+04
+    [60] x_norm: 5.56e+05, r_norm: 3.75e+04
+    [70] x_norm: 5.57e+05, r_norm: 3.73e+04
+    [80] x_norm: 5.66e+05, r_norm: 2.18e+04
+    [90] x_norm: 5.69e+05, r_norm: 9.22e+03
+    [100] x_norm: 5.70e+05, r_norm: 8.65e+03
+    [110] x_norm: 5.70e+05, r_norm: 8.37e+03
+    [120] x_norm: 5.70e+05, r_norm: 8.31e+03
+    [130] x_norm: 5.70e+05, r_norm: 8.26e+03
+    [140] x_norm: 5.70e+05, r_norm: 8.22e+03
+    [150] x_norm: 5.70e+05, r_norm: 8.18e+03
+    [160] x_norm: 5.72e+05, r_norm: 4.90e+03
+    [170] x_norm: 5.72e+05, r_norm: 4.70e+03
+    [180] x_norm: 5.72e+05, r_norm: 4.66e+03
+    [190] x_norm: 5.72e+05, r_norm: 4.64e+03
+    [200] x_norm: 5.72e+05, r_norm: 4.63e+03
+    [210] x_norm: 5.72e+05, r_norm: 4.59e+03
+    [220] x_norm: 5.73e+05, r_norm: 1.54e+03
+    [230] x_norm: 5.74e+05, r_norm: 1.09e+03
+    [240] x_norm: 5.74e+05, r_norm: 9.82e+02
+    [250] x_norm: 5.74e+05, r_norm: 9.42e+02
+    [260] x_norm: 5.74e+05, r_norm: 9.19e+02
+    [270] x_norm: 5.74e+05, r_norm: 9.07e+02
+    [280] x_norm: 5.74e+05, r_norm: 8.97e+02
+    [290] x_norm: 5.74e+05, r_norm: 8.79e+02
+    [300] x_norm: 5.74e+05, r_norm: 8.71e+02
+    Algorithm converged in 300 iterations.
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 212-213
+
+Let us check the quality of reconstruction
+
+.. GENERATED FROM PYTHON SOURCE LINES 213-215
+
+.. code-block:: default
+
     problems.analyze_solution(prob, sol)
 
 
@@ -320,11 +373,34 @@ Run SPGL1 algorithm
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 212-213
+.. GENERATED FROM PYTHON SOURCE LINES 216-217
+
+Let's plot the progress of SPGL1 over different iterations
+
+.. GENERATED FROM PYTHON SOURCE LINES 217-220
+
+.. code-block:: default
+
+    ax = crplot.one_plot(height=6)
+    tracker.plot_progress(ax)
+
+
+
+
+.. image-sg:: /gallery/images/sphx_glr_0401_002.png
+   :alt: 0401
+   :srcset: /gallery/images/sphx_glr_0401_002.png
+   :class: sphx-glr-single-img
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 221-222
 
 The estimated sparse representation
 
-.. GENERATED FROM PYTHON SOURCE LINES 213-214
+.. GENERATED FROM PYTHON SOURCE LINES 222-223
 
 .. code-block:: default
 
@@ -336,16 +412,40 @@ The estimated sparse representation
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 215-216
+.. GENERATED FROM PYTHON SOURCE LINES 224-225
 
 Let us reconstruct the signal from this sparse representation
 
-.. GENERATED FROM PYTHON SOURCE LINES 216-228
+.. GENERATED FROM PYTHON SOURCE LINES 225-231
 
 .. code-block:: default
 
     y = prob.reconstruct(x)
+    # Compare the original
+    snr = crn.signal_noise_ratio(y0, y)
+    print(f'SNR: {snr:.2f} dB')
 
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    SNR: 51.85 dB
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 232-233
+
+Let us visually compare original signal with the reconstructed one
+
+.. GENERATED FROM PYTHON SOURCE LINES 233-242
+
+.. code-block:: default
 
     ax = crplot.h_plots(4)
     ax[0].plot(y0[:, 0])
@@ -359,9 +459,9 @@ Let us reconstruct the signal from this sparse representation
 
 
 
-.. image-sg:: /gallery/images/sphx_glr_0401_002.png
+.. image-sg:: /gallery/images/sphx_glr_0401_003.png
    :alt: Original audio 1 (Guitar), Reconstructed audio 1 (Guitar), Original audio 2 (Piano), Reconstructed audio 2 (Piano)
-   :srcset: /gallery/images/sphx_glr_0401_002.png
+   :srcset: /gallery/images/sphx_glr_0401_003.png
    :class: sphx-glr-single-img
 
 
@@ -377,7 +477,7 @@ Let us reconstruct the signal from this sparse representation
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  17.937 seconds)
+   **Total running time of the script:** (0 minutes 19.359 seconds)
 
 
 .. _sphx_glr_download_gallery_0401.py:
@@ -385,6 +485,8 @@ Let us reconstruct the signal from this sparse representation
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

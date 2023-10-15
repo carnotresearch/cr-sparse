@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_0200_cs_sparse_binary_sensor.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_0200_cs_sparse_binary_sensor.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -54,7 +54,7 @@ each column
     \end{bmatrix}
 
 From the perspective of algorithm design, we often require that
-the sensing matrix have unit form columns. This can be easily
+the sensing matrix have unit norm columns. This can be easily
 attained for sparse binary matrices by scaling them with
 :math:`\frac{1}{\sqrt{d}}`.
 
@@ -404,7 +404,7 @@ We can quickly visualize the sparsity pattern of this sensing matrix
  .. code-block:: none
 
 
-    <matplotlib.image.AxesImage object at 0x7fc04b99e520>
+    <matplotlib.image.AxesImage object at 0x7fc2f004d3d0>
 
 
 
@@ -641,7 +641,7 @@ Import the algorithm
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  17.367 seconds)
+   **Total running time of the script:** (0 minutes 14.014 seconds)
 
 
 .. _sphx_glr_download_gallery_0200_cs_sparse_binary_sensor.py:
@@ -649,6 +649,8 @@ Import the algorithm
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

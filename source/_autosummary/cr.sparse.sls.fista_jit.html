@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -144,12 +144,12 @@ via fast iterative shrinkage and thresholding.</p>
 <li><p><strong>operator</strong> (<a class="reference internal" href="cr.sparse.lop.Operator.html#cr.sparse.lop.Operator" title="cr.sparse.lop.Operator"><em>cr.sparse.lop.Operator</em></a>) – A linear operator <span class="math notranslate nohighlight">\(A\)</span></p></li>
 <li><p><strong>b</strong> (<em>jax.numpy.ndarray</em>) – Data vector</p></li>
 <li><p><strong>x0</strong> (<em>jax.numpy.ndarray</em>) – An initial estimate <span class="math notranslate nohighlight">\(x_0\)</span> of the model vector <span class="math notranslate nohighlight">\(x\)</span></p></li>
-<li><p><strong>step_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Step size for ISTA iteration</p></li>
+<li><p><strong>step_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Step size for ISTA iteration</p></li>
 <li><p><strong>threshold_func</strong> (<em>Function</em>) – A user defined thresholding function. See <a class="reference internal" href="../../sls/thresholding.html#sls-thresholding"><span class="std std-ref">Thresholding</span></a> for details.</p></li>
 <li><p><strong>basis</strong> (<a class="reference internal" href="cr.sparse.lop.Operator.html#cr.sparse.lop.Operator" title="cr.sparse.lop.Operator"><em>cr.sparse.lop.Operator</em></a>) – A sparsifying basis <span class="math notranslate nohighlight">\(B\)</span> for <span class="math notranslate nohighlight">\(x\)</span></p></li>
-<li><p><strong>res_norm_rtol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Relative tolerance for norm of residual <span class="math notranslate nohighlight">\(r = b - A x\)</span> relative to norm of <span class="math notranslate nohighlight">\(b\)</span></p></li>
-<li><p><strong>x_norm_change_tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Tolerance for change in <span class="math notranslate nohighlight">\(x\)</span> in each iteration</p></li>
-<li><p><strong>max_iters</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Maximum number of iterations</p></li>
+<li><p><strong>res_norm_rtol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Relative tolerance for norm of residual <span class="math notranslate nohighlight">\(r = b - A x\)</span> relative to norm of <span class="math notranslate nohighlight">\(b\)</span></p></li>
+<li><p><strong>x_norm_change_tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Tolerance for change in <span class="math notranslate nohighlight">\(x\)</span> in each iteration</p></li>
+<li><p><strong>max_iters</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Maximum number of iterations</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -178,7 +178,7 @@ and other details.</p>
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="../../_sources/source/_autosummary/cr.sparse.sls.fista_jit.rst.txt"

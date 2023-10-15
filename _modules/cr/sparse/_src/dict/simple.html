@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -136,7 +136,7 @@
 
 
 <div class="viewcode-block" id="gaussian_mtx"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.gaussian_mtx.html#cr.sparse.dict.gaussian_mtx">[docs]</a><span class="k">def</span> <span class="nf">gaussian_mtx</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A dictionary/sensing matrix where entries are drawn independently from normal distribution.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A dictionary/sensing matrix where entries are drawn independently from normal distribution.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        key: a PRNG key used as the random key.</span>
@@ -176,7 +176,7 @@
     <span class="k">return</span> <span class="nb">dict</span></div>
 
 <div class="viewcode-block" id="rademacher_mtx"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.rademacher_mtx.html#cr.sparse.dict.rademacher_mtx">[docs]</a><span class="k">def</span> <span class="nf">rademacher_mtx</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A dictionary/sensing matrix where entries are drawn independently from Rademacher distribution.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A dictionary/sensing matrix where entries are drawn independently from Rademacher distribution.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        key: a PRNG key used as the random key.</span>
@@ -215,7 +215,7 @@
 
 
 <div class="viewcode-block" id="sparse_binary_mtx"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.sparse_binary_mtx.html#cr.sparse.dict.sparse_binary_mtx">[docs]</a><span class="k">def</span> <span class="nf">sparse_binary_mtx</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">normalize_atoms</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dense</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A sensing matrix where exactly d entries are 1 in each column</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A sensing matrix where exactly d entries are 1 in each column</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        key: a PRNG key used as the random key.</span>
@@ -247,7 +247,7 @@
     <span class="k">return</span> <span class="n">sparse</span><span class="o">.</span><span class="n">BCOO</span><span class="o">.</span><span class="n">fromdense</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="random_onb"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.random_onb.html#cr.sparse.dict.random_onb">[docs]</a><span class="k">def</span> <span class="nf">random_onb</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates a random orthonormal basis for :math:`\mathbb{R}^N`</span>
 
 <span class="sd">    Args:</span>
@@ -277,7 +277,7 @@
 
 
 <div class="viewcode-block" id="random_orthonormal_rows"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.random_orthonormal_rows.html#cr.sparse.dict.random_orthonormal_rows">[docs]</a><span class="k">def</span> <span class="nf">random_orthonormal_rows</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates a random sensing matrix with orthonormal rows</span>
 
 <span class="sd">    Args:</span>
@@ -305,7 +305,7 @@
     <span class="k">return</span> <span class="n">Q</span><span class="o">.</span><span class="n">T</span></div>
 
 <div class="viewcode-block" id="hadamard"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.hadamard.html#cr.sparse.dict.hadamard">[docs]</a><span class="k">def</span> <span class="nf">hadamard</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Hadamard matrices of size :math:`n \times n`</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Hadamard matrices of size :math:`n \times n`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">lg2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
     <span class="k">assert</span> <span class="mi">2</span><span class="o">**</span><span class="n">lg2</span> <span class="o">==</span> <span class="n">n</span><span class="p">,</span> <span class="s2">&quot;n must be positive integer and a power of 2&quot;</span>
@@ -315,14 +315,14 @@
     <span class="k">return</span> <span class="n">H</span></div>
 
 <div class="viewcode-block" id="hadamard_basis"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.hadamard_basis.html#cr.sparse.dict.hadamard_basis">[docs]</a><span class="k">def</span> <span class="nf">hadamard_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A Hadamard basis</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A Hadamard basis</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">H</span> <span class="o">=</span> <span class="n">hadamard</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">H</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="dirac_hadamard_basis"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.dirac_hadamard_basis.html#cr.sparse.dict.dirac_hadamard_basis">[docs]</a><span class="k">def</span> <span class="nf">dirac_hadamard_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A dictionary consisting of identity basis and hadamard bases</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A dictionary consisting of identity basis and hadamard bases</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">I</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="n">H</span> <span class="o">=</span> <span class="n">hadamard_basis</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
@@ -330,7 +330,7 @@
 
 
 <div class="viewcode-block" id="cosine_basis"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.cosine_basis.html#cr.sparse.dict.cosine_basis">[docs]</a><span class="k">def</span> <span class="nf">cosine_basis</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;DCT Basis</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;DCT Basis</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ogrid</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="n">N</span><span class="p">]</span>
     <span class="n">D</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">N</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">k</span><span class="p">)</span>
@@ -338,14 +338,14 @@
     <span class="k">return</span> <span class="n">D</span><span class="o">.</span><span class="n">T</span></div>
 
 <div class="viewcode-block" id="dirac_cosine_basis"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.dirac_cosine_basis.html#cr.sparse.dict.dirac_cosine_basis">[docs]</a><span class="k">def</span> <span class="nf">dirac_cosine_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A dictionary consisting of identity and DCT bases</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A dictionary consisting of identity and DCT bases</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">I</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="n">H</span> <span class="o">=</span> <span class="n">cosine_basis</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">I</span><span class="p">,</span> <span class="n">H</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="dirac_hadamard_cosine_basis"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.dirac_hadamard_cosine_basis.html#cr.sparse.dict.dirac_hadamard_cosine_basis">[docs]</a><span class="k">def</span> <span class="nf">dirac_hadamard_cosine_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A dictionary consisting of identity, Hadamard and DCT bases</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A dictionary consisting of identity, Hadamard and DCT bases</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">I</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="n">H</span> <span class="o">=</span> <span class="n">hadamard_basis</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
@@ -354,7 +354,7 @@
 
 
 <div class="viewcode-block" id="fourier_basis"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.fourier_basis.html#cr.sparse.dict.fourier_basis">[docs]</a><span class="k">def</span> <span class="nf">fourier_basis</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Fourier basis</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fourier basis</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">F</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">dft</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="c1"># From numpy to jax</span>
@@ -365,7 +365,7 @@
 
 
 <div class="viewcode-block" id="wavelet_basis"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.dict.wavelet_basis.html#cr.sparse.dict.wavelet_basis">[docs]</a><span class="k">def</span> <span class="nf">wavelet_basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Builds a wavelet basis for a given decomposition level</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Builds a wavelet basis for a given decomposition level</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        This function generates orthogonal bases only for orthogonal wavelets.</span>
@@ -411,7 +411,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

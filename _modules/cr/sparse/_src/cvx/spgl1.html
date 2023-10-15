@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -135,9 +135,11 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Callable</span>
 
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array_str</span>
+<span class="kn">import</span> <span class="nn">jax</span>
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">lax</span><span class="p">,</span> <span class="n">jit</span><span class="p">,</span> <span class="n">device_get</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 
+<span class="kn">import</span> <span class="nn">cr.sparse</span> <span class="k">as</span> <span class="nn">crs</span>
 <span class="kn">import</span> <span class="nn">cr.nimble</span> <span class="k">as</span> <span class="nn">crn</span>
 <span class="n">norm</span> <span class="o">=</span> <span class="n">crn</span><span class="o">.</span><span class="n">arr_l2norm</span>
 
@@ -153,7 +155,7 @@
 <span class="c1">############################################################################</span>
 
 <div class="viewcode-block" id="SPGL1Options"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cvx.spgl1.SPGL1Options.html#cr.sparse.cvx.spgl1.SPGL1Options">[docs]</a><span class="k">class</span> <span class="nc">SPGL1Options</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Options for the SPGL1 algorithm</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Options for the SPGL1 algorithm</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">bp_tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span>
     <span class="s2">&quot;Tolerance for basis pursuit solution&quot;</span>
@@ -183,7 +185,7 @@
 <span class="c1">############################################################################</span>
 
 <span class="k">def</span> <span class="nf">_project_to_l1_ball</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Projects a vector inside an l1 norm ball</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Projects a vector inside an l1 norm ball</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># sort the absolute values in descending order</span>
     <span class="n">u</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -204,7 +206,7 @@
         <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">kappa</span><span class="p">)</span> <span class="o">+</span> <span class="n">jnp</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">kappa</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">project_to_l1_ball</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Projects a vector inside an l1 norm ball</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Projects a vector inside an l1 norm ball</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">shape</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
@@ -218,7 +220,7 @@
         <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">project_to_l1_ball_at</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Projects a vector inside an l1 norm ball centered at b</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Projects a vector inside an l1 norm ball centered at b</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="c1"># compute difference from center</span>
@@ -241,7 +243,7 @@
     <span class="k">return</span> <span class="n">crn</span><span class="o">.</span><span class="n">norm_linf</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">w</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">obj_val</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Objective value is half of squared norm of the residual</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Objective value is half of squared norm of the residual</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
 
@@ -250,7 +252,7 @@
 <span class="c1">############################################################################</span>
 
 <span class="k">class</span> <span class="nc">CurvyLineSearchState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;State for the line search algorithm</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;State for the line search algorithm</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span>
     <span class="n">scale</span><span class="p">:</span> <span class="nb">float</span>
@@ -265,7 +267,7 @@
     <span class="n">n_safe</span><span class="p">:</span> <span class="nb">int</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the string representation of the state</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the string representation of the state</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">x_norm</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_new</span><span class="p">)</span>
@@ -283,7 +285,7 @@
         <span class="k">return</span> <span class="sa">u</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">curvy_line_search</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">alpha0</span><span class="p">,</span> <span class="n">f_max</span><span class="p">,</span> <span class="n">proj</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;curvilinear line search</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;curvilinear line search</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">max_iters</span> <span class="o">=</span> <span class="mi">10</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">alpha0</span> <span class="o">*</span> <span class="n">g</span>
@@ -369,7 +371,7 @@
 
 
 <div class="viewcode-block" id="SPGL1LassoState"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cvx.spgl1.SPGL1LassoState.html#cr.sparse.cvx.spgl1.SPGL1LassoState">[docs]</a><span class="k">class</span> <span class="nc">SPGL1LassoState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Solution state of the SPGL1 algorithm for LASSO problem</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Solution state of the SPGL1 algorithm for LASSO problem</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="s2">&quot;Solution vector&quot;</span>
@@ -397,7 +399,7 @@
     <span class="s2">&quot;Number of line search iterations in the current iteration&quot;</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the string representation of the state</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the string representation of the state</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">f_val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_past</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -418,8 +420,9 @@
     <span class="n">b</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> 
     <span class="n">tau</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> 
     <span class="n">x0</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-    <span class="n">options</span><span class="p">:</span> <span class="n">SPGL1Options</span> <span class="o">=</span> <span class="n">SPGL1Options</span><span class="p">()):</span>
-    <span class="sd">&quot;&quot;&quot;Solves the LASSO problem using SPGL1 algorithm with an initial solution</span>
+    <span class="n">options</span><span class="p">:</span> <span class="n">SPGL1Options</span> <span class="o">=</span> <span class="n">SPGL1Options</span><span class="p">(),</span>
+    <span class="n">tracker</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">noop_tracker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Solves the LASSO problem using SPGL1 algorithm with an initial solution</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># shape of the linear operator</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
@@ -497,6 +500,7 @@
         <span class="n">c</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">r_norm</span> <span class="o">&gt;=</span> <span class="n">opt_tol</span> <span class="o">*</span> <span class="n">b_norm</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+        <span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">more</span><span class="o">=</span><span class="n">a</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">a</span>
 
     <span class="n">state</span> <span class="o">=</span> <span class="n">init</span><span class="p">()</span>
@@ -509,14 +513,15 @@
 <div class="viewcode-block" id="solve_lasso"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cvx.spgl1.solve_lasso.html#cr.sparse.cvx.spgl1.solve_lasso">[docs]</a><span class="k">def</span> <span class="nf">solve_lasso</span><span class="p">(</span><span class="n">A</span><span class="p">,</span>
     <span class="n">b</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> 
     <span class="n">tau</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> 
-    <span class="n">options</span><span class="p">:</span> <span class="n">SPGL1Options</span> <span class="o">=</span> <span class="n">SPGL1Options</span><span class="p">()):</span>
-    <span class="sd">&quot;&quot;&quot;Solves the LASSO problem using SPGL1 algorithm</span>
+    <span class="n">options</span><span class="p">:</span> <span class="n">SPGL1Options</span> <span class="o">=</span> <span class="n">SPGL1Options</span><span class="p">(),</span>
+    <span class="n">tracker</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">noop_tracker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Solves the LASSO problem using SPGL1 algorithm</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">x0</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">solve_lasso_from</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">solve_lasso_from</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">tracker</span><span class="o">=</span><span class="n">tracker</span><span class="p">)</span></div>
 
-<span class="n">solve_lasso_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">solve_lasso</span><span class="p">,</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="p">))</span>
+<span class="n">solve_lasso_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">solve_lasso</span><span class="p">,</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;tracker&quot;</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">analyze_lasso_state</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">x0</span><span class="p">):</span>
@@ -544,7 +549,7 @@
     <span class="n">f_prev</span> <span class="o">=</span> <span class="n">f_past</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">f_change</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f</span> <span class="o">-</span> <span class="n">f_prev</span><span class="p">)</span>
     <span class="n">rel_f_change</span> <span class="o">=</span> <span class="n">f_change</span> <span class="o">/</span> <span class="n">f</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;f_val:</span><span class="si">{</span><span class="n">f</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1"> f_prev: </span><span class="si">{</span><span class="n">f_prev</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">, change: </span><span class="si">{</span><span class="n">f_change</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">, rel change: </span><span class="si">{</span><span class="n">rel_f_change</span> <span class="o">*</span> <span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;f_val:</span><span class="si">{</span><span class="n">f</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1"> f_prev: </span><span class="si">{</span><span class="n">f_prev</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">, change: </span><span class="si">{</span><span class="n">f_change</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">, rel change: </span><span class="si">{</span><span class="n">rel_f_change</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;g_norm:</span><span class="si">{</span><span class="n">norm</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1"> g_dnorm: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">norm_linf</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
    
 
@@ -553,7 +558,7 @@
 <span class="c1">############################################################################</span>
 
 <div class="viewcode-block" id="SPGL1BPState"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cvx.spgl1.SPGL1BPState.html#cr.sparse.cvx.spgl1.SPGL1BPState">[docs]</a><span class="k">class</span> <span class="nc">SPGL1BPState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Solution state of the SPGL1 algorithm for BPIC problem</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Solution state of the SPGL1 algorithm for BPIC problem</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="s2">&quot;Solution vector&quot;</span>
@@ -591,7 +596,7 @@
     <span class="s2">&quot;Number of line search iterations in the current iteration&quot;</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the string representation of the state</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the string representation of the state</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">f_val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_past</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -663,8 +668,9 @@
     <span class="n">b</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> 
     <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> 
     <span class="n">x0</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-    <span class="n">options</span><span class="p">:</span> <span class="n">SPGL1Options</span> <span class="o">=</span> <span class="n">SPGL1Options</span><span class="p">()):</span>
-    <span class="sd">&quot;&quot;&quot;Solves the BPIC problem using SPGL1 algorithm with an initial solution</span>
+    <span class="n">options</span><span class="p">:</span> <span class="n">SPGL1Options</span> <span class="o">=</span> <span class="n">SPGL1Options</span><span class="p">(),</span>
+    <span class="n">tracker</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">noop_tracker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Solves the BPIC problem using SPGL1 algorithm with an initial solution</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># shape of the linear operator</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
@@ -799,6 +805,7 @@
         <span class="c1"># check on maximum number of matrix vector products</span>
         <span class="n">f</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">n_times</span> <span class="o">+</span> <span class="n">state</span><span class="o">.</span><span class="n">n_trans</span> <span class="o">&lt;</span> <span class="n">options</span><span class="o">.</span><span class="n">max_matvec</span>
         <span class="n">cont</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">cont</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="n">jax</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">tracker</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">more</span><span class="o">=</span><span class="n">cont</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">cont</span>
 
     <span class="n">state</span> <span class="o">=</span> <span class="n">init</span><span class="p">()</span>
@@ -809,19 +816,20 @@
     <span class="c1"># print(state)</span>
     <span class="k">return</span> <span class="n">state</span></div>
 
-<span class="n">solve_bpic_from_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">solve_bpic_from</span><span class="p">,</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;options&quot;</span><span class="p">))</span>
+<span class="n">solve_bpic_from_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">solve_bpic_from</span><span class="p">,</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;options&quot;</span><span class="p">,</span> <span class="s2">&quot;tracker&quot;</span><span class="p">))</span>
 
 <div class="viewcode-block" id="solve_bpic"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cvx.spgl1.solve_bpic.html#cr.sparse.cvx.spgl1.solve_bpic">[docs]</a><span class="k">def</span> <span class="nf">solve_bpic</span><span class="p">(</span><span class="n">A</span><span class="p">,</span>
     <span class="n">b</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> 
     <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> 
-    <span class="n">options</span><span class="p">:</span> <span class="n">SPGL1Options</span> <span class="o">=</span> <span class="n">SPGL1Options</span><span class="p">()):</span>
-    <span class="sd">&quot;&quot;&quot;Solves the BPIC problem using SPGL1 algorithm</span>
+    <span class="n">options</span><span class="p">:</span> <span class="n">SPGL1Options</span> <span class="o">=</span> <span class="n">SPGL1Options</span><span class="p">(),</span>
+    <span class="n">tracker</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">noop_tracker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Solves the BPIC problem using SPGL1 algorithm</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">x0</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">b</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">solve_bpic_from</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">solve_bpic_from</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">tracker</span><span class="o">=</span><span class="n">tracker</span><span class="p">)</span></div>
 
-<span class="n">solve_bpic_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">solve_bpic</span><span class="p">,</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;options&quot;</span><span class="p">))</span>
+<span class="n">solve_bpic_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">solve_bpic</span><span class="p">,</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;options&quot;</span><span class="p">,</span> <span class="s2">&quot;tracker&quot;</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">analyze_bpic_state</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">x0</span><span class="p">):</span>
@@ -850,7 +858,7 @@
     <span class="n">f_prev</span> <span class="o">=</span> <span class="n">f_past</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">f_change</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f</span> <span class="o">-</span> <span class="n">f_prev</span><span class="p">)</span>
     <span class="n">rel_f_change</span> <span class="o">=</span> <span class="n">f_change</span> <span class="o">/</span> <span class="n">f</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;f_val:</span><span class="si">{</span><span class="n">f</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1"> f_prev: </span><span class="si">{</span><span class="n">f_prev</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">, change: </span><span class="si">{</span><span class="n">f_change</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">, rel change: </span><span class="si">{</span><span class="n">rel_f_change</span> <span class="o">*</span> <span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;f_val:</span><span class="si">{</span><span class="n">f</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1"> f_prev: </span><span class="si">{</span><span class="n">f_prev</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">, change: </span><span class="si">{</span><span class="n">f_change</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">, rel change: </span><span class="si">{</span><span class="n">rel_f_change</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;g_norm:</span><span class="si">{</span><span class="n">norm</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1"> g_dnorm: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">norm_linf</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
    
     <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">r_gap</span> <span class="o">&lt;=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">opt_tol</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">r_f_error</span><span class="p">):</span>
@@ -861,8 +869,9 @@
 
 <div class="viewcode-block" id="solve_bp"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.cvx.spgl1.solve_bp.html#cr.sparse.cvx.spgl1.solve_bp">[docs]</a><span class="k">def</span> <span class="nf">solve_bp</span><span class="p">(</span><span class="n">A</span><span class="p">,</span>
     <span class="n">b</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> 
-    <span class="n">options</span><span class="p">:</span> <span class="n">SPGL1Options</span> <span class="o">=</span> <span class="n">SPGL1Options</span><span class="p">()):</span>
-    <span class="sd">&quot;&quot;&quot;Solves the Basis Pursuit problem using SPGL1 algorithm</span>
+    <span class="n">options</span><span class="p">:</span> <span class="n">SPGL1Options</span> <span class="o">=</span> <span class="n">SPGL1Options</span><span class="p">(),</span>
+    <span class="n">tracker</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">noop_tracker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Solves the Basis Pursuit problem using SPGL1 algorithm</span>
 
 <span class="sd">    Examples:</span>
 
@@ -873,9 +882,9 @@
     <span class="n">dtype</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">complex128</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">A</span><span class="o">.</span><span class="n">real</span> <span class="k">else</span> <span class="n">b</span><span class="o">.</span><span class="n">dtype</span>
     <span class="n">x0</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.</span>
-    <span class="k">return</span> <span class="n">solve_bpic_from</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">solve_bpic_from</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">tracker</span><span class="o">=</span><span class="n">tracker</span><span class="p">)</span></div>
 
-<span class="n">solve_bp_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">solve_bp</span><span class="p">,</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;options&quot;</span><span class="p">))</span>
+<span class="n">solve_bp_jit</span> <span class="o">=</span> <span class="n">jit</span><span class="p">(</span><span class="n">solve_bp</span><span class="p">,</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;options&quot;</span><span class="p">,</span> <span class="s2">&quot;tracker&quot;</span><span class="p">))</span>
 </pre></div>
 
           </div>
@@ -889,7 +898,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

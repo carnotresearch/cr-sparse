@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
@@ -126,18 +126,18 @@
 
 <span class="k">class</span> <span class="nc">CGState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;The solution&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The solution&quot;&quot;&quot;</span>
     <span class="n">r</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;The residual&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The residual&quot;&quot;&quot;</span>
     <span class="n">p</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;The conjugate direction&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The conjugate direction&quot;&quot;&quot;</span>
     <span class="n">r_norm_sqr</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;The residual norm squared&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The residual norm squared&quot;&quot;&quot;</span>
     <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="solve_from"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.opt.cg.solve_from.html#cr.sparse.opt.cg.solve_from">[docs]</a><span class="k">def</span> <span class="nf">solve_from</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">res_norm_rtol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Solves the problem :math:`Ax  = b` for a symmetric positive definite :math:`A` via conjugate gradients iterations with an initial guess.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Solves the problem :math:`Ax  = b` for a symmetric positive definite :math:`A` via conjugate gradients iterations with an initial guess.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Boyd Conjugate Gradients slide 22</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
@@ -198,7 +198,7 @@
 
 
 <div class="viewcode-block" id="solve"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.opt.cg.solve.html#cr.sparse.opt.cg.solve">[docs]</a><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">res_norm_rtol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Solves the problem :math:`Ax  = b` for a symmetric positive definite :math:`A` via conjugate gradients iterations.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Solves the problem :math:`Ax  = b` for a symmetric positive definite :math:`A` via conjugate gradients iterations.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x_0</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">solve_from_jit</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="n">max_iters</span><span class="p">,</span> <span class="n">res_norm_rtol</span><span class="o">=</span><span class="n">res_norm_rtol</span><span class="p">)</span></div>
@@ -219,7 +219,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

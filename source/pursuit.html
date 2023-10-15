@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -175,7 +175,7 @@ simultaneously. The recovery problem <span class="math notranslate nohighlight">
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.mp.solve.html#cr.sparse.pursuit.mp.solve" title="cr.sparse.pursuit.mp.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mp.solve</span></code></a>(Phi, y[, max_iters, res_norm_rtol])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.mp.solve.html#cr.sparse.pursuit.mp.solve" title="cr.sparse.pursuit.mp.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mp.solve</span></code></a>(Phi, y[, max_iters, res_norm_rtol, …])</p></td>
 <td><p>Solves the sparse recovery problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using matching pursuit algorithm</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.mp.matrix_solve.html#cr.sparse.pursuit.mp.matrix_solve" title="cr.sparse.pursuit.mp.matrix_solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mp.matrix_solve</span></code></a>(Phi, y[, max_iters, …])</p></td>
@@ -193,13 +193,16 @@ simultaneously. The recovery problem <span class="math notranslate nohighlight">
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.omp.solve.html#cr.sparse.pursuit.omp.solve" title="cr.sparse.pursuit.omp.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omp.solve</span></code></a>(Phi, y, max_iters[, max_res_norm])</p></td>
 <td><p>Solves the recovery/approximation problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Orthogonal Matching Pursuit</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.omp.matrix_solve.html#cr.sparse.pursuit.omp.matrix_solve" title="cr.sparse.pursuit.omp.matrix_solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omp.matrix_solve</span></code></a>(Phi, y, max_iters[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.omp.operator_solve.html#cr.sparse.pursuit.omp.operator_solve" title="cr.sparse.pursuit.omp.operator_solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omp.operator_solve</span></code></a>(Phi, y, K[, res_norm_rtol])</p></td>
+<td><p>Solves the sparse recovery problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Orthogonal Matching Pursuit for linear operators</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.omp.matrix_solve.html#cr.sparse.pursuit.omp.matrix_solve" title="cr.sparse.pursuit.omp.matrix_solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omp.matrix_solve</span></code></a>(Phi, y, max_iters[, …])</p></td>
 <td><p>Solves the recovery/approximation problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Orthogonal Matching Pursuit</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.omp.matrix_solve_jit.html#cr.sparse.pursuit.omp.matrix_solve_jit" title="cr.sparse.pursuit.omp.matrix_solve_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omp.matrix_solve_jit</span></code></a>(Phi, y, max_iters[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.omp.matrix_solve_jit.html#cr.sparse.pursuit.omp.matrix_solve_jit" title="cr.sparse.pursuit.omp.matrix_solve_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omp.matrix_solve_jit</span></code></a>(Phi, y, max_iters[, …])</p></td>
 <td><p>Solves the recovery/approximation problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Orthogonal Matching Pursuit</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.omp.matrix_solve_multi.html#cr.sparse.pursuit.omp.matrix_solve_multi" title="cr.sparse.pursuit.omp.matrix_solve_multi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omp.matrix_solve_multi</span></code></a>(Phi, y, max_iters[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.omp.matrix_solve_multi.html#cr.sparse.pursuit.omp.matrix_solve_multi" title="cr.sparse.pursuit.omp.matrix_solve_multi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omp.matrix_solve_multi</span></code></a>(Phi, y, max_iters[, …])</p></td>
 <td><p>Solves the MMV recovery/approximation problem <span class="math notranslate nohighlight">\(Y = \Phi X + E\)</span> using Orthogonal Matching Pursuit</p></td>
 </tr>
 </tbody>
@@ -236,7 +239,7 @@ simultaneously. The recovery problem <span class="math notranslate nohighlight">
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.sp.solve.html#cr.sparse.pursuit.sp.solve" title="cr.sparse.pursuit.sp.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sp.solve</span></code></a>(Phi, y, K[, max_iters, res_norm_rtol])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.sp.solve.html#cr.sparse.pursuit.sp.solve" title="cr.sparse.pursuit.sp.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sp.solve</span></code></a>(Phi, y, K[, max_iters, …])</p></td>
 <td><p>Solves the sparse recovery problem <span class="math notranslate nohighlight">\(y = \Phi x + e\)</span> using Subspace Pursuit for linear operators</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.pursuit.sp.matrix_solve.html#cr.sparse.pursuit.sp.matrix_solve" title="cr.sparse.pursuit.sp.matrix_solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sp.matrix_solve</span></code></a>(Phi, y, K[, max_iters, …])</p></td>
@@ -422,7 +425,7 @@ sparse representation as follows:</p>
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="../_sources/source/pursuit.rst.txt"

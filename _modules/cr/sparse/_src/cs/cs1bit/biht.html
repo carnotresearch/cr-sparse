@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/custom.css" />
     <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
@@ -130,23 +130,23 @@
 
 
 <div class="viewcode-block" id="BIHTState"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cs.cs1bit.BIHTState.html#cr.sparse.cs.cs1bit.BIHTState">[docs]</a><span class="k">class</span> <span class="nc">BIHTState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents the state of the BIHT algorithm</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the state of the BIHT algorithm</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># The non-zero values</span>
     <span class="n">x_I</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;Non-zero values&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Non-zero values&quot;&quot;&quot;</span>
     <span class="n">I</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;The support for non-zero values&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The support for non-zero values&quot;&quot;&quot;</span>
     <span class="n">r</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="sd">&quot;&quot;&quot;The residuals&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The residuals&quot;&quot;&quot;</span>
     <span class="n">n_mismatched_bits</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="c1"># &quot;&quot;&quot;The number of bits that are mismatched&quot;&quot;&quot;</span>
     <span class="n">iterations</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The number of iterations it took to complete&quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="biht"><a class="viewcode-back" href="../../../../../../source/_autosummary/cr.sparse.cs.cs1bit.biht.html#cr.sparse.cs.cs1bit.biht">[docs]</a><span class="k">def</span> <span class="nf">biht</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solves the 1-bit compressive sensing problem :math:`\text{sgn} (\\Phi x) = y` using </span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Solves the 1-bit compressive sensing problem :math:`\text{sgn} (\\Phi x) = y` using </span>
 <span class="sd">    Binary Iterative Hard Thresholding</span>
 
 <span class="sd">    Args:</span>
@@ -267,7 +267,7 @@
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
     </div>
 

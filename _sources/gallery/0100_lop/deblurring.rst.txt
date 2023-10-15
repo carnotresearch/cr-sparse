@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_0100_lop_deblurring.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_0100_lop_deblurring.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -51,7 +51,7 @@ Let's import necessary libraries
     # For plotting diagrams
     import matplotlib.pyplot as plt
     ## CR-Sparse modules
-    import cr.nimble as cnb
+    import cr.nimble as crn
     # Linear operators
     from cr.sparse import lop
     # Image processing utilities
@@ -144,7 +144,7 @@ Locate the center of the filter
 
 .. code-block:: default
 
-    offset = cnb.arr_largest_index(h)
+    offset = crn.arr_largest_index(h)
     print(offset)
     # Construct a 2D convolution operator based on the kernel
     H = lop.convolve2D(image.shape, h, offset=offset)
@@ -159,7 +159,7 @@ Locate the center of the filter
 
  .. code-block:: none
 
-    (DeviceArray(7, dtype=int64), DeviceArray(12, dtype=int64))
+    (Array(7, dtype=int64), Array(12, dtype=int64))
 
 
 
@@ -176,7 +176,7 @@ Apply the blurring operator to the original image
 
     blurred_image = H.times(image)
     # Measure the PSNR
-    print("Blurred PSNR: ", cnb.peak_signal_noise_ratio(image, blurred_image), 'dB')
+    print("Blurred PSNR: ", crn.peak_signal_noise_ratio(image, blurred_image), 'dB')
     # plot the original and the blurred images
     fig, ax = plt.subplots(ncols=2, figsize=(10, 5))
     ax[0].imshow(image, cmap=plt.cm.gray)
@@ -218,7 +218,7 @@ An initial guess of the deblurred image is all zeros
     sol = sls.lsqr(H, blurred_image, x0, max_iters=50)
     deblurred_image = sol.x
     # Measure the PSNR
-    print("Deblurred PSNR: ", cnb.peak_signal_noise_ratio(image, deblurred_image), 'dB')
+    print("Deblurred PSNR: ", crn.peak_signal_noise_ratio(image, deblurred_image), 'dB')
     # Plot the original, blurred and deblurred image
     fig, ax = plt.subplots(ncols=3, figsize=(15, 5))
     ax[0].imshow(image, cmap=plt.cm.gray)
@@ -246,11 +246,11 @@ An initial guess of the deblurred image is all zeros
 
     Deblurred PSNR:  21.206455209076868 dB
     x: (200, 200)
-    A_norm: 4.946758875785461
-    A_cond: 167.30699088560283
+    A_norm: 4.946758875785462
+    A_cond: 167.30699088560272
     x_norm: 34971.66794553033
-    r_norm: 28.39413044122903
-    atr_norm: 3.8161913539048378
+    r_norm: 28.394130441229127
+    atr_norm: 3.81619135390487
     iterations: 50
     n_times: 50
     n_trans: 50
@@ -332,7 +332,7 @@ We combine the convolution operator and the wavelet basis operator
     # Compute the deblurred image from the coefficients given by FISTA
     deblurred_image = DWT_basis.times(sol.x)
     # Measure the PSNR
-    print("Deblurred PSNR: ", cnb.peak_signal_noise_ratio(image, deblurred_image), 'dB')
+    print("Deblurred PSNR: ", crn.peak_signal_noise_ratio(image, deblurred_image), 'dB')
     fig, ax = plt.subplots(ncols=3, figsize=(15, 5))
     ax[0].imshow(image, cmap=plt.cm.gray)
     ax[0].set_title('Original')
@@ -354,7 +354,7 @@ We combine the convolution operator and the wavelet basis operator
  .. code-block:: none
 
     Number of FISTA iterations 50
-    Deblurred PSNR:  20.41179022466172 dB
+    Deblurred PSNR:  20.411790224661722 dB
 
     Text(0.5, 1.0, 'FISTA deblurring')
 
@@ -363,7 +363,7 @@ We combine the convolution operator and the wavelet basis operator
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  12.954 seconds)
+   **Total running time of the script:** (0 minutes 9.379 seconds)
 
 
 .. _sphx_glr_download_gallery_0100_lop_deblurring.py:
@@ -371,6 +371,8 @@ We combine the convolution operator and the wavelet basis operator
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

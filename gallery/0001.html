@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -128,7 +128,7 @@
             
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-gallery-0001-py"><span class="std std-ref">here</span></a>
+<p><a class="reference internal" href="#sphx-glr-download-gallery-0001-py"><span class="std std-ref">Go to the end</span></a>
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="heavisine-signal-in-fourier-heaviside-basis">
@@ -237,7 +237,7 @@ x_norm 1.193985e+02
 </pre></div>
 </div>
 <p>Check if we could reconstruct the sparse representation correctly</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Model Space SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s1"> dB&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Model Space SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s1"> dB&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Model Space SNR: 9.009642143585591 dB
@@ -251,7 +251,7 @@ couldn’t make the exact recovery of the original sparse
 representation. Nevertheless we indeed recovered a good sparse
 representation since the residual norm is very small</p>
 <p>Check if we could reconstruct the signal correctly</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Signal Space SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">b0</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="si">}</span><span class="s1"> dB&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Signal Space SNR: </span><span class="si">{</span><span class="n">crn</span><span class="o">.</span><span class="n">signal_noise_ratio</span><span class="p">(</span><span class="n">b0</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="si">}</span><span class="s1"> dB&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Signal Space SNR: 302.32500793997445 dB
@@ -265,7 +265,7 @@ representation since the residual norm is very small</p>
 <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_0001_002.png" srcset="../_images/sphx_glr_0001_002.png" alt="0001" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc04bfa7b50&gt;]
+<img src="../_images/sphx_glr_0001_002.png" srcset="../_images/sphx_glr_0001_002.png" alt="0001" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc2fb023dc0&gt;]
 </pre></div>
 </div>
 </section>
@@ -278,10 +278,10 @@ representation since the residual norm is very small</p>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>m: 1024, n: 2048
-b_norm: original: 75.465 reconstruction: 75.465 SNR: 117.56 dB
-x_norm: original: 127.687 reconstruction: 71.466 SNR: 2.33 dB
-Sparsity: original: 5, reconstructed: 282, overlap: 4, ratio: 0.014
-Iterations: 1508 n_times: 2636, n_trans: 1509
+b_norm: original: 75.465 reconstruction: 75.465 SNR: 118.08 dB
+x_norm: original: 127.687 reconstruction: 70.851 SNR: 2.30 dB
+Sparsity: original: 5, reconstructed: 301, overlap: 4, ratio: 0.013
+Iterations: 1668 n_times: 2917, n_trans: 1669
 </pre></div>
 </div>
 <p>The estimated sparse representation</p>
@@ -298,7 +298,7 @@ Iterations: 1508 n_times: 2636, n_trans: 1509
 <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_0001_003.png" srcset="../_images/sphx_glr_0001_003.png" alt="0001" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc04bdece20&gt;]
+<img src="../_images/sphx_glr_0001_003.png" srcset="../_images/sphx_glr_0001_003.png" alt="0001" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc2fa557d00&gt;]
 </pre></div>
 </div>
 </section>
@@ -309,7 +309,7 @@ Iterations: 1508 n_times: 2636, n_trans: 1509
 <li><p>SPGL1 takes 1600+ iterations to converge. Still it is inaccurate.</p></li>
 <li><p>The HeaviSide basis is highly coherent. It doesn’t satisfy RIP guarantees.</p></li>
 </ul>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  12.432 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 10.752 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-gallery-0001-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/afad14023b1083d7cd2ba53672fad952/0001.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">0001.py</span></code></a></p>
@@ -334,7 +334,7 @@ Iterations: 1508 n_times: 2636, n_trans: 1509
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
       <a href="../_sources/gallery/0001.rst.txt"
