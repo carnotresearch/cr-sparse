@@ -35,7 +35,7 @@ each column
     \\end{bmatrix}
 
 From the perspective of algorithm design, we often require that
-the sensing matrix have unit form columns. This can be easily
+the sensing matrix have unit norm columns. This can be easily
 attained for sparse binary matrices by scaling them with
 :math:`\\frac{1}{\\sqrt{d}}`.
 

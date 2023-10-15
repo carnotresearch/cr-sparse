@@ -8,6 +8,13 @@ All notable changes to this project will be documented in this file.
 
 [Documentation](https://cr-sparse.readthedocs.io/en/latest/)
 
+## [0.4.0] - 2023-10-15
+
+[Documentation](https://cr-sparse.readthedocs.io/en/v0.4.0/)
+
+This is a maintenance release to align the library with `JAX` 0.4.x
+versions.
+
 ## [0.3.2] - 2022-10-08
 
 [Documentation](https://cr-sparse.readthedocs.io/en/v0.3.2/)
@@ -30,7 +37,7 @@ Sparse Recovery algorithms
 - FOCUSS
 - SPGL1 (Spectral Projected Gradient L1)
 
-Optimization : Smooth functions
+Optimization: Smooth functions
 
 - smooth_quad_error 
 
@@ -404,7 +411,8 @@ General stuff
 
 Initial release
 
-[Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.3.2...HEAD
+[Unreleased]: https://github.com/carnotresearch/cr-sparse/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/carnotresearch/cr-sparse/compare/v0.3.2...v0.4.0
 [0.3.2]: https://github.com/carnotresearch/cr-sparse/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/carnotresearch/cr-sparse/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/carnotresearch/cr-sparse/compare/v0.2.2...v0.3.0

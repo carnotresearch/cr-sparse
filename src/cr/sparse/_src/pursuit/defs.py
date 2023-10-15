@@ -15,6 +15,7 @@
 import math
 from typing import NamedTuple, List, Dict
 from dataclasses import dataclass
+import jax
 import jax.numpy as jnp
 from jax.tree_util import register_pytree_node
 from cr.nimble.dsp import build_signal_from_indices_and_values
@@ -22,15 +23,15 @@ norm = jnp.linalg.norm
 
 @dataclass
 class SingleRecoverySolution:
-    signals: jnp.DeviceArray = None
-    representations : jnp.DeviceArray = None
-    residuals : jnp.DeviceArray =  None
-    residual_norms : jnp.DeviceArray = None
+    signals: jax.Array = None
+    representations : jax.Array = None
+    residuals : jax.Array =  None
+    residual_norms : jax.Array = None
     iterations: int = None
-    support : jnp.DeviceArray = None
+    support : jax.Array = None
 
 class RecoverySolution(NamedTuple):
-    """Represents the solution of a sparse recovery problem
+    r"""Represents the solution of a sparse recovery problem
 
     Consider a sparse recovery problem :math:`y=\Phi x + e`.
     Assume that :math:`x` is supported on an index set :math:`I`
@@ -108,9 +109,9 @@ class PTConfig(NamedTuple):
 class PTConfigurations(NamedTuple):
     N: int
     configurations: List[PTConfig]
-    Ms: jnp.DeviceArray
-    etas: jnp.DeviceArray
-    rhos: jnp.DeviceArray
+    Ms: jax.Array
+    etas: jax.Array
+    rhos: jax.Array
     reverse_map: Dict
 
 
