@@ -1,0 +1,2 @@
+cr-nimble>=0.4.0
+cr-wavelets>=0.4.0

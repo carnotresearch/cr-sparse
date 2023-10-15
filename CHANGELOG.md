@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 
 [Documentation](https://cr-sparse.readthedocs.io/en/latest/)
 
-## [0.4.0] - 2023-10-15
+## [0.4.0] - 2023-10-16
 
 [Documentation](https://cr-sparse.readthedocs.io/en/v0.4.0/)
 

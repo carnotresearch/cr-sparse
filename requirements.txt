@@ -1,7 +1,0 @@
-numpy
-scipy
-tensorflow
-matplotlib
-imageio
-click
-pytest

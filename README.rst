@@ -44,8 +44,7 @@ Supported Platforms
 ``CR-Sparse`` can run on any platform supported by ``JAX``. 
 We have tested ``CR-Sparse`` on Mac and Linux platforms and Google Colaboratory.
 
-* The latest code in the library has been tested against JAX 0.3.14.
-* The last released version of CR-Sparse (0.2.2) was tested against JAX 0.1.55 and later JAX 0.1.x versions. 
+* The latest code in the library has been tested against JAX 0.4.
 
 ``JAX`` is not officially supported on Windows platforms at the moment. 
 Although, it is possible to build it from source using Windows Subsystems for Linux.

@@ -5,7 +5,7 @@ sphinxcontrib-bibtex>=1.0.0
 sphinx-autodoc-typehints>=1.11.1
 IPython>=7.16.1
 ipykernel>=5.3.4
-pandoc>>=1.0.2
+pandoc>=1.0.2
 nbsphinx>=0.8.0
 requests
-cr-nimble
+cr-nimble>=0.4.0
