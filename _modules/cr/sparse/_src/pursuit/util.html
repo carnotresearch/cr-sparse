@@ -134,7 +134,7 @@
 
 
 <div class="viewcode-block" id="gram_chol_update"><a class="viewcode-back" href="../../../../../source/_autosummary/cr.sparse.pursuit.gram_chol_update.html#cr.sparse.pursuit.gram_chol_update">[docs]</a><span class="k">def</span> <span class="nf">gram_chol_update</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Incrementally updates the Cholesky factorization :math:`G = L L^T` where :math:`G = \Phi^T \Phi`</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Incrementally updates the Cholesky factorization :math:`G = L L^T` where :math:`G = \Phi^T \Phi`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>

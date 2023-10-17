@@ -314,7 +314,7 @@ Let us visualize the original and reconstructed signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc2fb023dc0>]
+    [<matplotlib.lines.Line2D object at 0x7f202075f730>]
 
 
 
@@ -409,7 +409,7 @@ Let us visualize the original and reconstructed signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc2fa557d00>]
+    [<matplotlib.lines.Line2D object at 0x7f2020a1e7f0>]
 
 
 
@@ -425,7 +425,7 @@ Comments
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 10.752 seconds)
+   **Total running time of the script:** (0 minutes 10.585 seconds)
 
 
 .. _sphx_glr_download_gallery_0001.py:

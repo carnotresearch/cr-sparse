@@ -308,7 +308,7 @@ Let us visualize the original and reconstructed signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc30c351fa0>]
+    [<matplotlib.lines.Line2D object at 0x7f202076c640>]
 
 
 
@@ -437,7 +437,7 @@ Let us visualize the original and reconstructed signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc30c4ad7f0>]
+    [<matplotlib.lines.Line2D object at 0x7f20208b0700>]
 
 
 
@@ -617,7 +617,7 @@ Let us visualize the original and reconstructed signal
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc2fba1eeb0>]
+    [<matplotlib.lines.Line2D object at 0x7f200ce21b20>]
 
 
 
@@ -632,7 +632,7 @@ while SPGL1 takes 9 iterations to converge.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 14.431 seconds)
+   **Total running time of the script:** (0 minutes 14.155 seconds)
 
 
 .. _sphx_glr_download_gallery_0002.py:

@@ -174,16 +174,16 @@ versions.</p>
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve_from.html#cr.sparse.cvx.l1ls.solve_from" title="cr.sparse.cvx.l1ls.solve_from"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1ls.solve_from</span></code></a>(A, y, lambda_, x0, u0[, …])</p></td>
-<td><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p></td>
+<td><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \\lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve_from_jit.html#cr.sparse.cvx.l1ls.solve_from_jit" title="cr.sparse.cvx.l1ls.solve_from_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1ls.solve_from_jit</span></code></a>(A, y, lambda_, x0, u0[, …])</p></td>
-<td><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p></td>
+<td><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \\lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve.html#cr.sparse.cvx.l1ls.solve" title="cr.sparse.cvx.l1ls.solve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1ls.solve</span></code></a>(A, y, lambda_[, x0, u0, tol, xi, …])</p></td>
-<td><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p></td>
+<td><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \\lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.l1ls.solve_jit.html#cr.sparse.cvx.l1ls.solve_jit" title="cr.sparse.cvx.l1ls.solve_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">l1ls.solve_jit</span></code></a>(A, y, lambda_[, x0, u0, tol, …])</p></td>
-<td><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p></td>
+<td><p>Solves <span class="math notranslate nohighlight">\(\min \| A x - b \|_2^2 + \\lambda \| x \|_1\)</span> using the Truncated Newton Interior Point Method</p></td>
 </tr>
 </tbody>
 </table>
@@ -208,22 +208,22 @@ specific types of problems.</p>
 <td><p>Wrapper method to solve a variety of l1 minimization problems using ADMM</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_bp.html#cr.sparse.cvx.adm.yall1.solve_bp" title="cr.sparse.cvx.adm.yall1.solve_bp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_bp</span></code></a>(A, b, x0, z0, w, nonneg, …)</p></td>
-<td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1 \, \text{s.t.}\, A x = b\)</span> using ADMM</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1 \, \\text{s.t.}\, A x = b\)</span> using ADMM</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_bp_jit.html#cr.sparse.cvx.adm.yall1.solve_bp_jit" title="cr.sparse.cvx.adm.yall1.solve_bp_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_bp_jit</span></code></a>(A, b, x0, z0, w, nonneg, …)</p></td>
-<td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1 \, \text{s.t.}\, A x = b\)</span> using ADMM</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1 \, \\text{s.t.}\, A x = b\)</span> using ADMM</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2.html#cr.sparse.cvx.adm.yall1.solve_l1_l2" title="cr.sparse.cvx.adm.yall1.solve_l1_l2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_l1_l2</span></code></a>(A, b, x0, z0, w, nonneg, …)</p></td>
-<td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1  + \frac{1}{2 \rho} \| A x - b \|_2^2\)</span> using ADMM</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1  + \\frac{1}{2 \\rho} \| A x - b \|_2^2\)</span> using ADMM</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2_jit.html#cr.sparse.cvx.adm.yall1.solve_l1_l2_jit" title="cr.sparse.cvx.adm.yall1.solve_l1_l2_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_l1_l2_jit</span></code></a>(A, b, x0, z0, w, …)</p></td>
-<td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1  + \frac{1}{2 \rho} \| A x - b \|_2^2\)</span> using ADMM</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1  + \\frac{1}{2 \\rho} \| A x - b \|_2^2\)</span> using ADMM</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2con.html#cr.sparse.cvx.adm.yall1.solve_l1_l2con" title="cr.sparse.cvx.adm.yall1.solve_l1_l2con"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_l1_l2con</span></code></a>(A, b, x0, z0, w, …)</p></td>
-<td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1  \text{s.t.} \| A x - b \|_2 \leq \delta\)</span> using ADMM</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1  \\text{s.t.} \| A x - b \|_2 \\leq \\delta\)</span> using ADMM</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit.html#cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit" title="cr.sparse.cvx.adm.yall1.solve_l1_l2con_jit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yall1.solve_l1_l2con_jit</span></code></a>(A, b, x0, z0, w, …)</p></td>
-<td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1  \text{s.t.} \| A x - b \|_2 \leq \delta\)</span> using ADMM</p></td>
+<td><p>Solves the problem <span class="math notranslate nohighlight">\(\min \| x \|_1  \\text{s.t.} \| A x - b \|_2 \\leq \\delta\)</span> using ADMM</p></td>
 </tr>
 </tbody>
 </table>

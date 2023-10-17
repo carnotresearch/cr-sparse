@@ -297,7 +297,7 @@ Sensing matrix
  .. code-block:: none
 
 
-    <matplotlib.image.AxesImage object at 0x7fc2f2bfe760>
+    <matplotlib.image.AxesImage object at 0x7f1ffe0724f0>
 
 
 
@@ -568,7 +568,7 @@ Build the sensing matrix
  .. code-block:: none
 
 
-    <matplotlib.image.AxesImage object at 0x7fc2f0b3dee0>
+    <matplotlib.image.AxesImage object at 0x7f1ffbffdbe0>
 
 
 
@@ -949,7 +949,7 @@ Plot the noiseless and noisy measurements
  .. code-block:: none
 
 
-    [<matplotlib.lines.Line2D object at 0x7fc2f0750940>]
+    [<matplotlib.lines.Line2D object at 0x7f1ffbd9abe0>]
 
 
 
@@ -1212,7 +1212,7 @@ Observations:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 14.323 seconds)
+   **Total running time of the script:** (0 minutes 14.180 seconds)
 
 
 .. _sphx_glr_download_gallery_0200_cs_bsbl_1.py:
