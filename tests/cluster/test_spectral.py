@@ -49,8 +49,8 @@ def test_spectral5():
 
 
 def test_spectral6():
-    m = 10
-    a = jnp.ones((m, m))
+    m = 20
+    a = 100*jnp.ones((m, m))
     z = jnp.zeros((m, m))
     az = jnp.hstack((a, z))
     za = jnp.hstack((z, a))
@@ -60,7 +60,7 @@ def test_spectral6():
     print("True Labels: ", true_labels)
     affinity = BCOO.fromdense(affinity)
     k = 2
-    res = spectral.normalized_symmetric_sparse_fast_k_jit(cnb.KEYS[2], affinity, k)
+    res = spectral.normalized_symmetric_sparse_fast_k_jit(cnb.KEYS[1], affinity, k)
     pred_labels =  res.assignment
     print("Predicted Labels: ", pred_labels)
     error = cluster.clustering_error(true_labels, pred_labels)
