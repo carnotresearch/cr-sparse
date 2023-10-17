@@ -50,7 +50,7 @@ def test_spectral5():
 
 def test_spectral6():
     m = 20
-    a = 100*jnp.ones((m, m))
+    a = jnp.ones((m, m))
     z = jnp.zeros((m, m))
     az = jnp.hstack((a, z))
     za = jnp.hstack((z, a))
