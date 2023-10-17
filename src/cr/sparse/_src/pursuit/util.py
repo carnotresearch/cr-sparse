@@ -28,7 +28,7 @@ def largest_indices(h, K):
 
 
 def gram_chol_update(L, v):
-    """Incrementally updates the Cholesky factorization :math:`G = L L^T` where :math:`G = \Phi^T \Phi`
+    r"""Incrementally updates the Cholesky factorization :math:`G = L L^T` where :math:`G = \Phi^T \Phi`
     """
     m, n = L.shape
     z = jnp.zeros((m, 1))

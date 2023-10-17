@@ -57,9 +57,11 @@ def test_spectral6():
     affinity = jnp.vstack((az, za))
     print(affinity)
     true_labels = cluster.labels_from_sizes(jnp.array([m, m]))
+    print("True Labels: ", true_labels)
     affinity = BCOO.fromdense(affinity)
     k = 2
-    res = spectral.normalized_symmetric_sparse_fast_k_jit(cnb.KEYS[1], affinity, k)
+    res = spectral.normalized_symmetric_sparse_fast_k_jit(cnb.KEYS[2], affinity, k)
     pred_labels =  res.assignment
+    print("Predicted Labels: ", pred_labels)
     error = cluster.clustering_error(true_labels, pred_labels)
-    assert error.error == 0
+    assert_almost_equal(error.error, 0)

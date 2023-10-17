@@ -115,7 +115,7 @@ def prox_l1_pos(q=1.):
     return build(func, proximal_op)
 
 def prox_l1_ball(q=1.):
-    """Returns a prox-capable wrapper for the l1-ball :math:`\{ x : \| x \|_1 \leq q \}` indicator
+    r"""Returns a prox-capable wrapper for the l1-ball :math:`\{ x : \| x \|_1 \leq q \}` indicator
 
     Returns:
        ProxCapable: A prox-capable function 

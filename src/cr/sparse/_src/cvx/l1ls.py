@@ -116,7 +116,7 @@ class State(NamedTuple):
 
 def solve_from(A, y, lambda_, x0, u0, tol=1e-3, xi=1e-3, t0=None,
     max_iters=MAX_ITERS, pcg_max_iters=PCG_MAX_ITERS):
-    """
+    r"""
     Solves :math:`\min \| A x - b \|_2^2 + \\lambda \| x \|_1` using the Truncated Newton Interior Point Method
     """
     trans = A.trans
@@ -234,7 +234,7 @@ def solve_from(A, y, lambda_, x0, u0, tol=1e-3, xi=1e-3, t0=None,
         p3 = prb / prs
 
         def preconditioner(x):
-            """Computes the inverse y = M \ x where M is the preconditioner operator"""
+            r"""Computes the inverse y = M \ x where M is the preconditioner operator"""
             x1 = x[:n]
             x2 = x[n:]
             upper =  p1 * x1 - p2 * x2
@@ -371,7 +371,7 @@ solve_from_jit  = jit(solve_from,
 
 def solve(A, y, lambda_, x0=None, u0=None, tol=1e-3, xi=1e-3, t0=None,
     max_iters=MAX_ITERS, pcg_max_iters=PCG_MAX_ITERS):
-    """
+    r"""
     Solves :math:`\min \| A x - b \|_2^2 + \\lambda \| x \|_1` using the Truncated Newton Interior Point Method
     """
     m, n = A.shape

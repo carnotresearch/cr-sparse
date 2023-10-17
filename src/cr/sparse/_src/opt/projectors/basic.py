@@ -161,7 +161,7 @@ def proj_box_affine(l, u, a, alpha=0., tol=1e-6):
             y = box_bound(x - beta * a)
 
 def proj_conic():
-    """Projector function for Lorentz/ice-cream cone {(x,t): \| x \|_2 \leq t}
+    r"""Projector function for Lorentz/ice-cream cone {(x,t): \| x \|_2 \leq t}
     """
     @jit
     def proj(x):

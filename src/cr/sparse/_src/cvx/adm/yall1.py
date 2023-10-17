@@ -87,7 +87,7 @@ def finalize(state, b_max, n_times, n_trans, W=None, nonneg=False):
         n_trans=state.n_trans+n_trans)
 
 def solve_bp(A, b, x0, z0, w, nonneg, gamma, tolerance, max_iters):
-    """
+    r"""
     Solves the problem :math:`\min \| x \|_1 \, \\text{s.t.}\, A x = b` using ADMM
 
     This function implements eq 2.29 of the paper.
@@ -202,7 +202,7 @@ solve_bp_jit = jit(solve_bp, static_argnums=(0,))
 
 
 def solve_l1_l2(A, b, x0, z0, w, nonneg, rho, gamma, tolerance, max_iters):
-    """
+    r"""
     Solves the problem :math:`\min \| x \|_1  + \\frac{1}{2 \\rho} \| A x - b \|_2^2` using ADMM
 
     This function implements eq 2.25 of the paper.
@@ -328,7 +328,7 @@ solve_l1_l2_jit = jit(solve_l1_l2, static_argnums=(0,))
 
 
 def solve_l1_l2con(A, b, x0, z0, w, nonneg, delta, gamma, tolerance, max_iters):
-    """
+    r"""
     Solves the problem :math:`\min \| x \|_1  \\text{s.t.} \| A x - b \|_2 \\leq \\delta` using ADMM
 
     This function implements eq 2.27 of the paper.
